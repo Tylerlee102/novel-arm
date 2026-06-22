@@ -1,0 +1,6 @@
+policy,roi_ticks,insts_not_nop,l1d_demand_misses,checksum,rc,bytes,rounds,seed,level,pointer_like_words,total_compressed,zcrc,pfIssued,pfUseful,pointerLikeCandidates,learnedProofs,allowedCandidates,blockedNoProvenance,fillPrefetchTranslationFault,targetLineWitnessMisses,boundaryAuthorityEntriesDropped,tick_delta_vs_none_pct,l1d_miss_delta_vs_none_pct
+none,11081529378,45106549,140246,0xf5b59076d62b0a4a,0,8192,2,0,1,256,16219,0xc42fee06,0,0,0,0,0,0,0,0,0,0.000,0.000
+naive,11064164094,45120573,140320,0xf5b59076d62b0a4a,0,8192,2,0,1,256,16219,0xc42fee06,2146,391,13489,628,13489,0,0,11336,0,-0.157,0.053
+copper_clpd64k_peb,11055484116,45120645,140303,0xf5b59076d62b0a4a,0,8192,2,0,1,256,16219,0xc42fee06,1177,218,14164,583,1242,12922,0,65,17734,-0.235,0.041
+spp,9555242526,44838038,76531,0xf5b59076d62b0a4a,0,8192,2,0,1,256,16219,0xc42fee06,413112,60429,0,0,0,0,0,0,0,-13.773,-45.431
+spp_copper_slack,9551254851,44840146,76452,0xf5b59076d62b0a4a,0,8192,2,0,1,256,16219,0xc42fee06,413491,60506,22148,446,857,21291,0,58,10174,-13.809,-45.487

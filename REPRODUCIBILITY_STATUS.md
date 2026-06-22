@@ -5,6 +5,9 @@ machine or one-command full-system artifact.
 
 ## Reproducible From This Repository
 
+- `reproduce.ps1`, `reproduce.sh`, or `python reproduce.py --mode all-local`
+  reruns the clone-local reproduction path and writes
+  `research/results/reproduction/LOCAL_REPRODUCTION_REPORT.md`.
 - Paper-facing documents, tables, summaries, RTL sources, testbenches, and
   reproduction scripts are included with stable relative paths.
 - The Python audit and summary scripts can be rerun with a local Python 3
@@ -33,3 +36,7 @@ Reviewers can audit the reported evidence, rerun many Python and RTL checks with
 standard tools, and reproduce selected public-workload points after installing
 the external simulator/toolchain stack. They should not expect a fresh clone to
 reproduce the entire long-running full-system campaign without that setup.
+
+The clone-local runner is intended to make this boundary explicit: it should pass
+from a fresh clone after Python dependencies are installed, while full gem5 and
+Vivado reruns remain external-tool modes.

@@ -6,9 +6,9 @@ Purpose: define a practical reviewer-facing artifact package for the current COP
 
 ## Package Summary
 
-- Manifest entries: 573
+- Manifest entries: 601
 - Missing referenced files: 0
-- Minimal-package bytes: 6,096,123
+- Minimal-package bytes: 7,333,546
 - External-store bytes: 13,479,413
 - CSV manifest: `research/results/copper_public_artifact_manifest_20260620.csv`
 - SHA-256 manifest: `research/results/copper_public_artifact_manifest_20260620.sha256`
@@ -17,13 +17,13 @@ Purpose: define a practical reviewer-facing artifact package for the current COP
 
 | Class | Files | Bytes |
 |---|---:|---:|
-| derived_table_or_config | 9 | 9,191 |
+| derived_table_or_config | 28 | 78,337 |
 | heavy_raw_evidence | 2 | 13,479,413 |
-| measured_summary | 114 | 370,132 |
-| paper_or_reproduction_doc | 8 | 373,176 |
-| reproduction_script | 273 | 1,637,134 |
+| measured_summary | 123 | 1,539,020 |
+| paper_or_reproduction_doc | 8 | 369,372 |
+| reproduction_script | 273 | 1,640,463 |
 | rtl_or_tool_flow_source | 99 | 748,109 |
-| source_or_note | 13 | 2,353,648 |
+| source_or_note | 13 | 2,353,512 |
 | tool_report_or_log | 26 | 326,011 |
 | workload_source | 29 | 278,722 |
 
@@ -32,7 +32,7 @@ Purpose: define a practical reviewer-facing artifact package for the current COP
 | Recommendation | Files | Bytes | Meaning |
 |---|---:|---:|---|
 | external-store-with-hash | 2 | 13,479,413 | Large raw artifacts that should be hosted separately or made optional, with this manifest providing hashes. |
-| include-in-minimal-package | 571 | 6,096,123 | Small or central artifacts that should be copied directly into a public package. |
+| include-in-minimal-package | 599 | 7,333,546 | Small or central artifacts that should be copied directly into a public package. |
 
 ## Largest Entries
 
@@ -43,13 +43,13 @@ Purpose: define a practical reviewer-facing artifact package for the current COP
 | `external/mibench_network/network/patricia/large.udp` | source_or_note | 1,514,237 | include-in-minimal-package | `07d04080d9aaf158` |
 | `external/mibench_download/network.tar.gz` | source_or_note | 470,094 | include-in-minimal-package | `e23b6b744ad3056a` |
 | `external/mibench_network/network/patricia/small.udp` | source_or_note | 251,969 | include-in-minimal-package | `ed0c6a4791b07cad` |
+| `research/results/figures/copper_app_runtime_delta.png` | measured_summary | 193,647 | include-in-minimal-package | `761f1fd63d86019e` |
+| `research/results/figures/copper_app_full_baseline_runtime.png` | measured_summary | 190,927 | include-in-minimal-package | `b8492d87157b72d9` |
 | `research/COPPER_FULL_PAPER.md` | paper_or_reproduction_doc | 168,821 | include-in-minimal-package | `36093baedbd75d70` |
-| `research/COPPER_FINAL_OUTPUT.md` | paper_or_reproduction_doc | 104,896 | include-in-minimal-package | `d059e69b4afef8ae` |
-| `research/verify_copper_artifacts.py` | reproduction_script | 80,994 | include-in-minimal-package | `f58824d8536792c7` |
-| `research/build_copper_claim_evidence_matrix.py` | reproduction_script | 64,291 | include-in-minimal-package | `1241dafd4eb43566` |
-| `research/build_copper_scoop_conference_docx.py` | reproduction_script | 42,111 | include-in-minimal-package | `7268d240f4121ac9` |
-| `research/aarch64_openssl_tls_tcp_workload.c` | workload_source | 38,260 | include-in-minimal-package | `94d11ef0adfb3bee` |
-| `research/copper_lsq_cepf_line_e2e_tb.sv` | rtl_or_tool_flow_source | 35,875 | include-in-minimal-package | `c26527ec09fbdb3b` |
+| `research/results/figures/copper_app_ctlw_reduction.png` | measured_summary | 161,401 | include-in-minimal-package | `ddefd630c39a1546` |
+| `research/results/figures/copper_app_bus_overhead.png` | measured_summary | 136,244 | include-in-minimal-package | `b1581ee367db5a41` |
+| `research/results/figures/copper_app_full_baseline_runtime.svg` | measured_summary | 120,211 | include-in-minimal-package | `14a7d491adc7a0a4` |
+| `research/results/figures/copper_app_runtime_delta.svg` | measured_summary | 116,496 | include-in-minimal-package | `d2082c7f0fd3dba7` |
 
 ## Interpretation
 

@@ -43,11 +43,20 @@ SEED_DOCS = [
 ]
 
 EXPLICIT_EVIDENCE = [
-    RESULTS / "copper_clpd_sram_workload_activity.saif",
     RESULTS / "copper_clpd_sram_workload_activity_saif_power.rpt",
-    RESULTS / "copper_clpd_sram_tcp_process_activity.saif",
     RESULTS / "copper_clpd_sram_tcp_process_activity_saif_power.rpt",
     RESULTS / "COPPER_TCP_PROCESS_CLPD_ACTIVITY_POWER_20260620.md",
+    RESULTS / "COPPER_CONFERENCE_DRAFT_REVIEW.pdf",
+    RESULTS / "copper_prefetch_traffic_overhead_20260616.csv",
+    RESULTS / "figures" / "COPPER_APP_FIGURE_INDEX_20260616.md",
+    RESULTS / "figures" / "copper_app_runtime_delta.png",
+    RESULTS / "figures" / "copper_app_runtime_delta.svg",
+    RESULTS / "figures" / "copper_app_full_baseline_runtime.png",
+    RESULTS / "figures" / "copper_app_full_baseline_runtime.svg",
+    RESULTS / "figures" / "copper_app_ctlw_reduction.png",
+    RESULTS / "figures" / "copper_app_ctlw_reduction.svg",
+    RESULTS / "figures" / "copper_app_bus_overhead.png",
+    RESULTS / "figures" / "copper_app_bus_overhead.svg",
     RESULTS / "OPENSSL_TCP_PROCESS_METADATA_TOGGLE_BOUND_20260620.md",
     RESULTS / "OPENSSL_TCP_PROCESS_SCALE_PORTFOLIO_20260620.md",
     RESULTS / "OPENSSL_CLI_TLS_PAIR_FEASIBILITY_20260620.md",
@@ -71,6 +80,24 @@ EXPLICIT_EVIDENCE = [
     RESULTS / "gem5_arm_ubuntu_fs_mibench_patricia_app" / "mibench_patricia_patricia_large12288_summary.csv",
     RESULTS / "gem5_arm_ubuntu_fs_mibench_patricia_app" / "MIBENCH_PATRICIA_PATRICIA_LARGE12288_SEED1_FS_SUMMARY.md",
     RESULTS / "gem5_arm_ubuntu_fs_mibench_patricia_app" / "mibench_patricia_patricia_large12288_seed1_summary.csv",
+    RESULTS / "gem5_arm_ubuntu_fs_pcre2_app" / "pcre2_pcre2_smoke_summary.csv",
+    RESULTS / "gem5_arm_ubuntu_fs_pcre2_app" / "pcre2_pcre2_seed1_summary.csv",
+    RESULTS / "gem5_arm_ubuntu_fs_zstd_app" / "zstd_zstd_tiny_summary.csv",
+    RESULTS / "gem5_arm_ubuntu_fs_zstd_app" / "zstd_zstd_seed1_summary.csv",
+    RESULTS / "gem5_arm_ubuntu_fs_zlib_app" / "zlib_zlib_tiny_summary.csv",
+    RESULTS / "gem5_arm_ubuntu_fs_zlib_app" / "zlib_zlib_seed1_summary.csv",
+    RESULTS / "gem5_arm_ubuntu_fs_sqlite_app" / "sqlite_app_medium_summary.csv",
+    RESULTS / "gem5_arm_ubuntu_fs_sqlite_app" / "sqlite_app_stress_summary.csv",
+    RESULTS / "gem5_arm_ubuntu_fs_lua_app" / "lua_app_medium_summary.csv",
+    RESULTS / "gem5_arm_ubuntu_fs_lua_app" / "lua_app_stress_summary.csv",
+    RESULTS / "gem5_arm_ubuntu_fs_duktape_app" / "duktape_app_medium_summary.csv",
+    RESULTS / "gem5_arm_ubuntu_fs_duktape_app" / "duktape_app_stress_summary.csv",
+    RESULTS / "gem5_arm_ubuntu_fs_yyjson_app" / "yyjson_app_medium_summary.csv",
+    RESULTS / "gem5_arm_ubuntu_fs_yyjson_app" / "yyjson_app_stress_summary.csv",
+    RESULTS / "gem5_arm_ubuntu_fs_jsonsqlite_app" / "jsonsqlite_app_medium_summary.csv",
+    RESULTS / "gem5_arm_ubuntu_fs_jsonsqlite_app" / "jsonsqlite_app_stress_summary.csv",
+    RESULTS / "gem5_arm_ubuntu_fs_cachesvc_app" / "cachesvc_app_small_summary.csv",
+    RESULTS / "gem5_arm_ubuntu_fs_cachesvc_app" / "cachesvc_app_medium_key_summary.csv",
     RESULTS / "MIBENCH_PATRICIA_SCALE_PORTFOLIO_20260620.md",
     RESULTS / "mibench_patricia_scale_portfolio_20260620.csv",
     RESULTS / "MIBENCH_PATRICIA_12K_SEED_STABILITY_20260621.md",
@@ -87,6 +114,22 @@ EXPLICIT_EVIDENCE = [
     ROOT / "external" / "mibench_network" / "network" / "patricia" / "large.udp",
 ]
 
+STATIC_EXTERNAL_EVIDENCE = [
+    (
+        "research/results/copper_clpd_sram_tcp_process_activity.saif",
+        "heavy_raw_evidence",
+        6_798_821,
+        "a405e60dfea7150965474680459e9f9c65d7640170aaa1f959bdb477aeae7534",
+    ),
+    (
+        "research/results/copper_clpd_sram_workload_activity.saif",
+        "heavy_raw_evidence",
+        6_680_592,
+        "02ccc7ab1095b5b2937039019607c1f68b69cc41e58ea12b90b6aff5212b9242",
+    ),
+]
+STATIC_EXTERNAL_RELS = {item[0] for item in STATIC_EXTERNAL_EVIDENCE}
+
 SOURCE_EXTS = {
     ".c",
     ".cc",
@@ -102,7 +145,7 @@ SOURCE_EXTS = {
     ".xdc",
     ".md",
 }
-RESULT_EXTS = {".md", ".csv", ".txt", ".log", ".rpt", ".saif", ".svh", ".json"}
+RESULT_EXTS = {".md", ".csv", ".txt", ".log", ".rpt", ".saif", ".svh", ".json", ".png", ".svg", ".pdf"}
 HEAVY_EXTS = {".saif", ".dcp", ".vcd"}
 SKIP_PARTS = {"__pycache__", "bin", "downloads", "_vendor"}
 
@@ -146,6 +189,8 @@ def normalize_candidate(token: str) -> Path | None:
     if any(ch.isspace() for ch in token):
         return None
     if token.startswith("C:") or token.startswith("http:") or token.startswith("https:"):
+        return None
+    if "copper_public_artifact_package_20260620" in token:
         return None
     if token.startswith("research/") or token.startswith("research\\"):
         return (ROOT / token).resolve()
@@ -216,8 +261,11 @@ def collect_entries() -> tuple[list[Entry], list[str], list[str]]:
             missing.append(rel(path))
 
     for path in referenced_paths():
+        rel_path = rel(path) if is_under(path, ROOT) else str(path)
+        if rel_path in STATIC_EXTERNAL_RELS:
+            continue
         if not path.exists():
-            missing.append(rel(path) if is_under(path, ROOT) else str(path))
+            missing.append(rel_path)
             continue
         if path.is_file() and (path.suffix.lower() in RESULT_EXTS or not is_under(path, RESULTS)):
             candidates.add(path.resolve())
@@ -250,6 +298,20 @@ def collect_entries() -> tuple[list[Entry], list[str], list[str]]:
                 package_recommendation=recommendation(path, artifact_class),
             )
         )
+    present = {entry.rel for entry in entries}
+    for rel_path, artifact_class, size, digest in STATIC_EXTERNAL_EVIDENCE:
+        if rel_path not in present:
+            entries.append(
+                Entry(
+                    path=(ROOT / rel_path),
+                    rel=rel_path,
+                    artifact_class=artifact_class,
+                    size=size,
+                    sha256=digest,
+                    package_recommendation="external-store-with-hash",
+                )
+            )
+    entries.sort(key=lambda entry: entry.rel)
     return entries, sorted(set(missing)), sorted(set(skipped_dirs))
 
 

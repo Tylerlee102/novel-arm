@@ -4,7 +4,9 @@ Date: 2026-06-20
 
 This guide records the local commands and expected outputs for the current COPPER artifact package. It is meant for reviewer-style reruns on a Windows workspace with the required external tools installed. It does not claim silicon signoff, top-tier acceptance, or one-command reproduction of the entire full-system campaign from a fresh clone.
 
-For a concise clone-level reproducibility statement, see `REPRODUCIBILITY_STATUS.md`.
+For the clone-level one-command path, run `.\reproduce.ps1` on Windows or
+`./reproduce.sh` on Linux/macOS from the repository root. For a concise
+reproducibility statement, see `REPRODUCIBILITY_STATUS.md`.
 
 ## Local Tool Paths
 
@@ -49,13 +51,11 @@ From `C:\Users\tyboy\OneDrive\Documents\novel-arm`:
   research\analyze_openssl_tcp_process_metadata_toggle_bound.py `
   research\build_copper_tcp_process_clpd_replay.py `
   research\summarize_copper_tcp_process_clpd_activity_power.py `
-  research\build_copper_public_artifact_manifest.py `
-  research\build_copper_public_artifact_package.py
+  research\build_copper_public_artifact_manifest.py
 
 & 'python' research\build_copper_claim_evidence_matrix.py
 & 'python' research\summarize_pcre2_seed_stability.py
 & 'python' research\build_copper_public_artifact_manifest.py
-& 'python' research\build_copper_public_artifact_package.py
 & 'python' research\verify_copper_artifacts.py
 ```
 
@@ -70,21 +70,19 @@ Expected current result:
 
 Expected public artifact manifest:
 
-- Manifest entries: 573.
+- Manifest entries: 601.
 - Missing referenced files: 0.
-- Minimal-package files/bytes: 571 files / 6,096,123 bytes.
+- Minimal-package files/bytes: 599 files / 7,333,483 bytes.
 - External-store files/bytes: 2 files / 13,479,413 bytes.
 - Heavy optional files: `research\results\copper_clpd_sram_workload_activity.saif` and `research\results\copper_clpd_sram_tcp_process_activity.saif`.
 - `status=PASS`
 
-Expected public artifact package build:
+Expected clone-local reproduction:
 
-- Direct-package rows copied: 571.
-- Generated metadata files copied: 4.
-- Package files present: 575.
-- Missing files: 0.
-- Hash mismatches: 0.
-- `status=PASS`
+- `research\results\reproduction\LOCAL_REPRODUCTION_REPORT.md`
+- Overall status: `PASS`.
+- Artifact audit line: `Passed 177/177 artifact checks.`
+- Manifest hash audit: `checked=599, external_by_hash=2`.
 
 ## Upstream SQLite speedtest1 JSON/Star/ORM Rerun
 

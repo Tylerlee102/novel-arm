@@ -1,0 +1,3 @@
+seed_label,input_seed,checksum,rc_ok,naive_ctlw,copper_ctlw,slack_ctlw,copper_ctlw_reduction_pct,slack_ctlw_reduction_pct,copper_faults,slack_faults,spp_delta_pct,slack_delta_pct,slack_gap_vs_spp_points,records,lookups,scan_depth,rounds,matches
+seed0,0,0x70905e0adac9ac17,yes,9406,62,79,99.341,99.160,0,0,-8.100,-8.054,0.046,512,1500,4,1,14569
+seed1,1,0xfc469fc668f4c38c,yes,9394,59,107,99.372,98.861,0,0,-8.101,-8.100,0.001,512,1500,4,1,14571

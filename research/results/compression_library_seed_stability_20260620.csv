@@ -1,0 +1,5 @@
+library,seed_label,input_seed,checksum,rcs,naive_ctlw,copper_ctlw,slack_ctlw,copper_ctlw_reduction_pct,slack_ctlw_reduction_pct,copper_faults,slack_faults,spp_delta_pct,slack_delta_pct,slack_gap_vs_spp_points,bytes,rounds,level,pointer_like_words,total_compressed
+Zstd,seed0,0,0x93d05761620949ad,0,9239,49,51,99.470,99.448,0,0,-15.931,-15.748,0.183,8192,2,1,256,16084
+Zstd,seed1,1,0x22c3e1e7b9a49990,0,9239,49,51,99.470,99.448,0,0,-15.857,-15.921,-0.064,8192,2,1,256,16097
+zlib,seed0,0,0xf5b59076d62b0a4a,0,11336,65,58,99.427,99.488,0,0,-13.773,-13.809,-0.036,8192,2,1,256,16219
+zlib,seed1,1,0x258843db93c006e3,0,11450,65,57,99.432,99.502,0,0,-13.626,-13.652,-0.026,8192,2,1,256,16210

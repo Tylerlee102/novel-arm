@@ -1,0 +1,9 @@
+policy,roi_ticks,insts_not_nop,l1d_demand_misses,l1d_demand_accesses,l2_demand_misses,checksum,rc,items,requests,scan_depth,rounds,seed,poison,pfIssued,pfUseful,pointerLikeCandidates,learnedProofs,proofEvictions,allowedCandidates,blockedNoProvenance,fillPrefetchTranslated,fillPrefetchTranslationFault,targetLineWitnessHits,targetLineWitnessMisses,carriedProvenanceTerminalStops,boundaryFlushes,boundaryAuthorityEntriesDropped,boundaryPrefetchesDropped,tick_delta_vs_none_pct,l1d_miss_delta_vs_none_pct
+none,4063964634,3524579,51835,1130932,46605,0xd8e12b7b2c5a2f4b,0,256,512,32,1,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.000,0.000
+stride,3788302572,3520837,42456,1128954,51137,0xd8e12b7b2c5a2f4b,0,256,512,32,1,2,1,20051,10629,0,0,0,0,0,0,0,0,0,0,0,0,0,-6.783,-18.094
+naive,4050206739,3521424,51643,1129157,46520,0xd8e12b7b2c5a2f4b,0,256,512,32,1,2,1,1256,239,4895,410,0,4895,0,1011,0,1011,3637,0,0,0,0,-0.339,-0.370
+copper_clpd64k_peb,4060412190,3524639,51820,1130951,46615,0xd8e12b7b2c5a2f4b,0,256,512,32,1,2,1,593,106,5264,394,0,612,4652,490,0,490,19,609,2,17736,0,-0.087,-0.029
+dcpt,3605412312,3523881,35390,1130441,53281,0xd8e12b7b2c5a2f4b,0,256,512,32,1,2,1,203385,19471,0,0,0,0,0,0,0,0,0,0,0,0,0,-11.283,-31.726
+spp,3517766379,3520260,32415,1128249,57514,0xd8e12b7b2c5a2f4b,0,256,512,32,1,2,1,160612,25744,0,0,0,0,0,0,0,0,0,0,0,0,0,-13.440,-37.465
+ampm,3591658080,3522892,36022,1129767,58906,0xd8e12b7b2c5a2f4b,0,256,512,32,1,2,1,236336,25909,0,0,0,0,0,0,0,0,0,0,0,0,0,-11.622,-30.506
+spp_copper_slack,3519139005,3520479,32410,1128329,57559,0xd8e12b7b2c5a2f4b,0,256,512,32,1,2,1,161144,25758,7626,279,0,410,7216,333,0,333,19,529,2,10192,0,-13.406,-37.475

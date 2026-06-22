@@ -1,0 +1,6 @@
+policy,roi_ticks,insts_not_nop,l1d_demand_misses,checksum,rc,records,lookups,scan_depth,rounds,seed,poison,matches,pfIssued,pfUseful,pointerLikeCandidates,learnedProofs,allowedCandidates,blockedNoProvenance,fillPrefetchTranslationFault,targetLineWitnessMisses,boundaryAuthorityEntriesDropped,tick_delta_vs_none_pct,l1d_miss_delta_vs_none_pct
+none,21268901142,133647034,174440,0x70905e0adac9ac17,0,512,1500,4,1,0,1,14569,0,0,0,0,0,0,0,0,0,0.000,0.000
+naive,21267571473,133647734,174263,0x70905e0adac9ac17,0,512,1500,4,1,0,1,14569,6575,1151,15987,885,15987,0,0,9406,0,-0.006,-0.101
+copper_clpd64k_peb,21292385634,133657814,174379,0x70905e0adac9ac17,0,512,1500,4,1,0,1,14569,5296,841,18846,828,5358,13488,0,62,17746,0.110,-0.035
+spp,19546196238,133426894,74542,0x70905e0adac9ac17,0,512,1500,4,1,0,1,14569,772809,111515,0,0,0,0,0,0,0,-8.100,-57.268
+spp_copper_slack,19555851573,133426894,74241,0x70905e0adac9ac17,0,512,1500,4,1,0,1,14569,767484,111794,33354,634,3134,30220,0,79,10202,-8.054,-57.440
