@@ -1,0 +1,11 @@
+source research/vivado_tclstore_bootstrap.tcl
+read_verilog -sv research/copper_rocca_clpd_commit_adapter.sv
+read_verilog -sv research/copper_clpd_gate.sv
+read_verilog -sv research/copper_tlb_coherence_authority_filter.sv
+read_verilog -sv research/copper_cavi_authority_issue_gate.sv
+read_xdc research/copper_clpd_constraints.xdc
+synth_design -top copper_cavi_authority_issue_gate -part xc7a35tcpg236-1
+report_utilization -file research/results/copper_cavi_authority_issue_gate_utilization.rpt
+report_timing_summary -file research/results/copper_cavi_authority_issue_gate_timing.rpt
+write_checkpoint -force research/results/copper_cavi_authority_issue_gate_synth.dcp
+quit

@@ -1,0 +1,7 @@
+read_verilog -sv research/copper_full_authority_gate.sv
+read_xdc research/copper_full_authority_constraints.xdc
+synth_design -top copper_full_authority_gate -part xc7a35tcpg236-1
+report_utilization -file research/copper_full_authority_utilization.rpt
+report_timing_summary -file research/copper_full_authority_timing.rpt
+write_checkpoint -force research/copper_full_authority_synth.dcp
+quit

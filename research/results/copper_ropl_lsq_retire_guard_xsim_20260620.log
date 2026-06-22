@@ -1,0 +1,31 @@
+#-----------------------------------------------------------
+# xsim v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Sat Jun 20 01:08:17 2026
+# Process ID         : 20404
+# Current directory  : C:/Users/tyboy/OneDrive/Documents/novel-arm
+# Command line       : xsim.exe -log research\results\copper_ropl_lsq_retire_guard_xsim_20260620.log -mode tcl -source {xsim.dir/copper_ropl_lsq_retire_guard_tb_sim/xsim_script.tcl}
+# Log file           : C:/Users/tyboy/OneDrive/Documents/novel-arm/research/results/copper_ropl_lsq_retire_guard_xsim_20260620.log
+# Journal file       : C:/Users/tyboy/OneDrive/Documents/novel-arm\xsim.jou
+# Running On         : Tyler
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26200
+# Processor Detail   : AMD Ryzen 7 7700X 8-Core Processor             
+# CPU Frequency      : 4491 MHz
+# CPU Physical cores : 8
+# CPU Logical cores  : 16
+# Host memory        : 33456 MB
+# Swap memory        : 3543 MB
+# Total Virtual      : 37000 MB
+# Available Virtual  : 14523 MB
+#-----------------------------------------------------------
+source xsim.dir/copper_ropl_lsq_retire_guard_tb_sim/xsim_script.tcl
+# xsim {copper_ropl_lsq_retire_guard_tb_sim} -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+COPPER ROPL-LSQ retire guard completed: directed=18 random=20000 legal=9251 execute_stage=184 not_retire=227 not_memory=230 no_live_tag=1561 source=2064 exception=622 replay_squash=3371 alias_order=2534 translation_perm=140 random_proof=9250 random_block=10735 errors=0
+$finish called at time : 200205 ns : File "C:/Users/tyboy/OneDrive/Documents/novel-arm/research/copper_ropl_lsq_retire_guard_tb.sv" Line 492
+exit
+INFO: [Common 17-206] Exiting xsim at Sat Jun 20 01:08:21 2026...

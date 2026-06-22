@@ -1,0 +1,11 @@
+source research/vivado_tclstore_bootstrap.tcl
+read_verilog -sv research/copper_lsq_source_tag_tracker.sv
+read_verilog -sv research/copper_commit_epoch_proof_bridge.sv
+read_verilog -sv research/copper_line_provenance_gate.sv
+read_verilog -sv research/copper_lsq_cepf_line_e2e_top.sv
+read_xdc research/copper_clpd_constraints.xdc
+synth_design -top copper_lsq_cepf_line_e2e_top -part xc7a35tcpg236-1
+report_utilization -file research/results/copper_lsq_cepf_line_e2e_top_utilization.rpt
+report_timing_summary -file research/results/copper_lsq_cepf_line_e2e_top_timing.rpt
+write_checkpoint -force research/results/copper_lsq_cepf_line_e2e_top_synth.dcp
+quit

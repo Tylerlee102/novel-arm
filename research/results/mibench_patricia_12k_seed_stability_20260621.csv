@@ -1,0 +1,3 @@
+tag,seed,input_records,lookups,checksum,naive_ctlw,copper_ctlw,slack_ctlw,copper_reduction_pct,slack_reduction_pct,copper_faults,slack_faults,spp_tick_delta_pct,slack_tick_delta_pct,slack_gap_pp
+patricia_large12288,0,12288,24576,0x60874357358c1fc4,18454,381,635,97.935,96.559,0,0,-14.272,-14.237,+0.035
+patricia_large12288_seed1,1,12288,24576,0xe4dc12fd1dcd52b0,17909,398,567,97.778,96.834,0,0,-14.385,-14.414,-0.030

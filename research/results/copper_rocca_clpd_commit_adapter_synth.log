@@ -1,0 +1,285 @@
+#-----------------------------------------------------------
+# Vivado v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Sat Jun 20 16:57:29 2026
+# Process ID         : 31328
+# Current directory  : C:/Users/tyboy/OneDrive/Documents/novel-arm
+# Command line       : vivado.exe -mode batch -source research\run_copper_rocca_clpd_commit_adapter_synth.tcl -journal research\results\copper_rocca_clpd_commit_adapter_synth.jou -log research\results\copper_rocca_clpd_commit_adapter_synth.log
+# Log file           : C:/Users/tyboy/OneDrive/Documents/novel-arm/research/results/copper_rocca_clpd_commit_adapter_synth.log
+# Journal file       : C:/Users/tyboy/OneDrive/Documents/novel-arm\research\results\copper_rocca_clpd_commit_adapter_synth.jou
+# Running On         : Tyler
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26200
+# Processor Detail   : AMD Ryzen 7 7700X 8-Core Processor             
+# CPU Frequency      : 4491 MHz
+# CPU Physical cores : 8
+# CPU Logical cores  : 16
+# Host memory        : 33456 MB
+# Swap memory        : 3543 MB
+# Total Virtual      : 37000 MB
+# Available Virtual  : 14437 MB
+#-----------------------------------------------------------
+source {research\run_copper_rocca_clpd_commit_adapter_synth.tcl}
+# source research/vivado_tclstore_bootstrap.tcl
+## set copper_vivado_tclstore "C:/AMDDesignTools/2025.2/Vivado/data/XilinxTclStore"
+## foreach copper_tcl_path [list \
+##     "$copper_vivado_tclstore/support" \
+##     "$copper_vivado_tclstore/support/appinit" \
+##     "$copper_vivado_tclstore/tclapp" \
+##     "$copper_vivado_tclstore/tclapp/xilinx" \
+##     "$copper_vivado_tclstore/tclapp/xilinx/xsim"] {
+##     if {[file isdirectory $copper_tcl_path] && [lsearch -exact $auto_path $copper_tcl_path] < 0} {
+##         lappend auto_path $copper_tcl_path
+##     }
+## }
+## if {[catch {package require ::tclapp::support::appinit 1.2} copper_bootstrap_error]} {
+##     puts "WARNING: COPPER Vivado bootstrap could not load appinit: $copper_bootstrap_error"
+## }
+## if {[catch {package require ::tclapp::xilinx::xsim 2.520} copper_bootstrap_error]} {
+##     puts "WARNING: COPPER Vivado bootstrap could not load xsim Tcl app: $copper_bootstrap_error"
+## }
+## if {[llength [info commands ::tclapp::load_catalog]]} {
+##     if {[catch {::tclapp::load_catalog $copper_vivado_tclstore 2025.2} copper_bootstrap_error]} {
+##         puts "WARNING: COPPER Vivado bootstrap could not load TclStore catalog: $copper_bootstrap_error"
+##     }
+## }
+# read_verilog -sv research/copper_rocca_clpd_commit_adapter.sv
+# read_verilog -sv research/copper_clpd_gate.sv
+# read_verilog -sv research/copper_rocca_clpd_commit_adapter_top.sv
+# read_xdc research/copper_clpd_constraints.xdc
+# synth_design -top copper_rocca_clpd_commit_adapter_top -part xc7a35tcpg236-1
+Command: synth_design -top copper_rocca_clpd_commit_adapter_top -part xc7a35tcpg236-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Device 21-403] Loading part xc7a35tcpg236-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 34408
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1392.715 ; gain = 540.504
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'copper_rocca_clpd_commit_adapter_top' [C:/Users/tyboy/OneDrive/Documents/novel-arm/research/copper_rocca_clpd_commit_adapter_top.sv:5]
+INFO: [Synth 8-6157] synthesizing module 'copper_rocca_clpd_commit_adapter' [C:/Users/tyboy/OneDrive/Documents/novel-arm/research/copper_rocca_clpd_commit_adapter.sv:16]
+	Parameter LINE_TAG_W bound to: 32'sb00000000000000000000000000001100 
+	Parameter WORD_OFF_W bound to: 32'sb00000000000000000000000000000100 
+	Parameter TOKEN_W bound to: 32'sb00000000000000000000000000001000 
+	Parameter EPOCH_W bound to: 32'sb00000000000000000000000000000100 
+INFO: [Synth 8-6155] done synthesizing module 'copper_rocca_clpd_commit_adapter' (0#1) [C:/Users/tyboy/OneDrive/Documents/novel-arm/research/copper_rocca_clpd_commit_adapter.sv:16]
+INFO: [Synth 8-6157] synthesizing module 'copper_clpd_gate' [C:/Users/tyboy/OneDrive/Documents/novel-arm/research/copper_clpd_gate.sv:17]
+	Parameter LINE_TAG_W bound to: 32'sb00000000000000000000000000001100 
+	Parameter WORDS_PER_LINE bound to: 32'sb00000000000000000000000000010000 
+	Parameter WORD_OFF_W bound to: 32'sb00000000000000000000000000000100 
+	Parameter TOKEN_W bound to: 32'sb00000000000000000000000000001000 
+	Parameter EPOCH_W bound to: 32'sb00000000000000000000000000000100 
+	Parameter ENTRIES bound to: 32'sb00000000000000000000000001000000 
+	Parameter ENTRY_IDX_W bound to: 32'sb00000000000000000000000000000110 
+INFO: [Synth 8-6155] done synthesizing module 'copper_clpd_gate' (0#1) [C:/Users/tyboy/OneDrive/Documents/novel-arm/research/copper_clpd_gate.sv:17]
+INFO: [Synth 8-6155] done synthesizing module 'copper_rocca_clpd_commit_adapter_top' (0#1) [C:/Users/tyboy/OneDrive/Documents/novel-arm/research/copper_rocca_clpd_commit_adapter_top.sv:5]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 1593.371 ; gain = 741.160
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 1593.371 ; gain = 741.160
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 1593.371 ; gain = 741.160
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.087 . Memory (MB): peak = 1593.371 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [C:/Users/tyboy/OneDrive/Documents/novel-arm/research/copper_clpd_constraints.xdc]
+Finished Parsing XDC File [C:/Users/tyboy/OneDrive/Documents/novel-arm/research/copper_clpd_constraints.xdc]
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 1649.688 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.058 . Memory (MB): peak = 1649.688 ; gain = 0.000
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1649.688 ; gain = 797.477
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a35tcpg236-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1649.688 ; gain = 797.477
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1649.688 ; gain = 797.477
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:16 ; elapsed = 00:00:17 . Memory (MB): peak = 1649.688 ; gain = 797.477
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Registers : 
+	               16 Bit    Registers := 64    
+	               12 Bit    Registers := 64    
+	                8 Bit    Registers := 64    
+	                4 Bit    Registers := 64    
+	                1 Bit    Registers := 64    
++---Muxes : 
+	   2 Input   16 Bit        Muxes := 448   
+	   2 Input    1 Bit        Muxes := 512   
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 90 (col length:60)
+BRAMs: 100 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:48 ; elapsed = 00:00:50 . Memory (MB): peak = 1762.719 ; gain = 910.508
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:51 ; elapsed = 00:00:53 . Memory (MB): peak = 1775.078 ; gain = 922.867
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:01:11 ; elapsed = 00:01:12 . Memory (MB): peak = 2076.027 ; gain = 1223.816
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:01:17 ; elapsed = 00:01:19 . Memory (MB): peak = 2076.027 ; gain = 1223.816
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:01:20 ; elapsed = 00:01:22 . Memory (MB): peak = 2076.027 ; gain = 1223.816
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:01:20 ; elapsed = 00:01:22 . Memory (MB): peak = 2076.027 ; gain = 1223.816
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:20 ; elapsed = 00:01:22 . Memory (MB): peak = 2076.027 ; gain = 1223.816
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:01:20 ; elapsed = 00:01:22 . Memory (MB): peak = 2076.027 ; gain = 1223.816
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:01:21 ; elapsed = 00:01:23 . Memory (MB): peak = 2076.027 ; gain = 1223.816
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:01:21 ; elapsed = 00:01:23 . Memory (MB): peak = 2076.027 ; gain = 1223.816
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |BUFG   |     1|
+|2     |CARRY4 |     8|
+|3     |LUT1   |     1|
+|4     |LUT2   |   133|
+|5     |LUT3   |    51|
+|6     |LUT4   |   334|
+|7     |LUT5   |   514|
+|8     |LUT6   |  3493|
+|9     |MUXF7  |   848|
+|10    |MUXF8  |   410|
+|11    |FDCE   |  2624|
+|12    |IBUF   |   114|
+|13    |OBUF   |     8|
++------+-------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:01:21 ; elapsed = 00:01:23 . Memory (MB): peak = 2076.027 ; gain = 1223.816
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:01:13 ; elapsed = 00:01:20 . Memory (MB): peak = 2076.027 ; gain = 1167.500
+Synthesis Optimization Complete : Time (s): cpu = 00:01:21 ; elapsed = 00:01:23 . Memory (MB): peak = 2076.027 ; gain = 1223.816
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.044 . Memory (MB): peak = 2076.027 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 1266 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+WARNING: [Netlist 29-101] Netlist 'copper_rocca_clpd_commit_adapter_top' is not ideal for floorplanning, since the cellview 'copper_clpd_gate' contains a large number of primitives.  Please consider enabling hierarchy in synthesis if you want to do floorplanning.
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Parsing XDC File [C:/Users/tyboy/OneDrive/Documents/novel-arm/research/copper_clpd_constraints.xdc]
+Finished Parsing XDC File [C:/Users/tyboy/OneDrive/Documents/novel-arm/research/copper_clpd_constraints.xdc]
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 2076.027 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete | Checksum: b478c7d
+INFO: [Common 17-83] Releasing license: Synthesis
+20 Infos, 1 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:01:25 ; elapsed = 00:01:28 . Memory (MB): peak = 2076.027 ; gain = 1411.281
+# report_utilization -file research/results/copper_rocca_clpd_commit_adapter_top_utilization.rpt
+# report_timing_summary -file research/results/copper_rocca_clpd_commit_adapter_top_timing.rpt
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -1, Delay Type: min_max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 2 CPUs
+# write_checkpoint -force research/results/copper_rocca_clpd_commit_adapter_top_synth.dcp
+INFO: [Timing 38-480] Writing timing data to binary archive.
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.010 . Memory (MB): peak = 2076.027 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'C:/Users/tyboy/OneDrive/Documents/novel-arm/research/results/copper_rocca_clpd_commit_adapter_top_synth.dcp' has been generated.
+# quit
+INFO: [Common 17-206] Exiting Vivado at Sat Jun 20 16:59:09 2026...

@@ -1,0 +1,8 @@
+source research/vivado_tclstore_bootstrap.tcl
+read_verilog -sv research/copper_lsq_source_tag_tracker.sv
+read_xdc research/copper_clpd_constraints.xdc
+synth_design -top copper_lsq_source_tag_tracker -part xc7a35tcpg236-1
+report_utilization -file research/results/copper_lsq_source_tag_tracker_utilization.rpt
+report_timing_summary -file research/results/copper_lsq_source_tag_tracker_timing.rpt
+write_checkpoint -force research/results/copper_lsq_source_tag_tracker_synth.dcp
+quit

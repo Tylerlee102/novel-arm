@@ -1,0 +1,8 @@
+source research/vivado_tclstore_bootstrap.tcl
+read_verilog -sv research/copper_tlb_coherence_authority_filter.sv
+read_xdc research/copper_clpd_constraints.xdc
+synth_design -top copper_tlb_coherence_authority_filter -part xc7a35tcpg236-1
+report_utilization -file research/results/copper_tlb_coherence_authority_filter_utilization.rpt
+report_timing_summary -file research/results/copper_tlb_coherence_authority_filter_timing.rpt
+write_checkpoint -force research/results/copper_tlb_coherence_authority_filter_synth.dcp
+quit

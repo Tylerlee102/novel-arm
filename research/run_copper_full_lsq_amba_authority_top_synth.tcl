@@ -1,0 +1,15 @@
+source research/vivado_tclstore_bootstrap.tcl
+read_verilog -sv research/copper_lsq_source_tag_tracker.sv
+read_verilog -sv research/copper_commit_epoch_proof_bridge.sv
+read_verilog -sv research/copper_amba_sari_frontdoor.sv
+read_verilog -sv research/copper_sari_ring_revoker.sv
+read_verilog -sv research/copper_clpd_gate.sv
+read_verilog -sv research/copper_ctlw_witness_dir.sv
+read_verilog -sv research/copper_full_authority_gate.sv
+read_verilog -sv research/copper_full_lsq_amba_authority_top.sv
+read_xdc research/copper_clpd_constraints.xdc
+synth_design -top copper_full_lsq_amba_authority_top -part xc7a35tcpg236-1
+report_utilization -file research/results/copper_full_lsq_amba_authority_top_utilization.rpt
+report_timing_summary -file research/results/copper_full_lsq_amba_authority_top_timing.rpt
+write_checkpoint -force research/results/copper_full_lsq_amba_authority_top_synth.dcp
+quit

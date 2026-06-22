@@ -1,0 +1,8 @@
+source research/vivado_tclstore_bootstrap.tcl
+read_verilog -sv research/copper_amba_sari_frontdoor.sv
+read_xdc research/copper_clpd_constraints.xdc
+synth_design -top copper_amba_sari_frontdoor -part xc7a35tcpg236-1
+report_utilization -file research/results/copper_amba_sari_frontdoor_utilization.rpt
+report_timing_summary -file research/results/copper_amba_sari_frontdoor_timing.rpt
+write_checkpoint -force research/results/copper_amba_sari_frontdoor_synth.dcp
+quit

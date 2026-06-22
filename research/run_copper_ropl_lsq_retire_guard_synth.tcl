@@ -1,0 +1,9 @@
+source research/vivado_tclstore_bootstrap.tcl
+read_verilog -sv research/copper_ropl_lsq_retire_guard.sv
+read_verilog -sv research/copper_ropl_lsq_retire_guard_top.sv
+read_xdc research/copper_clpd_constraints.xdc
+synth_design -top copper_ropl_lsq_retire_guard_top -part xc7a35tcpg236-1
+report_utilization -file research/results/copper_ropl_lsq_retire_guard_top_utilization.rpt
+report_timing_summary -file research/results/copper_ropl_lsq_retire_guard_top_timing.rpt
+write_checkpoint -force research/results/copper_ropl_lsq_retire_guard_top_synth.dcp
+quit

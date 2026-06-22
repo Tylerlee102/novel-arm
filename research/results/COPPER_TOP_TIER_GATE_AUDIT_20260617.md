@@ -1,0 +1,20 @@
+# COPPER/SCOOP Top-Tier Gate Audit
+
+Date: 2026-06-20
+
+This audit asks whether the current package is ready for a top-tier architecture/security PhD-conference submission. It intentionally cannot and does not guarantee acceptance.
+
+| Gate | Dependent claims | Local evidence result | Gate verdict | Remaining issue |
+|---|---|---:|---|---|
+| Novelty and positioning | C1, C2 | PASS | PASS_WITH_PUBLIC_KNOWLEDGE_CAVEAT | The exact authority invariant remains defensible, but the paper must not claim metadata or pointer prefetching as new. |
+| Security evidence | C3, C9 | PASS | STRONG_FOR_MODELED_THREAT | Split oracle and checkers are strong for modeled DMP data-at-rest activation; full production hierarchy proof remains future work. |
+| Performance and baselines | C4, C5, C6 | PASS | FAIR_BUT_NOT_UNIVERSAL_SPEEDUP | Conventional SPP wins speed; SCOOP coexistence is the stronger claim, with quantified traffic side effects. |
+| Hardware feasibility | C7, C8, C9 | PASS | PLAUSIBLE_RTL_EVIDENCE | Vivado/XSim plus vectorless and SAIF-driven RTL power reporting, the OoO-LSQ/ROCCA proof-write checks, CAVI source-plus-target issue interlock, and TLB/coherence contract/filter evidence are meaningful but not ASIC signoff or production ARM integration. |
+| Reproducibility package | C3, C4, C6, C7 | PASS | GOOD_LOCAL_ARTIFACT | Environment documentation, a generated public manifest, and a materialized local package now exist; external hosting and third-party rerun remain future artifact work. |
+| Top-tier readiness | C1, C3, C4, C6, C7, C10 | PASS | NEAR_MISS_NOT_GUARANTEED | The strongest remaining gaps are SPEC-like applications, production-service or production TCP/TLS/standard crypto benchmark workloads, instruction-level full-system switching or ASIC-calibrated metadata power beyond the local FPGA/McPAT/transaction-replay proxies, and production-grade OoO/SoC integration beyond bounded contracts. |
+
+## Final Gate Result
+
+`FOCUSED_CONFERENCE_READY__TOP_TIER_NEEDS_MORE_EVIDENCE`
+
+The current package is stronger than a workshop-only sketch: it has public prior-art deltas, AArch64 full-system runs, adversarial DMP oracles, fair conventional baselines, repeated medium/stress public-engine layout evidence including two-seed PCRE2 regex matching, public MiBench Patricia two-seed 12K trie execution with larger Patricia feasibility probes, public libxml2 XML parser/serializer execution, public libarchive TAR parser execution, and two-seed Zstd/zlib compression/decompression, bounded service-style and crypto-adjacent full-system stress points, real OpenSSL libssl TLS memory-BIO small/medium two-seed execution, socket-backed OpenSSL libssl TLS execution, strict private-netns TCP-loopback OpenSSL libssl TLS execution, a four-point process-separated private-netns TCP-loopback OpenSSL libssl TLS portfolio, real OpenSSL libcrypto SHA256 plus small/medium EVP/HMAC two-seed drivers, fixed-buffer and multi-seed official OpenSSL CLI crypto evidence, gem5-counter energy/pollution, gem5 DRAM-energy, McPAT-sensitivity, Vivado vectorless/testbench-SAIF/workload-counter-replay/TCP-process-replay RTL power-proxy scorecards, app/service/parser/compression/TCP and TCP process-server metadata-toggle sensitivity bounds, Vivado RTL checks, synthesis/timing reports, an AMBA-SARI frontdoor RTL check, OoO-LSQ and TLB/coherence contract checkers, ROPL-LSQ retire guard plus ROCCA-to-CLPD clear-wins proof-write RTL checks, CAVI source-plus-target final issue interlock RTL evidence, a matching TLB/coherence RTL filter, and a passing artifact audit. It is still not honest to call top-tier acceptance guaranteed. The next evidence that would move the needle most is a SPEC-like application or production-service/production-TCP-TLS/standard-crypto-benchmark campaign, instruction-level full-system switching or ASIC-calibrated metadata power beyond the local FPGA/McPAT/transaction-replay proxies, plus production-style OoO/TLB/coherence integration beyond bounded contracts.

@@ -1,0 +1,7 @@
+read_verilog -sv research/copper_commit_epoch_proof_bridge.sv
+read_xdc research/copper_commit_epoch_constraints.xdc
+synth_design -top copper_commit_epoch_proof_bridge -part xc7a35tcpg236-1
+report_utilization -file research/copper_commit_epoch_utilization.rpt
+report_timing_summary -file research/copper_commit_epoch_timing.rpt
+write_checkpoint -force research/copper_commit_epoch_synth.dcp
+quit

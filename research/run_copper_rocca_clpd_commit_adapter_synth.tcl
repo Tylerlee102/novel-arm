@@ -1,0 +1,10 @@
+source research/vivado_tclstore_bootstrap.tcl
+read_verilog -sv research/copper_rocca_clpd_commit_adapter.sv
+read_verilog -sv research/copper_clpd_gate.sv
+read_verilog -sv research/copper_rocca_clpd_commit_adapter_top.sv
+read_xdc research/copper_clpd_constraints.xdc
+synth_design -top copper_rocca_clpd_commit_adapter_top -part xc7a35tcpg236-1
+report_utilization -file research/results/copper_rocca_clpd_commit_adapter_top_utilization.rpt
+report_timing_summary -file research/results/copper_rocca_clpd_commit_adapter_top_timing.rpt
+write_checkpoint -force research/results/copper_rocca_clpd_commit_adapter_top_synth.dcp
+quit

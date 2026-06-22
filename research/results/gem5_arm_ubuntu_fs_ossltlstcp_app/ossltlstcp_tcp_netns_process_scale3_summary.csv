@@ -1,0 +1,6 @@
+policy,roi_ticks,insts_not_nop,l1d_demand_misses,checksum,rc,sessions,handshakes,records,scan_depth,rounds,seed,poison,transport,tcp_pairs,afunix_fallback_pairs,strict_tcp,netns_loopback,netns_errno,process_server,process_pairs,child_failures,pfIssued,pfUseful,pointerLikeCandidates,learnedProofs,allowedCandidates,blockedNoProvenance,fillPrefetchTranslationFault,targetLineWitnessMisses,boundaryAuthorityEntriesDropped,tick_delta_vs_none_pct,l1d_miss_delta_vs_none_pct
+none,31539975120,54768776,489192,0x46e083abee222484,0,64,8,2,16,1,3,1,tcp_loopback_netns_process,8,0,1,1,0,1,8,0,0,0,0,0,0,0,0,0,0,0.000,0.000
+naive,31419564318,54634883,485515,0x46e083abee222484,0,64,8,2,16,1,3,1,tcp_loopback_netns_process,8,0,1,1,0,1,8,0,31177,6845,71154,4242,71154,0,0,39977,0,-0.382,-0.752
+copper_clpd64k_peb,31371553044,54466212,481765,0x46e083abee222484,0,64,8,2,16,1,3,1,tcp_loopback_netns_process,8,0,1,1,0,1,8,0,29195,6855,92106,3861,29905,62201,0,710,0,-0.534,-1.518
+spp,27514734723,51952386,294257,0x46e083abee222484,0,64,8,2,16,1,3,1,tcp_loopback_netns_process,8,0,1,1,0,1,8,0,1484756,233020,0,0,0,0,0,0,0,-12.762,-39.848
+spp_copper_slack,27512517276,51913605,294099,0x46e083abee222484,0,64,8,2,16,1,3,1,tcp_loopback_netns_process,8,0,1,1,0,1,8,0,1487927,232460,148024,2539,21449,126575,0,591,0,-12.769,-39.881

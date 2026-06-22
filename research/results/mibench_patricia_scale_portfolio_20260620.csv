@@ -1,0 +1,5 @@
+tag,input_records,lookups,checksum,none_ticks,naive_ctlw,copper_ctlw,slack_ctlw,copper_reduction_pct,slack_reduction_pct,copper_faults,slack_faults,spp_tick_delta_pct,slack_tick_delta_pct,slack_gap_pp
+patricia_preprobe,128,256,0xe9324f49c2b21a34,14915580489,11992,85,102,99.291,99.149,0,0,-15.822,-15.848,-0.026
+patricia_small2048,2048,4096,0x11f999a2549d757f,21899607138,14014,181,422,98.708,96.989,0,0,-12.297,-12.267,+0.030
+patricia_small8192,8192,16384,0xd4f96d52a9711657,54803550924,16478,245,379,98.513,97.700,0,0,-13.349,-13.299,+0.050
+patricia_large12288,12288,24576,0x60874357358c1fc4,79942105539,18454,381,635,97.935,96.559,0,0,-14.272,-14.237,+0.035

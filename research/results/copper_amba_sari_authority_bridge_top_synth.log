@@ -1,0 +1,325 @@
+#-----------------------------------------------------------
+# Vivado v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Tue Jun 16 11:32:28 2026
+# Process ID         : 2740
+# Current directory  : C:/Users/tyboy/OneDrive/Documents/novel-arm
+# Command line       : vivado.exe -mode batch -source research\run_copper_amba_sari_authority_bridge_top_synth.tcl -journal research\results\copper_amba_sari_authority_bridge_top_synth.jou -log research\results\copper_amba_sari_authority_bridge_top_synth.log
+# Log file           : C:/Users/tyboy/OneDrive/Documents/novel-arm/research/results/copper_amba_sari_authority_bridge_top_synth.log
+# Journal file       : C:/Users/tyboy/OneDrive/Documents/novel-arm\research\results\copper_amba_sari_authority_bridge_top_synth.jou
+# Running On         : Tyler
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26200
+# Processor Detail   : AMD Ryzen 7 7700X 8-Core Processor             
+# CPU Frequency      : 4491 MHz
+# CPU Physical cores : 8
+# CPU Logical cores  : 16
+# Host memory        : 33456 MB
+# Swap memory        : 2147 MB
+# Total Virtual      : 35603 MB
+# Available Virtual  : 12479 MB
+#-----------------------------------------------------------
+source {research\run_copper_amba_sari_authority_bridge_top_synth.tcl}
+# source research/vivado_tclstore_bootstrap.tcl
+## set copper_vivado_tclstore "C:/AMDDesignTools/2025.2/Vivado/data/XilinxTclStore"
+## foreach copper_tcl_path [list \
+##     "$copper_vivado_tclstore/support" \
+##     "$copper_vivado_tclstore/support/appinit" \
+##     "$copper_vivado_tclstore/tclapp" \
+##     "$copper_vivado_tclstore/tclapp/xilinx" \
+##     "$copper_vivado_tclstore/tclapp/xilinx/xsim"] {
+##     if {[file isdirectory $copper_tcl_path] && [lsearch -exact $auto_path $copper_tcl_path] < 0} {
+##         lappend auto_path $copper_tcl_path
+##     }
+## }
+## if {[catch {package require ::tclapp::support::appinit 1.2} copper_bootstrap_error]} {
+##     puts "WARNING: COPPER Vivado bootstrap could not load appinit: $copper_bootstrap_error"
+## }
+## if {[catch {package require ::tclapp::xilinx::xsim 2.520} copper_bootstrap_error]} {
+##     puts "WARNING: COPPER Vivado bootstrap could not load xsim Tcl app: $copper_bootstrap_error"
+## }
+## if {[llength [info commands ::tclapp::load_catalog]]} {
+##     if {[catch {::tclapp::load_catalog $copper_vivado_tclstore 2025.2} copper_bootstrap_error]} {
+##         puts "WARNING: COPPER Vivado bootstrap could not load TclStore catalog: $copper_bootstrap_error"
+##     }
+## }
+# read_verilog -sv research/copper_amba_sari_frontdoor.sv
+# read_verilog -sv research/copper_sari_ring_revoker.sv
+# read_verilog -sv research/copper_clpd_gate.sv
+# read_verilog -sv research/copper_ctlw_witness_dir.sv
+# read_verilog -sv research/copper_full_authority_gate.sv
+# read_verilog -sv research/copper_amba_sari_authority_bridge_top.sv
+# read_xdc research/copper_clpd_constraints.xdc
+# synth_design -top copper_amba_sari_authority_bridge_top -part xc7a35tcpg236-1
+Command: synth_design -top copper_amba_sari_authority_bridge_top -part xc7a35tcpg236-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Device 21-403] Loading part xc7a35tcpg236-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 20524
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1392.680 ; gain = 539.270
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'copper_amba_sari_authority_bridge_top' [C:/Users/tyboy/OneDrive/Documents/novel-arm/research/copper_amba_sari_authority_bridge_top.sv:10]
+INFO: [Synth 8-6157] synthesizing module 'copper_amba_sari_frontdoor' [C:/Users/tyboy/OneDrive/Documents/novel-arm/research/copper_amba_sari_frontdoor.sv:15]
+	Parameter SRC_LINE_W bound to: 32'sb00000000000000000000000000001100 
+	Parameter TGT_LINE_W bound to: 32'sb00000000000000000000000000010000 
+	Parameter TOKEN_W bound to: 32'sb00000000000000000000000000001000 
+	Parameter CHI_KIND_W bound to: 32'sb00000000000000000000000000000011 
+	Parameter DVM_KIND_W bound to: 32'sb00000000000000000000000000000010 
+INFO: [Synth 8-294] found qualifier unique on case statement: implementing as parallel_case [C:/Users/tyboy/OneDrive/Documents/novel-arm/research/copper_amba_sari_frontdoor.sv:86]
+INFO: [Synth 8-6155] done synthesizing module 'copper_amba_sari_frontdoor' (0#1) [C:/Users/tyboy/OneDrive/Documents/novel-arm/research/copper_amba_sari_frontdoor.sv:15]
+INFO: [Synth 8-6157] synthesizing module 'copper_sari_ring_revoker' [C:/Users/tyboy/OneDrive/Documents/novel-arm/research/copper_sari_ring_revoker.sv:12]
+	Parameter SRC_LINE_W bound to: 32'sb00000000000000000000000000001100 
+	Parameter TGT_LINE_W bound to: 32'sb00000000000000000000000000010000 
+	Parameter TOKEN_W bound to: 32'sb00000000000000000000000000001000 
+	Parameter DEPTH bound to: 32'sb00000000000000000000000000001000 
+	Parameter COUNT_W bound to: 32'sb00000000000000000000000000000100 
+INFO: [Synth 8-294] found qualifier unique on case statement: implementing as parallel_case [C:/Users/tyboy/OneDrive/Documents/novel-arm/research/copper_sari_ring_revoker.sv:139]
+INFO: [Synth 8-294] found qualifier unique on case statement: implementing as parallel_case [C:/Users/tyboy/OneDrive/Documents/novel-arm/research/copper_sari_ring_revoker.sv:207]
+INFO: [Synth 8-6155] done synthesizing module 'copper_sari_ring_revoker' (0#1) [C:/Users/tyboy/OneDrive/Documents/novel-arm/research/copper_sari_ring_revoker.sv:12]
+INFO: [Synth 8-6157] synthesizing module 'copper_clpd_gate' [C:/Users/tyboy/OneDrive/Documents/novel-arm/research/copper_clpd_gate.sv:17]
+	Parameter LINE_TAG_W bound to: 32'sb00000000000000000000000000001100 
+	Parameter WORDS_PER_LINE bound to: 32'sb00000000000000000000000000010000 
+	Parameter WORD_OFF_W bound to: 32'sb00000000000000000000000000000100 
+	Parameter TOKEN_W bound to: 32'sb00000000000000000000000000001000 
+	Parameter EPOCH_W bound to: 32'sb00000000000000000000000000000100 
+	Parameter ENTRIES bound to: 32'sb00000000000000000000000001000000 
+	Parameter ENTRY_IDX_W bound to: 32'sb00000000000000000000000000000110 
+INFO: [Synth 8-6155] done synthesizing module 'copper_clpd_gate' (0#1) [C:/Users/tyboy/OneDrive/Documents/novel-arm/research/copper_clpd_gate.sv:17]
+INFO: [Synth 8-6157] synthesizing module 'copper_ctlw_witness_dir' [C:/Users/tyboy/OneDrive/Documents/novel-arm/research/copper_ctlw_witness_dir.sv:11]
+	Parameter VLINE_W bound to: 32'sb00000000000000000000000000010000 
+	Parameter PLINE_W bound to: 32'sb00000000000000000000000000010000 
+	Parameter TOKEN_W bound to: 32'sb00000000000000000000000000001000 
+	Parameter ENTRIES bound to: 32'sb00000000000000000000000000010000 
+	Parameter IDX_W bound to: 32'sb00000000000000000000000000000100 
+INFO: [Synth 8-6155] done synthesizing module 'copper_ctlw_witness_dir' (0#1) [C:/Users/tyboy/OneDrive/Documents/novel-arm/research/copper_ctlw_witness_dir.sv:11]
+INFO: [Synth 8-6157] synthesizing module 'copper_full_authority_gate' [C:/Users/tyboy/OneDrive/Documents/novel-arm/research/copper_full_authority_gate.sv:16]
+	Parameter VALUE_W bound to: 32'sb00000000000000000000000000010000 
+	Parameter EPOCH_W bound to: 32'sb00000000000000000000000000000100 
+	Parameter TOKEN_W bound to: 32'sb00000000000000000000000000001000 
+	Parameter LINE_W bound to: 32'sb00000000000000000000000000010000 
+INFO: [Synth 8-6155] done synthesizing module 'copper_full_authority_gate' (0#1) [C:/Users/tyboy/OneDrive/Documents/novel-arm/research/copper_full_authority_gate.sv:16]
+INFO: [Synth 8-6155] done synthesizing module 'copper_amba_sari_authority_bridge_top' (0#1) [C:/Users/tyboy/OneDrive/Documents/novel-arm/research/copper_amba_sari_authority_bridge_top.sv:10]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 1602.781 ; gain = 749.371
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 1602.781 ; gain = 749.371
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 1602.781 ; gain = 749.371
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.113 . Memory (MB): peak = 1602.781 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [C:/Users/tyboy/OneDrive/Documents/novel-arm/research/copper_clpd_constraints.xdc]
+Finished Parsing XDC File [C:/Users/tyboy/OneDrive/Documents/novel-arm/research/copper_clpd_constraints.xdc]
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.005 . Memory (MB): peak = 1657.664 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.082 . Memory (MB): peak = 1657.664 ; gain = 0.000
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:15 ; elapsed = 00:00:16 . Memory (MB): peak = 1657.664 ; gain = 804.254
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a35tcpg236-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:15 ; elapsed = 00:00:16 . Memory (MB): peak = 1657.664 ; gain = 804.254
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:15 ; elapsed = 00:00:16 . Memory (MB): peak = 1657.664 ; gain = 804.254
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:19 ; elapsed = 00:00:20 . Memory (MB): peak = 1657.664 ; gain = 804.254
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   3 Input    5 Bit       Adders := 1     
+	   3 Input    4 Bit       Adders := 1     
+	   2 Input    3 Bit       Adders := 4     
++---Registers : 
+	               16 Bit    Registers := 96    
+	               12 Bit    Registers := 72    
+	                8 Bit    Registers := 80    
+	                4 Bit    Registers := 65    
+	                3 Bit    Registers := 2     
+	                1 Bit    Registers := 81    
++---Muxes : 
+	   2 Input   16 Bit        Muxes := 450   
+	   8 Input   12 Bit        Muxes := 3     
+	   2 Input   12 Bit        Muxes := 33    
+	   2 Input    3 Bit        Muxes := 21    
+	   4 Input    3 Bit        Muxes := 1     
+	   9 Input    2 Bit        Muxes := 1     
+	   2 Input    1 Bit        Muxes := 649   
+	   6 Input    1 Bit        Muxes := 4     
+	   4 Input    1 Bit        Muxes := 1     
+	   8 Input    1 Bit        Muxes := 3     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 90 (col length:60)
+BRAMs: 100 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:01:33 ; elapsed = 00:01:37 . Memory (MB): peak = 1773.508 ; gain = 920.098
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:01:38 ; elapsed = 00:01:42 . Memory (MB): peak = 1782.410 ; gain = 929.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:02:19 ; elapsed = 00:02:25 . Memory (MB): peak = 2103.535 ; gain = 1250.125
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:02:28 ; elapsed = 00:02:34 . Memory (MB): peak = 2103.535 ; gain = 1250.125
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:02:32 ; elapsed = 00:02:38 . Memory (MB): peak = 2103.535 ; gain = 1250.125
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:02:32 ; elapsed = 00:02:38 . Memory (MB): peak = 2103.535 ; gain = 1250.125
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:02:33 ; elapsed = 00:02:39 . Memory (MB): peak = 2103.535 ; gain = 1250.125
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:02:33 ; elapsed = 00:02:39 . Memory (MB): peak = 2103.535 ; gain = 1250.125
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:02:33 ; elapsed = 00:02:39 . Memory (MB): peak = 2103.535 ; gain = 1250.125
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:02:33 ; elapsed = 00:02:39 . Memory (MB): peak = 2103.535 ; gain = 1250.125
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |BUFG   |     1|
+|2     |CARRY4 |     9|
+|3     |LUT1   |     2|
+|4     |LUT2   |    77|
+|5     |LUT3   |    27|
+|6     |LUT4   |   247|
+|7     |LUT5   |   202|
+|8     |LUT6   |  3720|
+|9     |MUXF7  |   712|
+|10    |MUXF8  |   342|
+|11    |FDCE   |  3130|
+|12    |IBUF   |   183|
+|13    |OBUF   |    17|
++------+-------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:02:33 ; elapsed = 00:02:39 . Memory (MB): peak = 2103.535 ; gain = 1250.125
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:02:24 ; elapsed = 00:02:37 . Memory (MB): peak = 2103.535 ; gain = 1195.242
+Synthesis Optimization Complete : Time (s): cpu = 00:02:34 ; elapsed = 00:02:40 . Memory (MB): peak = 2103.535 ; gain = 1250.125
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.093 . Memory (MB): peak = 2103.535 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 1063 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Parsing XDC File [C:/Users/tyboy/OneDrive/Documents/novel-arm/research/copper_clpd_constraints.xdc]
+Finished Parsing XDC File [C:/Users/tyboy/OneDrive/Documents/novel-arm/research/copper_clpd_constraints.xdc]
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 2103.535 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete | Checksum: 32d62872
+INFO: [Common 17-83] Releasing license: Synthesis
+29 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:02:39 ; elapsed = 00:02:47 . Memory (MB): peak = 2103.535 ; gain = 1439.113
+# report_utilization -file research/results/copper_amba_sari_authority_bridge_top_utilization.rpt
+# report_timing_summary -file research/results/copper_amba_sari_authority_bridge_top_timing.rpt
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -1, Delay Type: min_max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 2 CPUs
+report_timing_summary: Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2103.535 ; gain = 0.000
+# write_checkpoint -force research/results/copper_amba_sari_authority_bridge_top_synth.dcp
+INFO: [Timing 38-480] Writing timing data to binary archive.
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.012 . Memory (MB): peak = 2103.535 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'C:/Users/tyboy/OneDrive/Documents/novel-arm/research/results/copper_amba_sari_authority_bridge_top_synth.dcp' has been generated.
+# quit
+INFO: [Common 17-206] Exiting Vivado at Tue Jun 16 11:35:28 2026...
