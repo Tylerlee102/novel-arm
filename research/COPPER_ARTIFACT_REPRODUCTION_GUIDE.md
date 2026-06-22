@@ -2,7 +2,9 @@
 
 Date: 2026-06-20
 
-This guide records the local commands and expected outputs for the current COPPER artifact package. It is meant for reviewer-style reruns on this Windows workspace. It does not claim silicon signoff or top-tier acceptance.
+This guide records the local commands and expected outputs for the current COPPER artifact package. It is meant for reviewer-style reruns on a Windows workspace with the required external tools installed. It does not claim silicon signoff, top-tier acceptance, or one-command reproduction of the entire full-system campaign from a fresh clone.
+
+For a concise clone-level reproducibility statement, see `REPRODUCIBILITY_STATUS.md`.
 
 ## Local Tool Paths
 
@@ -68,7 +70,7 @@ Expected current result:
 
 Expected public artifact manifest:
 
-- Manifest entries: 556.
+- Manifest entries: 573.
 - Missing referenced files: 0.
 - Minimal-package files/bytes: 571 files / 6,096,123 bytes.
 - External-store files/bytes: 2 files / 13,479,413 bytes.
@@ -77,9 +79,9 @@ Expected public artifact manifest:
 
 Expected public artifact package build:
 
-- Direct-package rows copied: 554.
+- Direct-package rows copied: 571.
 - Generated metadata files copied: 4.
-- Package files present: 558.
+- Package files present: 575.
 - Missing files: 0.
 - Hash mismatches: 0.
 - `status=PASS`
