@@ -1,0 +1,189 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{url}
+\usepackage{graphicx}
+
+\title{COPPER: Committed Pointer-Provenance Prefetching}
+\author{Artifact draft}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+COPPER explores whether committed pointer-provenance signals can improve the selectivity of hardware data-derived prefetching for pointer-intensive workloads. The mechanism records pointer-source evidence only after architectural commit, invalidates or blocks stale and mismatched sources, and uses that evidence to gate later prefetch issue. The artifact now supports a careful claim: COPPER is a measurable research mechanism with executable-model evidence, deterministic cycle-model evidence, CI-proven RTL unit simulation, CI-proven paper/artifact reproduction, and matched unit-level synthesis evidence. It does not claim state-of-the-art performance, production readiness, full-system integration, power efficiency, or silicon signoff.
+\end{abstract}
+
+\section{Introduction}
+Pointer-heavy programs expose memory latency that ordinary address-stream prefetchers can miss. Data-derived prefetching can help, but it can also act on data that merely resembles an address. COPPER changes the authority rule: a prefetch candidate needs committed pointer-source evidence before issue. This paper version is claim-disciplined; all measurements are routed through generated CSVs and all unsupported claims are kept out of the body.
+
+\section{Motivation}
+\begin{figure}[t]
+\centering
+\fbox{\begin{minipage}{\linewidth}\centering
+Demand execution uses a loaded pointer after commit. COPPER records that source word as eligible. Later data-derived prefetch issue checks the same source identity, value evidence, domain, and permission path before acting.
+\end{minipage}}
+\caption{Pointer-chasing motivation.}
+\label{fig:motivation}
+\end{figure}
+
+The motivating failure mode is not ordinary speculation alone. It is that a prefetcher may treat address-shaped data as authority. COPPER instead treats committed pointer use as authority.
+
+\section{Background And Related Work}
+Prior work covers next-line, stride, stream, indirect, pointer-chase, runahead, helper-thread, and dependence-guided prefetching, as well as metadata and capability mechanisms. COPPER's distinction is narrower: committed source-word proof gates data-derived prefetch issue. The repository matrix records what COPPER does not claim.
+
+\section{COPPER Design}
+\begin{figure}[t]
+\centering
+\fbox{\begin{minipage}{\linewidth}\centering
+Commit path: observe pointer-source use. Provenance table: retain clean source evidence. Prefetch path: require source match, target permission, and valid translation context. Invalidation path: clear source evidence on writes and coherence events.
+\end{minipage}}
+\caption{COPPER architecture.}
+\label{fig:architecture}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\fbox{\begin{minipage}{\linewidth}\centering
+Load source word, use as demand address, commit, record proof, later prefetch candidate, check proof, issue or block.
+\end{minipage}}
+\caption{Committed provenance update timeline.}
+\label{fig:timeline}
+\end{figure}
+
+COPPER has three core rules: proof creation occurs after committed architectural evidence; writes, coherence updates, failed permissions, and context mismatch block or destroy proof; recursive issue does not gain authority merely because a line arrived by prefetch.
+
+\section{Implementation}
+The artifact contains a Python model, a trace-driven evaluation harness, SystemVerilog RTL units, C/C++ workload sources, reproduction scripts, and summary parsers. The open-source RTL smoke target is \texttt{copper\_prefetch\_unit\_open}; larger local Vivado summaries are treated as existing evidence rather than portable rerun proof.
+
+\section{Methodology}
+\begin{table}[t]
+\centering
+\caption{Benchmarks}
+\begin{tabular}{lll}
+\hline
+Class & Examples & Evidence file \\
+\hline
+Pointer-heavy & linked list, tree, hash, graph, Patricia & cycle\_performance.csv \\
+Controls & array, matrix, compute, random access & cycle\_performance.csv \\
+Stress & short chains, long chains, mixed, noisy, branchy & cycle\_performance.csv \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering
+\caption{Configurations And Baselines}
+\begin{tabular}{lll}
+\hline
+Config & Role & Evidence file \\
+\hline
+no\_prefetch & reference & cycle\_performance.csv \\
+next\_line & spatial baseline & cycle\_performance.csv \\
+stride & regular-stream baseline & cycle\_performance.csv \\
+simple\_pointer\_chase & unsafe content-derived baseline & cycle\_performance.csv \\
+copper & committed-provenance policy & cycle\_performance.csv \\
+\hline
+\end{tabular}
+\end{table}
+
+The normalized CSVs report per-workload rows rather than hiding negative results inside averages. Evidence levels are explicit: \texttt{model} rows come from the executable policy model, \texttt{cycle\_model} rows come from a deterministic memory-system model with hit/miss latency, memory latency, outstanding prefetches, queue drops, lateness, and demand/prefetch traffic accounting. The cycle model is not gem5 and does not claim full-system integration.
+
+\section{Evaluation}
+\begin{figure}[t]
+\centering
+\fbox{\begin{minipage}{\linewidth}\centering
+Speedup rows are generated in \texttt{research/results/performance.csv} and \texttt{research/results/cycle\_performance.csv}. The paper does not collapse them into a single broad win claim.
+\end{minipage}}
+\caption{Speedup by benchmark.}
+\label{fig:speedup}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\fbox{\begin{minipage}{\linewidth}\centering
+Issued, useful, useless, accuracy, coverage, lateness, and queue-drop fields are generated in \texttt{research/results/prefetch\_metrics.csv} and \texttt{research/results/cycle\_prefetch\_metrics.csv}.
+\end{minipage}}
+\caption{Prefetch accuracy and coverage.}
+\label{fig:prefetch}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\fbox{\begin{minipage}{\linewidth}\centering
+Demand-load, prefetch-load, total-request, and traffic-overhead fields are generated in \texttt{research/results/memory\_traffic.csv} and \texttt{research/results/cycle\_memory\_traffic.csv}.
+\end{minipage}}
+\caption{Traffic overhead.}
+\label{fig:traffic}
+\end{figure}
+
+Current evidence supports selective, per-workload discussion. Several cycle-model rows show COPPER behind the best baseline; those regressions remain in the CSVs and block a universal speedup claim.
+
+\section{Ablation And Sensitivity}
+\begin{figure}[t]
+\centering
+\fbox{\begin{minipage}{\linewidth}\centering
+Ablation and sensitivity rows are generated in \texttt{research/results/ablation.csv} and \texttt{research/results/sensitivity.csv}; the rows include evidence-level labels.
+\end{minipage}}
+\caption{Ablation and sensitivity.}
+\label{fig:ablation}
+\end{figure}
+
+The cycle-model ablations isolate no provenance, speculative provenance, committed-only proof, confidence, queue filtering, and full COPPER. Queue size, confidence threshold, chain depth, distance, table size, and memory latency are varied in sensitivity rows. These are cycle-model counters and should not be described as gem5 counters.
+
+\section{Hardware Cost}
+\begin{table}[t]
+\centering
+\caption{Hardware Cost}
+\begin{tabular}{lll}
+\hline
+Evidence & Scope & File \\
+\hline
+CI RTL simulation & open-source unit test & rtl\_simulation.csv \\
+Yosys & generic unit resource context & synthesis.csv \\
+nextpnr & mapped unit resource context when available & synthesis.csv \\
+Overhead & matched unit rows from same flow & synthesis\_overhead.csv \\
+\hline
+\end{tabular}
+\end{table}
+
+The artifact supports unit-level hardware plausibility only. It does not claim full-core implementation cost, mapped full-core timing, or power efficiency.
+
+\section{Limitations}
+\begin{table}[t]
+\centering
+\caption{Limitations}
+\begin{tabular}{ll}
+\hline
+Limitation & Consequence \\
+\hline
+Cycle model is synthetic & Trends need gem5 or core-model validation \\
+No full-core integration & Full-core area and timing claims remain blocked \\
+No real power report & Power-efficiency claims remain blocked \\
+External gem5 and Vivado setup & Large external-tool reruns are not clone-local \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Artifact Evidence Gates}
+\begin{table}[t]
+\centering
+\caption{Artifact And Evidence Gates}
+\begin{tabular}{lll}
+\hline
+Gate class & Status source & Interpretation \\
+\hline
+CI RTL evidence & rtl\_simulation.csv & GitHub Actions unit simulation \\
+Cycle-model evidence & cycle\_performance.csv & deterministic timing model \\
+Hardware cost & synthesis\_overhead.csv & matched unit-level overhead \\
+Package & artifact\_manifest.csv & included and excluded files \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Conclusion}
+COPPER is best framed as a committed-provenance authority mechanism for data-derived prefetch issue. The artifact now has a CI-proven open-source path, deterministic cycle-model evidence, matched unit-level synthesis evidence, claim ledger, audits, and package manifest. The honest next step for a stronger architecture submission is gem5 or comparable core-model validation without changing the scoped claims in this artifact.
+
+\bibliographystyle{plain}
+\bibliography{references}
+\end{document}
