@@ -323,10 +323,10 @@ def artifact_status(imported_files: list[Path]) -> tuple[str, str]:
 
 def log_for_step(step: str, imported_files: list[Path]) -> str:
     needles = {
-        "make rtl": ("rtl", "iverilog"),
-        "make sim": ("vvp", "simulation", "rtl"),
+        "make rtl": ("iverilog",),
+        "make sim": ("vvp",),
         "make synth": ("synth", "yosys"),
-        "make paper": ("paper", "latex"),
+        "make paper": ("build_paper", "main.log", "latex"),
         "make check-toolchain": ("toolchain",),
         "make artifact": ("artifact",),
     }.get(step, ())
