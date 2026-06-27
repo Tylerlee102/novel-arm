@@ -35,17 +35,21 @@ module copper_prefetch_unit_open #(
     logic [TOKEN_W-1:0] token_table [ENTRIES];
     logic valid_table [ENTRIES];
     logic [$clog2(ENTRIES)-1:0] insert_ptr;
+    logic [ENTRIES-1:0] match_vec;
     logic hit;
     localparam logic [3:0] QUEUE_DEPTH_LIMIT = QUEUE_DEPTH;
 
-    always_comb begin
-        hit = 1'b0;
-        for (int i = 0; i < ENTRIES; i++) begin
-            hit |= valid_table[i]
-                && src_table[i] == demand_src_addr
-                && token_table[i] == demand_value_token;
+    generate
+        for (genvar gi = 0; gi < ENTRIES; gi++) begin : gen_match
+            assign match_vec[gi] = valid_table[gi]
+                && src_table[gi] == demand_src_addr
+                && token_table[gi] == demand_value_token;
         end
+    endgenerate
 
+    assign hit = |match_vec;
+
+    always_comb begin
         queue_full = queue_count >= QUEUE_DEPTH_LIMIT;
         blocked_disabled = demand_valid && !copper_enable;
         blocked_permission = demand_valid && copper_enable && hit

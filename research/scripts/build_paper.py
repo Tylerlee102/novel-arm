@@ -52,6 +52,15 @@ def first_error_line(text: str) -> str:
     return ""
 
 
+def github_escape(text: str) -> str:
+    return text.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
+
+
+def emit_github_error(file_path: str, message: str) -> None:
+    if os.environ.get("GITHUB_ACTIONS", "").lower() == "true":
+        print(f"::error file={file_path},title=COPPER paper build failed::{github_escape(message)}")
+
+
 def existing_rows(fieldnames: list[str]) -> list[dict[str, str]]:
     if not OUT.exists():
         return []
@@ -127,7 +136,9 @@ def main() -> int:
         print(f"built {rel(pdf)}")
         return 0
     first_error = first_error_line(combined)
-    write_status("FAIL", rel(pdf) if pdf.exists() else "", engine, errors or "1", warnings, rel(combined_log), first_error or "LaTeX returned a non-zero status.")
+    note = first_error or "LaTeX returned a non-zero status."
+    write_status("FAIL", rel(pdf) if pdf.exists() else "", engine, errors or "1", warnings, rel(combined_log), note)
+    emit_github_error(rel(combined_log), note)
     return 1
 
 

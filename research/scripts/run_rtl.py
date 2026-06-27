@@ -97,6 +97,15 @@ def parse_assertion_count(pattern: re.Pattern[str], text: str, default: str) -> 
     return match.group(1) if match else default
 
 
+def github_escape(text: str) -> str:
+    return text.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
+
+
+def emit_github_error(title: str, file_path: str, message: str) -> None:
+    if os.environ.get("GITHUB_ACTIONS", "").lower() == "true":
+        print(f"::error file={file_path},title={github_escape(title)}::{github_escape(message)}")
+
+
 def compile_rtl() -> dict[str, str]:
     LOG_DIR.mkdir(parents=True, exist_ok=True)
     RTL_DIR.mkdir(parents=True, exist_ok=True)
@@ -274,10 +283,14 @@ def main() -> int:
         row_data = compile_rtl()
         write_compile(row_data)
         print(f"wrote {COMPILE_CSV.relative_to(ROOT)}")
+        if row_data["status"] == "FAIL":
+            emit_github_error("COPPER RTL compile failed", row_data["log_path"], row_data["notes"])
         return 1 if row_data["status"] == "FAIL" else 0
     row_data = simulate_rtl()
     write_sim(row_data)
     print(f"wrote {SIM_CSV.relative_to(ROOT)}")
+    if row_data["status"] == "FAIL":
+        emit_github_error("COPPER RTL simulation failed", row_data["log_path"], row_data["notes"])
     return 1 if row_data["status"] == "FAIL" else 0
 
 
