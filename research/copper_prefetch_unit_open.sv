@@ -49,16 +49,14 @@ module copper_prefetch_unit_open #(
 
     assign hit = |match_vec;
 
-    always_comb begin
-        queue_full = queue_count >= QUEUE_DEPTH_LIMIT;
-        blocked_disabled = demand_valid && !copper_enable;
-        blocked_permission = demand_valid && copper_enable && hit
-            && (!demand_translation_ok || !demand_permission_ok);
-        blocked_unproven = demand_valid && copper_enable && !hit;
-        prefetch_valid = demand_valid && copper_enable && hit
-            && demand_translation_ok && demand_permission_ok && !queue_full;
-        architectural_state_mutated = 1'b0;
-    end
+    assign queue_full = queue_count >= QUEUE_DEPTH_LIMIT;
+    assign blocked_disabled = demand_valid && !copper_enable;
+    assign blocked_permission = demand_valid && copper_enable && hit
+        && (!demand_translation_ok || !demand_permission_ok);
+    assign blocked_unproven = demand_valid && copper_enable && !hit;
+    assign prefetch_valid = demand_valid && copper_enable && hit
+        && demand_translation_ok && demand_permission_ok && !queue_full;
+    assign architectural_state_mutated = 1'b0;
 
     always_ff @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
