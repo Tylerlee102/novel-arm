@@ -1,5 +1,15 @@
 `timescale 1ns/1ps
 
+`define CHECK_BIT(label, actual, expected) \
+    begin \
+        #1; \
+        checks = checks + 1; \
+        if ((actual) !== (expected)) begin \
+            $display("COPPER_ASSERTION_FAIL %s expected=%0b actual=%0b", label, expected, actual); \
+            errors = errors + 1; \
+        end \
+    end
+
 module copper_prefetch_unit_open_tb;
     logic clk;
     logic rst_n;
@@ -66,17 +76,6 @@ module copper_prefetch_unit_open_tb;
         end
     endtask
 
-    task automatic check_bit(input string label, input logic actual, input logic expected);
-        begin
-            #1;
-            checks = checks + 1;
-            if (actual !== expected) begin
-                $display("COPPER_ASSERTION_FAIL %s expected=%0b actual=%0b", label, expected, actual);
-                errors = errors + 1;
-            end
-        end
-    endtask
-
     task automatic commit_proof(input logic speculative);
         begin
             @(negedge clk);
@@ -107,49 +106,49 @@ module copper_prefetch_unit_open_tb;
         repeat (3) @(negedge clk);
         rst_n = 1'b1;
         @(negedge clk);
-        check_bit("reset queue empty", queue_full, 1'b0);
-        check_bit("reset no architectural mutation", architectural_state_mutated, 1'b0);
+        `CHECK_BIT("reset queue empty", queue_full, 1'b0)
+        `CHECK_BIT("reset no architectural mutation", architectural_state_mutated, 1'b0)
 
         demand_candidate();
-        check_bit("unproven blocks", blocked_unproven, 1'b1);
-        check_bit("unproven does not prefetch", prefetch_valid, 1'b0);
+        `CHECK_BIT("unproven blocks", blocked_unproven, 1'b1)
+        `CHECK_BIT("unproven does not prefetch", prefetch_valid, 1'b0)
 
         commit_proof(1'b1);
         demand_candidate();
-        check_bit("speculative commit rejected", prefetch_valid, 1'b0);
+        `CHECK_BIT("speculative commit rejected", prefetch_valid, 1'b0)
 
         commit_proof(1'b0);
         demand_candidate();
-        check_bit("committed proof prefetches", prefetch_valid, 1'b1);
-        check_bit("prefetch path no architectural mutation", architectural_state_mutated, 1'b0);
+        `CHECK_BIT("committed proof prefetches", prefetch_valid, 1'b1)
+        `CHECK_BIT("prefetch path no architectural mutation", architectural_state_mutated, 1'b0)
         @(negedge clk);
         clear_inputs();
 
         demand_candidate();
-        check_bit("second request fills queue", prefetch_valid, 1'b1);
+        `CHECK_BIT("second request fills queue", prefetch_valid, 1'b1)
         @(negedge clk);
         clear_inputs();
 
         demand_candidate();
-        check_bit("queue full blocks request", prefetch_valid, 1'b0);
-        check_bit("queue full flag", queue_full, 1'b1);
+        `CHECK_BIT("queue full blocks request", prefetch_valid, 1'b0)
+        `CHECK_BIT("queue full flag", queue_full, 1'b1)
 
         clear_inputs();
         copper_enable = 1'b0;
         demand_valid = 1'b1;
         demand_src_addr = 48'h1000;
         demand_value_token = 16'h1040;
-        check_bit("disabled blocks", blocked_disabled, 1'b1);
-        check_bit("disabled no prefetch", prefetch_valid, 1'b0);
+        `CHECK_BIT("disabled blocks", blocked_disabled, 1'b1)
+        `CHECK_BIT("disabled no prefetch", prefetch_valid, 1'b0)
 
         clear_inputs();
         demand_valid = 1'b1;
         demand_src_addr = 48'h1000;
         demand_value_token = 16'h1040;
         demand_permission_ok = 1'b0;
-        check_bit("permission block", blocked_permission, 1'b1);
-        check_bit("permission no prefetch", prefetch_valid, 1'b0);
-        check_bit("blocked path no architectural mutation", architectural_state_mutated, 1'b0);
+        `CHECK_BIT("permission block", blocked_permission, 1'b1)
+        `CHECK_BIT("permission no prefetch", prefetch_valid, 1'b0)
+        `CHECK_BIT("blocked path no architectural mutation", architectural_state_mutated, 1'b0)
 
         if (errors == 0) begin
             $display("COPPER_ASSERTIONS_PASSED=%0d", checks);
@@ -163,3 +162,5 @@ module copper_prefetch_unit_open_tb;
         $finish;
     end
 endmodule
+
+`undef CHECK_BIT
