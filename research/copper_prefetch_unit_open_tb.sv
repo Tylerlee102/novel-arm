@@ -106,6 +106,7 @@ module copper_prefetch_unit_open_tb;
         rst_n = 1'b0;
         repeat (3) @(negedge clk);
         rst_n = 1'b1;
+        @(negedge clk);
         check_bit("reset queue empty", queue_full, 1'b0);
         check_bit("reset no architectural mutation", architectural_state_mutated, 1'b0);
 
