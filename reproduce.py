@@ -24,6 +24,7 @@ RESULTS = RESEARCH / "results"
 OUT_DIR = RESULTS / "reproduction"
 REPORT = OUT_DIR / "LOCAL_REPRODUCTION_REPORT.md"
 SUMMARY_JSON = OUT_DIR / "local_reproduction_summary.json"
+STATUS_CSV = RESULTS / "reproduction_status.csv"
 
 
 @dataclass
@@ -83,6 +84,14 @@ def file_sha256(path: Path) -> str:
 def audit_manifest_rows() -> StepResult:
     start = time.perf_counter()
     manifest = RESULTS / "copper_public_artifact_manifest_20260620.csv"
+    if not manifest.exists():
+        elapsed = time.perf_counter() - start
+        return StepResult(
+            "Manifest hash audit",
+            "FAIL",
+            elapsed,
+            f"missing={rel(manifest)}",
+        )
     missing: list[str] = []
     mismatched: list[str] = []
     checked = 0
@@ -126,6 +135,8 @@ def extract_key_results() -> dict[str, str]:
         "claim_matrix": RESULTS / "COPPER_CLAIM_EVIDENCE_MATRIX_20260617.md",
     }
     for key, path in candidates.items():
+        if not path.exists():
+            continue
         body = path.read_text(encoding="utf-8", errors="replace")
         for line in body.splitlines():
             if "Passed " in line and "artifact checks" in line:
@@ -224,6 +235,23 @@ def write_report(step_results: list[StepResult], manifest_result: StepResult) ->
         ),
         encoding="utf-8",
     )
+    with STATUS_CSV.open("w", newline="", encoding="utf-8") as fh:
+        writer = csv.DictWriter(fh, fieldnames=["step", "status", "duration_sec", "log_path", "notes"])
+        writer.writeheader()
+        for result in all_results:
+            log_path = ""
+            detail = result.detail
+            if "log=" in detail:
+                log_path = detail.split("log=", 1)[1].split(";", 1)[0]
+            writer.writerow(
+                {
+                    "step": result.name,
+                    "status": result.status,
+                    "duration_sec": f"{result.seconds:.3f}",
+                    "log_path": log_path,
+                    "notes": detail,
+                }
+            )
 
 
 def main() -> int:

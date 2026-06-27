@@ -8,6 +8,14 @@ machine or one-command full-system artifact.
 - `reproduce.ps1`, `reproduce.sh`, or `python reproduce.py --mode all-local`
   reruns the clone-local reproduction path and writes
   `research/results/reproduction/LOCAL_REPRODUCTION_REPORT.md`.
+- In a Linux container, Codespaces, or GitHub Actions runner with the Dockerfile
+  dependencies, the open-source pass-6 flow runs through `make check-toolchain`,
+  `make test`, `make rtl`, `make sim`, `make eval`, `make synth`,
+  `make paper`, `make paper-audit`, and `make artifact`.
+- The model-level evaluation regenerates same-path baselines for
+  `no_prefetch`, `next_line`, `stride`, `simple_pointer_chase`, and `copper`,
+  including queue drops, lateness, accuracy, coverage, traffic overhead,
+  ablations, sensitivity, and seed/input stability.
 - Paper-facing documents, tables, summaries, RTL sources, testbenches, and
   reproduction scripts are included with stable relative paths.
 - The Python audit and summary scripts can be rerun with a local Python 3
@@ -18,6 +26,18 @@ machine or one-command full-system artifact.
   result are included under `external/`.
 - Vivado RTL simulations and synthesis scripts are included, but require a
   local Vivado installation and may need path edits for the installed version.
+- Local Windows is editing-only for final open-source RTL, Yosys synthesis,
+  paper PDF, and artifact-package proof. It may edit files, run Python syntax
+  checks, commit, push, or trigger CI, but it must not decide final PASS status
+  for those gates.
+- GitHub Actions, Docker, and Codespaces are the intended source of truth for
+  the open-source hardware and paper gates. Missing local tools are not a
+  license to substitute fake reports.
+- This Pass 6 checkout is web-trigger-ready but does not yet include a collected
+  GitHub Actions/Docker/Codespaces proof run. Follow `docs/RUN_CI_NOW.md` from
+  the GitHub Actions web UI or GitHub CLI, then import the downloaded
+  logs/artifacts with `research/scripts/import_ci_artifacts.py` before promoting
+  any RTL, synthesis, paper, or artifact-packaging gate to PASS.
 
 ## Requires External Setup
 
@@ -36,6 +56,11 @@ Reviewers can audit the reported evidence, rerun many Python and RTL checks with
 standard tools, and reproduce selected public-workload points after installing
 the external simulator/toolchain stack. They should not expect a fresh clone to
 reproduce the entire long-running full-system campaign without that setup.
+
+The model-level pass-6 evidence improves baseline discipline but does not
+replace full-system gem5 evidence. Claims in the paper and claim ledger must
+identify model-level, RTL-level, generic-synthesis, existing-Vivado, and
+full-system-summary evidence separately.
 
 The clone-local runner is intended to make this boundary explicit: it should pass
 from a fresh clone after Python dependencies are installed, while full gem5 and

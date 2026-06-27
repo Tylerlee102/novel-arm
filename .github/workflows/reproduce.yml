@@ -1,0 +1,102 @@
+name: COPPER Reproduction
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+      - main
+      - copper-ci-proof
+  pull_request:
+
+env:
+  PIP_BREAK_SYSTEM_PACKAGES: "1"
+  COPPER_ENVIRONMENT: github_actions
+
+jobs:
+  reproduce:
+    name: Open-source evidence flow
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install open-source toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            ca-certificates \
+            git \
+            python3 \
+            python3-pip \
+            make \
+            gcc \
+            g++ \
+            clang \
+            cmake \
+            iverilog \
+            verilator \
+            yosys \
+            latexmk \
+            texlive-latex-base \
+            texlive-latex-recommended \
+            texlive-latex-extra \
+            texlive-fonts-recommended \
+            texlive-publishers \
+            texlive-bibtex-extra \
+            biber
+          sudo apt-get install -y --no-install-recommends nextpnr-ice40 nextpnr-ecp5 || \
+            echo "optional nextpnr packages unavailable on this runner"
+          python3 -m pip install -r requirements.txt pytest numpy pandas
+
+      - name: Check toolchain
+        if: always()
+        run: make check-toolchain
+
+      - name: Run model tests
+        if: always()
+        run: make test
+
+      - name: Run model evaluation
+        if: always()
+        run: make eval
+
+      - name: Compile RTL
+        if: always()
+        run: make rtl
+
+      - name: Simulate RTL
+        if: always()
+        run: make sim
+
+      - name: Run synthesis
+        if: always()
+        run: make synth
+
+      - name: Build paper
+        if: always()
+        run: make paper
+
+      - name: Audit paper
+        if: always()
+        run: make paper-audit
+
+      - name: Package artifact
+        if: always()
+        run: make artifact
+
+      - name: Upload COPPER CI evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: copper-ci-evidence-${{ github.run_id }}
+          if-no-files-found: ignore
+          path: |
+            research/results/*.csv
+            research/results/**/*.csv
+            research/results/logs/**
+            research/paper/main.pdf
+            dist/copper-artifact.zip
+            research/CONFERENCE_READINESS_DASHBOARD.md
+            research/COPPER_FINAL_SUBMISSION_BLOCKERS.md
+            research/COPPER_CLAIM_LEDGER.md
+            REPRODUCIBILITY_STATUS.md
