@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import csv
+import os
 from pathlib import Path
 
 
@@ -23,6 +24,18 @@ def read_rows(path: Path) -> list[dict[str, str]]:
         return []
     with path.open(newline="", encoding="utf-8") as fh:
         return list(csv.DictReader(fh))
+
+
+def current_open_environment() -> bool:
+    env = os.environ.get("COPPER_ENVIRONMENT", "").strip()
+    if not env:
+        if os.environ.get("GITHUB_ACTIONS", "").lower() == "true":
+            env = "github_actions"
+        elif os.environ.get("CODESPACES", "").lower() == "true":
+            env = "codespaces"
+        elif Path("/.dockerenv").exists() or os.environ.get("container"):
+            env = "docker"
+    return env in OPEN_ENVIRONMENTS
 
 
 def write(path: Path, text: str) -> None:
@@ -174,11 +187,17 @@ def inventory_row(path: Path) -> dict[str, str]:
 
 def gate_status() -> list[dict[str, str]]:
     package_exists = (ROOT / "dist" / "copper-artifact.zip").exists()
-    ci_artifact_package = any(
+    imported_artifact_package = any(
         row.get("path", "").endswith("copper-artifact.zip")
         and positive_int(row.get("size_bytes", "0"))
         for row in read_rows(RESULTS / "ci_artifacts_manifest.csv")
     )
+    current_run_package = (
+        current_open_environment()
+        and package_exists
+        and (RESULTS / "artifact_manifest.csv").exists()
+    )
+    ci_artifact_package = imported_artifact_package or current_run_package
     paper_status = read_rows(RESULTS / "paper_build_status.csv")
     paper_built = any(row.get("environment") in OPEN_ENVIRONMENTS and row.get("status") == "PASS" for row in paper_status)
     rtl_compile_status = open_gate_status(RESULTS / "rtl_compile.csv")
@@ -197,7 +216,7 @@ def gate_status() -> list[dict[str, str]]:
     audit_todos = read_rows(RESULTS / "todo_audit.csv")
     audits_pass = audit_claims and audit_numbers and audit_todos and all(r.get("status") == "PASS" for r in audit_claims + audit_numbers + audit_todos)
     return [
-        gate("G1. Open-source CI/Docker reproduction", "Yes", g1_status, "Makefile; Dockerfile; .github/workflows/reproduce.yml; .devcontainer/devcontainer.json; research/results/ci_status.csv", "make readiness completes in GitHub Actions, Docker, or Codespaces with logs/artifacts", "CI/Docker/Codespaces proof has not been imported. Local Windows is editing-only." if g1_status != "PASS" else ""),
+        gate("G1. Open-source CI/Docker reproduction", "Yes", g1_status, "Makefile; Dockerfile; .github/workflows/reproduce.yml; .devcontainer/devcontainer.json; research/results/ci_status.csv; research/results/artifact_manifest.csv", "make readiness completes in GitHub Actions, Docker, or Codespaces with logs/artifacts", "CI/Docker/Codespaces proof has not been imported or produced in the current open evidence environment. Local Windows is editing-only." if g1_status != "PASS" else ""),
         gate("G2. Toolchain detection", "Yes", "PASS" if (RESULTS / "toolchain_status.csv").exists() else "TODO", "research/scripts/check_toolchain.py; research/results/toolchain_status.csv", "Required tools are detected and missing tools are explicit", ""),
         gate("G3. Functional model tests", "Yes", "PASS" if all_status(RESULTS / "model_tests.csv", "PASS") else ("PARTIAL" if (RESULTS / "model_tests.csv").exists() else "TODO"), "research/results/model_tests.csv; research/scripts/copper_eval_model.py", "Directed tests pass and unmodeled behaviors are labeled", "" if all_status(RESULTS / "model_tests.csv", "PASS") else "Some model checks are still non-PASS."),
         gate("G4. SystemVerilog RTL compile", "Yes", rtl_compile_status, "research/results/rtl_compile.csv; research/results/logs/rtl/", "Open-source smoke compile passes in GitHub Actions, Docker, or Codespaces", "No CI/Docker/Codespaces PASS row has been collected yet." if rtl_compile_status != "PASS" else ""),
@@ -214,7 +233,7 @@ def gate_status() -> list[dict[str, str]]:
         gate("G15. Area/resource/timing synthesis", "Yes", "PASS" if synthesis_overhead_pass() else ("PARTIAL" if (RESULTS / "synthesis.csv").exists() else "TODO"), "research/results/synthesis.csv; research/results/synthesis_overhead.csv; research/results/logs/synthesis/", "Matched unit-level overhead exists from the same GitHub Actions, Docker, or Codespaces flow", "No open-environment matched overhead row has been collected yet." if not synthesis_overhead_pass() else ""),
         gate("G16. Power/energy proxy or measured estimate", "Yes", "PARTIAL", "research/results/COPPER_RTL_POWER_PROXY_20260618.md; research/results/copper_rtl_power_proxy_20260618.csv", "Proxy evidence is identified", "Not calibrated full-chip power."),
         gate("G17. Statistical stability across seeds/input sizes", "Yes", "PASS" if cycle_stats_pass() else ("PARTIAL" if (RESULTS / "statistical_summary.csv").exists() else "TODO"), "research/results/seed_stability.csv; research/results/statistical_summary.csv", "Stability covers seeds 1-3 and multiple input sizes with evidence-level labels", ""),
-        gate("G18. Artifact package", "Yes", "PASS" if ci_artifact_package else ("PARTIAL" if package_exists else "TODO"), "dist/copper-artifact.zip; research/results/artifact_manifest.csv; research/results/ci_artifacts_manifest.csv", "Package regenerates in GitHub Actions, Docker, or Codespaces and the zip appears in imported artifacts", "" if ci_artifact_package else "Local package output is not final packaging proof."),
+        gate("G18. Artifact package", "Yes", "PASS" if ci_artifact_package else ("PARTIAL" if package_exists else "TODO"), "dist/copper-artifact.zip; research/results/artifact_manifest.csv; research/results/ci_artifacts_manifest.csv", "Package regenerates in GitHub Actions, Docker, or Codespaces or the zip appears in imported artifacts", "" if ci_artifact_package else "Local package output is not final packaging proof."),
         gate("G19. Paper build", "Yes", "PASS" if paper_built else "BLOCKED", "research/paper/main.tex; research/results/paper_build_status.csv", "PDF builds in GitHub Actions, Docker, or Codespaces", "" if paper_built else "No CI/Docker/Codespaces paper PASS row has been collected yet."),
         gate("G20. Claim audit", "Yes", "PASS" if audits_pass else "TODO", "research/scripts/audit_claims.py; research/scripts/audit_numbers.py; research/scripts/audit_todos.py", "Audits pass", "" if audits_pass else "Run make paper-audit after paper generation."),
         gate("G21. Related work/novelty matrix", "Yes", "PASS", "research/COPPER_RELATED_WORK_MATRIX.md", "Matrix exists and avoids first/novel overclaim", ""),

@@ -41,5 +41,7 @@ paper-audit:
 
 artifact:
 	$(PYTHON) research/scripts/package_artifact.py
+	$(PYTHON) research/scripts/build_conference_docs.py
+	$(PYTHON) research/scripts/package_artifact.py
 
 readiness: check-toolchain test rtl sim eval synth paper paper-audit artifact
