@@ -1,4 +1,4 @@
-﻿# COPPER Environment and Artifact Manifest
+# COPPER Environment and Artifact Manifest
 
 Date: 2026-06-20
 
@@ -10,7 +10,7 @@ Purpose: record the local toolchain and artifact footprint behind the current CO
 |---|---|---|
 | Workspace | `C:\Users\tyboy\OneDrive\Documents\novel-arm` | All commands in the reproduction guide assume this root unless rewritten for another machine. |
 | Shell | Windows PowerShell plus repo-local MSYS Bash | The official OpenSSL CLI runner is PowerShell-native; several other full-system workload runners use `tools\msys64\usr\bin\bash.exe`. |
-| Python | `Python 3.12.13` at `python` | Used for artifact checks, summaries, and model scripts. |
+| Python | `Python 3.12.13` at `C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe` | Used for artifact checks, summaries, and model scripts. |
 | Vivado | `vivado v2025.2 (64-bit)`, SW Build `6299465` | Used for XSim, synthesis, route, timing, and power-proxy reports. |
 | gem5 binary | `external\gem5\build\ARM\gem5.fast.exe`, 112.34 MiB, last modified 2026-06-15 21:06:29 local time | The binary does not accept `--version`; launch requires the repo-local MSYS/UCRT runtime on `PATH`. |
 | Repo-local runtime | `tools\msys64\ucrt64\bin`, `tools\msys64\usr\bin`; UCRT DLL subset observed as 80 DLL files / 290,509,493 bytes | Required for direct gem5 launch from PowerShell. |
@@ -50,4 +50,3 @@ Purpose: record the local toolchain and artifact footprint behind the current CO
 - Top-tier submission readiness still depends on broader workload evidence and production-style integration proof.
 
 manifest_status=PASS
-

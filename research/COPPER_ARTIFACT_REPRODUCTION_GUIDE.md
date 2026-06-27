@@ -1,18 +1,14 @@
-﻿# COPPER Artifact Reproduction Guide
+# COPPER Artifact Reproduction Guide
 
 Date: 2026-06-20
 
-This guide records the local commands and expected outputs for the current COPPER artifact package. It is meant for reviewer-style reruns on a Windows workspace with the required external tools installed. It does not claim silicon signoff, top-tier acceptance, or one-command reproduction of the entire full-system campaign from a fresh clone.
-
-For the clone-level one-command path, run `.\reproduce.ps1` on Windows or
-`./reproduce.sh` on Linux/macOS from the repository root. For a concise
-reproducibility statement, see `REPRODUCIBILITY_STATUS.md`.
+This guide records the local commands and expected outputs for the current COPPER artifact package. It is meant for reviewer-style reruns on this Windows workspace. It does not claim silicon signoff or top-tier acceptance.
 
 ## Local Tool Paths
 
 | Tool | Local path or command |
 |---|---|
-| Python | `python` |
+| Python | `C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe` |
 | gem5 | `external\gem5\build\ARM\gem5.fast.exe` |
 | Repo-local MSYS/UCRT runtime | `tools\msys64\ucrt64\bin`, `tools\msys64\usr\bin` |
 | Vivado | `C:\AMDDesignTools\2025.2\Vivado\bin\vivado.bat` |
@@ -24,7 +20,7 @@ reproducibility statement, see `REPRODUCIBILITY_STATUS.md`.
 From `C:\Users\tyboy\OneDrive\Documents\novel-arm`:
 
 ```powershell
-& 'python' -m py_compile `
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' -m py_compile `
   research\verify_copper_artifacts.py `
   research\build_copper_claim_evidence_matrix.py `
   research\summarize_openssl_cli_fixed_fs.py `
@@ -51,12 +47,14 @@ From `C:\Users\tyboy\OneDrive\Documents\novel-arm`:
   research\analyze_openssl_tcp_process_metadata_toggle_bound.py `
   research\build_copper_tcp_process_clpd_replay.py `
   research\summarize_copper_tcp_process_clpd_activity_power.py `
-  research\build_copper_public_artifact_manifest.py
+  research\build_copper_public_artifact_manifest.py `
+  research\build_copper_public_artifact_package.py
 
-& 'python' research\build_copper_claim_evidence_matrix.py
-& 'python' research\summarize_pcre2_seed_stability.py
-& 'python' research\build_copper_public_artifact_manifest.py
-& 'python' research\verify_copper_artifacts.py
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\build_copper_claim_evidence_matrix.py
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\summarize_pcre2_seed_stability.py
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\build_copper_public_artifact_manifest.py
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\build_copper_public_artifact_package.py
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\verify_copper_artifacts.py
 ```
 
 Expected current result:
@@ -70,19 +68,21 @@ Expected current result:
 
 Expected public artifact manifest:
 
-- Manifest entries: 601.
+- Manifest entries: 577.
 - Missing referenced files: 0.
-- Minimal-package files/bytes: 599 files / 7,333,483 bytes.
+- Minimal-package files/bytes: 575 files / 6,194,294 bytes.
 - External-store files/bytes: 2 files / 13,479,413 bytes.
 - Heavy optional files: `research\results\copper_clpd_sram_workload_activity.saif` and `research\results\copper_clpd_sram_tcp_process_activity.saif`.
 - `status=PASS`
 
-Expected clone-local reproduction:
+Expected public artifact package build:
 
-- `research\results\reproduction\LOCAL_REPRODUCTION_REPORT.md`
-- Overall status: `PASS`.
-- Artifact audit line: `Passed 177/177 artifact checks.`
-- Manifest hash audit: `checked=599, external_by_hash=2`.
+- Direct-package rows copied: 575.
+- Generated metadata files copied: 4.
+- Package files present: 579.
+- Missing files: 0.
+- Hash mismatches: 0.
+- `status=PASS`
 
 ## Upstream SQLite speedtest1 JSON/Star/ORM Rerun
 
@@ -91,7 +91,7 @@ The current tractable upstream SQLite speedtest1 points use unmodified SQLite 3.
 Runner: `research\run_sqlite_speedtest1_fs.sh`.
 
 ```powershell
-& 'python' research\build_sqlite_speedtest1_aarch64.py
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\build_sqlite_speedtest1_aarch64.py
 
 $env:TAG='speedtest1_json_smoke_size1'
 $env:SIZE='1'
@@ -99,7 +99,7 @@ $env:TESTSET='json'
 $env:POLICY_LIST='none naive copper_clpd64k_peb spp spp_copper_slack'
 & tools\msys64\usr\bin\bash.exe -lc 'cd /c/Users/tyboy/OneDrive/Documents/novel-arm && ./research/run_sqlite_speedtest1_fs.sh'
 
-& 'python' research\summarize_sqlite_speedtest1_fs.py --tag speedtest1_json_smoke_size1
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\summarize_sqlite_speedtest1_fs.py --tag speedtest1_json_smoke_size1
 
 $env:TAG='speedtest1_star_smoke_size1'
 $env:SIZE='1'
@@ -107,7 +107,7 @@ $env:TESTSET='star'
 $env:POLICY_LIST='none naive copper_clpd64k_peb spp spp_copper_slack'
 & tools\msys64\usr\bin\bash.exe -lc 'cd /c/Users/tyboy/OneDrive/Documents/novel-arm && ./research/run_sqlite_speedtest1_fs.sh'
 
-& 'python' research\summarize_sqlite_speedtest1_fs.py --tag speedtest1_star_smoke_size1
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\summarize_sqlite_speedtest1_fs.py --tag speedtest1_star_smoke_size1
 
 $env:TAG='speedtest1_orm_smoke_size1'
 $env:SIZE='1'
@@ -115,8 +115,8 @@ $env:TESTSET='orm'
 $env:POLICY_LIST='none naive copper_clpd64k_peb spp spp_copper_slack'
 & tools\msys64\usr\bin\bash.exe -lc 'cd /c/Users/tyboy/OneDrive/Documents/novel-arm && ./research/run_sqlite_speedtest1_fs.sh'
 
-& 'python' research\summarize_sqlite_speedtest1_fs.py --tag speedtest1_orm_smoke_size1
-& 'python' research\summarize_sqlite_speedtest1_components.py
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\summarize_sqlite_speedtest1_fs.py --tag speedtest1_orm_smoke_size1
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\summarize_sqlite_speedtest1_components.py
 ```
 
 Expected aggregate:
@@ -136,7 +136,7 @@ This point uses the public MiBench network/patricia Patricia trie implementation
 Runner: `research\run_mibench_patricia_fs.sh`.
 
 ```powershell
-& 'python' research\build_mibench_patricia_workload_aarch64.py
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\build_mibench_patricia_workload_aarch64.py
 
 $env:TAG='patricia_large12288'
 $env:LIMIT='12288'
@@ -147,8 +147,8 @@ $env:INPUT_FILE='external/mibench_network/network/patricia/large.udp'
 $env:POLICY_LIST='none naive copper_clpd64k_peb spp spp_copper_slack'
 & tools\msys64\usr\bin\bash.exe -lc 'cd /c/Users/tyboy/OneDrive/Documents/novel-arm && ./research/run_mibench_patricia_fs.sh'
 
-& 'python' research\summarize_mibench_patricia_fs.py --tag patricia_large12288
-& 'python' research\summarize_mibench_patricia_scale_portfolio.py
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\summarize_mibench_patricia_fs.py --tag patricia_large12288
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\summarize_mibench_patricia_scale_portfolio.py
 ```
 
 Expected summary:
@@ -170,7 +170,7 @@ Expected summary:
 For the second 12K seed, run `research\run_mibench_patricia_large12288_seed1_campaign.sh`, summarize with `--tag patricia_large12288_seed1`, then run:
 
 ```powershell
-& 'python' research\summarize_mibench_patricia_seed_stability.py
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\summarize_mibench_patricia_seed_stability.py
 ```
 
 Expected seed-stability summary:
@@ -202,7 +202,7 @@ This point calls the public PCRE2 8-bit regex compiler and matcher through the U
 Runner: `research\run_pcre2_regex_app_fs.sh`.
 
 ```powershell
-& 'python' research\build_pcre2_regex_workload_aarch64.py
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\build_pcre2_regex_workload_aarch64.py
 
 $env:TAG='pcre2_smoke'
 $env:RECORDS='512'
@@ -213,7 +213,7 @@ $env:SEED='0'
 $env:POLICY_LIST='none naive copper_clpd64k_peb spp spp_copper_slack'
 & tools\msys64\usr\bin\bash.exe -lc 'cd /c/Users/tyboy/OneDrive/Documents/novel-arm && bash research/run_pcre2_regex_app_fs.sh'
 
-& 'python' research\summarize_pcre2_regex_app_fs.py --tag pcre2_smoke --policies none naive copper_clpd64k_peb spp spp_copper_slack
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\summarize_pcre2_regex_app_fs.py --tag pcre2_smoke --policies none naive copper_clpd64k_peb spp spp_copper_slack
 
 $env:TAG='pcre2_seed1'
 $env:RECORDS='512'
@@ -224,8 +224,8 @@ $env:SEED='1'
 $env:POLICY_LIST='none naive copper_clpd64k_peb spp spp_copper_slack'
 & tools\msys64\usr\bin\bash.exe -lc 'cd /c/Users/tyboy/OneDrive/Documents/novel-arm && bash research/run_pcre2_regex_app_fs.sh'
 
-& 'python' research\summarize_pcre2_regex_app_fs.py --tag pcre2_seed1 --policies none naive copper_clpd64k_peb spp spp_copper_slack
-& 'python' research\summarize_pcre2_seed_stability.py
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\summarize_pcre2_regex_app_fs.py --tag pcre2_seed1 --policies none naive copper_clpd64k_peb spp spp_copper_slack
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\summarize_pcre2_seed_stability.py
 ```
 
 Expected summary:
@@ -245,7 +245,7 @@ This point calls the public libxml2 XML parser and serializer through the Ubuntu
 Runner: `research\run_libxml2_xml_app_fs.sh`.
 
 ```powershell
-& 'python' research\build_libxml2_xml_workload_aarch64.py
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\build_libxml2_xml_workload_aarch64.py
 
 $env:TAG='xml_tiny_full'
 $env:RECORDS='16'
@@ -255,7 +255,7 @@ $env:SEED='0'
 $env:POLICY_LIST='none naive copper_clpd64k_peb spp spp_copper_slack'
 & tools\msys64\usr\bin\bash.exe -lc 'cd /c/Users/tyboy/OneDrive/Documents/novel-arm && bash research/run_libxml2_xml_app_fs.sh'
 
-& 'python' research\summarize_libxml2_xml_app_fs.py --tag xml_tiny_full --policies none naive copper_clpd64k_peb spp spp_copper_slack
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\summarize_libxml2_xml_app_fs.py --tag xml_tiny_full --policies none naive copper_clpd64k_peb spp spp_copper_slack
 ```
 
 Expected summary:
@@ -274,7 +274,7 @@ This point calls the public libarchive TAR parser through the Ubuntu ARM64 guest
 Runner: `research\run_libarchive_tar_app_fs.sh`.
 
 ```powershell
-& 'python' research\build_libarchive_tar_workload_aarch64.py
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\build_libarchive_tar_workload_aarch64.py
 
 $env:TAG='tar_tiny_full'
 $env:ENTRIES='16'
@@ -284,7 +284,7 @@ $env:SEED='0'
 $env:POLICY_LIST='none naive copper_clpd64k_peb spp spp_copper_slack'
 & tools\msys64\usr\bin\bash.exe -lc 'cd /c/Users/tyboy/OneDrive/Documents/novel-arm && bash research/run_libarchive_tar_app_fs.sh'
 
-& 'python' research\summarize_libarchive_tar_app_fs.py --tag tar_tiny_full --policies none naive copper_clpd64k_peb spp spp_copper_slack
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\summarize_libarchive_tar_app_fs.py --tag tar_tiny_full --policies none naive copper_clpd64k_peb spp spp_copper_slack
 ```
 
 Expected summary:
@@ -303,7 +303,7 @@ This point calls public libzstd compression/decompression through the Ubuntu ARM
 Runner: `research\run_zstd_app_fs.sh`.
 
 ```powershell
-& 'python' research\build_zstd_workload_aarch64.py
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\build_zstd_workload_aarch64.py
 
 $env:TAG='zstd_tiny'
 $env:BYTES='8192'
@@ -313,7 +313,7 @@ $env:LEVEL='1'
 $env:POLICY_LIST='none naive copper_clpd64k_peb spp spp_copper_slack'
 & tools\msys64\usr\bin\bash.exe -lc 'cd /c/Users/tyboy/OneDrive/Documents/novel-arm && bash research/run_zstd_app_fs.sh'
 
-& 'python' research\summarize_zstd_app_fs.py --tag zstd_tiny --policies none naive copper_clpd64k_peb spp spp_copper_slack
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\summarize_zstd_app_fs.py --tag zstd_tiny --policies none naive copper_clpd64k_peb spp spp_copper_slack
 ```
 
 Expected summary:
@@ -331,7 +331,7 @@ This point calls public zlib compression/decompression through the Ubuntu ARM64 
 Runner: `research\run_zlib_app_fs.sh`.
 
 ```powershell
-& 'python' research\build_zlib_workload_aarch64.py
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\build_zlib_workload_aarch64.py
 
 $env:TAG='zlib_tiny'
 $env:BYTES='8192'
@@ -341,7 +341,7 @@ $env:LEVEL='1'
 $env:POLICY_LIST='none naive copper_clpd64k_peb spp spp_copper_slack'
 & tools\msys64\usr\bin\bash.exe -lc 'cd /c/Users/tyboy/OneDrive/Documents/novel-arm && bash research/run_zlib_app_fs.sh'
 
-& 'python' research\summarize_zlib_app_fs.py --tag zlib_tiny --policies none naive copper_clpd64k_peb spp spp_copper_slack
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\summarize_zlib_app_fs.py --tag zlib_tiny --policies none naive copper_clpd64k_peb spp spp_copper_slack
 ```
 
 Expected summary:
@@ -357,9 +357,9 @@ Expected summary:
 After running the two listed Zstd and zlib seeds, regenerate the aggregate stability report:
 
 ```powershell
-& 'python' research\summarize_zstd_app_fs.py --tag zstd_seed1 --policies none naive copper_clpd64k_peb spp spp_copper_slack
-& 'python' research\summarize_zlib_app_fs.py --tag zlib_seed1 --policies none naive copper_clpd64k_peb spp spp_copper_slack
-& 'python' research\summarize_compression_seed_stability.py
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\summarize_zstd_app_fs.py --tag zstd_seed1 --policies none naive copper_clpd64k_peb spp spp_copper_slack
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\summarize_zlib_app_fs.py --tag zlib_seed1 --policies none naive copper_clpd64k_peb spp spp_copper_slack
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\summarize_compression_seed_stability.py
 ```
 
 Expected aggregate:
@@ -391,10 +391,10 @@ Each command runs five policies: `none`, `naive`, `copper_clpd64k_peb`, `spp`, a
 After reruns, regenerate summaries:
 
 ```powershell
-& 'python' research\summarize_openssl_cli_fixed_fs.py --tag fixed_64k_seed2 --mode sha256
-& 'python' research\summarize_openssl_cli_fixed_fs.py --tag aesctr_64k_seed2 --mode aes_ctr
-& 'python' research\summarize_openssl_cli_fixed_fs.py --tag hmac_64k_seed2 --mode hmac
-& 'python' research\summarize_openssl_cli_seed_stability.py
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\summarize_openssl_cli_fixed_fs.py --tag fixed_64k_seed2 --mode sha256
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\summarize_openssl_cli_fixed_fs.py --tag aesctr_64k_seed2 --mode aes_ctr
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\summarize_openssl_cli_fixed_fs.py --tag hmac_64k_seed2 --mode hmac
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\summarize_openssl_cli_seed_stability.py
 ```
 
 Expected aggregate:
@@ -422,7 +422,7 @@ This is the tractable socket-backed TLS-library point. It runs OpenSSL libssl TL
 Runner: `research\run_openssl_tls_socket_fs.sh`.
 
 ```powershell
-& 'python' research\build_openssl_tls_socket_workload_aarch64.py
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\build_openssl_tls_socket_workload_aarch64.py
 
 $env:TAG='socket_smoke'
 $env:SESSIONS='16'
@@ -434,7 +434,7 @@ $env:SEED='0'
 $env:POLICY_LIST='none naive copper_clpd64k_peb spp spp_copper_slack'
 & tools\msys64\usr\bin\bash.exe /c/Users/tyboy/OneDrive/Documents/novel-arm/research/run_openssl_tls_socket_fs.sh
 
-& 'python' research\summarize_openssl_tls_socket_fs.py --tag socket_smoke --policies none naive copper_clpd64k_peb spp spp_copper_slack
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\summarize_openssl_tls_socket_fs.py --tag socket_smoke --policies none naive copper_clpd64k_peb spp spp_copper_slack
 ```
 
 Expected summary:
@@ -468,13 +468,13 @@ $env:SEED='0'
 $env:NATIVE_PRE_COMMAND='ip link set lo up || true; ifconfig lo up || true; ip addr add 127.0.0.1/8 dev lo || true; ip addr show || true; ip route show || true; cat /proc/net/dev || true; cat /proc/net/route || true'
 & tools\msys64\usr\bin\bash.exe -lc 'cd /c/Users/tyboy/OneDrive/Documents/novel-arm && bash research/run_openssl_tls_tcp_fs.sh'
 
-& 'python' research\summarize_openssl_tls_tcp_fs.py --tag tcp_diag_lo --policies none
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\summarize_openssl_tls_tcp_fs.py --tag tcp_diag_lo --policies none
 ```
 
 Tagged fallback rerun:
 
 ```powershell
-& 'python' research\build_openssl_tls_tcp_workload_aarch64.py
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\build_openssl_tls_tcp_workload_aarch64.py
 
 $env:TAG='tcp_fallback_probe'
 $env:SESSIONS='16'
@@ -486,7 +486,7 @@ $env:SEED='0'
 $env:POLICY_LIST='none naive copper_clpd64k_peb spp spp_copper_slack'
 & tools\msys64\usr\bin\bash.exe -lc 'cd /c/Users/tyboy/OneDrive/Documents/novel-arm && bash research/run_openssl_tls_tcp_fs.sh'
 
-& 'python' research\summarize_openssl_tls_tcp_fs.py --tag tcp_fallback_probe --policies none naive copper_clpd64k_peb spp spp_copper_slack
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\summarize_openssl_tls_tcp_fs.py --tag tcp_fallback_probe --policies none naive copper_clpd64k_peb spp spp_copper_slack
 ```
 
 Expected fallback summary:
@@ -502,7 +502,7 @@ Expected fallback summary:
 Strict TCP-netns rerun:
 
 ```powershell
-& 'python' research\build_openssl_tls_tcp_workload_aarch64.py
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\build_openssl_tls_tcp_workload_aarch64.py
 
 $env:TAG='tcp_netns_strict'
 $env:SESSIONS='16'
@@ -515,7 +515,7 @@ $env:STRICT_TCP='1'
 $env:POLICY_LIST='none naive copper_clpd64k_peb spp spp_copper_slack'
 & tools\msys64\usr\bin\bash.exe -lc 'cd /c/Users/tyboy/OneDrive/Documents/novel-arm && bash research/run_openssl_tls_tcp_fs.sh'
 
-& 'python' research\summarize_openssl_tls_tcp_fs.py --tag tcp_netns_strict --policies none naive copper_clpd64k_peb spp spp_copper_slack
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\summarize_openssl_tls_tcp_fs.py --tag tcp_netns_strict --policies none naive copper_clpd64k_peb spp spp_copper_slack
 ```
 
 Expected strict TCP-netns summary:
@@ -533,7 +533,7 @@ Expected strict TCP-netns summary:
 Process-server TCP-netns rerun:
 
 ```powershell
-& 'python' research\build_openssl_tls_tcp_workload_aarch64.py
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\build_openssl_tls_tcp_workload_aarch64.py
 
 $env:TAG='tcp_netns_process_key1'
 $env:SESSIONS='16'
@@ -547,7 +547,7 @@ $env:PROCESS_SERVER='1'
 $env:POLICY_LIST='none naive copper_clpd64k_peb spp spp_copper_slack'
 & tools\msys64\usr\bin\bash.exe -lc 'cd /c/Users/tyboy/OneDrive/Documents/novel-arm && bash research/run_openssl_tls_tcp_fs.sh'
 
-& 'python' research\summarize_openssl_tls_tcp_fs.py --tag tcp_netns_process_key1 --policies none naive copper_clpd64k_peb spp spp_copper_slack
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\summarize_openssl_tls_tcp_fs.py --tag tcp_netns_process_key1 --policies none naive copper_clpd64k_peb spp spp_copper_slack
 ```
 
 Expected process-server TCP-netns summary:
@@ -579,8 +579,8 @@ $env:PROCESS_SERVER='1'
 $env:POLICY_LIST='none naive copper_clpd64k_peb spp spp_copper_slack'
 & tools\msys64\usr\bin\bash.exe -lc 'cd /c/Users/tyboy/OneDrive/Documents/novel-arm && bash research/run_openssl_tls_tcp_fs.sh'
 
-& 'python' research\summarize_openssl_tls_tcp_fs.py --tag tcp_netns_process_seed1 --policies none naive copper_clpd64k_peb spp spp_copper_slack
-& 'python' research\summarize_openssl_tcp_process_seed_stability.py
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\summarize_openssl_tls_tcp_fs.py --tag tcp_netns_process_seed1 --policies none naive copper_clpd64k_peb spp spp_copper_slack
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\summarize_openssl_tcp_process_seed_stability.py
 ```
 
 Expected process-server seed-stability summary:
@@ -598,7 +598,7 @@ Expected process-server seed-stability summary:
 Process-server metadata-toggle side-effect bound:
 
 ```powershell
-& 'python' research\analyze_openssl_tcp_process_metadata_toggle_bound.py
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\analyze_openssl_tcp_process_metadata_toggle_bound.py
 ```
 
 Expected process-server metadata summary:
@@ -618,7 +618,7 @@ Process-server CLPD activity replay and Vivado SAIF power:
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File research\run_copper_clpd_sram_tcp_process_activity_xsim.ps1
 & 'C:\AMDDesignTools\2025.2\Vivado\bin\vivado.bat' -mode batch -source research\run_copper_clpd_sram_tcp_process_saif_power.tcl
-& 'python' research\summarize_copper_tcp_process_clpd_activity_power.py
+& 'C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' research\summarize_copper_tcp_process_clpd_activity_power.py
 ```
 
 Expected process-server CLPD activity-power summary:
@@ -707,4 +707,3 @@ Expected CAVI summary:
 - It does not provide a production ARM backend, TLB, or AMBA CHI integration proof.
 
 status=PASS
-

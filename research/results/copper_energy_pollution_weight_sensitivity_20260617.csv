@@ -1,0 +1,7 @@
+scenario,bus_weight,dram_read_weight,l2_repl_weight,l1d_repl_weight,naive_mean_score_pct,copper_mean_score_pct,copper_reduction_vs_naive_pct,copper_lower_or_equal_points,point_count,spp_mean_score_pct,slack_mean_score_pct,mean_slack_score_add_pp,worst_slack_score_add_pp,description
+base,0.35,0.30,0.20,0.15,1.083,0.879,18.8,20,22,36.845,37.067,0.222,8.340,Original transparent proxy weights.
+equal,0.25,0.25,0.25,0.25,1.370,1.103,19.5,20,22,40.152,40.434,0.282,8.385,Equal weight on each traffic/pollution counter.
+bus_heavy,0.55,0.20,0.15,0.10,0.902,0.736,18.4,20,22,34.070,34.250,0.181,7.854,Stress bus-byte traffic.
+dram_heavy,0.20,0.55,0.15,0.10,0.991,0.810,18.2,20,22,37.431,37.637,0.205,8.962,Stress DRAM read traffic.
+l2_heavy,0.20,0.15,0.55,0.10,0.978,0.800,18.1,20,22,32.333,32.552,0.218,8.787,Stress L2 replacement pressure.
+l1d_heavy,0.15,0.15,0.15,0.55,2.189,1.739,20.6,20,22,51.339,51.778,0.439,7.997,Stress L1D replacement pressure.

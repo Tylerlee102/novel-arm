@@ -1,16 +1,13 @@
-﻿$VivadoBin = "C:\AMDDesignTools\2025.2\Vivado\bin"
-$Python = $env:COPPER_PYTHON
-if (-not $Python) {
-    $Python = "python"
-}
+$VivadoBin = "C:\AMDDesignTools\2025.2\Vivado\bin"
+$Python = "C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe"
 
 if (!(Test-Path "$VivadoBin\xvlog.bat")) {
     Write-Error "xvlog.bat was not found. Edit `$VivadoBin in this script to match your Vivado install."
     exit 1
 }
 
-if (!(Get-Command $Python -ErrorAction SilentlyContinue) -and !(Test-Path $Python)) {
-    Write-Error "Python was not found. Put python on PATH or set COPPER_PYTHON to the local interpreter."
+if (!(Test-Path $Python)) {
+    Write-Error "Bundled Python was not found. Edit `$Python in this script to match the local runtime."
     exit 1
 }
 
@@ -41,4 +38,3 @@ if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
     -tclbatch research/copper_clpd_sram_workload_activity_saif_xsim.tcl `
     -log research\results\copper_clpd_sram_workload_activity_xsim.log
 exit $LASTEXITCODE
-

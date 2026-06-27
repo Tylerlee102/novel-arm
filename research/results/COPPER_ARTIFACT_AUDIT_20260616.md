@@ -154,10 +154,10 @@ Passed 177/177 artifact checks.
 | `research\results\gem5_arm_ubuntu_fs_osslcrypto_app\OSSLCRYPTO_APP_SMOKE_FS_SUMMARY.md` | PASS | ok |
 | `research\results\gem5_arm_ubuntu_fs_osslcrypto_app\OSSLCRYPTO_APP_MEDIUM_FS_SUMMARY.md` | PASS | ok |
 | `research\results\figures\COPPER_APP_FIGURE_INDEX_20260616.md` | PASS | ok |
-| `research\results\figures\copper_app_runtime_delta.png` | PASS | bytes=193647 |
+| `research\results\figures\copper_app_runtime_delta.png` | PASS | bytes=195951 |
 | `research\results\figures\copper_app_full_baseline_runtime.png` | PASS | bytes=190927 |
 | `research\results\figures\copper_app_ctlw_reduction.png` | PASS | bytes=161401 |
-| `research\results\figures\copper_app_bus_overhead.png` | PASS | bytes=136244 |
+| `research\results\figures\copper_app_bus_overhead.png` | PASS | bytes=137356 |
 | `research\results\COPPER_APPLICATION_WORKLOAD_PORTFOLIO_20260616.md` | PASS | ok |
 | `research\results\SQLITE_MEDIUM_STRESS_SEED_STABILITY_20260619.md` | PASS | ok |
 | `research\results\gem5_arm_ubuntu_fs_sqlite_speedtest1\SQLITE_SPEEDTEST1_SPEEDTEST1_JSON_SMOKE_SIZE1_FS_SUMMARY.md` | PASS | ok |

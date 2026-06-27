@@ -1,4 +1,4 @@
-﻿# COPPER DOCX QA
+# COPPER DOCX QA
 
 Date: 2026-06-12, updated 2026-06-15
 
@@ -10,7 +10,7 @@ Date: 2026-06-12, updated 2026-06-15
 - A references formatting issue caused Word auto-numbering to continue from an earlier numbered list.
 - A temporary PDF rendering attempt using incomplete bundled Node native packages was removed.
 - The rebuilt paper added AArch64 Minor/O3 sensitivity, randomized RTL-invariant evidence, CEPF backend proof filtering, graph-style provenance traces, an ARM64 full-system Linux boot/readfile probe, and a native AArch64 full-system workload ROI.
-- Earlier Word automation checks could open/count the rebuilt DOCX, but the current current Windows logon session cannot create a Word COM instance. The export pipeline therefore avoids Word's writer and uses the direct ReportLab PDF renderer plus structural DOCX/PDF checks.
+- Earlier Word automation checks could open/count the rebuilt DOCX, but the current Codex logon session cannot create a Word COM instance. The export pipeline therefore avoids Word's writer and uses the direct ReportLab PDF renderer plus structural DOCX/PDF checks.
 - The latest rebuild adds PASB plus CTLW full-system timing evidence: naive pointer-shaped DMP has 30 translation-faulted recursive attempts in the tiny ROI; pre-PASB COPPER has 5; PASB-COPPER has 0 while blocking 102 pointer-shaped unproven candidates; larger CTLW-terminal ROIs have zero recursive translation faults with -0.531% and -0.271% ticks versus no prefetch.
 - The current rebuild also adds a full-system AArch64 graph-gather control: COPPER-CTLW gives -0.367% ticks versus no prefetch, blocks 8,660 unproven candidates, and records zero translation faults; stride still wins that generated binary because the edge array is sequential.
 - The latest rebuild adds LLVM/clang plus LLD validation, a freestanding C AArch64 graph/hash/tree/fake-pointer suite under full-system Linux, and a bounded PASB/CTLW/terminal invariant checker. The compiled C suite is intentionally reported as a safety/control result, not a speedup result: COPPER blocks 679 unproven candidates with zero translation faults but is 0.093% slower than no prefetch on that smaller suite.
@@ -33,7 +33,7 @@ Date: 2026-06-12, updated 2026-06-15
 - A CLPD bounded state-space checker was added. Full CLPD passes 24,354 reachable states to depth 8; weakened no-tag, no-token, no-epoch, whole-line-proof, no-write-clear, no-fill-clear, and no-invalidate-clear variants fail with short counterexamples.
 - A CLPD storage model was added. Under explicit assumptions, CLPD full coverage is about 30.86-32.00x smaller than edge-exact retained proof across the GAPBS-backed graphs. On g12, the full-cover proxy is 1252.18 KiB edge-exact versus 39.87 KiB CLPD; at the measured points, CLPD uses 54.00 KiB for 2.115x while edge-exact uses 1696.00 KiB for 2.369x.
 - A source-backed security coverage matrix was added. `research/copper_security_coverage_matrix.py` maps ten modeled unsafe classes to COPPER mechanisms and local evidence, verifies the cited evidence strings, and regenerates `research/results/COPPER_SECURITY_COVERAGE_MATRIX.md` with `coverage_status=PASS`.
-- In the current current Windows logon session, Word COM creation fails with `0x80070520`, and the official DOCX renderer cannot find a LibreOffice/soffice backend. The fallback QA path uses the regenerated ReportLab PDF plus structural DOCX/PDF checks.
+- In the current Codex logon session, Word COM creation fails with `0x80070520`, and the official DOCX renderer cannot find a LibreOffice/soffice backend. The fallback QA path uses the regenerated ReportLab PDF plus structural DOCX/PDF checks.
 
 ## Current Deliverables
 
@@ -72,4 +72,3 @@ all-temp smoke test. The fallback pipeline therefore uses the ReportLab renderer
 to generate the primary 8-page PDF paper artifact, checks the generated PDF with
 `pypdf` text extraction, mirrors the verified PDF to the older deliverable path,
 and renders the current PDF to PNG/contact-sheet images for visual QA.
-

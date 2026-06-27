@@ -96,6 +96,17 @@ def sum_prefetch_counter(stats: dict[str, float], counter: str) -> int:
     return int(sum(value for _, value in matches))
 
 
+def select_roi_stats_section(sections: list[dict[str, float]], run_dir: Path) -> tuple[int, dict[str, float]]:
+    if not sections:
+        raise RuntimeError(f"no stats sections in {run_dir}")
+    # These native OpenSSL binaries use --native-self-roi and call m5_reset_stats
+    # followed by m5_dump_stats inside the measured ROI. The wrapper may emit
+    # later teardown dumps, so the first section is the paper-facing ROI.
+    if len(sections) < 2:
+        raise RuntimeError(f"expected ROI plus wrapper stats sections in {run_dir}")
+    return 0, sections[0]
+
+
 def terminal_info(path: Path) -> dict[str, str]:
     text = path.read_text(encoding="utf-8", errors="replace")
     info: dict[str, str] = {}
@@ -118,12 +129,12 @@ def summarize(tag: str, policies: list[str]) -> list[dict[str, str]]:
     for policy in policies:
         run_dir = RESULTS / f"gem5_arm_ubuntu_fs_ossltlsbio_{tag}_{policy}"
         sections = parse_stats_sections(run_dir / "stats.txt")
-        if not sections:
-            raise RuntimeError(f"no stats sections in {run_dir}")
-        stats = sections[0]
+        stats_section_index, stats = select_roi_stats_section(sections, run_dir)
         info = terminal_info(run_dir / "board.terminal")
         row: dict[str, str] = {
             "policy": policy,
+            "stats_section_index": str(stats_section_index),
+            "stats_sections_total": str(len(sections)),
             "roi_ticks": str(int(stats.get("simTicks", 0))),
             "insts_not_nop": str(
                 sum_matching(

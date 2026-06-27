@@ -1,4 +1,4 @@
-﻿param(
+param(
     [switch]$AttemptPdfExport,
     [switch]$UseWordPdfExport
 )
@@ -59,10 +59,7 @@ try {
         Add-Content -LiteralPath $progress -Encoding ASCII -Value "after-copy-pdf $(Get-Date -Format o)"
     }
     if ($AttemptPdfExport -and !$UseWordPdfExport) {
-        $python = $env:COPPER_PYTHON
-        if (-not $python) {
-            $python = 'python'
-        }
+        $python = Join-Path $env:USERPROFILE '.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe'
         $builder = Join-Path $PSScriptRoot 'build_copper_review_pdf.py'
         & $python $builder | Out-File -FilePath (Join-Path $outDir 'direct_pdf_build.txt') -Encoding ASCII
         if ($LASTEXITCODE -ne 0) {
@@ -84,4 +81,3 @@ try {
     $word.Quit()
     Add-Content -LiteralPath $progress -Encoding ASCII -Value "word-quit $(Get-Date -Format o)"
 }
-

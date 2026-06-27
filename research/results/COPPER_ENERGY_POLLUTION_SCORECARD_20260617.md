@@ -8,7 +8,7 @@ Pressure score definition:
 
 `0.35 * bus-byte delta + 0.30 * DRAM-read delta + 0.20 * L2-replacement delta + 0.15 * L1D-replacement delta`, all relative to the no-prefetch baseline for the same workload.
 
-The score is deliberately simple and source-backed. It is used only to compare pollution/traffic side effects within this artifact.
+This is the original base proxy. Because those weights are not derived from a calibrated platform, this report now treats the base score as one sensitivity point and sweeps alternative weightings below.
 
 ## Aggregate Scorecard
 
@@ -22,6 +22,7 @@ The score is deliberately simple and source-backed. It is used only to compare p
 ## Pairwise Findings
 
 - Standalone COPPER has a mean pressure score of 0.879% versus 1.083% for naive DMP, a 18.8% lower proxy pollution score.
+- Across the weight-sensitivity sweep, standalone COPPER's lower proxy-pollution result ranges from 18.1% to 20.6% versus naive DMP; COPPER is lower-or-equal on 20/22 to 20/22 points depending on weighting.
 - Standalone COPPER reduces aggregate CTLW misses by 93.9% versus naive DMP while keeping translation faults at 0.
 - COPPER is faster-or-equal than naive DMP on 10/22 points, has lower-or-equal pressure score on 20/22, lower-or-equal bus bytes on 19/22, lower-or-equal DRAM reads on 19/22, and lower-or-equal L1D demand misses on 17/22.
 - SPP+COPPER slack reduces aggregate CTLW misses by 95.7% versus naive DMP while keeping translation faults at 0.
@@ -30,9 +31,20 @@ The score is deliberately simple and source-backed. It is used only to compare p
 - SPP+COPPER slack adds 0.222 pressure-score points over SPP on average; worst added score is 8.340 points.
 - SPP+COPPER slack is within 0.5% runtime of SPP on 22/22 points, lower-or-equal bus bytes on 11/22, lower-or-equal DRAM reads on 11/22, and lower-or-equal L2 replacements on 11/22.
 
+## Weight-Sensitivity Table
+
+| Scenario | Weights bus/DRAM/L2/L1D | Naive score | COPPER score | COPPER reduction | COPPER <= naive points | SPP score | Slack score | Slack score add | Description |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| base | 0.35/0.30/0.20/0.15 | 1.083% | 0.879% | 18.8% | 20/22 | 36.845% | 37.067% | 0.222 pp | Original transparent proxy weights. |
+| equal | 0.25/0.25/0.25/0.25 | 1.370% | 1.103% | 19.5% | 20/22 | 40.152% | 40.434% | 0.282 pp | Equal weight on each traffic/pollution counter. |
+| bus_heavy | 0.55/0.20/0.15/0.10 | 0.902% | 0.736% | 18.4% | 20/22 | 34.070% | 34.250% | 0.181 pp | Stress bus-byte traffic. |
+| dram_heavy | 0.20/0.55/0.15/0.10 | 0.991% | 0.810% | 18.2% | 20/22 | 37.431% | 37.637% | 0.205 pp | Stress DRAM read traffic. |
+| l2_heavy | 0.20/0.15/0.55/0.10 | 0.978% | 0.800% | 18.1% | 20/22 | 32.333% | 32.552% | 0.218 pp | Stress L2 replacement pressure. |
+| l1d_heavy | 0.15/0.15/0.15/0.55 | 2.189% | 1.739% | 20.6% | 20/22 | 51.339% | 51.778% | 0.439 pp | Stress L1D replacement pressure. |
+
 ## Per-Workload Proxy Table
 
-| Workload | Policy | Runtime delta | Pressure score | Bus delta | DRAM-read delta | L2 repl delta | L1D repl delta | Max read Q | HardPF MSHR | CTLW misses | Faults |
+| Workload | Policy | Runtime delta | Base pressure score | Bus delta | DRAM-read delta | L2 repl delta | L1D repl delta | Max read Q | HardPF MSHR | CTLW misses | Faults |
 |---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | sqlite_medium | naive | -0.010% | 1.095% | 0.344% | 0.418% | 0.386% | 5.148% | 1.000 | 32952 | 16326 | 0 |
 | sqlite_medium | copper_clpd64k_peb | -0.000% | 0.927% | 0.241% | 0.300% | 0.283% | 4.640% | 1.000 | 30041 | 1211 | 0 |
@@ -125,11 +137,12 @@ The score is deliberately simple and source-backed. It is used only to compare p
 
 ## Reviewer-Facing Interpretation
 
-- This analysis strengthens the traffic side-effect story: standalone COPPER is not only safer than naive DMP in the CTLW/fault counters, it also has a lower mean traffic/pollution proxy score than naive DMP on the same public app/parser/compression/TCP set.
+- This analysis strengthens the traffic side-effect story: standalone COPPER is not only safer than naive DMP in the CTLW/fault counters, it also has a lower mean traffic/pollution proxy score than naive DMP across the checked weightings.
 - SCOOP remains a performance-coexistence mechanism: it intentionally inherits SPP's high traffic profile, but the incremental traffic over SPP is now quantified instead of hand-waved.
-- The score is not a substitute for McPAT, RTL power, DRAMPower, or silicon measurement. It is a transparent gem5-counter proxy suitable for a pre-submission artifact.
+- The score is not a substitute for McPAT, RTL power, DRAMPower, or silicon measurement. It is a transparent gem5-counter proxy and sensitivity check suitable for a pre-submission artifact.
 - A top-tier paper should still add calibrated energy/power modeling or real hardware counter validation if possible.
 
 CSV: `research/results/copper_energy_pollution_scorecard_20260617.csv`.
+Weight sensitivity CSV: `research/results/copper_energy_pollution_weight_sensitivity_20260617.csv`.
 
 status=PASS

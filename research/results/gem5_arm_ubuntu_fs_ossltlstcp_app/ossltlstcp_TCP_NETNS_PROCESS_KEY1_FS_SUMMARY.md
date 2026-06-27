@@ -29,6 +29,6 @@ Interpretation:
 - Naive DMP translation faults: 0; COPPER CLPD-64K+PEB translation faults: 0.
 - This is real libssl handshake and TLS record execution through the guest dynamic loader. The transport tag determines how strongly the result can be claimed.
 
-- All policies used process-separated AF_INET TCP loopback inside a private user/network namespace with a forked TLS server process. Process-mode rows: 1; process TCP pairs: 5; child failures: 0. This is stronger than the in-process loopback service driver, but still a bounded local server/client harness rather than a production deployment.
+- All policies used process-separated AF_INET TCP loopback inside a private user/network namespace with a forked TLS server process. Process-server flag values: 1; process TCP pairs: 5; child failures: 0. This is stronger than the in-process loopback service driver, but still a bounded local server/client harness rather than a production deployment.
 
 status=TCP_NETNS_PROCESS_PASS

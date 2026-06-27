@@ -172,7 +172,7 @@ def plot_runtime(rows: list[dict[str, str]]) -> tuple[Path, Path]:
         fig,
         ax,
         "Runtime deltas show COPPER is modest, while SPP is the raw-speed baseline",
-        "Ten full-system AArch64 app points. Negative tick delta is faster than no prefetching; labels show percent change.",
+        "Twelve full-system AArch64 app points. Negative tick delta is faster than no prefetching; labels show percent change.",
     )
     return save(fig, "copper_app_runtime_delta")
 
@@ -232,27 +232,37 @@ def plot_traffic(rows: list[dict[str, str]]) -> tuple[Path, Path]:
 
     family = COLORS["orange"]
     y = list(range(len(ordered)))
+    min_value = min(values)
+    max_value = max(values)
+    pad = max(0.2, 0.06 * (max_value - min_value))
     bars = ax.barh(y, [v for _, v in ordered], height=0.46,
                    color=family["base"], edgecolor=family["dark"], linewidth=0.8)
     for bar, (_, value) in zip(bars, ordered):
-        ax.text(value + 0.12, bar.get_y() + bar.get_height() / 2,
-                f"{value:.2f}%", ha="left", va="center",
-                fontsize=8, color=TOKENS["ink"])
+        if value < 0:
+            label_x = value - pad * 0.45
+            ha = "right"
+        else:
+            label_x = value + pad * 0.45
+            ha = "left"
+        ax.text(label_x, bar.get_y() + bar.get_height() / 2,
+                f"{value:.2f}%", ha=ha, va="center", fontsize=8,
+                color=TOKENS["ink"])
 
     mean_value = sum(values) / len(values)
     ax.axvline(mean_value, color=TOKENS["ink"], linestyle=":", linewidth=1.0)
     ax.text(mean_value + 0.08, -0.55, f"mean {mean_value:.2f}%",
             ha="left", va="center", fontsize=8, color=TOKENS["ink"])
+    ax.axvline(0, color=TOKENS["axis"], linewidth=0.9)
     ax.set_yticks(y, [label_workload(w) for w, _ in ordered])
-    ax.set_xlim(0, max(values) + 1.0)
+    ax.set_xlim(min(0.0, min_value) - pad, max(0.0, max_value) + pad)
     ax.set_xlabel("Memory-bus byte delta versus no prefetching (%)",
                   color=TOKENS["ink"])
     ax.invert_yaxis()
     add_header(
         fig,
         ax,
-        "Standalone COPPER keeps traffic overhead small on app workloads",
-        "Ten full-system AArch64 app points. Bars show memory-bus byte delta for COPPER CLPD-64K+PEB versus no prefetching.",
+        "Standalone COPPER keeps bus-byte deltas small on app workloads",
+        "Twelve full-system AArch64 app points. Bars show memory-bus byte delta for COPPER CLPD-64K+PEB versus no prefetching.",
     )
     return save(fig, "copper_app_bus_overhead")
 
@@ -265,12 +275,12 @@ def write_index(paths: list[tuple[str, tuple[Path, Path]]]) -> None:
         "",
         "| Figure | PNG | SVG | Purpose |",
         "|---|---|---|---|",
-        "| Full baseline runtime matrix | `research/results/figures/copper_app_full_baseline_runtime.png` | `research/results/figures/copper_app_full_baseline_runtime.svg` | Shows naive DMP, standalone COPPER, stride, DCPT, AMPM, SPP, and SPP+COPPER slack on the ten public app points. |",
+        "| Full baseline runtime matrix | `research/results/figures/copper_app_full_baseline_runtime.png` | `research/results/figures/copper_app_full_baseline_runtime.svg` | Shows naive DMP, standalone COPPER, stride, DCPT, AMPM, SPP, and SPP+COPPER slack on the twelve public app points. |",
     ]
     purposes = {
         "Runtime deltas": "Compares raw timing behavior across no-prefetch-normalized app runs.",
         "CTLW reduction": "Shows authority-risk reduction versus naive DMP.",
-        "Bus overhead": "Shows standalone COPPER memory-traffic cost versus no prefetching.",
+        "Bus overhead": "Shows standalone COPPER memory-bus byte deltas versus no prefetching.",
     }
     for label, (png, svg) in paths:
         png_rel = png.relative_to(ROOT).as_posix()

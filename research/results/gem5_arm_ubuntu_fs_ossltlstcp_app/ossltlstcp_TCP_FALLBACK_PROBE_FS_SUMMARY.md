@@ -3,7 +3,9 @@
 This workload is a deterministic native AArch64 Linux ROI that calls
 OpenSSL libssl's TLS 1.2 PSK handshake and TLS record read/write path
 over a nonblocking Linux TCP loopback connection when the guest permits it.
-If the guest loopback device is unavailable, the driver uses an explicitly tagged AF_UNIX
+If the guest loopback device is unavailable, the driver first tries an explicitly tagged
+private user/network-namespace TCP loopback path. If that is unavailable too, it uses an
+explicitly tagged AF_UNIX
 fallback so the TLS record path can still be measured without pretending that TCP worked.
 The workload maintains session hash/LRU metadata and
 pointer-shaped ticket words loaded as data.

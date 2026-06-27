@@ -150,7 +150,7 @@ CLAIMS = (
     Claim(
         "C5",
         "Standalone COPPER is a low-overhead authority path, not a universal speed path.",
-        "Across the expanded public app/service/parser/compression/TCP side-effect suite, standalone COPPER averages -0.321% ticks, +0.441% memory-bus bytes, 93.9% CTLW reduction versus naive DMP, zero translation faults, a lower mean gem5-counter pressure score than naive DMP, lower mean modeled DRAM total/op energy than naive DMP, a fixed-architecture McPAT sensitivity pass with -0.625% mean total-energy proxy versus no prefetch while naive DMP is -0.608%, a metadata-toggle sensitivity bound whose high scenario is 0.1887% of matching COPPER DRAM operation energy, and TCP process-server side-effect checks whose high pJ/access scenario stays below 6.818 uJ and whose conservative slack candidate stream replays through Vivado SAIF at 0.083 W total / 0.014 W dynamic.",
+        "Across the expanded public app/service/parser/compression/TCP side-effect suite, standalone COPPER averages -0.321% ticks, +0.441% memory-bus bytes, 93.9% CTLW reduction versus naive DMP, zero translation faults, a base-weighted 18.8% lower mean gem5-counter pressure score than naive DMP with 18.1%-20.6% lower results across transparent weight scenarios, lower mean modeled DRAM total/op energy than naive DMP, a fixed-architecture McPAT sensitivity pass with -0.625% mean total-energy proxy versus no prefetch while naive DMP is -0.608%, a metadata-toggle sensitivity bound whose high scenario is 0.1801% of matching COPPER DRAM operation energy, and TCP process-server side-effect checks whose high pJ/access scenario stays below 6.818 uJ and whose conservative slack candidate stream replays through Vivado SAIF at 0.083 W total / 0.014 W dynamic.",
         (
             Evidence(
                 RESULTS / "COPPER_PREFETCH_TRAFFIC_OVERHEAD_20260616.md",
@@ -166,6 +166,7 @@ CLAIMS = (
                 (
                     "0.879% versus 1.083%",
                     "18.8% lower proxy pollution score",
+                    "Across the weight-sensitivity sweep",
                     "SPP+COPPER slack adds 0.093 percentage points",
                     "status=PASS",
                 ),
@@ -191,9 +192,10 @@ CLAIMS = (
             Evidence(
                 RESULTS / "COPPER_METADATA_TOGGLE_BOUND_20260619.md",
                 (
-                    "Learned-proof writes: 34,131",
-                    "CLPD authority reads: 1,284,187",
-                    "high | 20.0 | 40.0 | 5.0 | 33.641 uJ | 0.1887%",
+                    "Learned-proof writes: 40,058",
+                    "CLPD source-proof reads: 1,407,655",
+                    "Total charged metadata reads: 1,427,701",
+                    "high | 20.0 | 40.0 | 5.0 | 37.495 uJ | 0.1801%",
                     "status=PASS",
                 ),
             ),
@@ -888,7 +890,7 @@ CLAIMS = (
     Claim(
         "C8",
         "The storage structures have plausible FPGA synthesis/route and power-proxy evidence.",
-        "The scalable 64K CLPD SRAM directory and PEB boundary block have local Vivado synthesis/route evidence with positive timing slack; power evidence now includes a 15-checkpoint vectorless pass, a routed CLPD testbench-SAIF activity pass, a measured workload-counter-derived CLPD SAIF replay, a TCP process-server CLPD SAIF replay, a 20-row metadata-toggle sensitivity bound, and a TCP process-server metadata-toggle bound.",
+        "The scalable 64K CLPD SRAM directory and PEB boundary block have local Vivado synthesis/route evidence with positive timing slack; power evidence now includes a 15-checkpoint vectorless pass, a routed CLPD testbench-SAIF activity pass, a measured workload-counter-derived CLPD SAIF replay, a TCP process-server CLPD SAIF replay, a 22-row metadata-toggle sensitivity bound, and a TCP process-server metadata-toggle bound.",
         (
             Evidence(
                 RESULTS / "COPPER_CLPD_SRAM_SYNTH_SUMMARY.md",
@@ -929,8 +931,8 @@ CLAIMS = (
             Evidence(
                 RESULTS / "COPPER_METADATA_TOGGLE_BOUND_20260619.md",
                 (
-                    "Total metadata events: 1,318,318",
-                    "Even the deliberately high scenario is 0.1887%",
+                    "Total metadata events: 1,467,759",
+                    "Even the deliberately high scenario is 0.1801%",
                     "not calibrated silicon power",
                     "status=PASS",
                 ),

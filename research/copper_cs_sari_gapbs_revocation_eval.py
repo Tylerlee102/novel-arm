@@ -44,6 +44,7 @@ class Scenario:
     tlbi_token_prob: float
     tlbi_all_prob: float
     queue_depth: int = 8
+    source_target_correlation: float = 0.0
 
 
 @dataclass
@@ -115,12 +116,13 @@ def choose_target_events(
     pf_target: int,
     node_count: int,
     token: int,
+    force_conflict: bool = False,
 ) -> tuple[list[tuple[int, int]], list[int], bool]:
     remaps: list[tuple[int, int]] = []
     tlbi_tokens: list[int] = []
     tlbi_all = False
-    if rng.random() < scenario.target_remap_prob:
-        if rng.random() < scenario.target_conflict_prob:
+    if force_conflict or rng.random() < scenario.target_remap_prob:
+        if force_conflict or rng.random() < scenario.target_conflict_prob:
             remaps.append((pf_target, token))
         else:
             remaps.append((rng.randrange(node_count), rng.randrange(16)))
@@ -181,8 +183,17 @@ def run_one(
             stats.raw_candidates += 1
 
             source_events = choose_source_event(rng, scenario, pf_edge, graph.edges)
+            incoming_source_conflict = pf_source_line in source_events
             remaps, tlbi_tokens, tlbi_all = choose_target_events(
-                rng, scenario, pf_target_line, graph.nodes, token
+                rng,
+                scenario,
+                pf_target_line,
+                graph.nodes,
+                token,
+                force_conflict=(
+                    incoming_source_conflict
+                    and rng.random() < scenario.source_target_correlation
+                ),
             )
 
             if pass_index == 1 and edge_index in workload.mutate_slots:
@@ -192,7 +203,6 @@ def run_one(
             stats.target_events += len(remaps) + len(tlbi_tokens) + int(tlbi_all)
 
             queued_source_conflict = pf_source_line in queue
-            incoming_source_conflict = pf_source_line in source_events
             remap_conflict = any(line == pf_target_line and event_token == token for line, event_token in remaps)
             tlbi_token_conflict = token in tlbi_tokens
             target_conflict = remap_conflict or tlbi_token_conflict or tlbi_all

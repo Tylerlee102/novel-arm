@@ -113,6 +113,8 @@ def collect_one(workload: str, tag: str, policy: str) -> dict[str, str]:
     sections = parse_stats_sections(path)
     if not sections:
         raise RuntimeError(f"no stats sections in {path}")
+    # The first stats section is the ROI section for these runs; later sections
+    # include post-workload/teardown counters and do not match summary roi_ticks.
     stats = sections[0]
     row: dict[str, str] = {
         "workload": workload,

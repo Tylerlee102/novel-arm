@@ -1,4 +1,4 @@
-﻿# COPPER Free-Tool Run Results
+# COPPER Free-Tool Run Results
 
 Date: 2026-06-12 local machine time
 
@@ -13,7 +13,7 @@ These runs completed on the local Windows/Vivado workstation.
 Command:
 
 ```text
-python research\copper_final_eval.py
+C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe research\copper_final_eval.py
 ```
 
 Outputs:
@@ -46,7 +46,7 @@ Adversarial trace:
 Command:
 
 ```text
-python research\copper_validation.py
+C:\Users\tyboy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe research\copper_validation.py
 ```
 
 Result:
@@ -619,4 +619,3 @@ the GAPBS-inspired mini-suite adds a BFS/SSSP/PageRank/CC-shaped graph-kernel
 be attached under full-system Linux; it is whether COPPER-CTLW shows useful
 speedup on larger official AArch64/Linux workloads while preserving the safety
 behavior seen here.
-

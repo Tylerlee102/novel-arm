@@ -11,7 +11,9 @@ from __future__ import annotations
 
 import csv
 import hashlib
+import os
 import shutil
+import stat
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -68,7 +70,11 @@ def reset_output_dir() -> None:
     if out.parent != expected_parent or out.name != "copper_public_artifact_package_20260620":
         raise RuntimeError(f"Refusing to reset unexpected package path: {out}")
     if out.exists():
-        shutil.rmtree(out)
+        def clear_readonly(func, path, _exc_info):
+            os.chmod(path, stat.S_IREAD | stat.S_IWRITE)
+            func(path)
+
+        shutil.rmtree(out, onerror=clear_readonly)
     out.mkdir(parents=True)
 
 

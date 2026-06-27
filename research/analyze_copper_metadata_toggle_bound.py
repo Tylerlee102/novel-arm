@@ -62,8 +62,11 @@ def main() -> None:
     commits = sum(fnum(row, "learnedProofs") for row in traffic_rows)
     allow = sum(fnum(row, "allowedCandidates") for row in traffic_rows)
     block = sum(fnum(row, "blockedNoProvenance") for row in traffic_rows)
-    fault = sum(fnum(row, "targetLineWitnessMisses") for row in traffic_rows)
-    reads = allow + block + fault
+    target_witness_lookups = sum(
+        fnum(row, "targetLineWitnessMisses") for row in traffic_rows
+    )
+    clpd_source_reads = allow + block
+    reads = clpd_source_reads + target_witness_lookups
     writes = commits
     events = reads + writes
 
@@ -83,6 +86,10 @@ def main() -> None:
                 "read_pj": scenario.read_pj,
                 "write_pj": scenario.write_pj,
                 "compare_pj": scenario.compare_pj,
+                "clpd_source_reads": clpd_source_reads,
+                "ctlw_target_witness_lookups": target_witness_lookups,
+                "charged_metadata_reads": reads,
+                "learned_proof_writes": writes,
                 "metadata_pj": metadata_pj,
                 "metadata_uJ": metadata_pj / 1_000_000.0,
                 "pct_dram_op": 100.0 * metadata_pj / dram_op_pj,
@@ -98,6 +105,10 @@ def main() -> None:
                 "read_pj",
                 "write_pj",
                 "compare_pj",
+                "clpd_source_reads",
+                "ctlw_target_witness_lookups",
+                "charged_metadata_reads",
+                "learned_proof_writes",
                 "metadata_pj",
                 "metadata_uJ",
                 "pct_dram_op",
@@ -121,7 +132,9 @@ def main() -> None:
         f"- Source DRAM-energy CSV: `{DRAM_CSV.relative_to(ROOT)}`",
         f"- Workload rows: {len(traffic_rows)} COPPER CLPD-64K+PEB public app/service/parser rows",
         f"- Learned-proof writes: {int(writes):,}",
-        f"- CLPD authority reads: {int(reads):,}",
+        f"- CLPD source-proof reads: {int(clpd_source_reads):,}",
+        f"- CTLW target-witness lookups charged as metadata reads: {int(target_witness_lookups):,}",
+        f"- Total charged metadata reads: {int(reads):,}",
         f"- Total metadata events: {int(events):,}",
         f"- Summed COPPER DRAM operation energy over matching rows: {dram_op_pj:,.0f} pJ",
         f"- Summed COPPER total DRAM energy over matching rows: {dram_total_pj:,.0f} pJ",
@@ -143,6 +156,7 @@ def main() -> None:
             "## Interpretation",
             "",
             f"- Even the deliberately high scenario is {float(worst['pct_dram_op']):.4f}% of matching COPPER DRAM operation energy.",
+            "- The charged-read total intentionally combines CLPD source-proof lookups with CTLW target-witness lookups; it should be cited as metadata authority lookups, not pure CLPD reads.",
             "- This supports the narrow claim that metadata-table access energy is unlikely to dominate the measured memory-system energy story under these assumptions.",
             "- This does not prove full-chip power, SRAM compiler energy, physical wire energy, or integrated clocking overhead.",
             "- The paper should continue to describe this as a sensitivity bound, not calibrated silicon power.",
