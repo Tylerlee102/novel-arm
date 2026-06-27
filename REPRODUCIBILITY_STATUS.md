@@ -9,13 +9,18 @@ machine or one-command full-system artifact.
   reruns the clone-local reproduction path and writes
   `research/results/reproduction/LOCAL_REPRODUCTION_REPORT.md`.
 - In a Linux container, Codespaces, or GitHub Actions runner with the Dockerfile
-  dependencies, the open-source pass-6 flow runs through `make check-toolchain`,
+  dependencies, the open-source flow runs through `make check-toolchain`,
   `make test`, `make rtl`, `make sim`, `make eval`, `make synth`,
   `make paper`, `make paper-audit`, and `make artifact`.
 - The model-level evaluation regenerates same-path baselines for
   `no_prefetch`, `next_line`, `stride`, `simple_pointer_chase`, and `copper`,
   including queue drops, lateness, accuracy, coverage, traffic overhead,
   ablations, sensitivity, and seed/input stability.
+- The deterministic cycle-model evaluation regenerates `cycle_performance.csv`,
+  `cycle_prefetch_metrics.csv`, and `cycle_memory_traffic.csv` for the same
+  baseline names. It models cache hit/miss latency, memory latency, outstanding
+  prefetches, queue drops, lateness, and demand/prefetch traffic, but it is not
+  gem5.
 - Paper-facing documents, tables, summaries, RTL sources, testbenches, and
   reproduction scripts are included with stable relative paths.
 - The Python audit and summary scripts can be rerun with a local Python 3
@@ -33,11 +38,10 @@ machine or one-command full-system artifact.
 - GitHub Actions, Docker, and Codespaces are the intended source of truth for
   the open-source hardware and paper gates. Missing local tools are not a
   license to substitute fake reports.
-- This Pass 6 checkout is web-trigger-ready but does not yet include a collected
-  GitHub Actions/Docker/Codespaces proof run. Follow `docs/RUN_CI_NOW.md` from
-  the GitHub Actions web UI or GitHub CLI, then import the downloaded
-  logs/artifacts with `research/scripts/import_ci_artifacts.py` before promoting
-  any RTL, synthesis, paper, or artifact-packaging gate to PASS.
+- This checkout includes imported GitHub Actions proof for the open-source RTL,
+  synthesis, paper, audit, and artifact-packaging gates. Future evidence changes
+  should still be imported with `research/scripts/import_ci_artifacts.py` before
+  promoting new CI-backed claims.
 
 ## Requires External Setup
 
@@ -57,10 +61,10 @@ standard tools, and reproduce selected public-workload points after installing
 the external simulator/toolchain stack. They should not expect a fresh clone to
 reproduce the entire long-running full-system campaign without that setup.
 
-The model-level pass-6 evidence improves baseline discipline but does not
-replace full-system gem5 evidence. Claims in the paper and claim ledger must
-identify model-level, RTL-level, generic-synthesis, existing-Vivado, and
-full-system-summary evidence separately.
+The model-level and cycle-model evidence improve baseline discipline but do not
+replace gem5 or core-integrated evidence. Claims in the paper and claim ledger
+must identify model-level, cycle-model, RTL-level, generic-synthesis,
+existing-Vivado, and external summary evidence separately.
 
 The clone-local runner is intended to make this boundary explicit: it should pass
 from a fresh clone after Python dependencies are installed, while full gem5 and

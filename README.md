@@ -43,7 +43,10 @@ environment for those gates.
 The Dockerfile and GitHub Actions workflow install the open-source tools needed
 for the model, RTL smoke simulation, generic Yosys synthesis, LaTeX paper build,
 and artifact packaging. The Codespaces devcontainer uses the same image.
-Vivado and full gem5 campaign reruns remain optional external-tool paths.
+The evaluation target also generates deterministic `cycle_model` evidence with
+cache hit/miss latency, memory latency, prefetch lateness, queue drops, and
+demand/prefetch traffic accounting. Vivado and full gem5 campaign reruns remain
+optional external-tool paths.
 
 If `gh` or Docker is unavailable on the local machine, use
 `docs/RUN_CI_NOW.md` to trigger the GitHub Actions run from the GitHub web UI,
@@ -75,11 +78,10 @@ Expected local result: `Overall status: PASS` in
 `research/results/reproduction/LOCAL_REPRODUCTION_REPORT.md`.
 
 Current conference-readiness status is tracked in
-`research/CONFERENCE_READINESS_DASHBOARD.md`. The pass-6 open-source path has
-CI/Docker/Codespaces entry points for toolchain, model, RTL, evaluation,
-synthesis, paper, and artifact gates, but those gates are not evidence until a
-real run log or Docker/Codespaces output is collected. The model-level flow
-generates no-prefetch, next-line, stride, simple pointer-chase, and COPPER
-baseline rows with accuracy, coverage, lateness, queue-drop, traffic, ablation,
-sensitivity, and seed/input-stability CSVs. These are model-level results, not
-fresh gem5 results.
+`research/CONFERENCE_READINESS_DASHBOARD.md`. The open-source GitHub Actions
+path has passing evidence for toolchain, model, RTL compile/simulation,
+evaluation, synthesis, paper, paper audit, artifact packaging, and artifact
+upload. The evaluation flow generates no-prefetch, next-line, stride, simple
+pointer-chase, and COPPER baseline rows with accuracy, coverage, lateness,
+queue-drop, traffic, ablation, sensitivity, and seed/input-stability CSVs at
+model and deterministic cycle-model levels. These are not fresh gem5 results.

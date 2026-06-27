@@ -11,7 +11,7 @@
 \maketitle
 
 \begin{abstract}
-COPPER explores whether committed pointer-provenance signals can improve the selectivity of hardware data-derived prefetching for pointer-intensive workloads. The mechanism records pointer-source evidence only after architectural commit, invalidates or blocks stale and mismatched sources, and uses that evidence to gate later prefetch issue. The current artifact supports a careful claim: COPPER is a measurable research mechanism with model tests, open-source RTL and synthesis smoke paths awaiting GitHub Actions/Codespaces/Docker proof, existing gem5 Linux summaries, and existing unit-level hardware summaries. It does not claim production readiness, broad benchmark dominance, or silicon signoff.
+COPPER explores whether committed pointer-provenance signals can improve the selectivity of hardware data-derived prefetching for pointer-intensive workloads. The mechanism records pointer-source evidence only after architectural commit, invalidates or blocks stale and mismatched sources, and uses that evidence to gate later prefetch issue. The artifact now supports a careful claim: COPPER is a measurable research mechanism with executable-model evidence, deterministic cycle-model evidence, CI-proven RTL unit simulation, CI-proven paper/artifact reproduction, and matched unit-level synthesis evidence. It does not claim state-of-the-art performance, production readiness, full-system integration, power efficiency, or silicon signoff.
 \end{abstract}
 
 \section{Introduction}
@@ -56,7 +56,7 @@ COPPER has three core rules: proof creation occurs after committed architectural
 \section{Implementation}
 The artifact contains a Python model, a trace-driven evaluation harness, SystemVerilog RTL units, C/C++ workload sources, reproduction scripts, and summary parsers. The open-source RTL smoke target is \texttt{copper\_prefetch\_unit\_open}; larger local Vivado summaries are treated as existing evidence rather than portable rerun proof.
 
-\section{Experimental Methodology}
+\section{Methodology}
 \begin{table}[t]
 \centering
 \caption{Benchmarks}
@@ -64,9 +64,9 @@ The artifact contains a Python model, a trace-driven evaluation harness, SystemV
 \hline
 Class & Examples & Evidence file \\
 \hline
-Pointer-heavy & heap, graph, Patricia & benchmark\_inventory.csv \\
-Controls & array, compute, random access & benchmark\_inventory.csv \\
-Stress & mixed, branchy, noisy allocation & benchmark\_inventory.csv \\
+Pointer-heavy & linked list, tree, hash, graph, Patricia & cycle\_performance.csv \\
+Controls & array, matrix, compute, random access & cycle\_performance.csv \\
+Stress & short chains, long chains, mixed, noisy, branchy & cycle\_performance.csv \\
 \hline
 \end{tabular}
 \end{table}
@@ -78,21 +78,22 @@ Stress & mixed, branchy, noisy allocation & benchmark\_inventory.csv \\
 \hline
 Config & Role & Evidence file \\
 \hline
-no\_prefetch & reference & baseline\_inventory.csv \\
-pointer\_chase\_simple & unsafe content-derived baseline & baseline\_inventory.csv \\
-spp\_conventional & conventional comparison & baseline\_inventory.csv \\
-copper & committed-provenance policy & baseline\_inventory.csv \\
+no\_prefetch & reference & cycle\_performance.csv \\
+next\_line & spatial baseline & cycle\_performance.csv \\
+stride & regular-stream baseline & cycle\_performance.csv \\
+simple\_pointer\_chase & unsafe content-derived baseline & cycle\_performance.csv \\
+copper & committed-provenance policy & cycle\_performance.csv \\
 \hline
 \end{tabular}
 \end{table}
 
-The normalized CSVs report per-workload rows rather than hiding negative results inside averages. Model-level rows and gem5-summary rows are labeled in notes.
+The normalized CSVs report per-workload rows rather than hiding negative results inside averages. Evidence levels are explicit: \texttt{model} rows come from the executable policy model, \texttt{cycle\_model} rows come from a deterministic memory-system model with hit/miss latency, memory latency, outstanding prefetches, queue drops, lateness, and demand/prefetch traffic accounting. The cycle model is not gem5 and does not claim full-system integration.
 
 \section{Evaluation}
 \begin{figure}[t]
 \centering
 \fbox{\begin{minipage}{\linewidth}\centering
-Speedup rows are generated in \texttt{research/results/performance.csv}. The paper does not collapse them into a single broad win claim.
+Speedup rows are generated in \texttt{research/results/performance.csv} and \texttt{research/results/cycle\_performance.csv}. The paper does not collapse them into a single broad win claim.
 \end{minipage}}
 \caption{Speedup by benchmark.}
 \label{fig:speedup}
@@ -101,7 +102,7 @@ Speedup rows are generated in \texttt{research/results/performance.csv}. The pap
 \begin{figure}[t]
 \centering
 \fbox{\begin{minipage}{\linewidth}\centering
-Issued, useful, useless, accuracy, and coverage fields are generated in \texttt{research/results/prefetch\_metrics.csv}.
+Issued, useful, useless, accuracy, coverage, lateness, and queue-drop fields are generated in \texttt{research/results/prefetch\_metrics.csv} and \texttt{research/results/cycle\_prefetch\_metrics.csv}.
 \end{minipage}}
 \caption{Prefetch accuracy and coverage.}
 \label{fig:prefetch}
@@ -110,25 +111,25 @@ Issued, useful, useless, accuracy, and coverage fields are generated in \texttt{
 \begin{figure}[t]
 \centering
 \fbox{\begin{minipage}{\linewidth}\centering
-Memory-traffic counters and byte-overhead fields are generated in \texttt{research/results/memory\_traffic.csv}.
+Demand-load, prefetch-load, total-request, and traffic-overhead fields are generated in \texttt{research/results/memory\_traffic.csv} and \texttt{research/results/cycle\_memory\_traffic.csv}.
 \end{minipage}}
 \caption{Traffic overhead.}
 \label{fig:traffic}
 \end{figure}
 
-Current evidence supports selective, per-workload discussion. It does not support a universal speedup claim.
+Current evidence supports selective, per-workload discussion. Several cycle-model rows show COPPER behind the best baseline; those regressions remain in the CSVs and block a universal speedup claim.
 
 \section{Ablation And Sensitivity}
 \begin{figure}[t]
 \centering
 \fbox{\begin{minipage}{\linewidth}\centering
-Ablation and sensitivity rows are generated in \texttt{research/results/ablation.csv} and \texttt{research/results/sensitivity.csv}.
+Ablation and sensitivity rows are generated in \texttt{research/results/ablation.csv} and \texttt{research/results/sensitivity.csv}; the rows include evidence-level labels.
 \end{minipage}}
 \caption{Ablation and sensitivity.}
 \label{fig:ablation}
 \end{figure}
 
-The current public model isolates several provenance choices. Queue filtering, confidence threshold, distance, and memory-latency sensitivity are reported at model level and should not be described as gem5 execution counters.
+The cycle-model ablations isolate no provenance, speculative provenance, committed-only proof, confidence, queue filtering, and full COPPER. Queue size, confidence threshold, chain depth, distance, table size, and memory latency are varied in sensitivity rows. These are cycle-model counters and should not be described as gem5 counters.
 
 \section{Hardware Cost}
 \begin{table}[t]
@@ -138,14 +139,15 @@ The current public model isolates several provenance choices. Queue filtering, c
 \hline
 Evidence & Scope & File \\
 \hline
-Yosys & generic unit if tool exists & synthesis.csv \\
-Vivado summaries & existing unit reports & synthesis.csv \\
-Overhead & matched generic unit rows when Yosys runs & synthesis\_overhead.csv \\
+CI RTL simulation & open-source unit test & rtl\_simulation.csv \\
+Yosys & generic unit resource context & synthesis.csv \\
+nextpnr & mapped unit resource context when available & synthesis.csv \\
+Overhead & matched unit rows from same flow & synthesis\_overhead.csv \\
 \hline
 \end{tabular}
 \end{table}
 
-The artifact supports unit-level hardware plausibility only. It does not claim full-core implementation cost.
+The artifact supports unit-level hardware plausibility only. It does not claim full-core implementation cost, mapped full-core timing, or power efficiency.
 
 \section{Limitations}
 \begin{table}[t]
@@ -155,10 +157,10 @@ The artifact supports unit-level hardware plausibility only. It does not claim f
 \hline
 Limitation & Consequence \\
 \hline
-External gem5 and Vivado setup & Full campaign is not fresh-clone portable \\
-Model-only next-line and stride isolation & Baseline story is not gem5-level \\
-No full-core matched hardware overhead & Full-core area claim remains blocked \\
-Limited seed coverage in some workloads & Stability claim remains preliminary \\
+Cycle model is synthetic & Trends need gem5 or core-model validation \\
+No full-core integration & Full-core area and timing claims remain blocked \\
+No real power report & Power-efficiency claims remain blocked \\
+External gem5 and Vivado setup & Large external-tool reruns are not clone-local \\
 \hline
 \end{tabular}
 \end{table}
@@ -171,15 +173,16 @@ Limited seed coverage in some workloads & Stability claim remains preliminary \\
 \hline
 Gate class & Status source & Interpretation \\
 \hline
-Reproduction & CONFERENCE\_READINESS\_DASHBOARD.md & portable path plus blockers \\
-Claims & COPPER\_CLAIM\_LEDGER.md & allowed wording only \\
+CI RTL evidence & rtl\_simulation.csv & GitHub Actions unit simulation \\
+Cycle-model evidence & cycle\_performance.csv & deterministic timing model \\
+Hardware cost & synthesis\_overhead.csv & matched unit-level overhead \\
 Package & artifact\_manifest.csv & included and excluded files \\
 \hline
 \end{tabular}
 \end{table}
 
 \section{Conclusion}
-COPPER is best framed as a committed-provenance authority mechanism for data-derived prefetch issue. The artifact now has a stricter reproduction path, claim ledger, metrics ledgers, paper source, audits, package manifest, and web-triggerable CI path. The honest recommendation is to treat the current repository as workshop-level unless GitHub Actions/Codespaces/Docker proof, RTL simulation, matched synthesis overhead, and paper PDF build blockers are closed.
+COPPER is best framed as a committed-provenance authority mechanism for data-derived prefetch issue. The artifact now has a CI-proven open-source path, deterministic cycle-model evidence, matched unit-level synthesis evidence, claim ledger, audits, and package manifest. The honest next step for a stronger architecture submission is gem5 or comparable core-model validation without changing the scoped claims in this artifact.
 
 \bibliographystyle{plain}
 \bibliography{references}

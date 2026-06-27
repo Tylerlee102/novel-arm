@@ -24,6 +24,7 @@ benchmarks:
 eval:
 	$(PYTHON) research/copper_final_eval.py
 	$(PYTHON) research/scripts/run_evaluation.py
+	$(PYTHON) research/scripts/run_cycle_eval.py
 
 synth:
 	$(PYTHON) research/scripts/run_synthesis.py
