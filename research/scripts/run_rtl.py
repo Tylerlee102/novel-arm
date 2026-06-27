@@ -7,6 +7,7 @@ import argparse
 import csv
 import os
 import platform
+import re
 import shutil
 import subprocess
 from pathlib import Path
@@ -20,6 +21,8 @@ LOG_DIR = RESULTS / "logs" / "rtl"
 COMPILE_CSV = RESULTS / "rtl_compile.csv"
 SIM_CSV = RESULTS / "rtl_simulation.csv"
 VVP = RTL_DIR / "copper_prefetch_unit_open_tb.vvp"
+ASSERTION_PASSED = re.compile(r"COPPER_ASSERTIONS_PASSED=(\d+)")
+ASSERTION_FAILED = re.compile(r"COPPER_ASSERTIONS_FAILED=(\d+)")
 
 
 def current_environment() -> str:
@@ -44,25 +47,59 @@ def rel(path: Path) -> str:
     return str(path.relative_to(ROOT)).replace("\\", "/")
 
 
+def text_or_empty(value: str | bytes | None) -> str:
+    if value is None:
+        return ""
+    if isinstance(value, bytes):
+        return value.decode("utf-8", errors="replace")
+    return value
+
+
 def run(command: list[str], log_path: Path) -> tuple[int, str]:
-    proc = subprocess.run(
-        command,
-        cwd=ROOT,
-        text=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
-        timeout=60,
-    )
-    log_path.write_text(proc.stdout, encoding="utf-8")
-    return proc.returncode, proc.stdout
+    try:
+        proc = subprocess.run(
+            command,
+            cwd=ROOT,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            timeout=60,
+        )
+        output = proc.stdout
+        code = proc.returncode
+    except subprocess.TimeoutExpired as exc:
+        output = text_or_empty(exc.stdout) + text_or_empty(exc.stderr)
+        output += "\nCOPPER_RUNNER_ERROR command timed out after 60 seconds\n"
+        code = 124
+    except Exception as exc:  # pragma: no cover - defensive CI evidence path
+        output = f"COPPER_RUNNER_ERROR {type(exc).__name__}: {exc}\n"
+        code = 125
+    log_path.write_text(output, encoding="utf-8")
+    return code, output
 
 
 def count_word(text: str, word: str) -> int:
     return sum(1 for line in text.splitlines() if word.lower() in line.lower())
 
 
+def first_error_line(text: str) -> str:
+    for line in text.splitlines():
+        lowered = line.lower()
+        if line.startswith("COPPER_ASSERTION_FAIL") or line.startswith("COPPER_RUNNER_ERROR"):
+            return line.strip()
+        if " error:" in lowered or lowered.startswith("error"):
+            return line.strip()
+    return ""
+
+
+def parse_assertion_count(pattern: re.Pattern[str], text: str, default: str) -> str:
+    match = pattern.search(text)
+    return match.group(1) if match else default
+
+
 def compile_rtl() -> dict[str, str]:
     LOG_DIR.mkdir(parents=True, exist_ok=True)
+    RTL_DIR.mkdir(parents=True, exist_ok=True)
     log_path = LOG_DIR / "iverilog_copper_prefetch_unit_open.log"
     iverilog = shutil.which("iverilog")
     if not iverilog:
@@ -77,10 +114,14 @@ def compile_rtl() -> dict[str, str]:
             "log_path": rel(log_path),
             "notes": "Open-source RTL compile requires Icarus Verilog. Docker/CI installs it; local Windows may block.",
         }
+    if VVP.exists():
+        VVP.unlink()
     command = [
         iverilog,
         "-g2012",
         "-Wall",
+        "-s",
+        "copper_prefetch_unit_open_tb",
         "-o",
         str(VVP),
         str(RESEARCH / "copper_prefetch_unit_open.sv"),
@@ -93,11 +134,11 @@ def compile_rtl() -> dict[str, str]:
         "design": "copper_prefetch_unit_open",
         "tool": "iverilog",
         "environment": ENVIRONMENT,
-        "status": "PASS" if code == 0 and errors == 0 else "FAIL",
+        "status": "PASS" if code == 0 and errors == 0 and VVP.exists() else "FAIL",
         "warnings": str(warnings),
         "errors": str(errors if errors else (0 if code == 0 else 1)),
         "log_path": rel(log_path),
-        "notes": "Open-source smoke compile of COPPER unit with queue/disable/speculation checks.",
+        "notes": first_error_line(output) or "Open-source smoke compile of COPPER unit with queue/disable/speculation checks.",
     }
 
 
@@ -178,8 +219,13 @@ def simulate_rtl() -> dict[str, str]:
             "notes": "Icarus runtime unavailable.",
         }
     code, output = run([vvp, str(VVP)], log_path)
-    failed = count_word(output, "error")
+    failed = int(parse_assertion_count(ASSERTION_FAILED, output, "0"))
+    failed_lines = sum(1 for line in output.splitlines() if line.startswith("COPPER_ASSERTION_FAIL"))
+    failed = max(failed, failed_lines)
     completed = "COPPER open RTL directed tests completed" in output
+    passed = parse_assertion_count(ASSERTION_PASSED, output, "0")
+    if code != 0 and failed == 0:
+        failed = 1
     return {
         "testbench": "copper_prefetch_unit_open_tb",
         "design": "copper_prefetch_unit_open",
@@ -188,10 +234,10 @@ def simulate_rtl() -> dict[str, str]:
         "seed": "directed",
         "status": "PASS" if code == 0 and failed == 0 and completed else "FAIL",
         "cycles": "",
-        "assertions_passed": "15" if completed and failed == 0 else "0",
+        "assertions_passed": passed if completed and failed == 0 else "0",
         "assertions_failed": str(failed),
         "log_path": rel(log_path),
-        "notes": "Directed reset, committed provenance update, speculative rejection, request generation, queue full behavior, disabled-COPPER behavior, permission block, no architectural output mutation.",
+        "notes": first_error_line(output) or "Directed reset, committed provenance update, speculative rejection, request generation, queue full behavior, disabled-COPPER behavior, permission block, no architectural output mutation.",
     }
 
 

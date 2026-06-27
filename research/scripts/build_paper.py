@@ -44,6 +44,14 @@ def count_word(text: str, word: str) -> int:
     return sum(1 for line in text.splitlines() if word.lower() in line.lower())
 
 
+def first_error_line(text: str) -> str:
+    for line in text.splitlines():
+        lowered = line.lower()
+        if line.startswith("!") or " error:" in lowered or lowered.startswith("error"):
+            return line.strip()
+    return ""
+
+
 def existing_rows(fieldnames: list[str]) -> list[dict[str, str]]:
     if not OUT.exists():
         return []
@@ -99,13 +107,13 @@ def main() -> int:
         print("paper build blocked: latexmk/pdflatex not found")
         return 0
     if latexmk:
-        command = [latexmk, "-pdf", "-interaction=nonstopmode", "-halt-on-error", "main.tex"]
+        command = [latexmk, "-pdf", "-file-line-error", "-interaction=nonstopmode", "-halt-on-error", "main.tex"]
         proc = subprocess.run(command, cwd=PAPER, text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, timeout=120)
         combined = proc.stdout
         ok = proc.returncode == 0
         engine = "latexmk"
     else:
-        command = [pdflatex, "-interaction=nonstopmode", "-halt-on-error", "main.tex"]
+        command = [pdflatex, "-file-line-error", "-interaction=nonstopmode", "-halt-on-error", "main.tex"]
         first = subprocess.run(command, cwd=PAPER, text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, timeout=60)
         second = subprocess.run(command, cwd=PAPER, text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, timeout=60)
         combined = first.stdout + "\n" + second.stdout
@@ -118,7 +126,8 @@ def main() -> int:
         write_status("PASS", rel(pdf), engine, errors, warnings, rel(log) if log.exists() else rel(combined_log), "LaTeX build completed.")
         print(f"built {rel(pdf)}")
         return 0
-    write_status("FAIL", rel(pdf) if pdf.exists() else "", engine, errors or "1", warnings, rel(combined_log), "LaTeX returned a non-zero status.")
+    first_error = first_error_line(combined)
+    write_status("FAIL", rel(pdf) if pdf.exists() else "", engine, errors or "1", warnings, rel(combined_log), first_error or "LaTeX returned a non-zero status.")
     return 1
 
 

@@ -507,7 +507,7 @@ Load source word, use as demand address, commit, record proof, later prefetch ca
 COPPER has three core rules: proof creation occurs after committed architectural evidence; writes, coherence updates, failed permissions, and context mismatch block or destroy proof; recursive issue does not gain authority merely because a line arrived by prefetch.
 
 \section{Implementation}
-The artifact contains a Python model, a trace-driven evaluation harness, SystemVerilog RTL units, C/C++ workload sources, reproduction scripts, and summary parsers. The open-source RTL smoke target is `copper_prefetch_unit_open`; larger local Vivado summaries are treated as existing evidence rather than portable rerun proof.
+The artifact contains a Python model, a trace-driven evaluation harness, SystemVerilog RTL units, C/C++ workload sources, reproduction scripts, and summary parsers. The open-source RTL smoke target is \texttt{copper\_prefetch\_unit\_open}; larger local Vivado summaries are treated as existing evidence rather than portable rerun proof.
 
 \section{Experimental Methodology}
 \begin{table}[t]
@@ -545,7 +545,7 @@ The normalized CSVs report per-workload rows rather than hiding negative results
 \begin{figure}[t]
 \centering
 \fbox{\begin{minipage}{\linewidth}\centering
-Speedup rows are generated in `research/results/performance.csv`. The paper does not collapse them into a single broad win claim.
+Speedup rows are generated in \texttt{research/results/performance.csv}. The paper does not collapse them into a single broad win claim.
 \end{minipage}}
 \caption{Speedup by benchmark.}
 \label{fig:speedup}
@@ -554,7 +554,7 @@ Speedup rows are generated in `research/results/performance.csv`. The paper does
 \begin{figure}[t]
 \centering
 \fbox{\begin{minipage}{\linewidth}\centering
-Issued, useful, useless, accuracy, and coverage fields are generated in `research/results/prefetch_metrics.csv`.
+Issued, useful, useless, accuracy, and coverage fields are generated in \texttt{research/results/prefetch\_metrics.csv}.
 \end{minipage}}
 \caption{Prefetch accuracy and coverage.}
 \label{fig:prefetch}
@@ -563,7 +563,7 @@ Issued, useful, useless, accuracy, and coverage fields are generated in `researc
 \begin{figure}[t]
 \centering
 \fbox{\begin{minipage}{\linewidth}\centering
-Memory-traffic counters and byte-overhead fields are generated in `research/results/memory_traffic.csv`.
+Memory-traffic counters and byte-overhead fields are generated in \texttt{research/results/memory\_traffic.csv}.
 \end{minipage}}
 \caption{Traffic overhead.}
 \label{fig:traffic}
@@ -575,7 +575,7 @@ Current evidence supports selective, per-workload discussion. It does not suppor
 \begin{figure}[t]
 \centering
 \fbox{\begin{minipage}{\linewidth}\centering
-Ablation and sensitivity rows are generated in `research/results/ablation.csv` and `research/results/sensitivity.csv`.
+Ablation and sensitivity rows are generated in \texttt{research/results/ablation.csv} and \texttt{research/results/sensitivity.csv}.
 \end{minipage}}
 \caption{Ablation and sensitivity.}
 \label{fig:ablation}

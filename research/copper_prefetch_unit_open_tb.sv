@@ -21,6 +21,7 @@ module copper_prefetch_unit_open_tb;
     logic blocked_permission;
     logic architectural_state_mutated;
     logic [3:0] queue_count;
+    integer checks;
     integer errors;
 
     copper_prefetch_unit_open dut (
@@ -68,8 +69,9 @@ module copper_prefetch_unit_open_tb;
     task automatic check_bit(input string label, input logic actual, input logic expected);
         begin
             #1;
+            checks = checks + 1;
             if (actual !== expected) begin
-                $display("ERROR %s expected=%0b actual=%0b", label, expected, actual);
+                $display("COPPER_ASSERTION_FAIL %s expected=%0b actual=%0b", label, expected, actual);
                 errors = errors + 1;
             end
         end
@@ -98,6 +100,7 @@ module copper_prefetch_unit_open_tb;
     endtask
 
     initial begin
+        checks = 0;
         errors = 0;
         clear_inputs();
         rst_n = 1'b0;
@@ -148,10 +151,14 @@ module copper_prefetch_unit_open_tb;
         check_bit("blocked path no architectural mutation", architectural_state_mutated, 1'b0);
 
         if (errors == 0) begin
+            $display("COPPER_ASSERTIONS_PASSED=%0d", checks);
+            $display("COPPER_ASSERTIONS_FAILED=0");
             $display("COPPER open RTL directed tests completed");
             $finish;
         end
-        $display("COPPER open RTL directed tests failed errors=%0d", errors);
+        $display("COPPER_ASSERTIONS_PASSED=%0d", checks - errors);
+        $display("COPPER_ASSERTIONS_FAILED=%0d", errors);
+        $display("COPPER open RTL directed tests failed");
         $finish;
     end
 endmodule
