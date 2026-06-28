@@ -34,15 +34,24 @@ AUTO_POLICIES = tuple(
             "copper_clpd64k",
             "copper_exact131k",
             "copper_exact16k",
+            "copper_clpd64k_rerun",
             "copper_clpd32k",
             "copper_clpd16k",
             "copper_clpd8k",
+            "copper_proof131k",
+            "copper_ctlw_terminal",
+            "copper_ctlw",
+            "copper_ctw",
+            "copper_tpw",
             "spp_copper",
+            "none_retry",
+            "indirect",
             "copper",
             "naive",
             "none",
             "stride",
             "dcpt",
+            "isb",
             "spp",
             "ampm",
             "bop",
@@ -609,11 +618,17 @@ def terminal_info(path: Path, result_token: str) -> tuple[str, str]:
     return checksum, rc
 
 
-def generic_terminal_info(path: Path) -> tuple[str, str]:
+def generic_terminal_info(path: Path) -> tuple[str, str, str]:
     text = path.read_text(encoding="utf-8", errors="replace") if path.exists() else ""
-    checksum = first_match(r"checksum=(0x[0-9a-fA-F]+)", text)
+    checksum = first_match(r"checksum=([0-9a-fA-Fx]+)", text)
     rc = first_match(r"COPPER_FS_NATIVE_A64_DONE rc=(\d+)", text)
-    return checksum, rc
+    if rc:
+        return checksum, rc, "COPPER_FS_NATIVE_A64_DONE"
+    job_rcs = re.findall(r"COPPER_FS_NATIVE_JOB_DONE[^\r\n]*\brc=(\d+)", text)
+    if job_rcs and "COPPER_FS_RUNSCRIPT_DONE" in text:
+        failures = [value for value in job_rcs if value != "0"]
+        return checksum, failures[0] if failures else "0", "COPPER_FS_NATIVE_JOB_DONE"
+    return checksum, "", ""
 
 
 def stats_value(path: Path, name: str) -> str:
@@ -678,10 +693,15 @@ def auto_discovered_rows(existing_output_dirs: set[str]) -> list[dict[str, str]]
         host_stderr = run_dir.with_suffix(".host.err")
         if not stats.exists() or stats.stat().st_size == 0 or not terminal.exists():
             continue
-        checksum, rc = generic_terminal_info(terminal)
-        if rc != "0" or not checksum:
+        checksum, rc, completion = generic_terminal_info(terminal)
+        if rc != "0":
             continue
         host_text = host_stdout.read_text(encoding="utf-8", errors="replace") if host_stdout.exists() else ""
+        checksum_note = (
+            "terminal checksum"
+            if checksum
+            else "terminal/stat SHA-256 hashes; this workload did not print a workload checksum"
+        )
         rows.append(
             {
                 "tag": tag,
@@ -709,9 +729,9 @@ def auto_discovered_rows(existing_output_dirs: set[str]) -> list[dict[str, str]]
                 "l1d_demand_misses": stats_sum(stats, ("l1d-cache-", "demandMisses::total")),
                 "notes": (
                     "Auto-discovered retained local raw gem5 ARM full-system run with "
-                    "nonempty stats, terminal checksum, and rc=0. This broadens raw-run "
-                    "provenance only; it is not a clone-local CI proof or a complete "
-                    "top-tier workload/config matrix by itself."
+                    f"nonempty stats, {completion} rc=0, and {checksum_note}. "
+                    "This broadens raw-run provenance only; it is not a clone-local "
+                    "CI proof or a complete top-tier workload/config matrix by itself."
                 ),
             }
         )
