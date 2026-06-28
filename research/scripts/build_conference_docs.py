@@ -317,11 +317,44 @@ def energy_proxy_present() -> bool:
     return any(row.get("status") == "PASS" and row.get("evidence_level", "").startswith("proxy_") for row in rows)
 
 
+def csv_bool(row: dict[str, str], field: str) -> bool | None:
+    value = row.get(field)
+    if value is None or value == "":
+        return None
+    return value.strip().lower() in {"1", "true", "yes", "pass"}
+
+
+def legacy_or_true(row: dict[str, str], field: str) -> bool:
+    value = csv_bool(row, field)
+    return True if value is None else value
+
+
 def power_index_pass(evidence_level: str) -> bool:
-    return any(
-        row.get("evidence_level") == evidence_level and row.get("status") == "PASS"
+    rows = [
+        row
         for row in read_rows(RESULTS / "power_report_index.csv")
-    )
+        if row.get("evidence_level") == evidence_level and row.get("status") == "PASS"
+    ]
+    if evidence_level == "openroad_postroute_tool_estimate":
+        return any(
+            legacy_or_true(row, "tool_report_power")
+            and legacy_or_true(row, "asic_tool_estimate")
+            and legacy_or_true(row, "postroute_estimate")
+            for row in rows
+        )
+    if evidence_level == "asic_liberty_tool_estimate":
+        return any(
+            legacy_or_true(row, "tool_report_power")
+            and legacy_or_true(row, "asic_tool_estimate")
+            for row in rows
+        )
+    if evidence_level in {"fpga_tool_estimate", "measured_tool_power"}:
+        return any(legacy_or_true(row, "tool_report_power") for row in rows)
+    if evidence_level == "proxy_activity":
+        return any(legacy_or_true(row, "activity_proxy") for row in rows)
+    if evidence_level == "proxy_assumed_memory_energy":
+        return any(legacy_or_true(row, "assumption_proxy") for row in rows)
+    return bool(rows)
 
 
 def activity_power_proxy_present() -> bool:

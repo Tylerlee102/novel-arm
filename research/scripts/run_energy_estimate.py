@@ -36,6 +36,28 @@ ASSUMPTIONS = (
     " demand_access_pj=120.0; prefetch_access_pj=120.0; logic_cycle_pj=0.05;"
     " not calibrated to silicon, CACTI, McPAT, Vivado, or a process library"
 )
+POWER_INDEX_FIELDS = [
+    "evidence_level",
+    "status",
+    "source",
+    "report_path",
+    "tool",
+    "environment",
+    "scope",
+    "power_kind",
+    "baseline_design",
+    "copper_design",
+    "tool_report_power",
+    "fpga_estimate",
+    "asic_tool_estimate",
+    "postroute_estimate",
+    "activity_proxy",
+    "assumption_proxy",
+    "silicon_measured",
+    "signoff_grade",
+    "full_core",
+    "notes",
+]
 
 
 def rel(path: Path) -> str:
@@ -65,6 +87,55 @@ def positive_float(value: str) -> bool:
         return False
 
 
+def power_index_row(
+    evidence_level: str,
+    status: str,
+    source: str,
+    report_path: str = "",
+    tool: str = "",
+    environment: str = "current",
+    scope: str = "core_wrapper",
+    power_kind: str = "",
+    baseline_design: str = "",
+    copper_design: str = "",
+    tool_report_power: bool = False,
+    fpga_estimate: bool = False,
+    asic_tool_estimate: bool = False,
+    postroute_estimate: bool = False,
+    activity_proxy: bool = False,
+    assumption_proxy: bool = False,
+    silicon_measured: bool = False,
+    signoff_grade: bool = False,
+    full_core: bool = False,
+    notes: str = "",
+) -> dict[str, str]:
+    def yn(value: bool) -> str:
+        return "yes" if value else "no"
+
+    return {
+        "evidence_level": evidence_level,
+        "status": status,
+        "source": source,
+        "report_path": report_path,
+        "tool": tool,
+        "environment": environment,
+        "scope": scope,
+        "power_kind": power_kind,
+        "baseline_design": baseline_design,
+        "copper_design": copper_design,
+        "tool_report_power": yn(tool_report_power),
+        "fpga_estimate": yn(fpga_estimate),
+        "asic_tool_estimate": yn(asic_tool_estimate),
+        "postroute_estimate": yn(postroute_estimate),
+        "activity_proxy": yn(activity_proxy),
+        "assumption_proxy": yn(assumption_proxy),
+        "silicon_measured": yn(silicon_measured),
+        "signoff_grade": yn(signoff_grade),
+        "full_core": yn(full_core),
+        "notes": notes,
+    }
+
+
 def fpga_tool_power_evidence() -> dict[str, str] | None:
     evidence: list[tuple[Path, dict[str, str]]] = []
     for path in (MAPPED_PPA, RESULTS / "synthesis.csv", RESULTS / "fullcore_synthesis.csv"):
@@ -80,6 +151,31 @@ def fpga_tool_power_evidence() -> dict[str, str] | None:
                 evidence.append((path, row))
     if not evidence:
         return None
+
+    pairs = {
+        "core_wrapper": ("baseline_core_wrapper", "core_wrapper_plus_copper"),
+        "near_core_stub": ("nearcore_stub_baseline", "nearcore_stub_plus_copper"),
+        "unit": ("baseline_prefetch_unit", "copper_unit"),
+    }
+    by_group: dict[tuple[str, str, str], list[tuple[Path, dict[str, str]]]] = {}
+    for item in evidence:
+        row = item[1]
+        by_group.setdefault((row.get("scope", ""), row.get("target", ""), row.get("flow", "")), []).append(item)
+
+    matched: list[tuple[int, tuple[str, str, str], list[tuple[Path, dict[str, str]]]]] = []
+    for group, items in by_group.items():
+        scope, target, _flow = group
+        baseline, copper = pairs.get(scope, ("", ""))
+        designs = {row.get("design", "") for _, row in items}
+        if baseline and copper and {baseline, copper}.issubset(designs):
+            priority_value = 0 if scope == "core_wrapper" and target.startswith("vivado-") else 1
+            matched.append((priority_value, group, items))
+    if matched:
+        matched.sort(key=lambda item: item[0])
+        _priority, (scope, _target, _flow), evidence = matched[0]
+        baseline_design, copper_design = pairs[scope]
+    else:
+        baseline_design, copper_design = "", ""
 
     def priority(item: tuple[Path, dict[str, str]]) -> tuple[int, int]:
         row = item[1]
@@ -104,6 +200,9 @@ def fpga_tool_power_evidence() -> dict[str, str] | None:
         "report_path": first_row.get("report_path", ""),
         "tool": first_row.get("flow", ""),
         "environment": first_row.get("environment", "current"),
+        "scope": first_row.get("scope", "mapped_fpga"),
+        "baseline_design": baseline_design,
+        "copper_design": copper_design,
         "notes": (
             f"FPGA tool-estimated power rows found: {designs}. "
             "Treat as Vivado/EDA report power for the stated mapped FPGA target, not silicon "
@@ -122,8 +221,10 @@ def asic_liberty_power_evidence() -> dict[str, str] | None:
         and row.get("report_path")
         and (ROOT / row.get("report_path", "")).exists()
     ]
-    if not rows:
+    by_design = {row.get("design", ""): row for row in rows}
+    if not {"baseline_core_wrapper", "core_wrapper_plus_copper"}.issubset(by_design):
         return None
+    rows = [by_design["core_wrapper_plus_copper"], by_design["baseline_core_wrapper"]]
 
     def priority(row: dict[str, str]) -> tuple[int, str]:
         design = row.get("design", "")
@@ -144,6 +245,9 @@ def asic_liberty_power_evidence() -> dict[str, str] | None:
         "report_path": first.get("report_path", ""),
         "tool": first.get("flow", ""),
         "environment": first.get("environment", "current"),
+        "scope": first.get("scope", "core_wrapper"),
+        "baseline_design": "baseline_core_wrapper",
+        "copper_design": "core_wrapper_plus_copper",
         "notes": (
             f"ASIC standard-cell Liberty tool estimate rows found: {designs}. "
             "This is a Nangate45 Liberty estimate from a tool report, not silicon measurement, "
@@ -162,8 +266,10 @@ def openroad_postroute_power_evidence() -> dict[str, str] | None:
         and row.get("report_path")
         and (ROOT / row.get("report_path", "")).exists()
     ]
-    if not rows:
+    by_design = {row.get("design", ""): row for row in rows}
+    if not {"baseline_core_wrapper", "core_wrapper_plus_copper"}.issubset(by_design):
         return None
+    rows = [by_design["core_wrapper_plus_copper"], by_design["baseline_core_wrapper"]]
 
     def priority(row: dict[str, str]) -> tuple[int, str]:
         design = row.get("design", "")
@@ -184,6 +290,9 @@ def openroad_postroute_power_evidence() -> dict[str, str] | None:
         "report_path": first.get("report_path", ""),
         "tool": first.get("flow", ""),
         "environment": first.get("environment", "current"),
+        "scope": first.get("scope", "core_wrapper"),
+        "baseline_design": "baseline_core_wrapper",
+        "copper_design": "core_wrapper_plus_copper",
         "notes": (
             f"OpenROAD post-route tool-estimate rows found: {designs}. "
             "This is an OpenROAD-flow-scripts Nangate45 post-route estimate, "
@@ -210,6 +319,7 @@ def mcpat_activity_evidence() -> dict[str, str] | None:
         "report_path": rel(report_path),
         "tool": "McPAT 0.8 via research/analyze_copper_mcpat_sensitivity.py",
         "environment": "current",
+        "scope": "model_proxy",
         "notes": (
             f"Activity-based McPAT proxy found: {len(ok_rows)}/{len(rows)} rows use measured gem5 ROI "
             "activity counters in a fixed AArch64-style core/cache model. This is not silicon power, "
@@ -225,59 +335,81 @@ def write_power_index(proxy_status: str) -> None:
     mcpat = mcpat_activity_evidence()
     write_csv(
         POWER_INDEX,
-        ["evidence_level", "status", "source", "report_path", "tool", "environment", "notes"],
+        POWER_INDEX_FIELDS,
         [
-            {
-                "evidence_level": "openroad_postroute_tool_estimate",
-                "status": "PASS" if openroad_postroute else "BLOCKED",
-                "source": openroad_postroute["source"] if openroad_postroute else rel(OPENROAD_POSTROUTE_POWER),
-                "report_path": openroad_postroute["report_path"] if openroad_postroute else "",
-                "tool": openroad_postroute["tool"] if openroad_postroute else "",
-                "environment": openroad_postroute["environment"] if openroad_postroute else "current",
-                "notes": openroad_postroute["notes"]
+            power_index_row(
+                "openroad_postroute_tool_estimate",
+                "PASS" if openroad_postroute else "BLOCKED",
+                openroad_postroute["source"] if openroad_postroute else rel(OPENROAD_POSTROUTE_POWER),
+                report_path=openroad_postroute["report_path"] if openroad_postroute else "",
+                tool=openroad_postroute["tool"] if openroad_postroute else "",
+                environment=openroad_postroute["environment"] if openroad_postroute else "current",
+                scope=openroad_postroute["scope"] if openroad_postroute else "core_wrapper",
+                power_kind="nangate45_openroad_postroute_tool_estimate",
+                baseline_design=openroad_postroute["baseline_design"] if openroad_postroute else "baseline_core_wrapper",
+                copper_design=openroad_postroute["copper_design"] if openroad_postroute else "core_wrapper_plus_copper",
+                tool_report_power=bool(openroad_postroute),
+                asic_tool_estimate=bool(openroad_postroute),
+                postroute_estimate=bool(openroad_postroute),
+                notes=openroad_postroute["notes"]
                 if openroad_postroute
                 else (
                     "No OpenROAD post-route core-wrapper power/timing PASS row was found. "
                     "Do not claim post-route ASIC, signoff, silicon, or full-core power."
                 ),
-            },
-            {
-                "evidence_level": "asic_liberty_tool_estimate",
-                "status": "PASS" if asic_power else "BLOCKED",
-                "source": asic_power["source"] if asic_power else rel(ASIC_POWER),
-                "report_path": asic_power["report_path"] if asic_power else "",
-                "tool": asic_power["tool"] if asic_power else "",
-                "environment": asic_power["environment"] if asic_power else "current",
-                "notes": asic_power["notes"]
+            ),
+            power_index_row(
+                "asic_liberty_tool_estimate",
+                "PASS" if asic_power else "BLOCKED",
+                asic_power["source"] if asic_power else rel(ASIC_POWER),
+                report_path=asic_power["report_path"] if asic_power else "",
+                tool=asic_power["tool"] if asic_power else "",
+                environment=asic_power["environment"] if asic_power else "current",
+                scope=asic_power["scope"] if asic_power else "core_wrapper",
+                power_kind="nangate45_liberty_tool_estimate",
+                baseline_design=asic_power["baseline_design"] if asic_power else "baseline_core_wrapper",
+                copper_design=asic_power["copper_design"] if asic_power else "core_wrapper_plus_copper",
+                tool_report_power=bool(asic_power),
+                asic_tool_estimate=bool(asic_power),
+                notes=asic_power["notes"]
                 if asic_power
                 else (
                     "No OpenSTA/OpenROAD ASIC Liberty tool-power PASS row was found. "
                     "Do not claim ASIC, signoff, silicon, or full-core power."
                 ),
-            },
-            {
-                "evidence_level": "fpga_tool_estimate",
-                "status": "PASS" if fpga_power else "BLOCKED",
-                "source": fpga_power["source"] if fpga_power else "none",
-                "report_path": fpga_power["report_path"] if fpga_power else "",
-                "tool": fpga_power["tool"] if fpga_power else "",
-                "environment": fpga_power["environment"] if fpga_power else "current",
-                "notes": fpga_power["notes"]
+            ),
+            power_index_row(
+                "fpga_tool_estimate",
+                "PASS" if fpga_power else "BLOCKED",
+                fpga_power["source"] if fpga_power else "none",
+                report_path=fpga_power["report_path"] if fpga_power else "",
+                tool=fpga_power["tool"] if fpga_power else "",
+                environment=fpga_power["environment"] if fpga_power else "current",
+                scope=fpga_power["scope"] if fpga_power else "mapped_fpga",
+                power_kind="vivado_fpga_report_power",
+                baseline_design=fpga_power["baseline_design"] if fpga_power else "",
+                copper_design=fpga_power["copper_design"] if fpga_power else "",
+                tool_report_power=bool(fpga_power),
+                fpga_estimate=bool(fpga_power),
+                notes=fpga_power["notes"]
                 if fpga_power
                 else (
                     "No Vivado report_power, OpenROAD power, ASIC, CACTI, or process-calibrated "
                     "RTL power report with a PASS power_mw row was found in this open evidence pass. "
                     "McPAT activity-proxy evidence is indexed separately under proxy_activity."
                 ),
-            },
-            {
-                "evidence_level": "proxy_activity",
-                "status": "PASS" if mcpat else "BLOCKED",
-                "source": mcpat["source"] if mcpat else "none",
-                "report_path": mcpat["report_path"] if mcpat else "",
-                "tool": mcpat["tool"] if mcpat else "",
-                "environment": mcpat["environment"] if mcpat else "current",
-                "notes": (
+            ),
+            power_index_row(
+                "proxy_activity",
+                "PASS" if mcpat else "BLOCKED",
+                mcpat["source"] if mcpat else "none",
+                report_path=mcpat["report_path"] if mcpat else "",
+                tool=mcpat["tool"] if mcpat else "",
+                environment=mcpat["environment"] if mcpat else "current",
+                scope=mcpat["scope"] if mcpat else "model_proxy",
+                power_kind="mcpat_activity_proxy",
+                activity_proxy=bool(mcpat),
+                notes=(
                     mcpat["notes"]
                     if mcpat
                     else (
@@ -285,16 +417,19 @@ def write_power_index(proxy_status: str) -> None:
                         "SAIF/activity traces are not converted into power without a calibrated tool report."
                     )
                 ),
-            },
-            {
-                "evidence_level": "proxy_assumed_memory_energy",
-                "status": proxy_status,
-                "source": f"{rel(TRAFFIC)}; {rel(PERF)}",
-                "report_path": rel(OUT),
-                "tool": "research/scripts/run_energy_estimate.py",
-                "environment": "current",
-                "notes": ASSUMPTIONS,
-            },
+            ),
+            power_index_row(
+                "proxy_assumed_memory_energy",
+                proxy_status,
+                f"{rel(TRAFFIC)}; {rel(PERF)}",
+                report_path=rel(OUT),
+                tool="research/scripts/run_energy_estimate.py",
+                environment="current",
+                scope="model_proxy",
+                power_kind="assumed_memory_energy_proxy",
+                assumption_proxy=proxy_status == "PASS",
+                notes=ASSUMPTIONS,
+            ),
         ],
     )
 
