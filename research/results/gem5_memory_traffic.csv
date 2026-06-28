@@ -1,0 +1,2 @@
+benchmark,input,seed,config,evidence_level,simulator,demand_loads,prefetch_loads,total_memory_requests,traffic_overhead_pct,bandwidth_pressure_metric,log_path,notes
+ALL,NA,NA,NA,gem5,gem5_unavailable,NA,NA,NA,NA,NA,research/results/logs/gem5/gem5_availability.log,external/gem5/build/ARM/gem5.opt exists but is not on PATH and Phase 0 showed it is not executable in this OS session.
