@@ -254,31 +254,19 @@ def near_core_synthesis_pass() -> bool:
 
 def core_wrapper_synthesis_pass() -> bool:
     return any(
-        row.get("scope") == "core_wrapper" and row.get("status") == "PASS" and row.get("percent_overhead")
+        row.get("scope") == "accepted_core_wrapper" and row.get("status") == "PASS" and row.get("percent_overhead")
         for row in read_rows(RESULTS / "fullcore_synthesis_overhead.csv")
     )
 
 
 def mapped_row_scope(row: dict[str, str]) -> str:
-    explicit = row.get("scope", "").strip()
-    if explicit:
-        return explicit
-    design = row.get("design", "")
-    if design in {"nearcore_stub_baseline", "nearcore_stub_plus_copper"}:
-        return "near_core_stub"
-    if design in {"baseline_core_wrapper", "core_wrapper_plus_baseline_prefetch", "core_wrapper_plus_copper"}:
-        return "core_wrapper"
-    if design in {"baseline_prefetch_unit", "copper_unit"}:
-        return "unit"
-    if design in {"full_core_baseline", "full_core_plus_copper"}:
-        return "full_core"
-    return ""
+    return row.get("scope", "").strip()
 
 
 def matched_mapped_ppa_pass(scope: str = "near_core_stub") -> bool:
     if scope == "near_core_stub":
         baseline, copper = "nearcore_stub_baseline", "nearcore_stub_plus_copper"
-    elif scope == "core_wrapper":
+    elif scope == "accepted_core_wrapper":
         baseline, copper = "baseline_core_wrapper", "core_wrapper_plus_copper"
     elif scope == "unit":
         baseline, copper = "baseline_prefetch_unit", "copper_unit"
@@ -303,8 +291,8 @@ def matched_mapped_ppa_pass(scope: str = "near_core_stub") -> bool:
 
 
 def strongest_mapped_ppa_scope() -> str:
-    if matched_mapped_ppa_pass("core_wrapper"):
-        return "core_wrapper"
+    if matched_mapped_ppa_pass("accepted_core_wrapper"):
+        return "accepted_core_wrapper"
     if matched_mapped_ppa_pass("near_core_stub"):
         return "near_core_stub"
     if matched_mapped_ppa_pass("unit"):
@@ -324,9 +312,8 @@ def csv_bool(row: dict[str, str], field: str) -> bool | None:
     return value.strip().lower() in {"1", "true", "yes", "pass"}
 
 
-def legacy_or_true(row: dict[str, str], field: str) -> bool:
-    value = csv_bool(row, field)
-    return True if value is None else value
+def explicit_yes(row: dict[str, str], field: str) -> bool:
+    return csv_bool(row, field) is True
 
 
 def power_index_pass(evidence_level: str) -> bool:
@@ -335,28 +322,50 @@ def power_index_pass(evidence_level: str) -> bool:
         for row in read_rows(RESULTS / "power_report_index.csv")
         if row.get("evidence_level") == evidence_level and row.get("status") == "PASS"
     ]
+    def available(row: dict[str, str]) -> bool:
+        return explicit_yes(row, "available")
+
     if evidence_level == "openroad_postroute_tool_estimate":
         return any(
-            legacy_or_true(row, "tool_report_power")
-            and legacy_or_true(row, "asic_tool_estimate")
-            and legacy_or_true(row, "postroute_estimate")
-            and legacy_or_true(row, "physical_layout_present")
-            and legacy_or_true(row, "parasitics_present")
+            available(row)
+            and row.get("measurement_type") == "openroad_estimate"
+            and explicit_yes(row, "tool_report_power")
+            and explicit_yes(row, "asic_tool_estimate")
+            and explicit_yes(row, "postroute_estimate")
+            and explicit_yes(row, "physical_layout_present")
+            and explicit_yes(row, "parasitics_present")
             for row in rows
         )
     if evidence_level == "asic_liberty_tool_estimate":
         return any(
-            legacy_or_true(row, "tool_report_power")
-            and legacy_or_true(row, "asic_tool_estimate")
+            available(row)
+            and row.get("measurement_type") == "openroad_estimate"
+            and explicit_yes(row, "tool_report_power")
+            and explicit_yes(row, "asic_tool_estimate")
             for row in rows
         )
-    if evidence_level in {"fpga_tool_estimate", "measured_tool_power"}:
-        return any(legacy_or_true(row, "tool_report_power") for row in rows)
+    if evidence_level == "fpga_tool_estimate":
+        return any(
+            available(row)
+            and row.get("measurement_type") == "fpga_tool_estimate"
+            and explicit_yes(row, "tool_report_power")
+            for row in rows
+        )
     if evidence_level == "proxy_activity":
-        return any(legacy_or_true(row, "activity_proxy") for row in rows)
+        return any(
+            available(row)
+            and row.get("measurement_type") == "activity_proxy"
+            and explicit_yes(row, "activity_proxy")
+            for row in rows
+        )
     if evidence_level == "proxy_assumed_memory_energy":
-        return any(legacy_or_true(row, "assumption_proxy") for row in rows)
-    return bool(rows)
+        return any(
+            available(row)
+            and row.get("measurement_type") == "memory_energy_proxy"
+            and explicit_yes(row, "assumption_proxy")
+            for row in rows
+        )
+    return any(available(row) for row in rows)
 
 
 def activity_power_proxy_present() -> bool:
@@ -369,7 +378,6 @@ def energy_gate_pass() -> bool:
         or power_index_pass("openroad_postroute_tool_estimate")
         or power_index_pass("asic_liberty_tool_estimate")
         or power_index_pass("fpga_tool_estimate")
-        or power_index_pass("measured_tool_power")
     )
 
 
@@ -381,8 +389,6 @@ def energy_evidence_levels() -> str:
         levels.append("asic_liberty_tool_estimate")
     if power_index_pass("fpga_tool_estimate"):
         levels.append("fpga_tool_estimate")
-    if power_index_pass("measured_tool_power"):
-        levels.append("measured_tool_power_legacy")
     if activity_power_proxy_present():
         levels.append("proxy_activity")
     if energy_proxy_present():
@@ -395,7 +401,7 @@ def energy_claim_caveat() -> str:
         return "OpenROAD post-route power is a Nangate45 tool estimate with OpenROAD-flow-scripts reports and indexed final DEF/SPEF/netlist artifacts; do not call it silicon measurement, foundry signoff, or full-core power."
     if power_index_pass("asic_liberty_tool_estimate"):
         return "ASIC Liberty power is a Nangate45 standard-cell tool estimate; do not call it silicon measurement, post-route signoff with extracted parasitics, or full-core power."
-    if power_index_pass("fpga_tool_estimate") or power_index_pass("measured_tool_power"):
+    if power_index_pass("fpga_tool_estimate"):
         return "Vivado report_power is tool-estimated FPGA power for the mapped target; do not call it silicon measurement, ASIC signoff, or full-core power."
     return "Allowed only as proxy/model energy. Do not claim silicon power, RTL signoff power, or power efficiency without a real power report."
 
@@ -564,7 +570,7 @@ def build_claim_ledger() -> None:
     c7_status = "ALLOWED" if synthesis_overhead_pass() else "TODO"
     c8_status = "ALLOWED" if near_core_synthesis_pass() else "TODO"
     c12_status = "ALLOWED" if matched_mapped_ppa_pass("near_core_stub") else "TODO"
-    c13_status = "ALLOWED" if matched_mapped_ppa_pass("core_wrapper") else "TODO"
+    c13_status = "ALLOWED" if matched_mapped_ppa_pass("accepted_core_wrapper") else "TODO"
     c14_status = "ALLOWED" if core_wrapper_synthesis_pass() else "TODO"
     c15_status = "ALLOWED" if gem5_full_system_pass() else "TODO"
     energy_status = "ALLOWED" if energy_gate_pass() else ("PARTIAL" if energy_proxy_present() else "TODO")
@@ -581,8 +587,8 @@ def build_claim_ledger() -> None:
         ("C10", "COPPER has scoped OpenROAD post-route, ASIC-Liberty/FPGA tool-power, and proxy/model energy results where indexed PASS.", energy_status, "research/results/openroad_postroute_power.csv; research/results/openroad_postroute_power_overhead.csv; research/results/asic_power.csv; research/results/asic_power_overhead.csv; research/results/energy_proxy.csv; research/results/energy_summary.csv; research/results/power_report_index.csv; research/results/mapped_ppa.csv; research/results/copper_mcpat_sensitivity_20260618.csv", energy_evidence_levels(), energy_claim_caveat()),
         ("C11", "COPPER is novel versus existing pointer-chasing prefetchers.", "TODO", "research/COPPER_RELATED_WORK_MATRIX.md; research/COPPER_PRIOR_ART.md", "related-work matrix", "Use distinction language; do not claim first or publication-level novelty without a fresh literature audit."),
         ("C12", "COPPER has matched near-core-stub mapped timing.", c12_status, "research/results/mapped_ppa.csv; research/results/mapped_ppa_overhead.csv", "near_core_stub mapped PPA", "Allowed only when baseline and COPPER near-core-stub rows PASS in the same mapped flow with timing fields from nextpnr, Vivado, or OpenROAD; not full-core PPA."),
-        ("C13", "COPPER has matched PicoRV32 core-wrapper mapped FPGA PPA.", c13_status, "research/results/mapped_ppa.csv; research/results/mapped_ppa_overhead.csv", "core_wrapper mapped PPA", "Allowed only when baseline and COPPER PicoRV32 core-wrapper rows PASS in the same mapped flow with timing fields from nextpnr, Vivado, or OpenROAD; not full-core, ARM-core, ASIC, or silicon PPA."),
-        ("C14", "COPPER has matched PicoRV32 core-wrapper generic-synthesis overhead.", c14_status, "research/results/fullcore_synthesis.csv; research/results/fullcore_synthesis_overhead.csv", "core_wrapper", "Allowed only when scope is called PicoRV32 core_wrapper; not full-core overhead or ASIC timing."),
+        ("C13", "COPPER has matched PicoRV32 accepted core-wrapper mapped FPGA PPA.", c13_status, "research/results/mapped_ppa.csv; research/results/mapped_ppa_overhead.csv", "accepted_core_wrapper mapped PPA", "Allowed only when baseline and COPPER PicoRV32 accepted-core-wrapper rows PASS in the same mapped flow with timing fields from nextpnr, Vivado, or OpenROAD; not full-core, ARM-core, ASIC, or silicon PPA."),
+        ("C14", "COPPER has matched PicoRV32 accepted core-wrapper generic-synthesis overhead.", c14_status, "research/results/fullcore_synthesis.csv; research/results/fullcore_synthesis_overhead.csv", "accepted_core_wrapper", "Allowed only when scope is called accepted_core_wrapper; not full-core overhead or ASIC timing."),
         ("C15", "COPPER has validated gem5 ARM-system evidence across multiple benchmark families.", c15_status, "research/results/gem5_validation.csv; research/results/gem5_performance.csv; research/results/gem5_prefetch_metrics.csv; research/results/gem5_memory_traffic.csv; research/results/gem5_statistical_summary.csv; research/results/gem5_raw_rerun_manifest.csv; research/results/gem5_raw_rerun_statistical_summary.csv; research/results/logs/gem5/gem5_import.log", "gem5_full_system", f"Allowed only for summary groups with a no-prefetch baseline, a COPPER-family row, matching checksums, rc=0, and positive tick counts; current scope is {gem5_evidence_summary()}. Local raw rerun scope is {gem5_raw_rerun_summary()}; raw-only repeated-stat scope is {gem5_raw_stats_summary()}. gem5_statistical_summary.csv is still summary-derived and the raw-only statistics are not a full-matrix confidence interval unless the raw group covers the final matrix."),
     ]
     lines = [
@@ -607,11 +613,11 @@ Source includes the Python model and analysis scripts under `research/*.py` and 
 
 ## Generated
 
-Generated evidence lives under `research/results`. The new conference-facing generated CSVs are `toolchain_status.csv`, `model_tests.csv`, `rtl_compile.csv`, `rtl_simulation.csv`, `workload_build.csv`, `benchmark_inventory.csv`, `baseline_inventory.csv`, `performance.csv`, `prefetch_metrics.csv`, `memory_traffic.csv`, `cycle_performance.csv`, `cycle_prefetch_metrics.csv`, `cycle_memory_traffic.csv`, `gem5_validation.csv`, `gem5_performance.csv`, `gem5_prefetch_metrics.csv`, `gem5_memory_traffic.csv`, `gem5_statistical_summary.csv`, `gem5_raw_rerun_manifest.csv`, `gem5_raw_rerun_statistical_summary.csv`, `independent_sim_performance.csv`, `independent_sim_prefetch_metrics.csv`, `independent_sim_memory_traffic.csv`, `core_integrated_performance.csv`, `core_integrated_prefetch_metrics.csv`, `core_integrated_memory_traffic.csv`, `energy_proxy.csv`, `energy_summary.csv`, `power_report_index.csv`, `openroad_postroute_power.csv`, `openroad_postroute_power_overhead.csv`, `asic_power.csv`, `asic_power_overhead.csv`, `copper_mcpat_sensitivity_20260618.csv`, `ablation.csv`, `sensitivity.csv`, `seed_stability.csv`, `statistical_summary.csv`, `synthesis.csv`, `synthesis_overhead.csv`, `fullcore_synthesis.csv`, `fullcore_synthesis_overhead.csv`, `mapped_ppa.csv`, `mapped_ppa_overhead.csv`, `ci_status.csv`, `ci_artifacts_manifest.csv`, `ci_failure_summary.csv`, `artifact_inventory.csv`, and `artifact_manifest.csv`. Tool logs for open-source hardware gates are written under `research/results/logs/`.
+Generated evidence lives under `research/results`. The new conference-facing generated CSVs are `toolchain_status.csv`, `model_tests.csv`, `rtl_compile.csv`, `rtl_simulation.csv`, `workload_build.csv`, `benchmark_inventory.csv`, `baseline_inventory.csv`, `performance.csv`, `prefetch_metrics.csv`, `memory_traffic.csv`, `cycle_performance.csv`, `cycle_prefetch_metrics.csv`, `cycle_memory_traffic.csv`, `gem5_validation.csv`, `gem5_performance.csv`, `gem5_prefetch_metrics.csv`, `gem5_memory_traffic.csv`, `gem5_statistical_summary.csv`, `gem5_raw_rerun_manifest.csv`, `gem5_raw_rerun_statistical_summary.csv`, `independent_sim_performance.csv`, `independent_sim_prefetch_metrics.csv`, `independent_sim_memory_traffic.csv`, `core_integrated_performance.csv`, `core_integrated_prefetch_metrics.csv`, `core_integrated_memory_traffic.csv`, `energy_proxy.csv`, `energy_summary.csv`, `power_report_index.csv`, `openroad_postroute_power.csv`, `openroad_postroute_power_overhead.csv`, `asic_power.csv`, `asic_power_overhead.csv`, `copper_mcpat_sensitivity_20260618.csv`, `ablation.csv`, `sensitivity.csv`, `seed_stability.csv`, `statistical_summary.csv`, `synthesis.csv`, `synthesis_overhead.csv`, `full_core_design_inventory.csv`, `fullcore_synthesis.csv`, `fullcore_synthesis_overhead.csv`, `mapped_ppa.csv`, `mapped_ppa_overhead.csv`, `hardware_evidence_summary.csv`, `top_tier_gate_status.csv`, `ci_status.csv`, `ci_artifacts_manifest.csv`, `ci_failure_summary.csv`, `artifact_inventory.csv`, and `artifact_manifest.csv`. Tool logs for open-source hardware gates are written under `research/results/logs/`.
 
 ## Evidence
 
-Evidence used by the paper and dashboard comes from generated CSVs and explicit logs. Gem5 rows are promoted only from public tracked summaries that pass `gem5_validation.csv`: a no-prefetch baseline, a COPPER-family row, matching checksums, clean return codes, and positive tick counts; `gem5_statistical_summary.csv` is derived only from those promoted rows and marks single-sample statistics explicitly. The package includes the tracked `gem5_arm_ubuntu_fs_*/*_summary.csv` input files used by that validation ledger. `gem5_raw_rerun_manifest.csv` records local raw full-system rows with retained stats and terminal logs for the `cachesvc_codex_raw_smoke`, `zlib_codex_raw_zlib_tiny`, `zlib_codex_raw_zlib_tiny_seed12`, and `zstd_zstd_*` summaries; `gem5_raw_rerun_statistical_summary.csv` reports raw-only repeated statistics where those rerun rows have multiple samples. The current gem5 rows span multiple ARM-system benchmark families, but only the rows in `gem5_raw_rerun_manifest.csv` have retained local raw stats/terminal provenance in this workspace; the rest remain validated summaries. OpenROAD post-route rows are tool estimates only when OpenROAD-flow-scripts emits real route/final reports and, for current-schema rows, indexed final DEF/SPEF/netlist/report JSON artifacts; ASIC Liberty rows are standard-cell tool estimates only when OpenSTA/OpenROAD emits a real report; Vivado report_power rows are FPGA tool estimates. None should be called measured silicon or full-core signoff power. Paper claims are controlled by `research/COPPER_CLAIM_LEDGER.md`.
+Evidence used by the paper and dashboard comes from generated CSVs and explicit logs. Gem5 rows are promoted only from public tracked summaries that pass `gem5_validation.csv`: a no-prefetch baseline, a COPPER-family row, matching checksums, clean return codes, and positive tick counts; `gem5_statistical_summary.csv` is derived only from those promoted rows and marks single-sample statistics explicitly. The package includes the tracked `gem5_arm_ubuntu_fs_*/*_summary.csv` input files used by that validation ledger. `gem5_raw_rerun_manifest.csv` records local raw full-system rows with retained stats and terminal logs for the `cachesvc_codex_raw_smoke`, `zlib_codex_raw_zlib_tiny`, `zlib_codex_raw_zlib_tiny_seed12`, and `zstd_zstd_*` summaries; `gem5_raw_rerun_statistical_summary.csv` reports raw-only repeated statistics where those rerun rows have multiple samples. The current gem5 rows span multiple ARM-system benchmark families, but only the rows in `gem5_raw_rerun_manifest.csv` have retained local raw stats/terminal provenance in this workspace; the rest remain validated summaries. OpenROAD post-route rows are tool estimates only when OpenROAD-flow-scripts emits real route/final reports and, for current-schema rows, indexed final DEF/SPEF/netlist/report JSON artifacts; ASIC Liberty rows are standard-cell tool estimates only when OpenSTA/OpenROAD emits a real report; Vivado report_power rows are FPGA tool estimates. `hardware_evidence_summary.csv` and `top_tier_gate_status.csv` merge those lane outputs and keep full-core and silicon/signoff gaps machine-readable. None should be called measured silicon or full-core signoff power. Paper claims are controlled by `research/COPPER_CLAIM_LEDGER.md`.
 
 ## Old Or Local-Only
 

@@ -1,1 +1,1 @@
-BLOCKED: no real full-core RTL integration is present. Accepted core-wrapper rows are reported separately with scope=core_wrapper and must not be called full-core PPA.
+BLOCKED: no real full-core RTL integration is present. Accepted core-wrapper rows are reported separately with scope=accepted_core_wrapper and must not be called full-core PPA.

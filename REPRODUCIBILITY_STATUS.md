@@ -43,7 +43,7 @@ machine or one-command full-system artifact.
   evidence; it records that gem5 was unavailable or not runnable in the current
   environment.
 - `fullcore_synthesis*.csv` records unit, near-core-stub, and PicoRV32
-  core-wrapper synthesis scope. Near-core-stub and PicoRV32 wrapper rows must
+  accepted-core-wrapper synthesis scope. Near-core-stub and PicoRV32 wrapper rows must
   not be described as full-core overhead, ARM-core integration, ASIC timing, or
   measured power.
 - `mapped_ppa.csv` and `mapped_ppa_overhead.csv` are the only open-source
@@ -62,6 +62,10 @@ machine or one-command full-system artifact.
   tool estimates, not foundry signoff, full-core power, or silicon measurement.
   Vivado power rows are tool-estimated FPGA power for the stated mapped target,
   not measured silicon, ASIC signoff power, or full-core power.
+- `hardware_evidence_summary.csv` and `top_tier_gate_status.csv` are produced
+  by `make sync-hardware-evidence` after the lane outputs are present. They
+  merge mapped timing, matched overhead, power classification, paper audit, and
+  artifact packaging into a machine-readable submission gate.
 - Paper-facing documents, tables, summaries, RTL sources, testbenches, and
   reproduction scripts are included with stable relative paths.
 - The Python audit and summary scripts can be rerun with a local Python 3
@@ -107,7 +111,7 @@ gem5 evidence improve baseline discipline but do not prove a clone-local rerun
 of every raw full-system simulation. Claims in the paper and claim ledger must
 identify model-level, cycle-model, core-integrated, independent-sim, imported
 gem5, RTL-level, unit-synthesis, near-core-stub synthesis, PicoRV32
-core-wrapper synthesis, mapped-PPA, proxy-energy, optional ASIC-Liberty
+accepted-core-wrapper synthesis, mapped-PPA, proxy-energy, optional ASIC-Liberty
 tool-power, local Vivado FPGA tool-power, and external summary evidence
 separately.
 

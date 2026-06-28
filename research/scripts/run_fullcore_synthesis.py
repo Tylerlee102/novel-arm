@@ -3,7 +3,7 @@
 
 Full-core rows remain BLOCKED unless a real full CPU-core integration is
 present. The repository may also contain an accepted open-source PicoRV32
-core-wrapper, which is labeled as core_wrapper rather than full_core.
+core-wrapper, which is labeled as accepted_core_wrapper rather than full_core.
 """
 
 from __future__ import annotations
@@ -23,6 +23,7 @@ RESULTS = ROOT / "research" / "results"
 LOG_DIR = RESULTS / "logs" / "fullcore_synthesis"
 OUT = RESULTS / "fullcore_synthesis.csv"
 OVERHEAD = RESULTS / "fullcore_synthesis_overhead.csv"
+INVENTORY = RESULTS / "full_core_design_inventory.csv"
 
 
 @dataclass(frozen=True)
@@ -38,8 +39,10 @@ class Design:
 
 
 FULLCORE_BLOCKER = (
-    "BLOCKED: no real full-core RTL integration is present in this open artifact, "
-    "so no full-core area/timing/power row is claimed."
+    "BLOCKED: no true full-core RTL target with both baseline and COPPER variants "
+    "exists under research/rtl/fullcore, research/rtl/integration, or external/. "
+    "PicoRV32 rows are accepted_core_wrapper only; near-core stubs are "
+    "near_core_stub only. No full-core area/timing/power row is claimed."
 )
 
 PICORV32_SOURCES = (
@@ -49,6 +52,12 @@ PICORV32_SOURCES = (
     "research/rtl/fullcore/picorv32_copper_wrapper.sv",
 )
 
+FULL_CORE_SEARCH_PATHS = (
+    "research/rtl/fullcore",
+    "research/rtl/integration",
+    "external",
+)
+
 DESIGNS = (
     Design("full_core_baseline", "", (), "full_core", "full_core", False, FULLCORE_BLOCKER),
     Design("full_core_plus_copper", "", (), "full_core", "full_core", False, FULLCORE_BLOCKER),
@@ -56,7 +65,7 @@ DESIGNS = (
         "baseline_core_wrapper",
         "baseline_core_wrapper",
         PICORV32_SOURCES,
-        "core_wrapper",
+        "accepted_core_wrapper",
         "picorv32_core_wrapper",
         True,
     ),
@@ -64,7 +73,7 @@ DESIGNS = (
         "core_wrapper_plus_baseline_prefetch",
         "core_wrapper_plus_baseline_prefetch",
         PICORV32_SOURCES,
-        "core_wrapper",
+        "accepted_core_wrapper",
         "picorv32_core_wrapper",
         True,
     ),
@@ -72,7 +81,7 @@ DESIGNS = (
         "core_wrapper_plus_copper",
         "core_wrapper_plus_copper",
         PICORV32_SOURCES,
-        "core_wrapper",
+        "accepted_core_wrapper",
         "picorv32_core_wrapper",
         True,
         "",
@@ -144,6 +153,11 @@ def rel(path: Path) -> str:
     return str(path.relative_to(ROOT)).replace("\\", "/")
 
 
+def evidence_id(prefix: str, *parts: str) -> str:
+    body = "_".join(re.sub(r"[^A-Za-z0-9]+", "_", str(part)).strip("_").lower() for part in parts if part)
+    return f"{prefix}_{body}" if body else prefix
+
+
 def scrub_text(text: str) -> str:
     return text.replace(str(Path.home()), "{USER_HOME}").replace(Path.home().as_posix(), "{USER_HOME}")
 
@@ -181,8 +195,71 @@ def write_csv(path: Path, fields: list[str], rows: list[dict[str, str]]) -> None
         writer.writerows(rows)
 
 
+def sources_present(sources: tuple[str, ...]) -> bool:
+    return bool(sources) and all((ROOT / source).exists() for source in sources)
+
+
+def inventory_rows() -> list[dict[str, str]]:
+    scan_notes = (
+        "Scanned research/rtl/fullcore, research/rtl/integration, and external/picorv32. "
+        "Only the PicoRV32 accepted core-wrapper and near-core stub RTL are present; "
+        "no target full CPU-core baseline/COPPER integration pair is present."
+    )
+    rows: list[dict[str, str]] = []
+    for design in DESIGNS:
+        if design.scope == "full_core":
+            available = "no"
+            qualifies = "no"
+            status = "BLOCKED"
+            role = "required_true_full_core"
+            notes = FULLCORE_BLOCKER + " " + scan_notes
+        elif design.scope == "accepted_core_wrapper":
+            available = "yes" if sources_present(design.sources) else "no"
+            qualifies = "no"
+            status = "AVAILABLE" if available == "yes" else "BLOCKED"
+            role = "accepted_core_wrapper_fallback"
+            notes = (
+                "Accepted PicoRV32 core-wrapper fallback with real PicoRV32 RTL plus wrapper/prefetch sources. "
+                "This is stronger than a stub but is not the target true full-core integration."
+            )
+        elif design.scope == "near_core_stub":
+            available = "yes" if sources_present(design.sources) else "no"
+            qualifies = "no"
+            status = "AVAILABLE" if available == "yes" else "BLOCKED"
+            role = "near_core_stub_fallback"
+            notes = "Near-core stub fallback; not a full CPU/core integration."
+        else:
+            available = "no"
+            qualifies = "no"
+            status = "BLOCKED"
+            role = "unknown"
+            notes = "Unsupported scope in design inventory."
+        rows.append(
+            {
+                "evidence_id": evidence_id("full_core_inventory", design.scope, design.name, design.target, ENVIRONMENT),
+                "scope": design.scope,
+                "design": design.name,
+                "target": design.target,
+                "flow": "inventory",
+                "environment": ENVIRONMENT,
+                "status": status,
+                "available": available,
+                "qualifies_true_full_core": qualifies,
+                "role": role,
+                "top": design.top,
+                "rtl_sources": ";".join(design.sources),
+                "search_paths": ";".join(FULL_CORE_SEARCH_PATHS),
+                "report_path": rel(INVENTORY),
+                "notes": notes,
+            }
+        )
+    return rows
+
+
 def row_for(design: Design, status: str, report_path: Path, notes: str, cells: str = "", lut: str = "", ff: str = "") -> dict[str, str]:
     return {
+        "evidence_id": evidence_id("fullcore", design.scope, design.name, design.target, "yosys" if design.runnable else "not_run", ENVIRONMENT),
+        "scope": design.scope,
         "design": design.name,
         "target": design.target,
         "flow": "yosys" if design.runnable else "not_run",
@@ -283,8 +360,8 @@ def overhead_rows(rows: list[dict[str, str]]) -> list[dict[str, str]]:
     by_design = {row["design"]: row for row in rows}
     pairs = (
         ("full_core_cells_baseline_vs_copper", "full_core_baseline", "full_core_plus_copper", "full_core"),
-        ("core_wrapper_cells_baseline_vs_copper", "baseline_core_wrapper", "core_wrapper_plus_copper", "core_wrapper"),
-        ("core_wrapper_cells_prefetch_baseline_vs_copper", "core_wrapper_plus_baseline_prefetch", "core_wrapper_plus_copper", "core_wrapper"),
+        ("accepted_core_wrapper_cells_baseline_vs_copper", "baseline_core_wrapper", "core_wrapper_plus_copper", "accepted_core_wrapper"),
+        ("accepted_core_wrapper_cells_prefetch_baseline_vs_copper", "core_wrapper_plus_baseline_prefetch", "core_wrapper_plus_copper", "accepted_core_wrapper"),
         ("near_core_stub_cells_baseline_vs_copper", "nearcore_stub_baseline", "nearcore_stub_plus_copper", "near_core_stub"),
     )
     out: list[dict[str, str]] = []
@@ -299,15 +376,16 @@ def overhead_rows(rows: list[dict[str, str]]) -> list[dict[str, str]]:
                     "target": baseline.get("target", "generic"),
                     "flow": baseline.get("flow", "yosys"),
                     "environment": ENVIRONMENT,
+                    "evidence_id": evidence_id("fullcore_overhead", scope, metric, baseline_name, copper_name, baseline.get("target", "generic"), baseline.get("flow", "yosys"), ENVIRONMENT),
+                    "scope": scope,
+                    "design": f"{baseline_name}__vs__{copper_name}",
+                    "status": "PASS",
                     "metric": metric,
-                    "baseline_design": baseline_name,
-                    "with_copper_design": copper_name,
                     "baseline": f"{b:.0f}",
                     "with_copper": f"{c:.0f}",
                     "delta": f"{c - b:.0f}",
                     "percent_overhead": f"{((c - b) / b * 100.0) if b else 0.0:.6f}",
-                    "scope": scope,
-                    "status": "PASS",
+                    "report_path": rel(OUT),
                     "notes": f"Matched {scope} generic Yosys resource overhead only; no mapped timing or power claim.",
                 }
             )
@@ -323,15 +401,16 @@ def overhead_rows(rows: list[dict[str, str]]) -> list[dict[str, str]]:
                     "target": baseline.get("target", "full_core" if scope == "full_core" else "generic"),
                     "flow": baseline.get("flow", "not_run"),
                     "environment": ENVIRONMENT,
+                    "evidence_id": evidence_id("fullcore_overhead", scope, metric, baseline_name, copper_name, baseline.get("target", "generic"), baseline.get("flow", "not_run"), ENVIRONMENT),
+                    "scope": scope,
+                    "design": f"{baseline_name}__vs__{copper_name}",
+                    "status": "BLOCKED",
                     "metric": metric,
-                    "baseline_design": baseline_name,
-                    "with_copper_design": copper_name,
                     "baseline": baseline.get("cells", ""),
                     "with_copper": copper.get("cells", ""),
                     "delta": "",
                     "percent_overhead": "",
-                    "scope": scope,
-                    "status": "BLOCKED",
+                    "report_path": rel(OUT),
                     "notes": reason,
                 }
             )
@@ -340,10 +419,33 @@ def overhead_rows(rows: list[dict[str, str]]) -> list[dict[str, str]]:
 
 def main() -> int:
     RESULTS.mkdir(parents=True, exist_ok=True)
+    write_csv(
+        INVENTORY,
+        [
+            "evidence_id",
+            "scope",
+            "design",
+            "target",
+            "flow",
+            "environment",
+            "status",
+            "available",
+            "qualifies_true_full_core",
+            "role",
+            "top",
+            "rtl_sources",
+            "search_paths",
+            "report_path",
+            "notes",
+        ],
+        inventory_rows(),
+    )
     rows = [run_design(design) for design in DESIGNS]
     write_csv(
         OUT,
         [
+            "evidence_id",
+            "scope",
             "design",
             "target",
             "flow",
@@ -367,23 +469,24 @@ def main() -> int:
     write_csv(
         OVERHEAD,
         [
+            "evidence_id",
+            "scope",
+            "design",
             "target",
             "flow",
             "environment",
+            "status",
             "metric",
-            "baseline_design",
-            "with_copper_design",
             "baseline",
             "with_copper",
             "delta",
             "percent_overhead",
-            "scope",
-            "status",
+            "report_path",
             "notes",
         ],
         overhead_rows(rows),
     )
-    print(f"wrote {rel(OUT)} and {rel(OVERHEAD)}")
+    print(f"wrote {rel(INVENTORY)}, {rel(OUT)}, and {rel(OVERHEAD)}")
     return 1 if any(row["status"] == "FAIL" for row in rows) else 0
 
 

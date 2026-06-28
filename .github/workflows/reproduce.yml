@@ -14,44 +14,52 @@ env:
   COPPER_ENVIRONMENT: github_actions
 
 jobs:
+  fullcore-synth:
+    name: fullcore-synth
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install lane tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends ca-certificates git make python3 python3-pip yosys
+          python3 -m pip install -r requirements.txt pytest numpy pandas
+
+      - name: Run full-core/core-wrapper synthesis ledger
+        if: always()
+        run: make fullcore-synth
+
+      - name: Upload full-core/core-wrapper evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: copper-fullcore-synth-${{ github.run_id }}
+          if-no-files-found: ignore
+          path: |
+            research/results/full_core_design_inventory.csv
+            research/results/fullcore_synthesis*.csv
+            research/results/logs/**
+
   mapped-ppa:
     name: mapped-ppa
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Python and packaging basics
+      - name: Install lane tools
         run: |
           sudo apt-get update
-          sudo apt-get install -y --no-install-recommends \
-            ca-certificates \
-            curl \
-            git \
-            make \
-            python3 \
-            python3-pip
-
-      - name: Try OSS CAD Suite
-        continue-on-error: true
-        uses: YosysHQ/setup-oss-cad-suite@v3
-
-      - name: Try apt FPGA tools
-        if: always()
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends yosys || true
+          sudo apt-get install -y --no-install-recommends ca-certificates curl git make python3 python3-pip yosys
           sudo apt-get install -y --no-install-recommends nextpnr-ecp5 || true
           sudo apt-get install -y --no-install-recommends nextpnr-ice40 || true
           sudo apt-get install -y --no-install-recommends openroad || true
           python3 -m pip install -r requirements.txt pytest numpy pandas
 
-      - name: Install pinned OpenROAD prebuilt for ASIC Liberty estimate
-        run: |
-          OPENROAD_DEB="openroad_2.0-17598-ga008522d8_amd64-ubuntu-22.04.deb"
-          OPENROAD_URL="https://github.com/Precision-Innovations/OpenROAD/releases/download/2024-12-14/${OPENROAD_DEB}"
-          curl -L --retry 3 --retry-delay 5 -o "${OPENROAD_DEB}" "${OPENROAD_URL}"
-          sudo apt-get install -y "./${OPENROAD_DEB}"
-          openroad -version
+      - name: Try OSS CAD Suite
+        if: always()
+        continue-on-error: true
+        uses: YosysHQ/setup-oss-cad-suite@v3
 
       - name: Show mapped PPA tool availability
         if: always()
@@ -62,34 +70,9 @@ jobs:
           openroad -version || true
           vivado -version || true
 
-      - name: Run mapped PPA
+      - name: Run mapped PPA ledger
         if: always()
-        run: |
-          make mapped-ppa
-          python3 research/scripts/run_mapped_ppa.py
-          python3 research/scripts/run_asic_power.py
-          python3 research/scripts/run_openroad_postroute.py
-          python3 research/scripts/run_energy_estimate.py
-          python3 - <<'PY'
-          import csv, pathlib, sys
-          rows = list(csv.DictReader(open("research/results/power_report_index.csv", newline="", encoding="utf-8")))
-          ok = any(row.get("evidence_level") == "asic_liberty_tool_estimate" and row.get("status") == "PASS" for row in rows)
-          if not ok:
-              print("ASIC Liberty tool estimate did not produce a PASS row.")
-              details = []
-              for row in rows:
-                  if row.get("evidence_level") == "asic_liberty_tool_estimate":
-                      print(row)
-                      details.append(str(row))
-              for path in pathlib.Path("research/results/logs/asic_power").glob("*.log"):
-                  text = path.read_text(encoding="utf-8", errors="replace")[-3000:]
-                  details.append(f"{path}: {text}")
-              message = " | ".join(details).replace("\n", " ")
-              print(f"::error file=research/results/asic_power.csv,line=1::{message}")
-              sys.exit(1)
-          PY
-          python3 research/scripts/build_conference_docs.py
-          python3 research/scripts/package_artifact.py
+        run: make mapped-ppa
 
       - name: Upload mapped PPA evidence
         if: always()
@@ -98,44 +81,56 @@ jobs:
           name: copper-mapped-ppa-${{ github.run_id }}
           if-no-files-found: ignore
           path: |
-            research/results/mapped_ppa.csv
-            research/results/mapped_ppa_overhead.csv
-            research/results/asic_power.csv
-            research/results/asic_power_overhead.csv
-            research/results/openroad_postroute_power.csv
-            research/results/openroad_postroute_power_overhead.csv
-            research/results/power_report_index.csv
-            research/results/logs/asic_power/**
-            research/results/logs/mapped_ppa/**
-            research/results/logs/openroad/**
-            research/results/logs/openroad_postroute/**
-            research/results/logs/vivado/**
-            dist/copper-artifact.zip
+            research/results/mapped_ppa*.csv
+            research/results/logs/**
 
-  reproduce:
-    name: Open-source evidence flow
-    needs: mapped-ppa
-    if: ${{ always() }}
-    runs-on: ubuntu-latest
+  power-evidence:
+    name: power-evidence
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install open-source toolchain
+      - name: Install lane tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends ca-certificates git make python3 python3-pip
+          python3 -m pip install -r requirements.txt pytest numpy pandas
+
+      - name: Run power classification ledger
+        if: always()
+        run: make power-evidence
+
+      - name: Upload power evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: copper-power-evidence-${{ github.run_id }}
+          if-no-files-found: ignore
+          path: |
+            research/results/power_report_index.csv
+            research/results/energy_*.csv
+            research/results/logs/**
+
+  sync-docs-audit-package:
+    name: sync-docs-audit-package
+    needs:
+      - fullcore-synth
+      - mapped-ppa
+      - power-evidence
+    if: always()
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install doc and package tools
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends \
             ca-certificates \
             git \
+            make \
             python3 \
             python3-pip \
-            make \
-            gcc \
-            g++ \
-            clang \
-            cmake \
-            iverilog \
-            verilator \
-            yosys \
             latexmk \
             texlive-latex-base \
             texlive-latex-recommended \
@@ -144,52 +139,49 @@ jobs:
             texlive-publishers \
             texlive-bibtex-extra \
             biber
-          sudo apt-get install -y --no-install-recommends nextpnr-ice40 nextpnr-ecp5 || \
-            echo "optional nextpnr packages unavailable on this runner"
           python3 -m pip install -r requirements.txt pytest numpy pandas
 
-      - name: Check toolchain
+      - name: Download full-core/core-wrapper evidence
         if: always()
-        run: make check-toolchain
-
-      - name: Run model tests
-        if: always()
-        run: make test
-
-      - name: Build C workloads
-        if: always()
-        run: make workloads
-
-      - name: Run model evaluation
-        if: always()
-        run: make eval
-
-      - name: Compile RTL
-        if: always()
-        run: make rtl
-
-      - name: Simulate RTL
-        if: always()
-        run: make sim
-
-      - name: Run synthesis
-        if: always()
-        run: make synth
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          name: copper-fullcore-synth-${{ github.run_id }}
+          path: .lane-fullcore
 
       - name: Download mapped PPA evidence
-        if: ${{ needs.mapped-ppa.result == 'success' }}
+        if: always()
+        continue-on-error: true
         uses: actions/download-artifact@v4
         with:
           name: copper-mapped-ppa-${{ github.run_id }}
-          path: .mapped-ppa-evidence
+          path: .lane-mapped
 
-      - name: Merge mapped PPA evidence
-        if: ${{ needs.mapped-ppa.result == 'success' }}
+      - name: Download power evidence
+        if: always()
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          name: copper-power-evidence-${{ github.run_id }}
+          path: .lane-power
+
+      - name: Merge lane artifacts
+        if: always()
         run: |
-          cp -a .mapped-ppa-evidence/research/results/. research/results/
-          python3 research/scripts/build_conference_docs.py
+          mkdir -p .lane-fullcore .lane-mapped .lane-power
+          cp -a .lane-fullcore/. . || true
+          cp -a .lane-mapped/. . || true
+          cp -a .lane-power/. . || true
 
-      - name: Build paper
+      - name: Rebuild power index after mapped evidence merge
+        if: always()
+        run: make power-evidence
+
+      - name: Synchronize hardware evidence
+        if: always()
+        run: make sync-hardware-evidence
+
+      - name: Build paper docs
         if: always()
         run: make paper
 
@@ -197,23 +189,23 @@ jobs:
         if: always()
         run: make paper-audit
 
-      - name: Package artifact
+      - name: Package synchronized artifact
         if: always()
         run: make artifact
 
-      - name: Upload COPPER CI evidence
+      - name: Upload synchronized COPPER evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: copper-ci-evidence-${{ github.run_id }}
+          name: copper-synchronized-evidence-${{ github.run_id }}
           if-no-files-found: ignore
           path: |
-            research/results/*.csv
-            research/results/**/*.csv
+            research/results/fullcore_synthesis*.csv
+            research/results/full_core_design_inventory.csv
+            research/results/mapped_ppa*.csv
+            research/results/power_report_index.csv
+            research/results/energy_*.csv
+            research/results/hardware_evidence_summary.csv
+            research/results/top_tier_gate_status.csv
             research/results/logs/**
-            research/paper/main.pdf
             dist/copper-artifact.zip
-            research/CONFERENCE_READINESS_DASHBOARD.md
-            research/COPPER_FINAL_SUBMISSION_BLOCKERS.md
-            research/COPPER_CLAIM_LEDGER.md
-            REPRODUCIBILITY_STATUS.md

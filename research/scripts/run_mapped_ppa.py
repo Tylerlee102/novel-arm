@@ -75,19 +75,19 @@ CORE_WRAPPER_BASELINE = Design(
     "baseline_core_wrapper",
     "baseline_core_wrapper",
     PICORV32_SOURCES,
-    "core_wrapper",
+    "accepted_core_wrapper",
 )
 CORE_WRAPPER_PREFETCH_BASELINE = Design(
     "core_wrapper_plus_baseline_prefetch",
     "core_wrapper_plus_baseline_prefetch",
     PICORV32_SOURCES,
-    "core_wrapper",
+    "accepted_core_wrapper",
 )
 CORE_WRAPPER_COPPER = Design(
     "core_wrapper_plus_copper",
     "core_wrapper_plus_copper",
     PICORV32_SOURCES,
-    "core_wrapper",
+    "accepted_core_wrapper",
     (("ENTRIES", 8), ("QUEUE_DEPTH", 4)),
 )
 UNIT_BASELINE = Design(
@@ -103,14 +103,23 @@ UNIT_COPPER = Design(
     "unit",
     (("ENTRIES", 2), ("QUEUE_DEPTH", 1)),
 )
+MAPPED_DESIGNS = (
+    NEARCORE_BASELINE,
+    NEARCORE_COPPER,
+    CORE_WRAPPER_BASELINE,
+    CORE_WRAPPER_PREFETCH_BASELINE,
+    CORE_WRAPPER_COPPER,
+)
+FALLBACK_DESIGNS = MAPPED_DESIGNS + (UNIT_BASELINE, UNIT_COPPER)
 
 FIELDS = [
+    "evidence_id",
+    "scope",
     "design",
     "target",
     "flow",
     "environment",
     "status",
-    "scope",
     "lut",
     "ff",
     "bram",
@@ -124,7 +133,22 @@ FIELDS = [
     "report_path",
     "notes",
 ]
-OVERHEAD_FIELDS = ["target", "flow", "scope", "metric", "baseline", "with_copper", "delta", "percent_overhead", "notes"]
+OVERHEAD_FIELDS = [
+    "evidence_id",
+    "scope",
+    "design",
+    "target",
+    "flow",
+    "environment",
+    "status",
+    "metric",
+    "baseline",
+    "with_copper",
+    "delta",
+    "percent_overhead",
+    "report_path",
+    "notes",
+]
 
 
 def current_environment() -> str:
@@ -189,6 +213,11 @@ def tool_path(name: str) -> str | None:
 
 def rel(path: Path) -> str:
     return str(path.relative_to(ROOT)).replace("\\", "/")
+
+
+def evidence_id(prefix: str, *parts: str) -> str:
+    body = "_".join(re.sub(r"[^A-Za-z0-9]+", "_", str(part)).strip("_").lower() for part in parts if part)
+    return f"{prefix}_{body}" if body else prefix
 
 
 def write_text(path: Path, text: str) -> None:
@@ -263,12 +292,13 @@ def yosys_script(design: Design, tail: str) -> str:
 
 def blank_row(design: Design, target: str, flow: str, status: str, report_path: Path, notes: str) -> dict[str, str]:
     return {
+        "evidence_id": evidence_id("mapped", design.scope, design.name, target, flow, ENVIRONMENT),
+        "scope": design.scope,
         "design": design.name,
         "target": target,
         "flow": flow,
         "environment": ENVIRONMENT,
         "status": status,
-        "scope": design.scope,
         "lut": "NA",
         "ff": "NA",
         "bram": "NA",
@@ -386,8 +416,27 @@ def parse_vivado_power_mw(output: str) -> str:
     return f"{float(matches[-1]) * 1000.0:.3f}"
 
 
+def vivado_fmax_from_wns(wns: str) -> str:
+    try:
+        clock_mhz = float(CLOCK_MHZ)
+        slack_ns = float(wns)
+    except (TypeError, ValueError):
+        return ""
+    if clock_mhz <= 0:
+        return ""
+    period_ns = 1000.0 / clock_mhz
+    critical_path_ns = period_ns - slack_ns
+    if critical_path_ns <= 0:
+        return ""
+    return f"{1000.0 / critical_path_ns:.3f}"
+
+
 def value_or_na(value: str) -> str:
     return value if value not in {"", None} else "NA"
+
+
+def flow_timeout(design: Design) -> int:
+    return 900 if design.scope in {"accepted_core_wrapper", "core_wrapper", "full_core"} else 300
 
 
 def nextpnr_ecp5(design: Design) -> dict[str, str]:
@@ -427,7 +476,7 @@ def nextpnr_ecp5(design: Design) -> dict[str, str]:
                     "--textcfg",
                     str(cfg_path),
                 ],
-                timeout=900 if design.scope == "core_wrapper" else 300,
+                timeout=flow_timeout(design),
             )
         else:
             pnr_code, pnr_output = 1, "nextpnr-ecp5 skipped because Yosys ECP5 mapping failed\n"
@@ -471,7 +520,7 @@ def nextpnr_ice40(design: Design) -> dict[str, str]:
                     "--asc",
                     str(asc_path),
                 ],
-                timeout=900 if design.scope == "core_wrapper" else 300,
+                timeout=flow_timeout(design),
             )
         else:
             pnr_code, pnr_output = 1, "nextpnr-ice40 skipped because Yosys iCE40 mapping failed\n"
@@ -503,12 +552,13 @@ def mapped_row(
     if status != "PASS":
         note = f"FAIL: mapped {design.scope} synthesis/place-and-route did not complete; see log."
     return {
+        "evidence_id": evidence_id("mapped", design.scope, design.name, target, flow, ENVIRONMENT),
+        "scope": design.scope,
         "design": design.name,
         "target": target,
         "flow": flow,
         "environment": ENVIRONMENT,
         "status": status,
-        "scope": design.scope,
         "lut": value_or_na(lut),
         "ff": value_or_na(ff),
         "bram": value_or_na(bram),
@@ -522,6 +572,46 @@ def mapped_row(
         "report_path": rel(log_path),
         "notes": note,
     }
+
+
+def generic_yosys(design: Design) -> dict[str, str]:
+    log_path = LOG_DIR / f"generic_yosys_{design.name}.log"
+    yosys = tool_path("yosys")
+    if not yosys:
+        note = "BLOCKED: generic Yosys resource fallback requires yosys on PATH."
+        write_text(log_path, note + "\n")
+        return blank_row(design, "generic-yosys", "generic-yosys-resource", "BLOCKED", log_path, note)
+    missing_sources = [source for source in design.sources if not (ROOT / source).exists()]
+    if missing_sources:
+        note = f"BLOCKED: missing RTL source(s): {', '.join(missing_sources)}."
+        write_text(log_path, note + "\n")
+        return blank_row(design, "generic-yosys", "generic-yosys-resource", "BLOCKED", log_path, note)
+    script = yosys_script(design, f"synth -top {design.top}; stat")
+    code, output = run_capture([yosys, "-p", script], timeout=180)
+    write_text(log_path, output)
+    counts = parse_cell_counts(output)
+    status = "PASS" if code == 0 else "FAIL"
+    row = blank_row(
+        design,
+        "generic-yosys",
+        "generic-yosys-resource",
+        status,
+        log_path,
+        (
+            "Generic Yosys resource-only fallback. "
+            "fmax_mhz/WNS/TNS/power_mw are NA because this is not mapped timing or power."
+            if status == "PASS"
+            else "FAIL: generic Yosys resource fallback did not complete; see log."
+        ),
+    )
+    row["lut"] = value_or_na(str(sum(value for cell, value in counts.items() if cell.startswith("$_"))) if counts else "")
+    row["ff"] = value_or_na(str(sum(value for cell, value in counts.items() if "DFF" in cell.upper())) if counts else "")
+    row["cells"] = value_or_na(parse_total_cells(output))
+    row["fmax_mhz"] = "NA"
+    row["wns"] = "NA"
+    row["tns"] = "NA"
+    row["power_mw"] = "NA"
+    return row
 
 
 def vivado_tcl(design: Design, run_dir: Path) -> str:
@@ -571,11 +661,13 @@ def vivado_impl(design: Design) -> dict[str, str]:
     row["dsp"] = value_or_na(parse_vivado_util(combined, "DSPs"))
     row["wns"] = value_or_na(parse_vivado_setup_wns(combined) or row["wns"])
     row["tns"] = value_or_na(parse_vivado_setup_tns(combined) or row["tns"])
+    row["fmax_mhz"] = value_or_na(vivado_fmax_from_wns(row["wns"]) or row["fmax_mhz"])
     row["power_mw"] = value_or_na(parse_vivado_power_mw(combined))
     if code == 0:
         row["notes"] = (
             f"Vivado implementation completed at {CLOCK_MHZ} MHz target. "
-            "power_mw is from report_power when present; this is tool-estimated power, not silicon measurement."
+            "fmax_mhz is derived from report_timing_summary setup slack and the target clock; "
+            "power_mw is from report_power when present and is not silicon measurement."
         )
     return row
 
@@ -598,10 +690,8 @@ def openroad_blocked_rows() -> list[dict[str, str]]:
         )
     write_text(log_path, note + "\n")
     return [
-        blank_row(NEARCORE_BASELINE, "openroad", "openroad", "BLOCKED", log_path, note),
-        blank_row(NEARCORE_COPPER, "openroad", "openroad", "BLOCKED", log_path, note),
-        blank_row(CORE_WRAPPER_BASELINE, "openroad", "openroad", "BLOCKED", log_path, note),
-        blank_row(CORE_WRAPPER_COPPER, "openroad", "openroad", "BLOCKED", log_path, note),
+        blank_row(design, "openroad", "openroad-opensta", "BLOCKED", log_path, note)
+        for design in MAPPED_DESIGNS
     ]
 
 
@@ -609,18 +699,19 @@ def fullcore_blocked_rows() -> list[dict[str, str]]:
     log_path = LOG_DIR / "fullcore_wrapper_availability.log"
     note = (
         "BLOCKED: no real full-core RTL integration is present. Accepted core-wrapper rows "
-        "are reported separately with scope=core_wrapper and must not be called full-core PPA."
+        "are reported separately with scope=accepted_core_wrapper and must not be called full-core PPA."
     )
     write_text(log_path, note + "\n")
     return [
-        blank_row(FULLCORE_BASELINE, "full-core-wrapper", "not_run", "BLOCKED", log_path, note),
-        blank_row(FULLCORE_COPPER, "full-core-wrapper", "not_run", "BLOCKED", log_path, note),
+        blank_row(FULLCORE_BASELINE, "full_core", "not_run", "BLOCKED", log_path, note),
+        blank_row(FULLCORE_COPPER, "full_core", "not_run", "BLOCKED", log_path, note),
     ]
 
 
 def matched_pass(rows: list[dict[str, str]], target: str, flow: str, scope: str) -> bool:
     names = {
         "near_core_stub": (NEARCORE_BASELINE.name, NEARCORE_COPPER.name),
+        "accepted_core_wrapper": (CORE_WRAPPER_BASELINE.name, CORE_WRAPPER_COPPER.name),
         "core_wrapper": (CORE_WRAPPER_BASELINE.name, CORE_WRAPPER_COPPER.name),
         "unit": (UNIT_BASELINE.name, UNIT_COPPER.name),
     }[scope]
@@ -628,33 +719,37 @@ def matched_pass(rows: list[dict[str, str]], target: str, flow: str, scope: str)
     return all(by_name.get(name, {}).get("status") == "PASS" for name in names)
 
 
-def run_open_source_fpga() -> list[dict[str, str]]:
+def has_real_timing(row: dict[str, str]) -> bool:
+    return any(row.get(field, "").strip().upper() not in {"", "NA"} for field in ("fmax_mhz", "wns", "tns"))
+
+
+def has_matched_mapped_timing(rows: list[dict[str, str]], scope: str) -> bool:
+    pairs = {
+        "accepted_core_wrapper": (CORE_WRAPPER_BASELINE.name, CORE_WRAPPER_COPPER.name),
+        "near_core_stub": (NEARCORE_BASELINE.name, NEARCORE_COPPER.name),
+        "unit": (UNIT_BASELINE.name, UNIT_COPPER.name),
+    }
+    baseline, copper = pairs[scope]
+    by_key: dict[tuple[str, str], set[str]] = {}
+    for row in rows:
+        if (
+            row.get("status") == "PASS"
+            and row.get("scope") == scope
+            and row.get("flow") not in {"yosys", "not_run", "generic-yosys-resource", ""}
+            and has_real_timing(row)
+        ):
+            by_key.setdefault((row.get("target", ""), row.get("flow", "")), set()).add(row.get("design", ""))
+    return any({baseline, copper}.issubset(designs) for designs in by_key.values())
+
+
+def run_ordered_flows() -> list[dict[str, str]]:
     rows: list[dict[str, str]] = []
     rows.extend(fullcore_blocked_rows())
-    rows.extend(nextpnr_ecp5(design) for design in (NEARCORE_BASELINE, NEARCORE_COPPER))
-    rows.extend(nextpnr_ecp5(design) for design in (CORE_WRAPPER_BASELINE, CORE_WRAPPER_PREFETCH_BASELINE, CORE_WRAPPER_COPPER))
-    if not matched_pass(rows, "ecp5-85k", "yosys+nextpnr-ecp5", "near_core_stub"):
-        rows.extend(nextpnr_ice40(design) for design in (NEARCORE_BASELINE, NEARCORE_COPPER))
-    if not any(matched_pass(rows, target, flow, "near_core_stub") for target, flow in (("ecp5-85k", "yosys+nextpnr-ecp5"), ("ice40-hx8k", "yosys+nextpnr-ice40"))):
-        if tool_path("yosys") and tool_path("nextpnr-ecp5"):
-            rows.extend(nextpnr_ecp5(design) for design in (UNIT_BASELINE, UNIT_COPPER))
-        elif tool_path("yosys") and tool_path("nextpnr-ice40"):
-            rows.extend(nextpnr_ice40(design) for design in (UNIT_BASELINE, UNIT_COPPER))
-        else:
-            log_path = LOG_DIR / "unit_fallback.log"
-            note = "BLOCKED: unit-level fallback was not run because no Yosys plus nextpnr target is available."
-            write_text(log_path, note + "\n")
-            rows.extend(
-                blank_row(design, "unit-fallback", "not_run", "BLOCKED", log_path, note)
-                for design in (UNIT_BASELINE, UNIT_COPPER)
-            )
-    return rows
-
-
-def run_vendor_or_asic() -> list[dict[str, str]]:
-    rows = openroad_blocked_rows()
-    rows.extend(vivado_impl(design) for design in (NEARCORE_BASELINE, NEARCORE_COPPER))
-    rows.extend(vivado_impl(design) for design in (CORE_WRAPPER_BASELINE, CORE_WRAPPER_PREFETCH_BASELINE, CORE_WRAPPER_COPPER))
+    rows.extend(vivado_impl(design) for design in MAPPED_DESIGNS)
+    rows.extend(nextpnr_ecp5(design) for design in MAPPED_DESIGNS)
+    rows.extend(nextpnr_ice40(design) for design in MAPPED_DESIGNS)
+    rows.extend(openroad_blocked_rows())
+    rows.extend(generic_yosys(design) for design in FALLBACK_DESIGNS)
     return rows
 
 
@@ -672,13 +767,13 @@ def overhead_rows(rows: list[dict[str, str]]) -> list[dict[str, str]]:
         grouped.setdefault((row["target"], row["flow"]), {})[row["design"]] = row
     for (target, flow), by_name in grouped.items():
         pairs = (
-            ("near_core_stub", NEARCORE_BASELINE.name, NEARCORE_COPPER.name),
-            ("full_core", FULLCORE_BASELINE.name, FULLCORE_COPPER.name),
-            ("core_wrapper", CORE_WRAPPER_BASELINE.name, CORE_WRAPPER_COPPER.name),
-            ("core_wrapper_prefetch_baseline", CORE_WRAPPER_PREFETCH_BASELINE.name, CORE_WRAPPER_COPPER.name),
-            ("unit", UNIT_BASELINE.name, UNIT_COPPER.name),
+            ("near_core_stub", "near_core_stub", NEARCORE_BASELINE.name, NEARCORE_COPPER.name),
+            ("full_core", "full_core", FULLCORE_BASELINE.name, FULLCORE_COPPER.name),
+            ("accepted_core_wrapper", "accepted_core_wrapper", CORE_WRAPPER_BASELINE.name, CORE_WRAPPER_COPPER.name),
+            ("accepted_core_wrapper", "accepted_core_wrapper", CORE_WRAPPER_PREFETCH_BASELINE.name, CORE_WRAPPER_COPPER.name),
+            ("unit", "unit", UNIT_BASELINE.name, UNIT_COPPER.name),
         )
-        for scope, baseline_name, copper_name in pairs:
+        for scope, metric_scope, baseline_name, copper_name in pairs:
             baseline = by_name.get(baseline_name)
             copper = by_name.get(copper_name)
             if not baseline or not copper:
@@ -686,19 +781,24 @@ def overhead_rows(rows: list[dict[str, str]]) -> list[dict[str, str]]:
             if baseline.get("status") != "PASS" or copper.get("status") != "PASS":
                 out.append(
                     {
+                        "evidence_id": evidence_id("mapped_overhead", metric_scope, "blocked", target, flow, baseline_name, copper_name, ENVIRONMENT),
+                        "scope": scope,
+                        "design": f"{baseline_name}__vs__{copper_name}",
                         "target": target,
                         "flow": flow,
-                        "scope": scope,
-                        "metric": f"{scope}_mapped_timing",
+                        "environment": ENVIRONMENT,
+                        "status": "BLOCKED",
+                        "metric": f"{metric_scope}_mapped_timing",
                         "baseline": "",
                         "with_copper": "",
                         "delta": "",
                         "percent_overhead": "",
+                        "report_path": rel(OUT),
                         "notes": "BLOCKED: matched mapped PPA overhead requires PASS rows for baseline and COPPER.",
                     }
                 )
                 continue
-            for metric in ("lut", "ff", "bram", "dsp", "cells", "fmax_mhz", "power_mw"):
+            for metric in ("lut", "ff", "bram", "dsp", "cells", "fmax_mhz", "wns", "tns", "power_mw"):
                 b = numeric(baseline.get(metric, ""))
                 c = numeric(copper.get(metric, ""))
                 if b is None or c is None:
@@ -707,28 +807,38 @@ def overhead_rows(rows: list[dict[str, str]]) -> list[dict[str, str]]:
                 pct = (delta / b * 100.0) if b else 0.0
                 out.append(
                     {
+                        "evidence_id": evidence_id("mapped_overhead", metric_scope, metric, target, flow, baseline_name, copper_name, ENVIRONMENT),
+                        "scope": scope,
+                        "design": f"{baseline_name}__vs__{copper_name}",
                         "target": target,
                         "flow": flow,
-                        "scope": scope,
-                        "metric": f"{scope}_{metric}",
+                        "environment": ENVIRONMENT,
+                        "status": "PASS",
+                        "metric": f"{metric_scope}_{metric}",
                         "baseline": f"{b:.6f}".rstrip("0").rstrip("."),
                         "with_copper": f"{c:.6f}".rstrip("0").rstrip("."),
                         "delta": f"{delta:.6f}".rstrip("0").rstrip("."),
                         "percent_overhead": f"{pct:.6f}",
+                        "report_path": rel(OUT),
                         "notes": "Matched mapped PPA overhead from same target, flow, and constraints.",
                     }
                 )
     if not out:
         out.append(
             {
+                "evidence_id": evidence_id("mapped_overhead", "near_core_stub", "none", ENVIRONMENT),
+                "scope": "near_core_stub",
+                "design": f"{NEARCORE_BASELINE.name}__vs__{NEARCORE_COPPER.name}",
                 "target": "none",
                 "flow": "none",
-                "scope": "near_core_stub",
+                "environment": ENVIRONMENT,
+                "status": "BLOCKED",
                 "metric": "near_core_stub_mapped_timing",
                 "baseline": "",
                 "with_copper": "",
                 "delta": "",
                 "percent_overhead": "",
+                "report_path": rel(OUT),
                 "notes": "BLOCKED: no matched mapped PPA PASS pair was produced.",
             }
         )
@@ -738,8 +848,7 @@ def overhead_rows(rows: list[dict[str, str]]) -> list[dict[str, str]]:
 def main() -> int:
     RESULTS.mkdir(parents=True, exist_ok=True)
     LOG_DIR.mkdir(parents=True, exist_ok=True)
-    rows = run_open_source_fpga()
-    rows.extend(run_vendor_or_asic())
+    rows = run_ordered_flows()
     write_csv(OUT, FIELDS, rows)
     write_csv(OVERHEAD, OVERHEAD_FIELDS, overhead_rows(rows))
     print(f"wrote {rel(OUT)} and {rel(OVERHEAD)}")
