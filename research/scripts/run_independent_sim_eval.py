@@ -299,7 +299,18 @@ def benchmark_events(benchmark: str, input_name: str, seed: int) -> list[Event]:
             walk(index * 2 + 2)
 
         walk(0)
-        return [Event(addr, order[i + 1] if i + 1 < len(order) else None, order[i - 1] if i else None, True, True, 16) for i, addr in enumerate(order * 3)]
+        traversal = order * 3
+        return [
+            Event(
+                addr,
+                traversal[i + 1] if i + 1 < len(traversal) else None,
+                traversal[i - 1] if i else None,
+                True,
+                True,
+                16,
+            )
+            for i, addr in enumerate(traversal)
+        ]
     if benchmark == "hash_table_chaining":
         buckets = max(8, n // 16)
         chains = [[0x3000000 + (b * 16 + i) * LINE * 7 + seed * 0x10000 for i in range(6)] for b in range(buckets)]
