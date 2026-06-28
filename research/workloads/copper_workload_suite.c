@@ -217,7 +217,7 @@ static uint64_t run_one(const char *name, size_t n) {
     if (strcmp(name, "noisy_allocation_pattern") == 0) return noisy_allocation_pattern(n);
     if (strcmp(name, "branchy_pointer_chains") == 0) return branchy_pointer_chains(n);
     fprintf(stderr, "unknown benchmark: %s\n", name);
-    return 0;
+    exit(1);
 }
 
 int main(int argc, char **argv) {
@@ -226,5 +226,5 @@ int main(int argc, char **argv) {
     size_t n = input_n(input);
     uint64_t checksum = run_one(benchmark, n);
     printf("%s,%s,%llu\n", benchmark, input, (unsigned long long)checksum);
-    return checksum == 0 ? 1 : 0;
+    return 0;
 }
