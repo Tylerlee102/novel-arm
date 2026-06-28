@@ -161,14 +161,14 @@ The artifact supports unit-level hardware plausibility and, when Yosys is availa
 Evidence & Scope & File \\
 \hline
 Memory traffic proxy & assumption-based, not measured & energy\_proxy.csv \\
-Measured power index & BLOCKED unless real tool-power report exists & power\_report\_index.csv \\
+Measured power index & Vivado tool power when indexed PASS & power\_report\_index.csv; mapped\_ppa.csv \\
 Activity proxy & McPAT proxy when indexed PASS & power\_report\_index.csv; copper\_mcpat\_sensitivity\_20260618.csv \\
 Summary & proxy overhead statistics & energy\_summary.csv \\
 \hline
 \end{tabular}
 \end{table}
 
-Energy rows use explicit assumptions recorded in \texttt{energy\_proxy.csv}. They are \texttt{proxy\_assumed\_memory\_energy} rows, not calibrated power and not silicon measurements. When \texttt{power\_report\_index.csv} marks \texttt{proxy\_activity} PASS, the activity proxy is the fixed-architecture McPAT sensitivity run driven by measured gem5 ROI counters. This supports proxy/model energy discussion, not measured power-efficiency claims.
+Energy rows use explicit assumptions recorded in \texttt{energy\_proxy.csv}. When \texttt{power\_report\_index.csv} marks \texttt{measured\_tool\_power} PASS, the measured-tool row is Vivado \texttt{report\_power} for the mapped near-core-stub target, not silicon or ASIC signoff. When \texttt{proxy\_activity} is PASS, the activity proxy is the fixed-architecture McPAT sensitivity run driven by measured gem5 ROI counters. This supports scoped tool-power and proxy/model energy discussion, not full-core or silicon power-efficiency claims.
 
 \section{Limitations}
 \begin{table}[t]
@@ -181,7 +181,7 @@ Limitation & Consequence \\
 Gem5 rows may be BLOCKED & Gem5 validation cannot be claimed without PASS rows \\
 Independent simulator is trace/event level & It is not a system-level gem5 campaign \\
 No full-core integration & Full-core area, timing, and power claims remain blocked \\
-Energy is proxy/model based & Measured power-efficiency claims remain blocked \\
+Power is near-core tool/model based & Full-core and silicon power-efficiency claims remain blocked \\
 External gem5 and Vivado setup & Large external-tool reruns are not clone-local \\
 \hline
 \end{tabular}

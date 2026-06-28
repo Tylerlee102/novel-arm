@@ -64,6 +64,7 @@ def positive_float(value: str) -> bool:
 
 
 def measured_power_evidence() -> dict[str, str] | None:
+    evidence: list[tuple[Path, dict[str, str]]] = []
     for path in (MAPPED_PPA, RESULTS / "synthesis.csv", RESULTS / "fullcore_synthesis.csv"):
         for row in read_csv(path):
             report = row.get("report_path", "")
@@ -74,17 +75,25 @@ def measured_power_evidence() -> dict[str, str] | None:
                 and report
                 and report_path.exists()
             ):
-                return {
-                    "source": rel(path),
-                    "report_path": report,
-                    "tool": row.get("flow", ""),
-                    "environment": row.get("environment", "current"),
-                    "notes": (
-                        f"Tool power row found for {row.get('design', '')} on {row.get('target', '')}; "
-                        "treat as EDA report power, not silicon measurement."
-                    ),
-                }
-    return None
+                evidence.append((path, row))
+    if not evidence:
+        return None
+
+    first_path, first_row = evidence[0]
+    designs = "; ".join(
+        f"{row.get('design', '')} on {row.get('target', '')} power_mw={row.get('power_mw', '')}"
+        for _, row in evidence[:4]
+    )
+    return {
+        "source": "; ".join(sorted({rel(path) for path, _ in evidence})),
+        "report_path": first_row.get("report_path", ""),
+        "tool": first_row.get("flow", ""),
+        "environment": first_row.get("environment", "current"),
+        "notes": (
+            f"Tool-estimated power rows found: {designs}. "
+            "Treat as EDA report power for the stated mapped target, not silicon measurement."
+        ),
+    }
 
 
 def mcpat_activity_evidence() -> dict[str, str] | None:

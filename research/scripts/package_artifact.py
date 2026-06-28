@@ -58,6 +58,7 @@ EXCLUDE_PARTS = {
 }
 PRIVATE_PATH_PATTERNS = {
     "C:" + "\\Users\\tyboy",
+    "C:/Users/" + "tyboy",
     "/c/Users/" + "tyboy",
     "home/" + "tyboy",
 }

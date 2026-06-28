@@ -53,14 +53,16 @@ demand/prefetch traffic accounting. The top-tier pass adds a deterministic
 is not runnable, source-built C workload evidence via `make workloads`, a
 source-backed `independent_sim` trace/event simulator, a near-core-stub
 synthesis flow, a strict `mapped_ppa.csv` place-and-route ledger,
-`proxy_assumed_memory_energy` rows, and a McPAT activity-proxy index when the
-local McPAT sensitivity output is present. These are scoped
+`proxy_assumed_memory_energy` rows, Vivado `report_power` rows when Vivado is
+available, and a McPAT activity-proxy index when the local McPAT sensitivity
+output is present. These are scoped
 evidence levels: `independent_sim` is not gem5, `core_integrated` is not gem5,
 the near-core stub is not a full CPU, generic Yosys is not mapped timing, and
-the energy proxy is not measured silicon or RTL signoff power. `mapped_ppa.csv`
-may be cited for timing only when it has matched PASS rows from nextpnr,
-Vivado, or OpenROAD and real timing fields are not `NA`. Vivado and full gem5
-campaign reruns remain optional external-tool paths.
+Vivado `report_power` is tool-estimated FPGA power rather than silicon or ASIC
+signoff power. `mapped_ppa.csv` may be cited for timing only when it has
+matched PASS rows from nextpnr, Vivado, or OpenROAD and real timing fields are
+not `NA`. Vivado and full gem5 campaign reruns remain optional external-tool
+paths.
 
 If `gh` or Docker is unavailable on the local machine, use
 `docs/RUN_CI_NOW.md` to trigger the GitHub Actions run from the GitHub web UI,
@@ -101,6 +103,5 @@ queue-drop, traffic, ablation, sensitivity, and seed/input-stability CSVs at
 model, deterministic cycle-model, and deterministic core-integrated levels.
 The independent simulator rows add a separate source-backed trace/event path,
 but these are still not fresh gem5 results. The remaining top-tier blocker is
-real mapped full-core evidence and measured silicon/RTL signoff power; missing
-PPA tools must stay BLOCKED rather than being replaced by generic resource
-counts.
+real mapped full-core evidence and silicon/ASIC signoff power; missing PPA
+tools must stay BLOCKED rather than being replaced by generic resource counts.

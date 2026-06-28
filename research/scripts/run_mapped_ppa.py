@@ -129,6 +129,11 @@ def write_text(path: Path, text: str) -> None:
     path.write_text(sanitized, encoding="utf-8")
 
 
+def write_raw_text(path: Path, text: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(text, encoding="utf-8")
+
+
 def write_csv(path: Path, fields: list[str], rows: list[dict[str, str]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", newline="", encoding="utf-8") as fh:
@@ -247,6 +252,29 @@ def parse_wns(output: str) -> str:
 
 def parse_tns(output: str) -> str:
     matches = re.findall(r"TNS\(ns\)\s*[:=]\s*(-?[0-9.]+)", output, re.I)
+    return matches[-1] if matches else ""
+
+
+def parse_vivado_setup_wns(output: str) -> str:
+    matches = re.findall(
+        r"Setup\s*:\s*\d+\s+Failing Endpoints,\s*Worst Slack\s*(-?[0-9.]+)ns",
+        output,
+        re.I,
+    )
+    return matches[-1] if matches else ""
+
+
+def parse_vivado_setup_tns(output: str) -> str:
+    matches = re.findall(
+        r"Setup\s*:\s*\d+\s+Failing Endpoints,\s*Worst Slack\s*-?[0-9.]+ns,\s*Total Violation\s*(-?[0-9.]+)ns",
+        output,
+        re.I,
+    )
+    return matches[-1] if matches else ""
+
+
+def parse_vivado_util(output: str, label: str) -> str:
+    matches = re.findall(rf"\|\s*{re.escape(label)}\s*\|\s*(\d+)\s*\|", output, re.I)
     return matches[-1] if matches else ""
 
 
@@ -414,13 +442,20 @@ def vivado_impl(design: Design) -> dict[str, str]:
     run_dir = LOG_DIR / "vivado_runs" / design.name
     run_dir.mkdir(parents=True, exist_ok=True)
     tcl_path = run_dir / "run_vivado_impl.tcl"
-    write_text(tcl_path, vivado_tcl(design, run_dir))
+    write_raw_text(tcl_path, vivado_tcl(design, run_dir))
     code, output = run_capture([vivado, "-mode", "batch", "-source", str(tcl_path)], timeout=1200)
+    util_text = (run_dir / f"{design.name}_utilization.rpt").read_text(encoding="utf-8", errors="ignore") if (run_dir / f"{design.name}_utilization.rpt").exists() else ""
     timing_text = (run_dir / f"{design.name}_timing.rpt").read_text(encoding="utf-8", errors="ignore") if (run_dir / f"{design.name}_timing.rpt").exists() else ""
     power_text = (run_dir / f"{design.name}_power.rpt").read_text(encoding="utf-8", errors="ignore") if (run_dir / f"{design.name}_power.rpt").exists() else ""
-    combined = output + "\n" + timing_text + "\n" + power_text
+    combined = output + "\n" + util_text + "\n" + timing_text + "\n" + power_text
     write_text(log_path, combined)
     row = mapped_row(design, f"vivado-{VIVADO_PART}", "vivado-impl", 0, code, log_path, combined)
+    row["lut"] = value_or_na(parse_vivado_util(combined, "Slice LUTs"))
+    row["ff"] = value_or_na(parse_vivado_util(combined, "Slice Registers"))
+    row["bram"] = value_or_na(parse_vivado_util(combined, "Block RAM Tile"))
+    row["dsp"] = value_or_na(parse_vivado_util(combined, "DSPs"))
+    row["wns"] = value_or_na(parse_vivado_setup_wns(combined) or row["wns"])
+    row["tns"] = value_or_na(parse_vivado_setup_tns(combined) or row["tns"])
     row["power_mw"] = value_or_na(parse_vivado_power_mw(combined))
     if code == 0:
         row["notes"] = (
