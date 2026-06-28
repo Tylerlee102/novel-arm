@@ -9,6 +9,7 @@ Run:
 ```sh
 make check-toolchain
 make test
+make workloads
 make rtl
 make sim
 make eval

@@ -45,8 +45,13 @@ for the model, RTL smoke simulation, generic Yosys synthesis, LaTeX paper build,
 and artifact packaging. The Codespaces devcontainer uses the same image.
 The evaluation target also generates deterministic `cycle_model` evidence with
 cache hit/miss latency, memory latency, prefetch lateness, queue drops, and
-demand/prefetch traffic accounting. Vivado and full gem5 campaign reruns remain
-optional external-tool paths.
+demand/prefetch traffic accounting. The top-tier pass adds a deterministic
+`core_integrated` validation harness, explicit `gem5_*` BLOCKED rows when gem5
+is not runnable, source-built C workload evidence via `make workloads`, a
+near-core-stub synthesis flow, and `proxy_assumed` energy rows. These are
+scoped evidence levels: `core_integrated` is not gem5, the near-core stub is not
+a full CPU, and the energy proxy is not measured power. Vivado and full gem5
+campaign reruns remain optional external-tool paths.
 
 If `gh` or Docker is unavailable on the local machine, use
 `docs/RUN_CI_NOW.md` to trigger the GitHub Actions run from the GitHub web UI,
@@ -84,4 +89,5 @@ evaluation, synthesis, paper, paper audit, artifact packaging, and artifact
 upload. The evaluation flow generates no-prefetch, next-line, stride, simple
 pointer-chase, and COPPER baseline rows with accuracy, coverage, lateness,
 queue-drop, traffic, ablation, sensitivity, and seed/input-stability CSVs at
-model and deterministic cycle-model levels. These are not fresh gem5 results.
+model, deterministic cycle-model, and deterministic core-integrated levels.
+These are not fresh gem5 results.
