@@ -1,6 +1,6 @@
 PYTHON ?= python3
 
-.PHONY: check-toolchain test reproduce rtl sim benchmarks eval synth mapped-ppa asic-power paper paper-audit artifact readiness
+.PHONY: check-toolchain test reproduce rtl sim benchmarks eval synth mapped-ppa asic-power openroad-postroute paper paper-audit artifact readiness
 
 check-toolchain:
 	$(PYTHON) research/scripts/check_toolchain.py
@@ -38,15 +38,22 @@ synth:
 	$(PYTHON) research/scripts/run_fullcore_synthesis.py
 	$(PYTHON) research/scripts/run_mapped_ppa.py
 	$(PYTHON) research/scripts/run_asic_power.py
+	$(PYTHON) research/scripts/run_openroad_postroute.py
 	$(PYTHON) research/scripts/run_energy_estimate.py
 
 mapped-ppa:
 	$(PYTHON) research/scripts/run_mapped_ppa.py
 	$(PYTHON) research/scripts/run_asic_power.py
+	$(PYTHON) research/scripts/run_openroad_postroute.py
 	$(PYTHON) research/scripts/run_energy_estimate.py
 
 asic-power:
 	$(PYTHON) research/scripts/run_asic_power.py
+	$(PYTHON) research/scripts/run_openroad_postroute.py
+	$(PYTHON) research/scripts/run_energy_estimate.py
+
+openroad-postroute:
+	$(PYTHON) research/scripts/run_openroad_postroute.py
 	$(PYTHON) research/scripts/run_energy_estimate.py
 
 paper:

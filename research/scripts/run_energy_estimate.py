@@ -23,6 +23,7 @@ SUMMARY = RESULTS / "energy_summary.csv"
 POWER_INDEX = RESULTS / "power_report_index.csv"
 MAPPED_PPA = RESULTS / "mapped_ppa.csv"
 ASIC_POWER = RESULTS / "asic_power.csv"
+OPENROAD_POSTROUTE_POWER = RESULTS / "openroad_postroute_power.csv"
 MCPAT_CSV = RESULTS / "copper_mcpat_sensitivity_20260618.csv"
 MCPAT_MD = RESULTS / "COPPER_MCPAT_SENSITIVITY_20260618.md"
 
@@ -151,6 +152,46 @@ def asic_liberty_power_evidence() -> dict[str, str] | None:
     }
 
 
+def openroad_postroute_power_evidence() -> dict[str, str] | None:
+    rows = [
+        row
+        for row in read_csv(OPENROAD_POSTROUTE_POWER)
+        if row.get("status") == "PASS"
+        and row.get("scope") == "core_wrapper"
+        and positive_float(row.get("total_power_mw", ""))
+        and row.get("report_path")
+        and (ROOT / row.get("report_path", "")).exists()
+    ]
+    if not rows:
+        return None
+
+    def priority(row: dict[str, str]) -> tuple[int, str]:
+        design = row.get("design", "")
+        if design == "core_wrapper_plus_copper":
+            return (0, design)
+        if design == "baseline_core_wrapper":
+            return (1, design)
+        return (2, design)
+
+    rows.sort(key=priority)
+    first = rows[0]
+    designs = "; ".join(
+        f"{row.get('design', '')} total_power_mw={row.get('total_power_mw', '')}"
+        for row in rows[:4]
+    )
+    return {
+        "source": rel(OPENROAD_POSTROUTE_POWER),
+        "report_path": first.get("report_path", ""),
+        "tool": first.get("flow", ""),
+        "environment": first.get("environment", "current"),
+        "notes": (
+            f"OpenROAD post-route tool-estimate rows found: {designs}. "
+            "This is an OpenROAD-flow-scripts Nangate45 post-route estimate, "
+            "not silicon measurement, not foundry signoff, and not full-core power."
+        ),
+    }
+
+
 def mcpat_activity_evidence() -> dict[str, str] | None:
     rows = read_csv(MCPAT_CSV)
     ok_rows = [
@@ -178,6 +219,7 @@ def mcpat_activity_evidence() -> dict[str, str] | None:
 
 
 def write_power_index(proxy_status: str) -> None:
+    openroad_postroute = openroad_postroute_power_evidence()
     asic_power = asic_liberty_power_evidence()
     fpga_power = fpga_tool_power_evidence()
     mcpat = mcpat_activity_evidence()
@@ -185,6 +227,20 @@ def write_power_index(proxy_status: str) -> None:
         POWER_INDEX,
         ["evidence_level", "status", "source", "report_path", "tool", "environment", "notes"],
         [
+            {
+                "evidence_level": "openroad_postroute_tool_estimate",
+                "status": "PASS" if openroad_postroute else "BLOCKED",
+                "source": openroad_postroute["source"] if openroad_postroute else rel(OPENROAD_POSTROUTE_POWER),
+                "report_path": openroad_postroute["report_path"] if openroad_postroute else "",
+                "tool": openroad_postroute["tool"] if openroad_postroute else "",
+                "environment": openroad_postroute["environment"] if openroad_postroute else "current",
+                "notes": openroad_postroute["notes"]
+                if openroad_postroute
+                else (
+                    "No OpenROAD post-route core-wrapper power/timing PASS row was found. "
+                    "Do not claim post-route ASIC, signoff, silicon, or full-core power."
+                ),
+            },
             {
                 "evidence_level": "asic_liberty_tool_estimate",
                 "status": "PASS" if asic_power else "BLOCKED",

@@ -68,6 +68,7 @@ jobs:
           make mapped-ppa
           python3 research/scripts/run_mapped_ppa.py
           python3 research/scripts/run_asic_power.py
+          python3 research/scripts/run_openroad_postroute.py
           python3 research/scripts/run_energy_estimate.py
           python3 - <<'PY'
           import csv, pathlib, sys
@@ -101,10 +102,13 @@ jobs:
             research/results/mapped_ppa_overhead.csv
             research/results/asic_power.csv
             research/results/asic_power_overhead.csv
+            research/results/openroad_postroute_power.csv
+            research/results/openroad_postroute_power_overhead.csv
             research/results/power_report_index.csv
             research/results/logs/asic_power/**
             research/results/logs/mapped_ppa/**
             research/results/logs/openroad/**
+            research/results/logs/openroad_postroute/**
             research/results/logs/vivado/**
             dist/copper-artifact.zip
 
