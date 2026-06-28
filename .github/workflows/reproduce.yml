@@ -60,6 +60,10 @@ jobs:
         if: always()
         run: make eval
 
+      - name: Build C workloads
+        if: always()
+        run: make workloads
+
       - name: Compile RTL
         if: always()
         run: make rtl

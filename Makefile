@@ -21,6 +21,9 @@ sim:
 benchmarks:
 	$(PYTHON) research/scripts/run_evaluation.py --inventory-only
 
+workloads:
+	$(PYTHON) research/scripts/build_workloads.py
+
 eval:
 	$(PYTHON) research/copper_final_eval.py
 	$(PYTHON) research/scripts/run_evaluation.py
@@ -44,4 +47,4 @@ artifact:
 	$(PYTHON) research/scripts/build_conference_docs.py
 	$(PYTHON) research/scripts/package_artifact.py
 
-readiness: check-toolchain test rtl sim eval synth paper paper-audit artifact
+readiness: check-toolchain test workloads rtl sim eval synth paper paper-audit artifact
