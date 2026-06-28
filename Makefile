@@ -1,6 +1,6 @@
 PYTHON ?= python3
 
-.PHONY: check-toolchain test reproduce rtl sim benchmarks eval synth paper paper-audit artifact readiness
+.PHONY: check-toolchain test reproduce rtl sim benchmarks eval synth mapped-ppa paper paper-audit artifact readiness
 
 check-toolchain:
 	$(PYTHON) research/scripts/check_toolchain.py
@@ -36,6 +36,12 @@ eval:
 synth:
 	$(PYTHON) research/scripts/run_synthesis.py
 	$(PYTHON) research/scripts/run_fullcore_synthesis.py
+	$(PYTHON) research/scripts/run_mapped_ppa.py
+	$(PYTHON) research/scripts/run_energy_estimate.py
+
+mapped-ppa:
+	$(PYTHON) research/scripts/run_mapped_ppa.py
+	$(PYTHON) research/scripts/run_energy_estimate.py
 
 paper:
 	$(PYTHON) research/scripts/build_conference_docs.py

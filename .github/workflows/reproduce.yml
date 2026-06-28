@@ -14,6 +14,70 @@ env:
   COPPER_ENVIRONMENT: github_actions
 
 jobs:
+  mapped-ppa:
+    name: mapped-ppa
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Python and packaging basics
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            ca-certificates \
+            curl \
+            git \
+            make \
+            python3 \
+            python3-pip
+
+      - name: Try OSS CAD Suite
+        continue-on-error: true
+        uses: YosysHQ/setup-oss-cad-suite@v3
+
+      - name: Try apt FPGA tools
+        if: always()
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends yosys || true
+          sudo apt-get install -y --no-install-recommends nextpnr-ecp5 || true
+          sudo apt-get install -y --no-install-recommends nextpnr-ice40 || true
+          sudo apt-get install -y --no-install-recommends openroad || true
+          python3 -m pip install -r requirements.txt pytest numpy pandas
+
+      - name: Show mapped PPA tool availability
+        if: always()
+        run: |
+          yosys -V || true
+          nextpnr-ecp5 --version || true
+          nextpnr-ice40 --version || true
+          openroad -version || true
+          vivado -version || true
+
+      - name: Run mapped PPA
+        if: always()
+        run: |
+          make mapped-ppa
+          python3 research/scripts/run_mapped_ppa.py
+          python3 research/scripts/run_energy_estimate.py
+          python3 research/scripts/build_conference_docs.py
+          python3 research/scripts/package_artifact.py
+
+      - name: Upload mapped PPA evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: copper-mapped-ppa-${{ github.run_id }}
+          if-no-files-found: ignore
+          path: |
+            research/results/mapped_ppa.csv
+            research/results/mapped_ppa_overhead.csv
+            research/results/power_report_index.csv
+            research/results/logs/mapped_ppa/**
+            research/results/logs/openroad/**
+            research/results/logs/vivado/**
+            dist/copper-artifact.zip
+
   reproduce:
     name: Open-source evidence flow
     runs-on: ubuntu-latest

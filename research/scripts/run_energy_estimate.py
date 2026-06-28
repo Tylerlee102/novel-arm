@@ -21,6 +21,7 @@ PERF = RESULTS / "core_integrated_performance.csv"
 OUT = RESULTS / "energy_proxy.csv"
 SUMMARY = RESULTS / "energy_summary.csv"
 POWER_INDEX = RESULTS / "power_report_index.csv"
+MAPPED_PPA = RESULTS / "mapped_ppa.csv"
 
 DEMAND_ACCESS_PJ = 120.0
 PREFETCH_ACCESS_PJ = 120.0
@@ -53,19 +54,68 @@ def write_csv(path: Path, fields: list[str], rows: list[dict[str, object]]) -> N
             writer.writerow({field: row.get(field, "") for field in fields})
 
 
+def positive_float(value: str) -> bool:
+    try:
+        return float(value) > 0.0
+    except (TypeError, ValueError):
+        return False
+
+
+def measured_power_evidence() -> dict[str, str] | None:
+    for path in (MAPPED_PPA, RESULTS / "synthesis.csv", RESULTS / "fullcore_synthesis.csv"):
+        for row in read_csv(path):
+            report = row.get("report_path", "")
+            report_path = ROOT / report if report else Path()
+            if (
+                row.get("status") == "PASS"
+                and positive_float(row.get("power_mw", ""))
+                and report
+                and report_path.exists()
+            ):
+                return {
+                    "source": rel(path),
+                    "report_path": report,
+                    "tool": row.get("flow", ""),
+                    "environment": row.get("environment", "current"),
+                    "notes": (
+                        f"Tool power row found for {row.get('design', '')} on {row.get('target', '')}; "
+                        "treat as EDA report power, not silicon measurement."
+                    ),
+                }
+    return None
+
+
 def write_power_index(proxy_status: str) -> None:
+    measured = measured_power_evidence()
     write_csv(
         POWER_INDEX,
         ["evidence_level", "status", "source", "report_path", "tool", "environment", "notes"],
         [
             {
                 "evidence_level": "measured_tool_power",
+                "status": "PASS" if measured else "BLOCKED",
+                "source": measured["source"] if measured else "none",
+                "report_path": measured["report_path"] if measured else "",
+                "tool": measured["tool"] if measured else "",
+                "environment": measured["environment"] if measured else "current",
+                "notes": measured["notes"]
+                if measured
+                else (
+                    "No Vivado report_power, ASIC, CACTI, McPAT, or process-calibrated power report "
+                    "with a PASS power_mw row was found in this open evidence pass."
+                ),
+            },
+            {
+                "evidence_level": "proxy_activity",
                 "status": "BLOCKED",
                 "source": "none",
                 "report_path": "",
                 "tool": "",
                 "environment": "current",
-                "notes": "No Vivado, ASIC, CACTI, McPAT, or process-calibrated power report was found in this open evidence pass.",
+                "notes": (
+                    "No activity-calibrated proxy power flow is available in this pass. "
+                    "SAIF/activity traces are not converted into power without a calibrated tool report."
+                ),
             },
             {
                 "evidence_level": "proxy_assumed_memory_energy",

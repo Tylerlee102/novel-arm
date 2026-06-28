@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     clang \
     cmake \
+    curl \
     g++ \
     gcc \
     git \
@@ -17,17 +18,30 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     python3 \
     python3-pip \
     python3-venv \
+    tar \
     texlive-latex-base \
     texlive-latex-extra \
     texlive-fonts-recommended \
     texlive-publishers \
     texlive-bibtex-extra \
     texlive-latex-recommended \
+    xz-utils \
     biber \
     verilator \
     yosys \
-    && (apt-get install -y --no-install-recommends nextpnr-ice40 nextpnr-ecp5 || true) \
+    && (apt-get install -y --no-install-recommends nextpnr-ice40 || true) \
+    && (apt-get install -y --no-install-recommends nextpnr-ecp5 || true) \
+    && (apt-get install -y --no-install-recommends openroad || true) \
     && rm -rf /var/lib/apt/lists/*
+
+ARG INSTALL_OSS_CAD_SUITE=0
+RUN if [ "$INSTALL_OSS_CAD_SUITE" = "1" ]; then \
+      mkdir -p /opt/oss-cad-suite && \
+      curl -L https://github.com/YosysHQ/oss-cad-suite-build/releases/latest/download/oss-cad-suite-linux-x64.tgz \
+        | tar -xz -C /opt/oss-cad-suite --strip-components=1; \
+    fi
+
+ENV PATH="/opt/oss-cad-suite/bin:${PATH}"
 
 WORKDIR /workspace
 COPY requirements.txt /workspace/requirements.txt

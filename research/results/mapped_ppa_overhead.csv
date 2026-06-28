@@ -1,0 +1,7 @@
+target,flow,scope,metric,baseline,with_copper,delta,percent_overhead,notes
+ecp5-85k,yosys+nextpnr-ecp5,near_core_stub,near_core_stub_mapped_timing,,,,,BLOCKED: matched mapped PPA overhead requires PASS rows for baseline and COPPER.
+ice40-hx8k,yosys+nextpnr-ice40,near_core_stub,near_core_stub_mapped_timing,,,,,BLOCKED: matched mapped PPA overhead requires PASS rows for baseline and COPPER.
+full-core-wrapper,not_run,full_core,full_core_mapped_timing,,,,,BLOCKED: matched mapped PPA overhead requires PASS rows for baseline and COPPER.
+unit-fallback,not_run,unit,unit_mapped_timing,,,,,BLOCKED: matched mapped PPA overhead requires PASS rows for baseline and COPPER.
+openroad,openroad,near_core_stub,near_core_stub_mapped_timing,,,,,BLOCKED: matched mapped PPA overhead requires PASS rows for baseline and COPPER.
+vivado-xc7a35tcsg324-1,vivado-impl,near_core_stub,near_core_stub_mapped_timing,,,,,BLOCKED: matched mapped PPA overhead requires PASS rows for baseline and COPPER.

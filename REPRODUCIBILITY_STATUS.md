@@ -39,10 +39,17 @@ machine or one-command full-system artifact.
 - `fullcore_synthesis*.csv` records unit and near-core-stub synthesis scope.
   Near-core-stub rows must not be described as full-core overhead, mapped
   timing, or measured power.
+- `mapped_ppa.csv` and `mapped_ppa_overhead.csv` are the only open-source
+  mapped-PPA ledgers. They record BLOCKED when Yosys, nextpnr, OpenROAD, Vivado,
+  or required platform data are unavailable, FAIL when a real mapping attempt
+  does not complete, and PASS only when a mapped flow finishes with timing
+  fields from the tool report. Missing timing or power fields are recorded as
+  `NA`, not inferred.
 - `energy_proxy.csv`, `energy_summary.csv`, and `power_report_index.csv` are
   `proxy_assumed_memory_energy` evidence only unless a measured-tool-power row
-  appears. They are not measured silicon, Vivado, CACTI, McPAT, or
-  process-calibrated power reports.
+  appears. `proxy_activity` remains BLOCKED unless activity is converted through
+  a calibrated tool flow. They are not measured silicon, Vivado, CACTI, McPAT,
+  or process-calibrated power reports.
 - Paper-facing documents, tables, summaries, RTL sources, testbenches, and
   reproduction scripts are included with stable relative paths.
 - The Python audit and summary scripts can be rerun with a local Python 3
@@ -87,8 +94,8 @@ The model-level, cycle-model, core-integrated, and independent-sim evidence
 improve baseline discipline but do not replace real gem5/full-system evidence.
 Claims in the paper and claim ledger must identify model-level, cycle-model,
 core-integrated, independent-sim, RTL-level, unit-synthesis,
-near-core-stub synthesis, proxy-energy, existing-Vivado, and external summary
-evidence separately.
+near-core-stub synthesis, mapped-PPA, proxy-energy, existing-Vivado, and
+external summary evidence separately.
 
 The clone-local runner is intended to make this boundary explicit: it should pass
 from a fresh clone after Python dependencies are installed, while full gem5 and

@@ -31,6 +31,7 @@ make rtl
 make sim
 make eval
 make synth
+make mapped-ppa
 make paper
 make paper-audit
 make artifact
@@ -41,19 +42,24 @@ proof. GitHub Actions, Codespaces, or Docker is the intended evidence
 environment for those gates.
 
 The Dockerfile and GitHub Actions workflow install the open-source tools needed
-for the model, RTL smoke simulation, generic Yosys synthesis, LaTeX paper build,
-and artifact packaging. The Codespaces devcontainer uses the same image.
+for the model, RTL smoke simulation, generic Yosys synthesis, mapped-PPA
+attempts, LaTeX paper build, and artifact packaging. The `mapped-ppa` CI job
+tries OSS CAD Suite or equivalent Yosys/nextpnr tools first, then records
+OpenROAD/Vivado availability without requiring paid tools.
 The evaluation target also generates deterministic `cycle_model` evidence with
 cache hit/miss latency, memory latency, prefetch lateness, queue drops, and
 demand/prefetch traffic accounting. The top-tier pass adds a deterministic
 `core_integrated` validation harness, explicit `gem5_*` BLOCKED rows when gem5
 is not runnable, source-built C workload evidence via `make workloads`, a
 source-backed `independent_sim` trace/event simulator, a near-core-stub
-synthesis flow, and `proxy_assumed_memory_energy` rows. These are scoped
+synthesis flow, a strict `mapped_ppa.csv` place-and-route ledger, and
+`proxy_assumed_memory_energy` rows. These are scoped
 evidence levels: `independent_sim` is not gem5, `core_integrated` is not gem5,
-the near-core stub is not a full CPU or mapped timing/power result, and the
-energy proxy is not measured power. Vivado and full gem5 campaign reruns remain
-optional external-tool paths.
+the near-core stub is not a full CPU, generic Yosys is not mapped timing, and
+the energy proxy is not measured power. `mapped_ppa.csv` may be cited for timing
+only when it has matched PASS rows from nextpnr, Vivado, or OpenROAD and real
+timing fields are not `NA`. Vivado and full gem5 campaign reruns remain optional
+external-tool paths.
 
 If `gh` or Docker is unavailable on the local machine, use
 `docs/RUN_CI_NOW.md` to trigger the GitHub Actions run from the GitHub web UI,
@@ -93,4 +99,6 @@ pointer-chase, and COPPER baseline rows with accuracy, coverage, lateness,
 queue-drop, traffic, ablation, sensitivity, and seed/input-stability CSVs at
 model, deterministic cycle-model, and deterministic core-integrated levels.
 The independent simulator rows add a separate source-backed trace/event path,
-but these are still not fresh gem5 results.
+but these are still not fresh gem5 results. The remaining top-tier blocker is
+real mapped full-core or accepted near-core timing/power evidence; missing PPA
+tools must stay BLOCKED rather than being replaced by generic resource counts.
