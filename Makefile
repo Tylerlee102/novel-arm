@@ -30,6 +30,7 @@ eval:
 	$(PYTHON) research/scripts/run_cycle_eval.py
 	$(PYTHON) research/scripts/run_gem5_eval.py
 	$(PYTHON) research/scripts/run_core_eval.py
+	$(PYTHON) research/scripts/run_energy_estimate.py
 
 synth:
 	$(PYTHON) research/scripts/run_synthesis.py
