@@ -67,6 +67,10 @@ PRIVATE_PATH_PATTERNS = {
     "home/" + "tyboy",
 }
 GEM5_SUMMARY_PREFIX = "gem5_arm_ubuntu_fs_"
+OPENROAD_FINAL_PHYSICAL = {
+    "6_final.def",
+    "6_final.spef",
+}
 ROOT_FILES = {
     "README.md",
     "REPRODUCIBILITY_STATUS.md",
@@ -169,6 +173,14 @@ def should_include(path: Path) -> tuple[bool, str]:
             ):
                 return True, "included public tracked gem5 summary input/report"
             return False, "excluded raw gem5 output tree; summaries are included"
+        if (
+            len(result_parts) >= 5
+            and result_parts[0] == "logs"
+            and result_parts[1] == "openroad_postroute"
+            and result_parts[3] == "results"
+            and result_parts[4] in OPENROAD_FINAL_PHYSICAL
+        ):
+            return True, "included OpenROAD final physical artifact referenced by post-route evidence"
         return path.suffix.lower() in INCLUDE_SUFFIXES, "included summary/evidence file"
     if path == ZIP_PATH:
         return False, "output zip excluded"
