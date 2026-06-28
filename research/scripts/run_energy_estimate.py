@@ -22,6 +22,8 @@ OUT = RESULTS / "energy_proxy.csv"
 SUMMARY = RESULTS / "energy_summary.csv"
 POWER_INDEX = RESULTS / "power_report_index.csv"
 MAPPED_PPA = RESULTS / "mapped_ppa.csv"
+MCPAT_CSV = RESULTS / "copper_mcpat_sensitivity_20260618.csv"
+MCPAT_MD = RESULTS / "COPPER_MCPAT_SENSITIVITY_20260618.md"
 
 DEMAND_ACCESS_PJ = 120.0
 PREFETCH_ACCESS_PJ = 120.0
@@ -85,8 +87,35 @@ def measured_power_evidence() -> dict[str, str] | None:
     return None
 
 
+def mcpat_activity_evidence() -> dict[str, str] | None:
+    rows = read_csv(MCPAT_CSV)
+    ok_rows = [
+        row
+        for row in rows
+        if row.get("status") == "ok"
+        and positive_float(row.get("mcpat_system_runtime_dynamic_power", ""))
+        and positive_float(row.get("mcpat_system_total_runtime_energy", ""))
+    ]
+    if not ok_rows:
+        return None
+
+    report_path = MCPAT_MD if MCPAT_MD.exists() else MCPAT_CSV
+    return {
+        "source": rel(MCPAT_CSV),
+        "report_path": rel(report_path),
+        "tool": "McPAT 0.8 via research/analyze_copper_mcpat_sensitivity.py",
+        "environment": "current",
+        "notes": (
+            f"Activity-based McPAT proxy found: {len(ok_rows)}/{len(rows)} rows use measured gem5 ROI "
+            "activity counters in a fixed AArch64-style core/cache model. This is not silicon power, "
+            "not RTL signoff power, and does not separately model COPPER metadata-table switching."
+        ),
+    }
+
+
 def write_power_index(proxy_status: str) -> None:
     measured = measured_power_evidence()
+    mcpat = mcpat_activity_evidence()
     write_csv(
         POWER_INDEX,
         ["evidence_level", "status", "source", "report_path", "tool", "environment", "notes"],
@@ -101,20 +130,25 @@ def write_power_index(proxy_status: str) -> None:
                 "notes": measured["notes"]
                 if measured
                 else (
-                    "No Vivado report_power, ASIC, CACTI, McPAT, or process-calibrated power report "
-                    "with a PASS power_mw row was found in this open evidence pass."
+                    "No Vivado report_power, OpenROAD power, ASIC, CACTI, or process-calibrated "
+                    "RTL power report with a PASS power_mw row was found in this open evidence pass. "
+                    "McPAT activity-proxy evidence is indexed separately under proxy_activity."
                 ),
             },
             {
                 "evidence_level": "proxy_activity",
-                "status": "BLOCKED",
-                "source": "none",
-                "report_path": "",
-                "tool": "",
-                "environment": "current",
+                "status": "PASS" if mcpat else "BLOCKED",
+                "source": mcpat["source"] if mcpat else "none",
+                "report_path": mcpat["report_path"] if mcpat else "",
+                "tool": mcpat["tool"] if mcpat else "",
+                "environment": mcpat["environment"] if mcpat else "current",
                 "notes": (
-                    "No activity-calibrated proxy power flow is available in this pass. "
-                    "SAIF/activity traces are not converted into power without a calibrated tool report."
+                    mcpat["notes"]
+                    if mcpat
+                    else (
+                        "No activity-calibrated proxy power flow is available in this pass. "
+                        "SAIF/activity traces are not converted into power without a calibrated tool report."
+                    )
                 ),
             },
             {

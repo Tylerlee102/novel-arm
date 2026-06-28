@@ -32,6 +32,7 @@ INCLUDE_SUFFIXES = {
     ".tex",
     ".bib",
     ".json",
+    ".xml",
     ".yml",
     ".yaml",
     ".txt",

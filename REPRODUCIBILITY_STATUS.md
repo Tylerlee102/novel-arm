@@ -45,11 +45,12 @@ machine or one-command full-system artifact.
   does not complete, and PASS only when a mapped flow finishes with timing
   fields from the tool report. Missing timing or power fields are recorded as
   `NA`, not inferred.
-- `energy_proxy.csv`, `energy_summary.csv`, and `power_report_index.csv` are
-  `proxy_assumed_memory_energy` evidence only unless a measured-tool-power row
-  appears. `proxy_activity` remains BLOCKED unless activity is converted through
-  a calibrated tool flow. They are not measured silicon, Vivado, CACTI, McPAT,
-  or process-calibrated power reports.
+- `energy_proxy.csv`, `energy_summary.csv`, `power_report_index.csv`, and
+  `copper_mcpat_sensitivity_20260618.csv` separate assumption-based memory
+  energy from activity-based McPAT proxy evidence. `proxy_activity` is PASS only
+  when McPAT rows are generated from measured gem5 ROI activity counters. These
+  rows are proxy/model energy, not measured silicon, RTL signoff power, Vivado
+  power, or process-calibrated power reports.
 - Paper-facing documents, tables, summaries, RTL sources, testbenches, and
   reproduction scripts are included with stable relative paths.
 - The Python audit and summary scripts can be rerun with a local Python 3

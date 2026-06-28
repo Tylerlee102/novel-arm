@@ -1,13 +1,13 @@
-$ {USER_HOME}/work/_temp/oss-cad-suite/bin/yosys -p read_verilog -sv research/copper_prefetch_unit_open.sv; read_verilog -sv research/rtl/integration/copper_near_core_stub.sv; chparam -set ENTRIES 8 -set QUEUE_DEPTH 4 nearcore_stub_plus_copper; synth_ecp5 -top nearcore_stub_plus_copper -json /tmp/copper_mapped_ecp5_lejmxzmi/nearcore_stub_plus_copper.json; stat
+$ {USER_HOME}\tools\oss-cad-suite\bin\yosys.EXE -p read_verilog -sv research/copper_prefetch_unit_open.sv; read_verilog -sv research/rtl/integration/copper_near_core_stub.sv; chparam -set ENTRIES 8 -set QUEUE_DEPTH 4 nearcore_stub_plus_copper; synth_ecp5 -top nearcore_stub_plus_copper -json {USER_HOME}/AppData/Local/Temp/copper_mapped_ecp5_1178sy68/nearcore_stub_plus_copper.json; stat
 
  /----------------------------------------------------------------------------\
  |  yosys -- Yosys Open SYnthesis Suite                                       |
  |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
  |  Distributed under an ISC-like license, type "license" to see terms        |
  \----------------------------------------------------------------------------/
- Yosys 0.66+179 (git sha1 e74db6dea, Release, Clang /usr/bin/clang++ 18.1.8)
+ Yosys 0.66+154 (git sha1 23aadd92a, Release, GNU /usr/bin/x86_64-w64-mingw32-g++ 13.2.1)
 
--- Running command `read_verilog -sv research/copper_prefetch_unit_open.sv; read_verilog -sv research/rtl/integration/copper_near_core_stub.sv; chparam -set ENTRIES 8 -set QUEUE_DEPTH 4 nearcore_stub_plus_copper; synth_ecp5 -top nearcore_stub_plus_copper -json /tmp/copper_mapped_ecp5_lejmxzmi/nearcore_stub_plus_copper.json; stat' --
+-- Running command `read_verilog -sv research/copper_prefetch_unit_open.sv; read_verilog -sv research/rtl/integration/copper_near_core_stub.sv; chparam -set ENTRIES 8 -set QUEUE_DEPTH 4 nearcore_stub_plus_copper; synth_ecp5 -top nearcore_stub_plus_copper -json {USER_HOME}/AppData/Local/Temp/copper_mapped_ecp5_1178sy68/nearcore_stub_plus_copper.json; stat' --
 
 1. Executing Verilog-2005 frontend: research/copper_prefetch_unit_open.sv
 Parsing SystemVerilog input from `research/copper_prefetch_unit_open.sv' to AST representation.
@@ -34,8 +34,8 @@ Generating RTLIL representation for module `$paramod$977dbc26883b7dd257dfd371811
 
 4. Executing SYNTH_LATTICE pass.
 
-4.1. Executing Verilog-2005 frontend: {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_sim_ecp5.v
-Parsing Verilog input from `{USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_sim_ecp5.v' to AST representation.
+4.1. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_sim_ecp5.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_sim_ecp5.v' to AST representation.
 Generating RTLIL representation for module `\LUT4'.
 Generating RTLIL representation for module `\$__ABC9_LUT5'.
 Generating RTLIL representation for module `\$__ABC9_LUT6'.
@@ -87,76 +87,76 @@ Generating RTLIL representation for module `\ILVDS'.
 Generating RTLIL representation for module `\OLVDS'.
 Generating RTLIL representation for module `\CCU2C'.
 Generating RTLIL representation for module `\DP16KD'.
-Replacing existing blackbox module `\FD1P3AX' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_ff.vh:2.1-2.261.
+Replacing existing blackbox module `\FD1P3AX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:2.1-2.261.
 Generating RTLIL representation for module `\FD1P3AX'.
-Replacing existing blackbox module `\FD1P3AY' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_ff.vh:3.1-3.261.
+Replacing existing blackbox module `\FD1P3AY' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:3.1-3.261.
 Generating RTLIL representation for module `\FD1P3AY'.
-Replacing existing blackbox module `\FD1P3BX' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_ff.vh:4.1-4.261.
+Replacing existing blackbox module `\FD1P3BX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:4.1-4.261.
 Generating RTLIL representation for module `\FD1P3BX'.
-Replacing existing blackbox module `\FD1P3DX' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_ff.vh:5.1-5.261.
+Replacing existing blackbox module `\FD1P3DX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:5.1-5.261.
 Generating RTLIL representation for module `\FD1P3DX'.
-Replacing existing blackbox module `\FD1P3IX' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_ff.vh:6.1-6.261.
+Replacing existing blackbox module `\FD1P3IX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:6.1-6.261.
 Generating RTLIL representation for module `\FD1P3IX'.
-Replacing existing blackbox module `\FD1P3JX' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_ff.vh:7.1-7.261.
+Replacing existing blackbox module `\FD1P3JX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:7.1-7.261.
 Generating RTLIL representation for module `\FD1P3JX'.
-Replacing existing blackbox module `\FD1S3AX' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_ff.vh:8.1-8.261.
+Replacing existing blackbox module `\FD1S3AX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:8.1-8.261.
 Generating RTLIL representation for module `\FD1S3AX'.
-Replacing existing blackbox module `\FD1S3AY' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_ff.vh:9.1-9.261.
+Replacing existing blackbox module `\FD1S3AY' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:9.1-9.261.
 Generating RTLIL representation for module `\FD1S3AY'.
-Replacing existing blackbox module `\FD1S3BX' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_ff.vh:10.1-10.261.
+Replacing existing blackbox module `\FD1S3BX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:10.1-10.261.
 Generating RTLIL representation for module `\FD1S3BX'.
-Replacing existing blackbox module `\FD1S3DX' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_ff.vh:11.1-11.261.
+Replacing existing blackbox module `\FD1S3DX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:11.1-11.261.
 Generating RTLIL representation for module `\FD1S3DX'.
-Replacing existing blackbox module `\FD1S3IX' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_ff.vh:12.1-12.261.
+Replacing existing blackbox module `\FD1S3IX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:12.1-12.261.
 Generating RTLIL representation for module `\FD1S3IX'.
-Replacing existing blackbox module `\FD1S3JX' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_ff.vh:13.1-13.261.
+Replacing existing blackbox module `\FD1S3JX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:13.1-13.261.
 Generating RTLIL representation for module `\FD1S3JX'.
-Replacing existing blackbox module `\IFS1P3BX' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_ff.vh:26.1-26.301.
+Replacing existing blackbox module `\IFS1P3BX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:26.1-26.301.
 Generating RTLIL representation for module `\IFS1P3BX'.
-Replacing existing blackbox module `\IFS1P3DX' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_ff.vh:27.1-27.301.
+Replacing existing blackbox module `\IFS1P3DX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:27.1-27.301.
 Generating RTLIL representation for module `\IFS1P3DX'.
-Replacing existing blackbox module `\IFS1P3IX' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_ff.vh:28.1-28.301.
+Replacing existing blackbox module `\IFS1P3IX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:28.1-28.301.
 Generating RTLIL representation for module `\IFS1P3IX'.
-Replacing existing blackbox module `\IFS1P3JX' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_ff.vh:29.1-29.301.
+Replacing existing blackbox module `\IFS1P3JX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:29.1-29.301.
 Generating RTLIL representation for module `\IFS1P3JX'.
-Replacing existing blackbox module `\OFS1P3BX' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_ff.vh:31.1-31.302.
+Replacing existing blackbox module `\OFS1P3BX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:31.1-31.302.
 Generating RTLIL representation for module `\OFS1P3BX'.
-Replacing existing blackbox module `\OFS1P3DX' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_ff.vh:32.1-32.302.
+Replacing existing blackbox module `\OFS1P3DX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:32.1-32.302.
 Generating RTLIL representation for module `\OFS1P3DX'.
-Replacing existing blackbox module `\OFS1P3IX' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_ff.vh:33.1-33.302.
+Replacing existing blackbox module `\OFS1P3IX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:33.1-33.302.
 Generating RTLIL representation for module `\OFS1P3IX'.
-Replacing existing blackbox module `\OFS1P3JX' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_ff.vh:34.1-34.302.
+Replacing existing blackbox module `\OFS1P3JX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:34.1-34.302.
 Generating RTLIL representation for module `\OFS1P3JX'.
-Replacing existing blackbox module `\IB' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_io.vh:2.1-2.157.
+Replacing existing blackbox module `\IB' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_io.vh:2.1-2.157.
 Generating RTLIL representation for module `\IB'.
-Replacing existing blackbox module `\IBPU' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_io.vh:3.1-3.157.
+Replacing existing blackbox module `\IBPU' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_io.vh:3.1-3.157.
 Generating RTLIL representation for module `\IBPU'.
-Replacing existing blackbox module `\IBPD' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_io.vh:4.1-4.157.
+Replacing existing blackbox module `\IBPD' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_io.vh:4.1-4.157.
 Generating RTLIL representation for module `\IBPD'.
-Replacing existing blackbox module `\OB' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_io.vh:5.1-5.157.
+Replacing existing blackbox module `\OB' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_io.vh:5.1-5.157.
 Generating RTLIL representation for module `\OB'.
-Replacing existing blackbox module `\OBZ' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_io.vh:6.1-6.164.
+Replacing existing blackbox module `\OBZ' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_io.vh:6.1-6.164.
 Generating RTLIL representation for module `\OBZ'.
-Replacing existing blackbox module `\OBZPU' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_io.vh:7.1-7.164.
+Replacing existing blackbox module `\OBZPU' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_io.vh:7.1-7.164.
 Generating RTLIL representation for module `\OBZPU'.
-Replacing existing blackbox module `\OBZPD' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_io.vh:8.1-8.164.
+Replacing existing blackbox module `\OBZPD' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_io.vh:8.1-8.164.
 Generating RTLIL representation for module `\OBZPD'.
-Replacing existing blackbox module `\OBCO' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_io.vh:9.1-9.90.
+Replacing existing blackbox module `\OBCO' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_io.vh:9.1-9.90.
 Generating RTLIL representation for module `\OBCO'.
-Replacing existing blackbox module `\BB' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_io.vh:10.1-10.179.
+Replacing existing blackbox module `\BB' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_io.vh:10.1-10.179.
 Generating RTLIL representation for module `\BB'.
-Replacing existing blackbox module `\BBPU' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_io.vh:11.1-11.179.
+Replacing existing blackbox module `\BBPU' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_io.vh:11.1-11.179.
 Generating RTLIL representation for module `\BBPU'.
-Replacing existing blackbox module `\BBPD' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_io.vh:12.1-12.179.
+Replacing existing blackbox module `\BBPD' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_io.vh:12.1-12.179.
 Generating RTLIL representation for module `\BBPD'.
-Replacing existing blackbox module `\ILVDS' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_io.vh:13.1-13.139.
+Replacing existing blackbox module `\ILVDS' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_io.vh:13.1-13.139.
 Generating RTLIL representation for module `\ILVDS'.
-Replacing existing blackbox module `\OLVDS' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_io.vh:14.1-14.146.
+Replacing existing blackbox module `\OLVDS' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_io.vh:14.1-14.146.
 Generating RTLIL representation for module `\OLVDS'.
 Successfully finished Verilog frontend.
 
-4.2. Executing Verilog-2005 frontend: {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_bb_ecp5.v
-Parsing Verilog input from `{USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_bb_ecp5.v' to AST representation.
+4.2. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_bb_ecp5.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_bb_ecp5.v' to AST representation.
 Generating RTLIL representation for module `\GSR'.
 Generating RTLIL representation for module `\PUR'.
 Generating RTLIL representation for module `\SGSR'.
@@ -656,8 +656,8 @@ Finding unused cells or wires in module \nearcore_stub_plus_copper..
 
 4.19. Executing TECHMAP pass (map to technology primitives).
 
-4.19.1. Executing Verilog-2005 frontend: {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/cmp2lut.v
-Parsing Verilog input from `{USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/cmp2lut.v' to AST representation.
+4.19.1. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/cmp2lut.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/cmp2lut.v' to AST representation.
 Generating RTLIL representation for module `\_90_lut_cmp_'.
 Successfully finished Verilog frontend.
 
@@ -676,8 +676,8 @@ Removed 0 unused cells and 3 unused wires.
 
 4.22. Executing TECHMAP pass (map to technology primitives).
 
-4.22.1. Executing Verilog-2005 frontend: {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/mul2dsp.v
-Parsing Verilog input from `{USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/mul2dsp.v' to AST representation.
+4.22.1. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/mul2dsp.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/mul2dsp.v' to AST representation.
 Generating RTLIL representation for module `\_80_mul'.
 Generating RTLIL representation for module `\_90_soft_mul'.
 Successfully finished Verilog frontend.
@@ -688,8 +688,8 @@ No more expansions possible.
 
 4.23. Executing TECHMAP pass (map to technology primitives).
 
-4.23.1. Executing Verilog-2005 frontend: {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/dsp_map_18x18.v
-Parsing Verilog input from `{USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/dsp_map_18x18.v' to AST representation.
+4.23.1. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/dsp_map_18x18.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/dsp_map_18x18.v' to AST representation.
 Generating RTLIL representation for module `$__MUL18X18'.
 Successfully finished Verilog frontend.
 
@@ -792,13 +792,13 @@ Finding unused cells or wires in module \nearcore_stub_plus_copper..
 
 4.29. Executing TECHMAP pass (map to technology primitives).
 
-4.29.1. Executing Verilog-2005 frontend: {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/lutrams_map_trellis.v
-Parsing Verilog input from `{USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/lutrams_map_trellis.v' to AST representation.
+4.29.1. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/lutrams_map_trellis.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/lutrams_map_trellis.v' to AST representation.
 Generating RTLIL representation for module `$__TRELLIS_DPR16X4_'.
 Successfully finished Verilog frontend.
 
-4.29.2. Executing Verilog-2005 frontend: {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/brams_map_16kd.v
-Parsing Verilog input from `{USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/brams_map_16kd.v' to AST representation.
+4.29.2. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/brams_map_16kd.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/brams_map_16kd.v' to AST representation.
 Generating RTLIL representation for module `$__DP16KD_'.
 Generating RTLIL representation for module `$__PDPW16KD_'.
 Successfully finished Verilog frontend.
@@ -1019,8 +1019,8 @@ Optimizing module nearcore_stub_plus_copper.
 
 4.33. Executing TECHMAP pass (map to technology primitives).
 
-4.33.1. Executing Verilog-2005 frontend: {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/techmap.v
-Parsing Verilog input from `{USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/techmap.v' to AST representation.
+4.33.1. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/techmap.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/techmap.v' to AST representation.
 Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
 Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
 Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
@@ -1048,8 +1048,8 @@ Generating RTLIL representation for module `$connect'.
 Generating RTLIL representation for module `$input_port'.
 Successfully finished Verilog frontend.
 
-4.33.2. Executing Verilog-2005 frontend: {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/arith_map_ccu2c.v
-Parsing Verilog input from `{USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/arith_map_ccu2c.v' to AST representation.
+4.33.2. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v' to AST representation.
 Generating RTLIL representation for module `\_80_ccu2c_alu'.
 Successfully finished Verilog frontend.
 
@@ -1123,8 +1123,8 @@ Removed a total of 601 cells.
 
 4.38. Executing TECHMAP pass (map to technology primitives).
 
-4.38.1. Executing Verilog-2005 frontend: {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_map_trellis.v
-Parsing Verilog input from `{USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_map_trellis.v' to AST representation.
+4.38.1. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v' to AST representation.
 Generating RTLIL representation for module `$_DFF_N_'.
 Generating RTLIL representation for module `$_DFF_P_'.
 Generating RTLIL representation for module `$_DFFE_NN_'.
@@ -1220,8 +1220,8 @@ Removed 0 unused cells and 4087 unused wires.
 
 4.44. Executing TECHMAP pass (map to technology primitives).
 
-4.44.1. Executing Verilog-2005 frontend: {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/latches_map.v
-Parsing Verilog input from `{USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/latches_map.v' to AST representation.
+4.44.1. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/latches_map.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/latches_map.v' to AST representation.
 Generating RTLIL representation for module `$_DLATCH_N_'.
 Generating RTLIL representation for module `$_DLATCH_P_'.
 Successfully finished Verilog frontend.
@@ -1242,7 +1242,7 @@ No more expansions possible.
 Cleaned up 0 empty switches.
 
 4.45.3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
-Marked 1 switch rules as full_case in process $proc${USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/common_sim.vh:282$5494 in module $paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF.
+Marked 1 switch rules as full_case in process $proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:282$5494 in module $paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF.
 Removed a total of 0 dead cases.
 
 4.45.3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
@@ -1250,33 +1250,33 @@ Removed 0 redundant assignments.
 Promoted 1 assignment to connection.
 
 4.45.3.4. Executing PROC_INIT pass (extract init attributes).
-Found init rule in `$paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF.$proc${USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/common_sim.vh:278$5495'.
+Found init rule in `$paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF.$proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:278$5495'.
   Set init value: \Q = 1'0
 
 4.45.3.5. Executing PROC_ARST pass (detect async resets in processes).
-Found async reset \muxlsr in `$paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF.$proc${USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/common_sim.vh:282$5494'.
+Found async reset \muxlsr in `$paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF.$proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:282$5494'.
 
 4.45.3.6. Executing PROC_ROM pass (convert switches to ROMs).
 Converted 0 switches.
 <suppressed ~1 debug messages>
 
 4.45.3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
-Creating decoders for process `$paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF.$proc${USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/common_sim.vh:278$5495'.
-Creating decoders for process `$paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF.$proc${USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/common_sim.vh:282$5494'.
+Creating decoders for process `$paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF.$proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:278$5495'.
+Creating decoders for process `$paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF.$proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:282$5494'.
      1/1: $0\Q[0:0]
 
 4.45.3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
 
 4.45.3.9. Executing PROC_DFF pass (convert process syncs to FFs).
-Creating register for signal `$paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF.\Q' using process `$paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF.$proc${USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/common_sim.vh:282$5494'.
+Creating register for signal `$paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF.\Q' using process `$paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF.$proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:282$5494'.
   created $adff cell `$procdff$5500' with positive edge clock and positive level reset.
 
 4.45.3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
 
 4.45.3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
-Removing empty process `$paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF.$proc${USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/common_sim.vh:278$5495'.
-Found and cleaned up 1 empty switch in `$paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF.$proc${USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/common_sim.vh:282$5494'.
-Removing empty process `$paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF.$proc${USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/common_sim.vh:282$5494'.
+Removing empty process `$paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF.$proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:278$5495'.
+Found and cleaned up 1 empty switch in `$paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF.$proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:282$5494'.
+Removing empty process `$paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF.$proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:282$5494'.
 Cleaned up 1 empty switch.
 
 4.45.4. Executing PROC pass (convert processes to netlists).
@@ -1285,7 +1285,7 @@ Cleaned up 1 empty switch.
 Cleaned up 0 empty switches.
 
 4.45.4.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
-Marked 1 switch rules as full_case in process $proc${USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/common_sim.vh:282$5508 in module $paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.
+Marked 1 switch rules as full_case in process $proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:282$5508 in module $paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.
 Removed a total of 0 dead cases.
 
 4.45.4.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
@@ -1293,33 +1293,33 @@ Removed 0 redundant assignments.
 Promoted 1 assignment to connection.
 
 4.45.4.4. Executing PROC_INIT pass (extract init attributes).
-Found init rule in `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.$proc${USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/common_sim.vh:278$5509'.
+Found init rule in `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.$proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:278$5509'.
   Set init value: \Q = 1'0
 
 4.45.4.5. Executing PROC_ARST pass (detect async resets in processes).
-Found async reset \muxlsr in `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.$proc${USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/common_sim.vh:282$5508'.
+Found async reset \muxlsr in `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.$proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:282$5508'.
 
 4.45.4.6. Executing PROC_ROM pass (convert switches to ROMs).
 Converted 0 switches.
 <suppressed ~1 debug messages>
 
 4.45.4.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
-Creating decoders for process `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.$proc${USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/common_sim.vh:278$5509'.
-Creating decoders for process `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.$proc${USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/common_sim.vh:282$5508'.
+Creating decoders for process `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.$proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:278$5509'.
+Creating decoders for process `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.$proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:282$5508'.
      1/1: $0\Q[0:0]
 
 4.45.4.8. Executing PROC_DLATCH pass (convert process syncs to latches).
 
 4.45.4.9. Executing PROC_DFF pass (convert process syncs to FFs).
-Creating register for signal `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.\Q' using process `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.$proc${USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/common_sim.vh:282$5508'.
+Creating register for signal `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.\Q' using process `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.$proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:282$5508'.
   created $adff cell `$procdff$5514' with positive edge clock and positive level reset.
 
 4.45.4.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
 
 4.45.4.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
-Removing empty process `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.$proc${USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/common_sim.vh:278$5509'.
-Found and cleaned up 1 empty switch in `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.$proc${USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/common_sim.vh:282$5508'.
-Removing empty process `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.$proc${USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/common_sim.vh:282$5508'.
+Removing empty process `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.$proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:278$5509'.
+Found and cleaned up 1 empty switch in `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.$proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:282$5508'.
+Removing empty process `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.$proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:282$5508'.
 Cleaned up 1 empty switch.
 
 4.45.5. Executing SCC pass (detecting logic loops).
@@ -1330,8 +1330,8 @@ Found 0 SCCs.
 
 4.45.7. Executing TECHMAP pass (map to technology primitives).
 
-4.45.7.1. Executing Verilog-2005 frontend: {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/techmap.v
-Parsing Verilog input from `{USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/techmap.v' to AST representation.
+4.45.7.1. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/techmap.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/techmap.v' to AST representation.
 Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
 Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
 Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
@@ -1415,8 +1415,8 @@ Optimizing module $paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.
 
 4.45.9. Executing TECHMAP pass (map to technology primitives).
 
-4.45.9.1. Executing Verilog-2005 frontend: {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/abc9_map.v
-Parsing Verilog input from `{USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/abc9_map.v' to AST representation.
+4.45.9.1. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/abc9_map.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/abc9_map.v' to AST representation.
 Successfully finished Verilog frontend.
 
 4.45.9.2. Continuing TECHMAP pass.
@@ -1425,8 +1425,8 @@ Using template $paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF for 
 No more expansions possible.
 <suppressed ~606 debug messages>
 
-4.45.10. Executing Verilog-2005 frontend: {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/abc9_model.v
-Parsing Verilog input from `{USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/abc9_model.v' to AST representation.
+4.45.10. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/abc9_model.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/abc9_model.v' to AST representation.
 Generating RTLIL representation for module `$__ABC9_DELAY'.
 Generating RTLIL representation for module `$__ABC9_SCC_BREAKER'.
 Generating RTLIL representation for module `$__DFF_N__$abc9_flop'.
@@ -1443,8 +1443,8 @@ Successfully finished Verilog frontend.
 
 4.45.14. Executing TECHMAP pass (map to technology primitives).
 
-4.45.14.1. Executing Verilog-2005 frontend: {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/techmap.v
-Parsing Verilog input from `{USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/techmap.v' to AST representation.
+4.45.14.1. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/techmap.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/techmap.v' to AST representation.
 Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
 Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
 Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
@@ -1597,36 +1597,36 @@ ABC: + read_lut <abc-temp-dir>/input.lut
 ABC: + read_box <abc-temp-dir>/input.box 
 ABC: + &read <abc-temp-dir>/input.xaig 
 ABC: + &ps 
-ABC: <abc-temp-dir>/input : i/o =    605/    224  and =    1916  lev =   17 (0.08)  mem = 0.07 MB  box = 639  bb = 602
+ABC: <abc-temp-dir>/input : i/o =    605/    224  and =    1916  lev =   17 (   0.08)  mem = 0.07 MB  box = 639  bb = 602
 ABC: + &scorr 
 ABC: Warning: The network is combinational.
 ABC: + &sweep 
 ABC: + &dc2 
 ABC: + &dch -f -r 
 ABC: + &ps 
-ABC: <abc-temp-dir>/input : i/o =    605/    224  and =    3747  lev =   15 (0.07)  mem = 0.09 MB  ch =  145  box = 639  bb = 602
+ABC: <abc-temp-dir>/input : i/o =    605/    224  and =    3747  lev =   15 (   0.07)  mem = 0.09 MB  ch =  145  box = 639  bb = 602
 ABC: cst =       0  cls =    140  lit =     145  unused =    4780  proof =     0
 ABC: + &if -W 300 -v 
 ABC: K = 7. Memory (bytes): Truth =    0. Cut =   76. Obj =  156. Set =  780. CutMin = no
 ABC: Node =    3747.  Ch =   140.  Total mem =    1.12 MB. Peak cut mem =    0.62 MB.
-ABC: P:  Del = 3854.00.  Ar =    3615.0.  Edge =     5018.  Cut =    33241.  T =     0.01 sec
-ABC: P:  Del = 3802.00.  Ar =    3680.0.  Edge =     5018.  Cut =    32950.  T =     0.01 sec
+ABC: P:  Del = 3854.00.  Ar =    3615.0.  Edge =     5018.  Cut =    33241.  T =     0.00 sec
+ABC: P:  Del = 3802.00.  Ar =    3680.0.  Edge =     5018.  Cut =    32950.  T =     0.00 sec
 ABC: P:  Del = 3802.00.  Ar =    1943.0.  Edge =     4863.  Cut =    46030.  T =     0.01 sec
 ABC: F:  Del = 3798.00.  Ar =    1536.0.  Edge =     5016.  Cut =    37556.  T =     0.01 sec
-ABC: A:  Del = 3798.00.  Ar =    1522.0.  Edge =     4868.  Cut =    33374.  T =     0.01 sec
+ABC: A:  Del = 3798.00.  Ar =    1522.0.  Edge =     4868.  Cut =    33374.  T =     0.00 sec
 ABC: A:  Del = 3798.00.  Ar =    1521.0.  Edge =     4861.  Cut =    33539.  T =     0.01 sec
-ABC: Total time =     0.05 sec
+ABC: Total time =     0.03 sec
 ABC: + &write -n <abc-temp-dir>/output.aig 
 ABC: + &mfs 
 ABC: + &ps -l 
-ABC: <abc-temp-dir>/input : i/o =    605/    224  and =    2498  lev =   19 (0.08)  mem = 0.08 MB  box = 639  bb = 602
+ABC: <abc-temp-dir>/input : i/o =    605/    224  and =    2498  lev =   19 (   0.08)  mem = 0.08 MB  box = 639  bb = 602
 ABC: Mapping (K=7)  :  lut =    707  edge =    2596  lev =    8 (0.04)  levB =   22  mem = 0.04 MB
 ABC: LUT = 707 : 2=135 19.1 %  3=68 9.6 %  4=426 60.3 %  5=61 8.6 %  6=6 0.8 %  7=11 1.6 %  Ave = 3.67
 ABC: + &write -n <abc-temp-dir>/output.aig 
 ABC: + &verify 
-ABC: Networks are equivalent.  Time =     0.06 sec
+ABC: Networks are equivalent.  Time =     0.05 sec
 ABC: + time 
-ABC: elapse: 2.11 seconds, total: 2.11 seconds
+ABC: elapse: 1.29 seconds, total: 1.29 seconds
 
 4.45.17.6. Executing AIGER frontend.
 <suppressed ~1668 debug messages>
@@ -1643,8 +1643,8 @@ Removing temp directory.
 
 4.45.18. Executing TECHMAP pass (map to technology primitives).
 
-4.45.18.1. Executing Verilog-2005 frontend: {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/abc9_unmap.v
-Parsing Verilog input from `{USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/abc9_unmap.v' to AST representation.
+4.45.18.1. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/abc9_unmap.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/abc9_unmap.v' to AST representation.
 Generating RTLIL representation for module `$__DFF_x__$abc9_flop'.
 Generating RTLIL representation for module `$__ABC9_SCC_BREAKER'.
 Successfully finished Verilog frontend.
@@ -1661,8 +1661,8 @@ Removed 7 unused cells and 18652 unused wires.
 
 4.46. Executing TECHMAP pass (map to technology primitives).
 
-4.46.1. Executing Verilog-2005 frontend: {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_map_trellis.v
-Parsing Verilog input from `{USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_map_trellis.v' to AST representation.
+4.46.1. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v' to AST representation.
 Generating RTLIL representation for module `$_DFF_N_'.
 Generating RTLIL representation for module `$_DFF_P_'.
 Generating RTLIL representation for module `$_DFFE_NN_'.
@@ -2075,11 +2075,11 @@ Found and reported 0 problems.
       602   TRELLIS_FF
 
 Warnings: 3 unique messages, 6 total
-End of script. Logfile hash: 078fcc475e, time: 3.60s, user: 1.32s, system: 0.16s, MEM: 65.95 MB peak
-Yosys 0.66+179 (git sha1 e74db6dea, Release, Clang /usr/bin/clang++ 18.1.8)
-Time spent: 59% 1x abc9_exe (2 sec), 11% 1x autoname (0 sec), ...
+End of script. Logfile hash: e98a7a0921
+Yosys 0.66+154 (git sha1 23aadd92a, Release, GNU /usr/bin/x86_64-w64-mingw32-g++ 13.2.1)
+Time spent: 1% 28x opt_expr (0 sec), 1% 25x opt_clean (0 sec), ...
 
-$ {USER_HOME}/work/_temp/oss-cad-suite/bin/nextpnr-ecp5 --85k --package CABGA381 --speed 6 --freq 50 --lpf-allow-unconstrained --json /tmp/copper_mapped_ecp5_lejmxzmi/nearcore_stub_plus_copper.json --textcfg /tmp/copper_mapped_ecp5_lejmxzmi/nearcore_stub_plus_copper.config
+$ {USER_HOME}\tools\oss-cad-suite\bin\nextpnr-ecp5.EXE --85k --package CABGA381 --speed 6 --freq 50 --lpf-allow-unconstrained --json {USER_HOME}\AppData\Local\Temp\copper_mapped_ecp5_1178sy68\nearcore_stub_plus_copper.json --textcfg {USER_HOME}\AppData\Local\Temp\copper_mapped_ecp5_1178sy68\nearcore_stub_plus_copper.config
 
 
 Info: Logic utilisation before packing:
@@ -2101,7 +2101,7 @@ Info:     82 FFs paired with LUTs.
 Info: Generating derived timing constraints...
 Info: Promoting globals...
 Info:     promoting clock net clk$TRELLIS_IO_IN to global network
-Info: Checksum: 0x8ea77d1a
+Info: Checksum: 0xb005016e
 
 Info: Device utilisation:
 Info: 	          TRELLIS_IO:      28/    365     7%
@@ -2140,7 +2140,7 @@ Info:     at initial placer iter 1, wirelen = 2556
 Info:     at initial placer iter 2, wirelen = 2488
 Info:     at initial placer iter 3, wirelen = 2664
 Info: Running main analytical placer, max placement attempts per cell = 315615.
-Info:     at iteration #1, type ALL: wirelen solved = 2446, spread = 7943, legal = 8021; time = 0.04s
+Info:     at iteration #1, type ALL: wirelen solved = 2446, spread = 7943, legal = 8021; time = 0.03s
 Info:     at iteration #2, type ALL: wirelen solved = 2439, spread = 7246, legal = 7334; time = 0.02s
 Info:     at iteration #3, type ALL: wirelen solved = 2678, spread = 7135, legal = 7338; time = 0.02s
 Info:     at iteration #4, type ALL: wirelen solved = 2852, spread = 7067, legal = 7253; time = 0.02s
@@ -2157,14 +2157,14 @@ Info:     at iteration #14, type ALL: wirelen solved = 4435, spread = 6138, lega
 Info:     at iteration #15, type ALL: wirelen solved = 4595, spread = 6274, legal = 6391; time = 0.02s
 Info:     at iteration #16, type ALL: wirelen solved = 4762, spread = 6273, legal = 6605; time = 0.02s
 Info:     at iteration #17, type ALL: wirelen solved = 4697, spread = 6330, legal = 6462; time = 0.02s
-Info:     at iteration #18, type ALL: wirelen solved = 4977, spread = 6360, legal = 6540; time = 0.02s
-Info:     at iteration #19, type ALL: wirelen solved = 4886, spread = 6093, legal = 6281; time = 0.02s
+Info:     at iteration #18, type ALL: wirelen solved = 4977, spread = 6360, legal = 6540; time = 0.01s
+Info:     at iteration #19, type ALL: wirelen solved = 4886, spread = 6093, legal = 6281; time = 0.01s
 Info:     at iteration #20, type ALL: wirelen solved = 4784, spread = 5961, legal = 6135; time = 0.02s
-Info:     at iteration #21, type ALL: wirelen solved = 4903, spread = 5951, legal = 6104; time = 0.02s
-Info: HeAP Placer Time: 0.69s
-Info:   of which solving equations: 0.38s
-Info:   of which spreading cells: 0.10s
-Info:   of which strict legalisation: 0.03s
+Info:     at iteration #21, type ALL: wirelen solved = 4903, spread = 5951, legal = 6104; time = 0.01s
+Info: HeAP Placer Time: 0.55s
+Info:   of which solving equations: 0.28s
+Info:   of which spreading cells: 0.08s
+Info:   of which strict legalisation: 0.02s
 
 Info: Running simulated annealing placer for refinement.
 Info:   at iteration #1: temp = 0.000000, timing cost = 594, wirelen = 6104
@@ -2173,7 +2173,7 @@ Info:   at iteration #10: temp = 0.000000, timing cost = 473, wirelen = 4893
 Info:   at iteration #15: temp = 0.000000, timing cost = 438, wirelen = 4750
 Info:   at iteration #20: temp = 0.000000, timing cost = 555, wirelen = 4692
 Info:   at iteration #21: temp = 0.000000, timing cost = 552, wirelen = 4676 
-Info: SA placement time 0.95s
+Info: SA placement time 0.62s
 
 Info: Max frequency for clock '$glbnet$clk$TRELLIS_IO_IN': 60.65 MHz (PASS at 50.00 MHz)
 
@@ -2204,7 +2204,7 @@ Info: [ 16104,  16891) |*************************+
 Info: [ 16891,  17678) |************************************************************ 
 Info: [ 17678,  18465) |**************************************************+
 Info: [ 18465,  19252) |**************+
-Info: Checksum: 0xf0683af5
+Info: Checksum: 0x0241f524
 Info: Routing globals...
 Info:     routing clock net $glbnet$clk$TRELLIS_IO_IN using global 0
 
@@ -2213,20 +2213,20 @@ Info: Setting up routing queue.
 Info: Routing 4519 arcs.
 Info:            |   (re-)routed arcs  |   delta    | remaining|       time spent     |
 Info:    IterCnt |  w/ripup   wo/ripup |  w/r  wo/r |      arcs| batch(sec) total(sec)|
-Info:       1000 |      465        534 |  465   534 |      4150|       0.30       0.30|
-Info:       2000 |      914       1085 |  449   551 |      3811|       0.27       0.56|
-Info:       3000 |     1448       1551 |  534   466 |      3582|       0.33       0.89|
-Info:       4000 |     1972       2027 |  524   476 |      3182|       0.25       1.14|
-Info:       5000 |     2465       2503 |  493   476 |      2803|       0.24       1.38|
-Info:       6000 |     3091       2869 |  626   366 |      2495|       0.25       1.63|
-Info:       7000 |     3735       3220 |  644   351 |      2166|       0.28       1.90|
-Info:       8000 |     4230       3722 |  495   502 |      1727|       0.28       2.18|
-Info:       9000 |     4582       4364 |  352   642 |      1126|       0.60       2.78|
-Info:      10000 |     4909       4989 |  327   625 |       547|       0.77       3.54|
-Info:      10689 |     5016       5513 |  107   524 |         0|       0.67       4.22|
+Info:       1000 |      465        534 |  465   534 |      4150|       0.20       0.20|
+Info:       2000 |      914       1085 |  449   551 |      3811|       0.17       0.36|
+Info:       3000 |     1448       1551 |  534   466 |      3582|       0.20       0.56|
+Info:       4000 |     1972       2027 |  524   476 |      3182|       0.17       0.73|
+Info:       5000 |     2465       2503 |  493   476 |      2803|       0.16       0.89|
+Info:       6000 |     3091       2869 |  626   366 |      2495|       0.19       1.07|
+Info:       7000 |     3735       3220 |  644   351 |      2166|       0.19       1.26|
+Info:       8000 |     4230       3722 |  495   502 |      1727|       0.17       1.43|
+Info:       9000 |     4582       4364 |  352   642 |      1126|       0.38       1.82|
+Info:      10000 |     4909       4989 |  327   625 |       547|       0.53       2.35|
+Info:      10689 |     5016       5513 |  107   524 |         0|       0.44       2.78|
 Info: Routing complete.
-Info: Router1 time 4.22s
-Info: Checksum: 0xdd4b0040
+Info: Router1 time 2.78s
+Info: Checksum: 0xbb8f9545
 
 Info: Critical path report for clock '$glbnet$clk$TRELLIS_IO_IN' (posedge -> posedge):
 Info:       type curr  total name
@@ -2234,42 +2234,42 @@ Info:   clk-to-q  0.52  0.52 Source u_nearcore_copper.demand_addr_TRELLIS_FF_Q_1
 Info:    routing  1.59  2.11 Net u_nearcore_copper.demand_addr[17] (58,40) -> (65,35)
 Info:                          Sink u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_2_D_LUT4_Z_1_D_LUT4_Z_B_LUT4_A_1_Z_LUT4_Z_1_D_LUT4_Z.D
 Info:                          Defined in:
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
 Info:      logic  0.24  2.35 Source u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_2_D_LUT4_Z_1_D_LUT4_Z_B_LUT4_A_1_Z_LUT4_Z_1_D_LUT4_Z.F
 Info:    routing  0.61  2.96 Net u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_2_D_LUT4_Z_1_D_LUT4_Z_B_LUT4_A_1_Z_LUT4_Z_1_D[2] (65,35) -> (65,35)
 Info:                          Sink u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_2_D_LUT4_Z_1_D_LUT4_Z_B_LUT4_A_1_Z_LUT4_Z_1.C
 Info:                          Defined in:
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
 Info:      logic  0.24  3.20 Source u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_2_D_LUT4_Z_1_D_LUT4_Z_B_LUT4_A_1_Z_LUT4_Z_1.F
 Info:    routing  0.88  4.08 Net u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_2_D_LUT4_Z_1_D_LUT4_Z_B_LUT4_A_1_Z[2] (65,35) -> (64,35)
 Info:                          Sink u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_2_D_LUT4_Z_1_D_LUT4_Z_B_LUT4_A_1_Z_LUT4_D.C
 Info:                          Defined in:
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
 Info:      logic  0.24  4.31 Source u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_2_D_LUT4_Z_1_D_LUT4_Z_B_LUT4_A_1_Z_LUT4_D.F
 Info:    routing  0.65  4.96 Net u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_4_D[3] (64,35) -> (65,36)
 Info:                          Sink u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_4.D
 Info:                          Defined in:
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
 Info:      logic  0.24  5.20 Source u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_4.F
 Info:    routing  0.67  5.86 Net u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0[4] (65,36) -> (65,37)
 Info:                          Sink u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_BLUT_LUT4_Z.M
 Info:                          Defined in:
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
 Info:      logic  0.26  6.12 Source u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_BLUT_LUT4_Z.OFX
 Info:    routing  1.20  7.32 Net u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_2_D[3] (65,37) -> (63,43)
 Info:                          Sink u_nearcore_copper.u_copper_prefetch.queue_count_TRELLIS_FF_Q_CE_TRELLIS_FF_CE_Q_LUT4_Z_D_LUT4_Z_1.C
 Info:                          Defined in:
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
 Info:      logic  0.24  7.55 Source u_nearcore_copper.u_copper_prefetch.queue_count_TRELLIS_FF_Q_CE_TRELLIS_FF_CE_Q_LUT4_Z_D_LUT4_Z_1.F
 Info:    routing  0.61  8.16 Net u_nearcore_copper.u_copper_prefetch.queue_count_TRELLIS_FF_Q_CE_TRELLIS_FF_CE_Q_LUT4_Z_D[2] (63,43) -> (63,43)
 Info:                          Sink u_nearcore_copper.u_copper_prefetch.queue_count_TRELLIS_FF_Q_CE_TRELLIS_FF_CE_Q_LUT4_Z.D
 Info:                          Defined in:
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
 Info:      logic  0.24  8.40 Source u_nearcore_copper.u_copper_prefetch.queue_count_TRELLIS_FF_Q_CE_TRELLIS_FF_CE_Q_LUT4_Z.F
 Info:    routing  0.67  9.07 Net u_nearcore_copper.queue_pop_LUT4_B_D[4] (63,43) -> (63,44)
 Info:                          Sink u_nearcore_copper.prefetch_valid_PFUMX_Z_BLUT_LUT4_Z.M
 Info:                          Defined in:
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
 Info:      logic  0.26  9.32 Source u_nearcore_copper.prefetch_valid_PFUMX_Z_BLUT_LUT4_Z.OFX
 Info:    routing  3.48  12.81 Net prefetch_valid$TRELLIS_IO_OUT (63,44) -> (124,44)
 Info:                          Sink core_status_TRELLIS_FF_Q.M
@@ -2284,7 +2284,7 @@ Info:     source  0.00  0.00 Source enable$tr_io.O
 Info:    routing  3.88  3.88 Net enable$TRELLIS_IO_IN (126,44) -> (63,44)
 Info:                          Sink u_nearcore_copper.prefetch_valid_PFUMX_Z_BLUT_LUT4_Z.D
 Info:                          Defined in:
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
 Info:      logic  0.40  4.28 Source u_nearcore_copper.prefetch_valid_PFUMX_Z_BLUT_LUT4_Z.OFX
 Info:    routing  3.72  8.01 Net prefetch_valid$TRELLIS_IO_OUT (63,44) -> (126,44)
 Info:                          Sink prefetch_valid$tr_io.I
@@ -2298,7 +2298,7 @@ Info:     source  0.00  0.00 Source enable$tr_io.O
 Info:    routing  3.88  3.88 Net enable$TRELLIS_IO_IN (126,44) -> (63,44)
 Info:                          Sink u_nearcore_copper.prefetch_valid_PFUMX_Z_BLUT_LUT4_Z.D
 Info:                          Defined in:
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
 Info:      logic  0.40  4.28 Source u_nearcore_copper.prefetch_valid_PFUMX_Z_BLUT_LUT4_Z.OFX
 Info:    routing  3.48  7.76 Net prefetch_valid$TRELLIS_IO_OUT (63,44) -> (124,44)
 Info:                          Sink core_status_TRELLIS_FF_Q.M
@@ -2313,42 +2313,42 @@ Info:   clk-to-q  0.52  0.52 Source u_nearcore_copper.demand_addr_TRELLIS_FF_Q_1
 Info:    routing  1.59  2.11 Net u_nearcore_copper.demand_addr[17] (58,40) -> (65,35)
 Info:                          Sink u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_2_D_LUT4_Z_1_D_LUT4_Z_B_LUT4_A_1_Z_LUT4_Z_1_D_LUT4_Z.D
 Info:                          Defined in:
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
 Info:      logic  0.24  2.35 Source u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_2_D_LUT4_Z_1_D_LUT4_Z_B_LUT4_A_1_Z_LUT4_Z_1_D_LUT4_Z.F
 Info:    routing  0.61  2.96 Net u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_2_D_LUT4_Z_1_D_LUT4_Z_B_LUT4_A_1_Z_LUT4_Z_1_D[2] (65,35) -> (65,35)
 Info:                          Sink u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_2_D_LUT4_Z_1_D_LUT4_Z_B_LUT4_A_1_Z_LUT4_Z_1.C
 Info:                          Defined in:
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
 Info:      logic  0.24  3.20 Source u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_2_D_LUT4_Z_1_D_LUT4_Z_B_LUT4_A_1_Z_LUT4_Z_1.F
 Info:    routing  0.88  4.08 Net u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_2_D_LUT4_Z_1_D_LUT4_Z_B_LUT4_A_1_Z[2] (65,35) -> (64,35)
 Info:                          Sink u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_2_D_LUT4_Z_1_D_LUT4_Z_B_LUT4_A_1_Z_LUT4_D.C
 Info:                          Defined in:
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
 Info:      logic  0.24  4.31 Source u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_2_D_LUT4_Z_1_D_LUT4_Z_B_LUT4_A_1_Z_LUT4_D.F
 Info:    routing  0.65  4.96 Net u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_4_D[3] (64,35) -> (65,36)
 Info:                          Sink u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_4.D
 Info:                          Defined in:
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
 Info:      logic  0.24  5.20 Source u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_4.F
 Info:    routing  0.67  5.86 Net u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0[4] (65,36) -> (65,37)
 Info:                          Sink u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_BLUT_LUT4_Z.M
 Info:                          Defined in:
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
 Info:      logic  0.26  6.12 Source u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_BLUT_LUT4_Z.OFX
 Info:    routing  1.20  7.32 Net u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_2_D[3] (65,37) -> (63,43)
 Info:                          Sink u_nearcore_copper.u_copper_prefetch.queue_count_TRELLIS_FF_Q_CE_TRELLIS_FF_CE_Q_LUT4_Z_D_LUT4_Z_1.C
 Info:                          Defined in:
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
 Info:      logic  0.24  7.55 Source u_nearcore_copper.u_copper_prefetch.queue_count_TRELLIS_FF_Q_CE_TRELLIS_FF_CE_Q_LUT4_Z_D_LUT4_Z_1.F
 Info:    routing  0.61  8.16 Net u_nearcore_copper.u_copper_prefetch.queue_count_TRELLIS_FF_Q_CE_TRELLIS_FF_CE_Q_LUT4_Z_D[2] (63,43) -> (63,43)
 Info:                          Sink u_nearcore_copper.u_copper_prefetch.queue_count_TRELLIS_FF_Q_CE_TRELLIS_FF_CE_Q_LUT4_Z.D
 Info:                          Defined in:
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
 Info:      logic  0.24  8.40 Source u_nearcore_copper.u_copper_prefetch.queue_count_TRELLIS_FF_Q_CE_TRELLIS_FF_CE_Q_LUT4_Z.F
 Info:    routing  0.67  9.07 Net u_nearcore_copper.queue_pop_LUT4_B_D[4] (63,43) -> (63,44)
 Info:                          Sink u_nearcore_copper.prefetch_valid_PFUMX_Z_BLUT_LUT4_Z.M
 Info:                          Defined in:
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
 Info:      logic  0.26  9.32 Source u_nearcore_copper.prefetch_valid_PFUMX_Z_BLUT_LUT4_Z.OFX
 Info:    routing  3.72  13.05 Net prefetch_valid$TRELLIS_IO_OUT (63,44) -> (126,44)
 Info:                          Sink prefetch_valid$tr_io.I

@@ -9,17 +9,17 @@ Invalid/nonphysical McPAT rows excluded from means: 0.
 
 | Policy | Workloads | Runtime delta | McPAT total-energy delta | McPAT dynamic-energy delta | McPAT runtime-power delta | L1D miss delta | L2 read-miss delta |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| naive | 26 | -0.322% | -0.608% | -1.050% | -0.728% | -0.939% | 0.720% |
-| copper_clpd64k_peb | 26 | -0.338% | -0.625% | -1.068% | -0.730% | -1.177% | 0.574% |
-| spp | 26 | -12.061% | -9.892% | -5.296% | 7.544% | -37.955% | 36.941% |
-| spp_copper_slack | 26 | -12.062% | -11.521% | -10.334% | 2.031% | -38.025% | 37.031% |
+| naive | 26 | -0.322% | -0.304% | -0.267% | 0.056% | -0.939% | 0.720% |
+| copper_clpd64k_peb | 26 | -0.338% | -0.321% | -0.285% | 0.054% | -1.177% | 0.574% |
+| spp | 26 | -12.061% | -11.279% | -9.685% | 2.868% | -37.955% | 36.941% |
+| spp_copper_slack | 26 | -12.062% | -11.279% | -9.683% | 2.867% | -38.025% | 37.031% |
 
 ## Pairwise Checks
 
 - McPAT total runtime energy: copper_clpd64k_peb <= naive on 12/26; mean delta -0.017%.
 - McPAT runtime dynamic energy: copper_clpd64k_peb <= naive on 12/26; mean delta -0.019%.
-- McPAT total runtime energy: spp_copper_slack <= spp on 14/26; mean delta -1.206%.
-- McPAT runtime dynamic energy: spp_copper_slack <= spp on 13/26; mean delta -2.241%.
+- McPAT total runtime energy: spp_copper_slack <= spp on 13/26; mean delta 0.006%.
+- McPAT runtime dynamic energy: spp_copper_slack <= spp on 12/26; mean delta 0.006%.
 
 ## Per-Workload McPAT Total-Energy Delta
 
@@ -46,8 +46,8 @@ Invalid/nonphysical McPAT rows excluded from means: 0.
 | sqlite_stress | -0.002% | -0.031% | -2.364% | -2.325% |
 | tlssvc_small | -0.116% | -0.076% | -12.985% | -13.009% |
 | yyjson_medium | -0.091% | -0.063% | -16.936% | -16.930% |
-| yyjson_stress | -7.943% | -7.963% | -26.669% | -26.748% |
-| zlib_seed1 | -0.010% | 0.031% | 34.365% | -7.997% |
+| yyjson_stress | -0.023% | -0.046% | -20.361% | -20.447% |
+| zlib_seed1 | -0.010% | 0.031% | -7.998% | -7.997% |
 | zlib_tiny | -0.025% | -0.053% | -8.040% | -8.038% |
 | zstd_seed1 | -0.020% | -0.080% | -13.511% | -13.554% |
 | zstd_tiny | -0.169% | -0.109% | -13.629% | -13.429% |

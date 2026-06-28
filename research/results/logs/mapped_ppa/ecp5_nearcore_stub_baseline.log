@@ -1,13 +1,13 @@
-$ {USER_HOME}/work/_temp/oss-cad-suite/bin/yosys -p read_verilog -sv research/baseline_prefetch_unit.sv; read_verilog -sv research/rtl/integration/copper_near_core_stub.sv; synth_ecp5 -top nearcore_stub_baseline -json /tmp/copper_mapped_ecp5_yr19m55d/nearcore_stub_baseline.json; stat
+$ {USER_HOME}\tools\oss-cad-suite\bin\yosys.EXE -p read_verilog -sv research/baseline_prefetch_unit.sv; read_verilog -sv research/rtl/integration/copper_near_core_stub.sv; synth_ecp5 -top nearcore_stub_baseline -json {USER_HOME}/AppData/Local/Temp/copper_mapped_ecp5_0fhes05n/nearcore_stub_baseline.json; stat
 
  /----------------------------------------------------------------------------\
  |  yosys -- Yosys Open SYnthesis Suite                                       |
  |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
  |  Distributed under an ISC-like license, type "license" to see terms        |
  \----------------------------------------------------------------------------/
- Yosys 0.66+179 (git sha1 e74db6dea, Release, Clang /usr/bin/clang++ 18.1.8)
+ Yosys 0.66+154 (git sha1 23aadd92a, Release, GNU /usr/bin/x86_64-w64-mingw32-g++ 13.2.1)
 
--- Running command `read_verilog -sv research/baseline_prefetch_unit.sv; read_verilog -sv research/rtl/integration/copper_near_core_stub.sv; synth_ecp5 -top nearcore_stub_baseline -json /tmp/copper_mapped_ecp5_yr19m55d/nearcore_stub_baseline.json; stat' --
+-- Running command `read_verilog -sv research/baseline_prefetch_unit.sv; read_verilog -sv research/rtl/integration/copper_near_core_stub.sv; synth_ecp5 -top nearcore_stub_baseline -json {USER_HOME}/AppData/Local/Temp/copper_mapped_ecp5_0fhes05n/nearcore_stub_baseline.json; stat' --
 
 1. Executing Verilog-2005 frontend: research/baseline_prefetch_unit.sv
 Parsing SystemVerilog input from `research/baseline_prefetch_unit.sv' to AST representation.
@@ -24,8 +24,8 @@ Successfully finished Verilog frontend.
 
 3. Executing SYNTH_LATTICE pass.
 
-3.1. Executing Verilog-2005 frontend: {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_sim_ecp5.v
-Parsing Verilog input from `{USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_sim_ecp5.v' to AST representation.
+3.1. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_sim_ecp5.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_sim_ecp5.v' to AST representation.
 Generating RTLIL representation for module `\LUT4'.
 Generating RTLIL representation for module `\$__ABC9_LUT5'.
 Generating RTLIL representation for module `\$__ABC9_LUT6'.
@@ -77,76 +77,76 @@ Generating RTLIL representation for module `\ILVDS'.
 Generating RTLIL representation for module `\OLVDS'.
 Generating RTLIL representation for module `\CCU2C'.
 Generating RTLIL representation for module `\DP16KD'.
-Replacing existing blackbox module `\FD1P3AX' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_ff.vh:2.1-2.261.
+Replacing existing blackbox module `\FD1P3AX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:2.1-2.261.
 Generating RTLIL representation for module `\FD1P3AX'.
-Replacing existing blackbox module `\FD1P3AY' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_ff.vh:3.1-3.261.
+Replacing existing blackbox module `\FD1P3AY' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:3.1-3.261.
 Generating RTLIL representation for module `\FD1P3AY'.
-Replacing existing blackbox module `\FD1P3BX' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_ff.vh:4.1-4.261.
+Replacing existing blackbox module `\FD1P3BX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:4.1-4.261.
 Generating RTLIL representation for module `\FD1P3BX'.
-Replacing existing blackbox module `\FD1P3DX' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_ff.vh:5.1-5.261.
+Replacing existing blackbox module `\FD1P3DX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:5.1-5.261.
 Generating RTLIL representation for module `\FD1P3DX'.
-Replacing existing blackbox module `\FD1P3IX' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_ff.vh:6.1-6.261.
+Replacing existing blackbox module `\FD1P3IX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:6.1-6.261.
 Generating RTLIL representation for module `\FD1P3IX'.
-Replacing existing blackbox module `\FD1P3JX' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_ff.vh:7.1-7.261.
+Replacing existing blackbox module `\FD1P3JX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:7.1-7.261.
 Generating RTLIL representation for module `\FD1P3JX'.
-Replacing existing blackbox module `\FD1S3AX' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_ff.vh:8.1-8.261.
+Replacing existing blackbox module `\FD1S3AX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:8.1-8.261.
 Generating RTLIL representation for module `\FD1S3AX'.
-Replacing existing blackbox module `\FD1S3AY' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_ff.vh:9.1-9.261.
+Replacing existing blackbox module `\FD1S3AY' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:9.1-9.261.
 Generating RTLIL representation for module `\FD1S3AY'.
-Replacing existing blackbox module `\FD1S3BX' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_ff.vh:10.1-10.261.
+Replacing existing blackbox module `\FD1S3BX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:10.1-10.261.
 Generating RTLIL representation for module `\FD1S3BX'.
-Replacing existing blackbox module `\FD1S3DX' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_ff.vh:11.1-11.261.
+Replacing existing blackbox module `\FD1S3DX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:11.1-11.261.
 Generating RTLIL representation for module `\FD1S3DX'.
-Replacing existing blackbox module `\FD1S3IX' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_ff.vh:12.1-12.261.
+Replacing existing blackbox module `\FD1S3IX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:12.1-12.261.
 Generating RTLIL representation for module `\FD1S3IX'.
-Replacing existing blackbox module `\FD1S3JX' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_ff.vh:13.1-13.261.
+Replacing existing blackbox module `\FD1S3JX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:13.1-13.261.
 Generating RTLIL representation for module `\FD1S3JX'.
-Replacing existing blackbox module `\IFS1P3BX' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_ff.vh:26.1-26.301.
+Replacing existing blackbox module `\IFS1P3BX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:26.1-26.301.
 Generating RTLIL representation for module `\IFS1P3BX'.
-Replacing existing blackbox module `\IFS1P3DX' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_ff.vh:27.1-27.301.
+Replacing existing blackbox module `\IFS1P3DX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:27.1-27.301.
 Generating RTLIL representation for module `\IFS1P3DX'.
-Replacing existing blackbox module `\IFS1P3IX' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_ff.vh:28.1-28.301.
+Replacing existing blackbox module `\IFS1P3IX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:28.1-28.301.
 Generating RTLIL representation for module `\IFS1P3IX'.
-Replacing existing blackbox module `\IFS1P3JX' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_ff.vh:29.1-29.301.
+Replacing existing blackbox module `\IFS1P3JX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:29.1-29.301.
 Generating RTLIL representation for module `\IFS1P3JX'.
-Replacing existing blackbox module `\OFS1P3BX' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_ff.vh:31.1-31.302.
+Replacing existing blackbox module `\OFS1P3BX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:31.1-31.302.
 Generating RTLIL representation for module `\OFS1P3BX'.
-Replacing existing blackbox module `\OFS1P3DX' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_ff.vh:32.1-32.302.
+Replacing existing blackbox module `\OFS1P3DX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:32.1-32.302.
 Generating RTLIL representation for module `\OFS1P3DX'.
-Replacing existing blackbox module `\OFS1P3IX' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_ff.vh:33.1-33.302.
+Replacing existing blackbox module `\OFS1P3IX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:33.1-33.302.
 Generating RTLIL representation for module `\OFS1P3IX'.
-Replacing existing blackbox module `\OFS1P3JX' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_ff.vh:34.1-34.302.
+Replacing existing blackbox module `\OFS1P3JX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:34.1-34.302.
 Generating RTLIL representation for module `\OFS1P3JX'.
-Replacing existing blackbox module `\IB' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_io.vh:2.1-2.157.
+Replacing existing blackbox module `\IB' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_io.vh:2.1-2.157.
 Generating RTLIL representation for module `\IB'.
-Replacing existing blackbox module `\IBPU' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_io.vh:3.1-3.157.
+Replacing existing blackbox module `\IBPU' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_io.vh:3.1-3.157.
 Generating RTLIL representation for module `\IBPU'.
-Replacing existing blackbox module `\IBPD' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_io.vh:4.1-4.157.
+Replacing existing blackbox module `\IBPD' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_io.vh:4.1-4.157.
 Generating RTLIL representation for module `\IBPD'.
-Replacing existing blackbox module `\OB' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_io.vh:5.1-5.157.
+Replacing existing blackbox module `\OB' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_io.vh:5.1-5.157.
 Generating RTLIL representation for module `\OB'.
-Replacing existing blackbox module `\OBZ' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_io.vh:6.1-6.164.
+Replacing existing blackbox module `\OBZ' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_io.vh:6.1-6.164.
 Generating RTLIL representation for module `\OBZ'.
-Replacing existing blackbox module `\OBZPU' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_io.vh:7.1-7.164.
+Replacing existing blackbox module `\OBZPU' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_io.vh:7.1-7.164.
 Generating RTLIL representation for module `\OBZPU'.
-Replacing existing blackbox module `\OBZPD' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_io.vh:8.1-8.164.
+Replacing existing blackbox module `\OBZPD' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_io.vh:8.1-8.164.
 Generating RTLIL representation for module `\OBZPD'.
-Replacing existing blackbox module `\OBCO' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_io.vh:9.1-9.90.
+Replacing existing blackbox module `\OBCO' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_io.vh:9.1-9.90.
 Generating RTLIL representation for module `\OBCO'.
-Replacing existing blackbox module `\BB' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_io.vh:10.1-10.179.
+Replacing existing blackbox module `\BB' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_io.vh:10.1-10.179.
 Generating RTLIL representation for module `\BB'.
-Replacing existing blackbox module `\BBPU' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_io.vh:11.1-11.179.
+Replacing existing blackbox module `\BBPU' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_io.vh:11.1-11.179.
 Generating RTLIL representation for module `\BBPU'.
-Replacing existing blackbox module `\BBPD' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_io.vh:12.1-12.179.
+Replacing existing blackbox module `\BBPD' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_io.vh:12.1-12.179.
 Generating RTLIL representation for module `\BBPD'.
-Replacing existing blackbox module `\ILVDS' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_io.vh:13.1-13.139.
+Replacing existing blackbox module `\ILVDS' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_io.vh:13.1-13.139.
 Generating RTLIL representation for module `\ILVDS'.
-Replacing existing blackbox module `\OLVDS' at {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_io.vh:14.1-14.146.
+Replacing existing blackbox module `\OLVDS' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_io.vh:14.1-14.146.
 Generating RTLIL representation for module `\OLVDS'.
 Successfully finished Verilog frontend.
 
-3.2. Executing Verilog-2005 frontend: {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_bb_ecp5.v
-Parsing Verilog input from `{USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_bb_ecp5.v' to AST representation.
+3.2. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_bb_ecp5.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_bb_ecp5.v' to AST representation.
 Generating RTLIL representation for module `\GSR'.
 Generating RTLIL representation for module `\PUR'.
 Generating RTLIL representation for module `\SGSR'.
@@ -443,8 +443,8 @@ Finding unused cells or wires in module \nearcore_stub_baseline..
 
 3.19. Executing TECHMAP pass (map to technology primitives).
 
-3.19.1. Executing Verilog-2005 frontend: {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/cmp2lut.v
-Parsing Verilog input from `{USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/cmp2lut.v' to AST representation.
+3.19.1. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/cmp2lut.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/cmp2lut.v' to AST representation.
 Generating RTLIL representation for module `\_90_lut_cmp_'.
 Successfully finished Verilog frontend.
 
@@ -460,8 +460,8 @@ Finding unused cells or wires in module \nearcore_stub_baseline..
 
 3.22. Executing TECHMAP pass (map to technology primitives).
 
-3.22.1. Executing Verilog-2005 frontend: {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/mul2dsp.v
-Parsing Verilog input from `{USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/mul2dsp.v' to AST representation.
+3.22.1. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/mul2dsp.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/mul2dsp.v' to AST representation.
 Generating RTLIL representation for module `\_80_mul'.
 Generating RTLIL representation for module `\_90_soft_mul'.
 Successfully finished Verilog frontend.
@@ -472,8 +472,8 @@ No more expansions possible.
 
 3.23. Executing TECHMAP pass (map to technology primitives).
 
-3.23.1. Executing Verilog-2005 frontend: {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/dsp_map_18x18.v
-Parsing Verilog input from `{USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/dsp_map_18x18.v' to AST representation.
+3.23.1. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/dsp_map_18x18.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/dsp_map_18x18.v' to AST representation.
 Generating RTLIL representation for module `$__MUL18X18'.
 Successfully finished Verilog frontend.
 
@@ -562,13 +562,13 @@ Finding unused cells or wires in module \nearcore_stub_baseline..
 
 3.29. Executing TECHMAP pass (map to technology primitives).
 
-3.29.1. Executing Verilog-2005 frontend: {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/lutrams_map_trellis.v
-Parsing Verilog input from `{USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/lutrams_map_trellis.v' to AST representation.
+3.29.1. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/lutrams_map_trellis.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/lutrams_map_trellis.v' to AST representation.
 Generating RTLIL representation for module `$__TRELLIS_DPR16X4_'.
 Successfully finished Verilog frontend.
 
-3.29.2. Executing Verilog-2005 frontend: {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/brams_map_16kd.v
-Parsing Verilog input from `{USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/brams_map_16kd.v' to AST representation.
+3.29.2. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/brams_map_16kd.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/brams_map_16kd.v' to AST representation.
 Generating RTLIL representation for module `$__DP16KD_'.
 Generating RTLIL representation for module `$__PDPW16KD_'.
 Successfully finished Verilog frontend.
@@ -673,8 +673,8 @@ Optimizing module nearcore_stub_baseline.
 
 3.33. Executing TECHMAP pass (map to technology primitives).
 
-3.33.1. Executing Verilog-2005 frontend: {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/techmap.v
-Parsing Verilog input from `{USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/techmap.v' to AST representation.
+3.33.1. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/techmap.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/techmap.v' to AST representation.
 Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
 Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
 Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
@@ -702,8 +702,8 @@ Generating RTLIL representation for module `$connect'.
 Generating RTLIL representation for module `$input_port'.
 Successfully finished Verilog frontend.
 
-3.33.2. Executing Verilog-2005 frontend: {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/arith_map_ccu2c.v
-Parsing Verilog input from `{USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/arith_map_ccu2c.v' to AST representation.
+3.33.2. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v' to AST representation.
 Generating RTLIL representation for module `\_80_ccu2c_alu'.
 Successfully finished Verilog frontend.
 
@@ -760,8 +760,8 @@ Removed a total of 58 cells.
 
 3.38. Executing TECHMAP pass (map to technology primitives).
 
-3.38.1. Executing Verilog-2005 frontend: {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_map_trellis.v
-Parsing Verilog input from `{USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_map_trellis.v' to AST representation.
+3.38.1. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v' to AST representation.
 Generating RTLIL representation for module `$_DFF_N_'.
 Generating RTLIL representation for module `$_DFF_P_'.
 Generating RTLIL representation for module `$_DFFE_NN_'.
@@ -855,8 +855,8 @@ Removed 0 unused cells and 353 unused wires.
 
 3.44. Executing TECHMAP pass (map to technology primitives).
 
-3.44.1. Executing Verilog-2005 frontend: {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/latches_map.v
-Parsing Verilog input from `{USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/latches_map.v' to AST representation.
+3.44.1. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/latches_map.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/latches_map.v' to AST representation.
 Generating RTLIL representation for module `$_DLATCH_N_'.
 Generating RTLIL representation for module `$_DLATCH_P_'.
 Successfully finished Verilog frontend.
@@ -877,7 +877,7 @@ No more expansions possible.
 Cleaned up 0 empty switches.
 
 3.45.3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
-Marked 1 switch rules as full_case in process $proc${USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/common_sim.vh:282$1153 in module $paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.
+Marked 1 switch rules as full_case in process $proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:282$1153 in module $paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.
 Removed a total of 0 dead cases.
 
 3.45.3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
@@ -885,33 +885,33 @@ Removed 0 redundant assignments.
 Promoted 1 assignment to connection.
 
 3.45.3.4. Executing PROC_INIT pass (extract init attributes).
-Found init rule in `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.$proc${USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/common_sim.vh:278$1154'.
+Found init rule in `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.$proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:278$1154'.
   Set init value: \Q = 1'0
 
 3.45.3.5. Executing PROC_ARST pass (detect async resets in processes).
-Found async reset \muxlsr in `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.$proc${USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/common_sim.vh:282$1153'.
+Found async reset \muxlsr in `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.$proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:282$1153'.
 
 3.45.3.6. Executing PROC_ROM pass (convert switches to ROMs).
 Converted 0 switches.
 <suppressed ~1 debug messages>
 
 3.45.3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
-Creating decoders for process `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.$proc${USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/common_sim.vh:278$1154'.
-Creating decoders for process `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.$proc${USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/common_sim.vh:282$1153'.
+Creating decoders for process `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.$proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:278$1154'.
+Creating decoders for process `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.$proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:282$1153'.
      1/1: $0\Q[0:0]
 
 3.45.3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
 
 3.45.3.9. Executing PROC_DFF pass (convert process syncs to FFs).
-Creating register for signal `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.\Q' using process `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.$proc${USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/common_sim.vh:282$1153'.
+Creating register for signal `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.\Q' using process `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.$proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:282$1153'.
   created $adff cell `$procdff$1159' with positive edge clock and positive level reset.
 
 3.45.3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
 
 3.45.3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
-Removing empty process `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.$proc${USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/common_sim.vh:278$1154'.
-Found and cleaned up 1 empty switch in `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.$proc${USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/common_sim.vh:282$1153'.
-Removing empty process `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.$proc${USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/common_sim.vh:282$1153'.
+Removing empty process `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.$proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:278$1154'.
+Found and cleaned up 1 empty switch in `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.$proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:282$1153'.
+Removing empty process `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.$proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:282$1153'.
 Cleaned up 1 empty switch.
 
 3.45.4. Executing SCC pass (detecting logic loops).
@@ -922,8 +922,8 @@ Found 0 SCCs.
 
 3.45.6. Executing TECHMAP pass (map to technology primitives).
 
-3.45.6.1. Executing Verilog-2005 frontend: {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/techmap.v
-Parsing Verilog input from `{USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/techmap.v' to AST representation.
+3.45.6.1. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/techmap.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/techmap.v' to AST representation.
 Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
 Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
 Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
@@ -994,8 +994,8 @@ Optimizing module $paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.
 
 3.45.8. Executing TECHMAP pass (map to technology primitives).
 
-3.45.8.1. Executing Verilog-2005 frontend: {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/abc9_map.v
-Parsing Verilog input from `{USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/abc9_map.v' to AST representation.
+3.45.8.1. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/abc9_map.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/abc9_map.v' to AST representation.
 Successfully finished Verilog frontend.
 
 3.45.8.2. Continuing TECHMAP pass.
@@ -1003,8 +1003,8 @@ Using template $paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF for 
 No more expansions possible.
 <suppressed ~62 debug messages>
 
-3.45.9. Executing Verilog-2005 frontend: {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/abc9_model.v
-Parsing Verilog input from `{USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/abc9_model.v' to AST representation.
+3.45.9. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/abc9_model.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/abc9_model.v' to AST representation.
 Generating RTLIL representation for module `$__ABC9_DELAY'.
 Generating RTLIL representation for module `$__ABC9_SCC_BREAKER'.
 Generating RTLIL representation for module `$__DFF_N__$abc9_flop'.
@@ -1021,8 +1021,8 @@ Successfully finished Verilog frontend.
 
 3.45.13. Executing TECHMAP pass (map to technology primitives).
 
-3.45.13.1. Executing Verilog-2005 frontend: {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/techmap.v
-Parsing Verilog input from `{USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/techmap.v' to AST representation.
+3.45.13.1. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/techmap.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/techmap.v' to AST representation.
 Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
 Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
 Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
@@ -1169,14 +1169,14 @@ ABC: + read_lut <abc-temp-dir>/input.lut
 ABC: + read_box <abc-temp-dir>/input.box 
 ABC: + &read <abc-temp-dir>/input.xaig 
 ABC: + &ps 
-ABC: <abc-temp-dir>/input : i/o =     62/    125  and =       1  lev =    1 (0.00)  mem = 0.01 MB  box = 88  bb = 59
+ABC: <abc-temp-dir>/input : i/o =     62/    125  and =       1  lev =    1 (   0.00)  mem = 0.01 MB  box = 88  bb = 59
 ABC: + &scorr 
 ABC: Warning: The network is combinational.
 ABC: + &sweep 
 ABC: + &dc2 
 ABC: + &dch -f -r 
 ABC: + &ps 
-ABC: <abc-temp-dir>/input : i/o =     62/    125  and =       1  lev =    1 (0.00)  mem = 0.01 MB  ch =    0  box = 88  bb = 59
+ABC: <abc-temp-dir>/input : i/o =     62/    125  and =       1  lev =    1 (   0.00)  mem = 0.01 MB  ch =    0  box = 88  bb = 59
 ABC: cst =       0  cls =      0  lit =       0  unused =     209  proof =     0
 ABC: + &if -W 300 -v 
 ABC: K = 7. Memory (bytes): Truth =    0. Cut =   76. Obj =  156. Set =  780. CutMin = no
@@ -1192,7 +1192,7 @@ ABC: + &write -n <abc-temp-dir>/output.aig
 ABC: + &mfs 
 ABC: The network is not changed by "&mfs".
 ABC: + &ps -l 
-ABC: <abc-temp-dir>/input : i/o =     62/    125  and =       1  lev =    1 (0.00)  mem = 0.01 MB  box = 88  bb = 59
+ABC: <abc-temp-dir>/input : i/o =     62/    125  and =       1  lev =    1 (   0.00)  mem = 0.01 MB  box = 88  bb = 59
 ABC: Mapping (K=2)  :  lut =      1  edge =       2  lev =    1 (0.00)  levB =   22  mem = 0.00 MB
 ABC: LUT = 1 : 2=1 100.0 %  Ave = 2.00
 ABC: + &write -n <abc-temp-dir>/output.aig 
@@ -1215,8 +1215,8 @@ Removing temp directory.
 
 3.45.17. Executing TECHMAP pass (map to technology primitives).
 
-3.45.17.1. Executing Verilog-2005 frontend: {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/abc9_unmap.v
-Parsing Verilog input from `{USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/abc9_unmap.v' to AST representation.
+3.45.17.1. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/abc9_unmap.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/abc9_unmap.v' to AST representation.
 Generating RTLIL representation for module `$__DFF_x__$abc9_flop'.
 Generating RTLIL representation for module `$__ABC9_SCC_BREAKER'.
 Successfully finished Verilog frontend.
@@ -1231,8 +1231,8 @@ Removed 0 unused cells and 1709 unused wires.
 
 3.46. Executing TECHMAP pass (map to technology primitives).
 
-3.46.1. Executing Verilog-2005 frontend: {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_map_trellis.v
-Parsing Verilog input from `{USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/cells_map_trellis.v' to AST representation.
+3.46.1. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v' to AST representation.
 Generating RTLIL representation for module `$_DFF_N_'.
 Generating RTLIL representation for module `$_DFF_P_'.
 Generating RTLIL representation for module `$_DFFE_NN_'.
@@ -1396,11 +1396,11 @@ Found and reported 0 problems.
         4   LUT4
        59   TRELLIS_FF
 
-End of script. Logfile hash: 1428dc89d1, time: 0.56s, user: 0.40s, system: 0.13s, MEM: 30.77 MB peak
-Yosys 0.66+179 (git sha1 e74db6dea, Release, Clang /usr/bin/clang++ 18.1.8)
-Time spent: 52% 23x read_verilog (0 sec), 12% 1x synth_lattice (0 sec), ...
+End of script. Logfile hash: fff6dd0607
+Yosys 0.66+154 (git sha1 23aadd92a, Release, GNU /usr/bin/x86_64-w64-mingw32-g++ 13.2.1)
+Time spent: 1% 23x read_verilog (0 sec), 1% 21x opt_expr (0 sec), ...
 
-$ {USER_HOME}/work/_temp/oss-cad-suite/bin/nextpnr-ecp5 --85k --package CABGA381 --speed 6 --freq 50 --lpf-allow-unconstrained --json /tmp/copper_mapped_ecp5_yr19m55d/nearcore_stub_baseline.json --textcfg /tmp/copper_mapped_ecp5_yr19m55d/nearcore_stub_baseline.config
+$ {USER_HOME}\tools\oss-cad-suite\bin\nextpnr-ecp5.EXE --85k --package CABGA381 --speed 6 --freq 50 --lpf-allow-unconstrained --json {USER_HOME}\AppData\Local\Temp\copper_mapped_ecp5_0fhes05n\nearcore_stub_baseline.json --textcfg {USER_HOME}\AppData\Local\Temp\copper_mapped_ecp5_0fhes05n\nearcore_stub_baseline.config
 
 
 Info: Logic utilisation before packing:
@@ -1422,7 +1422,7 @@ Info:     59 FFs paired with LUTs.
 Info: Generating derived timing constraints...
 Info: Promoting globals...
 Info:     promoting clock net clk$TRELLIS_IO_IN to global network
-Info: Checksum: 0xb5c4986e
+Info: Checksum: 0xd3fab338
 
 Info: Device utilisation:
 Info: 	          TRELLIS_IO:      68/    365    18%
@@ -1462,7 +1462,7 @@ Info:     at initial placer iter 2, wirelen = 5170
 Info:     at initial placer iter 3, wirelen = 5141
 Info: Running main analytical placer, max placement attempts per cell = 10000.
 Info:     at iteration #1, type TRELLIS_COMB: wirelen solved = 5114, spread = 5115, legal = 5115; time = 0.02s
-Info: HeAP Placer Time: 0.08s
+Info: HeAP Placer Time: 0.07s
 Info:   of which solving equations: 0.00s
 Info:   of which spreading cells: 0.00s
 Info:   of which strict legalisation: 0.00s
@@ -1473,7 +1473,7 @@ Info:   at iteration #5: temp = 0.000000, timing cost = 1, wirelen = 4003
 Info:   at iteration #10: temp = 0.000000, timing cost = 1, wirelen = 3975
 Info:   at iteration #15: temp = 0.000000, timing cost = 1, wirelen = 3716
 Info:   at iteration #17: temp = 0.000000, timing cost = 1, wirelen = 3696 
-Info: SA placement time 0.05s
+Info: SA placement time 0.03s
 
 Info: Max frequency for clock '$glbnet$clk$TRELLIS_IO_IN': 291.12 MHz (PASS at 50.00 MHz)
 
@@ -1504,7 +1504,7 @@ Info: [ 18709,  18843) |
 Info: [ 18843,  18977) | 
 Info: [ 18977,  19111) | 
 Info: [ 19111,  19245) |** 
-Info: Checksum: 0x5cbfcfc7
+Info: Checksum: 0x893fad6e
 Info: Routing globals...
 Info:     routing clock net $glbnet$clk$TRELLIS_IO_IN using global 0
 
@@ -1513,10 +1513,10 @@ Info: Setting up routing queue.
 Info: Routing 286 arcs.
 Info:            |   (re-)routed arcs  |   delta    | remaining|       time spent     |
 Info:    IterCnt |  w/ripup   wo/ripup |  w/r  wo/r |      arcs| batch(sec) total(sec)|
-Info:        286 |        0        253 |    0   253 |         0|       0.19       0.19|
+Info:        286 |        0        253 |    0   253 |         0|       0.14       0.14|
 Info: Routing complete.
-Info: Router1 time 0.19s
-Info: Checksum: 0xfd48b23b
+Info: Router1 time 0.14s
+Info: Checksum: 0xc411d738
 
 Info: Critical path report for clock '$glbnet$clk$TRELLIS_IO_IN' (posedge -> posedge):
 Info:       type curr  total name
@@ -1533,8 +1533,8 @@ Info:    routing  0.00  1.85 Net prefetch_addr_CCU2C_S1_20_COUT (86,38) -> (86,3
 Info:                          Sink prefetch_addr_CCU2C_S1_18$CCU2_COMB0.FCI
 Info:                          Defined in:
 Info:                               research/rtl/integration/copper_near_core_stub.sv:35.28-35.69
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/ccu2c_sim.vh:9.9-9.13
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\ccu2c_sim.vh:9.9-9.13
 Info:      logic  0.07  1.92 Source prefetch_addr_CCU2C_S1_18$CCU2_COMB0.FCO
 Info:    routing  0.00  1.92 Net prefetch_addr_CCU2C_S1_18$CCU2_FCI_INT (86,38) -> (86,38)
 Info:                          Sink prefetch_addr_CCU2C_S1_18$CCU2_COMB1.FCI
@@ -1543,8 +1543,8 @@ Info:    routing  0.00  1.92 Net prefetch_addr_CCU2C_S1_18_COUT (86,38) -> (86,3
 Info:                          Sink prefetch_addr_CCU2C_S1_17$CCU2_COMB0.FCI
 Info:                          Defined in:
 Info:                               research/rtl/integration/copper_near_core_stub.sv:35.28-35.69
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/ccu2c_sim.vh:9.9-9.13
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\ccu2c_sim.vh:9.9-9.13
 Info:      logic  0.07  2.00 Source prefetch_addr_CCU2C_S1_17$CCU2_COMB0.FCO
 Info:    routing  0.00  2.00 Net prefetch_addr_CCU2C_S1_17$CCU2_FCI_INT (86,38) -> (86,38)
 Info:                          Sink prefetch_addr_CCU2C_S1_17$CCU2_COMB1.FCI
@@ -1553,8 +1553,8 @@ Info:    routing  0.00  2.00 Net prefetch_addr_CCU2C_S1_17_COUT (86,38) -> (87,3
 Info:                          Sink prefetch_addr_CCU2C_S1_16$CCU2_COMB0.FCI
 Info:                          Defined in:
 Info:                               research/rtl/integration/copper_near_core_stub.sv:35.28-35.69
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/ccu2c_sim.vh:9.9-9.13
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\ccu2c_sim.vh:9.9-9.13
 Info:      logic  0.07  2.07 Source prefetch_addr_CCU2C_S1_16$CCU2_COMB0.FCO
 Info:    routing  0.00  2.07 Net prefetch_addr_CCU2C_S1_16$CCU2_FCI_INT (87,38) -> (87,38)
 Info:                          Sink prefetch_addr_CCU2C_S1_16$CCU2_COMB1.FCI
@@ -1563,8 +1563,8 @@ Info:    routing  0.00  2.07 Net prefetch_addr_CCU2C_S1_16_COUT (87,38) -> (87,3
 Info:                          Sink prefetch_addr_CCU2C_S1_15$CCU2_COMB0.FCI
 Info:                          Defined in:
 Info:                               research/rtl/integration/copper_near_core_stub.sv:35.28-35.69
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/ccu2c_sim.vh:9.9-9.13
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\ccu2c_sim.vh:9.9-9.13
 Info:      logic  0.07  2.14 Source prefetch_addr_CCU2C_S1_15$CCU2_COMB0.FCO
 Info:    routing  0.00  2.14 Net prefetch_addr_CCU2C_S1_15$CCU2_FCI_INT (87,38) -> (87,38)
 Info:                          Sink prefetch_addr_CCU2C_S1_15$CCU2_COMB1.FCI
@@ -1573,8 +1573,8 @@ Info:    routing  0.00  2.14 Net prefetch_addr_CCU2C_S1_15_COUT (87,38) -> (87,3
 Info:                          Sink prefetch_addr_CCU2C_S1_14$CCU2_COMB0.FCI
 Info:                          Defined in:
 Info:                               research/rtl/integration/copper_near_core_stub.sv:35.28-35.69
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/ccu2c_sim.vh:9.9-9.13
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\ccu2c_sim.vh:9.9-9.13
 Info:      logic  0.07  2.21 Source prefetch_addr_CCU2C_S1_14$CCU2_COMB0.FCO
 Info:    routing  0.00  2.21 Net prefetch_addr_CCU2C_S1_14$CCU2_FCI_INT (87,38) -> (87,38)
 Info:                          Sink prefetch_addr_CCU2C_S1_14$CCU2_COMB1.FCI
@@ -1583,8 +1583,8 @@ Info:    routing  0.00  2.21 Net prefetch_addr_CCU2C_S1_14_COUT (87,38) -> (87,3
 Info:                          Sink prefetch_addr_CCU2C_S1_13$CCU2_COMB0.FCI
 Info:                          Defined in:
 Info:                               research/rtl/integration/copper_near_core_stub.sv:35.28-35.69
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/ccu2c_sim.vh:9.9-9.13
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\ccu2c_sim.vh:9.9-9.13
 Info:      logic  0.07  2.28 Source prefetch_addr_CCU2C_S1_13$CCU2_COMB0.FCO
 Info:    routing  0.00  2.28 Net prefetch_addr_CCU2C_S1_13$CCU2_FCI_INT (87,38) -> (87,38)
 Info:                          Sink prefetch_addr_CCU2C_S1_13$CCU2_COMB1.FCI
@@ -1593,8 +1593,8 @@ Info:    routing  0.00  2.28 Net prefetch_addr_CCU2C_S1_13_COUT (87,38) -> (88,3
 Info:                          Sink prefetch_addr_CCU2C_S1_12$CCU2_COMB0.FCI
 Info:                          Defined in:
 Info:                               research/rtl/integration/copper_near_core_stub.sv:35.28-35.69
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/ccu2c_sim.vh:9.9-9.13
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\ccu2c_sim.vh:9.9-9.13
 Info:      logic  0.07  2.35 Source prefetch_addr_CCU2C_S1_12$CCU2_COMB0.FCO
 Info:    routing  0.00  2.35 Net prefetch_addr_CCU2C_S1_12$CCU2_FCI_INT (88,38) -> (88,38)
 Info:                          Sink prefetch_addr_CCU2C_S1_12$CCU2_COMB1.FCI
@@ -1603,8 +1603,8 @@ Info:    routing  0.00  2.35 Net prefetch_addr_CCU2C_S1_12_COUT (88,38) -> (88,3
 Info:                          Sink prefetch_addr_CCU2C_S1_11$CCU2_COMB0.FCI
 Info:                          Defined in:
 Info:                               research/rtl/integration/copper_near_core_stub.sv:35.28-35.69
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/ccu2c_sim.vh:9.9-9.13
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\ccu2c_sim.vh:9.9-9.13
 Info:      logic  0.07  2.42 Source prefetch_addr_CCU2C_S1_11$CCU2_COMB0.FCO
 Info:    routing  0.00  2.42 Net prefetch_addr_CCU2C_S1_11$CCU2_FCI_INT (88,38) -> (88,38)
 Info:                          Sink prefetch_addr_CCU2C_S1_11$CCU2_COMB1.FCI
@@ -1613,8 +1613,8 @@ Info:    routing  0.00  2.42 Net prefetch_addr_CCU2C_S1_11_COUT (88,38) -> (88,3
 Info:                          Sink prefetch_addr_CCU2C_S1_10$CCU2_COMB0.FCI
 Info:                          Defined in:
 Info:                               research/rtl/integration/copper_near_core_stub.sv:35.28-35.69
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/ccu2c_sim.vh:9.9-9.13
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\ccu2c_sim.vh:9.9-9.13
 Info:      logic  0.07  2.49 Source prefetch_addr_CCU2C_S1_10$CCU2_COMB0.FCO
 Info:    routing  0.00  2.49 Net prefetch_addr_CCU2C_S1_10$CCU2_FCI_INT (88,38) -> (88,38)
 Info:                          Sink prefetch_addr_CCU2C_S1_10$CCU2_COMB1.FCI
@@ -1623,8 +1623,8 @@ Info:    routing  0.00  2.49 Net prefetch_addr_CCU2C_S1_10_COUT (88,38) -> (88,3
 Info:                          Sink prefetch_addr_CCU2C_S1_9$CCU2_COMB0.FCI
 Info:                          Defined in:
 Info:                               research/rtl/integration/copper_near_core_stub.sv:35.28-35.69
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/ccu2c_sim.vh:9.9-9.13
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\ccu2c_sim.vh:9.9-9.13
 Info:      logic  0.07  2.56 Source prefetch_addr_CCU2C_S1_9$CCU2_COMB0.FCO
 Info:    routing  0.00  2.56 Net prefetch_addr_CCU2C_S1_9$CCU2_FCI_INT (88,38) -> (88,38)
 Info:                          Sink prefetch_addr_CCU2C_S1_9$CCU2_COMB1.FCI
@@ -1633,8 +1633,8 @@ Info:    routing  0.00  2.56 Net prefetch_addr_CCU2C_S1_9_COUT (88,38) -> (89,38
 Info:                          Sink prefetch_addr_CCU2C_S1_8$CCU2_COMB0.FCI
 Info:                          Defined in:
 Info:                               research/rtl/integration/copper_near_core_stub.sv:35.28-35.69
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/ccu2c_sim.vh:9.9-9.13
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\ccu2c_sim.vh:9.9-9.13
 Info:      logic  0.07  2.63 Source prefetch_addr_CCU2C_S1_8$CCU2_COMB0.FCO
 Info:    routing  0.00  2.63 Net prefetch_addr_CCU2C_S1_8$CCU2_FCI_INT (89,38) -> (89,38)
 Info:                          Sink prefetch_addr_CCU2C_S1_8$CCU2_COMB1.FCI
@@ -1643,8 +1643,8 @@ Info:    routing  0.00  2.63 Net prefetch_addr_CCU2C_S1_8_COUT (89,38) -> (89,38
 Info:                          Sink prefetch_addr_CCU2C_S1_7$CCU2_COMB0.FCI
 Info:                          Defined in:
 Info:                               research/rtl/integration/copper_near_core_stub.sv:35.28-35.69
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/ccu2c_sim.vh:9.9-9.13
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\ccu2c_sim.vh:9.9-9.13
 Info:      logic  0.07  2.70 Source prefetch_addr_CCU2C_S1_7$CCU2_COMB0.FCO
 Info:    routing  0.00  2.70 Net prefetch_addr_CCU2C_S1_7$CCU2_FCI_INT (89,38) -> (89,38)
 Info:                          Sink prefetch_addr_CCU2C_S1_7$CCU2_COMB1.FCI
@@ -1653,8 +1653,8 @@ Info:    routing  0.00  2.70 Net prefetch_addr_CCU2C_S1_7_COUT (89,38) -> (89,38
 Info:                          Sink prefetch_addr_CCU2C_S1_6$CCU2_COMB0.FCI
 Info:                          Defined in:
 Info:                               research/rtl/integration/copper_near_core_stub.sv:35.28-35.69
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/ccu2c_sim.vh:9.9-9.13
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\ccu2c_sim.vh:9.9-9.13
 Info:      logic  0.07  2.78 Source prefetch_addr_CCU2C_S1_6$CCU2_COMB0.FCO
 Info:    routing  0.00  2.78 Net prefetch_addr_CCU2C_S1_6$CCU2_FCI_INT (89,38) -> (89,38)
 Info:                          Sink prefetch_addr_CCU2C_S1_6$CCU2_COMB1.FCI
@@ -1663,8 +1663,8 @@ Info:    routing  0.00  2.78 Net prefetch_addr_CCU2C_S1_6_COUT (89,38) -> (89,38
 Info:                          Sink prefetch_addr_CCU2C_S1_5$CCU2_COMB0.FCI
 Info:                          Defined in:
 Info:                               research/rtl/integration/copper_near_core_stub.sv:35.28-35.69
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/ccu2c_sim.vh:9.9-9.13
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\ccu2c_sim.vh:9.9-9.13
 Info:      logic  0.07  2.85 Source prefetch_addr_CCU2C_S1_5$CCU2_COMB0.FCO
 Info:    routing  0.00  2.85 Net prefetch_addr_CCU2C_S1_5$CCU2_FCI_INT (89,38) -> (89,38)
 Info:                          Sink prefetch_addr_CCU2C_S1_5$CCU2_COMB1.FCI
@@ -1673,8 +1673,8 @@ Info:    routing  0.00  2.85 Net prefetch_addr_CCU2C_S1_5_COUT (89,38) -> (90,38
 Info:                          Sink prefetch_addr_CCU2C_S1_4$CCU2_COMB0.FCI
 Info:                          Defined in:
 Info:                               research/rtl/integration/copper_near_core_stub.sv:35.28-35.69
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/ccu2c_sim.vh:9.9-9.13
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\ccu2c_sim.vh:9.9-9.13
 Info:      logic  0.07  2.92 Source prefetch_addr_CCU2C_S1_4$CCU2_COMB0.FCO
 Info:    routing  0.00  2.92 Net prefetch_addr_CCU2C_S1_4$CCU2_FCI_INT (90,38) -> (90,38)
 Info:                          Sink prefetch_addr_CCU2C_S1_4$CCU2_COMB1.FCI
@@ -1683,8 +1683,8 @@ Info:    routing  0.00  2.92 Net prefetch_addr_CCU2C_S1_4_COUT (90,38) -> (90,38
 Info:                          Sink prefetch_addr_CCU2C_S1_3$CCU2_COMB0.FCI
 Info:                          Defined in:
 Info:                               research/rtl/integration/copper_near_core_stub.sv:35.28-35.69
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/ccu2c_sim.vh:9.9-9.13
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\ccu2c_sim.vh:9.9-9.13
 Info:      logic  0.07  2.99 Source prefetch_addr_CCU2C_S1_3$CCU2_COMB0.FCO
 Info:    routing  0.00  2.99 Net prefetch_addr_CCU2C_S1_3$CCU2_FCI_INT (90,38) -> (90,38)
 Info:                          Sink prefetch_addr_CCU2C_S1_3$CCU2_COMB1.FCI
@@ -1693,8 +1693,8 @@ Info:    routing  0.00  2.99 Net prefetch_addr_CCU2C_S1_3_COUT (90,38) -> (90,38
 Info:                          Sink prefetch_addr_CCU2C_S1_2$CCU2_COMB0.FCI
 Info:                          Defined in:
 Info:                               research/rtl/integration/copper_near_core_stub.sv:35.28-35.69
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/ccu2c_sim.vh:9.9-9.13
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\ccu2c_sim.vh:9.9-9.13
 Info:      logic  0.07  3.06 Source prefetch_addr_CCU2C_S1_2$CCU2_COMB0.FCO
 Info:    routing  0.00  3.06 Net prefetch_addr_CCU2C_S1_2$CCU2_FCI_INT (90,38) -> (90,38)
 Info:                          Sink prefetch_addr_CCU2C_S1_2$CCU2_COMB1.FCI
@@ -1703,8 +1703,8 @@ Info:    routing  0.00  3.06 Net prefetch_addr_CCU2C_S1_2_COUT (90,38) -> (90,38
 Info:                          Sink prefetch_addr_CCU2C_S1_1$CCU2_COMB0.FCI
 Info:                          Defined in:
 Info:                               research/rtl/integration/copper_near_core_stub.sv:35.28-35.69
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/ccu2c_sim.vh:9.9-9.13
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\ccu2c_sim.vh:9.9-9.13
 Info:      logic  0.07  3.13 Source prefetch_addr_CCU2C_S1_1$CCU2_COMB0.FCO
 Info:    routing  0.00  3.13 Net prefetch_addr_CCU2C_S1_1$CCU2_FCI_INT (90,38) -> (90,38)
 Info:                          Sink prefetch_addr_CCU2C_S1_1$CCU2_COMB1.FCI
@@ -1713,8 +1713,8 @@ Info:    routing  0.00  3.13 Net prefetch_addr_CCU2C_S1_1_COUT (90,38) -> (91,38
 Info:                          Sink prefetch_addr_CCU2C_S1_19$CCU2_COMB0.FCI
 Info:                          Defined in:
 Info:                               research/rtl/integration/copper_near_core_stub.sv:35.28-35.69
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/ccu2c_sim.vh:9.9-9.13
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\ccu2c_sim.vh:9.9-9.13
 Info:      logic  0.07  3.20 Source prefetch_addr_CCU2C_S1_19$CCU2_COMB0.FCO
 Info:    routing  0.00  3.20 Net prefetch_addr_CCU2C_S1_19$CCU2_FCI_INT (91,38) -> (91,38)
 Info:                          Sink prefetch_addr_CCU2C_S1_19$CCU2_COMB1.FCI
@@ -1723,8 +1723,8 @@ Info:    routing  0.00  3.20 Net prefetch_addr_CCU2C_S1_19_COUT (91,38) -> (91,3
 Info:                          Sink prefetch_addr_CCU2C_S1$CCU2_COMB0.FCI
 Info:                          Defined in:
 Info:                               research/rtl/integration/copper_near_core_stub.sv:35.28-35.69
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/ccu2c_sim.vh:9.9-9.13
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\ccu2c_sim.vh:9.9-9.13
 Info:      logic  0.07  3.27 Source prefetch_addr_CCU2C_S1$CCU2_COMB0.FCO
 Info:    routing  0.00  3.27 Net prefetch_addr_CCU2C_S1$CCU2_FCI_INT (91,38) -> (91,38)
 Info:                          Sink prefetch_addr_CCU2C_S1$CCU2_COMB1.FCI
@@ -1778,8 +1778,8 @@ Info:    routing  0.00  1.85 Net prefetch_addr_CCU2C_S1_20_COUT (86,38) -> (86,3
 Info:                          Sink prefetch_addr_CCU2C_S1_18$CCU2_COMB0.FCI
 Info:                          Defined in:
 Info:                               research/rtl/integration/copper_near_core_stub.sv:35.28-35.69
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/ccu2c_sim.vh:9.9-9.13
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\ccu2c_sim.vh:9.9-9.13
 Info:      logic  0.07  1.92 Source prefetch_addr_CCU2C_S1_18$CCU2_COMB0.FCO
 Info:    routing  0.00  1.92 Net prefetch_addr_CCU2C_S1_18$CCU2_FCI_INT (86,38) -> (86,38)
 Info:                          Sink prefetch_addr_CCU2C_S1_18$CCU2_COMB1.FCI
@@ -1788,8 +1788,8 @@ Info:    routing  0.00  1.92 Net prefetch_addr_CCU2C_S1_18_COUT (86,38) -> (86,3
 Info:                          Sink prefetch_addr_CCU2C_S1_17$CCU2_COMB0.FCI
 Info:                          Defined in:
 Info:                               research/rtl/integration/copper_near_core_stub.sv:35.28-35.69
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/ccu2c_sim.vh:9.9-9.13
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\ccu2c_sim.vh:9.9-9.13
 Info:      logic  0.07  2.00 Source prefetch_addr_CCU2C_S1_17$CCU2_COMB0.FCO
 Info:    routing  0.00  2.00 Net prefetch_addr_CCU2C_S1_17$CCU2_FCI_INT (86,38) -> (86,38)
 Info:                          Sink prefetch_addr_CCU2C_S1_17$CCU2_COMB1.FCI
@@ -1798,8 +1798,8 @@ Info:    routing  0.00  2.00 Net prefetch_addr_CCU2C_S1_17_COUT (86,38) -> (87,3
 Info:                          Sink prefetch_addr_CCU2C_S1_16$CCU2_COMB0.FCI
 Info:                          Defined in:
 Info:                               research/rtl/integration/copper_near_core_stub.sv:35.28-35.69
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/ccu2c_sim.vh:9.9-9.13
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\ccu2c_sim.vh:9.9-9.13
 Info:      logic  0.07  2.07 Source prefetch_addr_CCU2C_S1_16$CCU2_COMB0.FCO
 Info:    routing  0.00  2.07 Net prefetch_addr_CCU2C_S1_16$CCU2_FCI_INT (87,38) -> (87,38)
 Info:                          Sink prefetch_addr_CCU2C_S1_16$CCU2_COMB1.FCI
@@ -1808,8 +1808,8 @@ Info:    routing  0.00  2.07 Net prefetch_addr_CCU2C_S1_16_COUT (87,38) -> (87,3
 Info:                          Sink prefetch_addr_CCU2C_S1_15$CCU2_COMB0.FCI
 Info:                          Defined in:
 Info:                               research/rtl/integration/copper_near_core_stub.sv:35.28-35.69
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/ccu2c_sim.vh:9.9-9.13
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\ccu2c_sim.vh:9.9-9.13
 Info:      logic  0.07  2.14 Source prefetch_addr_CCU2C_S1_15$CCU2_COMB0.FCO
 Info:    routing  0.00  2.14 Net prefetch_addr_CCU2C_S1_15$CCU2_FCI_INT (87,38) -> (87,38)
 Info:                          Sink prefetch_addr_CCU2C_S1_15$CCU2_COMB1.FCI
@@ -1818,8 +1818,8 @@ Info:    routing  0.00  2.14 Net prefetch_addr_CCU2C_S1_15_COUT (87,38) -> (87,3
 Info:                          Sink prefetch_addr_CCU2C_S1_14$CCU2_COMB0.FCI
 Info:                          Defined in:
 Info:                               research/rtl/integration/copper_near_core_stub.sv:35.28-35.69
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/ccu2c_sim.vh:9.9-9.13
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\ccu2c_sim.vh:9.9-9.13
 Info:      logic  0.07  2.21 Source prefetch_addr_CCU2C_S1_14$CCU2_COMB0.FCO
 Info:    routing  0.00  2.21 Net prefetch_addr_CCU2C_S1_14$CCU2_FCI_INT (87,38) -> (87,38)
 Info:                          Sink prefetch_addr_CCU2C_S1_14$CCU2_COMB1.FCI
@@ -1828,8 +1828,8 @@ Info:    routing  0.00  2.21 Net prefetch_addr_CCU2C_S1_14_COUT (87,38) -> (87,3
 Info:                          Sink prefetch_addr_CCU2C_S1_13$CCU2_COMB0.FCI
 Info:                          Defined in:
 Info:                               research/rtl/integration/copper_near_core_stub.sv:35.28-35.69
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/ccu2c_sim.vh:9.9-9.13
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\ccu2c_sim.vh:9.9-9.13
 Info:      logic  0.07  2.28 Source prefetch_addr_CCU2C_S1_13$CCU2_COMB0.FCO
 Info:    routing  0.00  2.28 Net prefetch_addr_CCU2C_S1_13$CCU2_FCI_INT (87,38) -> (87,38)
 Info:                          Sink prefetch_addr_CCU2C_S1_13$CCU2_COMB1.FCI
@@ -1838,8 +1838,8 @@ Info:    routing  0.00  2.28 Net prefetch_addr_CCU2C_S1_13_COUT (87,38) -> (88,3
 Info:                          Sink prefetch_addr_CCU2C_S1_12$CCU2_COMB0.FCI
 Info:                          Defined in:
 Info:                               research/rtl/integration/copper_near_core_stub.sv:35.28-35.69
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/ccu2c_sim.vh:9.9-9.13
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\ccu2c_sim.vh:9.9-9.13
 Info:      logic  0.07  2.35 Source prefetch_addr_CCU2C_S1_12$CCU2_COMB0.FCO
 Info:    routing  0.00  2.35 Net prefetch_addr_CCU2C_S1_12$CCU2_FCI_INT (88,38) -> (88,38)
 Info:                          Sink prefetch_addr_CCU2C_S1_12$CCU2_COMB1.FCI
@@ -1848,8 +1848,8 @@ Info:    routing  0.00  2.35 Net prefetch_addr_CCU2C_S1_12_COUT (88,38) -> (88,3
 Info:                          Sink prefetch_addr_CCU2C_S1_11$CCU2_COMB0.FCI
 Info:                          Defined in:
 Info:                               research/rtl/integration/copper_near_core_stub.sv:35.28-35.69
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/ccu2c_sim.vh:9.9-9.13
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\ccu2c_sim.vh:9.9-9.13
 Info:      logic  0.07  2.42 Source prefetch_addr_CCU2C_S1_11$CCU2_COMB0.FCO
 Info:    routing  0.00  2.42 Net prefetch_addr_CCU2C_S1_11$CCU2_FCI_INT (88,38) -> (88,38)
 Info:                          Sink prefetch_addr_CCU2C_S1_11$CCU2_COMB1.FCI
@@ -1858,8 +1858,8 @@ Info:    routing  0.00  2.42 Net prefetch_addr_CCU2C_S1_11_COUT (88,38) -> (88,3
 Info:                          Sink prefetch_addr_CCU2C_S1_10$CCU2_COMB0.FCI
 Info:                          Defined in:
 Info:                               research/rtl/integration/copper_near_core_stub.sv:35.28-35.69
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/ccu2c_sim.vh:9.9-9.13
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\ccu2c_sim.vh:9.9-9.13
 Info:      logic  0.07  2.49 Source prefetch_addr_CCU2C_S1_10$CCU2_COMB0.FCO
 Info:    routing  0.00  2.49 Net prefetch_addr_CCU2C_S1_10$CCU2_FCI_INT (88,38) -> (88,38)
 Info:                          Sink prefetch_addr_CCU2C_S1_10$CCU2_COMB1.FCI
@@ -1868,8 +1868,8 @@ Info:    routing  0.00  2.49 Net prefetch_addr_CCU2C_S1_10_COUT (88,38) -> (88,3
 Info:                          Sink prefetch_addr_CCU2C_S1_9$CCU2_COMB0.FCI
 Info:                          Defined in:
 Info:                               research/rtl/integration/copper_near_core_stub.sv:35.28-35.69
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/ccu2c_sim.vh:9.9-9.13
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\ccu2c_sim.vh:9.9-9.13
 Info:      logic  0.07  2.56 Source prefetch_addr_CCU2C_S1_9$CCU2_COMB0.FCO
 Info:    routing  0.00  2.56 Net prefetch_addr_CCU2C_S1_9$CCU2_FCI_INT (88,38) -> (88,38)
 Info:                          Sink prefetch_addr_CCU2C_S1_9$CCU2_COMB1.FCI
@@ -1878,8 +1878,8 @@ Info:    routing  0.00  2.56 Net prefetch_addr_CCU2C_S1_9_COUT (88,38) -> (89,38
 Info:                          Sink prefetch_addr_CCU2C_S1_8$CCU2_COMB0.FCI
 Info:                          Defined in:
 Info:                               research/rtl/integration/copper_near_core_stub.sv:35.28-35.69
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/ccu2c_sim.vh:9.9-9.13
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\ccu2c_sim.vh:9.9-9.13
 Info:      logic  0.07  2.63 Source prefetch_addr_CCU2C_S1_8$CCU2_COMB0.FCO
 Info:    routing  0.00  2.63 Net prefetch_addr_CCU2C_S1_8$CCU2_FCI_INT (89,38) -> (89,38)
 Info:                          Sink prefetch_addr_CCU2C_S1_8$CCU2_COMB1.FCI
@@ -1888,8 +1888,8 @@ Info:    routing  0.00  2.63 Net prefetch_addr_CCU2C_S1_8_COUT (89,38) -> (89,38
 Info:                          Sink prefetch_addr_CCU2C_S1_7$CCU2_COMB0.FCI
 Info:                          Defined in:
 Info:                               research/rtl/integration/copper_near_core_stub.sv:35.28-35.69
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/ccu2c_sim.vh:9.9-9.13
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\ccu2c_sim.vh:9.9-9.13
 Info:      logic  0.07  2.70 Source prefetch_addr_CCU2C_S1_7$CCU2_COMB0.FCO
 Info:    routing  0.00  2.70 Net prefetch_addr_CCU2C_S1_7$CCU2_FCI_INT (89,38) -> (89,38)
 Info:                          Sink prefetch_addr_CCU2C_S1_7$CCU2_COMB1.FCI
@@ -1898,8 +1898,8 @@ Info:    routing  0.00  2.70 Net prefetch_addr_CCU2C_S1_7_COUT (89,38) -> (89,38
 Info:                          Sink prefetch_addr_CCU2C_S1_6$CCU2_COMB0.FCI
 Info:                          Defined in:
 Info:                               research/rtl/integration/copper_near_core_stub.sv:35.28-35.69
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/ccu2c_sim.vh:9.9-9.13
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\ccu2c_sim.vh:9.9-9.13
 Info:      logic  0.07  2.78 Source prefetch_addr_CCU2C_S1_6$CCU2_COMB0.FCO
 Info:    routing  0.00  2.78 Net prefetch_addr_CCU2C_S1_6$CCU2_FCI_INT (89,38) -> (89,38)
 Info:                          Sink prefetch_addr_CCU2C_S1_6$CCU2_COMB1.FCI
@@ -1908,8 +1908,8 @@ Info:    routing  0.00  2.78 Net prefetch_addr_CCU2C_S1_6_COUT (89,38) -> (89,38
 Info:                          Sink prefetch_addr_CCU2C_S1_5$CCU2_COMB0.FCI
 Info:                          Defined in:
 Info:                               research/rtl/integration/copper_near_core_stub.sv:35.28-35.69
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/ccu2c_sim.vh:9.9-9.13
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\ccu2c_sim.vh:9.9-9.13
 Info:      logic  0.07  2.85 Source prefetch_addr_CCU2C_S1_5$CCU2_COMB0.FCO
 Info:    routing  0.00  2.85 Net prefetch_addr_CCU2C_S1_5$CCU2_FCI_INT (89,38) -> (89,38)
 Info:                          Sink prefetch_addr_CCU2C_S1_5$CCU2_COMB1.FCI
@@ -1918,8 +1918,8 @@ Info:    routing  0.00  2.85 Net prefetch_addr_CCU2C_S1_5_COUT (89,38) -> (90,38
 Info:                          Sink prefetch_addr_CCU2C_S1_4$CCU2_COMB0.FCI
 Info:                          Defined in:
 Info:                               research/rtl/integration/copper_near_core_stub.sv:35.28-35.69
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/ccu2c_sim.vh:9.9-9.13
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\ccu2c_sim.vh:9.9-9.13
 Info:      logic  0.07  2.92 Source prefetch_addr_CCU2C_S1_4$CCU2_COMB0.FCO
 Info:    routing  0.00  2.92 Net prefetch_addr_CCU2C_S1_4$CCU2_FCI_INT (90,38) -> (90,38)
 Info:                          Sink prefetch_addr_CCU2C_S1_4$CCU2_COMB1.FCI
@@ -1928,8 +1928,8 @@ Info:    routing  0.00  2.92 Net prefetch_addr_CCU2C_S1_4_COUT (90,38) -> (90,38
 Info:                          Sink prefetch_addr_CCU2C_S1_3$CCU2_COMB0.FCI
 Info:                          Defined in:
 Info:                               research/rtl/integration/copper_near_core_stub.sv:35.28-35.69
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/ccu2c_sim.vh:9.9-9.13
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\ccu2c_sim.vh:9.9-9.13
 Info:      logic  0.07  2.99 Source prefetch_addr_CCU2C_S1_3$CCU2_COMB0.FCO
 Info:    routing  0.00  2.99 Net prefetch_addr_CCU2C_S1_3$CCU2_FCI_INT (90,38) -> (90,38)
 Info:                          Sink prefetch_addr_CCU2C_S1_3$CCU2_COMB1.FCI
@@ -1938,8 +1938,8 @@ Info:    routing  0.00  2.99 Net prefetch_addr_CCU2C_S1_3_COUT (90,38) -> (90,38
 Info:                          Sink prefetch_addr_CCU2C_S1_2$CCU2_COMB0.FCI
 Info:                          Defined in:
 Info:                               research/rtl/integration/copper_near_core_stub.sv:35.28-35.69
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/ccu2c_sim.vh:9.9-9.13
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\ccu2c_sim.vh:9.9-9.13
 Info:      logic  0.07  3.06 Source prefetch_addr_CCU2C_S1_2$CCU2_COMB0.FCO
 Info:    routing  0.00  3.06 Net prefetch_addr_CCU2C_S1_2$CCU2_FCI_INT (90,38) -> (90,38)
 Info:                          Sink prefetch_addr_CCU2C_S1_2$CCU2_COMB1.FCI
@@ -1948,8 +1948,8 @@ Info:    routing  0.00  3.06 Net prefetch_addr_CCU2C_S1_2_COUT (90,38) -> (90,38
 Info:                          Sink prefetch_addr_CCU2C_S1_1$CCU2_COMB0.FCI
 Info:                          Defined in:
 Info:                               research/rtl/integration/copper_near_core_stub.sv:35.28-35.69
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/ccu2c_sim.vh:9.9-9.13
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\ccu2c_sim.vh:9.9-9.13
 Info:      logic  0.07  3.13 Source prefetch_addr_CCU2C_S1_1$CCU2_COMB0.FCO
 Info:    routing  0.00  3.13 Net prefetch_addr_CCU2C_S1_1$CCU2_FCI_INT (90,38) -> (90,38)
 Info:                          Sink prefetch_addr_CCU2C_S1_1$CCU2_COMB1.FCI
@@ -1958,8 +1958,8 @@ Info:    routing  0.00  3.13 Net prefetch_addr_CCU2C_S1_1_COUT (90,38) -> (91,38
 Info:                          Sink prefetch_addr_CCU2C_S1_19$CCU2_COMB0.FCI
 Info:                          Defined in:
 Info:                               research/rtl/integration/copper_near_core_stub.sv:35.28-35.69
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
-Info:                               {USER_HOME}/work/_temp/oss-cad-suite/lib/../share/yosys/lattice/ccu2c_sim.vh:9.9-9.13
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v:74.7-80.4
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\ccu2c_sim.vh:9.9-9.13
 Info:      logic  0.07  3.20 Source prefetch_addr_CCU2C_S1_19$CCU2_COMB0.FCO
 Info:    routing  0.00  3.20 Net prefetch_addr_CCU2C_S1_19$CCU2_FCI_INT (91,38) -> (91,38)
 Info:                          Sink prefetch_addr_CCU2C_S1_19$CCU2_COMB1.FCI
