@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Summarize fresh local raw gem5 rerun statistics.
+"""Summarize local raw gem5 rerun statistics.
 
 This ledger is intentionally narrower than gem5_statistical_summary.csv: it
 uses only rows recorded in gem5_raw_rerun_manifest.csv. Repeated raw samples
@@ -114,7 +114,7 @@ def summarize() -> list[dict[str, str]]:
                 "source_tags": ";".join(tags),
                 "source_rows": str(len(samples)),
                 "notes": (
-                    "Fresh local raw gem5 full-system rerun statistics from "
+                    "Local raw gem5 full-system rerun statistics from "
                     f"{rel(MANIFEST)} only; PASS requires at least two raw samples. "
                     "This is not a full workload/config campaign unless the raw_group "
                     "covers the final matrix."

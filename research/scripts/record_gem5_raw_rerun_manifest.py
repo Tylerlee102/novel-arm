@@ -75,6 +75,32 @@ SPECS = (
             "workload/config matrix."
         ),
     ),
+    RawRerunSpec(
+        tag="zstd_tiny_existing",
+        run_prefix="gem5_arm_ubuntu_fs_zstd_zstd_tiny_",
+        summary_path=RESULTS / "gem5_arm_ubuntu_fs_zstd_app" / "zstd_zstd_tiny_summary.csv",
+        terminal_result="ZSTD_COPPER_RESULT",
+        policies=("none", "naive", "copper_clpd64k_peb", "spp", "spp_copper_slack"),
+        notes=(
+            "Existing local raw gem5 ARM full-system zstd compression-library run "
+            "with retained stats and terminal logs. This adds another public benchmark "
+            "family to the raw provenance ledger; it is not a clone-local CI proof or "
+            "full workload/config matrix."
+        ),
+    ),
+    RawRerunSpec(
+        tag="zstd_tiny_existing_seed1",
+        run_prefix="gem5_arm_ubuntu_fs_zstd_zstd_seed1_",
+        summary_path=RESULTS / "gem5_arm_ubuntu_fs_zstd_app" / "zstd_zstd_seed1_summary.csv",
+        terminal_result="ZSTD_COPPER_RESULT",
+        policies=("none", "naive", "copper_clpd64k_peb", "spp", "spp_copper_slack"),
+        notes=(
+            "Existing local raw gem5 ARM full-system zstd compression-library seed-1 "
+            "run with retained stats and terminal logs. Together with zstd_tiny_existing, "
+            "this provides repeated local raw samples for another public benchmark "
+            "family; it is not the full final workload/config matrix."
+        ),
+    ),
 )
 
 
