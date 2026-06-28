@@ -22,7 +22,7 @@ research/results/gem5_arm_ubuntu_fs_sqlite_app/sqlite_app_medium_summary.csv__po
 research/results/gem5_arm_ubuntu_fs_sqlite_app/sqlite_app_stress_summary.csv__poison1 imported: imported 8 rows, checksum 0xc91843372c7ddc37, rc=0
 research/results/gem5_arm_ubuntu_fs_yyjson_app/yyjson_app_medium_summary.csv__seed2__poison1 imported: imported 8 rows, checksum 0x5913918638a88fc6, rc=0
 research/results/gem5_arm_ubuntu_fs_yyjson_app/yyjson_app_stress_summary.csv__seed2__poison1 imported: imported 8 rows, checksum 0xa79b34679333f240, rc=0
-research/results/gem5_arm_ubuntu_fs_zlib_app/zlib_codex_raw_zlib_tiny_summary.csv__seed11 imported: imported 2 rows, checksum 0x7dbec8e3fca9fb9b, rc=0
+research/results/gem5_arm_ubuntu_fs_zlib_app/zlib_codex_raw_zlib_tiny_summary.csv__seed11 imported: imported 8 rows, checksum 0x7dbec8e3fca9fb9b, rc=0
 research/results/gem5_arm_ubuntu_fs_zlib_app/zlib_zlib_seed1_summary.csv__seed1 imported: imported 5 rows, checksum 0x258843db93c006e3, rc=0
 research/results/gem5_arm_ubuntu_fs_zlib_app/zlib_zlib_tiny_summary.csv__seed0 imported: imported 5 rows, checksum 0xf5b59076d62b0a4a, rc=0
 research/results/gem5_arm_ubuntu_fs_zstd_app/zstd_zstd_seed1_summary.csv__seed1 imported: imported 5 rows, checksum 0x22c3e1e7b9a49990, rc=0

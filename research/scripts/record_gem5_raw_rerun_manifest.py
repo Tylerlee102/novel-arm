@@ -20,6 +20,7 @@ class RawRerunSpec:
     run_prefix: str
     summary_path: Path
     terminal_result: str
+    policies: tuple[str, ...]
     notes: str
 
 
@@ -29,6 +30,7 @@ SPECS = (
         run_prefix="gem5_arm_ubuntu_fs_cachesvc_codex_raw_smoke_",
         summary_path=RESULTS / "gem5_arm_ubuntu_fs_cachesvc_app" / "cachesvc_codex_raw_smoke_summary.csv",
         terminal_result="CACHESVC_COPPER_RESULT",
+        policies=("none", "copper_clpd64k_peb"),
         notes=(
             "Fresh local raw gem5 ARM full-system cache-service smoke rerun. "
             "This proves the smoke path is runnable in this local environment; "
@@ -40,6 +42,7 @@ SPECS = (
         run_prefix="gem5_arm_ubuntu_fs_zlib_codex_raw_zlib_tiny_",
         summary_path=RESULTS / "gem5_arm_ubuntu_fs_zlib_app" / "zlib_codex_raw_zlib_tiny_summary.csv",
         terminal_result="ZLIB_COPPER_RESULT",
+        policies=("none", "stride", "naive", "copper_clpd64k_peb", "dcpt", "spp", "ampm", "spp_copper_slack"),
         notes=(
             "Fresh local raw gem5 ARM full-system zlib compression-library rerun. "
             "This proves another public benchmark family is runnable in this local environment; "
@@ -133,11 +136,10 @@ def row_for(spec: RawRerunSpec, policy: str, summary_by_policy: dict[str, dict[s
 
 
 def main() -> int:
-    policies = ["none", "copper_clpd64k_peb"]
     rows = []
     for spec in SPECS:
         summary_by_policy = {row.get("policy", ""): row for row in read_csv(spec.summary_path)}
-        rows.extend(row_for(spec, policy, summary_by_policy) for policy in policies)
+        rows.extend(row_for(spec, policy, summary_by_policy) for policy in spec.policies)
     OUT.parent.mkdir(parents=True, exist_ok=True)
     with OUT.open("w", newline="", encoding="utf-8") as fh:
         writer = csv.DictWriter(fh, fieldnames=FIELDS)
