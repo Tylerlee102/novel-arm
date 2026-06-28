@@ -49,6 +49,19 @@ SPECS = (
             "it is not a full workload/config matrix or clone-local CI proof."
         ),
     ),
+    RawRerunSpec(
+        tag="codex_raw_zlib_tiny_seed12",
+        run_prefix="gem5_arm_ubuntu_fs_zlib_codex_raw_zlib_tiny_seed12_",
+        summary_path=RESULTS / "gem5_arm_ubuntu_fs_zlib_app" / "zlib_codex_raw_zlib_tiny_seed12_summary.csv",
+        terminal_result="ZLIB_COPPER_RESULT",
+        policies=("none", "stride", "naive", "copper_clpd64k_peb", "dcpt", "spp", "ampm", "spp_copper_slack"),
+        notes=(
+            "Fresh local raw gem5 ARM full-system zlib compression-library seed-12 rerun. "
+            "Together with codex_raw_zlib_tiny, this provides repeated raw samples for "
+            "one public benchmark-family policy matrix; it is not the full final "
+            "workload/config matrix."
+        ),
+    ),
 )
 
 

@@ -29,6 +29,7 @@ eval:
 	$(PYTHON) research/scripts/run_evaluation.py
 	$(PYTHON) research/scripts/run_cycle_eval.py
 	$(PYTHON) research/scripts/run_gem5_eval.py
+	$(PYTHON) research/scripts/summarize_gem5_raw_reruns.py
 	$(PYTHON) research/scripts/run_independent_sim_eval.py
 	$(PYTHON) research/scripts/run_core_eval.py
 	$(PYTHON) research/scripts/run_energy_estimate.py
