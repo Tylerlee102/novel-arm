@@ -10,6 +10,7 @@ reason.
 from __future__ import annotations
 
 import csv
+import hashlib
 import os
 import platform
 import shutil
@@ -23,6 +24,7 @@ LOG_DIR = RESULTS / "logs" / "gem5"
 PERF = RESULTS / "gem5_performance.csv"
 PREF = RESULTS / "gem5_prefetch_metrics.csv"
 TRAFFIC = RESULTS / "gem5_memory_traffic.csv"
+VALIDATION = RESULTS / "gem5_validation.csv"
 SUMMARY_PREFIX = "gem5_arm_ubuntu_fs_"
 
 POLICY_TO_CONFIG = {
@@ -174,6 +176,14 @@ def write_csv(path: Path, fields: list[str], rows: list[dict[str, str]]) -> None
         writer.writerows([{field: row.get(field, "") for field in fields} for row in rows])
 
 
+def sha256(path: Path) -> str:
+    h = hashlib.sha256()
+    with path.open("rb") as fh:
+        for chunk in iter(lambda: fh.read(1024 * 1024), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
 def fnum(value: str) -> float:
     try:
         return float(value)
@@ -217,11 +227,50 @@ def benchmark_input_from_summary(path: Path) -> tuple[str, str]:
 
 
 def summary_paths() -> list[Path]:
-    return sorted(
+    paths = sorted(
         path
         for path in RESULTS.glob(f"{SUMMARY_PREFIX}*/*_summary.csv")
         if "imported_ci" not in path.parts and "copper_public_artifact_package_20260620" not in path.parts
     )
+    if os.environ.get("COPPER_ALLOW_LOCAL_GEM5_SUMMARIES", "").lower() in {"1", "true", "yes"}:
+        return paths
+    tracked = tracked_result_paths()
+    if not tracked:
+        return paths
+    return [path for path in paths if rel(path) in tracked]
+
+
+def tracked_result_paths() -> set[str]:
+    git = shutil.which("git")
+    if not git:
+        return set()
+    try:
+        proc = subprocess.run(
+            [git, "-C", str(ROOT), "ls-files", "--", "research/results"],
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.DEVNULL,
+            timeout=20,
+        )
+    except Exception:
+        return set()
+    if proc.returncode != 0:
+        return set()
+    return {line.strip().replace("\\", "/") for line in proc.stdout.splitlines() if line.strip()}
+
+
+def ignored_local_summary_count() -> int:
+    if os.environ.get("COPPER_ALLOW_LOCAL_GEM5_SUMMARIES", "").lower() in {"1", "true", "yes"}:
+        return 0
+    tracked = tracked_result_paths()
+    if not tracked:
+        return 0
+    all_paths = [
+        path
+        for path in RESULTS.glob(f"{SUMMARY_PREFIX}*/*_summary.csv")
+        if "imported_ci" not in path.parts and "copper_public_artifact_package_20260620" not in path.parts
+    ]
+    return sum(1 for path in all_paths if rel(path) not in tracked)
 
 
 def config_from_policy(policy: str) -> str:
@@ -263,13 +312,81 @@ def group_label(key: tuple[tuple[str, str], ...]) -> str:
     return "__" + "__".join(parts) if parts else ""
 
 
-def validated_summaries() -> tuple[list[tuple[Path, list[dict[str, str]], str, str]], list[str]]:
+VALIDATION_FIELDS = [
+    "summary_path",
+    "summary_sha256",
+    "benchmark",
+    "input",
+    "group_label",
+    "status",
+    "rows",
+    "policies",
+    "configs",
+    "checksum",
+    "checksum_count",
+    "rc_values",
+    "min_ticks",
+    "has_no_prefetch",
+    "has_copper",
+    "checksum_consistent",
+    "return_codes_clean",
+    "positive_ticks",
+    "notes",
+]
+
+
+def validation_row(
+    path: Path,
+    key: tuple[tuple[str, str], ...],
+    rows: list[dict[str, str]],
+    status: str,
+    notes: str,
+) -> dict[str, str]:
+    benchmark, input_tag = benchmark_input_from_summary(path)
+    policies = sorted({row.get("policy", "") for row in rows})
+    configs = sorted({config_from_policy(policy) for policy in policies})
+    checksums = sorted({checksum_value(row) for row in rows})
+    return_codes = sorted({row.get("rc", "") for row in rows})
+    ticks = [fnum(tick_value(row)) for row in rows]
+    nonempty_checksums = [value for value in checksums if value]
+    return {
+        "summary_path": rel(path),
+        "summary_sha256": sha256(path),
+        "benchmark": benchmark,
+        "input": input_tag,
+        "group_label": group_label(key).lstrip("_"),
+        "status": status,
+        "rows": str(len(rows)),
+        "policies": ";".join(policies),
+        "configs": ";".join(configs),
+        "checksum": nonempty_checksums[0] if len(nonempty_checksums) == 1 else "",
+        "checksum_count": str(len(nonempty_checksums)),
+        "rc_values": ";".join(return_codes),
+        "min_ticks": f"{min(ticks):.0f}" if ticks else "0",
+        "has_no_prefetch": "yes" if "none" in policies else "no",
+        "has_copper": "yes" if any(is_copper_config(config) for config in configs) else "no",
+        "checksum_consistent": "yes" if len(nonempty_checksums) == 1 and "" not in checksums else "no",
+        "return_codes_clean": "yes" if return_codes == ["0"] else "no",
+        "positive_ticks": "yes" if rows and all(value > 0 for value in ticks) else "no",
+        "notes": notes,
+    }
+
+
+def validated_summaries() -> tuple[list[tuple[Path, list[dict[str, str]], str, str]], list[str], list[dict[str, str]]]:
     good: list[tuple[Path, list[dict[str, str]], str, str]] = []
     notes: list[str] = []
+    validation_rows: list[dict[str, str]] = []
+    ignored = ignored_local_summary_count()
+    if ignored:
+        notes.append(
+            f"ignored {ignored} local-only gem5 summary file(s); set COPPER_ALLOW_LOCAL_GEM5_SUMMARIES=1 "
+            "to include non-tracked local experiments outside the public CI evidence path"
+        )
     for path in summary_paths():
         rows = read_csv(path)
         if not rows:
             notes.append(f"{rel(path)} skipped: empty summary")
+            validation_rows.append(validation_row(path, (), [], "SKIPPED", "empty summary"))
             continue
         groups: dict[tuple[tuple[str, str], ...], list[dict[str, str]]] = {}
         for row in rows:
@@ -282,34 +399,46 @@ def validated_summaries() -> tuple[list[tuple[Path, list[dict[str, str]], str, s
             return_codes = {row.get("rc", "") for row in group_rows}
             ticks_ok = all(fnum(tick_value(row)) > 0 for row in group_rows)
             if "none" not in policies:
-                notes.append(f"{rel(path)}{group_label(key)} skipped: no none baseline row")
+                note = "no none baseline row"
+                notes.append(f"{rel(path)}{group_label(key)} skipped: {note}")
+                validation_rows.append(validation_row(path, key, group_rows, "SKIPPED", note))
                 continue
             if not any(is_copper_config(config) for config in configs):
-                notes.append(f"{rel(path)}{group_label(key)} skipped: no COPPER policy row")
+                note = "no COPPER policy row"
+                notes.append(f"{rel(path)}{group_label(key)} skipped: {note}")
+                validation_rows.append(validation_row(path, key, group_rows, "SKIPPED", note))
                 continue
             if len(checksums) != 1 or "" in checksums:
-                notes.append(f"{rel(path)}{group_label(key)} skipped: checksum mismatch or missing checksum")
+                note = "checksum mismatch or missing checksum"
+                notes.append(f"{rel(path)}{group_label(key)} skipped: {note}")
+                validation_rows.append(validation_row(path, key, group_rows, "SKIPPED", note))
                 continue
             if return_codes != {"0"}:
-                notes.append(f"{rel(path)}{group_label(key)} skipped: nonzero return code(s) {sorted(return_codes)}")
+                note = f"nonzero return code(s) {sorted(return_codes)}"
+                notes.append(f"{rel(path)}{group_label(key)} skipped: {note}")
+                validation_rows.append(validation_row(path, key, group_rows, "SKIPPED", note))
                 continue
             if not ticks_ok:
-                notes.append(f"{rel(path)}{group_label(key)} skipped: missing or zero tick count")
+                note = "missing or zero tick count"
+                notes.append(f"{rel(path)}{group_label(key)} skipped: {note}")
+                validation_rows.append(validation_row(path, key, group_rows, "SKIPPED", note))
                 continue
             label = group_label(key)
             good.append((path, group_rows, next(iter(checksums)), label))
             imported_groups += 1
+            note = f"imported {len(group_rows)} rows, checksum {next(iter(checksums))}, rc=0"
             notes.append(
-                f"{rel(path)}{label} imported: {len(group_rows)} rows, "
-                f"checksum {next(iter(checksums))}, rc=0"
+                f"{rel(path)}{label} imported: {note}"
             )
+            validation_rows.append(validation_row(path, key, group_rows, "PASS", note))
         if not imported_groups:
             notes.append(f"{rel(path)} skipped: no validated comparable COPPER group")
-    return good, notes
+    return good, notes, validation_rows
 
 
 def import_summaries() -> tuple[list[dict[str, str]], list[dict[str, str]], list[dict[str, str]], list[str]]:
-    imported, notes = validated_summaries()
+    imported, notes, validation_rows = validated_summaries()
+    write_csv(VALIDATION, VALIDATION_FIELDS, validation_rows)
     perf_rows: list[dict[str, str]] = []
     pref_rows: list[dict[str, str]] = []
     traffic_rows: list[dict[str, str]] = []
@@ -398,6 +527,33 @@ def import_summaries() -> tuple[list[dict[str, str]], list[dict[str, str]], list
 def write_blocked(note: str, gem5: str = "") -> None:
     log_path = LOG_DIR / "gem5_availability.log"
     log_path.write_text(note + "\n", encoding="utf-8")
+    write_csv(
+        VALIDATION,
+        VALIDATION_FIELDS,
+        [
+            {
+                "summary_path": "",
+                "summary_sha256": "",
+                "benchmark": "ALL",
+                "input": "NA",
+                "group_label": "",
+                "status": "BLOCKED",
+                "rows": "0",
+                "policies": "",
+                "configs": "",
+                "checksum": "",
+                "checksum_count": "0",
+                "rc_values": "",
+                "min_ticks": "0",
+                "has_no_prefetch": "no",
+                "has_copper": "no",
+                "checksum_consistent": "no",
+                "return_codes_clean": "no",
+                "positive_ticks": "no",
+                "notes": note,
+            }
+        ],
+    )
     common = {
         "benchmark": "ALL",
         "input": "NA",

@@ -123,7 +123,10 @@ def should_include(path: Path) -> tuple[bool, str]:
         if path.suffix.lower() not in INCLUDE_SUFFIXES and path.name not in {"LICENSE", "COPYING"}:
             return False, "excluded external file suffix"
     if path.is_relative_to(RESULTS):
-        if any(part.startswith("gem5_") for part in path.relative_to(RESULTS).parts):
+        result_parts = path.relative_to(RESULTS).parts
+        if any(part.startswith("gem5_") for part in result_parts):
+            if len(result_parts) == 1 and path.suffix.lower() == ".csv":
+                return True, "included generated gem5 summary/evidence csv"
             return False, "excluded raw gem5 output tree; summaries are included"
         return path.suffix.lower() in INCLUDE_SUFFIXES, "included summary/evidence file"
     if path == ZIP_PATH:
