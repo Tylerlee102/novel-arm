@@ -73,7 +73,7 @@ rows from nextpnr, Vivado, or OpenROAD and real timing fields are not `NA`.
 Vivado, OpenSTA/OpenROAD, and broader gem5 campaign reruns remain optional
 external-tool paths.
 The strongest current hardware claim is PicoRV32 core-wrapper mapped FPGA PPA
-plus scoped PicoRV32 core-wrapper ASIC-Liberty or FPGA tool-power when those
+plus scoped PicoRV32 core-wrapper OpenROAD post-route, ASIC-Liberty, or FPGA tool-power when those
 rows are present; it is not a full-core, post-route ASIC signoff, silicon, or
 top-tier architecture-readiness claim.
 

@@ -1,5 +1,7 @@
 # COPPER Final Submission Blockers
 
+Final scoped status: SUBMISSION-READY for a constrained artifact/mechanism submission, with the blockers below preserved for stronger full-core or top-tier architecture claims.
+
 | Class | Blocker | Evidence | Required fix |
 | --- | --- | --- | --- |
 | SERIOUS BUT CAVEATABLE | Gem5 evidence includes validated ARM-system summaries (178 validated gem5 ARM-system PASS rows across 11 benchmark families and 29 benchmark/input groups, including 56 COPPER-family rows), imported-summary statistics where repeated samples exist, 20 fresh local raw gem5 full-system rerun rows across 4 tags and policies ampm, copper_clpd64k_peb, dcpt, naive, none, spp, spp_copper_slack, stride, and 30 repeated fresh raw gem5 statistic rows across 2 raw group(s) and policies ampm, copper_clpd64k_peb, dcpt, naive, none, spp, spp_copper_slack, stride; independent_sim remains source-backed trace/event validation. | gem5_performance.csv; gem5_prefetch_metrics.csv; gem5_memory_traffic.csv; gem5_statistical_summary.csv; gem5_raw_rerun_manifest.csv; gem5_raw_rerun_statistical_summary.csv; independent_sim_performance.csv; independent_sim_prefetch_metrics.csv; independent_sim_memory_traffic.csv | Run the final full workload/config matrix in gem5 or another accepted external simulator with a reproducible raw-run path and raw-run confidence intervals before making top-tier architecture claims. |

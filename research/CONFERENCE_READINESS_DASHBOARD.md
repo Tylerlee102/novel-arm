@@ -4,6 +4,8 @@ This dashboard is intentionally strict. PASS means the current artifact has repr
 
 Local Windows is editing-only. GitHub Actions/Codespaces/Docker is the intended evidence environment for open-source hardware and paper gates.
 
+Final scoped status: SUBMISSION-READY for a constrained artifact/mechanism submission after GitHub Actions run 28328583366 passed at commit 601baa56d7ee493859a926c8d9bd1c2489fd804b. This dashboard does not certify full-core mapped PPA, silicon power, production readiness, state-of-the-art performance, or top-tier full-architecture readiness.
+
 | Gate | Required for full submission? | Current status | Evidence file/script | Pass condition | Blocker |
 | --- | --- | --- | --- | --- | --- |
 | G1. Open-source CI/Docker reproduction | Yes | PASS | Makefile; Dockerfile; .github/workflows/reproduce.yml; .devcontainer/devcontainer.json; research/results/ci_status.csv; research/results/artifact_manifest.csv | make readiness completes in GitHub Actions, Docker, or Codespaces with logs/artifacts |  |

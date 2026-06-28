@@ -53,13 +53,13 @@ machine or one-command full-system artifact.
   fields from the tool report. Missing timing or power fields are recorded as
   `NA`, not inferred.
 - `energy_proxy.csv`, `energy_summary.csv`, `power_report_index.csv`,
-  `asic_power.csv`, `mapped_ppa.csv`, and
+  `openroad_postroute_power.csv`, `asic_power.csv`, `mapped_ppa.csv`, and
   `copper_mcpat_sensitivity_20260618.csv` separate assumption-based memory
   energy, activity-based McPAT proxy evidence, optional Nangate45
+  OpenROAD post-route tool-power rows when a configured OpenROAD flow is available,
   ASIC-Liberty tool-power rows when OpenSTA/OpenROAD is available, and Vivado
-  `report_power` rows when Vivado is available. ASIC-Liberty rows are scoped
-  standard-cell tool estimates, not post-route signoff, full-core power, or
-  silicon measurement.
+  `report_power` rows when Vivado is available. OpenROAD and ASIC-Liberty rows are scoped
+  tool estimates, not foundry signoff, full-core power, or silicon measurement.
   Vivado power rows are tool-estimated FPGA power for the stated mapped target,
   not measured silicon, ASIC signoff power, or full-core power.
 - Paper-facing documents, tables, summaries, RTL sources, testbenches, and
