@@ -70,14 +70,21 @@ jobs:
           python3 research/scripts/run_asic_power.py
           python3 research/scripts/run_energy_estimate.py
           python3 - <<'PY'
-          import csv, sys
+          import csv, pathlib, sys
           rows = list(csv.DictReader(open("research/results/power_report_index.csv", newline="", encoding="utf-8")))
           ok = any(row.get("evidence_level") == "asic_liberty_tool_estimate" and row.get("status") == "PASS" for row in rows)
           if not ok:
               print("ASIC Liberty tool estimate did not produce a PASS row.")
+              details = []
               for row in rows:
                   if row.get("evidence_level") == "asic_liberty_tool_estimate":
                       print(row)
+                      details.append(str(row))
+              for path in pathlib.Path("research/results/logs/asic_power").glob("*.log"):
+                  text = path.read_text(encoding="utf-8", errors="replace")[-3000:]
+                  details.append(f"{path}: {text}")
+              message = " | ".join(details).replace("\n", " ")
+              print(f"::error file=research/results/asic_power.csv,line=1::{message}")
               sys.exit(1)
           PY
           python3 research/scripts/build_conference_docs.py
