@@ -28,15 +28,40 @@ EVIDENCE_CSVS = {
     "performance.csv",
     "prefetch_metrics.csv",
     "memory_traffic.csv",
+    "workload_build.csv",
+    "cycle_performance.csv",
+    "cycle_prefetch_metrics.csv",
+    "cycle_memory_traffic.csv",
+    "gem5_validation.csv",
+    "gem5_performance.csv",
+    "gem5_prefetch_metrics.csv",
+    "gem5_memory_traffic.csv",
     "ablation.csv",
     "sensitivity.csv",
     "seed_stability.csv",
     "statistical_summary.csv",
     "gem5_statistical_summary.csv",
+    "independent_sim_performance.csv",
+    "independent_sim_prefetch_metrics.csv",
+    "independent_sim_memory_traffic.csv",
+    "core_integrated_performance.csv",
+    "core_integrated_prefetch_metrics.csv",
+    "core_integrated_memory_traffic.csv",
     "rtl_compile.csv",
     "rtl_simulation.csv",
     "synthesis.csv",
     "synthesis_overhead.csv",
+    "fullcore_synthesis.csv",
+    "fullcore_synthesis_overhead.csv",
+    "mapped_ppa.csv",
+    "mapped_ppa_overhead.csv",
+    "energy_proxy.csv",
+    "energy_summary.csv",
+    "power_report_index.csv",
+    "openroad_postroute_power.csv",
+    "openroad_postroute_power_overhead.csv",
+    "asic_power.csv",
+    "asic_power_overhead.csv",
     "paper_build_status.csv",
     "claim_audit.csv",
     "number_audit.csv",
@@ -52,15 +77,40 @@ GATE_BY_FILE = {
     "performance.csv": "G11",
     "prefetch_metrics.csv": "G10",
     "memory_traffic.csv": "G12",
+    "workload_build.csv": "G6/G7",
+    "cycle_performance.csv": "G11",
+    "cycle_prefetch_metrics.csv": "G10",
+    "cycle_memory_traffic.csv": "G12",
+    "gem5_validation.csv": "G17",
+    "gem5_performance.csv": "G11/G17",
+    "gem5_prefetch_metrics.csv": "G10/G17",
+    "gem5_memory_traffic.csv": "G12/G17",
     "ablation.csv": "G14",
     "sensitivity.csv": "G13",
     "seed_stability.csv": "G17",
     "statistical_summary.csv": "G17",
     "gem5_statistical_summary.csv": "G17",
+    "independent_sim_performance.csv": "G11/G17",
+    "independent_sim_prefetch_metrics.csv": "G10/G17",
+    "independent_sim_memory_traffic.csv": "G12/G17",
+    "core_integrated_performance.csv": "G11/G17",
+    "core_integrated_prefetch_metrics.csv": "G10/G17",
+    "core_integrated_memory_traffic.csv": "G12/G17",
     "rtl_compile.csv": "G4",
     "rtl_simulation.csv": "G5",
     "synthesis.csv": "G15",
     "synthesis_overhead.csv": "G15",
+    "fullcore_synthesis.csv": "G15",
+    "fullcore_synthesis_overhead.csv": "G15",
+    "mapped_ppa.csv": "G15",
+    "mapped_ppa_overhead.csv": "G15",
+    "energy_proxy.csv": "G16",
+    "energy_summary.csv": "G16",
+    "power_report_index.csv": "G16",
+    "openroad_postroute_power.csv": "G16",
+    "openroad_postroute_power_overhead.csv": "G16",
+    "asic_power.csv": "G16",
+    "asic_power_overhead.csv": "G16",
     "paper_build_status.csv": "G19",
     "claim_audit.csv": "G20",
     "number_audit.csv": "G20",
@@ -155,9 +205,27 @@ def write_csv(path: Path, fieldnames: list[str], rows: list[dict[str, str]]) -> 
         writer.writerows(rows)
 
 
-def merge_evidence_csv(imported: Path) -> tuple[bool, str]:
+def is_top_level_results_csv(imported_root: Path, imported: Path) -> bool:
+    """Accept only current evidence rows, not archived snapshots inside artifacts."""
+    try:
+        parts = imported.relative_to(imported_root).parts
+    except ValueError:
+        return False
+    if len(parts) == 1:
+        return True
+    if len(parts) == 2 and parts[0] == "results":
+        return True
+    for idx in range(len(parts) - 2):
+        if parts[idx] == "research" and parts[idx + 1] == "results":
+            return len(parts) == idx + 3
+    return False
+
+
+def merge_evidence_csv(imported_root: Path, imported: Path) -> tuple[bool, str]:
     if imported.name not in EVIDENCE_CSVS:
         return False, "not a canonical evidence CSV"
+    if not is_top_level_results_csv(imported_root, imported):
+        return False, "not a top-level current results CSV"
     canonical = RESULTS / imported.name
     imported_fields = csv_fields(imported)
     if not imported_fields:
@@ -210,17 +278,21 @@ def used_by_gate(path: Path) -> str:
     return GATE_BY_FILE.get(path.name, "G1")
 
 
-def first_path(imported_files: list[Path], name: str) -> str:
-    for path in imported_files:
-        if path.name == name:
-            return rel(path)
+def matching_imported_files(imported_dir: Path, imported_files: list[Path], name: str) -> list[Path]:
+    candidates = [path for path in imported_files if path.name == name]
+    current = [path for path in candidates if is_top_level_results_csv(imported_dir, path)]
+    return current or candidates
+
+
+def first_path(imported_dir: Path, imported_files: list[Path], name: str) -> str:
+    for path in matching_imported_files(imported_dir, imported_files, name):
+        return rel(path)
     return ""
 
 
-def imported_csv_rows(imported_files: list[Path], name: str) -> list[dict[str, str]]:
-    for path in imported_files:
-        if path.name == name:
-            return read_csv(path)
+def imported_csv_rows(imported_dir: Path, imported_files: list[Path], name: str) -> list[dict[str, str]]:
+    for path in matching_imported_files(imported_dir, imported_files, name):
+        return read_csv(path)
     return []
 
 
@@ -239,8 +311,8 @@ def status_from_rows(name: str) -> tuple[str, str]:
     return "MISSING", f"no open-environment rows found in {name}"
 
 
-def imported_all_pass_status(imported_files: list[Path], name: str) -> tuple[str, str]:
-    rows = imported_csv_rows(imported_files, name)
+def imported_all_pass_status(imported_dir: Path, imported_files: list[Path], name: str) -> tuple[str, str]:
+    rows = imported_csv_rows(imported_dir, imported_files, name)
     if not rows:
         return "MISSING", f"{name} was not found in imported artifacts"
     if all(row.get("status") == "PASS" for row in rows):
@@ -302,14 +374,14 @@ def paper_status(imported_files: list[Path]) -> tuple[str, str]:
     return status, note
 
 
-def audits_status(imported_files: list[Path]) -> tuple[str, str]:
+def audits_status(imported_dir: Path, imported_files: list[Path]) -> tuple[str, str]:
     names = ["claim_audit.csv", "number_audit.csv", "todo_audit.csv"]
-    missing = [name for name in names if not imported_csv_rows(imported_files, name)]
+    missing = [name for name in names if not imported_csv_rows(imported_dir, imported_files, name)]
     if missing:
         return "MISSING", "missing imported audit CSVs: " + ", ".join(missing)
     bad: list[str] = []
     for name in names:
-        rows = imported_csv_rows(imported_files, name)
+        rows = imported_csv_rows(imported_dir, imported_files, name)
         if not rows or any(row.get("status") != "PASS" for row in rows):
             bad.append(name)
     if bad:
@@ -386,19 +458,19 @@ def write_ci_ledgers(imported_dir: Path, imported_files: list[Path], merge_notes
 
     checks = [
         ("toolchain", "make check-toolchain", "G1/G2", toolchain_status()),
-        ("test", "make test", "G3", imported_all_pass_status(imported_files, "model_tests.csv")),
-        ("eval", "make eval", "G10/G11/G12/G13/G14/G17", ("PASS", "evaluation CSVs are imported") if first_path(imported_files, "performance.csv") else ("MISSING", "performance.csv is missing from imported artifacts")),
+        ("test", "make test", "G3", imported_all_pass_status(imported_dir, imported_files, "model_tests.csv")),
+        ("eval", "make eval", "G10/G11/G12/G13/G14/G17", ("PASS", "evaluation CSVs are imported") if first_path(imported_dir, imported_files, "performance.csv") else ("MISSING", "performance.csv is missing from imported artifacts")),
         ("rtl", "make rtl", "G4", status_from_rows("rtl_compile.csv")),
         ("sim", "make sim", "G5", status_from_rows("rtl_simulation.csv")),
         ("synth", "make synth", "G15", synthesis_status()),
         ("paper", "make paper", "G19", paper_status(imported_files)),
-        ("paper-audit", "make paper-audit", "G20", audits_status(imported_files)),
+        ("paper-audit", "make paper-audit", "G20", audits_status(imported_dir, imported_files)),
         ("artifact", "make artifact", "G18", artifact_status(imported_files)),
     ]
     status_rows = []
     failure_rows = []
     for job, step, gate, (status, note) in checks:
-        artifact_path = first_path(imported_files, {
+        artifact_path = first_path(imported_dir, imported_files, {
             "make check-toolchain": "toolchain_status.csv",
             "make test": "model_tests.csv",
             "make eval": "performance.csv",
@@ -465,7 +537,7 @@ def main() -> int:
     for path in imported_files:
         if path.suffix.lower() != ".csv":
             continue
-        merged, note = merge_evidence_csv(path)
+        merged, note = merge_evidence_csv(imported_dir, path)
         if merged:
             merge_notes[rel(path)] = note
     write_ci_ledgers(imported_dir, imported_files, merge_notes)

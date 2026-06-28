@@ -33,125 +33,12 @@ reproduce.py,10603,9fbdf605b17da202a692801d521be204168a521952ce2d10b3aec8e72beef
 reproduce.sh,330,e88875bb21f1637d4701689487ec70877dc0076a511cbb2f6e72fa6701c0eee0,yes,reproduce.sh,included source or reviewer file
 REPRODUCIBILITY_STATUS.md,6986,0cb5cfef613ee8c2c581db149fdc97665386286d38a75e9a02c9b7e520074681,yes,REPRODUCIBILITY_STATUS.md,included source or reviewer file
 requirements.txt,312,8df7b6b0f162b144707c20956493509edd0dc42bb5239fa75122035c8422561f,yes,requirements.txt,included source or reviewer file
-research/__pycache__/analyze_copper_dram_energy_scorecard.cpython-312.pyc,14167,,no,,excluded scratch/private/build directory
-research/__pycache__/analyze_copper_energy_pollution_scorecard.cpython-312.pyc,24570,,no,,excluded scratch/private/build directory
-research/__pycache__/analyze_copper_mcpat_sensitivity.cpython-312.pyc,37467,,no,,excluded scratch/private/build directory
-research/__pycache__/analyze_copper_metadata_toggle_bound.cpython-312.pyc,9021,,no,,excluded scratch/private/build directory
-research/__pycache__/analyze_copper_prefetch_traffic_overhead.cpython-312.pyc,24239,,no,,excluded scratch/private/build directory
-research/__pycache__/analyze_openssl_tcp_process_metadata_toggle_bound.cpython-312.pyc,17352,,no,,excluded scratch/private/build directory
-research/__pycache__/audit_sanity_checks.cpython-312.pyc,7984,,no,,excluded scratch/private/build directory
-research/__pycache__/build_copper_claim_evidence_matrix.cpython-312.pyc,48829,,no,,excluded scratch/private/build directory
-research/__pycache__/build_copper_conference_docx.cpython-312.pyc,37059,,no,,excluded scratch/private/build directory
-research/__pycache__/build_copper_full_docx.cpython-312.pyc,16733,,no,,excluded scratch/private/build directory
-research/__pycache__/build_copper_public_artifact_manifest.cpython-312.pyc,20714,,no,,excluded scratch/private/build directory
-research/__pycache__/build_copper_public_artifact_package.cpython-312.pyc,9247,,no,,excluded scratch/private/build directory
-research/__pycache__/build_copper_review_pdf.cpython-312.pyc,13452,,no,,excluded scratch/private/build directory
-research/__pycache__/build_copper_scoop_conference_docx.cpython-312.pyc,48320,,no,,excluded scratch/private/build directory
-research/__pycache__/build_copper_tcp_process_clpd_replay.cpython-312.pyc,10379,,no,,excluded scratch/private/build directory
-research/__pycache__/build_copper_workload_clpd_replay.cpython-312.pyc,7801,,no,,excluded scratch/private/build directory
-research/__pycache__/build_expat_xml_workload_aarch64.cpython-312.pyc,3505,,no,,excluded scratch/private/build directory
-research/__pycache__/build_gapbs_aarch64_official.cpython-312.pyc,3832,,no,,excluded scratch/private/build directory
-research/__pycache__/build_heap_pointer_roi_stress_aarch64.cpython-312.pyc,2500,,no,,excluded scratch/private/build directory
-research/__pycache__/build_heap_pointer_stress_aarch64.cpython-312.pyc,2196,,no,,excluded scratch/private/build directory
-research/__pycache__/build_libarchive_tar_workload_aarch64.cpython-312.pyc,4019,,no,,excluded scratch/private/build directory
-research/__pycache__/build_libxml2_xml_workload_aarch64.cpython-312.pyc,3684,,no,,excluded scratch/private/build directory
-research/__pycache__/build_mibench_patricia_workload_aarch64.cpython-312.pyc,3518,,no,,excluded scratch/private/build directory
-research/__pycache__/build_openssl_tls_socket_workload_aarch64.cpython-312.pyc,3674,,no,,excluded scratch/private/build directory
-research/__pycache__/build_openssl_tls_tcp_workload_aarch64.cpython-312.pyc,3668,,no,,excluded scratch/private/build directory
-research/__pycache__/build_pcre2_regex_workload_aarch64.cpython-312.pyc,3262,,no,,excluded scratch/private/build directory
-research/__pycache__/build_sqlite_speedtest1_aarch64.cpython-312.pyc,4612,,no,,excluded scratch/private/build directory
-research/__pycache__/build_zlib_workload_aarch64.cpython-312.pyc,3152,,no,,excluded scratch/private/build directory
-research/__pycache__/build_zstd_workload_aarch64.cpython-312.pyc,3161,,no,,excluded scratch/private/build directory
-research/__pycache__/copper_authority_state_space.cpython-312.pyc,12945,,no,,excluded scratch/private/build directory
-research/__pycache__/copper_cs_sari_gapbs_revocation_eval.cpython-312.pyc,21640,,no,,excluded scratch/private/build directory
-research/__pycache__/copper_cs_sari_sensitivity_sweep.cpython-312.pyc,16572,,no,,excluded scratch/private/build directory
-research/__pycache__/copper_dmp_model.cpython-311.pyc,23041,,no,,excluded scratch/private/build directory
-research/__pycache__/copper_dmp_model.cpython-312.pyc,20810,,no,,excluded scratch/private/build directory
-research/__pycache__/copper_final_eval.cpython-312.pyc,17078,,no,,excluded scratch/private/build directory
-research/__pycache__/copper_heap_roi_storage_proxy.cpython-312.pyc,6065,,no,,excluded scratch/private/build directory
-research/__pycache__/copper_ooo_replay_exception_alias_contract.cpython-312.pyc,12951,,no,,excluded scratch/private/build directory
-research/__pycache__/copper_security_coverage_matrix.cpython-312.pyc,23238,,no,,excluded scratch/private/build directory
-research/__pycache__/copper_sweep.cpython-312.pyc,8696,,no,,excluded scratch/private/build directory
-research/__pycache__/copper_trace_gen.cpython-312.pyc,10135,,no,,excluded scratch/private/build directory
-research/__pycache__/copper_trace_sim.cpython-312.pyc,15110,,no,,excluded scratch/private/build directory
-research/__pycache__/copper_trace_sweep.cpython-312.pyc,4984,,no,,excluded scratch/private/build directory
-research/__pycache__/copper_validation.cpython-312.pyc,13531,,no,,excluded scratch/private/build directory
-research/__pycache__/extract_arm64_ubuntu_sysroot.cpython-312.pyc,6868,,no,,excluded scratch/private/build directory
-research/__pycache__/gapbs_copper_kernel_sensitivity.cpython-312.pyc,16673,,no,,excluded scratch/private/build directory
-research/__pycache__/gapbs_copper_kernel_trace_eval.cpython-312.pyc,17092,,no,,excluded scratch/private/build directory
-research/__pycache__/gapbs_copper_trace_eval.cpython-312.pyc,32724,,no,,excluded scratch/private/build directory
-research/__pycache__/gem5_arm_ubuntu_fs_copper_workload.cpython-312.pyc,29145,,no,,excluded scratch/private/build directory
-research/__pycache__/gem5_arm_ubuntu_fs_copper_workload.cpython-314.pyc,20487,,no,,excluded scratch/private/build directory
-research/__pycache__/plot_copper_app_full_baseline_runtime.cpython-312.pyc,8467,,no,,excluded scratch/private/build directory
-research/__pycache__/plot_copper_app_overhead_figures.cpython-312.pyc,17225,,no,,excluded scratch/private/build directory
-research/__pycache__/render_pdf_pages_pymupdf.cpython-312.pyc,3692,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_application_workload_portfolio.cpython-312.pyc,12658,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_clpd_sram_synth.cpython-314.pyc,10869,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_compression_seed_stability.cpython-312.pyc,8738,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_copper_tcp_process_clpd_activity_power.cpython-312.pyc,11321,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_copper_workload_clpd_activity_power.cpython-312.pyc,10796,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_duktape_object_app_fs.cpython-312.pyc,12252,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_expat_xml_app_fs.cpython-312.pyc,14426,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_gapbs_mini_large_fs.cpython-312.pyc,12341,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_gapbs_official_fs.cpython-312.pyc,9234,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_gapbs_official_suite_fs.cpython-312.pyc,21530,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_gapbs_official_suite_fs.cpython-314.pyc,24778,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_gapbs_official_suite_scales.cpython-312.pyc,5178,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_heap_pointer_roi_fakeonly_fs.cpython-312.pyc,10047,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_heap_pointer_roi_fakeonly_fs.cpython-314.pyc,12655,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_heap_pointer_roi_fs.cpython-312.pyc,13449,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_heap_pointer_roi_fs.cpython-314.pyc,16161,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_heap_pointer_roi_seed_sweep_fs.cpython-312.pyc,11524,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_heap_pointer_roi_seed_sweep_fs.cpython-314.pyc,13825,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_heap_pointer_stress_fs.cpython-312.pyc,12924,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_jsonsqlite_seed_stability.cpython-312.pyc,7093,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_jsonsqlite_stress_seed_stability.cpython-312.pyc,7121,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_libarchive_tar_app_fs.cpython-312.pyc,15002,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_libxml2_xml_app_fs.cpython-312.pyc,14975,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_lua_duktape_seed_stability.cpython-312.pyc,10833,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_lua_table_app_fs.cpython-312.pyc,13264,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_mibench_patricia_fs.cpython-312.pyc,15566,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_mibench_patricia_scale_portfolio.cpython-312.pyc,8940,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_mibench_patricia_seed_stability.cpython-312.pyc,9324,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_olden_suite_fs.cpython-312.pyc,12324,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_openssl_cli_fixed_fs.cpython-312.pyc,16513,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_openssl_cli_seed_stability.cpython-312.pyc,10327,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_openssl_speedlike_seed_stability.cpython-312.pyc,6953,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_openssl_tcp_process_scale_portfolio.cpython-312.pyc,10049,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_openssl_tcp_process_seed_stability.cpython-312.pyc,10002,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_openssl_tls_bio_fs.cpython-312.pyc,13905,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_openssl_tls_socket_fs.cpython-312.pyc,13991,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_openssl_tls_tcp_fs.cpython-312.pyc,19423,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_pcre2_regex_app_fs.cpython-312.pyc,13430,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_pcre2_seed_stability.cpython-312.pyc,9510,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_sqlite_pointer_app_fs.cpython-312.pyc,13546,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_sqlite_seed_stability.cpython-312.pyc,9454,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_sqlite_speedtest1_components.cpython-312.pyc,7259,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_sqlite_speedtest1_fs.cpython-312.pyc,16310,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_struct_mix_fs.cpython-312.pyc,9971,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_yyjson_seed_stability.cpython-312.pyc,8856,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_zlib_app_fs.cpython-312.pyc,14164,,no,,excluded scratch/private/build directory
-research/__pycache__/summarize_zstd_app_fs.cpython-312.pyc,13958,,no,,excluded scratch/private/build directory
-research/__pycache__/verify_copper_artifacts.cpython-312.pyc,59835,,no,,excluded scratch/private/build directory
 research/_vendor/pymupdf/bin/pymupdf.exe,108388,,no,,suffix not included
 research/_vendor/pymupdf/fitz/__init__.py,479,23dae7eac8bbdcae7fc175de7fa168b849c25b6fec1a7196a7a9e9f6141a372f,yes,research/_vendor/pymupdf/fitz/__init__.py,included source or reviewer file
-research/_vendor/pymupdf/fitz/__pycache__/__init__.cpython-312.pyc,608,,no,,excluded scratch/private/build directory
-research/_vendor/pymupdf/fitz/__pycache__/table.cpython-312.pyc,210,,no,,excluded scratch/private/build directory
-research/_vendor/pymupdf/fitz/__pycache__/utils.cpython-312.pyc,210,,no,,excluded scratch/private/build directory
 research/_vendor/pymupdf/fitz/table.py,85,8ab84abc4a59ff83cdfbe4c95ccdaf6eb4ac438415bdee3747d0b2d8a65e2713,yes,research/_vendor/pymupdf/fitz/table.py,included source or reviewer file
 research/_vendor/pymupdf/fitz/utils.py,85,4e72ca23d6bad3e263113f4a8fda7b1a5e0ca00be96847031bd64fef2c2fa130,yes,research/_vendor/pymupdf/fitz/utils.py,included source or reviewer file
 research/_vendor/pymupdf/pymupdf/__init__.py,916826,1b8fe9fd941fac2bfb45143c2d21be04e0a8eb0599c92a29de7ec913914d4568,yes,research/_vendor/pymupdf/pymupdf/__init__.py,included source or reviewer file
 research/_vendor/pymupdf/pymupdf/__main__.py,41358,763a97305937d0665a43d4b6920924efb15d8f87795ec2926c09f9da69bfd2cb,yes,research/_vendor/pymupdf/pymupdf/__main__.py,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/__pycache__/__init__.cpython-312.pyc,1072668,,no,,excluded scratch/private/build directory
-research/_vendor/pymupdf/pymupdf/__pycache__/__main__.cpython-312.pyc,48407,,no,,excluded scratch/private/build directory
-research/_vendor/pymupdf/pymupdf/__pycache__/_apply_pages.cpython-312.pyc,8682,,no,,excluded scratch/private/build directory
-research/_vendor/pymupdf/pymupdf/__pycache__/_build.cpython-312.pyc,556,,no,,excluded scratch/private/build directory
-research/_vendor/pymupdf/pymupdf/__pycache__/_wxcolors.cpython-312.pyc,15693,,no,,excluded scratch/private/build directory
-research/_vendor/pymupdf/pymupdf/__pycache__/extra.cpython-312.pyc,13263,,no,,excluded scratch/private/build directory
-research/_vendor/pymupdf/pymupdf/__pycache__/mupdf.cpython-312.pyc,3480185,,no,,excluded scratch/private/build directory
-research/_vendor/pymupdf/pymupdf/__pycache__/pymupdf.cpython-312.pyc,202,,no,,excluded scratch/private/build directory
-research/_vendor/pymupdf/pymupdf/__pycache__/table.cpython-312.pyc,109033,,no,,excluded scratch/private/build directory
-research/_vendor/pymupdf/pymupdf/__pycache__/utils.cpython-312.pyc,46349,,no,,excluded scratch/private/build directory
 research/_vendor/pymupdf/pymupdf/_apply_pages.py,7716,720b52015d70320bb3603c1a724c0741c9b53e87a9943ec96a911ef38b5bd457,yes,research/_vendor/pymupdf/pymupdf/_apply_pages.py,included source or reviewer file
 research/_vendor/pymupdf/pymupdf/_build.py,302,8f6d54b5d2499182d1fc43a0fff64a92348719cd011b5f34ec179c388372176c,yes,research/_vendor/pymupdf/pymupdf/_build.py,included source or reviewer file
 research/_vendor/pymupdf/pymupdf/_extra.pyd,190464,,no,,suffix not included
@@ -433,7 +320,7 @@ research/copper_authority_state_space.py,10586,a75f2c66ebf37f1a07403efc059056842
 research/copper_cavi_authority_issue_gate.sv,9763,8a32c7539e431792fdda0afd022e77d960bb3c6f3a25e31530a7467327a4efaa,yes,research/copper_cavi_authority_issue_gate.sv,included source or reviewer file
 research/copper_cavi_authority_issue_gate_tb.sv,21023,b8ad75546148481154503dbaf2556ce8e63aa585a6c16d273636b702b1022bec,yes,research/copper_cavi_authority_issue_gate_tb.sv,included source or reviewer file
 research/copper_cepf_line_e2e_sva_tb.sv,20115,2c19cbcfa95e29a5e5f1786591944b2e93320c618eab10a8bd26afda898bb3cc,yes,research/copper_cepf_line_e2e_sva_tb.sv,included source or reviewer file
-research/COPPER_CLAIM_LEDGER.md,6962,a95698cde94729b38131b8f970a20c753e819bb982d821637d768a204c854cf5,yes,research/COPPER_CLAIM_LEDGER.md,included source or reviewer file
+research/COPPER_CLAIM_LEDGER.md,7046,6b6809ed928182e81e03ac9c1497738cac3be3f50ab03b3a12fe8ec5cbe5bb53,yes,research/COPPER_CLAIM_LEDGER.md,included source or reviewer file
 research/copper_clpd_constraints.xdc,44,,no,,suffix not included
 research/copper_clpd_ctlw_authority_e2e_tb.sv,25956,175c323f1c22abc92c62d6f28ff4460cd0d97574de0bf5ae55520923a1f13a3b,yes,research/copper_clpd_ctlw_authority_e2e_tb.sv,included source or reviewer file
 research/copper_clpd_gate.sv,6531,971acb8bbf013fbe1b148624d8b68623c1e1b781c391fde3d25364f1bdba8a30,yes,research/copper_clpd_gate.sv,included source or reviewer file
@@ -589,13 +476,13 @@ research/results/aarch64_c_kernel_suite_fs.s,15452,,no,,included summary/evidenc
 research/results/aarch64_gapbs_mini_suite_fs.s,24111,,no,,included summary/evidence file
 research/results/aarch64_gapbs_mini_suite_fs_small.s,20597,,no,,included summary/evidence file
 research/results/ablation.csv,11431,5121591a6b88d9308f397ca6444f1d32704bcd3c30b36aee5a0aa0ddf3d01ccd,yes,research/results/ablation.csv,included summary/evidence file
-research/results/artifact_inventory.csv,3517652,5d8f4f1d6d20cb273472fcb97357559375621ac0610ef6abe288f7c8ffc0460c,yes,research/results/artifact_inventory.csv,included summary/evidence file
-research/results/artifact_manifest.csv,1896239,c26fd1f0401072a2625e5fb8ea57abc466f2aa09bc04799eb85459aa32541191,yes,research/results/artifact_manifest.csv,included summary/evidence file
+research/results/artifact_inventory.csv,3691286,ebc989af9fdaa6d0d72e867850cffadc98f1416f7069e97f1f5566dc800ef7bc,yes,research/results/artifact_inventory.csv,included summary/evidence file
+research/results/artifact_manifest.csv,2034189,32b4233969a427dce26441ac989d7cb0918a4bbadadeb85966803473e86b03fd,yes,research/results/artifact_manifest.csv,included summary/evidence file
 research/results/asic_power/core_wrapper_plus_copper/core_wrapper_plus_copper_nangate45.v,1337348,629c8890e3d747905c83c7945261b954e58646df7af3bcf5e1a08068cf67090e,yes,research/results/asic_power/core_wrapper_plus_copper/core_wrapper_plus_copper_nangate45.v,included summary/evidence file
 research/results/asic_power/core_wrapper_plus_copper/sta_power.tcl,506,,no,,excluded local-only file containing a private absolute path
 research/results/asic_power/nangate45/NangateOpenCellLibrary_typical.lib,6692032,,no,,included summary/evidence file
-research/results/asic_power.csv,1265,b93496d9aabff57e3bc547bae8b0266bcb25bc4bf6a5dd980895bbcee3dac0d7,yes,research/results/asic_power.csv,included summary/evidence file
-research/results/asic_power_overhead.csv,247,ef3a0395aaa0083553223bcdd67a622e2142f384d312c65d4213008faf643c48,yes,research/results/asic_power_overhead.csv,included summary/evidence file
+research/results/asic_power.csv,2665,be90502a6ad7e3ca59b5cc10cc3cbb039030c382daf9419cbe4969f00ef817b8,yes,research/results/asic_power.csv,included summary/evidence file
+research/results/asic_power_overhead.csv,1764,16aca8b38af0393e89e93fcf002d81f40f974050495210d85f2312162093fa21,yes,research/results/asic_power_overhead.csv,included summary/evidence file
 research/results/authority_regression/run_copper_cepf_line_e2e_xsim.log,5176,de1284fdcb7e889420f17bd87bd155f27672cade11d139de745bcc2a81497b70,yes,research/results/authority_regression/run_copper_cepf_line_e2e_xsim.log,included summary/evidence file
 research/results/authority_regression/run_copper_clpd_ctlw_authority_e2e_xsim.log,6006,68d7a0a7ade621a5e57c99da833d13b7a95efabb1c49ac018c091112479a5a26,yes,research/results/authority_regression/run_copper_clpd_ctlw_authority_e2e_xsim.log,included summary/evidence file
 research/results/authority_regression/run_copper_clpd_xsim.log,4134,0fadb5ebeef3464c873dc162261be6ab84c91a619de233145038c66798aa64fe,yes,research/results/authority_regression/run_copper_clpd_xsim.log,included summary/evidence file
@@ -650,9 +537,9 @@ research/results/champsim/no_w0_pointer_chase.json,6132,d3ac0019c8849f1f5a5d9d43
 research/results/champsim/no_w0_pointer_chase.txt,229280,f2607ddee7f4c077724f4d56e706d9a74607408f53f3dab64183927cb9f717b2,yes,research/results/champsim/no_w0_pointer_chase.txt,included summary/evidence file
 research/results/champsim/no_w0_sequential_scan.json,6102,216f2741a201f012a9145002a02eb6dfdf23ddb907c06657f94dbb6c5804ad2c,yes,research/results/champsim/no_w0_sequential_scan.json,included summary/evidence file
 research/results/champsim/no_w0_sequential_scan.txt,263492,3bdabfeb5966e1cd2b3d5bee521a5a8c2b7ae922a51f7e947dd735d9a96df119,yes,research/results/champsim/no_w0_sequential_scan.txt,included summary/evidence file
-research/results/ci_artifacts_manifest.csv,16654,cb54e33180c66b6518320aef3dfe1aa3e34a319de2140c8bfe0f1c061ce157bd,yes,research/results/ci_artifacts_manifest.csv,included summary/evidence file
+research/results/ci_artifacts_manifest.csv,67548,833e6746d5a1b6b7f2040e00e940eaac429e4f3f3dfaaa3338770093f13d5a72,yes,research/results/ci_artifacts_manifest.csv,included summary/evidence file
 research/results/ci_failure_summary.csv,159,734694a6e1e7cd16f9ca2189db098e58b42f564a4393518ceee81bde91d19999,yes,research/results/ci_failure_summary.csv,included summary/evidence file
-research/results/ci_status.csv,2070,8cd447901f778e05248804aba22c9ebd066d9642cf069833f52a5901339b3822,yes,research/results/ci_status.csv,included summary/evidence file
+research/results/ci_status.csv,2195,628f0f050b4293e3c473118365d12303514dc9ab270c23159b7e89927260604b,yes,research/results/ci_status.csv,included summary/evidence file
 research/results/claim_audit.csv,75,e4d2b239949ce2045fb43cc603f2462cec4aea6b3a48f6359c5d491ca7fbac55,yes,research/results/claim_audit.csv,included summary/evidence file
 research/results/compression_library_seed_stability_20260620.csv,690,90f3288342ad0b72b83d07f6db066a111e3b0c8a9f8c8eb0407a3d2e5e053eba,yes,research/results/compression_library_seed_stability_20260620.csv,included summary/evidence file
 research/results/COMPRESSION_LIBRARY_SEED_STABILITY_20260620.md,1650,028cd2ad6db2815ef0935476181b56a68c377972c04eb83abac37c8f55a2ac70,yes,research/results/COMPRESSION_LIBRARY_SEED_STABILITY_20260620.md,included summary/evidence file
@@ -928,585 +815,6 @@ research/results/COPPER_PUBLIC_APP_STRESS_SEED_SWEEP_20260617.md,2329,e8dd402ccd
 research/results/copper_public_artifact_manifest_20260620.csv,99051,e3f319b5d01d11b480a42acefdf85e34ffd7486270dbfb69ff79136b684d188c,yes,research/results/copper_public_artifact_manifest_20260620.csv,included summary/evidence file
 research/results/COPPER_PUBLIC_ARTIFACT_MANIFEST_20260620.md,3940,ac72bc1a63f99f3612469437bfed0a282315ee258e0ee6fedf74b2ab57af896f,yes,research/results/COPPER_PUBLIC_ARTIFACT_MANIFEST_20260620.md,included summary/evidence file
 research/results/copper_public_artifact_manifest_20260620.sha256,69214,,no,,included summary/evidence file
-research/results/copper_public_artifact_package_20260620/external/gem5/src/mem/cache/prefetch/copper.cc,28934,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/external/gem5/src/mem/cache/prefetch/copper.hh,10606,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/external/mibench_download/network.tar.gz,470094,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/external/mibench_network/network/patricia/large.udp,1514237,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/external/mibench_network/network/patricia/LICENSE,72,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/external/mibench_network/network/patricia/patricia.c,7040,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/external/mibench_network/network/patricia/patricia.h,1590,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/external/mibench_network/network/patricia/small.udp,251969,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/aarch64_c_kernel_suite.c,5562,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/aarch64_cache_service_workload.c,10266,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/aarch64_dmp_oracle_probe.cc,5976,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/aarch64_duktape_object_workload.c,4866,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/aarch64_expat_xml_workload.c,10384,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/aarch64_freestanding_smoke.c,720,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/aarch64_gapbs_mini_suite.c,7204,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/aarch64_heap_pointer_roi_stress.cc,4163,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/aarch64_heap_pointer_stress.cc,3175,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/aarch64_json_sqlite_ingest_workload.c,12422,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/aarch64_libarchive_tar_workload.c,11131,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/aarch64_libxml2_xml_workload.c,8522,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/aarch64_lua_table_workload.c,4521,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/aarch64_mibench_patricia_workload.c,7091,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/aarch64_openssl_crypto_suite_workload.c,13129,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/aarch64_openssl_sha_service_workload.c,10379,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/aarch64_openssl_speedlike_workload.c,8460,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/aarch64_openssl_tls_bio_workload.c,22370,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/aarch64_openssl_tls_socket_workload.c,23255,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/aarch64_openssl_tls_tcp_workload.c,38260,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/aarch64_pcre2_regex_workload.c,10852,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/aarch64_pointer_structure_mix.cc,4788,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/aarch64_sqlite_pointer_workload.c,9993,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/aarch64_tls_session_workload.c,13267,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/aarch64_yyjson_workload.c,8527,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/aarch64_zlib_workload.c,5458,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/aarch64_zstd_workload.c,5351,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/acow_model.py,8096,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/analyze_copper_app_baseline_matrix.py,9922,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/analyze_copper_dram_energy_scorecard.py,10593,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/analyze_copper_energy_pollution_scorecard.py,20962,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/analyze_copper_mcpat_sensitivity.py,30191,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/analyze_copper_metadata_toggle_bound.py,6723,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/analyze_copper_prefetch_traffic_overhead.py,19665,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/analyze_openssl_tcp_process_metadata_toggle_bound.py,13468,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/audit_cache_service_no_poison_control.py,4961,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/audit_cache_service_scale_sensitivity.py,4872,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/audit_cache_service_seed_stability.py,4782,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/audit_sanity_checks.py,5325,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/build_cache_service_workload_aarch64.py,1836,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/build_copper_claim_evidence_matrix.py,64503,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/build_copper_conference_docx.py,34053,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/build_copper_full_docx.py,10224,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/build_copper_public_artifact_manifest.py,15592,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/build_copper_public_artifact_package.py,6145,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/build_copper_review_pdf.py,9898,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/build_copper_scoop_conference_docx.py,42331,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/build_copper_tcp_process_clpd_replay.py,6750,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/build_copper_workload_clpd_replay.py,5217,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/build_dmp_oracle_probe_aarch64.py,1438,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/build_duktape_object_workload_aarch64.py,1968,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/build_expat_xml_workload_aarch64.py,2262,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/build_gapbs_aarch64_official.py,2646,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/build_heap_pointer_roi_stress_aarch64.py,1461,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/build_heap_pointer_stress_aarch64.py,1279,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/build_json_sqlite_ingest_workload_aarch64.py,2252,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/build_libarchive_tar_workload_aarch64.py,2470,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/build_libxml2_xml_workload_aarch64.py,2475,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/build_lua_table_workload_aarch64.py,2095,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/build_mibench_patricia_workload_aarch64.py,2349,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/build_olden_aarch64.py,8364,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/build_openssl_crypto_suite_workload_aarch64.py,2149,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/build_openssl_sha_service_workload_aarch64.py,2096,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/build_openssl_speedlike_workload_aarch64.py,2146,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/build_openssl_tls_bio_workload_aarch64.py,2373,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/build_openssl_tls_socket_workload_aarch64.py,2409,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/build_openssl_tls_tcp_workload_aarch64.py,2404,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/build_pcre2_regex_workload_aarch64.py,2119,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/build_sqlite_pointer_workload_aarch64.py,2098,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/build_sqlite_speedtest1_aarch64.py,2985,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/build_tls_session_workload_aarch64.py,2063,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/build_yyjson_workload_aarch64.py,1941,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/build_zlib_workload_aarch64.py,2012,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/build_zstd_workload_aarch64.py,2020,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/COPPER_AMBA_CHI_ACE_EVENT_MAP_20260619.md,6938,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_amba_sari_authority_bridge_tb.sv,34907,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_amba_sari_authority_bridge_top.sv,13080,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_amba_sari_frontdoor.sv,5991,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_amba_sari_frontdoor_regslice.sv,8374,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_amba_sari_frontdoor_tb.sv,17811,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/COPPER_ARTIFACT_REPRODUCTION_GUIDE.md,35255,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_authority_state_space.py,10586,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_cavi_authority_issue_gate.sv,9763,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_cavi_authority_issue_gate_tb.sv,21023,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_cepf_line_e2e_sva_tb.sv,20115,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_clpd_constraints.xdc,44,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_clpd_ctlw_authority_e2e_tb.sv,25956,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_clpd_gate.sv,6531,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_clpd_gate_tb.sv,17983,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_clpd_sram_activity_saif_xsim.tcl,126,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_clpd_sram_activity_xsim.tcl,122,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_clpd_sram_dir.sv,13392,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_clpd_sram_dir_tb.sv,24858,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_clpd_sram_tcp_process_activity_saif_xsim.tcl,148,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_clpd_sram_workload_activity_saif_xsim.tcl,145,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_clpd_sram_workload_activity_tb.sv,18880,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_clpd_state_space.py,10611,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_clpd_storage_model.py,7859,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_commit_epoch_constraints.xdc,58,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_commit_epoch_proof_bridge.sv,2943,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_commit_epoch_proof_bridge_tb.sv,5456,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_cs_sari_area_proxy.py,5536,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_cs_sari_composition_state_space.py,21290,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_cs_sari_gapbs_revocation_eval.py,15555,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_cs_sari_sensitivity_sweep.py,13584,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_cs_sari_state_space.py,16206,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_ctlw_full_authority_e2e_tb.sv,17539,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_ctlw_witness_dir.sv,4596,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_ctlw_witness_dir_tb.sv,16166,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_dmp_model.py,15452,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/COPPER_DOCX_QA.md,13190,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/COPPER_ENVIRONMENT_ARTIFACT_MANIFEST_20260619.md,5389,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_final_eval.py,13907,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/COPPER_FINAL_OUTPUT.md,105697,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/COPPER_FREE_RUN_RESULTS.md,32147,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_full_authority_constraints.xdc,58,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_full_authority_gate.sv,4129,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_full_authority_gate_tb.sv,17570,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_full_authority_sva_tb.sv,17072,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_full_lsq_amba_authority_tb.sv,29946,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_full_lsq_amba_authority_top.sv,20380,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/COPPER_FULL_PAPER.md,169725,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_graph_workload_eval.py,12477,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_heap_roi_storage_proxy.py,5337,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_invariant_model_check.py,7576,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_line_constraints.xdc,44,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_line_provenance_gate.sv,3049,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_line_provenance_gate_tb.sv,7044,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_line_provenance_random_tb.sv,8727,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_lsq_cepf_line_e2e_tb.sv,35875,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_lsq_cepf_line_e2e_top.sv,7535,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_lsq_source_tag_tracker.sv,7952,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_lsq_source_tag_tracker_tb.sv,23591,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/COPPER_NOTE.md,7316,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_ooo_lsq_proof_contract.py,10488,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_ooo_replay_exception_alias_contract.py,10695,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/COPPER_PAPER_EVAL.md,9626,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_prefetch_gate.sv,3794,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_prefetch_gate_tb.sv,5410,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/COPPER_PRIOR_ART.md,16124,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_provenance_epoch_boundary.sv,4601,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_provenance_epoch_boundary_tb.sv,8120,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_rocca_clpd_commit_adapter.sv,3707,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_rocca_clpd_commit_adapter_tb.sv,22167,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_rocca_clpd_commit_adapter_top.sv,5223,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_ropl_lsq_retire_guard.sv,4616,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_ropl_lsq_retire_guard_tb.sv,18719,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_ropl_lsq_retire_guard_top.sv,7624,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_sari_clpd_ctlw_authority_e2e_tb.sv,33528,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_sari_revoker.sv,5175,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_sari_revoker_tb.sv,13888,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_sari_ring_revoker.sv,7898,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_sari_rq_state_space.py,9755,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_sari_scoped_authority_e2e_tb.sv,32682,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_sari_scoped_revoker.sv,6593,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_sari_scoped_revoker_v.v,6179,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_sari_scoped_trace_sim.py,15388,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_scoop_companion_arbiter.sv,1311,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_scoop_companion_arbiter_tb.sv,5171,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/COPPER_SCOOP_DOCX_QA.md,1354,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_security_coverage_matrix.py,31933,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_stream_gate.sv,5121,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_stream_gate_tb.sv,6636,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_stream_table_constraints.xdc,54,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_stream_table_gate.sv,7574,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_stream_table_gate_tb.sv,7196,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/COPPER_SUBMISSION_RESTRUCTURED.md,29437,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_sweep.py,5893,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_tlb_coherence_authority_filter.sv,12672,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_tlb_coherence_authority_filter_tb.sv,18601,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_tlb_coherence_contract.py,28581,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_trace_gen.py,9214,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_trace_sim.py,10549,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_trace_sweep.py,4030,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/copper_validation.py,10683,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/COPPER_VALIDATION_REPORT.md,9544,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/COPPER_VIVADO_SUMMARY.md,21037,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/export_copper_docx_pdf.ps1,4056,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/export_copper_scoop_docx_pdf.ps1,2200,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/extract_arm64_ubuntu_sysroot.py,4087,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/fs_copper_graph_guest.py,8929,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/fs_copper_tiny_guest.py,4734,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/gapbs_copper_kernel_sensitivity.py,11188,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/gapbs_copper_kernel_trace_eval.py,12268,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/gapbs_copper_trace_eval.py,23708,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/gem5_arm_ubuntu_fs_copper_workload.py,23232,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/gem5_arm_ubuntu_fs_probe.py,2089,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/gem5_copper_arm32_config.py,4998,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/gem5_query_resource.py,391,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/gem5_smoke_simple_arm.py,1285,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/generate_champsim_traces.py,6131,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/list_vivado_memory_parts.tcl,331,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/make_aarch64_fs_native_workload.py,5673,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/make_aarch64_graph_gather_bench.py,8132,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/make_aarch64_pointer_bench.py,6573,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/make_arm32_pointer_bench.py,4761,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/openssl_cli_tls_pair_guest.sh,1901,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/openssl_guest_probe.sh,207,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/plot_copper_app_full_baseline_runtime.py,6449,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/plot_copper_app_overhead_figures.py,11904,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/probe_scons_toolchain.py,1610,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/render_pdf_pages_pymupdf.py,2117,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/COMPRESSION_LIBRARY_SEED_STABILITY_20260620.md,1650,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/copper_amba_sari_authority_bridge_top_synth.log,22903,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/copper_amba_sari_authority_bridge_top_timing.rpt,19795,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/copper_amba_sari_authority_bridge_xsim_20260616.log,6962,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/copper_amba_sari_frontdoor_regslice_timing.rpt,17902,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/COPPER_AMBA_SARI_FRONTDOOR_RTL_SUMMARY.md,2485,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/copper_amba_sari_frontdoor_xsim_20260616.log,4464,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/copper_amba_sari_frontdoor_xsim_20260620.log,1874,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/COPPER_APP_BASELINE_MATRIX_20260617.md,3451,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/COPPER_APPLICATION_WORKLOAD_PORTFOLIO_20260616.md,9583,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/COPPER_ARTIFACT_AUDIT_20260616.md,16958,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/COPPER_CAVI_AUTHORITY_ISSUE_GATE_RTL_SUMMARY.md,2600,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/copper_cavi_authority_issue_gate_synth.log,21937,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/copper_cavi_authority_issue_gate_timing.rpt,20086,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/copper_cavi_authority_issue_gate_utilization.rpt,8653,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/copper_cavi_authority_issue_gate_xsim_20260620.log,1831,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/COPPER_CLAIM_EVIDENCE_MATRIX_20260617.md,17435,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/COPPER_CLPD_ACTIVITY_POWER_20260619.md,3263,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/COPPER_CLPD_SRAM_SYNTH_SUMMARY.md,2122,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/copper_clpd_sram_tcp_process_activity_saif_power.rpt,9076,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/copper_clpd_sram_workload_activity_saif_power.rpt,9031,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/COPPER_DRAM_ENERGY_SCORECARD_20260618.md,13695,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/COPPER_ENERGY_POLLUTION_SCORECARD_20260617.md,15601,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/copper_full_lsq_amba_authority_top_synth.log,24536,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/copper_full_lsq_amba_authority_top_timing.rpt,19647,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/copper_full_lsq_amba_authority_xsim_20260616.log,8822,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/copper_lsq_cepf_line_e2e_top_timing.rpt,19241,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/copper_lsq_cepf_line_e2e_xsim_20260616.log,5856,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/copper_lsq_source_tag_tracker_xsim_20260616.log,4548,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/COPPER_MCPAT_SENSITIVITY_20260618.md,3780,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/COPPER_METADATA_TOGGLE_BOUND_20260619.md,2047,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/COPPER_OOO_LSQ_PROOF_CONTRACT.md,3237,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/COPPER_OOO_REPLAY_EXCEPTION_ALIAS_CONTRACT.md,3867,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/COPPER_PEB_RTL_SUMMARY.md,2525,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/COPPER_PREFETCH_TRAFFIC_OVERHEAD_20260616.md,24179,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/COPPER_PRIOR_ART_DELTA_20260617.md,4474,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/COPPER_PRIOR_ART_REFRESH_20260619.md,6450,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/COPPER_PRIOR_ART_UPDATE_20260615.md,7722,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/COPPER_PRIOR_ART_UPDATE_20260616.md,6933,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/COPPER_PUBLIC_APP_MEDIUM_SEED_SWEEP_20260617.md,2768,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/COPPER_PUBLIC_APP_REPEATED_SEED_PORTFOLIO_20260617.md,2150,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/COPPER_PUBLIC_APP_STRESS_SEED_SWEEP_20260617.md,2329,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/copper_public_artifact_manifest_20260620.csv,97670,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/COPPER_PUBLIC_ARTIFACT_MANIFEST_20260620.md,3939,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/copper_public_artifact_manifest_20260620.sha256,68272,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/COPPER_PUBLIC_ARTIFACT_PACKAGE_BUILD_20260620.md,1246,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/COPPER_READINESS_AUDIT_20260615.md,6504,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/COPPER_READINESS_AUDIT_20260616.md,12606,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/COPPER_ROCCA_CLPD_COMMIT_ADAPTER_RTL_SUMMARY.md,2592,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/copper_rocca_clpd_commit_adapter_synth.log,19800,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/copper_rocca_clpd_commit_adapter_xsim_20260620.log,1825,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/COPPER_ROPL_LSQ_RETIRE_GUARD_RTL_SUMMARY.md,2700,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/copper_ropl_lsq_retire_guard_synth.log,18055,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/copper_ropl_lsq_retire_guard_top_timing.rpt,18041,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/copper_ropl_lsq_retire_guard_xsim_20260620.log,1886,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/COPPER_RTL_POWER_PROXY_20260618.md,5209,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/COPPER_SARI_RQ_STATE_SPACE.md,2007,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/COPPER_SECURITY_COVERAGE_MATRIX.md,15847,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/COPPER_SECURITY_EVIDENCE_PORTFOLIO_20260616.md,3369,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/COPPER_TCP_PROCESS_CLPD_ACTIVITY_POWER_20260620.md,4158,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/COPPER_TLB_COHERENCE_AUTHORITY_FILTER_RTL_SUMMARY.md,3062,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/copper_tlb_coherence_authority_filter_synth.log,19372,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/copper_tlb_coherence_authority_filter_timing.rpt,17913,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/copper_tlb_coherence_authority_filter_xsim_20260617.log,1955,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/COPPER_TLB_COHERENCE_CONTRACT.md,9125,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/COPPER_TOP_TIER_GAP_TRACKER_20260619.md,20499,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/COPPER_TOP_TIER_GATE_AUDIT_20260617.md,4010,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/COPPER_WORKLOAD_CLPD_ACTIVITY_POWER_20260619.md,3653,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/EXPAT_XML_FEASIBILITY_20260620.md,1710,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/figures/COPPER_APP_FIGURE_INDEX_20260616.md,1319,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_cachesvc_app/CACHESVC_NOPOISON_CONTROL_AUDIT.md,2042,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_cachesvc_app/CACHESVC_SCALE_SENSITIVITY_AUDIT.md,1992,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_cachesvc_app/CACHESVC_SEED_STABILITY_AUDIT.md,1779,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_dmp_oracle/DMP_ORACLE_I512_P4_PROBE1_EVICT512_SPLIT_SUMMARY.md,2541,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_duktape_app/DUKTAPE_APP_MEDIUM_FS_SUMMARY.md,1900,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_duktape_app/DUKTAPE_APP_STRESS_FS_SUMMARY.md,1915,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_gapbs_official_suite/GAPBS_OFFICIAL_SUITE_CROSS_SCALE_SUMMARY.md,2261,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_gapbs_official_suite/GAPBS_OFFICIAL_SUITE_FINAL_G14_FS_SUMMARY.md,5624,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_jsonsqlite_app/JSONSQLITE_MEDIUM_SEED1_FS_SUMMARY.md,1961,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_jsonsqlite_app/JSONSQLITE_STRESS_SEED1_FS_SUMMARY.md,1976,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_libarchive_app/LIBARCHIVE_TAR_TINY_FULL_FS_SUMMARY.md,2196,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_libxml2_app/LIBXML2_XML_TINY_FULL_FS_SUMMARY.md,2178,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_lua_app/LUA_APP_MEDIUM_SEED_SWEEP_SUMMARY.md,3387,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_lua_app/LUA_APP_STRESS_FS_SUMMARY.md,2088,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_mibench_patricia_app/MIBENCH_PATRICIA_PATRICIA_LARGE12288_FS_SUMMARY.md,2187,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_mibench_patricia_app/MIBENCH_PATRICIA_PATRICIA_LARGE12288_SEED1_FS_SUMMARY.md,2193,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_mibench_patricia_app/mibench_patricia_patricia_large12288_seed1_summary.csv,1126,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_mibench_patricia_app/mibench_patricia_patricia_large12288_summary.csv,1126,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_mibench_patricia_app/MIBENCH_PATRICIA_PATRICIA_PREPROBE_FS_SUMMARY.md,2119,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_mibench_patricia_app/mibench_patricia_patricia_preprobe_summary.csv,1043,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_mibench_patricia_app/MIBENCH_PATRICIA_PATRICIA_SMALL2048_FS_SUMMARY.md,2139,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_mibench_patricia_app/mibench_patricia_patricia_small2048_summary.csv,1081,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_mibench_patricia_app/MIBENCH_PATRICIA_PATRICIA_SMALL8192_FS_SUMMARY.md,2156,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_mibench_patricia_app/mibench_patricia_patricia_small8192_summary.csv,1106,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_olden_suite/OLDEN_BISORT_FINGERPRINT_VALIDATION.md,1602,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_olden_suite/OLDEN_BUILTIN_BASELINES.md,3343,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_osslcli_app/OSSLCLI_AESCTR_64K_FS_SUMMARY.md,2525,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_osslcli_app/OSSLCLI_AESCTR_64K_SEED2_FS_SUMMARY.md,2531,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_osslcli_app/OSSLCLI_FIXED_64K_FS_SUMMARY.md,2422,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_osslcli_app/OSSLCLI_FIXED_64K_SEED2_FS_SUMMARY.md,2517,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_osslcli_app/OSSLCLI_HMAC_64K_FS_SUMMARY.md,2427,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_osslcli_app/OSSLCLI_HMAC_64K_SEED2_FS_SUMMARY.md,2433,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_osslcrypto_app/OSSLCRYPTO_APP_MEDIUM_FS_SUMMARY.md,1901,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_osslcrypto_app/OSSLCRYPTO_APP_SMOKE_FS_SUMMARY.md,2305,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_osslsha_app/OSSLSHA_APP_SMOKE_FS_SUMMARY.md,2250,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_osslspeed_app/OSSLSPEED_APP_SMOKE_FS_SUMMARY.md,2077,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_ossltlsbio_app/OSSLTLSBIO_APP_MEDIUM_FS_SUMMARY.md,1928,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_ossltlsbio_app/OSSLTLSBIO_APP_SMOKE_FS_SUMMARY.md,2263,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_ossltlssocket_app/OSSLTLSSOCKET_SOCKET_SMOKE_FS_SUMMARY.md,1979,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_ossltlstcp_app/ossltlstcp_TCP_FALLBACK_PROBE_FS_SUMMARY.md,2624,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_ossltlstcp_app/ossltlstcp_TCP_NETNS_PROCESS_KEY1_FS_SUMMARY.md,2817,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_ossltlstcp_app/ossltlstcp_TCP_NETNS_PROCESS_SCALE2_FS_SUMMARY.md,2847,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_ossltlstcp_app/ossltlstcp_tcp_netns_process_scale2_summary.csv,1368,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_ossltlstcp_app/ossltlstcp_TCP_NETNS_PROCESS_SCALE3_FS_SUMMARY.md,2851,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_ossltlstcp_app/ossltlstcp_tcp_netns_process_scale3_summary.csv,1377,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_ossltlstcp_app/ossltlstcp_TCP_NETNS_STRICT_FS_SUMMARY.md,2699,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_pcre2_app/PCRE2_PCRE2_SEED1_FS_SUMMARY.md,1809,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_pcre2_app/PCRE2_PCRE2_SMOKE_FS_SUMMARY.md,1808,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_sqlite_app/SQLITE_APP_STRESS_FS_SUMMARY.md,2357,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_sqlite_speedtest1/SQLITE_SPEEDTEST1_SPEEDTEST1_JSON_SMOKE_SIZE1_FS_SUMMARY.md,2558,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_sqlite_speedtest1/SQLITE_SPEEDTEST1_SPEEDTEST1_ORM_SMOKE_SIZE1_FS_SUMMARY.md,2564,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_sqlite_speedtest1/SQLITE_SPEEDTEST1_SPEEDTEST1_STAR_SMOKE_SIZE1_FS_SUMMARY.md,2537,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_tlssvc_app/TLSSVC_APP_SMOKE_FS_SUMMARY.md,2411,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_yyjson_app/YYJSON_APP_STRESS_FS_SUMMARY.md,2377,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_zlib_app/ZLIB_ZLIB_TINY_FS_SUMMARY.md,1935,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/gem5_arm_ubuntu_fs_zstd_app/ZSTD_ZSTD_TINY_FS_SUMMARY.md,1903,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/GEM5_POWERSHELL_RUNNER_FIX_20260619.md,2011,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/JSONSQLITE_MEDIUM_SEED_STABILITY_20260619.md,1200,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/JSONSQLITE_STRESS_SEED_STABILITY_20260619.md,1225,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/libarchive_tar_workload_build/LIBARCHIVE_TAR_WORKLOAD_BUILD.md,1976,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/libxml2_xml_workload_build/LIBXML2_XML_WORKLOAD_BUILD.md,1330,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/LUA_DUKTAPE_MEDIUM_STRESS_SEED_STABILITY_20260619.md,3041,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/mibench_patricia_12k_seed_stability_20260621.csv,420,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/MIBENCH_PATRICIA_12K_SEED_STABILITY_20260621.md,1283,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/MIBENCH_PATRICIA_LARGE16384_FEASIBILITY_20260620.md,1761,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/MIBENCH_PATRICIA_LARGE32768_FEASIBILITY_20260620.md,1320,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/MIBENCH_PATRICIA_LARGE62721_FEASIBILITY_20260620.md,1319,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/mibench_patricia_scale_portfolio_20260620.csv,666,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/MIBENCH_PATRICIA_SCALE_PORTFOLIO_20260620.md,1404,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/mibench_patricia_workload_build/MIBENCH_PATRICIA_WORKLOAD_BUILD.md,1226,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/OPENSSL_CLI_FEASIBILITY_20260619.md,2367,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/OPENSSL_CLI_SEED_STABILITY_20260619.md,3696,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/OPENSSL_CLI_TLS_PAIR_FEASIBILITY_20260620.md,3297,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/OPENSSL_MEDIUM_SEED_STABILITY_20260619.md,2330,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/OPENSSL_SPEEDLIKE_SEED_STABILITY_20260619.md,1651,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/OPENSSL_TCP_LOOPBACK_FEASIBILITY_20260619.md,5536,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/OPENSSL_TCP_PROCESS_METADATA_TOGGLE_BOUND_20260620.md,3248,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/OPENSSL_TCP_PROCESS_SCALE_PORTFOLIO_20260620.md,2332,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/OPENSSL_TCP_PROCESS_SEED_STABILITY_20260620.md,1553,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/openssl_tls_socket_workload_build/OPENSSL_TLS_SOCKET_WORKLOAD_BUILD.md,1260,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/PCRE2_REGEX_SEED_STABILITY_20260620.md,1400,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/pcre2_regex_workload_build/PCRE2_REGEX_WORKLOAD_BUILD.md,947,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/SQLITE_MEDIUM_STRESS_SEED_STABILITY_20260619.md,2016,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/SQLITE_SPEEDTEST1_COMPONENTS_20260619.md,1686,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/YYJSON_MEDIUM_STRESS_SEED_STABILITY_20260619.md,1872,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/zlib_workload_build/ZLIB_WORKLOAD_BUILD.md,864,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/results/zstd_workload_build/ZSTD_WORKLOAD_BUILD.md,872,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_app_conventional_baseline_gap_fs.sh,1236,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_cache_service_app_fs.sh,2667,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_amba_sari_authority_bridge_top_synth.ps1,597,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_amba_sari_authority_bridge_top_synth.tcl,786,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_amba_sari_authority_bridge_xsim.ps1,768,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_amba_sari_frontdoor_regslice_synth.ps1,810,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_amba_sari_frontdoor_regslice_synth.tcl,567,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_amba_sari_frontdoor_synth.ps1,783,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_amba_sari_frontdoor_synth.tcl,466,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_amba_sari_frontdoor_xsim.ps1,777,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_authority_regression_xsim.ps1,1338,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_cavi_authority_issue_gate_synth.ps1,456,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_cavi_authority_issue_gate_synth.tcl,671,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_cavi_authority_issue_gate_xsim.ps1,967,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_cepf_line_e2e_xsim.ps1,637,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_clpd_ctlw_authority_e2e_xsim.ps1,680,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_clpd_sram_activity_power.tcl,1677,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_clpd_sram_activity_xsim.ps1,933,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_clpd_sram_dir_impl64k_a200t.ps1,717,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_clpd_sram_dir_impl64k_a200t.tcl,715,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_clpd_sram_dir_synth.ps1,693,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_clpd_sram_dir_synth.tcl,366,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_clpd_sram_dir_synth_a200t.ps1,711,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_clpd_sram_dir_synth_a200t.tcl,825,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_clpd_sram_dir_synth_extended.ps1,720,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_clpd_sram_dir_synth_extended.tcl,804,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_clpd_sram_dir_synth_sweep.ps1,711,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_clpd_sram_dir_synth_sweep.tcl,840,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_clpd_sram_dir_xsim.ps1,569,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_clpd_sram_saif_power_from_dcp.tcl,1220,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_clpd_sram_tcp_process_activity_xsim.ps1,1612,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_clpd_sram_tcp_process_saif_power.tcl,1730,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_clpd_sram_workload_activity_xsim.ps1,1554,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_clpd_sram_workload_saif_power.tcl,1709,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_clpd_synth.ps1,287,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_clpd_synth.tcl,331,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_clpd_xsim.ps1,549,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_commit_epoch_synth.ps1,295,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_commit_epoch_synth.tcl,395,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_cs_sari_synth.ps1,613,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_cs_sari_synth.tcl,435,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_ctlw_full_authority_e2e_xsim.ps1,651,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_ctlw_witness_xsim.ps1,584,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_direct_xsim.ps1,2642,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_full_authority_sva_xsim.ps1,595,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_full_authority_synth.tcl,391,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_full_authority_xsim.ps1,599,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_full_lsq_amba_authority_top_synth.ps1,588,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_full_lsq_amba_authority_top_synth.tcl,892,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_full_lsq_amba_authority_xsim.ps1,944,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_line_synth.ps1,287,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_line_synth.tcl,353,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_lsq_cepf_line_e2e_top_synth.ps1,789,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_lsq_cepf_line_e2e_top_synth.tcl,654,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_lsq_cepf_line_e2e_xsim.ps1,703,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_lsq_source_tag_tracker_synth.ps1,792,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_lsq_source_tag_tracker_synth.tcl,481,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_lsq_source_tag_tracker_xsim.ps1,614,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_peb_synth.ps1,735,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_peb_synth.tcl,384,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_peb_xsim.ps1,629,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_rocca_clpd_commit_adapter_synth.ps1,456,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_rocca_clpd_commit_adapter_synth.tcl,624,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_rocca_clpd_commit_adapter_xsim.ps1,860,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_ropl_lsq_retire_guard_synth.ps1,570,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_ropl_lsq_retire_guard_synth.tcl,554,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_ropl_lsq_retire_guard_xsim.ps1,789,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_rtl_power_proxy.tcl,2468,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_sari_clpd_ctlw_authority_e2e_xsim.ps1,732,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_sari_revoker_xsim.ps1,564,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_sari_scoped_authority_e2e_xsim.ps1,727,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_scoop_arbiter_xsim.ps1,619,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_synth.ps1,605,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_synth.tcl,379,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_tlb_coherence_authority_filter_synth.ps1,597,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_tlb_coherence_authority_filter_synth.tcl,521,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_tlb_coherence_authority_filter_xsim.ps1,843,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_copper_xsim.tcl,389,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_dmp_oracle_probe_fs.sh,2538,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_dmp_oracle_split_seed_sweep_fs.sh,732,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_duktape_medium_app_fs.sh,322,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_duktape_object_app_fs.sh,2619,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_duktape_stress_app_fs.sh,322,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_duktape_stress_conventional_gap_fs.sh,249,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_expat_xml_app_fs.sh,2279,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_gapbs_official_g14_fs.sh,1614,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_gem5_msys_build.sh,161,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_gem5_msys_fast_build.sh,162,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_heap_clpd16k_full_fs.sh,946,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_heap_roi_fakeonly_fs.sh,1992,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_heap_roi_seed_sweep_fs.sh,1715,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_heap_roi_sweep_fs.sh,1577,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_json_sqlite_ingest_app_fs.sh,2613,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_libarchive_tar_app_fs.sh,1953,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_libxml2_xml_app_fs.sh,1963,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_lua_medium_app_fs.sh,269,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_lua_medium_seed_sweep_fs.sh,385,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_lua_small_seed_sweep_fs.sh,327,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_lua_stress_app_fs.sh,319,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_lua_table_app_fs.sh,2570,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_mibench_patricia_fs.sh,3155,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_mibench_patricia_large12288_campaign.sh,398,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_mibench_patricia_large12288_seed1_campaign.sh,404,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_mibench_patricia_large16384_campaign.sh,398,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_mibench_patricia_large16384_non_naive_campaign.sh,387,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_mibench_patricia_large32768_campaign.sh,398,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_mibench_patricia_large62721_campaign.sh,399,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_olden_builtin_baselines_fs.sh,1145,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_olden_extra_builtin_baselines_fs.sh,1349,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_olden_medium_builtin_baselines_fs.sh,1184,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_olden_medium_randomalloc_fs.sh,1297,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_olden_suite_fs.sh,1239,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_openssl_cli_aesctr_fixed_fs.sh,2422,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_openssl_cli_fixed_fs.ps1,5282,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_openssl_cli_fixed_fs.sh,1992,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_openssl_cli_hmac_fixed_fs.sh,2083,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_openssl_crypto_suite_fs.sh,2557,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_openssl_medium_seed2_campaign.sh,593,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_openssl_sha_service_fs.sh,2521,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_openssl_speedlike_fs.sh,2211,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_openssl_tls_bio_fs.sh,2558,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_openssl_tls_socket_fs.sh,2572,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_openssl_tls_tcp_fs.sh,3581,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_pcre2_regex_app_fs.sh,2433,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_public_app_medium_seed_sweep_fs.sh,720,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_public_app_stress_seed1_fs.sh,2127,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_sqlite_pointer_app_fs.sh,2681,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_sqlite_speedtest1_fs.sh,2399,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_sqlite_stress_app_fs.sh,343,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_struct_mix_fs.sh,1164,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_tls_session_app_fs.sh,2743,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_yyjson_app_fs.sh,2602,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_zlib_app_fs.sh,2166,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/run_zstd_app_fs.sh,2166,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/scoop_companion_state_space.py,4243,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/setup_vivado.ps1,380,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_application_workload_portfolio.py,11590,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_cache_service_app_fs.py,10133,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_champsim.py,3669,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_clpd_sram_synth.py,10699,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_compression_seed_stability.py,6135,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_copper_clpd_activity_power.py,6545,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_copper_rtl_power_proxy.py,10854,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_copper_tcp_process_clpd_activity_power.py,8062,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_copper_workload_clpd_activity_power.py,7427,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_dmp_oracle_observer_seed_sweep.py,4807,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_dmp_oracle_probe_fs.py,13742,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_dmp_oracle_split_probe_fs.py,8942,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_duktape_object_app_fs.py,8347,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_expat_xml_app_fs.py,9513,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_gapbs.py,2664,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_gapbs_mini_large_fs.py,8675,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_gapbs_official_fs.py,7251,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_gapbs_official_suite_fs.py,17517,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_gapbs_official_suite_scales.py,3986,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_gem5_copper_results.py,19920,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_heap_pointer_roi_fakeonly_fs.py,9990,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_heap_pointer_roi_fs.py,11510,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_heap_pointer_roi_seed_sweep_fs.py,10308,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_heap_pointer_stress_fs.py,10983,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_json_sqlite_ingest_app_fs.py,9927,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_jsonsqlite_seed_stability.py,5239,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_jsonsqlite_stress_seed_stability.py,5267,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_libarchive_tar_app_fs.py,9982,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_libxml2_xml_app_fs.py,9954,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_lua_duktape_seed_stability.py,7609,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_lua_medium_seed_sweep.py,6411,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_lua_table_app_fs.py,9397,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_mibench_patricia_fs.py,10369,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_mibench_patricia_scale_portfolio.py,6804,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_mibench_patricia_seed_stability.py,7031,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_olden_bisort_fingerprint.py,5035,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_olden_builtin_baselines.py,4084,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_olden_layout_sensitivity.py,3068,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_olden_scaling.py,3599,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_olden_suite_fs.py,10317,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_openssl_cli_fixed_fs.py,11800,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_openssl_cli_seed_stability.py,7799,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_openssl_crypto_suite_fs.py,9203,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_openssl_medium_seed_stability.py,7127,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_openssl_sha_service_fs.py,9111,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_openssl_speedlike_fs.py,9238,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_openssl_speedlike_seed_stability.py,5427,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_openssl_tcp_process_scale_portfolio.py,6816,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_openssl_tcp_process_seed_stability.py,6837,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_openssl_tls_bio_fs.py,9868,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_openssl_tls_socket_fs.py,9956,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_openssl_tls_tcp_fs.py,14966,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_pcre2_regex_app_fs.py,8944,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_pcre2_seed_stability.py,6631,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_public_app_medium_seed_sweep.py,7528,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_public_app_repeated_seed_portfolio.py,8309,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_public_app_stress_seed_sweep.py,7640,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_security_evidence_portfolio.py,10163,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_slack_companion_hybrid.py,6559,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_sqlite_pointer_app_fs.py,9671,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_sqlite_seed_stability.py,6487,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_sqlite_speedtest1_components.py,5738,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_sqlite_speedtest1_fs.py,11790,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_struct_mix_fs.py,7762,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_tls_session_app_fs.py,10271,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_yyjson_app_fs.py,9899,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_yyjson_seed_stability.py,6138,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_zlib_app_fs.py,9334,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/summarize_zstd_app_fs.py,9238,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/test_word_pdf_export.ps1,1808,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/verify_copper_artifacts.py,81193,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/vivado_read_saif_help.tcl,21,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/vivado_read_vcd_help.tcl,20,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/vivado_tclapp_probe.tcl,1379,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/vivado_tclstore_bootstrap.tcl,1442,,no,,excluded scratch/private/build directory
-research/results/copper_public_artifact_package_20260620/research/xsim_saif_help.tcl,50,,no,,excluded scratch/private/build directory
 research/results/COPPER_PUBLIC_ARTIFACT_PACKAGE_BUILD_20260620.md,1246,a02c9d2d7de8992f3df10631ce2548575d9468d18288f4df5ed47b6999b0e362,yes,research/results/COPPER_PUBLIC_ARTIFACT_PACKAGE_BUILD_20260620.md,included summary/evidence file
 research/results/COPPER_READINESS_AUDIT_20260614.md,5514,d368f3109916e6b0fce2fa54569459103096a8a2b6cc77bbfea42bedaa15d8fb,yes,research/results/COPPER_READINESS_AUDIT_20260614.md,included summary/evidence file
 research/results/COPPER_READINESS_AUDIT_20260615.md,6504,63eeac6409a6f0d9686684dd794b2a9f7305a0abfa56610e805946be46bbfccf,yes,research/results/COPPER_READINESS_AUDIT_20260615.md,included summary/evidence file
@@ -1638,8 +946,8 @@ research/results/figures/copper_app_full_baseline_runtime.png,190927,b8492d87157
 research/results/figures/copper_app_full_baseline_runtime.svg,120211,,no,,included summary/evidence file
 research/results/figures/copper_app_runtime_delta.png,195951,d7f4dd868f8a4b2f34416624426e02c17b005f812fab8dd3766c6db227963d25,yes,research/results/figures/copper_app_runtime_delta.png,included summary/evidence file
 research/results/figures/copper_app_runtime_delta.svg,116712,,no,,included summary/evidence file
-research/results/fullcore_synthesis.csv,2113,cb738796ce46416f2ab5d322f98e9aadf015b7d23f5ed4c04ed0aeca5e386b20,yes,research/results/fullcore_synthesis.csv,included summary/evidence file
-research/results/fullcore_synthesis_overhead.csv,1198,39966d94cd4d09894d7e5f81aac740d6917e5b1619255475f63cd09b5f1d316e,yes,research/results/fullcore_synthesis_overhead.csv,included summary/evidence file
+research/results/fullcore_synthesis.csv,4117,a0650795030c3c4dcaf144d6cf458e0ad4165df4003b51c543d03ab9d855d457,yes,research/results/fullcore_synthesis.csv,included summary/evidence file
+research/results/fullcore_synthesis_overhead.csv,2268,9cc7208694895047bec2be4cbdc617ace5ccd4b23b02a8f97cfbdc8ad615b404,yes,research/results/fullcore_synthesis_overhead.csv,included summary/evidence file
 research/results/gapbs/bfs_g12_n3.txt,424,5a992fae511fbef52f38a6009fa72de26d72c6d7f4fa479332e72b12d2777cb4,yes,research/results/gapbs/bfs_g12_n3.txt,included summary/evidence file
 research/results/gapbs/bfs_g16_n3.txt,426,c4465a889113efe409573c4f3cd8410379192dc281c024de7bdec031f715dd88,yes,research/results/gapbs/bfs_g16_n3.txt,included summary/evidence file
 research/results/gapbs/bfs_g18_n3.txt,428,7aec79e11fc07006fb0b8e0afa84dc9f2f836de50b012ec6cb743588cd94227d,yes,research/results/gapbs/bfs_g18_n3.txt,included summary/evidence file
@@ -10662,158 +9970,6 @@ research/results/graph_copper/graph_copper_summary.csv,2210,9083971f7922f828e1bc
 research/results/graph_copper/GRAPH_COPPER_SUMMARY.md,1921,cb277bef1034fca41042d5e35faeadbf35d0f0b4099ab7a11eab51e308b05dae,yes,research/results/graph_copper/GRAPH_COPPER_SUMMARY.md,included summary/evidence file
 research/results/heap_pointer_roi_stress_build.log,99,,no,,excluded local-only file containing a private absolute path
 research/results/heap_pointer_stress_build.log,0,e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855,yes,research/results/heap_pointer_stress_build.log,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/dist/copper-artifact.zip,2689001,,no,,excluded scratch/private/build directory
-research/results/imported_ci/copper-ci-evidence-28304361917/REPRODUCIBILITY_STATUS.md,3784,5ded7bdc4ea78de4b443c740b54522de8b2d8e7c1088f0addd690ac92c739d95,yes,research/results/imported_ci/copper-ci-evidence-28304361917/REPRODUCIBILITY_STATUS.md,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/CONFERENCE_READINESS_DASHBOARD.md,5010,afbcb0898dc75fb47100a62139ab0ae2ac0e19919ddf3e12c6fe73ac2d40ff0d,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/CONFERENCE_READINESS_DASHBOARD.md,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/COPPER_CLAIM_LEDGER.md,3042,f9abb148cff5e958cf461a74793b140cf685aeeb2488fbef403ece1138b402a2,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/COPPER_CLAIM_LEDGER.md,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/COPPER_FINAL_SUBMISSION_BLOCKERS.md,1707,6781a8f59c7200a46e6f7c63ae0d8b3e044344e4937f96b47ec74dcef545e657,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/COPPER_FINAL_SUBMISSION_BLOCKERS.md,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/paper/main.pdf,106854,2a96b32b694695798ab3b1e5e9fc405c9251804dc7b7bdcf277dd625fdacf1b7,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/paper/main.pdf,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/ablation.csv,6239,24e41293927871002747919d4f45aac80834be6e6b2d383add3771d7f9f33940,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/ablation.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/artifact_inventory.csv,109178,4da25f3a455dbc90763dbb19ca09bc1111397366fcebd1ee00dfa7c43d99b9b5,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/artifact_inventory.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/artifact_manifest.csv,128067,4b8abfd5deb6b4ff69770cca1b9181a980a920d0cb6b2c6238c2a9665d215954,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/artifact_manifest.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/baseline_inventory.csv,460,2b12222cb141fc6e4b249f7b0bede313dd4ae085335ed8544756603e4458efd8,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/baseline_inventory.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/benchmark_inventory.csv,1765,854322ff077309502ea5019371b8bc40233b154becf21bc96aa4c45968019fd2,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/benchmark_inventory.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/claim_audit.csv,75,e4d2b239949ce2045fb43cc603f2462cec4aea6b3a48f6359c5d491ca7fbac55,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/claim_audit.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/compression_library_seed_stability_20260620.csv,690,90f3288342ad0b72b83d07f6db066a111e3b0c8a9f8c8eb0407a3d2e5e053eba,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/compression_library_seed_stability_20260620.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/copper_dram_energy_scorecard_20260618.csv,24667,bdbb4c6a0013d376f1358ec1ef5f2ae5784a0d3ed930ae35db5e302675937240,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/copper_dram_energy_scorecard_20260618.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/copper_energy_pollution_weight_sensitivity_20260617.csv,948,672f9df05efaef580d3ad6d5db2a9cc126b20aab1aa4c783412d691c56af55c3,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/copper_energy_pollution_weight_sensitivity_20260617.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/copper_final_results.csv,110536,34fb17ef0dfed55356f970fc32270f474be519879e45a942cb6c3821fd63c391,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/copper_final_results.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/copper_prefetch_traffic_overhead_20260616.csv,41167,d37f42213e7f9e6e3f1aa517b113c1ffec8e3b7439acc5a6ce7dba22f36807ae,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/copper_prefetch_traffic_overhead_20260616.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/copper_public_artifact_manifest_20260620.csv,99051,e3f319b5d01d11b480a42acefdf85e34ffd7486270dbfb69ff79136b684d188c,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/copper_public_artifact_manifest_20260620.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/gem5_arm_ubuntu_fs_cachesvc_app/cachesvc_app_medium_key_summary.csv,1685,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/gem5_arm_ubuntu_fs_cachesvc_app/cachesvc_app_small_summary.csv,1667,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/gem5_arm_ubuntu_fs_duktape_app/duktape_app_medium_summary.csv,1564,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/gem5_arm_ubuntu_fs_duktape_app/duktape_app_stress_summary.csv,1581,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/gem5_arm_ubuntu_fs_jsonsqlite_app/jsonsqlite_app_medium_summary.csv,1851,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/gem5_arm_ubuntu_fs_jsonsqlite_app/jsonsqlite_app_stress_summary.csv,1899,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/gem5_arm_ubuntu_fs_lua_app/lua_app_medium_summary.csv,1928,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/gem5_arm_ubuntu_fs_lua_app/lua_app_stress_summary.csv,1962,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/gem5_arm_ubuntu_fs_mibench_patricia_app/mibench_patricia_patricia_large12288_seed1_summary.csv,1126,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/gem5_arm_ubuntu_fs_mibench_patricia_app/mibench_patricia_patricia_large12288_summary.csv,1126,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/gem5_arm_ubuntu_fs_mibench_patricia_app/mibench_patricia_patricia_preprobe_summary.csv,1043,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/gem5_arm_ubuntu_fs_mibench_patricia_app/mibench_patricia_patricia_small2048_summary.csv,1081,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/gem5_arm_ubuntu_fs_mibench_patricia_app/mibench_patricia_patricia_small8192_summary.csv,1106,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/gem5_arm_ubuntu_fs_ossltlstcp_app/ossltlstcp_tcp_netns_process_scale2_summary.csv,1368,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/gem5_arm_ubuntu_fs_ossltlstcp_app/ossltlstcp_tcp_netns_process_scale3_summary.csv,1377,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/gem5_arm_ubuntu_fs_pcre2_app/pcre2_pcre2_seed1_summary.csv,1001,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/gem5_arm_ubuntu_fs_pcre2_app/pcre2_pcre2_smoke_summary.csv,1001,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/gem5_arm_ubuntu_fs_sqlite_app/sqlite_app_medium_summary.csv,2002,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/gem5_arm_ubuntu_fs_sqlite_app/sqlite_app_stress_summary.csv,2047,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/gem5_arm_ubuntu_fs_yyjson_app/yyjson_app_medium_summary.csv,1846,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/gem5_arm_ubuntu_fs_yyjson_app/yyjson_app_stress_summary.csv,1876,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/gem5_arm_ubuntu_fs_zlib_app/zlib_zlib_seed1_summary.csv,1049,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/gem5_arm_ubuntu_fs_zlib_app/zlib_zlib_tiny_summary.csv,1048,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/gem5_arm_ubuntu_fs_zstd_app/zstd_zstd_seed1_summary.csv,986,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/gem5_arm_ubuntu_fs_zstd_app/zstd_zstd_tiny_summary.csv,986,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/logs/paper/build_paper.log,8073,d8a5d2d43ee1de52d487e4292c3dad60711214ad4934670e1f9ecf1d9bb9dd74,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/logs/paper/build_paper.log,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/logs/rtl/iverilog_copper_prefetch_unit_open.log,0,e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/logs/rtl/iverilog_copper_prefetch_unit_open.log,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/logs/rtl/vvp_copper_prefetch_unit_open_tb.log,211,02ad2e2df9f16ba400b585d9a98ed26ce97604e78a870aa8fb9d3747ec0025bf,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/logs/rtl/vvp_copper_prefetch_unit_open_tb.log,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/logs/synthesis/nextpnr_ecp5_baseline_prefetch_unit.log,64168,06339a492bcf3f9fbf77c01086620c5fa989ed8b3155f8cbc61d67ab74834faa,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/logs/synthesis/nextpnr_ecp5_baseline_prefetch_unit.log,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/logs/synthesis/nextpnr_ecp5_copper_unit.log,103917,938dc738b13a8f2d30e709b02f91f25d06c8b8abdf2305e47dfcf9d5d07fef47,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/logs/synthesis/nextpnr_ecp5_copper_unit.log,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/logs/synthesis/nextpnr_ecp5_copper_with_queue.log,118512,7c2ada2dcc1882bdc820735789e20eee38ac84cb855027c669a0333f87b01270,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/logs/synthesis/nextpnr_ecp5_copper_with_queue.log,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/logs/synthesis/nextpnr_ecp5_copper_with_tables.log,134568,ab57f15f111c6465b5dbff8dfd82f1978f2fe1dd9b1867bb4b7136842bf447c9,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/logs/synthesis/nextpnr_ecp5_copper_with_tables.log,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/logs/synthesis/nextpnr_ice40_baseline_prefetch_unit.log,70750,3a75b10f589f4b5cc8fbca895ed9b4fe6fff12c0e97dcba157186ff8480a0755,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/logs/synthesis/nextpnr_ice40_baseline_prefetch_unit.log,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/logs/synthesis/nextpnr_ice40_copper_unit.log,83951,eddfbad5960afca5e894fdabb7775bdb7b798091af000ec97dab07de3740197e,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/logs/synthesis/nextpnr_ice40_copper_unit.log,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/logs/synthesis/nextpnr_ice40_copper_with_queue.log,87931,3eec25b93bab4940445a05e5f33abf134c3e10b22dc13fb1a6cba7e2190f23b7,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/logs/synthesis/nextpnr_ice40_copper_with_queue.log,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/logs/synthesis/nextpnr_ice40_copper_with_tables.log,107591,ecdc0222c92317b65d9f588c5d7fdfb1eca73845745e8efcf361d35b68d13643,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/logs/synthesis/nextpnr_ice40_copper_with_tables.log,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/logs/synthesis/yosys_generic_baseline_prefetch_unit.log,19718,e63868055376bc5b9220054d1c8a0efcf21b79c9c8ecb12df3ccb79466fd244d,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/logs/synthesis/yosys_generic_baseline_prefetch_unit.log,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/logs/synthesis/yosys_generic_copper_unit.log,36873,1baefb7dca4b5422d1cc0b26cacde02891c5fa65a720d63e04c72e6d8aa2dbbe,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/logs/synthesis/yosys_generic_copper_unit.log,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/logs/synthesis/yosys_generic_copper_with_queue.log,39331,468092e492c1648b5702b1482c35ef0c25936bf9ab961432ed6d3840106aaa80,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/logs/synthesis/yosys_generic_copper_with_queue.log,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/logs/synthesis/yosys_generic_copper_with_tables.log,54626,f96c78ca96ce58b4ce0db18b7d6bf3536858dda3959870b698262d60377080c4,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/logs/synthesis/yosys_generic_copper_with_tables.log,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/memory_traffic.csv,33488,aa2b9ec58373aecba39504f6a3368cc43964ae97e03c508942e892323eb3c38f,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/memory_traffic.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/mibench_patricia_12k_seed_stability_20260621.csv,420,26264d9c3c6d59309df3338a36b0ab1ef370058418276b95b32faacc48904cef,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/mibench_patricia_12k_seed_stability_20260621.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/mibench_patricia_scale_portfolio_20260620.csv,666,fa706ae981f7cb61671191041001b082d628c6996f3781480b70d097e81dbc4e,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/mibench_patricia_scale_portfolio_20260620.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/model_tests.csv,1309,a0f0525186bc94ea52b34f92a9fde4c84d098029e823b9ae7015c66afc6d246a,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/model_tests.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/number_audit.csv,88,6e01d9e276909e62d283116d086b9dc5b65cca0f48710277b5550c832d8950ca,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/number_audit.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/paper_build_status.csv,177,1bf68e61d6067a681acb078d2f8f8342080c90198c45f8c73ba348c749a16380,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/paper_build_status.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/pcre2_regex_seed_stability_20260620.csv,447,2d780a0175e87b533ff599d0e3cbc523f7f596413c4ddc3741b8f1b0a802f53e,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/pcre2_regex_seed_stability_20260620.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/performance.csv,38946,236ff155285760a11b2bed376417465808f8936d7d4c4526d77dd6f861b0667d,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/performance.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/prefetch_metrics.csv,49180,6f11d859849f603dad80b3af880897cc17f9f64097bf738b2fbd8e6fb841c527,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/prefetch_metrics.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/rtl_compile.csv,268,b63bd91fb817da4743f39d45e12435629594773d0c441d3c89a75385ae82cb8f,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/rtl_compile.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/rtl_simulation.csv,452,7d5fe5b1a583adb28f5329f1d7d89f3ecb78bba8fefea2bddfc49aa2ec76f85e,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/rtl_simulation.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/seed_stability.csv,36752,4f2887714073b8967a5812838247914ec54f000d9418848642bf6f3856365b4d,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/seed_stability.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/sensitivity.csv,2177,89cee57c6cd112863a33248763b4e4d136e22dace22b0295d7965ea4f689d4cc,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/sensitivity.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/statistical_summary.csv,38808,d120db8f2e046745f7807b1c1474f177c1711aae4835b421125b19b3892fadc9,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/statistical_summary.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/synthesis.csv,3027,bc61faf7eb8a43f2165f788b63cd97eab13a62687a3a2ca7147ce56c2bbe1e5a,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/synthesis.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/synthesis_overhead.csv,3114,bda4ee6e28eed6d96b6fcc7a3cad59c0a126b3646fcf1f34c15a4591bdd742b0,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/synthesis_overhead.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/todo_audit.csv,75,a2a83ca1afd8016b337a6c6d837723279d8cbc1d3bb0967870e437d406761a2a,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/todo_audit.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304361917/research/results/toolchain_status.csv,2826,6cc829320cb65ce1546bc6890999d53ee014975c71c3f2423225e8419733963a,yes,research/results/imported_ci/copper-ci-evidence-28304361917/research/results/toolchain_status.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/dist/copper-artifact.zip,2688998,,no,,excluded scratch/private/build directory
-research/results/imported_ci/copper-ci-evidence-28304517769/REPRODUCIBILITY_STATUS.md,3784,5ded7bdc4ea78de4b443c740b54522de8b2d8e7c1088f0addd690ac92c739d95,yes,research/results/imported_ci/copper-ci-evidence-28304517769/REPRODUCIBILITY_STATUS.md,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/CONFERENCE_READINESS_DASHBOARD.md,4948,41e2d57d2f926de1514a822c4fa6e7870f29a1b69a6b3e611c8fdf1524ef4636,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/CONFERENCE_READINESS_DASHBOARD.md,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/COPPER_CLAIM_LEDGER.md,3042,f9abb148cff5e958cf461a74793b140cf685aeeb2488fbef403ece1138b402a2,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/COPPER_CLAIM_LEDGER.md,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/COPPER_FINAL_SUBMISSION_BLOCKERS.md,1707,6781a8f59c7200a46e6f7c63ae0d8b3e044344e4937f96b47ec74dcef545e657,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/COPPER_FINAL_SUBMISSION_BLOCKERS.md,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/paper/main.pdf,106854,1179d6a7937e9cee510c80f1ef8749ffdb262fd95122ee66a0172525bd0259d0,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/paper/main.pdf,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/ablation.csv,6239,24e41293927871002747919d4f45aac80834be6e6b2d383add3771d7f9f33940,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/ablation.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/artifact_inventory.csv,109178,4da25f3a455dbc90763dbb19ca09bc1111397366fcebd1ee00dfa7c43d99b9b5,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/artifact_inventory.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/artifact_manifest.csv,128067,0cfa2dfa5fa61ff9dfa56a7bb20ab8f5fc5f6e47ed801443e410dcc1666bf1b2,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/artifact_manifest.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/baseline_inventory.csv,460,2b12222cb141fc6e4b249f7b0bede313dd4ae085335ed8544756603e4458efd8,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/baseline_inventory.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/benchmark_inventory.csv,1765,854322ff077309502ea5019371b8bc40233b154becf21bc96aa4c45968019fd2,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/benchmark_inventory.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/claim_audit.csv,75,e4d2b239949ce2045fb43cc603f2462cec4aea6b3a48f6359c5d491ca7fbac55,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/claim_audit.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/compression_library_seed_stability_20260620.csv,690,90f3288342ad0b72b83d07f6db066a111e3b0c8a9f8c8eb0407a3d2e5e053eba,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/compression_library_seed_stability_20260620.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/copper_dram_energy_scorecard_20260618.csv,24667,bdbb4c6a0013d376f1358ec1ef5f2ae5784a0d3ed930ae35db5e302675937240,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/copper_dram_energy_scorecard_20260618.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/copper_energy_pollution_weight_sensitivity_20260617.csv,948,672f9df05efaef580d3ad6d5db2a9cc126b20aab1aa4c783412d691c56af55c3,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/copper_energy_pollution_weight_sensitivity_20260617.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/copper_final_results.csv,110536,34fb17ef0dfed55356f970fc32270f474be519879e45a942cb6c3821fd63c391,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/copper_final_results.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/copper_prefetch_traffic_overhead_20260616.csv,41167,d37f42213e7f9e6e3f1aa517b113c1ffec8e3b7439acc5a6ce7dba22f36807ae,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/copper_prefetch_traffic_overhead_20260616.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/copper_public_artifact_manifest_20260620.csv,99051,e3f319b5d01d11b480a42acefdf85e34ffd7486270dbfb69ff79136b684d188c,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/copper_public_artifact_manifest_20260620.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/gem5_arm_ubuntu_fs_cachesvc_app/cachesvc_app_medium_key_summary.csv,1685,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/gem5_arm_ubuntu_fs_cachesvc_app/cachesvc_app_small_summary.csv,1667,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/gem5_arm_ubuntu_fs_duktape_app/duktape_app_medium_summary.csv,1564,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/gem5_arm_ubuntu_fs_duktape_app/duktape_app_stress_summary.csv,1581,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/gem5_arm_ubuntu_fs_jsonsqlite_app/jsonsqlite_app_medium_summary.csv,1851,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/gem5_arm_ubuntu_fs_jsonsqlite_app/jsonsqlite_app_stress_summary.csv,1899,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/gem5_arm_ubuntu_fs_lua_app/lua_app_medium_summary.csv,1928,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/gem5_arm_ubuntu_fs_lua_app/lua_app_stress_summary.csv,1962,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/gem5_arm_ubuntu_fs_mibench_patricia_app/mibench_patricia_patricia_large12288_seed1_summary.csv,1126,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/gem5_arm_ubuntu_fs_mibench_patricia_app/mibench_patricia_patricia_large12288_summary.csv,1126,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/gem5_arm_ubuntu_fs_mibench_patricia_app/mibench_patricia_patricia_preprobe_summary.csv,1043,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/gem5_arm_ubuntu_fs_mibench_patricia_app/mibench_patricia_patricia_small2048_summary.csv,1081,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/gem5_arm_ubuntu_fs_mibench_patricia_app/mibench_patricia_patricia_small8192_summary.csv,1106,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/gem5_arm_ubuntu_fs_ossltlstcp_app/ossltlstcp_tcp_netns_process_scale2_summary.csv,1368,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/gem5_arm_ubuntu_fs_ossltlstcp_app/ossltlstcp_tcp_netns_process_scale3_summary.csv,1377,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/gem5_arm_ubuntu_fs_pcre2_app/pcre2_pcre2_seed1_summary.csv,1001,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/gem5_arm_ubuntu_fs_pcre2_app/pcre2_pcre2_smoke_summary.csv,1001,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/gem5_arm_ubuntu_fs_sqlite_app/sqlite_app_medium_summary.csv,2002,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/gem5_arm_ubuntu_fs_sqlite_app/sqlite_app_stress_summary.csv,2047,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/gem5_arm_ubuntu_fs_yyjson_app/yyjson_app_medium_summary.csv,1846,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/gem5_arm_ubuntu_fs_yyjson_app/yyjson_app_stress_summary.csv,1876,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/gem5_arm_ubuntu_fs_zlib_app/zlib_zlib_seed1_summary.csv,1049,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/gem5_arm_ubuntu_fs_zlib_app/zlib_zlib_tiny_summary.csv,1048,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/gem5_arm_ubuntu_fs_zstd_app/zstd_zstd_seed1_summary.csv,986,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/gem5_arm_ubuntu_fs_zstd_app/zstd_zstd_tiny_summary.csv,986,,no,,excluded raw gem5 output tree; summaries are included
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/logs/paper/build_paper.log,8073,d8a5d2d43ee1de52d487e4292c3dad60711214ad4934670e1f9ecf1d9bb9dd74,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/logs/paper/build_paper.log,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/logs/rtl/iverilog_copper_prefetch_unit_open.log,0,e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/logs/rtl/iverilog_copper_prefetch_unit_open.log,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/logs/rtl/vvp_copper_prefetch_unit_open_tb.log,211,02ad2e2df9f16ba400b585d9a98ed26ce97604e78a870aa8fb9d3747ec0025bf,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/logs/rtl/vvp_copper_prefetch_unit_open_tb.log,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/logs/synthesis/nextpnr_ecp5_baseline_prefetch_unit.log,64168,b2894147fef6d4a310674aa15bb76cb10f5542291a2871b8f37b2bbfdf4f3c20,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/logs/synthesis/nextpnr_ecp5_baseline_prefetch_unit.log,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/logs/synthesis/nextpnr_ecp5_copper_unit.log,103917,65c44c3a1363ee460f2e9b73a6ccea48cfe63a05cfbf9efe3f1d47aeae932a39,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/logs/synthesis/nextpnr_ecp5_copper_unit.log,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/logs/synthesis/nextpnr_ecp5_copper_with_queue.log,118512,98e7d0613c316e10598c9379ede2233ea604e5508d524b591385575745ad1bc1,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/logs/synthesis/nextpnr_ecp5_copper_with_queue.log,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/logs/synthesis/nextpnr_ecp5_copper_with_tables.log,134569,47d792e7c45537630b11318f5626f23f2065c23f9372557501ca483d7d98fc0a,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/logs/synthesis/nextpnr_ecp5_copper_with_tables.log,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/logs/synthesis/nextpnr_ice40_baseline_prefetch_unit.log,70750,d831a25f13b716ad9c6f4e4d5da8c04cac2c4da383189cb4cafe4fd78506e456,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/logs/synthesis/nextpnr_ice40_baseline_prefetch_unit.log,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/logs/synthesis/nextpnr_ice40_copper_unit.log,83951,165ef00bc4b3ab4478b98d7d872944d92bf0135ecaa497cf7b93a40e6ed86279,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/logs/synthesis/nextpnr_ice40_copper_unit.log,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/logs/synthesis/nextpnr_ice40_copper_with_queue.log,87931,ffb8d86c62ff420481ab1067669117a34ab6e64ae067c14da98ebd1050e952e0,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/logs/synthesis/nextpnr_ice40_copper_with_queue.log,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/logs/synthesis/nextpnr_ice40_copper_with_tables.log,107591,eaf1bdd60147063cb144464c61e4e67ab73668eaa921c0efc5682dacb9d75e99,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/logs/synthesis/nextpnr_ice40_copper_with_tables.log,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/logs/synthesis/yosys_generic_baseline_prefetch_unit.log,19718,3e8496305df5897cf9553cd202edd20354eef24f688d7fd84197c15e4ec01ecc,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/logs/synthesis/yosys_generic_baseline_prefetch_unit.log,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/logs/synthesis/yosys_generic_copper_unit.log,36873,469115c64e6f3e59a9ad857b7612127e4f333a9aaffc7584a6c8729a16a99cd1,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/logs/synthesis/yosys_generic_copper_unit.log,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/logs/synthesis/yosys_generic_copper_with_queue.log,39331,3524433f61daff0a65aef676deeecaf1818d2cb3dd82f928e980a23e81122100,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/logs/synthesis/yosys_generic_copper_with_queue.log,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/logs/synthesis/yosys_generic_copper_with_tables.log,54626,68313e007ebb64bc194d5eb7aee1a082db301bc178a918a527cb56c42fa1e915,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/logs/synthesis/yosys_generic_copper_with_tables.log,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/memory_traffic.csv,33488,aa2b9ec58373aecba39504f6a3368cc43964ae97e03c508942e892323eb3c38f,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/memory_traffic.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/mibench_patricia_12k_seed_stability_20260621.csv,420,26264d9c3c6d59309df3338a36b0ab1ef370058418276b95b32faacc48904cef,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/mibench_patricia_12k_seed_stability_20260621.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/mibench_patricia_scale_portfolio_20260620.csv,666,fa706ae981f7cb61671191041001b082d628c6996f3781480b70d097e81dbc4e,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/mibench_patricia_scale_portfolio_20260620.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/model_tests.csv,1309,a0f0525186bc94ea52b34f92a9fde4c84d098029e823b9ae7015c66afc6d246a,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/model_tests.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/number_audit.csv,88,6e01d9e276909e62d283116d086b9dc5b65cca0f48710277b5550c832d8950ca,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/number_audit.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/paper_build_status.csv,177,1bf68e61d6067a681acb078d2f8f8342080c90198c45f8c73ba348c749a16380,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/paper_build_status.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/pcre2_regex_seed_stability_20260620.csv,447,2d780a0175e87b533ff599d0e3cbc523f7f596413c4ddc3741b8f1b0a802f53e,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/pcre2_regex_seed_stability_20260620.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/performance.csv,38946,236ff155285760a11b2bed376417465808f8936d7d4c4526d77dd6f861b0667d,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/performance.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/prefetch_metrics.csv,49180,6f11d859849f603dad80b3af880897cc17f9f64097bf738b2fbd8e6fb841c527,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/prefetch_metrics.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/rtl_compile.csv,268,b63bd91fb817da4743f39d45e12435629594773d0c441d3c89a75385ae82cb8f,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/rtl_compile.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/rtl_simulation.csv,452,7d5fe5b1a583adb28f5329f1d7d89f3ecb78bba8fefea2bddfc49aa2ec76f85e,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/rtl_simulation.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/seed_stability.csv,36752,4f2887714073b8967a5812838247914ec54f000d9418848642bf6f3856365b4d,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/seed_stability.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/sensitivity.csv,2177,89cee57c6cd112863a33248763b4e4d136e22dace22b0295d7965ea4f689d4cc,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/sensitivity.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/statistical_summary.csv,38808,d120db8f2e046745f7807b1c1474f177c1711aae4835b421125b19b3892fadc9,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/statistical_summary.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/synthesis.csv,3027,bc61faf7eb8a43f2165f788b63cd97eab13a62687a3a2ca7147ce56c2bbe1e5a,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/synthesis.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/synthesis_overhead.csv,3114,bda4ee6e28eed6d96b6fcc7a3cad59c0a126b3646fcf1f34c15a4591bdd742b0,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/synthesis_overhead.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/todo_audit.csv,75,a2a83ca1afd8016b337a6c6d837723279d8cbc1d3bb0967870e437d406761a2a,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/todo_audit.csv,included summary/evidence file
-research/results/imported_ci/copper-ci-evidence-28304517769/research/results/toolchain_status.csv,2826,6cc829320cb65ce1546bc6890999d53ee014975c71c3f2423225e8419733963a,yes,research/results/imported_ci/copper-ci-evidence-28304517769/research/results/toolchain_status.csv,included summary/evidence file
 research/results/independent_sim_memory_traffic.csv,39249,48c2fc418fc71b32b4a5ebadd5010ba0725e77b6753b8fdfd21dcfc9574a2101,yes,research/results/independent_sim_memory_traffic.csv,included summary/evidence file
 research/results/independent_sim_performance.csv,54454,666f18b99e3a002b61f4bd80ae500cc94d4d5e86124c0e73d7b84eefa59a0342,yes,research/results/independent_sim_performance.csv,included summary/evidence file
 research/results/independent_sim_prefetch_metrics.csv,43284,a7ce2e3bfb1d71ac68a74d72f453f8dc6e23884f259dccee4e537b3f7a3e5e73,yes,research/results/independent_sim_prefetch_metrics.csv,included summary/evidence file
@@ -10908,8 +10064,8 @@ research/results/lua_medium_run_20260616.err,0,,no,,included summary/evidence fi
 research/results/lua_medium_run_20260616.out,0,,no,,included summary/evidence file
 research/results/lua_table_workload_build/build.log,0,e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855,yes,research/results/lua_table_workload_build/build.log,included summary/evidence file
 research/results/lua_table_workload_build/LUA_TABLE_WORKLOAD_BUILD.md,3282,,no,,excluded local-only file containing a private absolute path
-research/results/mapped_ppa.csv,4865,6822da611a8d7155dd60fa0eb2ad7eb16aa24b96df60c05dbbee89025e32cb41,yes,research/results/mapped_ppa.csv,included summary/evidence file
-research/results/mapped_ppa_overhead.csv,6064,8fc55bad6f6e5eff129e14ea7da041eaf4742e1192fd0bc1687013b6ef361194,yes,research/results/mapped_ppa_overhead.csv,included summary/evidence file
+research/results/mapped_ppa.csv,9520,849603231a5a6c272933d22ec586cd12769bb92262661798375ed0c1bf7ad811,yes,research/results/mapped_ppa.csv,included summary/evidence file
+research/results/mapped_ppa_overhead.csv,6587,5e2d46b930474a37bb2509e602d6faf4ff7e41d1465e7221203ad59fc51e6bf4,yes,research/results/mapped_ppa_overhead.csv,included summary/evidence file
 research/results/mcpat_copper_sensitivity_20260618/mcpat_out/cachesvc_medium_copper_clpd64k_peb_ooo_proxy.txt,26393,a3499c4d66c3dd9182c6c4b1d33090d3ba63df802b292ceeebb603c1c8956296,yes,research/results/mcpat_copper_sensitivity_20260618/mcpat_out/cachesvc_medium_copper_clpd64k_peb_ooo_proxy.txt,included summary/evidence file
 research/results/mcpat_copper_sensitivity_20260618/mcpat_out/cachesvc_medium_naive_ooo_proxy.txt,26397,365358b7e79d84f3eaf780f1a5d04be791319482525bf99c9a0f6d021118e5d1,yes,research/results/mcpat_copper_sensitivity_20260618/mcpat_out/cachesvc_medium_naive_ooo_proxy.txt,included summary/evidence file
 research/results/mcpat_copper_sensitivity_20260618/mcpat_out/cachesvc_medium_none_ooo_proxy.txt,26392,8dbba4e2d80ece99865529ffd0d308208b6c1849b836b35ae54026c4cfb9887a,yes,research/results/mcpat_copper_sensitivity_20260618/mcpat_out/cachesvc_medium_none_ooo_proxy.txt,included summary/evidence file
@@ -11233,8 +10389,8 @@ research/results/olden_aarch64_build/random_checked/mst.log,1973,,no,,excluded l
 research/results/olden_aarch64_build/random_checked/OLDEN_AARCH64_BUILD.md,1366,,no,,excluded local-only file containing a private absolute path
 research/results/olden_aarch64_build/random_checked/treeadd.log,5633,,no,,excluded local-only file containing a private absolute path
 research/results/olden_aarch64_build/treeadd.log,5633,,no,,excluded local-only file containing a private absolute path
-research/results/openroad_postroute_power.csv,1552,a4ffdc71c011386f05e5b068ff973e163a3c5cc561fdc5c0c335f0873bbbe3cf,yes,research/results/openroad_postroute_power.csv,included summary/evidence file
-research/results/openroad_postroute_power_overhead.csv,264,8d10bb1ee72b51c62df669bc9a03d6854fa8fad340c82eef3368181d065f59e1,yes,research/results/openroad_postroute_power_overhead.csv,included summary/evidence file
+research/results/openroad_postroute_power.csv,3841,8a380b2258be2951cdaf9514c0294c4b8236aaaa13761df15970cb10cfc58181,yes,research/results/openroad_postroute_power.csv,included summary/evidence file
+research/results/openroad_postroute_power_overhead.csv,2325,296a3f3d15fee95a0892da1cb4bb8694dbbd5ef43323a327381ff7fac63bf902,yes,research/results/openroad_postroute_power_overhead.csv,included summary/evidence file
 research/results/OPENSSL_CLI_FEASIBILITY_20260619.md,2367,1a0cec1a120e3a000347b0b74e1b1f9abae4b0453e5a537273faedd0fd87c81f,yes,research/results/OPENSSL_CLI_FEASIBILITY_20260619.md,included summary/evidence file
 research/results/OPENSSL_CLI_SEED_STABILITY_20260619.md,3696,4c6e9cc2b8d492cf7967f499c1150a16ffd9e8c6e78be36a2f2142e01f626276,yes,research/results/OPENSSL_CLI_SEED_STABILITY_20260619.md,included summary/evidence file
 research/results/OPENSSL_CLI_TLS_PAIR_FEASIBILITY_20260620.md,3297,771a548f29ddb3c7dd472b9ea46a161cf0ccd2cffa73ba644e8423ab15bc3a32,yes,research/results/OPENSSL_CLI_TLS_PAIR_FEASIBILITY_20260620.md,included summary/evidence file
@@ -11314,30 +10470,12 @@ research/results/pass4_before/STATUS.md,451,10e50af3339aaf6f5560792cd6149c332a37
 research/results/pass4_before/synthesis.csv,3944,eb7d35fd8d8d097401f98e6cf3a8a4e032fc25c82b5837aef713d141260f289a,yes,research/results/pass4_before/synthesis.csv,included summary/evidence file
 research/results/pass4_before/synthesis_overhead.csv,2446,9deaa9a1cd569fe7d381987cd37313766ef1d5fcfca463aa7133d3868722a150,yes,research/results/pass4_before/synthesis_overhead.csv,included summary/evidence file
 research/results/pass4_before/toolchain_status.csv,1722,,no,,excluded local-only file containing a private absolute path
-research/results/pass_top_tier_before/BASELINE_STATUS.md,910,b90144791d74775a40111b2ae370cdffc0f79e28b363a5b2f90be758de71686c,yes,research/results/pass_top_tier_before/BASELINE_STATUS.md,included summary/evidence file
-research/results/pass_top_tier_before/REPRODUCIBILITY_STATUS.md,4055,e4b72669708c0ee2d0e44342f9b13888896fcf2ec63d0840b6ece44d6d71bb4f,yes,research/results/pass_top_tier_before/REPRODUCIBILITY_STATUS.md,included summary/evidence file
-research/results/pass_top_tier_before/research__CONFERENCE_READINESS_DASHBOARD.md,5089,e6005dae560d4bf9cf0534fc81e5ad503d10fb7eb262d54b4141cdf9b95c06ea,yes,research/results/pass_top_tier_before/research__CONFERENCE_READINESS_DASHBOARD.md,included summary/evidence file
-research/results/pass_top_tier_before/research__COPPER_CLAIM_LEDGER.md,3396,679d53d77021a6ab102cba2201ad1fdc81361660ea102645addade941ae10fcf,yes,research/results/pass_top_tier_before/research__COPPER_CLAIM_LEDGER.md,included summary/evidence file
-research/results/pass_top_tier_before/research__COPPER_FINAL_REVIEWER_REPORT.md,3534,1a086804a7aa9e8e0f208b246ffff2aba0bd80f2816382d6b5e4d0c8f9ef8054,yes,research/results/pass_top_tier_before/research__COPPER_FINAL_REVIEWER_REPORT.md,included summary/evidence file
-research/results/pass_top_tier_before/research__COPPER_FINAL_SUBMISSION_BLOCKERS.md,1234,48276e8f62a2a4c89bb1553d6d0c69670e3e9b0909a99c76896f6afa3d6a1d67,yes,research/results/pass_top_tier_before/research__COPPER_FINAL_SUBMISSION_BLOCKERS.md,included summary/evidence file
-research/results/pass_top_tier_before/research__results__ci_status.csv,2070,8cd447901f778e05248804aba22c9ebd066d9642cf069833f52a5901339b3822,yes,research/results/pass_top_tier_before/research__results__ci_status.csv,included summary/evidence file
-research/results/pass_top_tier_before/research__results__cycle_memory_traffic.csv,101898,bf7afad101ef16f5a92f922fbbd05091d4c32b377beda7d840952680074f535a,yes,research/results/pass_top_tier_before/research__results__cycle_memory_traffic.csv,included summary/evidence file
-research/results/pass_top_tier_before/research__results__cycle_performance.csv,182805,dc6329c71611d193a8ba57c722a5ef60cd518d156b0a63902232710b45ffc63b,yes,research/results/pass_top_tier_before/research__results__cycle_performance.csv,included summary/evidence file
-research/results/pass_top_tier_before/research__results__cycle_prefetch_metrics.csv,97391,edc11a69674e5891af43ce917e39b3dd6c7a3354f7056a93300e45545026d1d0,yes,research/results/pass_top_tier_before/research__results__cycle_prefetch_metrics.csv,included summary/evidence file
-research/results/pass_top_tier_before/research__results__model_tests.csv,1309,a0f0525186bc94ea52b34f92a9fde4c84d098029e823b9ae7015c66afc6d246a,yes,research/results/pass_top_tier_before/research__results__model_tests.csv,included summary/evidence file
-research/results/pass_top_tier_before/research__results__paper_build_status.csv,286,2f7aa3767bdc8dc23ae7a7f26c315ac7c7ceb0d925c97d5cba5d48356cb02a78,yes,research/results/pass_top_tier_before/research__results__paper_build_status.csv,included summary/evidence file
-research/results/pass_top_tier_before/research__results__rtl_compile.csv,492,5aab10dd3219cf1954ec63688a3ea6fb752d078abe128c53599fd6f0d417bf9a,yes,research/results/pass_top_tier_before/research__results__rtl_compile.csv,included summary/evidence file
-research/results/pass_top_tier_before/research__results__rtl_simulation.csv,628,b62d3a8f51dde2265d9fbbc216ee3d63919ec99dbca75df21f1b05db4ee9303a,yes,research/results/pass_top_tier_before/research__results__rtl_simulation.csv,included summary/evidence file
-research/results/pass_top_tier_before/research__results__statistical_summary.csv,130515,4f4459e78cc8953de3409617d12e0910be83e16307265d6aeee764781f8d1cae,yes,research/results/pass_top_tier_before/research__results__statistical_summary.csv,included summary/evidence file
-research/results/pass_top_tier_before/research__results__synthesis.csv,7135,b2b8ff02cadc45788c2abe9ab47f22b1a36167e9b7537a70ced6710f2d1d5ce7,yes,research/results/pass_top_tier_before/research__results__synthesis.csv,included summary/evidence file
-research/results/pass_top_tier_before/research__results__synthesis_overhead.csv,5705,b484aebf8be1e04832a1e724ac03e9753eb5aad476eaae6a2097c1da02fa8840,yes,research/results/pass_top_tier_before/research__results__synthesis_overhead.csv,included summary/evidence file
-research/results/pass_top_tier_before/snapshot_manifest.csv,2100,d392845c7b0faa7f299bc72fcfd6fdd8759b369a0f8a11bd3ff846965fe6e5e6,yes,research/results/pass_top_tier_before/snapshot_manifest.csv,included summary/evidence file
 research/results/pcre2_regex_seed_stability_20260620.csv,447,2d780a0175e87b533ff599d0e3cbc523f7f596413c4ddc3741b8f1b0a802f53e,yes,research/results/pcre2_regex_seed_stability_20260620.csv,included summary/evidence file
 research/results/PCRE2_REGEX_SEED_STABILITY_20260620.md,1400,b564e45a277daa9ef40c2ca76ae3b32a0d9a396da0793e4ed79cd971745840a8,yes,research/results/PCRE2_REGEX_SEED_STABILITY_20260620.md,included summary/evidence file
 research/results/pcre2_regex_workload_build/build.log,0,e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855,yes,research/results/pcre2_regex_workload_build/build.log,included summary/evidence file
 research/results/pcre2_regex_workload_build/PCRE2_REGEX_WORKLOAD_BUILD.md,947,,no,,excluded local-only file containing a private absolute path
 research/results/performance.csv,38946,236ff155285760a11b2bed376417465808f8936d7d4c4526d77dd6f861b0667d,yes,research/results/performance.csv,included summary/evidence file
-research/results/power_report_index.csv,1968,9c30b6c451967e585b162cc3bde2405217d64c8da42fd8dfcf3c2fab0139c224,yes,research/results/power_report_index.csv,included summary/evidence file
+research/results/power_report_index.csv,3201,4e738cee9c9a446fd3244cdd3097752a77b146841921585e8ffc34a83d1b44cd,yes,research/results/power_report_index.csv,included summary/evidence file
 research/results/ppa_before/CONFERENCE_READINESS_DASHBOARD.md,5788,16f7982e20dcd3167b646240b8539899a562556e5333b7266d9b4b7140096ce1,yes,research/results/ppa_before/CONFERENCE_READINESS_DASHBOARD.md,included summary/evidence file
 research/results/ppa_before/COPPER_CLAIM_LEDGER.md,4523,f6b9a78da3037611ead87195188e44bd0260e7f0126aead6637c772e52dc4560,yes,research/results/ppa_before/COPPER_CLAIM_LEDGER.md,included summary/evidence file
 research/results/ppa_before/COPPER_FINAL_SUBMISSION_BLOCKERS.md,1848,4bdfd34384b7dfd4bdc1a4ba29a3a6d32285dc962a224b9fd47b7f2b7cec04bb,yes,research/results/ppa_before/COPPER_FINAL_SUBMISSION_BLOCKERS.md,included summary/evidence file
@@ -11347,18 +10485,6 @@ research/results/ppa_before/fullcore_synthesis_overhead.csv,681,d9081dec2ac72024
 research/results/ppa_before/independent_sim_performance.csv,54454,666f18b99e3a002b61f4bd80ae500cc94d4d5e86124c0e73d7b84eefa59a0342,yes,research/results/ppa_before/independent_sim_performance.csv,included summary/evidence file
 research/results/ppa_before/paper_build_status.csv,286,71af0679cd57d416246b3955ae295aea3506cda8793b55de271e7fd0e6d75b3c,yes,research/results/ppa_before/paper_build_status.csv,included summary/evidence file
 research/results/ppa_before/rtl_simulation.csv,452,7d5fe5b1a583adb28f5329f1d7d89f3ecb78bba8fefea2bddfc49aa2ec76f85e,yes,research/results/ppa_before/rtl_simulation.csv,included summary/evidence file
-research/results/ppa_ci_before/CONFERENCE_READINESS_DASHBOARD.md,5964,0d7ec4700ef99410a76eddd48b1baded73bb6be6056af44eb4abcb0822122a53,yes,research/results/ppa_ci_before/CONFERENCE_READINESS_DASHBOARD.md,included summary/evidence file
-research/results/ppa_ci_before/COPPER_CLAIM_LEDGER.md,4873,9b048432ef539a795f395d8b4df3c4cf162e1c16a69b6575eaf01d57c16f6361,yes,research/results/ppa_ci_before/COPPER_CLAIM_LEDGER.md,included summary/evidence file
-research/results/ppa_ci_before/COPPER_FINAL_SUBMISSION_BLOCKERS.md,1908,b93558e4ca223c87254ee36e82412fe0cba7a21d155d2ddd03805ac58c8c87ce,yes,research/results/ppa_ci_before/COPPER_FINAL_SUBMISSION_BLOCKERS.md,included summary/evidence file
-research/results/ppa_ci_before/energy_proxy.csv,341992,9b3f9bcf2a73ffdf2e32ce8bd2d0ce984261baf9ea631c3a62927c2c5c119a46,yes,research/results/ppa_ci_before/energy_proxy.csv,included summary/evidence file
-research/results/ppa_ci_before/fullcore_synthesis.csv,1560,67e98fe059804b87cc11597cb1340f11af997b71fe884fcd670020a397fe63b3,yes,research/results/ppa_ci_before/fullcore_synthesis.csv,included summary/evidence file
-research/results/ppa_ci_before/fullcore_synthesis_overhead.csv,681,d9081dec2ac72024100495fae3cb802cfb2bf999f26c3eb6126edc7518e1c715,yes,research/results/ppa_ci_before/fullcore_synthesis_overhead.csv,included summary/evidence file
-research/results/ppa_ci_before/independent_sim_performance.csv,54454,666f18b99e3a002b61f4bd80ae500cc94d4d5e86124c0e73d7b84eefa59a0342,yes,research/results/ppa_ci_before/independent_sim_performance.csv,included summary/evidence file
-research/results/ppa_ci_before/mapped_ppa.csv,2135,24f11f54804e6e602d16199b449d26db16e1ffa8b4e4d49fa95e498e3d6c2407,yes,research/results/ppa_ci_before/mapped_ppa.csv,included summary/evidence file
-research/results/ppa_ci_before/mapped_ppa_overhead.csv,840,c849deff58c4d7e6312a8b5b543d1618dfc0fa857f5c7f7665e134d70274acb1,yes,research/results/ppa_ci_before/mapped_ppa_overhead.csv,included summary/evidence file
-research/results/ppa_ci_before/paper_build_status.csv,286,2f7aa3767bdc8dc23ae7a7f26c315ac7c7ceb0d925c97d5cba5d48356cb02a78,yes,research/results/ppa_ci_before/paper_build_status.csv,included summary/evidence file
-research/results/ppa_ci_before/power_report_index.csv,690,6defed0e4335681ef0f57412300fea8b450b0f63ff98b35bec4a2ccb019c8f54,yes,research/results/ppa_ci_before/power_report_index.csv,included summary/evidence file
-research/results/ppa_ci_before/rtl_simulation.csv,452,7d5fe5b1a583adb28f5329f1d7d89f3ecb78bba8fefea2bddfc49aa2ec76f85e,yes,research/results/ppa_ci_before/rtl_simulation.csv,included summary/evidence file
 research/results/prefetch_metrics.csv,49180,6f11d859849f603dad80b3af880897cc17f9f64097bf738b2fbd8e6fb841c527,yes,research/results/prefetch_metrics.csv,included summary/evidence file
 research/results/preflight_baseline_check.csv,5374,,no,,excluded local-only file containing a private absolute path
 research/results/preflight_logs/audit_claims.txt,40,585b20475ddaf5879d1c949e505b4e854c88aec72ec2d55dd5133fa555c84408,yes,research/results/preflight_logs/audit_claims.txt,included summary/evidence file
@@ -11612,27 +10738,6 @@ research/run_yyjson_app_fs.sh,2602,,no,,excluded local-only file containing a pr
 research/run_zlib_app_fs.sh,2166,,no,,excluded local-only file containing a private absolute path
 research/run_zstd_app_fs.sh,2166,,no,,excluded local-only file containing a private absolute path
 research/scoop_companion_state_space.py,4243,6e6aa03dc7cfd08cc7481603a578ac544b38c7a5d3678d106cb1d4c74db327b2,yes,research/scoop_companion_state_space.py,included source or reviewer file
-research/scripts/__pycache__/build_conference_docs.cpython-312.pyc,87158,,no,,excluded scratch/private/build directory
-research/scripts/__pycache__/build_paper.cpython-312.pyc,9297,,no,,excluded scratch/private/build directory
-research/scripts/__pycache__/build_workloads.cpython-312.pyc,9160,,no,,excluded scratch/private/build directory
-research/scripts/__pycache__/check_toolchain.cpython-312.pyc,12347,,no,,excluded scratch/private/build directory
-research/scripts/__pycache__/copper_eval_model.cpython-311.pyc,28557,,no,,excluded scratch/private/build directory
-research/scripts/__pycache__/copper_eval_model.cpython-312.pyc,24440,,no,,excluded scratch/private/build directory
-research/scripts/__pycache__/import_ci_artifacts.cpython-312.pyc,24888,,no,,excluded scratch/private/build directory
-research/scripts/__pycache__/package_artifact.cpython-312.pyc,10796,,no,,excluded scratch/private/build directory
-research/scripts/__pycache__/run_asic_power.cpython-312.pyc,28106,,no,,excluded scratch/private/build directory
-research/scripts/__pycache__/run_core_eval.cpython-312.pyc,13969,,no,,excluded scratch/private/build directory
-research/scripts/__pycache__/run_cycle_eval.cpython-312.pyc,18368,,no,,excluded scratch/private/build directory
-research/scripts/__pycache__/run_energy_estimate.cpython-312.pyc,18775,,no,,excluded scratch/private/build directory
-research/scripts/__pycache__/run_evaluation.cpython-312.pyc,16951,,no,,excluded scratch/private/build directory
-research/scripts/__pycache__/run_fullcore_synthesis.cpython-312.pyc,17350,,no,,excluded scratch/private/build directory
-research/scripts/__pycache__/run_gem5_eval.cpython-312.pyc,35931,,no,,excluded scratch/private/build directory
-research/scripts/__pycache__/run_independent_sim_eval.cpython-312.pyc,32057,,no,,excluded scratch/private/build directory
-research/scripts/__pycache__/run_mapped_ppa.cpython-312.pyc,40580,,no,,excluded scratch/private/build directory
-research/scripts/__pycache__/run_model_tests.cpython-312.pyc,7831,,no,,excluded scratch/private/build directory
-research/scripts/__pycache__/run_openroad_postroute.cpython-312.pyc,34258,,no,,excluded scratch/private/build directory
-research/scripts/__pycache__/run_rtl.cpython-312.pyc,14525,,no,,excluded scratch/private/build directory
-research/scripts/__pycache__/run_synthesis.cpython-312.pyc,25816,,no,,excluded scratch/private/build directory
 research/scripts/audit_claims.py,1641,cb359de924e64d38c1a5ab31e7b45f95169eff2951c17b6dcc94c075b579d0a8,yes,research/scripts/audit_claims.py,included source or reviewer file
 research/scripts/audit_numbers.py,1886,c17b5ec19c7255bab03f932a98a8508a374b88329ce65a9d5896562a3d3af7e0,yes,research/scripts/audit_numbers.py,included source or reviewer file
 research/scripts/audit_todos.py,1221,4ee4563c9dc961dd4493690e904dbb2863357374976c6530a6df972b313e748e,yes,research/scripts/audit_todos.py,included source or reviewer file
@@ -11641,8 +10746,8 @@ research/scripts/build_paper.py,5697,ca4250b8b05a7fedee4f3bea95bc7a4dad150ab6777
 research/scripts/build_workloads.py,6377,8120b2e9a571a7d7519e7ff9f2f4f405f1df8bc09bde748d6006923d2b90423d,yes,research/scripts/build_workloads.py,included source or reviewer file
 research/scripts/check_toolchain.py,8410,3f873413e2021c7305c1463bf39649e1b35d81fe950ba83f323be2ca31a32a54,yes,research/scripts/check_toolchain.py,included source or reviewer file
 research/scripts/copper_eval_model.py,16546,09fdd920664a1d995418f40ab2d1b5b4f292d3e1ca2fa0bb16e305e52809d1cb,yes,research/scripts/copper_eval_model.py,included source or reviewer file
-research/scripts/import_ci_artifacts.py,17818,26acf6a90f7a94c1e3f4ee2d053a73bc681962b8416e5b82e16c32aa28c2399e,yes,research/scripts/import_ci_artifacts.py,included source or reviewer file
-research/scripts/package_artifact.py,7193,c8b05ecf02613ad266e3ef1fe6b11679305d07653a47336fd0ef41ec6445914c,yes,research/scripts/package_artifact.py,included source or reviewer file
+research/scripts/import_ci_artifacts.py,20894,20d4b1527e090c76a62c492947d978a555c75e17b624120781c39b600b150889,yes,research/scripts/import_ci_artifacts.py,included source or reviewer file
+research/scripts/package_artifact.py,7486,d26959060e45b1dac3894dc10ef0423fd7b88d9744a4eacb0fc8d37187cabcca,yes,research/scripts/package_artifact.py,included source or reviewer file
 research/scripts/run_asic_power.py,19012,2bccd8540b246705da6db7de7c9e628cdc907d749238eeeb06baed684295cb10,yes,research/scripts/run_asic_power.py,included source or reviewer file
 research/scripts/run_core_eval.py,12180,62e50395eaf25c34ee4478a8eb9ce70e4388e89c5ce4d409f38590bcff708532,yes,research/scripts/run_core_eval.py,included source or reviewer file
 research/scripts/run_cycle_eval.py,16586,aaaa54e74f43f1c77cb1ffa832d9e3fbaf2f7aaebfe1096646b6e1214df6750e,yes,research/scripts/run_cycle_eval.py,included source or reviewer file

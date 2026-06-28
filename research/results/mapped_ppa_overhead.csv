@@ -35,3 +35,6 @@ vivado-xc7a35tcsg324-1,vivado-impl,core_wrapper_prefetch_baseline,core_wrapper_p
 vivado-xc7a35tcsg324-1,vivado-impl,core_wrapper_prefetch_baseline,core_wrapper_prefetch_baseline_bram,0,0,0,0.000000,"Matched mapped PPA overhead from same target, flow, and constraints."
 vivado-xc7a35tcsg324-1,vivado-impl,core_wrapper_prefetch_baseline,core_wrapper_prefetch_baseline_dsp,0,0,0,0.000000,"Matched mapped PPA overhead from same target, flow, and constraints."
 vivado-xc7a35tcsg324-1,vivado-impl,core_wrapper_prefetch_baseline,core_wrapper_prefetch_baseline_power_mw,78,76,-2,-2.564103,"Matched mapped PPA overhead from same target, flow, and constraints."
+vivado-xc7a35tcsg324-1,vivado-impl,near_core_stub,near_core_stub_mapped_timing,,,,,BLOCKED: matched mapped PPA overhead requires PASS rows for baseline and COPPER.
+vivado-xc7a35tcsg324-1,vivado-impl,core_wrapper,core_wrapper_mapped_timing,,,,,BLOCKED: matched mapped PPA overhead requires PASS rows for baseline and COPPER.
+vivado-xc7a35tcsg324-1,vivado-impl,core_wrapper_prefetch_baseline,core_wrapper_prefetch_baseline_mapped_timing,,,,,BLOCKED: matched mapped PPA overhead requires PASS rows for baseline and COPPER.

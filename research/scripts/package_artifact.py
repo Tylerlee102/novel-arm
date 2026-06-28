@@ -55,6 +55,9 @@ EXCLUDE_PARTS = {
     ".vivado_appdata",
     ".vivado_user",
     "dist",
+    "imported_ci",
+    "pass_top_tier_before",
+    "ppa_ci_before",
     "copper_public_artifact_package_20260620",
 }
 PRIVATE_PATH_PATTERNS = {
@@ -174,6 +177,14 @@ def should_include(path: Path) -> tuple[bool, str]:
     return False, "suffix not included"
 
 
+def is_excluded_tree(path: Path) -> bool:
+    try:
+        rel_parts = set(path.relative_to(ROOT).parts)
+    except ValueError:
+        return False
+    return bool(rel_parts & EXCLUDE_PARTS)
+
+
 def main() -> int:
     DIST.mkdir(parents=True, exist_ok=True)
     RESULTS.mkdir(parents=True, exist_ok=True)
@@ -186,7 +197,7 @@ def main() -> int:
             candidates.append(path)
     for base in (ROOT / ".devcontainer", ROOT / ".github", ROOT / "docs", RESEARCH, ROOT / "external" / "mibench_network", ROOT / "external" / "picorv32"):
         if base.exists():
-            candidates.extend(path for path in base.rglob("*") if path.is_file())
+            candidates.extend(path for path in base.rglob("*") if path.is_file() and not is_excluded_tree(path))
     for path in sorted(set(candidates)):
         include, note = should_include(path)
         row = {

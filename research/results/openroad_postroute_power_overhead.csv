@@ -1,0 +1,11 @@
+target,flow,scope,metric,baseline,with_copper,delta,percent_overhead,notes
+nangate45,openroad-flow-scripts-postroute,core_wrapper,core_wrapper_openroad_postroute_power,,,,,BLOCKED: matched OpenROAD post-route overhead requires PASS rows for baseline and COPPER.
+nangate45,openroad-flow-scripts-postroute,core_wrapper,core_wrapper_openroad_postroute_cells,606,4717,4111,678.382838,"Matched core-wrapper OpenROAD post-route estimate from same ORFS ref, platform, and constraints."
+nangate45,openroad-flow-scripts-postroute,core_wrapper,core_wrapper_openroad_postroute_area_um2,845.082,6400.76,5555.678,657.412890,"Matched core-wrapper OpenROAD post-route estimate from same ORFS ref, platform, and constraints."
+nangate45,openroad-flow-scripts-postroute,core_wrapper,core_wrapper_openroad_postroute_wns,0,0,0,0.000000,"Matched core-wrapper OpenROAD post-route estimate from same ORFS ref, platform, and constraints."
+nangate45,openroad-flow-scripts-postroute,core_wrapper,core_wrapper_openroad_postroute_tns,0,0,0,0.000000,"Matched core-wrapper OpenROAD post-route estimate from same ORFS ref, platform, and constraints."
+nangate45,openroad-flow-scripts-postroute,core_wrapper,core_wrapper_openroad_postroute_fmax_mhz,122.371,113.214,-9.157,-7.482982,"Matched core-wrapper OpenROAD post-route estimate from same ORFS ref, platform, and constraints."
+nangate45,openroad-flow-scripts-postroute,core_wrapper,core_wrapper_openroad_postroute_internal_power_mw,0.040683,0.467019,0.426336,1047.957603,"Matched core-wrapper OpenROAD post-route estimate from same ORFS ref, platform, and constraints."
+nangate45,openroad-flow-scripts-postroute,core_wrapper,core_wrapper_openroad_postroute_switching_power_mw,0.015463,0.278403,0.26294,1700.446226,"Matched core-wrapper OpenROAD post-route estimate from same ORFS ref, platform, and constraints."
+nangate45,openroad-flow-scripts-postroute,core_wrapper,core_wrapper_openroad_postroute_leakage_power_mw,0.017007,0.147237,0.13023,765.743517,"Matched core-wrapper OpenROAD post-route estimate from same ORFS ref, platform, and constraints."
+nangate45,openroad-flow-scripts-postroute,core_wrapper,core_wrapper_openroad_postroute_total_power_mw,0.073153,0.892658,0.819505,1120.266648,"Matched core-wrapper OpenROAD post-route estimate from same ORFS ref, platform, and constraints."
