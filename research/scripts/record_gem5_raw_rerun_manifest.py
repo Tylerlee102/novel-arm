@@ -101,6 +101,71 @@ SPECS = (
             "family; it is not the full final workload/config matrix."
         ),
     ),
+    RawRerunSpec(
+        tag="duktape_medium_existing",
+        run_prefix="gem5_arm_ubuntu_fs_duktape_app_medium_",
+        summary_path=RESULTS / "gem5_arm_ubuntu_fs_duktape_app" / "duktape_app_medium_summary.csv",
+        terminal_result="DUKTAPE_COPPER_RESULT",
+        policies=("none", "naive", "copper_clpd64k_peb", "spp", "spp_copper_slack"),
+        notes=(
+            "Existing local raw gem5 ARM full-system Duktape JavaScript-runtime medium run "
+            "with retained stats and terminal logs. This adds another public benchmark "
+            "family to the raw provenance ledger; it is not a clone-local CI proof or "
+            "full workload/config matrix."
+        ),
+    ),
+    RawRerunSpec(
+        tag="duktape_medium_existing_seed1",
+        run_prefix="gem5_arm_ubuntu_fs_duktape_app_medium_seed1_",
+        summary_path=RESULTS / "gem5_arm_ubuntu_fs_duktape_app" / "duktape_app_medium_seed1_summary.csv",
+        terminal_result="DUKTAPE_COPPER_RESULT",
+        policies=("none", "naive", "copper_clpd64k_peb", "spp", "spp_copper_slack"),
+        notes=(
+            "Existing local raw gem5 ARM full-system Duktape JavaScript-runtime medium seed-1 "
+            "run with retained stats and terminal logs. Together with the medium base and seed-2 "
+            "runs, this provides repeated local raw samples; it is not the full final "
+            "workload/config matrix."
+        ),
+    ),
+    RawRerunSpec(
+        tag="duktape_medium_existing_seed2",
+        run_prefix="gem5_arm_ubuntu_fs_duktape_app_medium_seed2_",
+        summary_path=RESULTS / "gem5_arm_ubuntu_fs_duktape_app" / "duktape_app_medium_seed2_summary.csv",
+        terminal_result="DUKTAPE_COPPER_RESULT",
+        policies=("none", "naive", "copper_clpd64k_peb", "spp", "spp_copper_slack"),
+        notes=(
+            "Existing local raw gem5 ARM full-system Duktape JavaScript-runtime medium seed-2 "
+            "run with retained stats and terminal logs. Together with the medium base and seed-1 "
+            "runs, this provides repeated local raw samples; it is not the full final "
+            "workload/config matrix."
+        ),
+    ),
+    RawRerunSpec(
+        tag="duktape_stress_existing",
+        run_prefix="gem5_arm_ubuntu_fs_duktape_app_stress_",
+        summary_path=RESULTS / "gem5_arm_ubuntu_fs_duktape_app" / "duktape_app_stress_summary.csv",
+        terminal_result="DUKTAPE_COPPER_RESULT",
+        policies=("none", "naive", "copper_clpd64k_peb", "spp", "spp_copper_slack"),
+        notes=(
+            "Existing local raw gem5 ARM full-system Duktape JavaScript-runtime stress run "
+            "with retained stats and terminal logs. This records the repeated-policy subset "
+            "for stress input provenance; it is not a clone-local CI proof or full "
+            "workload/config matrix."
+        ),
+    ),
+    RawRerunSpec(
+        tag="duktape_stress_existing_seed1",
+        run_prefix="gem5_arm_ubuntu_fs_duktape_app_stress_seed1_",
+        summary_path=RESULTS / "gem5_arm_ubuntu_fs_duktape_app" / "duktape_app_stress_seed1_summary.csv",
+        terminal_result="DUKTAPE_COPPER_RESULT",
+        policies=("none", "naive", "copper_clpd64k_peb", "spp", "spp_copper_slack"),
+        notes=(
+            "Existing local raw gem5 ARM full-system Duktape JavaScript-runtime stress seed-1 "
+            "run with retained stats and terminal logs. Together with duktape_stress_existing, "
+            "this provides repeated local raw samples; it is not the full final "
+            "workload/config matrix."
+        ),
+    ),
 )
 
 

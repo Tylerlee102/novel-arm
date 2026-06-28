@@ -1,0 +1,6 @@
+policy,roi_ticks,insts_not_nop,l1d_demand_misses,checksum,rc,rows,lookups,updates,traversals,seed,poison,pfIssued,pfUseful,pointerLikeCandidates,learnedProofs,proofEvictions,allowedCandidates,blockedNoProvenance,fillPrefetchTranslated,fillPrefetchTranslationFault,targetLineWitnessHits,targetLineWitnessMisses,carriedProvenanceTerminalStops,boundaryFlushes,boundaryAuthorityEntriesDropped,boundaryPrefetchesDropped,tick_delta_vs_none_pct,l1d_miss_delta_vs_none_pct
+none,108669896658,173931594,540011,0x74d2383b,0,1024,2400,1024,2400,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.000,0.000
+naive,108393201630,173931416,543214,0x74d2383b,0,1024,2400,1024,2400,1,1,85111,10561,98477,3994,0,98477,0,60141,0,60141,13364,0,0,0,0,-0.255,0.593
+copper_clpd64k_peb,108430686108,173931408,537910,0x74d2383b,0,1024,2400,1024,2400,1,1,66974,10557,106334,3240,0,67304,39030,40601,0,40601,330,105882,2,18376,0,-0.220,-0.389
+spp,101112067719,173914355,325775,0x74d2383b,0,1024,2400,1024,2400,1,1,2264408,317874,0,0,0,0,0,0,0,0,0,0,0,0,0,-6.955,-39.673
+spp_copper_slack,101413939545,173911144,339660,0x74d2383b,0,1024,2400,1024,2400,1,1,2247587,314104,230497,2579,0,38223,192274,25510,0,25510,740,124194,2,10328,0,-6.677,-37.101
