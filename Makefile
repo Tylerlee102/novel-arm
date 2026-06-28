@@ -33,6 +33,7 @@ eval:
 
 synth:
 	$(PYTHON) research/scripts/run_synthesis.py
+	$(PYTHON) research/scripts/run_fullcore_synthesis.py
 
 paper:
 	$(PYTHON) research/scripts/build_conference_docs.py

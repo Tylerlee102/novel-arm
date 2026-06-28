@@ -1,0 +1,5 @@
+target,flow,environment,metric,baseline,with_copper,delta,percent_overhead,scope,notes
+generic,yosys,local_windows,cells_near_core_baseline_vs_core_stub_plus_copper,,,,,near_core_stub,BLOCKED: matched near_core_stub overhead requires PASS rows and measured cells for both designs.
+generic,yosys,local_windows,cells_unit_baseline_vs_copper_unit,,,,,unit_prefetch,BLOCKED: matched unit_prefetch overhead requires PASS rows and measured cells for both designs.
+generic,yosys,local_windows,cells_unit_baseline_vs_copper_with_queue,,,,,unit_prefetch,BLOCKED: matched unit_prefetch overhead requires PASS rows and measured cells for both designs.
+generic,yosys,local_windows,cells_unit_baseline_vs_copper_with_tables,,,,,unit_prefetch,BLOCKED: matched unit_prefetch overhead requires PASS rows and measured cells for both designs.
