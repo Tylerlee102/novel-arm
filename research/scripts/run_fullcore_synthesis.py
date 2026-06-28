@@ -117,6 +117,29 @@ def current_environment() -> str:
 ENVIRONMENT = current_environment()
 
 
+def tool_path(name: str) -> str | None:
+    found = shutil.which(name)
+    if found:
+        return found
+    candidates: list[Path] = []
+    oss_roots = [
+        os.environ.get("COPPER_OSS_CAD_SUITE", ""),
+        "C:/Users/tyboy/tools/oss-cad-suite",
+        str(ROOT / "tools" / "oss-cad-suite"),
+        str(ROOT / ".tools" / "oss-cad-suite" / "oss-cad-suite"),
+    ]
+    names = [name]
+    if platform.system().lower().startswith("win") and not name.endswith(".exe"):
+        names.append(f"{name}.exe")
+    for root in oss_roots:
+        if root:
+            candidates.extend(Path(root) / "bin" / candidate for candidate in names)
+    for candidate in candidates:
+        if candidate.exists():
+            return str(candidate)
+    return None
+
+
 def rel(path: Path) -> str:
     return str(path.relative_to(ROOT)).replace("\\", "/")
 
@@ -187,6 +210,23 @@ def yosys_script(design: Design) -> str:
     return f"{reads} {chparam}synth -top {design.top}; stat"
 
 
+def command_env(command: list[str]) -> dict[str, str]:
+    env = os.environ.copy()
+    extra_paths = []
+    for item in command:
+        try:
+            path = Path(item)
+        except (TypeError, ValueError):
+            continue
+        if path.exists() and path.parent:
+            extra_paths.append(str(path.parent))
+            if path.parent.name == "bin" and (path.parent.parent / "lib").exists():
+                extra_paths.append(str(path.parent.parent / "lib"))
+    if extra_paths:
+        env["PATH"] = os.pathsep.join(extra_paths + [env.get("PATH", "")])
+    return env
+
+
 def run_design(design: Design) -> dict[str, str]:
     LOG_DIR.mkdir(parents=True, exist_ok=True)
     log_path = LOG_DIR / f"{design.name}.log"
@@ -200,7 +240,7 @@ def run_design(design: Design) -> dict[str, str]:
         write_log(log_path, note + "\n")
         return row_for(design, "BLOCKED", log_path, note)
 
-    yosys = shutil.which("yosys")
+    yosys = tool_path("yosys")
     if not yosys:
         note = (
             f"BLOCKED: {design.scope} synthesis requires Yosys on PATH. "
@@ -210,7 +250,15 @@ def run_design(design: Design) -> dict[str, str]:
         return row_for(design, "BLOCKED", log_path, note)
 
     command = [yosys, "-p", yosys_script(design)]
-    proc = subprocess.run(command, cwd=ROOT, text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, timeout=180)
+    proc = subprocess.run(
+        command,
+        cwd=ROOT,
+        env=command_env(command),
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        timeout=180,
+    )
     write_log(log_path, "$ " + " ".join(command) + "\n" + proc.stdout)
     counts = parse_cell_counts(proc.stdout)
     status = "PASS" if proc.returncode == 0 else "FAIL"

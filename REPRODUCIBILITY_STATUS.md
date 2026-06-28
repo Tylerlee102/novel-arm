@@ -34,10 +34,12 @@ machine or one-command full-system artifact.
   load-queue, branch, and memory timing parameters. It is not gem5 and does not
   replace a full-system simulator campaign.
 - `gem5_*.csv` files are promoted only when validated summaries exist with
-  matching checksums and `rc=0`. Current PASS gem5 rows are imported selected
-  MiBench Patricia ARM-system summaries, not a complete gem5 workload matrix.
-  A BLOCKED gem5 row is not performance evidence; it records that gem5 was
-  unavailable or not runnable in the current environment.
+  a no-prefetch baseline, a COPPER-family row, matching checksums, clean
+  return codes, and positive tick counts. Current PASS gem5 rows are imported
+  ARM full-system summaries across multiple benchmark families, not a
+  clone-local rerun of every raw full-system simulation. A BLOCKED gem5 row is
+  not performance evidence; it records that gem5 was unavailable or not runnable
+  in the current environment.
 - `fullcore_synthesis*.csv` records unit, near-core-stub, and PicoRV32
   core-wrapper synthesis scope. Near-core-stub and PicoRV32 wrapper rows must
   not be described as full-core overhead, ARM-core integration, ASIC timing, or
@@ -49,11 +51,14 @@ machine or one-command full-system artifact.
   fields from the tool report. Missing timing or power fields are recorded as
   `NA`, not inferred.
 - `energy_proxy.csv`, `energy_summary.csv`, `power_report_index.csv`,
-  `mapped_ppa.csv`, and `copper_mcpat_sensitivity_20260618.csv` separate
-  assumption-based memory energy, activity-based McPAT proxy evidence, and
-  Vivado `report_power` rows when Vivado is available. Vivado power rows are
-  tool-estimated FPGA power for the stated mapped target, not measured silicon,
-  ASIC signoff power, or full-core power.
+  `asic_power.csv`, `mapped_ppa.csv`, and
+  `copper_mcpat_sensitivity_20260618.csv` separate assumption-based memory
+  energy, activity-based McPAT proxy evidence, optional Nangate45
+  ASIC-Liberty tool-power rows when OpenSTA/OpenROAD is available, and Vivado
+  `report_power` rows when Vivado is available. ASIC-Liberty rows are
+  standard-cell tool estimates, not post-route signoff or silicon measurement.
+  Vivado power rows are tool-estimated FPGA power for the stated mapped target,
+  not measured silicon, ASIC signoff power, or full-core power.
 - Paper-facing documents, tables, summaries, RTL sources, testbenches, and
   reproduction scripts are included with stable relative paths.
 - The Python audit and summary scripts can be rerun with a local Python 3
@@ -94,13 +99,14 @@ standard tools, and reproduce selected public-workload points after installing
 the external simulator/toolchain stack. They should not expect a fresh clone to
 reproduce the entire long-running full-system campaign without that setup.
 
-The model-level, cycle-model, core-integrated, independent-sim, and selected
-gem5 evidence improve baseline discipline but do not prove a complete gem5
-workload matrix. Claims in the paper and claim ledger must identify
-model-level, cycle-model, core-integrated, independent-sim, selected gem5,
-RTL-level, unit-synthesis, near-core-stub synthesis, PicoRV32 core-wrapper
-synthesis, mapped-PPA, proxy-energy, local Vivado FPGA tool-power, and external
-summary evidence separately.
+The model-level, cycle-model, core-integrated, independent-sim, and imported
+gem5 evidence improve baseline discipline but do not prove a clone-local rerun
+of every raw full-system simulation. Claims in the paper and claim ledger must
+identify model-level, cycle-model, core-integrated, independent-sim, imported
+gem5, RTL-level, unit-synthesis, near-core-stub synthesis, PicoRV32
+core-wrapper synthesis, mapped-PPA, proxy-energy, optional ASIC-Liberty
+tool-power, local Vivado FPGA tool-power, and external summary evidence
+separately.
 
 The clone-local runner is intended to make this boundary explicit: it should pass
 from a fresh clone after Python dependencies are installed, while full gem5 and

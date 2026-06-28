@@ -1,4 +1,4 @@
-﻿$ {USER_HOME}\tools\oss-cad-suite\bin\yosys.EXE -p read_verilog -sv research/baseline_prefetch_unit.sv; read_verilog -sv research/rtl/integration/copper_near_core_stub.sv; synth -top nearcore_stub_baseline; stat
+$ {USER_HOME}\tools\oss-cad-suite\bin\yosys.exe -p read_verilog -sv research/baseline_prefetch_unit.sv; read_verilog -sv research/rtl/integration/copper_near_core_stub.sv; synth -top nearcore_stub_baseline; stat
 
  /----------------------------------------------------------------------------\
  |  yosys -- Yosys Open SYnthesis Suite                                       |
@@ -668,22 +668,22 @@ Removing temp directory.
 Extracted 153 gates and 211 wires to a netlist network with 58 inputs and 58 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
-ABC: + read_blif <abc-temp-dir>/input.blif
-ABC: + read_library <abc-temp-dir>/stdcells.genlib
-ABC: + strash
-ABC: + &get -n
-ABC: + &fraig -x
-ABC: + &put
-ABC: + scorr
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
 ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2
-ABC: + dretime
-ABC: + strash
-ABC: + &get -n
-ABC: + &dch -f
-ABC: + &nf
-ABC: + &put
-ABC: + write_blif <abc-temp-dir>/output.blif
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
 
 3.22.2.2. Re-integrating ABC results.
 ABC RESULTS:               AND cells:       52
@@ -702,22 +702,22 @@ Removing temp directory.
 Extracted 116 gates and 160 wires to a netlist network with 44 inputs and 43 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
-ABC: + read_blif <abc-temp-dir>/input.blif
-ABC: + read_library <abc-temp-dir>/stdcells.genlib
-ABC: + strash
-ABC: + &get -n
-ABC: + &fraig -x
-ABC: + &put
-ABC: + scorr
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
 ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2
-ABC: + dretime
-ABC: + strash
-ABC: + &get -n
-ABC: + &dch -f
-ABC: + &nf
-ABC: + &put
-ABC: + write_blif <abc-temp-dir>/output.blif
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
 
 3.22.3.2. Re-integrating ABC results.
 ABC RESULTS:               AND cells:       40
@@ -780,7 +780,7 @@ Removed 0 unused modules.
 === nearcore_stub_baseline ===
 
         +----------Local Count, excluding submodules.
-        |
+        | 
         6 wires
        68 wire bits
         6 public wires
@@ -793,7 +793,7 @@ Removed 0 unused modules.
 === $paramod\baseline_core_stub_with_prefetch_interface\ADDR_W=s32'00000000000000000000000000110000 ===
 
         +----------Local Count, excluding submodules.
-        |
+        | 
        66 wires
       287 wire bits
         8 public wires
@@ -813,7 +813,7 @@ Removed 0 unused modules.
 === $paramod\baseline_prefetch_unit\ADDR_W=s32'00000000000000000000000000110000 ===
 
         +----------Local Count, excluding submodules.
-        |
+        | 
        47 wires
       141 wire bits
         7 public wires
@@ -830,13 +830,13 @@ Removed 0 unused modules.
 === design hierarchy ===
 
         +----------Count including submodules.
-        |
+        | 
       254 nearcore_stub_baseline
       171 $paramod\baseline_core_stub_with_prefetch_interface\ADDR_W=s32'00000000000000000000000000110000
        83   $paramod\baseline_prefetch_unit\ADDR_W=s32'00000000000000000000000000110000
 
         +----------Count including submodules.
-        |
+        | 
       119 wires
       496 wire bits
        21 public wires
@@ -867,7 +867,7 @@ Found and reported 0 problems.
 === nearcore_stub_baseline ===
 
         +----------Local Count, excluding submodules.
-        |
+        | 
         6 wires
        68 wire bits
         6 public wires
@@ -880,7 +880,7 @@ Found and reported 0 problems.
 === $paramod\baseline_core_stub_with_prefetch_interface\ADDR_W=s32'00000000000000000000000000110000 ===
 
         +----------Local Count, excluding submodules.
-        |
+        | 
        66 wires
       287 wire bits
         8 public wires
@@ -900,7 +900,7 @@ Found and reported 0 problems.
 === $paramod\baseline_prefetch_unit\ADDR_W=s32'00000000000000000000000000110000 ===
 
         +----------Local Count, excluding submodules.
-        |
+        | 
        47 wires
       141 wire bits
         7 public wires
@@ -917,13 +917,13 @@ Found and reported 0 problems.
 === design hierarchy ===
 
         +----------Count including submodules.
-        |
+        | 
       254 nearcore_stub_baseline
       171 $paramod\baseline_core_stub_with_prefetch_interface\ADDR_W=s32'00000000000000000000000000110000
        83   $paramod\baseline_prefetch_unit\ADDR_W=s32'00000000000000000000000000110000
 
         +----------Count including submodules.
-        |
+        | 
       119 wires
       496 wire bits
        21 public wires

@@ -1,4 +1,4 @@
-﻿$ {USER_HOME}\tools\oss-cad-suite\bin\yosys.EXE -p read_verilog -sv research/copper_prefetch_unit_open.sv; read_verilog -sv research/rtl/integration/copper_near_core_stub.sv; chparam -set ENTRIES 8 -set QUEUE_DEPTH 4 nearcore_stub_plus_copper; synth_ecp5 -top nearcore_stub_plus_copper -json {USER_HOME}/AppData/Local/Temp/copper_mapped_ecp5_p3_nr2rr/nearcore_stub_plus_copper.json; stat
+$ {USER_HOME}\tools\oss-cad-suite\bin\yosys.exe -p read_verilog -sv research/copper_prefetch_unit_open.sv; read_verilog -sv research/rtl/integration/copper_near_core_stub.sv; chparam -set ENTRIES 8 -set QUEUE_DEPTH 4 nearcore_stub_plus_copper; synth_ecp5 -top nearcore_stub_plus_copper -json {USER_HOME}/AppData/Local/Temp/copper_mapped_ecp5_cu6t57c5/nearcore_stub_plus_copper.json; stat
 
  /----------------------------------------------------------------------------\
  |  yosys -- Yosys Open SYnthesis Suite                                       |
@@ -7,7 +7,7 @@
  \----------------------------------------------------------------------------/
  Yosys 0.66+154 (git sha1 23aadd92a, Release, GNU /usr/bin/x86_64-w64-mingw32-g++ 13.2.1)
 
--- Running command `read_verilog -sv research/copper_prefetch_unit_open.sv; read_verilog -sv research/rtl/integration/copper_near_core_stub.sv; chparam -set ENTRIES 8 -set QUEUE_DEPTH 4 nearcore_stub_plus_copper; synth_ecp5 -top nearcore_stub_plus_copper -json {USER_HOME}/AppData/Local/Temp/copper_mapped_ecp5_p3_nr2rr/nearcore_stub_plus_copper.json; stat' --
+-- Running command `read_verilog -sv research/copper_prefetch_unit_open.sv; read_verilog -sv research/rtl/integration/copper_near_core_stub.sv; chparam -set ENTRIES 8 -set QUEUE_DEPTH 4 nearcore_stub_plus_copper; synth_ecp5 -top nearcore_stub_plus_copper -json {USER_HOME}/AppData/Local/Temp/copper_mapped_ecp5_cu6t57c5/nearcore_stub_plus_copper.json; stat' --
 
 1. Executing Verilog-2005 frontend: research/copper_prefetch_unit_open.sv
 Parsing SystemVerilog input from `research/copper_prefetch_unit_open.sv' to AST representation.
@@ -1593,40 +1593,40 @@ Extracted 1926 AND gates and 6638 wires from module `nearcore_stub_plus_copper' 
 4.45.17.5. Executing ABC9.
 Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
 ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
-ABC: + read_lut <abc-temp-dir>/input.lut
-ABC: + read_box <abc-temp-dir>/input.box
-ABC: + &read <abc-temp-dir>/input.xaig
-ABC: + &ps
+ABC: + read_lut <abc-temp-dir>/input.lut 
+ABC: + read_box <abc-temp-dir>/input.box 
+ABC: + &read <abc-temp-dir>/input.xaig 
+ABC: + &ps 
 ABC: <abc-temp-dir>/input : i/o =    605/    224  and =    1916  lev =   17 (   0.08)  mem = 0.07 MB  box = 639  bb = 602
-ABC: + &scorr
+ABC: + &scorr 
 ABC: Warning: The network is combinational.
-ABC: + &sweep
-ABC: + &dc2
-ABC: + &dch -f -r
-ABC: + &ps
+ABC: + &sweep 
+ABC: + &dc2 
+ABC: + &dch -f -r 
+ABC: + &ps 
 ABC: <abc-temp-dir>/input : i/o =    605/    224  and =    3747  lev =   15 (   0.07)  mem = 0.09 MB  ch =  145  box = 639  bb = 602
 ABC: cst =       0  cls =    140  lit =     145  unused =    4780  proof =     0
-ABC: + &if -W 300 -v
+ABC: + &if -W 300 -v 
 ABC: K = 7. Memory (bytes): Truth =    0. Cut =   76. Obj =  156. Set =  780. CutMin = no
 ABC: Node =    3747.  Ch =   140.  Total mem =    1.12 MB. Peak cut mem =    0.62 MB.
 ABC: P:  Del = 3854.00.  Ar =    3615.0.  Edge =     5018.  Cut =    33241.  T =     0.00 sec
 ABC: P:  Del = 3802.00.  Ar =    3680.0.  Edge =     5018.  Cut =    32950.  T =     0.00 sec
 ABC: P:  Del = 3802.00.  Ar =    1943.0.  Edge =     4863.  Cut =    46030.  T =     0.01 sec
 ABC: F:  Del = 3798.00.  Ar =    1536.0.  Edge =     5016.  Cut =    37556.  T =     0.00 sec
-ABC: A:  Del = 3798.00.  Ar =    1522.0.  Edge =     4868.  Cut =    33374.  T =     0.00 sec
-ABC: A:  Del = 3798.00.  Ar =    1521.0.  Edge =     4861.  Cut =    33539.  T =     0.02 sec
+ABC: A:  Del = 3798.00.  Ar =    1522.0.  Edge =     4868.  Cut =    33374.  T =     0.01 sec
+ABC: A:  Del = 3798.00.  Ar =    1521.0.  Edge =     4861.  Cut =    33539.  T =     0.01 sec
 ABC: Total time =     0.03 sec
-ABC: + &write -n <abc-temp-dir>/output.aig
-ABC: + &mfs
-ABC: + &ps -l
+ABC: + &write -n <abc-temp-dir>/output.aig 
+ABC: + &mfs 
+ABC: + &ps -l 
 ABC: <abc-temp-dir>/input : i/o =    605/    224  and =    2498  lev =   19 (   0.08)  mem = 0.08 MB  box = 639  bb = 602
 ABC: Mapping (K=7)  :  lut =    707  edge =    2596  lev =    8 (0.04)  levB =   22  mem = 0.04 MB
 ABC: LUT = 707 : 2=135 19.1 %  3=68 9.6 %  4=426 60.3 %  5=61 8.6 %  6=6 0.8 %  7=11 1.6 %  Ave = 3.67
-ABC: + &write -n <abc-temp-dir>/output.aig
-ABC: + &verify
+ABC: + &write -n <abc-temp-dir>/output.aig 
+ABC: + &verify 
 ABC: Networks are equivalent.  Time =     0.05 sec
-ABC: + time
-ABC: elapse: 1.21 seconds, total: 1.21 seconds
+ABC: + time 
+ABC: elapse: 1.23 seconds, total: 1.23 seconds
 
 4.45.17.6. Executing AIGER frontend.
 <suppressed ~1668 debug messages>
@@ -2006,7 +2006,7 @@ Removed 0 unused modules.
 === nearcore_stub_plus_copper ===
 
         +----------Local Count, excluding submodules.
-        |
+        | 
       923 wires
      3092 wire bits
       923 public wires
@@ -2025,11 +2025,11 @@ Removed 0 unused modules.
 === design hierarchy ===
 
         +----------Count including submodules.
-        |
+        | 
         2 nearcore_stub_plus_copper
 
         +----------Count including submodules.
-        |
+        | 
       923 wires
      3092 wire bits
       923 public wires
@@ -2059,7 +2059,7 @@ Found and reported 0 problems.
 === nearcore_stub_plus_copper ===
 
         +----------Local Count, excluding submodules.
-        |
+        | 
       923 wires
      3092 wire bits
       923 public wires
@@ -2075,11 +2075,11 @@ Found and reported 0 problems.
       602   TRELLIS_FF
 
 Warnings: 3 unique messages, 6 total
-End of script. Logfile hash: 1bfb45698b
+End of script. Logfile hash: eb94ac5a76
 Yosys 0.66+154 (git sha1 23aadd92a, Release, GNU /usr/bin/x86_64-w64-mingw32-g++ 13.2.1)
 Time spent: 1% 28x opt_expr (0 sec), 1% 25x opt_clean (0 sec), ...
 
-$ {USER_HOME}\tools\oss-cad-suite\bin\nextpnr-ecp5.EXE --85k --package CABGA381 --speed 6 --freq 50 --lpf-allow-unconstrained --json {USER_HOME}\AppData\Local\Temp\copper_mapped_ecp5_p3_nr2rr\nearcore_stub_plus_copper.json --textcfg {USER_HOME}\AppData\Local\Temp\copper_mapped_ecp5_p3_nr2rr\nearcore_stub_plus_copper.config
+$ {USER_HOME}\tools\oss-cad-suite\bin\nextpnr-ecp5.exe --85k --package CABGA381 --speed 6 --freq 50 --lpf-allow-unconstrained --json {USER_HOME}\AppData\Local\Temp\copper_mapped_ecp5_cu6t57c5\nearcore_stub_plus_copper.json --textcfg {USER_HOME}\AppData\Local\Temp\copper_mapped_ecp5_cu6t57c5\nearcore_stub_plus_copper.config
 
 
 Info: Logic utilisation before packing:
@@ -2145,23 +2145,23 @@ Info:     at iteration #2, type ALL: wirelen solved = 2439, spread = 7246, legal
 Info:     at iteration #3, type ALL: wirelen solved = 2678, spread = 7135, legal = 7338; time = 0.02s
 Info:     at iteration #4, type ALL: wirelen solved = 2852, spread = 7067, legal = 7253; time = 0.02s
 Info:     at iteration #5, type ALL: wirelen solved = 2967, spread = 7094, legal = 7226; time = 0.02s
-Info:     at iteration #6, type ALL: wirelen solved = 3487, spread = 7051, legal = 7154; time = 0.01s
+Info:     at iteration #6, type ALL: wirelen solved = 3487, spread = 7051, legal = 7154; time = 0.02s
 Info:     at iteration #7, type ALL: wirelen solved = 3610, spread = 7034, legal = 7131; time = 0.02s
 Info:     at iteration #8, type ALL: wirelen solved = 3765, spread = 6715, legal = 6822; time = 0.02s
-Info:     at iteration #9, type ALL: wirelen solved = 3877, spread = 6547, legal = 6730; time = 0.02s
+Info:     at iteration #9, type ALL: wirelen solved = 3877, spread = 6547, legal = 6730; time = 0.01s
 Info:     at iteration #10, type ALL: wirelen solved = 4172, spread = 6612, legal = 6672; time = 0.01s
 Info:     at iteration #11, type ALL: wirelen solved = 4277, spread = 6622, legal = 6780; time = 0.01s
 Info:     at iteration #12, type ALL: wirelen solved = 4491, spread = 6379, legal = 6494; time = 0.01s
-Info:     at iteration #13, type ALL: wirelen solved = 4457, spread = 6154, legal = 6568; time = 0.02s
+Info:     at iteration #13, type ALL: wirelen solved = 4457, spread = 6154, legal = 6568; time = 0.01s
 Info:     at iteration #14, type ALL: wirelen solved = 4435, spread = 6138, legal = 6358; time = 0.01s
-Info:     at iteration #15, type ALL: wirelen solved = 4595, spread = 6274, legal = 6391; time = 0.02s
+Info:     at iteration #15, type ALL: wirelen solved = 4595, spread = 6274, legal = 6391; time = 0.01s
 Info:     at iteration #16, type ALL: wirelen solved = 4762, spread = 6273, legal = 6605; time = 0.01s
 Info:     at iteration #17, type ALL: wirelen solved = 4697, spread = 6330, legal = 6462; time = 0.01s
 Info:     at iteration #18, type ALL: wirelen solved = 4977, spread = 6360, legal = 6540; time = 0.01s
-Info:     at iteration #19, type ALL: wirelen solved = 4886, spread = 6093, legal = 6281; time = 0.02s
+Info:     at iteration #19, type ALL: wirelen solved = 4886, spread = 6093, legal = 6281; time = 0.01s
 Info:     at iteration #20, type ALL: wirelen solved = 4784, spread = 5961, legal = 6135; time = 0.01s
 Info:     at iteration #21, type ALL: wirelen solved = 4903, spread = 5951, legal = 6104; time = 0.01s
-Info: HeAP Placer Time: 0.52s
+Info: HeAP Placer Time: 0.51s
 Info:   of which solving equations: 0.25s
 Info:   of which spreading cells: 0.07s
 Info:   of which strict legalisation: 0.01s
@@ -2172,8 +2172,8 @@ Info:   at iteration #5: temp = 0.000000, timing cost = 512, wirelen = 5056
 Info:   at iteration #10: temp = 0.000000, timing cost = 473, wirelen = 4893
 Info:   at iteration #15: temp = 0.000000, timing cost = 438, wirelen = 4750
 Info:   at iteration #20: temp = 0.000000, timing cost = 555, wirelen = 4692
-Info:   at iteration #21: temp = 0.000000, timing cost = 552, wirelen = 4676
-Info: SA placement time 0.60s
+Info:   at iteration #21: temp = 0.000000, timing cost = 552, wirelen = 4676 
+Info: SA placement time 0.62s
 
 Info: Max frequency for clock '$glbnet$clk$TRELLIS_IO_IN': 60.65 MHz (PASS at 50.00 MHz)
 
@@ -2185,23 +2185,23 @@ Info: Slack histogram:
 Info:  legend: * represents 6 endpoint(s)
 Info:          + represents [1,6) endpoint(s)
 Info: [  3512,   4299) |+
-Info: [  4299,   5086) |
-Info: [  5086,   5873) |
-Info: [  5873,   6660) |
-Info: [  6660,   7447) |
-Info: [  7447,   8234) |
+Info: [  4299,   5086) | 
+Info: [  5086,   5873) | 
+Info: [  5873,   6660) | 
+Info: [  6660,   7447) | 
+Info: [  7447,   8234) | 
 Info: [  8234,   9021) |*+
 Info: [  9021,   9808) |+
-Info: [  9808,  10595) |
-Info: [ 10595,  11382) |
-Info: [ 11382,  12169) |
-Info: [ 12169,  12956) |
-Info: [ 12956,  13743) |
-Info: [ 13743,  14530) |
-Info: [ 14530,  15317) |
+Info: [  9808,  10595) | 
+Info: [ 10595,  11382) | 
+Info: [ 11382,  12169) | 
+Info: [ 12169,  12956) | 
+Info: [ 12956,  13743) | 
+Info: [ 13743,  14530) | 
+Info: [ 14530,  15317) | 
 Info: [ 15317,  16104) |****************+
 Info: [ 16104,  16891) |*************************+
-Info: [ 16891,  17678) |************************************************************
+Info: [ 16891,  17678) |************************************************************ 
 Info: [ 17678,  18465) |**************************************************+
 Info: [ 18465,  19252) |**************+
 Info: Checksum: 0x0241f524
@@ -2213,19 +2213,19 @@ Info: Setting up routing queue.
 Info: Routing 4519 arcs.
 Info:            |   (re-)routed arcs  |   delta    | remaining|       time spent     |
 Info:    IterCnt |  w/ripup   wo/ripup |  w/r  wo/r |      arcs| batch(sec) total(sec)|
-Info:       1000 |      465        534 |  465   534 |      4150|       0.17       0.17|
-Info:       2000 |      914       1085 |  449   551 |      3811|       0.15       0.32|
-Info:       3000 |     1448       1551 |  534   466 |      3582|       0.18       0.50|
-Info:       4000 |     1972       2027 |  524   476 |      3182|       0.14       0.64|
-Info:       5000 |     2465       2503 |  493   476 |      2803|       0.14       0.78|
-Info:       6000 |     3091       2869 |  626   366 |      2495|       0.14       0.92|
-Info:       7000 |     3735       3220 |  644   351 |      2166|       0.14       1.06|
-Info:       8000 |     4230       3722 |  495   502 |      1727|       0.15       1.21|
-Info:       9000 |     4582       4364 |  352   642 |      1126|       0.34       1.55|
-Info:      10000 |     4909       4989 |  327   625 |       547|       0.43       1.99|
-Info:      10689 |     5016       5513 |  107   524 |         0|       0.43       2.42|
+Info:       1000 |      465        534 |  465   534 |      4150|       0.20       0.20|
+Info:       2000 |      914       1085 |  449   551 |      3811|       0.15       0.35|
+Info:       3000 |     1448       1551 |  534   466 |      3582|       0.18       0.52|
+Info:       4000 |     1972       2027 |  524   476 |      3182|       0.14       0.66|
+Info:       5000 |     2465       2503 |  493   476 |      2803|       0.14       0.80|
+Info:       6000 |     3091       2869 |  626   366 |      2495|       0.14       0.95|
+Info:       7000 |     3735       3220 |  644   351 |      2166|       0.15       1.10|
+Info:       8000 |     4230       3722 |  495   502 |      1727|       0.15       1.25|
+Info:       9000 |     4582       4364 |  352   642 |      1126|       0.35       1.60|
+Info:      10000 |     4909       4989 |  327   625 |       547|       0.50       2.11|
+Info:      10689 |     5016       5513 |  107   524 |         0|       0.45       2.55|
 Info: Routing complete.
-Info: Router1 time 2.42s
+Info: Router1 time 2.55s
 Info: Checksum: 0xbb8f9545
 
 Info: Critical path report for clock '$glbnet$clk$TRELLIS_IO_IN' (posedge -> posedge):
@@ -2366,24 +2366,24 @@ Info: Slack histogram:
 Info:  legend: * represents 5 endpoint(s)
 Info:          + represents [1,5) endpoint(s)
 Info: [  7195,   7788) |+
-Info: [  7788,   8381) |
-Info: [  8381,   8974) |
+Info: [  7788,   8381) | 
+Info: [  8381,   8974) | 
 Info: [  8974,   9567) |+
 Info: [  9567,  10160) |+
 Info: [ 10160,  10753) |+
-Info: [ 10753,  11346) |
-Info: [ 11346,  11939) |
-Info: [ 11939,  12532) |
-Info: [ 12532,  13125) |
-Info: [ 13125,  13718) |
-Info: [ 13718,  14311) |
-Info: [ 14311,  14904) |
+Info: [ 10753,  11346) | 
+Info: [ 11346,  11939) | 
+Info: [ 11939,  12532) | 
+Info: [ 12532,  13125) | 
+Info: [ 13125,  13718) | 
+Info: [ 13718,  14311) | 
+Info: [ 14311,  14904) | 
 Info: [ 14904,  15497) |+
 Info: [ 15497,  16090) |***+
 Info: [ 16090,  16683) |*****************+
 Info: [ 16683,  17276) |******************************************************+
 Info: [ 17276,  17869) |*********************************************+
-Info: [ 17869,  18462) |************************************************************
+Info: [ 17869,  18462) |************************************************************ 
 Info: [ 18462,  19055) |*******************+
 
 Info: Program finished normally.

@@ -1,0 +1,1 @@
+BLOCKED: ASIC Liberty power requires OpenSTA `sta` or OpenROAD on PATH. No standard-cell power is inferred.

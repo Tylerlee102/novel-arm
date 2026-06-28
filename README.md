@@ -51,20 +51,24 @@ cache hit/miss latency, memory latency, prefetch lateness, queue drops, and
 demand/prefetch traffic accounting. The final evidence pass adds a deterministic
 `core_integrated` validation harness, explicit `gem5_*` BLOCKED rows when gem5
 is not runnable, source-built C workload evidence via `make workloads`, a
-source-backed `independent_sim` trace/event simulator, imported selected gem5
-ARM-system Patricia rows when checksum/return-code validation passes,
+source-backed `independent_sim` trace/event simulator, imported gem5
+ARM full-system summary rows when checksum/return-code validation passes,
 near-core-stub and PicoRV32 core-wrapper synthesis flows, a strict
 `mapped_ppa.csv` place-and-route ledger, `proxy_assumed_memory_energy` rows,
-Vivado `report_power` rows when Vivado is available, and a McPAT
+optional Nangate45 ASIC-Liberty tool-power rows when OpenSTA/OpenROAD is
+available, Vivado `report_power` rows when Vivado is available, and a McPAT
 activity-proxy index when the local McPAT sensitivity output is present. These
 are scoped evidence levels: `independent_sim` is not gem5, `core_integrated` is
-not gem5, selected gem5 Patricia rows are not a complete gem5 workload matrix,
+not gem5, imported gem5 summary rows are not a clone-local rerun of every raw
+full-system simulation,
 the near-core stub is not a full CPU, the PicoRV32 wrapper is not the target
 full-core/ARM integration, generic Yosys is not mapped timing, and Vivado
 `report_power` is tool-estimated FPGA power rather than silicon or ASIC signoff
-power. `mapped_ppa.csv` may be cited for timing only when it has matched PASS
+power. ASIC-Liberty rows, when present, are standard-cell tool estimates rather
+than post-route signoff or silicon measurements. `mapped_ppa.csv` may be cited for timing only when it has matched PASS
 rows from nextpnr, Vivado, or OpenROAD and real timing fields are not `NA`.
-Vivado and broader gem5 campaign reruns remain optional external-tool paths.
+Vivado, OpenSTA/OpenROAD, and broader gem5 campaign reruns remain optional
+external-tool paths.
 The strongest current hardware claim is PicoRV32 core-wrapper mapped FPGA PPA
 plus scoped FPGA tool-estimated power when those rows are present; it is not a
 full-core, ASIC, silicon, or top-tier architecture-readiness claim.
@@ -107,7 +111,7 @@ pointer-chase, and COPPER baseline rows with accuracy, coverage, lateness,
 queue-drop, traffic, ablation, sensitivity, and seed/input-stability CSVs at
 model, deterministic cycle-model, and deterministic core-integrated levels.
 The independent simulator rows add a separate source-backed trace/event path,
-and selected gem5 rows add imported MiBench Patricia ARM-system evidence. The
+and gem5 rows add validated imported ARM full-system summary evidence. The
 remaining blocker for a top-tier/full-core architecture claim is real mapped
-full-core evidence plus silicon/ASIC signoff power; missing PPA tools must stay
-BLOCKED rather than being replaced by generic resource counts.
+full-core evidence plus silicon/signoff-grade power; missing PPA or ASIC-power
+tools must stay BLOCKED rather than being replaced by generic resource counts.

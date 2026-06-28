@@ -41,6 +41,29 @@ def current_environment() -> str:
 ENVIRONMENT = current_environment()
 
 
+def tool_path(name: str) -> str | None:
+    found = shutil.which(name)
+    if found:
+        return found
+    candidates: list[Path] = []
+    oss_roots = [
+        os.environ.get("COPPER_OSS_CAD_SUITE", ""),
+        "C:/Users/tyboy/tools/oss-cad-suite",
+        str(ROOT / "tools" / "oss-cad-suite"),
+        str(ROOT / ".tools" / "oss-cad-suite" / "oss-cad-suite"),
+    ]
+    names = [name]
+    if platform.system().lower().startswith("win") and not name.endswith(".exe"):
+        names.append(f"{name}.exe")
+    for root in oss_roots:
+        if root:
+            candidates.extend(Path(root) / "bin" / candidate for candidate in names)
+    for candidate in candidates:
+        if candidate.exists():
+            return str(candidate)
+    return None
+
+
 @dataclass(frozen=True)
 class Design:
     name: str
@@ -79,10 +102,28 @@ def command_text(design: Design, tail: str) -> str:
     return f"read_verilog -sv {design.source}; {param_cmd}{tail}"
 
 
+def command_env(command: list[str]) -> dict[str, str]:
+    env = os.environ.copy()
+    extra_paths = []
+    for item in command:
+        try:
+            path = Path(item)
+        except (TypeError, ValueError):
+            continue
+        if path.exists() and path.parent:
+            extra_paths.append(str(path.parent))
+            if path.parent.name == "bin" and (path.parent.parent / "lib").exists():
+                extra_paths.append(str(path.parent.parent / "lib"))
+    if extra_paths:
+        env["PATH"] = os.pathsep.join(extra_paths + [env.get("PATH", "")])
+    return env
+
+
 def run_capture(command: list[str], timeout: int) -> tuple[int, str]:
     proc = subprocess.run(
         command,
         cwd=ROOT,
+        env=command_env(command),
         text=True,
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
@@ -146,7 +187,7 @@ def blank_row(design: Design, target: str, flow: str, status: str, report_path: 
 def run_yosys_generic(design: Design) -> dict[str, str]:
     LOG_DIR.mkdir(parents=True, exist_ok=True)
     log_path = LOG_DIR / f"yosys_generic_{design.name}.log"
-    yosys = shutil.which("yosys")
+    yosys = tool_path("yosys")
     if not yosys:
         write_log(log_path, "yosys not found on PATH\n")
         return blank_row(
@@ -186,8 +227,8 @@ def run_yosys_generic(design: Design) -> dict[str, str]:
 
 def run_nextpnr_ice40(design: Design) -> dict[str, str]:
     log_path = LOG_DIR / f"nextpnr_ice40_{design.name}.log"
-    yosys = shutil.which("yosys")
-    nextpnr = shutil.which("nextpnr-ice40")
+    yosys = tool_path("yosys")
+    nextpnr = tool_path("nextpnr-ice40")
     if not yosys or not nextpnr:
         missing = "yosys" if not yosys else "nextpnr-ice40"
         write_log(log_path, f"{missing} not found on PATH\n")
@@ -251,8 +292,8 @@ def run_nextpnr_ice40(design: Design) -> dict[str, str]:
 
 def run_nextpnr_ecp5(design: Design) -> dict[str, str]:
     log_path = LOG_DIR / f"nextpnr_ecp5_{design.name}.log"
-    yosys = shutil.which("yosys")
-    nextpnr = shutil.which("nextpnr-ecp5")
+    yosys = tool_path("yosys")
+    nextpnr = tool_path("nextpnr-ecp5")
     if not yosys or not nextpnr:
         missing = "yosys" if not yosys else "nextpnr-ecp5"
         write_log(log_path, f"{missing} not found on PATH\n")

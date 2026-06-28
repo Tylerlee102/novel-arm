@@ -1,4 +1,4 @@
-﻿$ {USER_HOME}\tools\oss-cad-suite\bin\yosys.EXE -p read_verilog -sv research/baseline_prefetch_unit.sv; read_verilog -sv research/rtl/integration/copper_near_core_stub.sv; synth_ecp5 -top nearcore_stub_baseline -json {USER_HOME}/AppData/Local/Temp/copper_mapped_ecp5_q1q2ydry/nearcore_stub_baseline.json; stat
+$ {USER_HOME}\tools\oss-cad-suite\bin\yosys.exe -p read_verilog -sv research/baseline_prefetch_unit.sv; read_verilog -sv research/rtl/integration/copper_near_core_stub.sv; synth_ecp5 -top nearcore_stub_baseline -json {USER_HOME}/AppData/Local/Temp/copper_mapped_ecp5_yfuroe29/nearcore_stub_baseline.json; stat
 
  /----------------------------------------------------------------------------\
  |  yosys -- Yosys Open SYnthesis Suite                                       |
@@ -7,7 +7,7 @@
  \----------------------------------------------------------------------------/
  Yosys 0.66+154 (git sha1 23aadd92a, Release, GNU /usr/bin/x86_64-w64-mingw32-g++ 13.2.1)
 
--- Running command `read_verilog -sv research/baseline_prefetch_unit.sv; read_verilog -sv research/rtl/integration/copper_near_core_stub.sv; synth_ecp5 -top nearcore_stub_baseline -json {USER_HOME}/AppData/Local/Temp/copper_mapped_ecp5_q1q2ydry/nearcore_stub_baseline.json; stat' --
+-- Running command `read_verilog -sv research/baseline_prefetch_unit.sv; read_verilog -sv research/rtl/integration/copper_near_core_stub.sv; synth_ecp5 -top nearcore_stub_baseline -json {USER_HOME}/AppData/Local/Temp/copper_mapped_ecp5_yfuroe29/nearcore_stub_baseline.json; stat' --
 
 1. Executing Verilog-2005 frontend: research/baseline_prefetch_unit.sv
 Parsing SystemVerilog input from `research/baseline_prefetch_unit.sv' to AST representation.
@@ -1165,20 +1165,20 @@ Extracted 1 AND gates and 234 wires from module `nearcore_stub_baseline' to a ne
 3.45.16.5. Executing ABC9.
 Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
 ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
-ABC: + read_lut <abc-temp-dir>/input.lut
-ABC: + read_box <abc-temp-dir>/input.box
-ABC: + &read <abc-temp-dir>/input.xaig
-ABC: + &ps
+ABC: + read_lut <abc-temp-dir>/input.lut 
+ABC: + read_box <abc-temp-dir>/input.box 
+ABC: + &read <abc-temp-dir>/input.xaig 
+ABC: + &ps 
 ABC: <abc-temp-dir>/input : i/o =     62/    125  and =       1  lev =    1 (   0.00)  mem = 0.01 MB  box = 88  bb = 59
-ABC: + &scorr
+ABC: + &scorr 
 ABC: Warning: The network is combinational.
-ABC: + &sweep
-ABC: + &dc2
-ABC: + &dch -f -r
-ABC: + &ps
+ABC: + &sweep 
+ABC: + &dc2 
+ABC: + &dch -f -r 
+ABC: + &ps 
 ABC: <abc-temp-dir>/input : i/o =     62/    125  and =       1  lev =    1 (   0.00)  mem = 0.01 MB  ch =    0  box = 88  bb = 59
 ABC: cst =       0  cls =      0  lit =       0  unused =     209  proof =     0
-ABC: + &if -W 300 -v
+ABC: + &if -W 300 -v 
 ABC: K = 7. Memory (bytes): Truth =    0. Cut =   76. Obj =  156. Set =  780. CutMin = no
 ABC: Node =       1.  Ch =     0.  Total mem =    0.12 MB. Peak cut mem =    0.00 MB.
 ABC: P:  Del = 1606.00.  Ar =       1.0.  Edge =        2.  Cut =        1.  T =     0.00 sec
@@ -1188,17 +1188,17 @@ ABC: F:  Del = 1606.00.  Ar =       1.0.  Edge =        2.  Cut =        1.  T =
 ABC: A:  Del = 1606.00.  Ar =       1.0.  Edge =        2.  Cut =        1.  T =     0.00 sec
 ABC: A:  Del = 1606.00.  Ar =       1.0.  Edge =        2.  Cut =        1.  T =     0.00 sec
 ABC: Total time =     0.00 sec
-ABC: + &write -n <abc-temp-dir>/output.aig
-ABC: + &mfs
+ABC: + &write -n <abc-temp-dir>/output.aig 
+ABC: + &mfs 
 ABC: The network is not changed by "&mfs".
-ABC: + &ps -l
+ABC: + &ps -l 
 ABC: <abc-temp-dir>/input : i/o =     62/    125  and =       1  lev =    1 (   0.00)  mem = 0.01 MB  box = 88  bb = 59
 ABC: Mapping (K=2)  :  lut =      1  edge =       2  lev =    1 (0.00)  levB =   22  mem = 0.00 MB
 ABC: LUT = 1 : 2=1 100.0 %  Ave = 2.00
-ABC: + &write -n <abc-temp-dir>/output.aig
-ABC: + &verify
-ABC: Networks are equivalent.  Time =     0.02 sec
-ABC: + time
+ABC: + &write -n <abc-temp-dir>/output.aig 
+ABC: + &verify 
+ABC: Networks are equivalent.  Time =     0.01 sec
+ABC: + time 
 ABC: elapse: 0.02 seconds, total: 0.02 seconds
 
 3.45.16.6. Executing AIGER frontend.
@@ -1334,7 +1334,7 @@ Removed 0 unused modules.
 === nearcore_stub_baseline ===
 
         +----------Local Count, excluding submodules.
-        |
+        | 
        54 wires
       334 wire bits
        54 public wires
@@ -1351,11 +1351,11 @@ Removed 0 unused modules.
 === design hierarchy ===
 
         +----------Count including submodules.
-        |
+        | 
         2 nearcore_stub_baseline
 
         +----------Count including submodules.
-        |
+        | 
        54 wires
       334 wire bits
        54 public wires
@@ -1383,7 +1383,7 @@ Found and reported 0 problems.
 === nearcore_stub_baseline ===
 
         +----------Local Count, excluding submodules.
-        |
+        | 
        54 wires
       334 wire bits
        54 public wires
@@ -1396,11 +1396,11 @@ Found and reported 0 problems.
         4   LUT4
        59   TRELLIS_FF
 
-End of script. Logfile hash: b844ce9397
+End of script. Logfile hash: 0a52b47f4d
 Yosys 0.66+154 (git sha1 23aadd92a, Release, GNU /usr/bin/x86_64-w64-mingw32-g++ 13.2.1)
 Time spent: 1% 23x read_verilog (0 sec), 1% 21x opt_expr (0 sec), ...
 
-$ {USER_HOME}\tools\oss-cad-suite\bin\nextpnr-ecp5.EXE --85k --package CABGA381 --speed 6 --freq 50 --lpf-allow-unconstrained --json {USER_HOME}\AppData\Local\Temp\copper_mapped_ecp5_q1q2ydry\nearcore_stub_baseline.json --textcfg {USER_HOME}\AppData\Local\Temp\copper_mapped_ecp5_q1q2ydry\nearcore_stub_baseline.config
+$ {USER_HOME}\tools\oss-cad-suite\bin\nextpnr-ecp5.exe --85k --package CABGA381 --speed 6 --freq 50 --lpf-allow-unconstrained --json {USER_HOME}\AppData\Local\Temp\copper_mapped_ecp5_yfuroe29\nearcore_stub_baseline.json --textcfg {USER_HOME}\AppData\Local\Temp\copper_mapped_ecp5_yfuroe29\nearcore_stub_baseline.config
 
 
 Info: Logic utilisation before packing:
@@ -1462,7 +1462,7 @@ Info:     at initial placer iter 2, wirelen = 5170
 Info:     at initial placer iter 3, wirelen = 5141
 Info: Running main analytical placer, max placement attempts per cell = 10000.
 Info:     at iteration #1, type TRELLIS_COMB: wirelen solved = 5114, spread = 5115, legal = 5115; time = 0.02s
-Info: HeAP Placer Time: 0.06s
+Info: HeAP Placer Time: 0.07s
 Info:   of which solving equations: 0.00s
 Info:   of which spreading cells: 0.00s
 Info:   of which strict legalisation: 0.00s
@@ -1472,7 +1472,7 @@ Info:   at iteration #1: temp = 0.000000, timing cost = 2, wirelen = 5115
 Info:   at iteration #5: temp = 0.000000, timing cost = 1, wirelen = 4003
 Info:   at iteration #10: temp = 0.000000, timing cost = 1, wirelen = 3975
 Info:   at iteration #15: temp = 0.000000, timing cost = 1, wirelen = 3716
-Info:   at iteration #17: temp = 0.000000, timing cost = 1, wirelen = 3696
+Info:   at iteration #17: temp = 0.000000, timing cost = 1, wirelen = 3696 
 Info: SA placement time 0.03s
 
 Info: Max frequency for clock '$glbnet$clk$TRELLIS_IO_IN': 291.12 MHz (PASS at 50.00 MHz)
@@ -1484,26 +1484,26 @@ Info: Max delay posedge $glbnet$clk$TRELLIS_IO_IN -> <async>                    
 Info: Slack histogram:
 Info:  legend: * represents 1 endpoint(s)
 Info:          + represents [1,1) endpoint(s)
-Info: [ 16565,  16699) |****
-Info: [ 16699,  16833) |****
-Info: [ 16833,  16967) |****
-Info: [ 16967,  17101) |****
-Info: [ 17101,  17235) |***
-Info: [ 17235,  17369) |****
-Info: [ 17369,  17503) |*****
-Info: [ 17503,  17637) |********
-Info: [ 17637,  17771) |******
-Info: [ 17771,  17905) |********
-Info: [ 17905,  18039) |******
-Info: [ 18039,  18173) |
-Info: [ 18173,  18307) |
-Info: [ 18307,  18441) |
-Info: [ 18441,  18575) |
-Info: [ 18575,  18709) |
-Info: [ 18709,  18843) |
-Info: [ 18843,  18977) |
-Info: [ 18977,  19111) |
-Info: [ 19111,  19245) |**
+Info: [ 16565,  16699) |**** 
+Info: [ 16699,  16833) |**** 
+Info: [ 16833,  16967) |**** 
+Info: [ 16967,  17101) |**** 
+Info: [ 17101,  17235) |*** 
+Info: [ 17235,  17369) |**** 
+Info: [ 17369,  17503) |***** 
+Info: [ 17503,  17637) |******** 
+Info: [ 17637,  17771) |****** 
+Info: [ 17771,  17905) |******** 
+Info: [ 17905,  18039) |****** 
+Info: [ 18039,  18173) | 
+Info: [ 18173,  18307) | 
+Info: [ 18307,  18441) | 
+Info: [ 18441,  18575) | 
+Info: [ 18575,  18709) | 
+Info: [ 18709,  18843) | 
+Info: [ 18843,  18977) | 
+Info: [ 18977,  19111) | 
+Info: [ 19111,  19245) |** 
 Info: Checksum: 0x893fad6e
 Info: Routing globals...
 Info:     routing clock net $glbnet$clk$TRELLIS_IO_IN using global 0
@@ -1513,9 +1513,9 @@ Info: Setting up routing queue.
 Info: Routing 286 arcs.
 Info:            |   (re-)routed arcs  |   delta    | remaining|       time spent     |
 Info:    IterCnt |  w/ripup   wo/ripup |  w/r  wo/r |      arcs| batch(sec) total(sec)|
-Info:        286 |        0        253 |    0   253 |         0|       0.13       0.13|
+Info:        286 |        0        253 |    0   253 |         0|       0.14       0.14|
 Info: Routing complete.
-Info: Router1 time 0.13s
+Info: Router1 time 0.14s
 Info: Checksum: 0xc411d738
 
 Info: Critical path report for clock '$glbnet$clk$TRELLIS_IO_IN' (posedge -> posedge):
@@ -1979,25 +1979,25 @@ Info: Max delay posedge $glbnet$clk$TRELLIS_IO_IN -> <async>                    
 Info: Slack histogram:
 Info:  legend: * represents 1 endpoint(s)
 Info:          + represents [1,1) endpoint(s)
-Info: [ 16194,  16329) |****
-Info: [ 16329,  16464) |***
-Info: [ 16464,  16599) |*****
-Info: [ 16599,  16734) |***
-Info: [ 16734,  16869) |*****
-Info: [ 16869,  17004) |**
-Info: [ 17004,  17139) |******
-Info: [ 17139,  17274) |******
-Info: [ 17274,  17409) |**********
-Info: [ 17409,  17544) |******
-Info: [ 17544,  17679) |******
-Info: [ 17679,  17814) |
-Info: [ 17814,  17949) |
-Info: [ 17949,  18084) |
-Info: [ 18084,  18219) |
-Info: [ 18219,  18354) |
-Info: [ 18354,  18489) |
-Info: [ 18489,  18624) |
-Info: [ 18624,  18759) |
-Info: [ 18759,  18894) |**
+Info: [ 16194,  16329) |**** 
+Info: [ 16329,  16464) |*** 
+Info: [ 16464,  16599) |***** 
+Info: [ 16599,  16734) |*** 
+Info: [ 16734,  16869) |***** 
+Info: [ 16869,  17004) |** 
+Info: [ 17004,  17139) |****** 
+Info: [ 17139,  17274) |****** 
+Info: [ 17274,  17409) |********** 
+Info: [ 17409,  17544) |****** 
+Info: [ 17544,  17679) |****** 
+Info: [ 17679,  17814) | 
+Info: [ 17814,  17949) | 
+Info: [ 17949,  18084) | 
+Info: [ 18084,  18219) | 
+Info: [ 18219,  18354) | 
+Info: [ 18354,  18489) | 
+Info: [ 18489,  18624) | 
+Info: [ 18624,  18759) | 
+Info: [ 18759,  18894) |** 
 
 Info: Program finished normally.

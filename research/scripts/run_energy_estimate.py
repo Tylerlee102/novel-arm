@@ -22,6 +22,7 @@ OUT = RESULTS / "energy_proxy.csv"
 SUMMARY = RESULTS / "energy_summary.csv"
 POWER_INDEX = RESULTS / "power_report_index.csv"
 MAPPED_PPA = RESULTS / "mapped_ppa.csv"
+ASIC_POWER = RESULTS / "asic_power.csv"
 MCPAT_CSV = RESULTS / "copper_mcpat_sensitivity_20260618.csv"
 MCPAT_MD = RESULTS / "COPPER_MCPAT_SENSITIVITY_20260618.md"
 
@@ -110,6 +111,46 @@ def fpga_tool_power_evidence() -> dict[str, str] | None:
     }
 
 
+def asic_liberty_power_evidence() -> dict[str, str] | None:
+    rows = [
+        row
+        for row in read_csv(ASIC_POWER)
+        if row.get("status") == "PASS"
+        and row.get("scope") == "core_wrapper"
+        and positive_float(row.get("total_power_mw", ""))
+        and row.get("report_path")
+        and (ROOT / row.get("report_path", "")).exists()
+    ]
+    if not rows:
+        return None
+
+    def priority(row: dict[str, str]) -> tuple[int, str]:
+        design = row.get("design", "")
+        if design == "core_wrapper_plus_copper":
+            return (0, design)
+        if design == "baseline_core_wrapper":
+            return (1, design)
+        return (2, design)
+
+    rows.sort(key=priority)
+    first = rows[0]
+    designs = "; ".join(
+        f"{row.get('design', '')} total_power_mw={row.get('total_power_mw', '')}"
+        for row in rows[:4]
+    )
+    return {
+        "source": rel(ASIC_POWER),
+        "report_path": first.get("report_path", ""),
+        "tool": first.get("flow", ""),
+        "environment": first.get("environment", "current"),
+        "notes": (
+            f"ASIC standard-cell Liberty tool estimate rows found: {designs}. "
+            "This is a Nangate45 Liberty estimate from a tool report, not silicon measurement, "
+            "not post-route signoff with extracted parasitics, and not full-core power."
+        ),
+    }
+
+
 def mcpat_activity_evidence() -> dict[str, str] | None:
     rows = read_csv(MCPAT_CSV)
     ok_rows = [
@@ -137,12 +178,27 @@ def mcpat_activity_evidence() -> dict[str, str] | None:
 
 
 def write_power_index(proxy_status: str) -> None:
+    asic_power = asic_liberty_power_evidence()
     fpga_power = fpga_tool_power_evidence()
     mcpat = mcpat_activity_evidence()
     write_csv(
         POWER_INDEX,
         ["evidence_level", "status", "source", "report_path", "tool", "environment", "notes"],
         [
+            {
+                "evidence_level": "asic_liberty_tool_estimate",
+                "status": "PASS" if asic_power else "BLOCKED",
+                "source": asic_power["source"] if asic_power else rel(ASIC_POWER),
+                "report_path": asic_power["report_path"] if asic_power else "",
+                "tool": asic_power["tool"] if asic_power else "",
+                "environment": asic_power["environment"] if asic_power else "current",
+                "notes": asic_power["notes"]
+                if asic_power
+                else (
+                    "No OpenSTA/OpenROAD ASIC Liberty tool-power PASS row was found. "
+                    "Do not claim ASIC, signoff, silicon, or full-core power."
+                ),
+            },
             {
                 "evidence_level": "fpga_tool_estimate",
                 "status": "PASS" if fpga_power else "BLOCKED",

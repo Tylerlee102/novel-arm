@@ -1,1 +1,3 @@
-BLOCKED: iCE40 mapped PPA requires yosys on PATH.
+$ {USER_HOME}\tools\oss-cad-suite\bin\yosys.exe -p read_verilog -sv research/copper_prefetch_unit_open.sv; read_verilog -sv research/rtl/integration/copper_near_core_stub.sv; chparam -set ENTRIES 8 -set QUEUE_DEPTH 4 nearcore_stub_plus_copper; synth_ice40 -top nearcore_stub_plus_copper -json {USER_HOME}/AppData/Local/Temp/copper_mapped_ice40_fmb87j8r/nearcore_stub_plus_copper.json; stat
+
+nextpnr-ice40 skipped because Yosys iCE40 mapping failed

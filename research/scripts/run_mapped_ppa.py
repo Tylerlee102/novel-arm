@@ -144,6 +144,29 @@ def current_environment() -> str:
 ENVIRONMENT = current_environment()
 
 
+def tool_path(name: str) -> str | None:
+    found = shutil.which(name)
+    if found:
+        return found
+    candidates: list[Path] = []
+    oss_roots = [
+        os.environ.get("COPPER_OSS_CAD_SUITE", ""),
+        "C:/Users/tyboy/tools/oss-cad-suite",
+        str(ROOT / "tools" / "oss-cad-suite"),
+        str(ROOT / ".tools" / "oss-cad-suite" / "oss-cad-suite"),
+    ]
+    names = [name]
+    if platform.system().lower().startswith("win") and not name.endswith(".exe"):
+        names.append(f"{name}.exe")
+    for root in oss_roots:
+        if root:
+            candidates.extend(Path(root) / "bin" / candidate for candidate in names)
+    for candidate in candidates:
+        if candidate.exists():
+            return str(candidate)
+    return None
+
+
 def rel(path: Path) -> str:
     return str(path.relative_to(ROOT)).replace("\\", "/")
 
@@ -167,11 +190,29 @@ def write_csv(path: Path, fields: list[str], rows: list[dict[str, str]]) -> None
         writer.writerows([{field: row.get(field, "") for field in fields} for row in rows])
 
 
+def command_env(command: list[str]) -> dict[str, str]:
+    env = os.environ.copy()
+    extra_paths = []
+    for item in command:
+        try:
+            path = Path(item)
+        except (TypeError, ValueError):
+            continue
+        if path.exists() and path.parent:
+            extra_paths.append(str(path.parent))
+            if path.parent.name == "bin" and (path.parent.parent / "lib").exists():
+                extra_paths.append(str(path.parent.parent / "lib"))
+    if extra_paths:
+        env["PATH"] = os.pathsep.join(extra_paths + [env.get("PATH", "")])
+    return env
+
+
 def run_capture(command: list[str], timeout: int) -> tuple[int, str]:
     try:
         proc = subprocess.run(
             command,
             cwd=ROOT,
+            env=command_env(command),
             text=True,
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
@@ -330,8 +371,8 @@ def value_or_na(value: str) -> str:
 
 def nextpnr_ecp5(design: Design) -> dict[str, str]:
     log_path = LOG_DIR / f"ecp5_{design.name}.log"
-    yosys = shutil.which("yosys")
-    nextpnr = shutil.which("nextpnr-ecp5")
+    yosys = tool_path("yosys")
+    nextpnr = tool_path("nextpnr-ecp5")
     if not yosys or not nextpnr:
         missing = "yosys" if not yosys else "nextpnr-ecp5"
         note = f"BLOCKED: ECP5 mapped PPA requires {missing} on PATH."
@@ -376,8 +417,8 @@ def nextpnr_ecp5(design: Design) -> dict[str, str]:
 
 def nextpnr_ice40(design: Design) -> dict[str, str]:
     log_path = LOG_DIR / f"ice40_{design.name}.log"
-    yosys = shutil.which("yosys")
-    nextpnr = shutil.which("nextpnr-ice40")
+    yosys = tool_path("yosys")
+    nextpnr = tool_path("nextpnr-ice40")
     if not yosys or not nextpnr:
         missing = "yosys" if not yosys else "nextpnr-ice40"
         note = f"BLOCKED: iCE40 mapped PPA requires {missing} on PATH."
@@ -528,7 +569,7 @@ def vivado_impl(design: Design) -> dict[str, str]:
 
 def openroad_blocked_rows() -> list[dict[str, str]]:
     log_path = OPENROAD_LOG_DIR / "openroad_availability.log"
-    openroad = shutil.which("openroad")
+    openroad = tool_path("openroad")
     platform_dir = os.environ.get("COPPER_OPENROAD_PLATFORM", "").strip()
     if not openroad:
         note = "BLOCKED: OpenROAD unavailable on PATH."
@@ -582,9 +623,9 @@ def run_open_source_fpga() -> list[dict[str, str]]:
     if not matched_pass(rows, "ecp5-85k", "yosys+nextpnr-ecp5", "near_core_stub"):
         rows.extend(nextpnr_ice40(design) for design in (NEARCORE_BASELINE, NEARCORE_COPPER))
     if not any(matched_pass(rows, target, flow, "near_core_stub") for target, flow in (("ecp5-85k", "yosys+nextpnr-ecp5"), ("ice40-hx8k", "yosys+nextpnr-ice40"))):
-        if shutil.which("yosys") and shutil.which("nextpnr-ecp5"):
+        if tool_path("yosys") and tool_path("nextpnr-ecp5"):
             rows.extend(nextpnr_ecp5(design) for design in (UNIT_BASELINE, UNIT_COPPER))
-        elif shutil.which("yosys") and shutil.which("nextpnr-ice40"):
+        elif tool_path("yosys") and tool_path("nextpnr-ice40"):
             rows.extend(nextpnr_ice40(design) for design in (UNIT_BASELINE, UNIT_COPPER))
         else:
             log_path = LOG_DIR / "unit_fallback.log"

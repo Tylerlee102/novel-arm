@@ -1,4 +1,4 @@
-﻿$ {USER_HOME}\tools\oss-cad-suite\bin\yosys.EXE -p read_verilog -sv research/copper_prefetch_unit_open.sv; read_verilog -sv research/rtl/integration/copper_near_core_stub.sv; chparam -set ENTRIES 8 -set QUEUE_DEPTH 4 nearcore_stub_plus_copper; synth -top nearcore_stub_plus_copper; stat
+$ {USER_HOME}\tools\oss-cad-suite\bin\yosys.exe -p read_verilog -sv research/copper_prefetch_unit_open.sv; read_verilog -sv research/rtl/integration/copper_near_core_stub.sv; chparam -set ENTRIES 8 -set QUEUE_DEPTH 4 nearcore_stub_plus_copper; synth -top nearcore_stub_plus_copper; stat
 
  /----------------------------------------------------------------------------\
  |  yosys -- Yosys Open SYnthesis Suite                                       |
@@ -1140,22 +1140,22 @@ Removed 90 unused cells and 500 unused wires.
 Extracted 191 gates and 265 wires to a netlist network with 74 inputs and 74 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
-ABC: + read_blif <abc-temp-dir>/input.blif
-ABC: + read_library <abc-temp-dir>/stdcells.genlib
-ABC: + strash
-ABC: + &get -n
-ABC: + &fraig -x
-ABC: + &put
-ABC: + scorr
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
 ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2
-ABC: + dretime
-ABC: + strash
-ABC: + &get -n
-ABC: + &dch -f
-ABC: + &nf
-ABC: + &put
-ABC: + write_blif <abc-temp-dir>/output.blif
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
 
 4.22.1.2. Re-integrating ABC results.
 ABC RESULTS:               AND cells:       65
@@ -1174,22 +1174,22 @@ Removing temp directory.
 Extracted 1126 gates and 1724 wires to a netlist network with 598 inputs and 22 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
-ABC: + read_blif <abc-temp-dir>/input.blif
-ABC: + read_library <abc-temp-dir>/stdcells.genlib
-ABC: + strash
-ABC: + &get -n
-ABC: + &fraig -x
-ABC: + &put
-ABC: + scorr
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
 ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2
-ABC: + dretime
-ABC: + strash
-ABC: + &get -n
-ABC: + &dch -f
-ABC: + &nf
-ABC: + &put
-ABC: + write_blif <abc-temp-dir>/output.blif
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
 
 4.22.2.2. Re-integrating ABC results.
 ABC RESULTS:               AND cells:      939
@@ -1263,7 +1263,7 @@ Removed 0 unused modules.
 === $paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\core_stub_plus_copper ===
 
         +----------Local Count, excluding submodules.
-        |
+        | 
        90 wires
       366 wire bits
        16 public wires
@@ -1283,7 +1283,7 @@ Removed 0 unused modules.
 === $paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open ===
 
         +----------Local Count, excluding submodules.
-        |
+        | 
      1937 wires
      2572 wire bits
        45 public wires
@@ -1305,7 +1305,7 @@ Removed 0 unused modules.
 === nearcore_stub_plus_copper ===
 
         +----------Local Count, excluding submodules.
-        |
+        | 
         6 wires
        28 wire bits
         6 public wires
@@ -1318,13 +1318,13 @@ Removed 0 unused modules.
 === design hierarchy ===
 
         +----------Count including submodules.
-        |
+        | 
      2694 nearcore_stub_plus_copper
       267 $paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\core_stub_plus_copper
      2427   $paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open
 
         +----------Count including submodules.
-        |
+        | 
      2033 wires
      2966 wire bits
        67 public wires
@@ -1360,7 +1360,7 @@ Found and reported 0 problems.
 === $paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\core_stub_plus_copper ===
 
         +----------Local Count, excluding submodules.
-        |
+        | 
        90 wires
       366 wire bits
        16 public wires
@@ -1380,7 +1380,7 @@ Found and reported 0 problems.
 === $paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open ===
 
         +----------Local Count, excluding submodules.
-        |
+        | 
      1937 wires
      2572 wire bits
        45 public wires
@@ -1402,7 +1402,7 @@ Found and reported 0 problems.
 === nearcore_stub_plus_copper ===
 
         +----------Local Count, excluding submodules.
-        |
+        | 
         6 wires
        28 wire bits
         6 public wires
@@ -1415,13 +1415,13 @@ Found and reported 0 problems.
 === design hierarchy ===
 
         +----------Count including submodules.
-        |
+        | 
      2694 nearcore_stub_plus_copper
       267 $paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\core_stub_plus_copper
      2427   $paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open
 
         +----------Count including submodules.
-        |
+        | 
      2033 wires
      2966 wire bits
        67 public wires

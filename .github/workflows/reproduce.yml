@@ -72,7 +72,10 @@ jobs:
           path: |
             research/results/mapped_ppa.csv
             research/results/mapped_ppa_overhead.csv
+            research/results/asic_power.csv
+            research/results/asic_power_overhead.csv
             research/results/power_report_index.csv
+            research/results/logs/asic_power/**
             research/results/logs/mapped_ppa/**
             research/results/logs/openroad/**
             research/results/logs/vivado/**

@@ -1,4 +1,4 @@
-﻿$ {USER_HOME}\tools\oss-cad-suite\bin\yosys.EXE -p read_verilog -sv external/picorv32/picorv32.v; read_verilog -sv research/baseline_prefetch_unit.sv; read_verilog -sv research/copper_prefetch_unit_open.sv; read_verilog -sv research/rtl/fullcore/picorv32_copper_wrapper.sv; synth_ecp5 -top core_wrapper_plus_baseline_prefetch -json {USER_HOME}/AppData/Local/Temp/copper_mapped_ecp5_rethbtpe/core_wrapper_plus_baseline_prefetch.json; stat
+$ {USER_HOME}\tools\oss-cad-suite\bin\yosys.exe -p read_verilog -sv external/picorv32/picorv32.v; read_verilog -sv research/baseline_prefetch_unit.sv; read_verilog -sv research/copper_prefetch_unit_open.sv; read_verilog -sv research/rtl/fullcore/picorv32_copper_wrapper.sv; synth_ecp5 -top core_wrapper_plus_baseline_prefetch -json {USER_HOME}/AppData/Local/Temp/copper_mapped_ecp5_6avxikl1/core_wrapper_plus_baseline_prefetch.json; stat
 
  /----------------------------------------------------------------------------\
  |  yosys -- Yosys Open SYnthesis Suite                                       |
@@ -7,7 +7,7 @@
  \----------------------------------------------------------------------------/
  Yosys 0.66+154 (git sha1 23aadd92a, Release, GNU /usr/bin/x86_64-w64-mingw32-g++ 13.2.1)
 
--- Running command `read_verilog -sv external/picorv32/picorv32.v; read_verilog -sv research/baseline_prefetch_unit.sv; read_verilog -sv research/copper_prefetch_unit_open.sv; read_verilog -sv research/rtl/fullcore/picorv32_copper_wrapper.sv; synth_ecp5 -top core_wrapper_plus_baseline_prefetch -json {USER_HOME}/AppData/Local/Temp/copper_mapped_ecp5_rethbtpe/core_wrapper_plus_baseline_prefetch.json; stat' --
+-- Running command `read_verilog -sv external/picorv32/picorv32.v; read_verilog -sv research/baseline_prefetch_unit.sv; read_verilog -sv research/copper_prefetch_unit_open.sv; read_verilog -sv research/rtl/fullcore/picorv32_copper_wrapper.sv; synth_ecp5 -top core_wrapper_plus_baseline_prefetch -json {USER_HOME}/AppData/Local/Temp/copper_mapped_ecp5_6avxikl1/core_wrapper_plus_baseline_prefetch.json; stat' --
 
 1. Executing Verilog-2005 frontend: external/picorv32/picorv32.v
 Parsing SystemVerilog input from `external/picorv32/picorv32.v' to AST representation.
@@ -3568,20 +3568,20 @@ Extracted 611 AND gates and 1823 wires from module `core_wrapper_plus_baseline_p
 5.45.15.5. Executing ABC9.
 Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
 ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
-ABC: + read_lut <abc-temp-dir>/input.lut
-ABC: + read_box <abc-temp-dir>/input.box
-ABC: + &read <abc-temp-dir>/input.xaig
-ABC: + &ps
+ABC: + read_lut <abc-temp-dir>/input.lut 
+ABC: + read_box <abc-temp-dir>/input.box 
+ABC: + &read <abc-temp-dir>/input.xaig 
+ABC: + &ps 
 ABC: <abc-temp-dir>/input : i/o =     94/    140  and =     519  lev =   16 (   1.46)  mem = 0.02 MB  box = 31  bb = 0
-ABC: + &scorr
+ABC: + &scorr 
 ABC: Warning: The network is combinational.
-ABC: + &sweep
-ABC: + &dc2
-ABC: + &dch -f -r
-ABC: + &ps
+ABC: + &sweep 
+ABC: + &dc2 
+ABC: + &dch -f -r 
+ABC: + &ps 
 ABC: <abc-temp-dir>/input : i/o =     94/    140  and =     533  lev =    8 (   1.25)  mem = 0.02 MB  ch =   75  box = 29  bb = 0
 ABC: cst =       0  cls =     74  lit =      75  unused =     565  proof =     0
-ABC: + &if -W 300 -v
+ABC: + &if -W 300 -v 
 ABC: K = 7. Memory (bytes): Truth =    0. Cut =   76. Obj =  156. Set =  780. CutMin = no
 ABC: Node =     533.  Ch =    74.  Total mem =    0.18 MB. Peak cut mem =    0.03 MB.
 ABC: P:  Del = 2762.00.  Ar =     506.0.  Edge =      635.  Cut =     4496.  T =     0.00 sec
@@ -3591,17 +3591,17 @@ ABC: F:  Del = 2762.00.  Ar =     223.0.  Edge =      524.  Cut =     7080.  T =
 ABC: A:  Del = 2762.00.  Ar =     223.0.  Edge =      486.  Cut =     5943.  T =     0.00 sec
 ABC: A:  Del = 2762.00.  Ar =     223.0.  Edge =      486.  Cut =     5100.  T =     0.00 sec
 ABC: Total time =     0.00 sec
-ABC: + &write -n <abc-temp-dir>/output.aig
-ABC: + &mfs
+ABC: + &write -n <abc-temp-dir>/output.aig 
+ABC: + &mfs 
 ABC: The network is not changed by "&mfs".
-ABC: + &ps -l
+ABC: + &ps -l 
 ABC: <abc-temp-dir>/input : i/o =     94/    140  and =     457  lev =    8 (   1.25)  mem = 0.02 MB  box = 29  bb = 0
 ABC: Mapping (K=7)  :  lut =    149  edge =     486  lev =    5 (0.68)  levB =   16  mem = 0.01 MB
 ABC: LUT = 149 : 2=62 41.6 %  3=32 21.5 %  4=25 16.8 %  5=20 13.4 %  6=4 2.7 %  7=6 4.0 %  Ave = 3.26
-ABC: + &write -n <abc-temp-dir>/output.aig
-ABC: + &verify
+ABC: + &write -n <abc-temp-dir>/output.aig 
+ABC: + &verify 
 ABC: Networks are equivalent.  Time =     0.01 sec
-ABC: + time
+ABC: + time 
 ABC: elapse: 0.04 seconds, total: 0.04 seconds
 
 5.45.15.6. Executing AIGER frontend.
@@ -3859,7 +3859,7 @@ Removed 0 unused modules.
 === core_wrapper_plus_baseline_prefetch ===
 
         +----------Local Count, excluding submodules.
-        |
+        | 
       458 wires
      2316 wire bits
       458 public wires
@@ -3878,11 +3878,11 @@ Removed 0 unused modules.
 === design hierarchy ===
 
         +----------Count including submodules.
-        |
+        | 
         4 core_wrapper_plus_baseline_prefetch
 
         +----------Count including submodules.
-        |
+        | 
       458 wires
      2316 wire bits
       458 public wires
@@ -3912,7 +3912,7 @@ Found and reported 0 problems.
 === core_wrapper_plus_baseline_prefetch ===
 
         +----------Local Count, excluding submodules.
-        |
+        | 
       458 wires
      2316 wire bits
       458 public wires
@@ -3928,11 +3928,11 @@ Found and reported 0 problems.
        90   TRELLIS_FF
 
 Warnings: 3 unique messages, 3 total
-End of script. Logfile hash: afb9f9d508
+End of script. Logfile hash: b2b81a9872
 Yosys 0.66+154 (git sha1 23aadd92a, Release, GNU /usr/bin/x86_64-w64-mingw32-g++ 13.2.1)
 Time spent: 1% 39x opt_expr (0 sec), 1% 37x opt_clean (0 sec), ...
 
-$ {USER_HOME}\tools\oss-cad-suite\bin\nextpnr-ecp5.EXE --85k --package CABGA381 --speed 6 --freq 50 --lpf-allow-unconstrained --json {USER_HOME}\AppData\Local\Temp\copper_mapped_ecp5_rethbtpe\core_wrapper_plus_baseline_prefetch.json --textcfg {USER_HOME}\AppData\Local\Temp\copper_mapped_ecp5_rethbtpe\core_wrapper_plus_baseline_prefetch.config
+$ {USER_HOME}\tools\oss-cad-suite\bin\nextpnr-ecp5.exe --85k --package CABGA381 --speed 6 --freq 50 --lpf-allow-unconstrained --json {USER_HOME}\AppData\Local\Temp\copper_mapped_ecp5_6avxikl1\core_wrapper_plus_baseline_prefetch.json --textcfg {USER_HOME}\AppData\Local\Temp\copper_mapped_ecp5_6avxikl1\core_wrapper_plus_baseline_prefetch.config
 
 
 Info: Logic utilisation before packing:
@@ -4004,7 +4004,7 @@ Info:   at iteration #1: temp = 0.000000, timing cost = 43, wirelen = 3996
 Info:   at iteration #5: temp = 0.000000, timing cost = 21, wirelen = 2939
 Info:   at iteration #10: temp = 0.000000, timing cost = 20, wirelen = 2817
 Info:   at iteration #15: temp = 0.000000, timing cost = 30, wirelen = 2786
-Info:   at iteration #15: temp = 0.000000, timing cost = 30, wirelen = 2788
+Info:   at iteration #15: temp = 0.000000, timing cost = 30, wirelen = 2788 
 Info: SA placement time 0.16s
 
 Info: Max frequency for clock '$glbnet$clk$TRELLIS_IO_IN': 189.65 MHz (PASS at 50.00 MHz)
@@ -4016,26 +4016,26 @@ Info: Max delay posedge $glbnet$clk$TRELLIS_IO_IN -> <async>                    
 Info: Slack histogram:
 Info:  legend: * represents 1 endpoint(s)
 Info:          + represents [1,1) endpoint(s)
-Info: [ 14727,  14953) |*****
-Info: [ 14953,  15179) |******
-Info: [ 15179,  15405) |******
-Info: [ 15405,  15631) |***********
-Info: [ 15631,  15857) |****************
-Info: [ 15857,  16083) |****
-Info: [ 16083,  16309) |****
-Info: [ 16309,  16535) |*****
-Info: [ 16535,  16761) |**************
-Info: [ 16761,  16987) |****************************
-Info: [ 16987,  17213) |****************
-Info: [ 17213,  17439) |*************
-Info: [ 17439,  17665) |**********
-Info: [ 17665,  17891) |********
-Info: [ 17891,  18117) |******
-Info: [ 18117,  18343) |***************
-Info: [ 18343,  18569) |
-Info: [ 18569,  18795) |*
-Info: [ 18795,  19021) |
-Info: [ 19021,  19247) |**
+Info: [ 14727,  14953) |***** 
+Info: [ 14953,  15179) |****** 
+Info: [ 15179,  15405) |****** 
+Info: [ 15405,  15631) |*********** 
+Info: [ 15631,  15857) |**************** 
+Info: [ 15857,  16083) |**** 
+Info: [ 16083,  16309) |**** 
+Info: [ 16309,  16535) |***** 
+Info: [ 16535,  16761) |************** 
+Info: [ 16761,  16987) |**************************** 
+Info: [ 16987,  17213) |**************** 
+Info: [ 17213,  17439) |************* 
+Info: [ 17439,  17665) |********** 
+Info: [ 17665,  17891) |******** 
+Info: [ 17891,  18117) |****** 
+Info: [ 18117,  18343) |*************** 
+Info: [ 18343,  18569) | 
+Info: [ 18569,  18795) |* 
+Info: [ 18795,  19021) | 
+Info: [ 19021,  19247) |** 
 Info: Checksum: 0x896f60c0
 Info: Routing globals...
 Info:     routing clock net $glbnet$clk$TRELLIS_IO_IN using global 0
@@ -4045,10 +4045,10 @@ Info: Setting up routing queue.
 Info: Routing 1061 arcs.
 Info:            |   (re-)routed arcs  |   delta    | remaining|       time spent     |
 Info:    IterCnt |  w/ripup   wo/ripup |  w/r  wo/r |      arcs| batch(sec) total(sec)|
-Info:       1000 |      116        818 |  116   818 |       181|       0.12       0.12|
-Info:       1193 |      126        980 |   10   162 |         0|       0.02       0.14|
+Info:       1000 |      116        818 |  116   818 |       181|       0.13       0.13|
+Info:       1193 |      126        980 |   10   162 |         0|       0.03       0.16|
 Info: Routing complete.
-Info: Router1 time 0.14s
+Info: Router1 time 0.16s
 Info: Checksum: 0x68533788
 
 Info: Critical path report for clock '$glbnet$clk$TRELLIS_IO_IN' (posedge -> posedge):
@@ -4198,25 +4198,25 @@ Info: Max delay posedge $glbnet$clk$TRELLIS_IO_IN -> <async>                    
 Info: Slack histogram:
 Info:  legend: * represents 1 endpoint(s)
 Info:          + represents [1,1) endpoint(s)
-Info: [ 14146,  14383) |*
-Info: [ 14383,  14620) |******
-Info: [ 14620,  14857) |**
-Info: [ 14857,  15094) |**
-Info: [ 15094,  15331) |*****
-Info: [ 15331,  15568) |**
-Info: [ 15568,  15805) |**************
-Info: [ 15805,  16042) |***********
-Info: [ 16042,  16279) |**********
-Info: [ 16279,  16516) |*******
-Info: [ 16516,  16753) |**********
-Info: [ 16753,  16990) |******************
-Info: [ 16990,  17227) |*****************************************
-Info: [ 17227,  17464) |**********
-Info: [ 17464,  17701) |******
-Info: [ 17701,  17938) |*************
-Info: [ 17938,  18175) |******
-Info: [ 18175,  18412) |***
-Info: [ 18412,  18649) |*
-Info: [ 18649,  18886) |**
+Info: [ 14146,  14383) |* 
+Info: [ 14383,  14620) |****** 
+Info: [ 14620,  14857) |** 
+Info: [ 14857,  15094) |** 
+Info: [ 15094,  15331) |***** 
+Info: [ 15331,  15568) |** 
+Info: [ 15568,  15805) |************** 
+Info: [ 15805,  16042) |*********** 
+Info: [ 16042,  16279) |********** 
+Info: [ 16279,  16516) |******* 
+Info: [ 16516,  16753) |********** 
+Info: [ 16753,  16990) |****************** 
+Info: [ 16990,  17227) |***************************************** 
+Info: [ 17227,  17464) |********** 
+Info: [ 17464,  17701) |****** 
+Info: [ 17701,  17938) |************* 
+Info: [ 17938,  18175) |****** 
+Info: [ 18175,  18412) |*** 
+Info: [ 18412,  18649) |* 
+Info: [ 18649,  18886) |** 
 
 Info: Program finished normally.

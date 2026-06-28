@@ -1,4 +1,4 @@
-﻿$ {USER_HOME}\tools\oss-cad-suite\bin\yosys.EXE -p read_verilog -sv external/picorv32/picorv32.v; read_verilog -sv research/baseline_prefetch_unit.sv; read_verilog -sv research/copper_prefetch_unit_open.sv; read_verilog -sv research/rtl/fullcore/picorv32_copper_wrapper.sv; chparam -set ENTRIES 8 -set QUEUE_DEPTH 4 core_wrapper_plus_copper; synth -top core_wrapper_plus_copper; stat
+$ {USER_HOME}\tools\oss-cad-suite\bin\yosys.exe -p read_verilog -sv external/picorv32/picorv32.v; read_verilog -sv research/baseline_prefetch_unit.sv; read_verilog -sv research/copper_prefetch_unit_open.sv; read_verilog -sv research/rtl/fullcore/picorv32_copper_wrapper.sv; chparam -set ENTRIES 8 -set QUEUE_DEPTH 4 core_wrapper_plus_copper; synth -top core_wrapper_plus_copper; stat
 
  /----------------------------------------------------------------------------\
  |  yosys -- Yosys Open SYnthesis Suite                                       |
@@ -3605,22 +3605,22 @@ Removed 0 unused cells and 3 unused wires.
 Extracted 63 gates and 156 wires to a netlist network with 93 inputs and 51 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
-ABC: + read_blif <abc-temp-dir>/input.blif
-ABC: + read_library <abc-temp-dir>/stdcells.genlib
-ABC: + strash
-ABC: + &get -n
-ABC: + &fraig -x
-ABC: + &put
-ABC: + scorr
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
 ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2
-ABC: + dretime
-ABC: + strash
-ABC: + &get -n
-ABC: + &dch -f
-ABC: + &nf
-ABC: + &put
-ABC: + write_blif <abc-temp-dir>/output.blif
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
 
 6.22.1.2. Re-integrating ABC results.
 ABC RESULTS:               AND cells:        3
@@ -3641,22 +3641,22 @@ Removing temp directory.
 Extracted 1126 gates and 1724 wires to a netlist network with 598 inputs and 22 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
-ABC: + read_blif <abc-temp-dir>/input.blif
-ABC: + read_library <abc-temp-dir>/stdcells.genlib
-ABC: + strash
-ABC: + &get -n
-ABC: + &fraig -x
-ABC: + &put
-ABC: + scorr
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
 ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2
-ABC: + dretime
-ABC: + strash
-ABC: + &get -n
-ABC: + &dch -f
-ABC: + &nf
-ABC: + &put
-ABC: + write_blif <abc-temp-dir>/output.blif
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
 
 6.22.2.2. Re-integrating ABC results.
 ABC RESULTS:               AND cells:      938
@@ -3680,22 +3680,22 @@ Replacing 5 occurrences of constant undef bits with constant zero bits
 Extracted 5859 gates and 7294 wires to a netlist network with 1432 inputs and 491 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
-ABC: + read_blif <abc-temp-dir>/input.blif
-ABC: + read_library <abc-temp-dir>/stdcells.genlib
-ABC: + strash
-ABC: + &get -n
-ABC: + &fraig -x
-ABC: + &put
-ABC: + scorr
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
 ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2
-ABC: + dretime
-ABC: + strash
-ABC: + &get -n
-ABC: + &dch -f
-ABC: + &nf
-ABC: + &put
-ABC: + write_blif <abc-temp-dir>/output.blif
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
 
 6.22.3.2. Re-integrating ABC results.
 ABC RESULTS:               AND cells:     1343
@@ -3727,22 +3727,22 @@ Removing temp directory.
 Extracted 36 gates and 104 wires to a netlist network with 68 inputs and 32 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
-ABC: + read_blif <abc-temp-dir>/input.blif
-ABC: + read_library <abc-temp-dir>/stdcells.genlib
-ABC: + strash
-ABC: + &get -n
-ABC: + &fraig -x
-ABC: + &put
-ABC: + scorr
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
 ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2
-ABC: + dretime
-ABC: + strash
-ABC: + &get -n
-ABC: + &dch -f
-ABC: + &nf
-ABC: + &put
-ABC: + write_blif <abc-temp-dir>/output.blif
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
 
 6.22.5.2. Re-integrating ABC results.
 ABC RESULTS:              XNOR cells:        8
@@ -3892,7 +3892,7 @@ Removed 0 unused modules.
 === core_wrapper_plus_copper ===
 
         +----------Local Count, excluding submodules.
-        |
+        | 
        68 wires
       275 wire bits
        24 public wires
@@ -3914,7 +3914,7 @@ Removed 0 unused modules.
 === $paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open ===
 
         +----------Local Count, excluding submodules.
-        |
+        | 
      1937 wires
      2572 wire bits
        45 public wires
@@ -3936,7 +3936,7 @@ Removed 0 unused modules.
 === $paramod$bf78bd41f2f39252b23b257acdd620f747e8237d\picorv32 ===
 
         +----------Local Count, excluding submodules.
-        |
+        | 
      7066 wires
      9295 wire bits
       181 public wires
@@ -3968,7 +3968,7 @@ Removed 0 unused modules.
 === picorv32_core_shell ===
 
         +----------Local Count, excluding submodules.
-        |
+        | 
        21 wires
       337 wire bits
        21 public wires
@@ -3982,7 +3982,7 @@ Removed 0 unused modules.
 === picorv32_memory_tieoff ===
 
         +----------Local Count, excluding submodules.
-        |
+        | 
        11 wires
       138 wire bits
         7 public wires
@@ -3996,14 +3996,14 @@ Removed 0 unused modules.
 === design hierarchy ===
 
         +----------Count including submodules.
-        |
+        | 
     11055 core_wrapper_plus_copper
      2427 $paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open
      8531   $paramod$bf78bd41f2f39252b23b257acdd620f747e8237d\picorv32
        36   picorv32_memory_tieoff
 
         +----------Count including submodules.
-        |
+        | 
      9103 wires
     12617 wire bits
       278 public wires
@@ -4052,7 +4052,7 @@ Found and reported 0 problems.
 === core_wrapper_plus_copper ===
 
         +----------Local Count, excluding submodules.
-        |
+        | 
        68 wires
       275 wire bits
        24 public wires
@@ -4074,7 +4074,7 @@ Found and reported 0 problems.
 === $paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open ===
 
         +----------Local Count, excluding submodules.
-        |
+        | 
      1937 wires
      2572 wire bits
        45 public wires
@@ -4096,7 +4096,7 @@ Found and reported 0 problems.
 === $paramod$bf78bd41f2f39252b23b257acdd620f747e8237d\picorv32 ===
 
         +----------Local Count, excluding submodules.
-        |
+        | 
      7066 wires
      9295 wire bits
       181 public wires
@@ -4128,7 +4128,7 @@ Found and reported 0 problems.
 === picorv32_core_shell ===
 
         +----------Local Count, excluding submodules.
-        |
+        | 
        21 wires
       337 wire bits
        21 public wires
@@ -4142,7 +4142,7 @@ Found and reported 0 problems.
 === picorv32_memory_tieoff ===
 
         +----------Local Count, excluding submodules.
-        |
+        | 
        11 wires
       138 wire bits
         7 public wires
@@ -4156,14 +4156,14 @@ Found and reported 0 problems.
 === design hierarchy ===
 
         +----------Count including submodules.
-        |
+        | 
     11055 core_wrapper_plus_copper
      2427 $paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open
      8531   $paramod$bf78bd41f2f39252b23b257acdd620f747e8237d\picorv32
        36   picorv32_memory_tieoff
 
         +----------Count including submodules.
-        |
+        | 
      9103 wires
     12617 wire bits
       278 public wires
