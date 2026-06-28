@@ -161,6 +161,22 @@ def pct_reduction(new: int, old: int) -> float:
     return 100.0 * (1.0 - (new / old)) if old else 0.0
 
 
+def optional_int(row: dict[str, str] | None, key: str) -> int | None:
+    if not row or row.get(key, "") == "":
+        return None
+    return int(row[key])
+
+
+def fmt_optional(value: int | None) -> str:
+    return str(value) if value is not None else "not run"
+
+
+def reduction_text(new: int | None, old: int | None) -> str:
+    if new is None or old is None:
+        return "NA (comparison row absent)"
+    return f"{pct_reduction(new, old):.1f}%"
+
+
 def write_outputs(tag: str, rows: list[dict[str, str]]) -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     csv_path = OUT / f"zlib_{tag}_summary.csv"
@@ -172,11 +188,11 @@ def write_outputs(tag: str, rows: list[dict[str, str]]) -> None:
     by = {row["policy"]: row for row in rows}
     checksums = {row["checksum"] for row in rows}
     rcs = {row["rc"] for row in rows}
-    naive_ctlw = int(by.get("naive", {}).get("targetLineWitnessMisses", "0"))
-    copper_ctlw = int(by.get("copper_clpd64k_peb", {}).get("targetLineWitnessMisses", "0"))
-    slack_ctlw = int(by.get("spp_copper_slack", {}).get("targetLineWitnessMisses", "0"))
-    copper_faults = int(by.get("copper_clpd64k_peb", {}).get("fillPrefetchTranslationFault", "0"))
-    naive_faults = int(by.get("naive", {}).get("fillPrefetchTranslationFault", "0"))
+    naive_ctlw = optional_int(by.get("naive"), "targetLineWitnessMisses")
+    copper_ctlw = optional_int(by.get("copper_clpd64k_peb"), "targetLineWitnessMisses")
+    slack_ctlw = optional_int(by.get("spp_copper_slack"), "targetLineWitnessMisses")
+    copper_faults = optional_int(by.get("copper_clpd64k_peb"), "fillPrefetchTranslationFault")
+    naive_faults = optional_int(by.get("naive"), "fillPrefetchTranslationFault")
 
     lines = [
         "# zlib AArch64 Full-System Summary",
@@ -213,9 +229,9 @@ def write_outputs(tag: str, rows: list[dict[str, str]]) -> None:
             "",
             f"- Checksum agreement: {'yes' if len(checksums) == 1 and '' not in checksums else 'no'} ({', '.join(sorted(checksums))}).",
             f"- Return-code agreement: {'yes' if rcs == {'0'} else 'no'} ({', '.join(sorted(rcs))}).",
-            f"- Naive DMP CTLW misses: {naive_ctlw}; COPPER CLPD-64K+PEB CTLW misses: {copper_ctlw}; reduction: {pct_reduction(copper_ctlw, naive_ctlw):.1f}%.",
-            f"- SPP+COPPER slack CTLW misses: {slack_ctlw}; reduction versus naive DMP: {pct_reduction(slack_ctlw, naive_ctlw):.1f}%.",
-            f"- Naive DMP translation faults: {naive_faults}; COPPER CLPD-64K+PEB translation faults: {copper_faults}.",
+            f"- Naive DMP CTLW misses: {fmt_optional(naive_ctlw)}; COPPER CLPD-64K+PEB CTLW misses: {fmt_optional(copper_ctlw)}; reduction: {reduction_text(copper_ctlw, naive_ctlw)}.",
+            f"- SPP+COPPER slack CTLW misses: {fmt_optional(slack_ctlw)}; reduction versus naive DMP: {reduction_text(slack_ctlw, naive_ctlw)}.",
+            f"- Naive DMP translation faults: {fmt_optional(naive_faults)}; COPPER CLPD-64K+PEB translation faults: {fmt_optional(copper_faults)}.",
             "- This is a public compression-library point, not a production server workload.",
             "",
             "status=PASS" if len(checksums) == 1 and "" not in checksums and rcs == {"0"} else "status=CHECKSUM_OR_RC_MISMATCH",

@@ -5,14 +5,48 @@ from __future__ import annotations
 
 import csv
 import re
+from dataclasses import dataclass
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[2]
 RESULTS = ROOT / "research" / "results"
 OUT = RESULTS / "gem5_raw_rerun_manifest.csv"
-SUMMARY = RESULTS / "gem5_arm_ubuntu_fs_cachesvc_app" / "cachesvc_codex_raw_smoke_summary.csv"
-RUN_PREFIX = "gem5_arm_ubuntu_fs_cachesvc_codex_raw_smoke_"
+
+
+@dataclass(frozen=True)
+class RawRerunSpec:
+    tag: str
+    run_prefix: str
+    summary_path: Path
+    terminal_result: str
+    notes: str
+
+
+SPECS = (
+    RawRerunSpec(
+        tag="codex_raw_smoke",
+        run_prefix="gem5_arm_ubuntu_fs_cachesvc_codex_raw_smoke_",
+        summary_path=RESULTS / "gem5_arm_ubuntu_fs_cachesvc_app" / "cachesvc_codex_raw_smoke_summary.csv",
+        terminal_result="CACHESVC_COPPER_RESULT",
+        notes=(
+            "Fresh local raw gem5 ARM full-system cache-service smoke rerun. "
+            "This proves the smoke path is runnable in this local environment; "
+            "it is not a full workload/config matrix or clone-local CI proof."
+        ),
+    ),
+    RawRerunSpec(
+        tag="codex_raw_zlib_tiny",
+        run_prefix="gem5_arm_ubuntu_fs_zlib_codex_raw_zlib_tiny_",
+        summary_path=RESULTS / "gem5_arm_ubuntu_fs_zlib_app" / "zlib_codex_raw_zlib_tiny_summary.csv",
+        terminal_result="ZLIB_COPPER_RESULT",
+        notes=(
+            "Fresh local raw gem5 ARM full-system zlib compression-library rerun. "
+            "This proves another public benchmark family is runnable in this local environment; "
+            "it is not a full workload/config matrix or clone-local CI proof."
+        ),
+    ),
+)
 
 
 FIELDS = [
@@ -54,10 +88,10 @@ def first_match(pattern: str, text: str) -> str:
     return match.group(1).strip() if match else ""
 
 
-def terminal_info(path: Path) -> tuple[str, str]:
+def terminal_info(path: Path, result_token: str) -> tuple[str, str]:
     text = path.read_text(encoding="utf-8", errors="replace") if path.exists() else ""
     result = re.search(
-        r"CACHESVC_COPPER_RESULT\s+(?P<body>.*?)checksum=(?P<checksum>0x[0-9a-fA-F]+)",
+        rf"{re.escape(result_token)}\s+(?P<body>.*?)checksum=(?P<checksum>0x[0-9a-fA-F]+)",
         text,
     )
     checksum = result.group("checksum") if result else ""
@@ -65,18 +99,18 @@ def terminal_info(path: Path) -> tuple[str, str]:
     return checksum, rc
 
 
-def row_for(policy: str, summary_by_policy: dict[str, dict[str, str]]) -> dict[str, str]:
-    run_dir = RESULTS / f"{RUN_PREFIX}{policy}"
+def row_for(spec: RawRerunSpec, policy: str, summary_by_policy: dict[str, dict[str, str]]) -> dict[str, str]:
+    run_dir = RESULTS / f"{spec.run_prefix}{policy}"
     host_stdout = run_dir.with_suffix(".host.out")
     host_stderr = run_dir.with_suffix(".host.err")
     stats = run_dir / "stats.txt"
     terminal = run_dir / "board.terminal"
     host_text = host_stdout.read_text(encoding="utf-8", errors="replace") if host_stdout.exists() else ""
-    checksum, rc = terminal_info(terminal)
+    checksum, rc = terminal_info(terminal, spec.terminal_result)
     summary = summary_by_policy.get(policy, {})
     status = "PASS" if stats.exists() and stats.stat().st_size > 0 and rc == "0" and checksum else "BLOCKED"
     return {
-        "tag": "codex_raw_smoke",
+        "tag": spec.tag,
         "policy": policy,
         "status": status,
         "environment": "local_windows",
@@ -88,24 +122,22 @@ def row_for(policy: str, summary_by_policy: dict[str, dict[str, str]]) -> dict[s
         "terminal_path": rel(terminal) if terminal.exists() else "",
         "host_stdout": rel(host_stdout) if host_stdout.exists() else "",
         "host_stderr": rel(host_stderr) if host_stderr.exists() else "",
-        "summary_path": rel(SUMMARY) if SUMMARY.exists() else "",
+        "summary_path": rel(spec.summary_path) if spec.summary_path.exists() else "",
         "summary_checksum": summary.get("checksum", checksum),
         "rc": summary.get("rc", rc),
         "roi_ticks": summary.get("roi_ticks", ""),
         "instructions": summary.get("insts_not_nop", ""),
         "l1d_demand_misses": summary.get("l1d_demand_misses", ""),
-        "notes": (
-            "Fresh local raw gem5 ARM full-system cache-service smoke rerun. "
-            "This proves the smoke path is runnable in this local environment; "
-            "it is not a full workload/config matrix or clone-local CI proof."
-        ),
+        "notes": spec.notes,
     }
 
 
 def main() -> int:
-    summary_by_policy = {row.get("policy", ""): row for row in read_csv(SUMMARY)}
     policies = ["none", "copper_clpd64k_peb"]
-    rows = [row_for(policy, summary_by_policy) for policy in policies]
+    rows = []
+    for spec in SPECS:
+        summary_by_policy = {row.get("policy", ""): row for row in read_csv(spec.summary_path)}
+        rows.extend(row_for(spec, policy, summary_by_policy) for policy in policies)
     OUT.parent.mkdir(parents=True, exist_ok=True)
     with OUT.open("w", newline="", encoding="utf-8") as fh:
         writer = csv.DictWriter(fh, fieldnames=FIELDS)

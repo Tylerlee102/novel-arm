@@ -320,7 +320,7 @@ research/copper_authority_state_space.py,10586,a75f2c66ebf37f1a07403efc059056842
 research/copper_cavi_authority_issue_gate.sv,9763,8a32c7539e431792fdda0afd022e77d960bb3c6f3a25e31530a7467327a4efaa,yes,research/copper_cavi_authority_issue_gate.sv,included source or reviewer file
 research/copper_cavi_authority_issue_gate_tb.sv,21023,b8ad75546148481154503dbaf2556ce8e63aa585a6c16d273636b702b1022bec,yes,research/copper_cavi_authority_issue_gate_tb.sv,included source or reviewer file
 research/copper_cepf_line_e2e_sva_tb.sv,20115,2c19cbcfa95e29a5e5f1786591944b2e93320c618eab10a8bd26afda898bb3cc,yes,research/copper_cepf_line_e2e_sva_tb.sv,included source or reviewer file
-research/COPPER_CLAIM_LEDGER.md,7344,3c28295b86703bd5f4a6f886837b74882dfcbfc39d741ab484bcbe351671f54c,yes,research/COPPER_CLAIM_LEDGER.md,included source or reviewer file
+research/COPPER_CLAIM_LEDGER.md,7346,dfacf87d617effe808159f4af12afe0d0d3ed75b907c5bb1e99425261d50c03f,yes,research/COPPER_CLAIM_LEDGER.md,included source or reviewer file
 research/copper_clpd_constraints.xdc,44,,no,,suffix not included
 research/copper_clpd_ctlw_authority_e2e_tb.sv,25956,175c323f1c22abc92c62d6f28ff4460cd0d97574de0bf5ae55520923a1f13a3b,yes,research/copper_clpd_ctlw_authority_e2e_tb.sv,included source or reviewer file
 research/copper_clpd_gate.sv,6531,971acb8bbf013fbe1b148624d8b68623c1e1b781c391fde3d25364f1bdba8a30,yes,research/copper_clpd_gate.sv,included source or reviewer file
@@ -360,8 +360,8 @@ research/COPPER_DOCX_QA.md,13190,c0110d089e5afda8beeb592f991e6386135d7f1369f7ef0
 research/COPPER_ENVIRONMENT_ARTIFACT_MANIFEST_20260619.md,5389,,no,,excluded local-only file containing a private absolute path
 research/copper_final_eval.py,13907,1279787e97eca6456355cd43e3c8c7b86fc8959953bde4f8679d1b0d65875550,yes,research/copper_final_eval.py,included source or reviewer file
 research/COPPER_FINAL_OUTPUT.md,105697,77837d2061122ffa81dc01d5a9129071a45b4dee8f868bdf8dc02638289830a4,yes,research/COPPER_FINAL_OUTPUT.md,included source or reviewer file
-research/COPPER_FINAL_REVIEWER_REPORT.md,6815,a14093aa00ea82d4799c3a20e5be855d87b37b7c2f2f3ce863b1cdf888ef1651,yes,research/COPPER_FINAL_REVIEWER_REPORT.md,included source or reviewer file
-research/COPPER_FINAL_SUBMISSION_BLOCKERS.md,2898,e60252ad5263da66ca92889159fc6f57546961dc5a71f909b3df1938aa10dd10,yes,research/COPPER_FINAL_SUBMISSION_BLOCKERS.md,included source or reviewer file
+research/COPPER_FINAL_REVIEWER_REPORT.md,6817,de8578f8ed080d6a738e9359ecf6e67a19f0931ce769379b13e795ce587ef260,yes,research/COPPER_FINAL_REVIEWER_REPORT.md,included source or reviewer file
+research/COPPER_FINAL_SUBMISSION_BLOCKERS.md,2899,3c1416f3f01ae89f55fe67b560643f53fda6f65c6e840c1a602d4d45ad46a055,yes,research/COPPER_FINAL_SUBMISSION_BLOCKERS.md,included source or reviewer file
 research/COPPER_FREE_RUN_RESULTS.md,32147,,no,,excluded local-only file containing a private absolute path
 research/copper_full_authority_constraints.xdc,58,,no,,suffix not included
 research/copper_full_authority_gate.sv,4129,4758407ffa1cd484ee7cb78ae11e3dfcd8851fb8b00ee7383b9d341172b6a945,yes,research/copper_full_authority_gate.sv,included source or reviewer file
@@ -476,8 +476,8 @@ research/results/aarch64_c_kernel_suite_fs.s,15452,,no,,included summary/evidenc
 research/results/aarch64_gapbs_mini_suite_fs.s,24111,,no,,included summary/evidence file
 research/results/aarch64_gapbs_mini_suite_fs_small.s,20597,,no,,included summary/evidence file
 research/results/ablation.csv,11431,5121591a6b88d9308f397ca6444f1d32704bcd3c30b36aee5a0aa0ddf3d01ccd,yes,research/results/ablation.csv,included summary/evidence file
-research/results/artifact_inventory.csv,3693559,0efca8c68f9ef5f62d1c26b19a1d06c2b52846eb7402d699dd381f1e6e18754e,yes,research/results/artifact_inventory.csv,included summary/evidence file
-research/results/artifact_manifest.csv,1742525,d1afd6b9581b14cd7652704e852e78a5a9c8fbe6668dc18513e729fbe979d5b3,yes,research/results/artifact_manifest.csv,included summary/evidence file
+research/results/artifact_inventory.csv,3695218,057cfe070d4ec421b08ce2bbbe84c27fded161bedc447861b9753567411e80c6,yes,research/results/artifact_inventory.csv,included summary/evidence file
+research/results/artifact_manifest.csv,1753754,1db0efa9f188587700c9b30e06e5ec216185ca78e9b7028419b5a7c2b9851be3,yes,research/results/artifact_manifest.csv,included summary/evidence file
 research/results/asic_power/core_wrapper_plus_copper/core_wrapper_plus_copper_nangate45.v,1337348,629c8890e3d747905c83c7945261b954e58646df7af3bcf5e1a08068cf67090e,yes,research/results/asic_power/core_wrapper_plus_copper/core_wrapper_plus_copper_nangate45.v,included summary/evidence file
 research/results/asic_power/core_wrapper_plus_copper/sta_power.tcl,506,,no,,excluded local-only file containing a private absolute path
 research/results/asic_power/nangate45/NangateOpenCellLibrary_typical.lib,6692032,,no,,included summary/evidence file
@@ -9363,10 +9363,36 @@ research/results/gem5_arm_ubuntu_fs_yyjson_app_stress_stride/readfile_-0x431d195
 research/results/gem5_arm_ubuntu_fs_yyjson_app_stress_stride/stats.txt,1127835,,no,,excluded raw gem5 output tree; summaries are included
 research/results/gem5_arm_ubuntu_fs_yyjson_app_stress_stride.host.err,4302,,no,,excluded raw gem5 output tree; summaries are included
 research/results/gem5_arm_ubuntu_fs_yyjson_app_stress_stride.host.out,1097,,no,,excluded raw gem5 output tree; summaries are included
+research/results/gem5_arm_ubuntu_fs_zlib_app/ZLIB_CODEX_RAW_ZLIB_TINY_FS_SUMMARY.md,1558,8357b862dea657a07cf1c634f0527facb97b2323a71e8f03d0e7d56be31fa5ba,yes,research/results/gem5_arm_ubuntu_fs_zlib_app/ZLIB_CODEX_RAW_ZLIB_TINY_FS_SUMMARY.md,included public tracked gem5 summary input/report
+research/results/gem5_arm_ubuntu_fs_zlib_app/zlib_codex_raw_zlib_tiny_summary.csv,625,7de2a5613f24df717da1d4af2bc46989e24b1b917967157ee91b116c8f51c291,yes,research/results/gem5_arm_ubuntu_fs_zlib_app/zlib_codex_raw_zlib_tiny_summary.csv,included public tracked gem5 summary input/report
 research/results/gem5_arm_ubuntu_fs_zlib_app/ZLIB_ZLIB_SEED1_FS_SUMMARY.md,1937,,no,,excluded raw gem5 output tree; summaries are included
 research/results/gem5_arm_ubuntu_fs_zlib_app/zlib_zlib_seed1_summary.csv,1049,d06068673fd6c951e1364e3d1f5c2f6c6816fc348ee9a823dfe3f434dcf769da,yes,research/results/gem5_arm_ubuntu_fs_zlib_app/zlib_zlib_seed1_summary.csv,included public tracked gem5 summary input/report
 research/results/gem5_arm_ubuntu_fs_zlib_app/ZLIB_ZLIB_TINY_FS_SUMMARY.md,1935,64c9f85d601ce2163d111635bbe0931979f39ecfe299daf49521241279ce938e,yes,research/results/gem5_arm_ubuntu_fs_zlib_app/ZLIB_ZLIB_TINY_FS_SUMMARY.md,included public tracked gem5 summary input/report
 research/results/gem5_arm_ubuntu_fs_zlib_app/zlib_zlib_tiny_summary.csv,1048,adb69b1bf13d6a28047788ac09b83b3056887c44423bb59bf16d999934ca9aa4,yes,research/results/gem5_arm_ubuntu_fs_zlib_app/zlib_zlib_tiny_summary.csv,included public tracked gem5 summary input/report
+research/results/gem5_arm_ubuntu_fs_zlib_codex_raw_zlib_tiny_copper_clpd64k_peb/board.realview.uart1.device,0,,no,,excluded raw gem5 output tree; summaries are included
+research/results/gem5_arm_ubuntu_fs_zlib_codex_raw_zlib_tiny_copper_clpd64k_peb/board.realview.uart2.device,0,,no,,excluded raw gem5 output tree; summaries are included
+research/results/gem5_arm_ubuntu_fs_zlib_codex_raw_zlib_tiny_copper_clpd64k_peb/board.realview.uart3.device,0,,no,,excluded raw gem5 output tree; summaries are included
+research/results/gem5_arm_ubuntu_fs_zlib_codex_raw_zlib_tiny_copper_clpd64k_peb/board.terminal,20889,,no,,excluded raw gem5 output tree; summaries are included
+research/results/gem5_arm_ubuntu_fs_zlib_codex_raw_zlib_tiny_copper_clpd64k_peb/citations.bib,4664,,no,,excluded raw gem5 output tree; summaries are included
+research/results/gem5_arm_ubuntu_fs_zlib_codex_raw_zlib_tiny_copper_clpd64k_peb/config.ini,109711,,no,,excluded raw gem5 output tree; summaries are included
+research/results/gem5_arm_ubuntu_fs_zlib_codex_raw_zlib_tiny_copper_clpd64k_peb/config.json,299996,,no,,excluded local-only file containing a private absolute path
+research/results/gem5_arm_ubuntu_fs_zlib_codex_raw_zlib_tiny_copper_clpd64k_peb/device.dtb,6140,,no,,excluded raw gem5 output tree; summaries are included
+research/results/gem5_arm_ubuntu_fs_zlib_codex_raw_zlib_tiny_copper_clpd64k_peb/readfile_-0x4627df76e7854299,15736,,no,,excluded raw gem5 output tree; summaries are included
+research/results/gem5_arm_ubuntu_fs_zlib_codex_raw_zlib_tiny_copper_clpd64k_peb/stats.txt,1163169,,no,,excluded raw gem5 output tree; summaries are included
+research/results/gem5_arm_ubuntu_fs_zlib_codex_raw_zlib_tiny_copper_clpd64k_peb.host.err,4394,,no,,excluded raw gem5 output tree; summaries are included
+research/results/gem5_arm_ubuntu_fs_zlib_codex_raw_zlib_tiny_copper_clpd64k_peb.host.out,1142,,no,,excluded raw gem5 output tree; summaries are included
+research/results/gem5_arm_ubuntu_fs_zlib_codex_raw_zlib_tiny_none/board.realview.uart1.device,0,,no,,excluded raw gem5 output tree; summaries are included
+research/results/gem5_arm_ubuntu_fs_zlib_codex_raw_zlib_tiny_none/board.realview.uart2.device,0,,no,,excluded raw gem5 output tree; summaries are included
+research/results/gem5_arm_ubuntu_fs_zlib_codex_raw_zlib_tiny_none/board.realview.uart3.device,0,,no,,excluded raw gem5 output tree; summaries are included
+research/results/gem5_arm_ubuntu_fs_zlib_codex_raw_zlib_tiny_none/board.terminal,20889,,no,,excluded raw gem5 output tree; summaries are included
+research/results/gem5_arm_ubuntu_fs_zlib_codex_raw_zlib_tiny_none/citations.bib,4664,,no,,excluded raw gem5 output tree; summaries are included
+research/results/gem5_arm_ubuntu_fs_zlib_codex_raw_zlib_tiny_none/config.ini,107363,,no,,excluded raw gem5 output tree; summaries are included
+research/results/gem5_arm_ubuntu_fs_zlib_codex_raw_zlib_tiny_none/config.json,294950,,no,,excluded local-only file containing a private absolute path
+research/results/gem5_arm_ubuntu_fs_zlib_codex_raw_zlib_tiny_none/device.dtb,6140,,no,,excluded raw gem5 output tree; summaries are included
+research/results/gem5_arm_ubuntu_fs_zlib_codex_raw_zlib_tiny_none/readfile_-0x4627df76e7854299,15736,,no,,excluded raw gem5 output tree; summaries are included
+research/results/gem5_arm_ubuntu_fs_zlib_codex_raw_zlib_tiny_none/stats.txt,1079171,,no,,excluded raw gem5 output tree; summaries are included
+research/results/gem5_arm_ubuntu_fs_zlib_codex_raw_zlib_tiny_none.host.err,4380,,no,,excluded raw gem5 output tree; summaries are included
+research/results/gem5_arm_ubuntu_fs_zlib_codex_raw_zlib_tiny_none.host.out,1051,,no,,excluded raw gem5 output tree; summaries are included
 research/results/gem5_arm_ubuntu_fs_zlib_zlib_seed1_copper_clpd64k_peb/board.realview.uart1.device,0,,no,,excluded raw gem5 output tree; summaries are included
 research/results/gem5_arm_ubuntu_fs_zlib_zlib_seed1_copper_clpd64k_peb/board.realview.uart2.device,0,,no,,excluded raw gem5 output tree; summaries are included
 research/results/gem5_arm_ubuntu_fs_zlib_zlib_seed1_copper_clpd64k_peb/board.realview.uart3.device,0,,no,,excluded raw gem5 output tree; summaries are included
@@ -9723,7 +9749,7 @@ research/results/gem5_med_pageperm_stride/config.json,57495,,no,,excluded local-
 research/results/gem5_med_pageperm_stride/stats.txt,132749,,no,,excluded raw gem5 output tree; summaries are included
 research/results/gem5_med_pageperm_stride.err,544,,no,,excluded raw gem5 output tree; summaries are included
 research/results/gem5_med_pageperm_stride.log,776,,no,,excluded local-only file containing a private absolute path
-research/results/gem5_memory_traffic.csv,82724,b73f860b62902f31540368e2b0ddeabb803f312d8e7ae7b2295b49b4c445aec5,yes,research/results/gem5_memory_traffic.csv,included generated gem5 summary/evidence csv
+research/results/gem5_memory_traffic.csv,83740,c2a851b5a680eb33dcfb2081f5b2397f7d8592eaf44052356bfe0520f578a296,yes,research/results/gem5_memory_traffic.csv,included generated gem5 summary/evidence csv
 research/results/gem5_objects_probe.err,0,,no,,excluded raw gem5 output tree; summaries are included
 research/results/gem5_objects_probe.log,1204,,no,,excluded raw gem5 output tree; summaries are included
 research/results/gem5_objects_probe_cpu.err,0,,no,,excluded raw gem5 output tree; summaries are included
@@ -9884,9 +9910,9 @@ research/results/gem5_pageperm_stride/config.json,57491,,no,,excluded local-only
 research/results/gem5_pageperm_stride/stats.txt,134216,,no,,excluded raw gem5 output tree; summaries are included
 research/results/gem5_pageperm_stride.err,544,,no,,excluded raw gem5 output tree; summaries are included
 research/results/gem5_pageperm_stride.log,724,,no,,excluded local-only file containing a private absolute path
-research/results/gem5_performance.csv,86566,75e44daaed2d554e27090c6bb464543f195b36d2d7000841b80dac26f95983f5,yes,research/results/gem5_performance.csv,included generated gem5 summary/evidence csv
+research/results/gem5_performance.csv,87635,0b2d5b0d17295f800faceda39e8ced919eb8386aa620a2d9c0641a47bf301e69,yes,research/results/gem5_performance.csv,included generated gem5 summary/evidence csv
 research/results/GEM5_POWERSHELL_RUNNER_FIX_20260619.md,2011,cf38d5739041f4ab66de8cf5f09f9aa54694976150be9cef4ddf846267ffb951,yes,research/results/GEM5_POWERSHELL_RUNNER_FIX_20260619.md,included summary/evidence file
-research/results/gem5_prefetch_metrics.csv,84286,1722091a9e6948d0f9450b411505bdcb460dfa27953a64b7f03d060c011ac05c,yes,research/results/gem5_prefetch_metrics.csv,included generated gem5 summary/evidence csv
+research/results/gem5_prefetch_metrics.csv,85305,3df8986be1a4bb3a4ce958472a344f484553395dcc91b8058bf9039634675342,yes,research/results/gem5_prefetch_metrics.csv,included generated gem5 summary/evidence csv
 research/results/gem5_random_s1_copper/citations.bib,4664,,no,,excluded raw gem5 output tree; summaries are included
 research/results/gem5_random_s1_copper/config.ini,22352,,no,,excluded raw gem5 output tree; summaries are included
 research/results/gem5_random_s1_copper/config.json,56725,,no,,excluded local-only file containing a private absolute path
@@ -9965,7 +9991,7 @@ research/results/gem5_random_small_none/config.json,54404,,no,,excluded local-on
 research/results/gem5_random_small_none/stats.txt,122073,,no,,excluded raw gem5 output tree; summaries are included
 research/results/gem5_random_small_none.err,544,,no,,excluded raw gem5 output tree; summaries are included
 research/results/gem5_random_small_none.log,771,,no,,excluded local-only file containing a private absolute path
-research/results/gem5_raw_rerun_manifest.csv,3255,c8d0087b5d46b4c2562b8965761fdcb816ceb34c6b9d0e4de7c313994e370672,yes,research/results/gem5_raw_rerun_manifest.csv,included generated gem5 summary/evidence csv
+research/results/gem5_raw_rerun_manifest.csv,6240,2d441ceb16f8fee196d0a627e52330020bff8ab01a9e2000056c328505c3c33b,yes,research/results/gem5_raw_rerun_manifest.csv,included generated gem5 summary/evidence csv
 research/results/gem5_resource_query/stats.txt,0,,no,,excluded raw gem5 output tree; summaries are included
 research/results/gem5_resource_query_bootloader/stats.txt,0,,no,,excluded raw gem5 output tree; summaries are included
 research/results/gem5_resource_query_disk/stats.txt,0,,no,,excluded raw gem5 output tree; summaries are included
@@ -9990,8 +10016,8 @@ research/results/gem5_sequential_copper_rec/config.json,56764,,no,,excluded loca
 research/results/gem5_sequential_copper_rec/stats.txt,137787,,no,,excluded raw gem5 output tree; summaries are included
 research/results/gem5_sequential_copper_rec.err,544,,no,,excluded raw gem5 output tree; summaries are included
 research/results/gem5_sequential_copper_rec.log,767,,no,,excluded local-only file containing a private absolute path
-research/results/gem5_statistical_summary.csv,274116,9e7769030922abeb0ba439c9cb78089b44b71017faf5fffa7ab72718f2ff8aeb,yes,research/results/gem5_statistical_summary.csv,included generated gem5 summary/evidence csv
-research/results/gem5_validation.csv,11993,b9040f2de518cc7659aeca31db1f2dad6d59592dbcf7e8445ed8e31b2cd8f258,yes,research/results/gem5_validation.csv,included generated gem5 summary/evidence csv
+research/results/gem5_statistical_summary.csv,274121,fb93bfb3d42f146a8a7ea46ea9f5e6fc47db924dbfbe459145160d2079c6bee1,yes,research/results/gem5_statistical_summary.csv,included generated gem5 summary/evidence csv
+research/results/gem5_validation.csv,12351,5c08b93628ebed6f07996cc85c0261c8c18d24e4f3cd702f17c40545935f207b,yes,research/results/gem5_validation.csv,included generated gem5 summary/evidence csv
 research/results/graph_copper/graph_copper_capacity.csv,288,e7898984b9c237120cf7d99fa97c7df4da33e160b29020602a043f297b07744f,yes,research/results/graph_copper/graph_copper_capacity.csv,included summary/evidence file
 research/results/graph_copper/graph_copper_summary.csv,2210,9083971f7922f828e1bcaa7b926bfad0b659612d07bde7452d7724debae9c6f5,yes,research/results/graph_copper/graph_copper_summary.csv,included summary/evidence file
 research/results/graph_copper/GRAPH_COPPER_SUMMARY.md,1921,cb277bef1034fca41042d5e35faeadbf35d0f0b4099ab7a11eab51e308b05dae,yes,research/results/graph_copper/GRAPH_COPPER_SUMMARY.md,included summary/evidence file
@@ -10037,7 +10063,7 @@ research/results/logs/gem5/codex_raw_smoke_runner.err,0,,no,,included summary/ev
 research/results/logs/gem5/codex_raw_smoke_runner.out,0,,no,,included summary/evidence file
 research/results/logs/gem5/codex_raw_smoke_runner.pid,6,,no,,included summary/evidence file
 research/results/logs/gem5/gem5_availability.log,120,,no,,excluded raw gem5 output tree; summaries are included
-research/results/logs/gem5/gem5_import.log,4534,,no,,excluded raw gem5 output tree; summaries are included
+research/results/logs/gem5/gem5_import.log,4686,,no,,excluded raw gem5 output tree; summaries are included
 research/results/logs/gem5/run_codex_raw_smoke_copper.ps1,321,,no,,excluded local-only file containing a private absolute path
 research/results/logs/gem5/run_codex_raw_smoke_none.ps1,307,,no,,excluded local-only file containing a private absolute path
 research/results/logs/independent_sim/independent_sim_eval.jsonl,2249,,no,,included summary/evidence file
@@ -10773,7 +10799,7 @@ research/run_sqlite_stress_app_fs.sh,343,,no,,excluded local-only file containin
 research/run_struct_mix_fs.sh,1164,,no,,excluded local-only file containing a private absolute path
 research/run_tls_session_app_fs.sh,2743,,no,,excluded local-only file containing a private absolute path
 research/run_yyjson_app_fs.sh,2602,,no,,excluded local-only file containing a private absolute path
-research/run_zlib_app_fs.sh,2166,,no,,excluded local-only file containing a private absolute path
+research/run_zlib_app_fs.sh,2198,2d230bfe305cf0d64f4b7257276823ed15e55e49c32cefe04ae1b2bdc34b7e3f,yes,research/run_zlib_app_fs.sh,included source or reviewer file
 research/run_zstd_app_fs.sh,2166,,no,,excluded local-only file containing a private absolute path
 research/scoop_companion_state_space.py,4243,6e6aa03dc7cfd08cc7481603a578ac544b38c7a5d3678d106cb1d4c74db327b2,yes,research/scoop_companion_state_space.py,included source or reviewer file
 research/scripts/audit_claims.py,1641,cb359de924e64d38c1a5ab31e7b45f95169eff2951c17b6dcc94c075b579d0a8,yes,research/scripts/audit_claims.py,included source or reviewer file
@@ -10786,7 +10812,7 @@ research/scripts/check_toolchain.py,8410,3f873413e2021c7305c1463bf39649e1b35d81f
 research/scripts/copper_eval_model.py,16546,09fdd920664a1d995418f40ab2d1b5b4f292d3e1ca2fa0bb16e305e52809d1cb,yes,research/scripts/copper_eval_model.py,included source or reviewer file
 research/scripts/import_ci_artifacts.py,20971,b59f5ec312feffcee50173e5453c1f3541e5d9176be89b872c537370b29bb535,yes,research/scripts/import_ci_artifacts.py,included source or reviewer file
 research/scripts/package_artifact.py,7528,ed601932324396a8c0a97d0e44d2c6c243c24dd49ae4f030d6a186576231ec8c,yes,research/scripts/package_artifact.py,included source or reviewer file
-research/scripts/record_gem5_raw_rerun_manifest.py,4206,a33b940f1100e0751e6ed31ca4615eb2bc5f0b0cb7c070482377cf1fb8a585a3,yes,research/scripts/record_gem5_raw_rerun_manifest.py,included source or reviewer file
+research/scripts/record_gem5_raw_rerun_manifest.py,5257,1d71092ffdcced8de33edf392697df1328ff15cb76106d9384d4f43a93477b38,yes,research/scripts/record_gem5_raw_rerun_manifest.py,included source or reviewer file
 research/scripts/run_asic_power.py,19012,2bccd8540b246705da6db7de7c9e628cdc907d749238eeeb06baed684295cb10,yes,research/scripts/run_asic_power.py,included source or reviewer file
 research/scripts/run_core_eval.py,12180,62e50395eaf25c34ee4478a8eb9ce70e4388e89c5ce4d409f38590bcff708532,yes,research/scripts/run_core_eval.py,included source or reviewer file
 research/scripts/run_cycle_eval.py,16586,aaaa54e74f43f1c77cb1ffa832d9e3fbaf2f7aaebfe1096646b6e1214df6750e,yes,research/scripts/run_cycle_eval.py,included source or reviewer file
@@ -10868,7 +10894,7 @@ research/summarize_struct_mix_fs.py,7762,db88396fcfaea6a8c7134a810a3da85b112c564
 research/summarize_tls_session_app_fs.py,10271,78a745f7bb6b8b9495b5d30d10cbda5e8c61939c645a1388e2a8ed8c608d0b2d,yes,research/summarize_tls_session_app_fs.py,included source or reviewer file
 research/summarize_yyjson_app_fs.py,9899,08721cf18e5c7ba1aea4f6c510d2eee11d3f0a1f0b929fcd4b77bf38497062cc,yes,research/summarize_yyjson_app_fs.py,included source or reviewer file
 research/summarize_yyjson_seed_stability.py,6138,6377b5013b69eee2cbf8af20fc971f1b42ef1d312145db7677206d0d6bac59ef,yes,research/summarize_yyjson_seed_stability.py,included source or reviewer file
-research/summarize_zlib_app_fs.py,9334,37f202192fa8ecbb4f70ac1d0e1fa5d748914d2738d9c905a4d0a8b677611d44,yes,research/summarize_zlib_app_fs.py,included source or reviewer file
+research/summarize_zlib_app_fs.py,9826,db2d96e98598a1a0de1d0953826f4a5fb4c7ed642724f264ff88f5247d3bf3df,yes,research/summarize_zlib_app_fs.py,included source or reviewer file
 research/summarize_zstd_app_fs.py,9238,6c7f1de1118129a70fe2b2979171096ce7a146519570bf6a4099f021bac2c3a6,yes,research/summarize_zstd_app_fs.py,included source or reviewer file
 research/test_word_pdf_export.ps1,1808,b37b2b4b55ed06a3446df69b4b8b6122cc569296b6d468d29ac668b6ee3d169d,yes,research/test_word_pdf_export.ps1,included source or reviewer file
 research/traces/adversarial.csv,2669,639008873b8c6b762e681682a39ecd86b35a69dd358bd84f7931f29daf65fea2,yes,research/traces/adversarial.csv,included source or reviewer file

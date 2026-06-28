@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-cd /c/Users/tyboy/OneDrive/Documents/novel-arm
+SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+cd "${SCRIPT_DIR}/.."
 export PATH="/ucrt64/bin:/usr/bin:${PATH}"
 
 TAG=${TAG:-app_smoke}
