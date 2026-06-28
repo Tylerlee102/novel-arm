@@ -200,12 +200,7 @@ jobs:
           name: copper-synchronized-evidence-${{ github.run_id }}
           if-no-files-found: ignore
           path: |
-            research/results/fullcore_synthesis*.csv
-            research/results/full_core_design_inventory.csv
-            research/results/mapped_ppa*.csv
-            research/results/power_report_index.csv
-            research/results/energy_*.csv
-            research/results/hardware_evidence_summary.csv
-            research/results/top_tier_gate_status.csv
+            research/results/*.csv
+            research/results/**/*.csv
             research/results/logs/**
             dist/copper-artifact.zip

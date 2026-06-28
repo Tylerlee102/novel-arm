@@ -6,4 +6,4 @@ power_evidence,PASS,INFO,fpga_tool_estimate or stronger,openroad_estimate,,Proxy
 full_core_absent,BLOCKER,BLOCKER,true full_core mapped PPA,none,full_core absent,Accepted core-wrapper rows are not full-core rows.
 silicon_signoff_power_absent,BLOCKER,BLOCKER,measured_silicon or asic_signoff power,none,silicon/signoff power absent,Tool estimates are not signoff-grade or silicon measurements.
 paper_audits_artifact,PASS,INFO,"paper build, audits, and artifact package PASS",paper=PASS; audit=PASS; artifact=PASS,,"paper_build_status.csv contains a PASS row; claim, number, and todo audits pass; artifact zip and manifest exist"
-overall_status,SUBMISSION-READY,INFO,all top-tier gates PASS with scoped claims,SUBMISSION-READY,,"SUBMISSION-READY here means scoped artifact/mechanism readiness, not full-core or silicon readiness."
+overall_status,SUBMISSION-READY,INFO,scoped artifact/mechanism gates PASS while stronger-claim blockers stay explicit,SUBMISSION-READY,full_core and silicon/signoff blockers remain for stronger claims,"SUBMISSION-READY here means scoped artifact/mechanism readiness only, not top-tier full-core, production, ASIC signoff, or silicon readiness."
