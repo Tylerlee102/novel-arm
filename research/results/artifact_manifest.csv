@@ -417,7 +417,7 @@ research/build_zlib_workload_aarch64.py,2012,274ebb28781d0661680e332b0888e5b3777
 research/build_zstd_workload_aarch64.py,2020,edd9048431c05dd7f443f184fee4f2835dfc48bc0869eb7fbf637c23839cda83,yes,research/build_zstd_workload_aarch64.py,included source or reviewer file
 research/champsim_configs/ip_stride_l1d.json,3745,13d959e85b1e6dba02a963bcc5ddf0f365e5ddb1dfc1d5f01d30899f96313f1b,yes,research/champsim_configs/ip_stride_l1d.json,included source or reviewer file
 research/champsim_configs/next_line_l1d.json,3745,09f24796215066cccc3439edfbbb46bef0c18761a3c644468c9a9010fd767dfd,yes,research/champsim_configs/next_line_l1d.json,included source or reviewer file
-research/CONFERENCE_READINESS_DASHBOARD.md,5494,646789286da059af2937c1ac9cffb47d45b5b4acf339804fc528796d02aae4a2,yes,research/CONFERENCE_READINESS_DASHBOARD.md,included source or reviewer file
+research/CONFERENCE_READINESS_DASHBOARD.md,5450,cd9b75ddbf73dd43d815f7ccf48b41cb96fb779bc72f3b20e70e5d8658143de5,yes,research/CONFERENCE_READINESS_DASHBOARD.md,included source or reviewer file
 research/COPPER_AMBA_CHI_ACE_EVENT_MAP_20260619.md,6938,5e612d00a84f525e51c06ea05a5e1df97203de0e1b7d9955126874089a7be6d8,yes,research/COPPER_AMBA_CHI_ACE_EVENT_MAP_20260619.md,included source or reviewer file
 research/copper_amba_sari_authority_bridge_tb.sv,34907,5dc4706d0a82ac91c09ca53b5ca3c2b937809b3243d56aec8ecdd8e60ea192bd,yes,research/copper_amba_sari_authority_bridge_tb.sv,included source or reviewer file
 research/copper_amba_sari_authority_bridge_top.sv,13080,5654c2b6afa9d23f610b570275314683db8d92560aff65bb32e34ba02514fb05,yes,research/copper_amba_sari_authority_bridge_top.sv,included source or reviewer file
@@ -469,8 +469,8 @@ research/COPPER_DOCX_QA.md,13190,c0110d089e5afda8beeb592f991e6386135d7f1369f7ef0
 research/COPPER_ENVIRONMENT_ARTIFACT_MANIFEST_20260619.md,5389,,no,,excluded local-only file containing a private absolute path
 research/copper_final_eval.py,13907,1279787e97eca6456355cd43e3c8c7b86fc8959953bde4f8679d1b0d65875550,yes,research/copper_final_eval.py,included source or reviewer file
 research/COPPER_FINAL_OUTPUT.md,105697,77837d2061122ffa81dc01d5a9129071a45b4dee8f868bdf8dc02638289830a4,yes,research/COPPER_FINAL_OUTPUT.md,included source or reviewer file
-research/COPPER_FINAL_REVIEWER_REPORT.md,3534,1a086804a7aa9e8e0f208b246ffff2aba0bd80f2816382d6b5e4d0c8f9ef8054,yes,research/COPPER_FINAL_REVIEWER_REPORT.md,included source or reviewer file
-research/COPPER_FINAL_SUBMISSION_BLOCKERS.md,1234,48276e8f62a2a4c89bb1553d6d0c69670e3e9b0909a99c76896f6afa3d6a1d67,yes,research/COPPER_FINAL_SUBMISSION_BLOCKERS.md,included source or reviewer file
+research/COPPER_FINAL_REVIEWER_REPORT.md,4687,b9e23e17eed50f4f2fefe392dd50b783799c84a1f5daa6a6abc9c65fc533c65a,yes,research/COPPER_FINAL_REVIEWER_REPORT.md,included source or reviewer file
+research/COPPER_FINAL_SUBMISSION_BLOCKERS.md,1676,2a430b1560a21dcaa22454c34c6d2f5061e0e26dd5177b43298dda8c36f1f392,yes,research/COPPER_FINAL_SUBMISSION_BLOCKERS.md,included source or reviewer file
 research/COPPER_FREE_RUN_RESULTS.md,32147,,no,,excluded local-only file containing a private absolute path
 research/copper_full_authority_constraints.xdc,58,,no,,suffix not included
 research/copper_full_authority_gate.sv,4129,4758407ffa1cd484ee7cb78ae11e3dfcd8851fb8b00ee7383b9d341172b6a945,yes,research/copper_full_authority_gate.sv,included source or reviewer file
@@ -586,7 +586,7 @@ research/results/aarch64_gapbs_mini_suite_fs.s,24111,,no,,included summary/evide
 research/results/aarch64_gapbs_mini_suite_fs_small.s,20597,,no,,included summary/evidence file
 research/results/ablation.csv,11431,5121591a6b88d9308f397ca6444f1d32704bcd3c30b36aee5a0aa0ddf3d01ccd,yes,research/results/ablation.csv,included summary/evidence file
 research/results/artifact_inventory.csv,3503732,5c4658053aecd24ae435137ba3e742c16ed8c294d6a1655b272d4f7eb357e4b1,yes,research/results/artifact_inventory.csv,included summary/evidence file
-research/results/artifact_manifest.csv,1843665,706a69ea6f626bbbffac0d0f98cad35ddd8826d3367809ceb66fd645e4a235a0,yes,research/results/artifact_manifest.csv,included summary/evidence file
+research/results/artifact_manifest.csv,1858455,08adbc39755e3f15e113fac1d39094edad5ec63f2c80bfa200d0ba604d47aeb8,yes,research/results/artifact_manifest.csv,included summary/evidence file
 research/results/authority_regression/run_copper_cepf_line_e2e_xsim.log,5176,de1284fdcb7e889420f17bd87bd155f27672cade11d139de745bcc2a81497b70,yes,research/results/authority_regression/run_copper_cepf_line_e2e_xsim.log,included summary/evidence file
 research/results/authority_regression/run_copper_clpd_ctlw_authority_e2e_xsim.log,6006,68d7a0a7ade621a5e57c99da833d13b7a95efabb1c49ac018c091112479a5a26,yes,research/results/authority_regression/run_copper_clpd_ctlw_authority_e2e_xsim.log,included summary/evidence file
 research/results/authority_regression/run_copper_clpd_xsim.log,4134,0fadb5ebeef3464c873dc162261be6ab84c91a619de233145038c66798aa64fe,yes,research/results/authority_regression/run_copper_clpd_xsim.log,included summary/evidence file
@@ -11520,7 +11520,7 @@ research/run_yyjson_app_fs.sh,2602,,no,,excluded local-only file containing a pr
 research/run_zlib_app_fs.sh,2166,,no,,excluded local-only file containing a private absolute path
 research/run_zstd_app_fs.sh,2166,,no,,excluded local-only file containing a private absolute path
 research/scoop_companion_state_space.py,4243,6e6aa03dc7cfd08cc7481603a578ac544b38c7a5d3678d106cb1d4c74db327b2,yes,research/scoop_companion_state_space.py,included source or reviewer file
-research/scripts/__pycache__/build_conference_docs.cpython-312.pyc,62027,,no,,excluded scratch/private/build directory
+research/scripts/__pycache__/build_conference_docs.cpython-312.pyc,63617,,no,,excluded scratch/private/build directory
 research/scripts/__pycache__/build_paper.cpython-312.pyc,9297,,no,,excluded scratch/private/build directory
 research/scripts/__pycache__/build_workloads.cpython-312.pyc,9160,,no,,excluded scratch/private/build directory
 research/scripts/__pycache__/check_toolchain.cpython-312.pyc,8873,,no,,excluded scratch/private/build directory
@@ -11539,7 +11539,7 @@ research/scripts/__pycache__/run_synthesis.cpython-312.pyc,22972,,no,,excluded s
 research/scripts/audit_claims.py,1641,cb359de924e64d38c1a5ab31e7b45f95169eff2951c17b6dcc94c075b579d0a8,yes,research/scripts/audit_claims.py,included source or reviewer file
 research/scripts/audit_numbers.py,1886,c17b5ec19c7255bab03f932a98a8508a374b88329ce65a9d5896562a3d3af7e0,yes,research/scripts/audit_numbers.py,included source or reviewer file
 research/scripts/audit_todos.py,1221,4ee4563c9dc961dd4493690e904dbb2863357374976c6530a6df972b313e748e,yes,research/scripts/audit_todos.py,included source or reviewer file
-research/scripts/build_conference_docs.py,51691,29e1c9ab199d53df84a14432f4e656486e7149885dc01f709ae4010b999a5f6a,yes,research/scripts/build_conference_docs.py,included source or reviewer file
+research/scripts/build_conference_docs.py,53284,297b2ac5cb888800019c65808e68a0bc9c63ab62a5e37b4a522e651f01dca8cf,yes,research/scripts/build_conference_docs.py,included source or reviewer file
 research/scripts/build_paper.py,5697,ca4250b8b05a7fedee4f3bea95bc7a4dad150ab6777465652247f28297ceea72,yes,research/scripts/build_paper.py,included source or reviewer file
 research/scripts/build_workloads.py,6377,8120b2e9a571a7d7519e7ff9f2f4f405f1df8bc09bde748d6006923d2b90423d,yes,research/scripts/build_workloads.py,included source or reviewer file
 research/scripts/check_toolchain.py,6271,45a47f5a8bbd509fa32990a30be33732ab56b8faacaf6575b48287399bab2fc5,yes,research/scripts/check_toolchain.py,included source or reviewer file

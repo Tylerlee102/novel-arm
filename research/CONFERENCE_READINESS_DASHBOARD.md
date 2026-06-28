@@ -25,6 +25,6 @@ Local Windows is editing-only. GitHub Actions/Codespaces/Docker is the intended 
 | G17. Statistical stability across seeds/input sizes | Yes | PASS | research/results/seed_stability.csv; research/results/statistical_summary.csv | Stability covers seeds 1-3 and multiple input sizes with evidence-level labels |  |
 | G18. Artifact package | Yes | PASS | dist/copper-artifact.zip; research/results/artifact_manifest.csv; research/results/ci_artifacts_manifest.csv | Package regenerates in GitHub Actions, Docker, or Codespaces or the zip appears in imported artifacts |  |
 | G19. Paper build | Yes | PASS | research/paper/main.tex; research/results/paper_build_status.csv | PDF builds in GitHub Actions, Docker, or Codespaces |  |
-| G20. Claim audit | Yes | TODO | research/scripts/audit_claims.py; research/scripts/audit_numbers.py; research/scripts/audit_todos.py | Audits pass | Run make paper-audit after paper generation. |
+| G20. Claim audit | Yes | PASS | research/scripts/audit_claims.py; research/scripts/audit_numbers.py; research/scripts/audit_todos.py | Audits pass |  |
 | G21. Related work/novelty matrix | Yes | PASS | research/COPPER_RELATED_WORK_MATRIX.md | Matrix exists and avoids first/novel overclaim |  |
 | G22. Reviewer attack response matrix | Yes | PASS | research/COPPER_FINAL_REVIEWER_REPORT.md | Reviewer panel and blockers exist |  |
