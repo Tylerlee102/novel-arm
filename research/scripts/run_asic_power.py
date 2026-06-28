@@ -276,9 +276,9 @@ def yosys_script(design: Design, liberty: Path, netlist: Path) -> str:
         f"{chparam(design)}"
         f"hierarchy -check -top {design.top}; proc; opt; memory; opt; "
         f"techmap; opt; dfflibmap -liberty {liberty.as_posix()}; "
-        f"abc -liberty {liberty.as_posix()}; clean; "
+        f"abc -liberty {liberty.as_posix()}; clean -purge; "
         f"stat -liberty {liberty.as_posix()}; "
-        f"write_verilog -noattr {netlist.as_posix()}"
+        f"write_verilog -noattr -noexpr -nodec -nohex -simple-lhs {netlist.as_posix()}"
     )
 
 
@@ -335,6 +335,28 @@ def parse_power(output: str) -> tuple[str, str, str, str]:
     return "NA", "NA", "NA", "NA"
 
 
+def sanitize_verilog_for_opensta(netlist: Path) -> str:
+    """Remove declaration signedness that OpenSTA's Verilog reader rejects."""
+    text = netlist.read_text(encoding="utf-8", errors="replace")
+    cleaned, count = re.subn(r"\b(wire|reg|input|output|inout)\s+signed\b", r"\1", text)
+    if count:
+        write_raw_text(netlist, cleaned)
+    return f"OpenSTA netlist compatibility: removed {count} declaration-level signed keyword(s)."
+
+
+def netlist_context(output: str, netlist: Path, radius: int = 5) -> str:
+    matches = re.findall(rf"{re.escape(str(netlist))}\s+line\s+(\d+)|line\s+(\d+),\s+syntax error", output)
+    line_numbers = [int(a or b) for a, b in matches if (a or b)]
+    if not line_numbers or not netlist.exists():
+        return ""
+    lines = netlist.read_text(encoding="utf-8", errors="replace").splitlines()
+    line_no = line_numbers[-1]
+    start = max(1, line_no - radius)
+    end = min(len(lines), line_no + radius)
+    excerpt = "\n".join(f"{idx}: {lines[idx - 1]}" for idx in range(start, end + 1))
+    return f"\nOpenSTA/OpenROAD netlist parse context around line {line_no}:\n{excerpt}\n"
+
+
 def run_design(design: Design, liberty: Path, sta_tool: str, sta_kind: str) -> dict[str, str]:
     log_path = LOG_DIR / f"{design.name}.log"
     if design.scope == "full_core":
@@ -366,6 +388,7 @@ def run_design(design: Design, liberty: Path, sta_tool: str, sta_kind: str) -> d
         row["area_um2"] = parse_area(synth_output)
         return row
 
+    synth_output += "\n" + sanitize_verilog_for_opensta(netlist) + "\n"
     write_raw_text(sta_tcl, sta_script(design, liberty, netlist))
     if sta_kind == "openroad":
         sta_command = [sta_tool, "-exit", str(sta_tcl)]
@@ -373,9 +396,11 @@ def run_design(design: Design, liberty: Path, sta_tool: str, sta_kind: str) -> d
         sta_command = [sta_tool, str(sta_tcl)]
     sta_code, sta_output = run_capture(sta_command, timeout=300)
     output = synth_output + "\n" + sta_output
-    write_text(log_path, output)
     internal, switching, leakage, total = parse_power(output)
     status = "PASS" if sta_code == 0 and total != "NA" else "FAIL"
+    if status == "FAIL":
+        output += netlist_context(sta_output, netlist)
+    write_text(log_path, output)
     notes = (
         "Nangate45 standard-cell Liberty tool estimate from Yosys mapping plus "
         f"{sta_kind}; clock_period_ns={CLOCK_PERIOD_NS}; global_activity={ACTIVITY}. "
