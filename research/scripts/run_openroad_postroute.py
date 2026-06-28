@@ -446,12 +446,13 @@ def parse_json_metrics(report_path: Path) -> dict[str, str]:
                 return metrics[key]
         return None
 
+    setup_slack = fmt(value("finish__timing__setup__ws"))
     out = {
         "cells": fmt(value("finish__design__instance__count__stdcell", "finish__design__instance__count")),
         "area_um2": fmt(value("finish__design__instance__area__stdcell", "finish__design__instance__area")),
         "die_area_um2": fmt(value("finish__design__die__area")),
         "utilization_pct": fmt(value("finish__design__instance__utilization__stdcell", "finish__design__instance__utilization"), 100.0),
-        "wns": fmt(value("finish__timing__setup__ws")),
+        "wns": fmt(value("finish__timing__setup__wns")),
         "tns": fmt(value("finish__timing__setup__tns")),
         "internal_power_mw": fmt(value("finish__power__internal__total"), 1000.0),
         "switching_power_mw": fmt(value("finish__power__switching__total"), 1000.0),
@@ -461,7 +462,7 @@ def parse_json_metrics(report_path: Path) -> dict[str, str]:
     }
     try:
         period_ns = float(CLOCK_PERIOD_NS)
-        slack_ns = float(out["wns"])
+        slack_ns = float(setup_slack)
         critical_ns = period_ns - slack_ns
         out["fmax_mhz"] = f"{1000.0 / critical_ns:.3f}" if critical_ns > 0 else "NA"
     except ValueError:
@@ -508,8 +509,9 @@ def parse_design(design: Design, code: int, report_path: Path, text: str) -> dic
         f"clock_period_ns={CLOCK_PERIOD_NS}; core_utilization={CORE_UTILIZATION}; "
         f"place_density={PLACE_DENSITY}; ORFS ref={ORFS_REF}. This is post-route "
         "OpenROAD/Nangate45 tool-estimated power/timing, not silicon measurement, "
-        "not foundry signoff, and not full-core power. GDS/image export is not required "
-        "for this row."
+        "not foundry signoff, and not full-core power. fmax_mhz is inferred from "
+        "reported worst setup slack and the configured clock period. GDS/image export "
+        "is not required for this row."
     )
     if status == "FAIL":
         notes = "FAIL: OpenROAD-flow-scripts did not complete route/final report or did not emit parseable timing and power."
