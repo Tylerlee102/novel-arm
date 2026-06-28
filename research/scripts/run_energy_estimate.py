@@ -63,7 +63,7 @@ def positive_float(value: str) -> bool:
         return False
 
 
-def measured_power_evidence() -> dict[str, str] | None:
+def fpga_tool_power_evidence() -> dict[str, str] | None:
     evidence: list[tuple[Path, dict[str, str]]] = []
     for path in (MAPPED_PPA, RESULTS / "synthesis.csv", RESULTS / "fullcore_synthesis.csv"):
         for row in read_csv(path):
@@ -79,6 +79,19 @@ def measured_power_evidence() -> dict[str, str] | None:
     if not evidence:
         return None
 
+    def priority(item: tuple[Path, dict[str, str]]) -> tuple[int, int]:
+        row = item[1]
+        design = row.get("design", "")
+        target = row.get("target", "")
+        if design == "core_wrapper_plus_copper" and target.startswith("vivado-"):
+            return (0, 0)
+        if "core_wrapper" in design and target.startswith("vivado-"):
+            return (1, 0)
+        if target.startswith("vivado-"):
+            return (2, 0)
+        return (3, 0)
+
+    evidence.sort(key=priority)
     first_path, first_row = evidence[0]
     designs = "; ".join(
         f"{row.get('design', '')} on {row.get('target', '')} power_mw={row.get('power_mw', '')}"
@@ -90,8 +103,9 @@ def measured_power_evidence() -> dict[str, str] | None:
         "tool": first_row.get("flow", ""),
         "environment": first_row.get("environment", "current"),
         "notes": (
-            f"Tool-estimated power rows found: {designs}. "
-            "Treat as EDA report power for the stated mapped target, not silicon measurement."
+            f"FPGA tool-estimated power rows found: {designs}. "
+            "Treat as Vivado/EDA report power for the stated mapped FPGA target, not silicon "
+            "measurement, ASIC signoff, or full-core power."
         ),
     }
 
@@ -123,21 +137,21 @@ def mcpat_activity_evidence() -> dict[str, str] | None:
 
 
 def write_power_index(proxy_status: str) -> None:
-    measured = measured_power_evidence()
+    fpga_power = fpga_tool_power_evidence()
     mcpat = mcpat_activity_evidence()
     write_csv(
         POWER_INDEX,
         ["evidence_level", "status", "source", "report_path", "tool", "environment", "notes"],
         [
             {
-                "evidence_level": "measured_tool_power",
-                "status": "PASS" if measured else "BLOCKED",
-                "source": measured["source"] if measured else "none",
-                "report_path": measured["report_path"] if measured else "",
-                "tool": measured["tool"] if measured else "",
-                "environment": measured["environment"] if measured else "current",
-                "notes": measured["notes"]
-                if measured
+                "evidence_level": "fpga_tool_estimate",
+                "status": "PASS" if fpga_power else "BLOCKED",
+                "source": fpga_power["source"] if fpga_power else "none",
+                "report_path": fpga_power["report_path"] if fpga_power else "",
+                "tool": fpga_power["tool"] if fpga_power else "",
+                "environment": fpga_power["environment"] if fpga_power else "current",
+                "notes": fpga_power["notes"]
+                if fpga_power
                 else (
                     "No Vivado report_power, OpenROAD power, ASIC, CACTI, or process-calibrated "
                     "RTL power report with a PASS power_mw row was found in this open evidence pass. "

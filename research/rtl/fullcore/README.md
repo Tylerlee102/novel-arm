@@ -1,11 +1,11 @@
 # COPPER Full-Core Integration Status
 
 This directory exists to make the full-core PPA blocker explicit. The public
-artifact does not currently include a real CPU core wrapper with both baseline
-prefetch and COPPER integrated under the same mapped timing/power flow.
+artifact now includes a PicoRV32 accepted open-source core-wrapper with both
+baseline prefetch and COPPER integrated under the same mapped FPGA flow. That
+evidence is labeled `core_wrapper`, not `full_core`.
 
-`research/scripts/run_fullcore_synthesis.py` therefore writes BLOCKED rows for
-`baseline_core_wrapper`, `core_wrapper_plus_baseline_prefetch`, and
-`core_wrapper_plus_copper` instead of fabricating full-core area, timing, or
-power numbers. The runnable open-source hardware evidence is limited to the
-explicitly labeled `near_core_stub` rows.
+`research/scripts/run_fullcore_synthesis.py` still writes BLOCKED rows for true
+full-core designs instead of fabricating full-core area, timing, or power
+numbers. Runnable open-source hardware evidence is limited to explicitly
+labeled `near_core_stub` and `core_wrapper` rows.

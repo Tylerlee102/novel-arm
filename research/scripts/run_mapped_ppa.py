@@ -53,17 +53,42 @@ NEARCORE_COPPER = Design(
     "near_core_stub",
     (("ENTRIES", 8), ("QUEUE_DEPTH", 4)),
 )
+PICORV32_SOURCES = (
+    "external/picorv32/picorv32.v",
+    "research/baseline_prefetch_unit.sv",
+    "research/copper_prefetch_unit_open.sv",
+    "research/rtl/fullcore/picorv32_copper_wrapper.sv",
+)
 FULLCORE_BASELINE = Design(
-    "baseline_core_wrapper",
+    "full_core_baseline",
     "",
     (),
     "full_core",
 )
 FULLCORE_COPPER = Design(
-    "core_wrapper_plus_copper",
+    "full_core_plus_copper",
     "",
     (),
     "full_core",
+)
+CORE_WRAPPER_BASELINE = Design(
+    "baseline_core_wrapper",
+    "baseline_core_wrapper",
+    PICORV32_SOURCES,
+    "core_wrapper",
+)
+CORE_WRAPPER_PREFETCH_BASELINE = Design(
+    "core_wrapper_plus_baseline_prefetch",
+    "core_wrapper_plus_baseline_prefetch",
+    PICORV32_SOURCES,
+    "core_wrapper",
+)
+CORE_WRAPPER_COPPER = Design(
+    "core_wrapper_plus_copper",
+    "core_wrapper_plus_copper",
+    PICORV32_SOURCES,
+    "core_wrapper",
+    (("ENTRIES", 8), ("QUEUE_DEPTH", 4)),
 )
 UNIT_BASELINE = Design(
     "baseline_prefetch_unit",
@@ -143,15 +168,21 @@ def write_csv(path: Path, fields: list[str], rows: list[dict[str, str]]) -> None
 
 
 def run_capture(command: list[str], timeout: int) -> tuple[int, str]:
-    proc = subprocess.run(
-        command,
-        cwd=ROOT,
-        text=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
-        timeout=timeout,
-    )
-    return proc.returncode, "$ " + " ".join(command) + "\n" + proc.stdout
+    try:
+        proc = subprocess.run(
+            command,
+            cwd=ROOT,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            timeout=timeout,
+        )
+        return proc.returncode, "$ " + " ".join(command) + "\n" + proc.stdout
+    except subprocess.TimeoutExpired as exc:
+        output = exc.stdout or ""
+        if isinstance(output, bytes):
+            output = output.decode("utf-8", errors="replace")
+        return 124, "$ " + " ".join(command) + f"\nTIMEOUT after {timeout}s\n" + output
 
 
 def source_reads(design: Design) -> str:
@@ -194,14 +225,20 @@ def blank_row(design: Design, target: str, flow: str, status: str, report_path: 
 def parse_cell_counts(output: str) -> dict[str, int]:
     counts: dict[str, int] = {}
     for line in output.splitlines():
-        match = re.match(r"\s+([A-Za-z0-9_$.\[\]-]+)\s+(\d+)\s*$", line)
+        match = re.match(r"\s+([A-Za-z0-9_$.\\\[\]-]+)\s+(\d+)\s*$", line)
         if match:
             counts[match.group(1)] = int(match.group(2))
+            continue
+        match = re.match(r"\s+(\d+)\s+([A-Za-z0-9_$.\\\[\]-]+)\s*$", line)
+        if match:
+            counts[match.group(2)] = int(match.group(1))
     return counts
 
 
 def parse_total_cells(output: str) -> str:
     matches = re.findall(r"Number of cells:\s+(\d+)", output)
+    if not matches:
+        matches = re.findall(r"^\s+(\d+)\s+cells\s*$", output, re.M)
     return matches[-1] if matches else ""
 
 
@@ -300,6 +337,11 @@ def nextpnr_ecp5(design: Design) -> dict[str, str]:
         note = f"BLOCKED: ECP5 mapped PPA requires {missing} on PATH."
         write_text(log_path, note + "\n")
         return blank_row(design, "ecp5-85k", "yosys+nextpnr-ecp5", "BLOCKED", log_path, note)
+    missing_sources = [source for source in design.sources if not (ROOT / source).exists()]
+    if missing_sources:
+        note = f"BLOCKED: missing RTL source(s): {', '.join(missing_sources)}."
+        write_text(log_path, note + "\n")
+        return blank_row(design, "ecp5-85k", "yosys+nextpnr-ecp5", "BLOCKED", log_path, note)
     with tempfile.TemporaryDirectory(prefix="copper_mapped_ecp5_") as tmp:
         tmpdir = Path(tmp)
         json_path = tmpdir / f"{design.name}.json"
@@ -323,7 +365,7 @@ def nextpnr_ecp5(design: Design) -> dict[str, str]:
                     "--textcfg",
                     str(cfg_path),
                 ],
-                timeout=300,
+                timeout=900 if design.scope == "core_wrapper" else 300,
             )
         else:
             pnr_code, pnr_output = 1, "nextpnr-ecp5 skipped because Yosys ECP5 mapping failed\n"
@@ -339,6 +381,11 @@ def nextpnr_ice40(design: Design) -> dict[str, str]:
     if not yosys or not nextpnr:
         missing = "yosys" if not yosys else "nextpnr-ice40"
         note = f"BLOCKED: iCE40 mapped PPA requires {missing} on PATH."
+        write_text(log_path, note + "\n")
+        return blank_row(design, "ice40-hx8k", "yosys+nextpnr-ice40", "BLOCKED", log_path, note)
+    missing_sources = [source for source in design.sources if not (ROOT / source).exists()]
+    if missing_sources:
+        note = f"BLOCKED: missing RTL source(s): {', '.join(missing_sources)}."
         write_text(log_path, note + "\n")
         return blank_row(design, "ice40-hx8k", "yosys+nextpnr-ice40", "BLOCKED", log_path, note)
     with tempfile.TemporaryDirectory(prefix="copper_mapped_ice40_") as tmp:
@@ -362,7 +409,7 @@ def nextpnr_ice40(design: Design) -> dict[str, str]:
                     "--asc",
                     str(asc_path),
                 ],
-                timeout=300,
+                timeout=900 if design.scope == "core_wrapper" else 300,
             )
         else:
             pnr_code, pnr_output = 1, "nextpnr-ice40 skipped because Yosys iCE40 mapping failed\n"
@@ -434,9 +481,23 @@ exit
 
 def vivado_impl(design: Design) -> dict[str, str]:
     log_path = VIVADO_LOG_DIR / f"{design.name}.log"
-    vivado = shutil.which("vivado")
+    vivado = shutil.which("vivado") or shutil.which("vivado.bat")
+    if not vivado:
+        for candidate in (
+            Path("C:/AMDDesignTools/2025.2/Vivado/bin/vivado.bat"),
+            Path("C:/Xilinx/Vivado/2025.2/bin/vivado.bat"),
+            Path("C:/Xilinx/Vivado/2024.2/bin/vivado.bat"),
+        ):
+            if candidate.exists():
+                vivado = str(candidate)
+                break
     if not vivado:
         note = "BLOCKED: Vivado mapped implementation requires vivado on PATH."
+        write_text(log_path, note + "\n")
+        return blank_row(design, f"vivado-{VIVADO_PART}", "vivado-impl", "BLOCKED", log_path, note)
+    missing_sources = [source for source in design.sources if not (ROOT / source).exists()]
+    if missing_sources:
+        note = f"BLOCKED: missing RTL source(s): {', '.join(missing_sources)}."
         write_text(log_path, note + "\n")
         return blank_row(design, f"vivado-{VIVADO_PART}", "vivado-impl", "BLOCKED", log_path, note)
     run_dir = LOG_DIR / "vivado_runs" / design.name
@@ -485,14 +546,16 @@ def openroad_blocked_rows() -> list[dict[str, str]]:
     return [
         blank_row(NEARCORE_BASELINE, "openroad", "openroad", "BLOCKED", log_path, note),
         blank_row(NEARCORE_COPPER, "openroad", "openroad", "BLOCKED", log_path, note),
+        blank_row(CORE_WRAPPER_BASELINE, "openroad", "openroad", "BLOCKED", log_path, note),
+        blank_row(CORE_WRAPPER_COPPER, "openroad", "openroad", "BLOCKED", log_path, note),
     ]
 
 
 def fullcore_blocked_rows() -> list[dict[str, str]]:
     log_path = LOG_DIR / "fullcore_wrapper_availability.log"
     note = (
-        "BLOCKED: no real full-core or accepted baseline/core_wrapper_plus_copper RTL is present, "
-        "so full-core mapped PPA cannot be run."
+        "BLOCKED: no real full-core RTL integration is present. Accepted core-wrapper rows "
+        "are reported separately with scope=core_wrapper and must not be called full-core PPA."
     )
     write_text(log_path, note + "\n")
     return [
@@ -502,21 +565,23 @@ def fullcore_blocked_rows() -> list[dict[str, str]]:
 
 
 def matched_pass(rows: list[dict[str, str]], target: str, flow: str, scope: str) -> bool:
-    names = {"near_core_stub": (NEARCORE_BASELINE.name, NEARCORE_COPPER.name), "unit": (UNIT_BASELINE.name, UNIT_COPPER.name)}[scope]
+    names = {
+        "near_core_stub": (NEARCORE_BASELINE.name, NEARCORE_COPPER.name),
+        "core_wrapper": (CORE_WRAPPER_BASELINE.name, CORE_WRAPPER_COPPER.name),
+        "unit": (UNIT_BASELINE.name, UNIT_COPPER.name),
+    }[scope]
     by_name = {row["design"]: row for row in rows if row["target"] == target and row["flow"] == flow}
     return all(by_name.get(name, {}).get("status") == "PASS" for name in names)
 
 
 def run_open_source_fpga() -> list[dict[str, str]]:
     rows: list[dict[str, str]] = []
+    rows.extend(fullcore_blocked_rows())
     rows.extend(nextpnr_ecp5(design) for design in (NEARCORE_BASELINE, NEARCORE_COPPER))
+    rows.extend(nextpnr_ecp5(design) for design in (CORE_WRAPPER_BASELINE, CORE_WRAPPER_PREFETCH_BASELINE, CORE_WRAPPER_COPPER))
     if not matched_pass(rows, "ecp5-85k", "yosys+nextpnr-ecp5", "near_core_stub"):
         rows.extend(nextpnr_ice40(design) for design in (NEARCORE_BASELINE, NEARCORE_COPPER))
-    if not any(
-        matched_pass(rows, target, flow, "near_core_stub")
-        for target, flow in (("ecp5-85k", "yosys+nextpnr-ecp5"), ("ice40-hx8k", "yosys+nextpnr-ice40"))
-    ):
-        rows.extend(fullcore_blocked_rows())
+    if not any(matched_pass(rows, target, flow, "near_core_stub") for target, flow in (("ecp5-85k", "yosys+nextpnr-ecp5"), ("ice40-hx8k", "yosys+nextpnr-ice40"))):
         if shutil.which("yosys") and shutil.which("nextpnr-ecp5"):
             rows.extend(nextpnr_ecp5(design) for design in (UNIT_BASELINE, UNIT_COPPER))
         elif shutil.which("yosys") and shutil.which("nextpnr-ice40"):
@@ -535,6 +600,7 @@ def run_open_source_fpga() -> list[dict[str, str]]:
 def run_vendor_or_asic() -> list[dict[str, str]]:
     rows = openroad_blocked_rows()
     rows.extend(vivado_impl(design) for design in (NEARCORE_BASELINE, NEARCORE_COPPER))
+    rows.extend(vivado_impl(design) for design in (CORE_WRAPPER_BASELINE, CORE_WRAPPER_PREFETCH_BASELINE, CORE_WRAPPER_COPPER))
     return rows
 
 
@@ -554,6 +620,8 @@ def overhead_rows(rows: list[dict[str, str]]) -> list[dict[str, str]]:
         pairs = (
             ("near_core_stub", NEARCORE_BASELINE.name, NEARCORE_COPPER.name),
             ("full_core", FULLCORE_BASELINE.name, FULLCORE_COPPER.name),
+            ("core_wrapper", CORE_WRAPPER_BASELINE.name, CORE_WRAPPER_COPPER.name),
+            ("core_wrapper_prefetch_baseline", CORE_WRAPPER_PREFETCH_BASELINE.name, CORE_WRAPPER_COPPER.name),
             ("unit", UNIT_BASELINE.name, UNIT_COPPER.name),
         )
         for scope, baseline_name, copper_name in pairs:

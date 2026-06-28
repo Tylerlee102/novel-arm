@@ -48,21 +48,26 @@ tries OSS CAD Suite or equivalent Yosys/nextpnr tools first, then records
 OpenROAD/Vivado availability without requiring paid tools.
 The evaluation target also generates deterministic `cycle_model` evidence with
 cache hit/miss latency, memory latency, prefetch lateness, queue drops, and
-demand/prefetch traffic accounting. The top-tier pass adds a deterministic
+demand/prefetch traffic accounting. The final evidence pass adds a deterministic
 `core_integrated` validation harness, explicit `gem5_*` BLOCKED rows when gem5
 is not runnable, source-built C workload evidence via `make workloads`, a
-source-backed `independent_sim` trace/event simulator, a near-core-stub
-synthesis flow, a strict `mapped_ppa.csv` place-and-route ledger,
-`proxy_assumed_memory_energy` rows, Vivado `report_power` rows when Vivado is
-available, and a McPAT activity-proxy index when the local McPAT sensitivity
-output is present. These are scoped
-evidence levels: `independent_sim` is not gem5, `core_integrated` is not gem5,
-the near-core stub is not a full CPU, generic Yosys is not mapped timing, and
-Vivado `report_power` is tool-estimated FPGA power rather than silicon or ASIC
-signoff power. `mapped_ppa.csv` may be cited for timing only when it has
-matched PASS rows from nextpnr, Vivado, or OpenROAD and real timing fields are
-not `NA`. Vivado and full gem5 campaign reruns remain optional external-tool
-paths.
+source-backed `independent_sim` trace/event simulator, imported selected gem5
+ARM-system Patricia rows when checksum/return-code validation passes,
+near-core-stub and PicoRV32 core-wrapper synthesis flows, a strict
+`mapped_ppa.csv` place-and-route ledger, `proxy_assumed_memory_energy` rows,
+Vivado `report_power` rows when Vivado is available, and a McPAT
+activity-proxy index when the local McPAT sensitivity output is present. These
+are scoped evidence levels: `independent_sim` is not gem5, `core_integrated` is
+not gem5, selected gem5 Patricia rows are not a complete gem5 workload matrix,
+the near-core stub is not a full CPU, the PicoRV32 wrapper is not the target
+full-core/ARM integration, generic Yosys is not mapped timing, and Vivado
+`report_power` is tool-estimated FPGA power rather than silicon or ASIC signoff
+power. `mapped_ppa.csv` may be cited for timing only when it has matched PASS
+rows from nextpnr, Vivado, or OpenROAD and real timing fields are not `NA`.
+Vivado and broader gem5 campaign reruns remain optional external-tool paths.
+The strongest current hardware claim is PicoRV32 core-wrapper mapped FPGA PPA
+plus scoped FPGA tool-estimated power when those rows are present; it is not a
+full-core, ASIC, silicon, or top-tier architecture-readiness claim.
 
 If `gh` or Docker is unavailable on the local machine, use
 `docs/RUN_CI_NOW.md` to trigger the GitHub Actions run from the GitHub web UI,
@@ -102,6 +107,7 @@ pointer-chase, and COPPER baseline rows with accuracy, coverage, lateness,
 queue-drop, traffic, ablation, sensitivity, and seed/input-stability CSVs at
 model, deterministic cycle-model, and deterministic core-integrated levels.
 The independent simulator rows add a separate source-backed trace/event path,
-but these are still not fresh gem5 results. The remaining top-tier blocker is
-real mapped full-core evidence and silicon/ASIC signoff power; missing PPA
-tools must stay BLOCKED rather than being replaced by generic resource counts.
+and selected gem5 rows add imported MiBench Patricia ARM-system evidence. The
+remaining blocker for a top-tier/full-core architecture claim is real mapped
+full-core evidence plus silicon/ASIC signoff power; missing PPA tools must stay
+BLOCKED rather than being replaced by generic resource counts.

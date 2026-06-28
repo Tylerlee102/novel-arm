@@ -113,9 +113,14 @@ def should_include(path: Path) -> tuple[bool, str]:
             ext_rel = path.relative_to(ROOT / "external")
         except ValueError:
             ext_rel = None
-        if not ext_rel or not str(ext_rel).replace("\\", "/").startswith("mibench_network/"):
+        ext_text = str(ext_rel).replace("\\", "/") if ext_rel else ""
+        if not ext_text.startswith(("mibench_network/", "picorv32/")):
             return False, "excluded external dependency not needed for public package"
-        if path.suffix.lower() not in INCLUDE_SUFFIXES and path.name != "LICENSE":
+        if ext_text.startswith("picorv32/") and ext_text not in {"picorv32/picorv32.v", "picorv32/README.md", "picorv32/COPYING"}:
+            return False, "excluded unused PicoRV32 support file"
+        if ext_text.startswith("picorv32/"):
+            return True, "included minimal PicoRV32 source/license file"
+        if path.suffix.lower() not in INCLUDE_SUFFIXES and path.name not in {"LICENSE", "COPYING"}:
             return False, "excluded external file suffix"
     if path.is_relative_to(RESULTS):
         if any(part.startswith("gem5_") for part in path.relative_to(RESULTS).parts):
@@ -138,7 +143,7 @@ def main() -> int:
         path = ROOT / name
         if path.exists():
             candidates.append(path)
-    for base in (ROOT / ".devcontainer", ROOT / ".github", ROOT / "docs", RESEARCH, ROOT / "external" / "mibench_network"):
+    for base in (ROOT / ".devcontainer", ROOT / ".github", ROOT / "docs", RESEARCH, ROOT / "external" / "mibench_network", ROOT / "external" / "picorv32"):
         if base.exists():
             candidates.extend(path for path in base.rglob("*") if path.is_file())
     for path in sorted(set(candidates)):

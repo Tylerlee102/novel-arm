@@ -94,14 +94,20 @@ def run_capture(command: list[str], timeout: int) -> tuple[int, str]:
 def parse_cell_counts(output: str) -> dict[str, int]:
     counts: dict[str, int] = {}
     for line in output.splitlines():
-        match = re.match(r"\s+([A-Za-z0-9_$.\[\]-]+)\s+(\d+)\s*$", line)
+        match = re.match(r"\s+([A-Za-z0-9_$.\\\[\]-]+)\s+(\d+)\s*$", line)
         if match:
             counts[match.group(1)] = int(match.group(2))
+            continue
+        match = re.match(r"\s+(\d+)\s+([A-Za-z0-9_$.\\\[\]-]+)\s*$", line)
+        if match:
+            counts[match.group(2)] = int(match.group(1))
     return counts
 
 
 def parse_total_cells(output: str) -> str:
     matches = re.findall(r"Number of cells:\s+(\d+)", output)
+    if not matches:
+        matches = re.findall(r"^\s+(\d+)\s+cells\s*$", output, re.M)
     return matches[-1] if matches else ""
 
 

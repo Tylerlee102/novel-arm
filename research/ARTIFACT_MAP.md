@@ -10,7 +10,7 @@ Generated evidence lives under `research/results`. The new conference-facing gen
 
 ## Evidence
 
-Evidence used by the paper and dashboard comes from generated CSVs and explicit logs. Gem5 rows remain BLOCKED unless a real runnable gem5 campaign produces PASS rows. Existing Vivado reports are local summaries unless rerun. Paper claims are controlled by `research/COPPER_CLAIM_LEDGER.md`.
+Evidence used by the paper and dashboard comes from generated CSVs and explicit logs. Gem5 rows are promoted only from validated PASS summaries; the current imported rows are scoped to MiBench Patricia ARM-system runs. Vivado report_power rows are FPGA tool estimates unless an ASIC/signoff flow is added. Paper claims are controlled by `research/COPPER_CLAIM_LEDGER.md`.
 
 ## Old Or Local-Only
 

@@ -1,0 +1,5 @@
+﻿research/results/gem5_arm_ubuntu_fs_mibench_patricia_app/mibench_patricia_patricia_large12288_seed1_summary.csv imported: 5 rows, checksum 0xe4dc12fd1dcd52b0, rc=0
+research/results/gem5_arm_ubuntu_fs_mibench_patricia_app/mibench_patricia_patricia_large12288_summary.csv imported: 5 rows, checksum 0x60874357358c1fc4, rc=0
+research/results/gem5_arm_ubuntu_fs_mibench_patricia_app/mibench_patricia_patricia_preprobe_summary.csv imported: 5 rows, checksum 0xe9324f49c2b21a34, rc=0
+research/results/gem5_arm_ubuntu_fs_mibench_patricia_app/mibench_patricia_patricia_small2048_summary.csv imported: 5 rows, checksum 0x11f999a2549d757f, rc=0
+research/results/gem5_arm_ubuntu_fs_mibench_patricia_app/mibench_patricia_patricia_small8192_summary.csv imported: 5 rows, checksum 0xd4f96d52a9711657, rc=0

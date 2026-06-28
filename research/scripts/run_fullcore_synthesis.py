@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
-"""Run matched full-core/near-core PPA evidence ledgers for COPPER.
+"""Run matched core-wrapper/near-core PPA evidence ledgers for COPPER.
 
-The repository currently contains a near-core stub, not a real CPU core. This
-script therefore writes BLOCKED rows for full-core/core-wrapper designs unless
-real full-core RTL is present, and only promotes generic Yosys resource counts
-for explicitly labeled near_core_stub designs.
+Full-core rows remain BLOCKED unless a real full CPU-core integration is
+present. The repository may also contain an accepted open-source PicoRV32
+core-wrapper, which is labeled as core_wrapper rather than full_core.
 """
 
 from __future__ import annotations
@@ -39,14 +38,46 @@ class Design:
 
 
 FULLCORE_BLOCKER = (
-    "BLOCKED: no real full-core or accepted core-wrapper RTL is present in this "
-    "open artifact, so no full-core area/timing/power row is claimed."
+    "BLOCKED: no real full-core RTL integration is present in this open artifact, "
+    "so no full-core area/timing/power row is claimed."
+)
+
+PICORV32_SOURCES = (
+    "external/picorv32/picorv32.v",
+    "research/baseline_prefetch_unit.sv",
+    "research/copper_prefetch_unit_open.sv",
+    "research/rtl/fullcore/picorv32_copper_wrapper.sv",
 )
 
 DESIGNS = (
-    Design("baseline_core_wrapper", "", (), "full_core", "full_core", False, FULLCORE_BLOCKER),
-    Design("core_wrapper_plus_baseline_prefetch", "", (), "full_core", "full_core", False, FULLCORE_BLOCKER),
-    Design("core_wrapper_plus_copper", "", (), "full_core", "full_core", False, FULLCORE_BLOCKER),
+    Design("full_core_baseline", "", (), "full_core", "full_core", False, FULLCORE_BLOCKER),
+    Design("full_core_plus_copper", "", (), "full_core", "full_core", False, FULLCORE_BLOCKER),
+    Design(
+        "baseline_core_wrapper",
+        "baseline_core_wrapper",
+        PICORV32_SOURCES,
+        "core_wrapper",
+        "picorv32_core_wrapper",
+        True,
+    ),
+    Design(
+        "core_wrapper_plus_baseline_prefetch",
+        "core_wrapper_plus_baseline_prefetch",
+        PICORV32_SOURCES,
+        "core_wrapper",
+        "picorv32_core_wrapper",
+        True,
+    ),
+    Design(
+        "core_wrapper_plus_copper",
+        "core_wrapper_plus_copper",
+        PICORV32_SOURCES,
+        "core_wrapper",
+        "picorv32_core_wrapper",
+        True,
+        "",
+        (("ENTRIES", 8), ("QUEUE_DEPTH", 4)),
+    ),
     Design(
         "nearcore_stub_baseline",
         "nearcore_stub_baseline",
@@ -90,17 +121,32 @@ def rel(path: Path) -> str:
     return str(path.relative_to(ROOT)).replace("\\", "/")
 
 
+def scrub_text(text: str) -> str:
+    return text.replace(str(Path.home()), "{USER_HOME}").replace(Path.home().as_posix(), "{USER_HOME}")
+
+
+def write_log(path: Path, text: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(scrub_text(text), encoding="utf-8")
+
+
 def parse_total_cells(output: str) -> str:
     matches = re.findall(r"Number of cells:\s+(\d+)", output)
+    if not matches:
+        matches = re.findall(r"^\s+(\d+)\s+cells\s*$", output, re.M)
     return matches[-1] if matches else ""
 
 
 def parse_cell_counts(output: str) -> dict[str, int]:
     counts: dict[str, int] = {}
     for line in output.splitlines():
-        match = re.match(r"\s+([A-Za-z0-9_$.\[\]-]+)\s+(\d+)\s*$", line)
+        match = re.match(r"\s+([A-Za-z0-9_$.\\\[\]-]+)\s+(\d+)\s*$", line)
         if match:
             counts[match.group(1)] = int(match.group(2))
+            continue
+        match = re.match(r"\s+(\d+)\s+([A-Za-z0-9_$.\\\[\]-]+)\s*$", line)
+        if match:
+            counts[match.group(2)] = int(match.group(1))
     return counts
 
 
@@ -145,8 +191,14 @@ def run_design(design: Design) -> dict[str, str]:
     LOG_DIR.mkdir(parents=True, exist_ok=True)
     log_path = LOG_DIR / f"{design.name}.log"
     if not design.runnable:
-        log_path.write_text(design.blocked_reason + "\n", encoding="utf-8")
+        write_log(log_path, design.blocked_reason + "\n")
         return row_for(design, "BLOCKED", log_path, design.blocked_reason)
+
+    missing_sources = [source for source in design.sources if not (ROOT / source).exists()]
+    if missing_sources:
+        note = f"BLOCKED: missing RTL source(s): {', '.join(missing_sources)}."
+        write_log(log_path, note + "\n")
+        return row_for(design, "BLOCKED", log_path, note)
 
     yosys = shutil.which("yosys")
     if not yosys:
@@ -154,12 +206,12 @@ def run_design(design: Design) -> dict[str, str]:
             f"BLOCKED: {design.scope} synthesis requires Yosys on PATH. "
             "No cells, timing, or power are inferred."
         )
-        log_path.write_text(note + "\n", encoding="utf-8")
+        write_log(log_path, note + "\n")
         return row_for(design, "BLOCKED", log_path, note)
 
     command = [yosys, "-p", yosys_script(design)]
     proc = subprocess.run(command, cwd=ROOT, text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, timeout=180)
-    log_path.write_text("$ " + " ".join(command) + "\n" + proc.stdout, encoding="utf-8")
+    write_log(log_path, "$ " + " ".join(command) + "\n" + proc.stdout)
     counts = parse_cell_counts(proc.stdout)
     status = "PASS" if proc.returncode == 0 else "FAIL"
     notes = (
@@ -182,7 +234,9 @@ def run_design(design: Design) -> dict[str, str]:
 def overhead_rows(rows: list[dict[str, str]]) -> list[dict[str, str]]:
     by_design = {row["design"]: row for row in rows}
     pairs = (
-        ("full_core_cells_core_wrapper_baseline_vs_copper", "baseline_core_wrapper", "core_wrapper_plus_copper", "full_core"),
+        ("full_core_cells_baseline_vs_copper", "full_core_baseline", "full_core_plus_copper", "full_core"),
+        ("core_wrapper_cells_baseline_vs_copper", "baseline_core_wrapper", "core_wrapper_plus_copper", "core_wrapper"),
+        ("core_wrapper_cells_prefetch_baseline_vs_copper", "core_wrapper_plus_baseline_prefetch", "core_wrapper_plus_copper", "core_wrapper"),
         ("near_core_stub_cells_baseline_vs_copper", "nearcore_stub_baseline", "nearcore_stub_plus_copper", "near_core_stub"),
     )
     out: list[dict[str, str]] = []

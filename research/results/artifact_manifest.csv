@@ -23,12 +23,15 @@ external/mibench_network/network/patricia/patricia_test.c,4965,0b53de7bcab0b0971
 external/mibench_network/network/patricia/runme_large.sh,48,1b9e3d6eca0cf36676f8886709c6b78fdc584bcddab02b43a30426fbf3cc9ff4,yes,external/mibench_network/network/patricia/runme_large.sh,included source or reviewer file
 external/mibench_network/network/patricia/runme_small.sh,48,2bbf61a7b5f45c868c5708a869adc7b67858f15e6a0403f74d895747c345b0e2,yes,external/mibench_network/network/patricia/runme_small.sh,included source or reviewer file
 external/mibench_network/network/patricia/small.udp,251969,ed0c6a4791b07cad17bdff92893467c1b07f4d33014c3db6989a830408e37681,yes,external/mibench_network/network/patricia/small.udp,included source or reviewer file
+external/picorv32/COPYING,792,469f6264d9c56452736ade78938592c520fff2fd9f2d29b067151d6aad25256f,yes,external/picorv32/COPYING,included minimal PicoRV32 source/license file
+external/picorv32/picorv32.v,97706,fd142889e8178ef67f1cff17cb2d18b3adae56fcae2badf7cbcc4c4f5ac7960e,yes,external/picorv32/picorv32.v,included minimal PicoRV32 source/license file
+external/picorv32/README.md,31025,1c3aa9f5de9e713f284108ce170cd8fcb89f281b2b9544529a77a3dd48daf39c,yes,external/picorv32/README.md,included minimal PicoRV32 source/license file
 Makefile,1820,2391abb7224e27c4f9161809e74b3b550d1d818b755b49fe1a96261bb49da0de,yes,Makefile,included source or reviewer file
-README.md,4797,d4c536ca8b89c8a2501da9256d47c7cb43f1d294e64c35d70e3e6a0654cbd8d4,yes,README.md,included source or reviewer file
+README.md,5350,1e6edad78ff148d7c0b624576f1b076d817bf4888fbf963bb8d19016dffbe3a4,yes,README.md,included source or reviewer file
 reproduce.ps1,967,eff68e79cdc1cf85e7d9f4903e7409418d3e59d0bdcc172e4a6d60bd0c1a9b1d,yes,reproduce.ps1,included source or reviewer file
 reproduce.py,10603,9fbdf605b17da202a692801d521be204168a521952ce2d10b3aec8e72beef28d,yes,reproduce.py,included source or reviewer file
 reproduce.sh,330,e88875bb21f1637d4701689487ec70877dc0076a511cbb2f6e72fa6701c0eee0,yes,reproduce.sh,included source or reviewer file
-REPRODUCIBILITY_STATUS.md,6109,8e4c266a19bdc0714e6de1e0c7273077074956be6999f76caea0954b2b7d0acf,yes,REPRODUCIBILITY_STATUS.md,included source or reviewer file
+REPRODUCIBILITY_STATUS.md,6436,7a5c43ec5c3a608c5b0fd74584e4bf9d805444e1b71d8faf0d2f0f0481012ef6,yes,REPRODUCIBILITY_STATUS.md,included source or reviewer file
 requirements.txt,312,8df7b6b0f162b144707c20956493509edd0dc42bb5239fa75122035c8422561f,yes,requirements.txt,included source or reviewer file
 research/__pycache__/analyze_copper_dram_energy_scorecard.cpython-312.pyc,14167,,no,,excluded scratch/private/build directory
 research/__pycache__/analyze_copper_energy_pollution_scorecard.cpython-312.pyc,24570,,no,,excluded scratch/private/build directory
@@ -62,6 +65,7 @@ research/__pycache__/build_zstd_workload_aarch64.cpython-312.pyc,3161,,no,,exclu
 research/__pycache__/copper_authority_state_space.cpython-312.pyc,12945,,no,,excluded scratch/private/build directory
 research/__pycache__/copper_cs_sari_gapbs_revocation_eval.cpython-312.pyc,21640,,no,,excluded scratch/private/build directory
 research/__pycache__/copper_cs_sari_sensitivity_sweep.cpython-312.pyc,16572,,no,,excluded scratch/private/build directory
+research/__pycache__/copper_dmp_model.cpython-311.pyc,23041,,no,,excluded scratch/private/build directory
 research/__pycache__/copper_dmp_model.cpython-312.pyc,20810,,no,,excluded scratch/private/build directory
 research/__pycache__/copper_final_eval.cpython-312.pyc,17078,,no,,excluded scratch/private/build directory
 research/__pycache__/copper_heap_roi_storage_proxy.cpython-312.pyc,6065,,no,,excluded scratch/private/build directory
@@ -294,7 +298,7 @@ research/analyze_copper_mcpat_sensitivity.py,30243,72d87a9b98b1eb8eb44e351364550
 research/analyze_copper_metadata_toggle_bound.py,6723,489a48b3490ebf49c2b99c3f6ad145eb28c4150aaab1bd1d27e2ef62b20216a4,yes,research/analyze_copper_metadata_toggle_bound.py,included source or reviewer file
 research/analyze_copper_prefetch_traffic_overhead.py,19665,d269e06831642ae33b75ccdbf03e1dead9966ddbc2a2bcc5e8f29f054ef25ada,yes,research/analyze_copper_prefetch_traffic_overhead.py,included source or reviewer file
 research/analyze_openssl_tcp_process_metadata_toggle_bound.py,13468,8c8c1a5be18d48ff55250e973096ef71cc1a574d53098f7f78d697c616d059ea,yes,research/analyze_openssl_tcp_process_metadata_toggle_bound.py,included source or reviewer file
-research/ARTIFACT_MAP.md,2702,de99f2d50b83032518203b03f3f3516eebdd0210ec8a77a48dfb1964cb62ed40,yes,research/ARTIFACT_MAP.md,included source or reviewer file
+research/ARTIFACT_MAP.md,2782,30fad5932ad0b9b0464dba031b2a5538e5d9686f9c71b3fc2435445325b90185,yes,research/ARTIFACT_MAP.md,included source or reviewer file
 research/audit_cache_service_no_poison_control.py,4961,a0ca2a521ab7a37f8be4dafebc63cfe9099f8d2ffad991e5faa2da9b197a1892,yes,research/audit_cache_service_no_poison_control.py,included source or reviewer file
 research/audit_cache_service_scale_sensitivity.py,4872,911363517c8b39ee1da29c2588452d5303324c5f2053e45d14ab25a7f633bcf7,yes,research/audit_cache_service_scale_sensitivity.py,included source or reviewer file
 research/audit_cache_service_seed_stability.py,4782,e3461107b545fa68c15a236980549d9e8d93d59b26e6d22dcd4612bcfe107cf0,yes,research/audit_cache_service_seed_stability.py,included source or reviewer file
@@ -417,7 +421,7 @@ research/build_zlib_workload_aarch64.py,2012,274ebb28781d0661680e332b0888e5b3777
 research/build_zstd_workload_aarch64.py,2020,edd9048431c05dd7f443f184fee4f2835dfc48bc0869eb7fbf637c23839cda83,yes,research/build_zstd_workload_aarch64.py,included source or reviewer file
 research/champsim_configs/ip_stride_l1d.json,3745,13d959e85b1e6dba02a963bcc5ddf0f365e5ddb1dfc1d5f01d30899f96313f1b,yes,research/champsim_configs/ip_stride_l1d.json,included source or reviewer file
 research/champsim_configs/next_line_l1d.json,3745,09f24796215066cccc3439edfbbb46bef0c18761a3c644468c9a9010fd767dfd,yes,research/champsim_configs/next_line_l1d.json,included source or reviewer file
-research/CONFERENCE_READINESS_DASHBOARD.md,5900,a3d1d8bb41e2e7ef4da3f0862d6519e6097cc8aa1bcc431482c62acc6ef3841d,yes,research/CONFERENCE_READINESS_DASHBOARD.md,included source or reviewer file
+research/CONFERENCE_READINESS_DASHBOARD.md,6054,1ffba73764b4b1506226e39e9ececf095e9918f75bbb35bd66bbd307f8c9c269,yes,research/CONFERENCE_READINESS_DASHBOARD.md,included source or reviewer file
 research/COPPER_AMBA_CHI_ACE_EVENT_MAP_20260619.md,6938,5e612d00a84f525e51c06ea05a5e1df97203de0e1b7d9955126874089a7be6d8,yes,research/COPPER_AMBA_CHI_ACE_EVENT_MAP_20260619.md,included source or reviewer file
 research/copper_amba_sari_authority_bridge_tb.sv,34907,5dc4706d0a82ac91c09ca53b5ca3c2b937809b3243d56aec8ecdd8e60ea192bd,yes,research/copper_amba_sari_authority_bridge_tb.sv,included source or reviewer file
 research/copper_amba_sari_authority_bridge_top.sv,13080,5654c2b6afa9d23f610b570275314683db8d92560aff65bb32e34ba02514fb05,yes,research/copper_amba_sari_authority_bridge_top.sv,included source or reviewer file
@@ -429,7 +433,7 @@ research/copper_authority_state_space.py,10586,a75f2c66ebf37f1a07403efc059056842
 research/copper_cavi_authority_issue_gate.sv,9763,8a32c7539e431792fdda0afd022e77d960bb3c6f3a25e31530a7467327a4efaa,yes,research/copper_cavi_authority_issue_gate.sv,included source or reviewer file
 research/copper_cavi_authority_issue_gate_tb.sv,21023,b8ad75546148481154503dbaf2556ce8e63aa585a6c16d273636b702b1022bec,yes,research/copper_cavi_authority_issue_gate_tb.sv,included source or reviewer file
 research/copper_cepf_line_e2e_sva_tb.sv,20115,2c19cbcfa95e29a5e5f1786591944b2e93320c618eab10a8bd26afda898bb3cc,yes,research/copper_cepf_line_e2e_sva_tb.sv,included source or reviewer file
-research/COPPER_CLAIM_LEDGER.md,5061,60519447d247b047a7be284eb5842cf5463c84fad594d3f869c613c871176add,yes,research/COPPER_CLAIM_LEDGER.md,included source or reviewer file
+research/COPPER_CLAIM_LEDGER.md,6284,b577c193b90eb29b62c9fe730e23fb4eee8c64f592de07db2413fdf1a8da5768,yes,research/COPPER_CLAIM_LEDGER.md,included source or reviewer file
 research/copper_clpd_constraints.xdc,44,,no,,suffix not included
 research/copper_clpd_ctlw_authority_e2e_tb.sv,25956,175c323f1c22abc92c62d6f28ff4460cd0d97574de0bf5ae55520923a1f13a3b,yes,research/copper_clpd_ctlw_authority_e2e_tb.sv,included source or reviewer file
 research/copper_clpd_gate.sv,6531,971acb8bbf013fbe1b148624d8b68623c1e1b781c391fde3d25364f1bdba8a30,yes,research/copper_clpd_gate.sv,included source or reviewer file
@@ -469,8 +473,8 @@ research/COPPER_DOCX_QA.md,13190,c0110d089e5afda8beeb592f991e6386135d7f1369f7ef0
 research/COPPER_ENVIRONMENT_ARTIFACT_MANIFEST_20260619.md,5389,,no,,excluded local-only file containing a private absolute path
 research/copper_final_eval.py,13907,1279787e97eca6456355cd43e3c8c7b86fc8959953bde4f8679d1b0d65875550,yes,research/copper_final_eval.py,included source or reviewer file
 research/COPPER_FINAL_OUTPUT.md,105697,77837d2061122ffa81dc01d5a9129071a45b4dee8f868bdf8dc02638289830a4,yes,research/COPPER_FINAL_OUTPUT.md,included source or reviewer file
-research/COPPER_FINAL_REVIEWER_REPORT.md,5074,1e0e897c2ff290adad967826ce64c2b3ae3d48809fd7e9ac8b1102fd2f461d7d,yes,research/COPPER_FINAL_REVIEWER_REPORT.md,included source or reviewer file
-research/COPPER_FINAL_SUBMISSION_BLOCKERS.md,2031,957c7ee88d790b7422b5c8662eeb708449c286cfd4318b0617d5d1f9204991c1,yes,research/COPPER_FINAL_SUBMISSION_BLOCKERS.md,included source or reviewer file
+research/COPPER_FINAL_REVIEWER_REPORT.md,5578,2d333897f3bc067520961c6f8b17b44680b6b1e5523531cb33a0c27877d98e3d,yes,research/COPPER_FINAL_REVIEWER_REPORT.md,included source or reviewer file
+research/COPPER_FINAL_SUBMISSION_BLOCKERS.md,2215,7dcd35a82fe8e383397e738feea4cf1dc5904b83bd3853b414b5a7bc7cf7ffe0,yes,research/COPPER_FINAL_SUBMISSION_BLOCKERS.md,included source or reviewer file
 research/COPPER_FREE_RUN_RESULTS.md,32147,,no,,excluded local-only file containing a private absolute path
 research/copper_full_authority_constraints.xdc,58,,no,,suffix not included
 research/copper_full_authority_gate.sv,4129,4758407ffa1cd484ee7cb78ae11e3dfcd8851fb8b00ee7383b9d341172b6a945,yes,research/copper_full_authority_gate.sv,included source or reviewer file
@@ -574,7 +578,7 @@ research/olden_compat/olden_random_alloc.c,672,c50fa66bdebe72782434ffc6c815f17ed
 research/olden_compat/olden_runtime_compat.c,998,bfe5f5b7b4f4a84ebe8a7d4eb9285f62fd1ddff043173523dc1dede7ef6fc9c8,yes,research/olden_compat/olden_runtime_compat.c,included source or reviewer file
 research/openssl_cli_tls_pair_guest.sh,1901,908f19955a4d744237fcc8565a56a0363052a3df84cc07ba01cb442cf4f7040c,yes,research/openssl_cli_tls_pair_guest.sh,included source or reviewer file
 research/openssl_guest_probe.sh,207,bd17320d4a32b19e29703bd4c71f3e7e0fa914277a6156793e97795ecc455b3c,yes,research/openssl_guest_probe.sh,included source or reviewer file
-research/paper/main.tex,13258,044e9b7d4cf489f141f74b036ca8be410d89a06da22279464cce1df4ad2230f9,yes,research/paper/main.tex,included source or reviewer file
+research/paper/main.tex,14173,61e3ae79460d34e4d1ea816d943fcccde7447ebc7b0f07458ccee3781ded5e57,yes,research/paper/main.tex,included source or reviewer file
 research/paper/references.bib,1227,4fc7f4263c3bf76759a6b6d90721c295054fc9bce70ac3f67b497dc0433f3784,yes,research/paper/references.bib,included source or reviewer file
 research/plot_copper_app_full_baseline_runtime.py,6449,55f542c872c48b0ba545599616744558f3d9e266c8badded676b3fcab1ea4fb6,yes,research/plot_copper_app_full_baseline_runtime.py,included source or reviewer file
 research/plot_copper_app_overhead_figures.py,11904,5d516fe4767370a8df2f47d461fca8c15d34781a7eabeec1dd57b08ddde82287,yes,research/plot_copper_app_overhead_figures.py,included source or reviewer file
@@ -585,8 +589,8 @@ research/results/aarch64_c_kernel_suite_fs.s,15452,,no,,included summary/evidenc
 research/results/aarch64_gapbs_mini_suite_fs.s,24111,,no,,included summary/evidence file
 research/results/aarch64_gapbs_mini_suite_fs_small.s,20597,,no,,included summary/evidence file
 research/results/ablation.csv,11431,5121591a6b88d9308f397ca6444f1d32704bcd3c30b36aee5a0aa0ddf3d01ccd,yes,research/results/ablation.csv,included summary/evidence file
-research/results/artifact_inventory.csv,3512094,f7debcb57379fca443b1e1a0b56a4ac795e4bd5580c16ef9bea14a6ac71a90de,yes,research/results/artifact_inventory.csv,included summary/evidence file
-research/results/artifact_manifest.csv,1884872,295b59b15b3ec65c7f443cb18cfb2f841602e33a23e4a6eb32a61b4a0060a068,yes,research/results/artifact_manifest.csv,included summary/evidence file
+research/results/artifact_inventory.csv,3516244,3b8bb652941effaf2c1f0f95ca6702ea69184577134242f485575d6d713e0ba7,yes,research/results/artifact_inventory.csv,included summary/evidence file
+research/results/artifact_manifest.csv,1888814,9c80cbb551740b1babcb127b977177cf0d5f4277d9d3f347dab0e564efbbcf91,yes,research/results/artifact_manifest.csv,included summary/evidence file
 research/results/authority_regression/run_copper_cepf_line_e2e_xsim.log,5176,de1284fdcb7e889420f17bd87bd155f27672cade11d139de745bcc2a81497b70,yes,research/results/authority_regression/run_copper_cepf_line_e2e_xsim.log,included summary/evidence file
 research/results/authority_regression/run_copper_clpd_ctlw_authority_e2e_xsim.log,6006,68d7a0a7ade621a5e57c99da833d13b7a95efabb1c49ac018c091112479a5a26,yes,research/results/authority_regression/run_copper_clpd_ctlw_authority_e2e_xsim.log,included summary/evidence file
 research/results/authority_regression/run_copper_clpd_xsim.log,4134,0fadb5ebeef3464c873dc162261be6ab84c91a619de233145038c66798aa64fe,yes,research/results/authority_regression/run_copper_clpd_xsim.log,included summary/evidence file
@@ -1629,8 +1633,8 @@ research/results/figures/copper_app_full_baseline_runtime.png,190927,b8492d87157
 research/results/figures/copper_app_full_baseline_runtime.svg,120211,,no,,included summary/evidence file
 research/results/figures/copper_app_runtime_delta.png,195951,d7f4dd868f8a4b2f34416624426e02c17b005f812fab8dd3766c6db227963d25,yes,research/results/figures/copper_app_runtime_delta.png,included summary/evidence file
 research/results/figures/copper_app_runtime_delta.svg,116712,,no,,included summary/evidence file
-research/results/fullcore_synthesis.csv,1560,67e98fe059804b87cc11597cb1340f11af997b71fe884fcd670020a397fe63b3,yes,research/results/fullcore_synthesis.csv,included summary/evidence file
-research/results/fullcore_synthesis_overhead.csv,681,d9081dec2ac72024100495fae3cb802cfb2bf999f26c3eb6126edc7518e1c715,yes,research/results/fullcore_synthesis_overhead.csv,included summary/evidence file
+research/results/fullcore_synthesis.csv,2113,cb738796ce46416f2ab5d322f98e9aadf015b7d23f5ed4c04ed0aeca5e386b20,yes,research/results/fullcore_synthesis.csv,included summary/evidence file
+research/results/fullcore_synthesis_overhead.csv,1198,39966d94cd4d09894d7e5f81aac740d6917e5b1619255475f63cd09b5f1d316e,yes,research/results/fullcore_synthesis_overhead.csv,included summary/evidence file
 research/results/gapbs/bfs_g12_n3.txt,424,5a992fae511fbef52f38a6009fa72de26d72c6d7f4fa479332e72b12d2777cb4,yes,research/results/gapbs/bfs_g12_n3.txt,included summary/evidence file
 research/results/gapbs/bfs_g16_n3.txt,426,c4465a889113efe409573c4f3cd8410379192dc281c024de7bdec031f715dd88,yes,research/results/gapbs/bfs_g16_n3.txt,included summary/evidence file
 research/results/gapbs/bfs_g18_n3.txt,428,7aec79e11fc07006fb0b8e0afa84dc9f2f836de50b012ec6cb743588cd94227d,yes,research/results/gapbs/bfs_g18_n3.txt,included summary/evidence file
@@ -10380,7 +10384,7 @@ research/results/gem5_med_pageperm_stride/config.json,57495,,no,,excluded local-
 research/results/gem5_med_pageperm_stride/stats.txt,132749,,no,,excluded raw gem5 output tree; summaries are included
 research/results/gem5_med_pageperm_stride.err,544,,no,,excluded raw gem5 output tree; summaries are included
 research/results/gem5_med_pageperm_stride.log,776,,no,,excluded local-only file containing a private absolute path
-research/results/gem5_memory_traffic.csv,385,,no,,excluded raw gem5 output tree; summaries are included
+research/results/gem5_memory_traffic.csv,13112,,no,,excluded raw gem5 output tree; summaries are included
 research/results/gem5_objects_probe.err,0,,no,,excluded raw gem5 output tree; summaries are included
 research/results/gem5_objects_probe.log,1204,,no,,excluded raw gem5 output tree; summaries are included
 research/results/gem5_objects_probe_cpu.err,0,,no,,excluded raw gem5 output tree; summaries are included
@@ -10541,9 +10545,9 @@ research/results/gem5_pageperm_stride/config.json,57491,,no,,excluded local-only
 research/results/gem5_pageperm_stride/stats.txt,134216,,no,,excluded raw gem5 output tree; summaries are included
 research/results/gem5_pageperm_stride.err,544,,no,,excluded raw gem5 output tree; summaries are included
 research/results/gem5_pageperm_stride.log,724,,no,,excluded local-only file containing a private absolute path
-research/results/gem5_performance.csv,408,,no,,excluded raw gem5 output tree; summaries are included
+research/results/gem5_performance.csv,13734,,no,,excluded raw gem5 output tree; summaries are included
 research/results/GEM5_POWERSHELL_RUNNER_FIX_20260619.md,2011,cf38d5739041f4ab66de8cf5f09f9aa54694976150be9cef4ddf846267ffb951,yes,research/results/GEM5_POWERSHELL_RUNNER_FIX_20260619.md,included summary/evidence file
-research/results/gem5_prefetch_metrics.csv,412,,no,,excluded raw gem5 output tree; summaries are included
+research/results/gem5_prefetch_metrics.csv,13364,,no,,excluded raw gem5 output tree; summaries are included
 research/results/gem5_random_s1_copper/citations.bib,4664,,no,,excluded raw gem5 output tree; summaries are included
 research/results/gem5_random_s1_copper/config.ini,22352,,no,,excluded raw gem5 output tree; summaries are included
 research/results/gem5_random_s1_copper/config.json,56725,,no,,excluded local-only file containing a private absolute path
@@ -10818,11 +10822,13 @@ research/results/logs/ci/gh_unavailable.log,327,90e471031a78146461a63f200a30ff3b
 research/results/logs/ci/web_ui_trigger_ready.log,344,af28d6361d458932b15c08ff75ea4f14689f0920624a621eeb3cd1b425361a58,yes,research/results/logs/ci/web_ui_trigger_ready.log,included summary/evidence file
 research/results/logs/core_integrated/core_integrated_eval.jsonl,399686,,no,,included summary/evidence file
 research/results/logs/energy/energy_proxy.log,309,ff176c5efdcca472849737e9783c07237f0ffb3d077da891640aac852cf3bb66,yes,research/results/logs/energy/energy_proxy.log,included summary/evidence file
-research/results/logs/fullcore_synthesis/baseline_core_wrapper.log,140,3a1215ec666cc0d6f99d4b8b52096d87f9dba94447234a3143e04ede4251754d,yes,research/results/logs/fullcore_synthesis/baseline_core_wrapper.log,included summary/evidence file
-research/results/logs/fullcore_synthesis/core_wrapper_plus_baseline_prefetch.log,140,3a1215ec666cc0d6f99d4b8b52096d87f9dba94447234a3143e04ede4251754d,yes,research/results/logs/fullcore_synthesis/core_wrapper_plus_baseline_prefetch.log,included summary/evidence file
-research/results/logs/fullcore_synthesis/core_wrapper_plus_copper.log,140,3a1215ec666cc0d6f99d4b8b52096d87f9dba94447234a3143e04ede4251754d,yes,research/results/logs/fullcore_synthesis/core_wrapper_plus_copper.log,included summary/evidence file
-research/results/logs/fullcore_synthesis/nearcore_stub_baseline.log,49732,82a4d9bb34948ee58d7c2da1630a2360da8dcf349656a8db3de0e64585bbd353,yes,research/results/logs/fullcore_synthesis/nearcore_stub_baseline.log,included summary/evidence file
-research/results/logs/fullcore_synthesis/nearcore_stub_plus_copper.log,85932,3f5680217a61624a0974b44176892d719ce8cb78bfc9f536ea10b8e2f35a2cdb,yes,research/results/logs/fullcore_synthesis/nearcore_stub_plus_copper.log,included summary/evidence file
+research/results/logs/fullcore_synthesis/baseline_core_wrapper.log,293939,7c6d1ce368922e889b0175a9632c93359266f6405477f8c14e06290e7d31ff7c,yes,research/results/logs/fullcore_synthesis/baseline_core_wrapper.log,included summary/evidence file
+research/results/logs/fullcore_synthesis/core_wrapper_plus_baseline_prefetch.log,319924,6c08d6519c7d2f604ff148fb7b94a375008a3819c9ad9b7bc674e7ea32d3c4aa,yes,research/results/logs/fullcore_synthesis/core_wrapper_plus_baseline_prefetch.log,included summary/evidence file
+research/results/logs/fullcore_synthesis/core_wrapper_plus_copper.log,342540,3ffa0437b7aad7706e1907581fba58c3795b1b9780dc91196b54c2571ef0ca85,yes,research/results/logs/fullcore_synthesis/core_wrapper_plus_copper.log,included summary/evidence file
+research/results/logs/fullcore_synthesis/full_core_baseline.log,128,b99fc94420a8a994debff5ebe6e580efcd95b635328a9697f1d6c40a748dc7b0,yes,research/results/logs/fullcore_synthesis/full_core_baseline.log,included summary/evidence file
+research/results/logs/fullcore_synthesis/full_core_plus_copper.log,128,b99fc94420a8a994debff5ebe6e580efcd95b635328a9697f1d6c40a748dc7b0,yes,research/results/logs/fullcore_synthesis/full_core_plus_copper.log,included summary/evidence file
+research/results/logs/fullcore_synthesis/nearcore_stub_baseline.log,53810,0954831d3e5d789656ee6fc3926cd7a2ca30c0488a9ec44c4e4e4dcf40b80e8d,yes,research/results/logs/fullcore_synthesis/nearcore_stub_baseline.log,included summary/evidence file
+research/results/logs/fullcore_synthesis/nearcore_stub_plus_copper.log,93343,75df8472da4cee7758740db6352c4f0142dc37cb17ac570d60b9c648a9f3a71f,yes,research/results/logs/fullcore_synthesis/nearcore_stub_plus_copper.log,included summary/evidence file
 research/results/logs/fullcore_synthesis/yosys_generic_baseline_core_stub_with_prefetch_interface.log,25,986a5d1dc17909a60035ec9494b8916f2d2e5d044501d7d098b0d3854a450b6a,yes,research/results/logs/fullcore_synthesis/yosys_generic_baseline_core_stub_with_prefetch_interface.log,included summary/evidence file
 research/results/logs/fullcore_synthesis/yosys_generic_baseline_prefetch_unit.log,25,986a5d1dc17909a60035ec9494b8916f2d2e5d044501d7d098b0d3854a450b6a,yes,research/results/logs/fullcore_synthesis/yosys_generic_baseline_prefetch_unit.log,included summary/evidence file
 research/results/logs/fullcore_synthesis/yosys_generic_copper_unit.log,25,986a5d1dc17909a60035ec9494b8916f2d2e5d044501d7d098b0d3854a450b6a,yes,research/results/logs/fullcore_synthesis/yosys_generic_copper_unit.log,included summary/evidence file
@@ -10830,13 +10836,29 @@ research/results/logs/fullcore_synthesis/yosys_generic_copper_with_queue.log,25,
 research/results/logs/fullcore_synthesis/yosys_generic_copper_with_tables.log,25,986a5d1dc17909a60035ec9494b8916f2d2e5d044501d7d098b0d3854a450b6a,yes,research/results/logs/fullcore_synthesis/yosys_generic_copper_with_tables.log,included summary/evidence file
 research/results/logs/fullcore_synthesis/yosys_generic_core_stub_plus_copper.log,25,986a5d1dc17909a60035ec9494b8916f2d2e5d044501d7d098b0d3854a450b6a,yes,research/results/logs/fullcore_synthesis/yosys_generic_core_stub_plus_copper.log,included summary/evidence file
 research/results/logs/gem5/gem5_availability.log,120,,no,,excluded raw gem5 output tree; summaries are included
+research/results/logs/gem5/gem5_import.log,794,,no,,excluded raw gem5 output tree; summaries are included
 research/results/logs/independent_sim/independent_sim_eval.jsonl,2249,,no,,included summary/evidence file
-research/results/logs/mapped_ppa/ecp5_nearcore_stub_baseline.log,117535,5a29442e5ab36b471e6ee1dbc9133188239357e875b9b668e70abf81ae1c81e2,yes,research/results/logs/mapped_ppa/ecp5_nearcore_stub_baseline.log,included summary/evidence file
-research/results/logs/mapped_ppa/ecp5_nearcore_stub_plus_copper.log,163326,a8a26dccf78a92ec9198f1a4085b251e7a0aa7d8c14927f0f6d38594ab9581dd,yes,research/results/logs/mapped_ppa/ecp5_nearcore_stub_plus_copper.log,included summary/evidence file
-research/results/logs/mapped_ppa/fullcore_wrapper_availability.log,129,c30544c5c475e61def7f6d4470f4e15475f0c8ed505f73970822896a77f58521,yes,research/results/logs/mapped_ppa/fullcore_wrapper_availability.log,included summary/evidence file
+research/results/logs/mapped_ppa/ecp5_baseline_core_wrapper.log,313164,7321e698e0d21f5c232da3e30efc81ebe246ebffc8c049ae4b9c72f24204e5f3,yes,research/results/logs/mapped_ppa/ecp5_baseline_core_wrapper.log,included summary/evidence file
+research/results/logs/mapped_ppa/ecp5_core_wrapper_plus_baseline_prefetch.log,342021,a64790ca7f0928127e759c8e5796394ba4c3b0ad82474f23ab258383dc16135e,yes,research/results/logs/mapped_ppa/ecp5_core_wrapper_plus_baseline_prefetch.log,included summary/evidence file
+research/results/logs/mapped_ppa/ecp5_core_wrapper_plus_copper.log,483875,60e12646abc8dc51c135e08d8800a08e07ad6f75c30eb4600755542721075159,yes,research/results/logs/mapped_ppa/ecp5_core_wrapper_plus_copper.log,included summary/evidence file
+research/results/logs/mapped_ppa/ecp5_nearcore_stub_baseline.log,115473,305f13c56ac337e22b7b62ca3c501d7459c590b053b7d002e1a3fb121f79b20f,yes,research/results/logs/mapped_ppa/ecp5_nearcore_stub_baseline.log,included summary/evidence file
+research/results/logs/mapped_ppa/ecp5_nearcore_stub_plus_copper.log,160895,3d5bb01d7a8763ad6a2a3fa796e1079c3c17b1aa84ed8e5c2d9a5bec762a1aa6,yes,research/results/logs/mapped_ppa/ecp5_nearcore_stub_plus_copper.log,included summary/evidence file
+research/results/logs/mapped_ppa/fullcore_wrapper_availability.log,170,01c5431404c6e02866bf49ea4d472672a491b01043bb8c9fe9b07ed7777936d0,yes,research/results/logs/mapped_ppa/fullcore_wrapper_availability.log,included summary/evidence file
 research/results/logs/mapped_ppa/ice40_nearcore_stub_baseline.log,51,110984e6263898f5823dc75cef8e8a5adf3bffd6ea837c864d324a656de25086,yes,research/results/logs/mapped_ppa/ice40_nearcore_stub_baseline.log,included summary/evidence file
 research/results/logs/mapped_ppa/ice40_nearcore_stub_plus_copper.log,51,110984e6263898f5823dc75cef8e8a5adf3bffd6ea837c864d324a656de25086,yes,research/results/logs/mapped_ppa/ice40_nearcore_stub_plus_copper.log,included summary/evidence file
 research/results/logs/mapped_ppa/unit_fallback.log,93,6a92fc7e41b59d308c38162b4742ffded22e6295745246a41724b1bda2c5c750,yes,research/results/logs/mapped_ppa/unit_fallback.log,included summary/evidence file
+research/results/logs/mapped_ppa/vivado_runs/baseline_core_wrapper/baseline_core_wrapper_power.rpt,8593,,no,,excluded local-only file containing a private absolute path
+research/results/logs/mapped_ppa/vivado_runs/baseline_core_wrapper/baseline_core_wrapper_timing.rpt,20711,,no,,excluded local-only file containing a private absolute path
+research/results/logs/mapped_ppa/vivado_runs/baseline_core_wrapper/baseline_core_wrapper_utilization.rpt,10867,,no,,excluded local-only file containing a private absolute path
+research/results/logs/mapped_ppa/vivado_runs/baseline_core_wrapper/run_vivado_impl.tcl,1152,,no,,excluded local-only file containing a private absolute path
+research/results/logs/mapped_ppa/vivado_runs/core_wrapper_plus_baseline_prefetch/core_wrapper_plus_baseline_prefetch_power.rpt,8867,,no,,excluded local-only file containing a private absolute path
+research/results/logs/mapped_ppa/vivado_runs/core_wrapper_plus_baseline_prefetch/core_wrapper_plus_baseline_prefetch_timing.rpt,19517,,no,,excluded local-only file containing a private absolute path
+research/results/logs/mapped_ppa/vivado_runs/core_wrapper_plus_baseline_prefetch/core_wrapper_plus_baseline_prefetch_utilization.rpt,10965,,no,,excluded local-only file containing a private absolute path
+research/results/logs/mapped_ppa/vivado_runs/core_wrapper_plus_baseline_prefetch/run_vivado_impl.tcl,1250,,no,,excluded local-only file containing a private absolute path
+research/results/logs/mapped_ppa/vivado_runs/core_wrapper_plus_copper/core_wrapper_plus_copper_power.rpt,8713,,no,,excluded local-only file containing a private absolute path
+research/results/logs/mapped_ppa/vivado_runs/core_wrapper_plus_copper/core_wrapper_plus_copper_timing.rpt,19604,,no,,excluded local-only file containing a private absolute path
+research/results/logs/mapped_ppa/vivado_runs/core_wrapper_plus_copper/core_wrapper_plus_copper_utilization.rpt,10930,,no,,excluded local-only file containing a private absolute path
+research/results/logs/mapped_ppa/vivado_runs/core_wrapper_plus_copper/run_vivado_impl.tcl,1214,,no,,excluded local-only file containing a private absolute path
 research/results/logs/mapped_ppa/vivado_runs/nearcore_stub_baseline/nearcore_stub_baseline_power.rpt,8605,,no,,excluded local-only file containing a private absolute path
 research/results/logs/mapped_ppa/vivado_runs/nearcore_stub_baseline/nearcore_stub_baseline_timing.rpt,22024,,no,,excluded local-only file containing a private absolute path
 research/results/logs/mapped_ppa/vivado_runs/nearcore_stub_baseline/nearcore_stub_baseline_utilization.rpt,10664,,no,,excluded local-only file containing a private absolute path
@@ -10847,22 +10869,25 @@ research/results/logs/mapped_ppa/vivado_runs/nearcore_stub_plus_copper/nearcore_
 research/results/logs/mapped_ppa/vivado_runs/nearcore_stub_plus_copper/run_vivado_impl.tcl,1030,,no,,excluded local-only file containing a private absolute path
 research/results/logs/openroad/openroad_availability.log,40,cac859dbcefa6ecdccc59066b663a698dd69178ad535c39048753442f6838ff6,yes,research/results/logs/openroad/openroad_availability.log,included summary/evidence file
 research/results/logs/paper/build_paper.log,37,789380ed506d193b5bc60a7c3314a499483cb34c47af1fe6c2aea60354c4d4b7,yes,research/results/logs/paper/build_paper.log,included summary/evidence file
-research/results/logs/rtl/iverilog_copper_prefetch_unit_open.log,28,f998dd62fde17d0a1dba58d49887c26cfab2b68102852e7e7443a582f945fb0a,yes,research/results/logs/rtl/iverilog_copper_prefetch_unit_open.log,included summary/evidence file
-research/results/logs/rtl/vvp_copper_prefetch_unit_open_tb.log,211,02ad2e2df9f16ba400b585d9a98ed26ce97604e78a870aa8fb9d3747ec0025bf,yes,research/results/logs/rtl/vvp_copper_prefetch_unit_open_tb.log,included summary/evidence file
-research/results/logs/synthesis/nextpnr_ecp5_baseline_prefetch_unit.log,25,986a5d1dc17909a60035ec9494b8916f2d2e5d044501d7d098b0d3854a450b6a,yes,research/results/logs/synthesis/nextpnr_ecp5_baseline_prefetch_unit.log,included summary/evidence file
-research/results/logs/synthesis/nextpnr_ecp5_copper_unit.log,25,986a5d1dc17909a60035ec9494b8916f2d2e5d044501d7d098b0d3854a450b6a,yes,research/results/logs/synthesis/nextpnr_ecp5_copper_unit.log,included summary/evidence file
-research/results/logs/synthesis/nextpnr_ecp5_copper_with_queue.log,25,986a5d1dc17909a60035ec9494b8916f2d2e5d044501d7d098b0d3854a450b6a,yes,research/results/logs/synthesis/nextpnr_ecp5_copper_with_queue.log,included summary/evidence file
-research/results/logs/synthesis/nextpnr_ecp5_copper_with_tables.log,25,986a5d1dc17909a60035ec9494b8916f2d2e5d044501d7d098b0d3854a450b6a,yes,research/results/logs/synthesis/nextpnr_ecp5_copper_with_tables.log,included summary/evidence file
-research/results/logs/synthesis/nextpnr_ice40_baseline_prefetch_unit.log,25,986a5d1dc17909a60035ec9494b8916f2d2e5d044501d7d098b0d3854a450b6a,yes,research/results/logs/synthesis/nextpnr_ice40_baseline_prefetch_unit.log,included summary/evidence file
-research/results/logs/synthesis/nextpnr_ice40_copper_unit.log,25,986a5d1dc17909a60035ec9494b8916f2d2e5d044501d7d098b0d3854a450b6a,yes,research/results/logs/synthesis/nextpnr_ice40_copper_unit.log,included summary/evidence file
-research/results/logs/synthesis/nextpnr_ice40_copper_with_queue.log,25,986a5d1dc17909a60035ec9494b8916f2d2e5d044501d7d098b0d3854a450b6a,yes,research/results/logs/synthesis/nextpnr_ice40_copper_with_queue.log,included summary/evidence file
-research/results/logs/synthesis/nextpnr_ice40_copper_with_tables.log,25,986a5d1dc17909a60035ec9494b8916f2d2e5d044501d7d098b0d3854a450b6a,yes,research/results/logs/synthesis/nextpnr_ice40_copper_with_tables.log,included summary/evidence file
-research/results/logs/synthesis/yosys_generic_baseline_prefetch_unit.log,25,986a5d1dc17909a60035ec9494b8916f2d2e5d044501d7d098b0d3854a450b6a,yes,research/results/logs/synthesis/yosys_generic_baseline_prefetch_unit.log,included summary/evidence file
-research/results/logs/synthesis/yosys_generic_copper_unit.log,25,986a5d1dc17909a60035ec9494b8916f2d2e5d044501d7d098b0d3854a450b6a,yes,research/results/logs/synthesis/yosys_generic_copper_unit.log,included summary/evidence file
-research/results/logs/synthesis/yosys_generic_copper_with_queue.log,25,986a5d1dc17909a60035ec9494b8916f2d2e5d044501d7d098b0d3854a450b6a,yes,research/results/logs/synthesis/yosys_generic_copper_with_queue.log,included summary/evidence file
-research/results/logs/synthesis/yosys_generic_copper_with_tables.log,25,986a5d1dc17909a60035ec9494b8916f2d2e5d044501d7d098b0d3854a450b6a,yes,research/results/logs/synthesis/yosys_generic_copper_with_tables.log,included summary/evidence file
-research/results/logs/vivado/nearcore_stub_baseline.log,84028,8c53e88413ed925290dabe6af4624cc4f6ce6f6b4c4a728828ba6227647a17f9,yes,research/results/logs/vivado/nearcore_stub_baseline.log,included summary/evidence file
-research/results/logs/vivado/nearcore_stub_plus_copper.log,84128,f44b68025d837a6403a8911f361467c9c685608ba4b2bc0b1827811a155fadd3,yes,research/results/logs/vivado/nearcore_stub_plus_copper.log,included summary/evidence file
+research/results/logs/rtl/iverilog_copper_prefetch_unit_open.log,0,e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855,yes,research/results/logs/rtl/iverilog_copper_prefetch_unit_open.log,included summary/evidence file
+research/results/logs/rtl/vvp_copper_prefetch_unit_open_tb.log,221,,no,,excluded local-only file containing a private absolute path
+research/results/logs/synthesis/nextpnr_ecp5_baseline_prefetch_unit.log,75702,,no,,excluded local-only file containing a private absolute path
+research/results/logs/synthesis/nextpnr_ecp5_copper_unit.log,119269,,no,,excluded local-only file containing a private absolute path
+research/results/logs/synthesis/nextpnr_ecp5_copper_with_queue.log,124522,,no,,excluded local-only file containing a private absolute path
+research/results/logs/synthesis/nextpnr_ecp5_copper_with_tables.log,142586,,no,,excluded local-only file containing a private absolute path
+research/results/logs/synthesis/nextpnr_ice40_baseline_prefetch_unit.log,74448,,no,,excluded local-only file containing a private absolute path
+research/results/logs/synthesis/nextpnr_ice40_copper_unit.log,91169,,no,,excluded local-only file containing a private absolute path
+research/results/logs/synthesis/nextpnr_ice40_copper_with_queue.log,96651,,no,,excluded local-only file containing a private absolute path
+research/results/logs/synthesis/nextpnr_ice40_copper_with_tables.log,116290,,no,,excluded local-only file containing a private absolute path
+research/results/logs/synthesis/yosys_generic_baseline_prefetch_unit.log,20057,,no,,excluded local-only file containing a private absolute path
+research/results/logs/synthesis/yosys_generic_copper_unit.log,35845,,no,,excluded local-only file containing a private absolute path
+research/results/logs/synthesis/yosys_generic_copper_with_queue.log,41588,,no,,excluded local-only file containing a private absolute path
+research/results/logs/synthesis/yosys_generic_copper_with_tables.log,57281,,no,,excluded local-only file containing a private absolute path
+research/results/logs/vivado/baseline_core_wrapper.log,105948,73a842d73523ba3405dd4a76730a2a885d83b25b43dff39505f6d0ce7462d1e2,yes,research/results/logs/vivado/baseline_core_wrapper.log,included summary/evidence file
+research/results/logs/vivado/core_wrapper_plus_baseline_prefetch.log,105948,c43124247a9ae13b41792fad09fc7bd0e37f2429b432096742e3d04b08e225ba,yes,research/results/logs/vivado/core_wrapper_plus_baseline_prefetch.log,included summary/evidence file
+research/results/logs/vivado/core_wrapper_plus_copper.log,107350,f1acde99c52a59e757e8ffd557f0926c9a8e01937f7c776c1983fc8da2bd1ec9,yes,research/results/logs/vivado/core_wrapper_plus_copper.log,included summary/evidence file
+research/results/logs/vivado/nearcore_stub_baseline.log,82303,37f654603e3d1e823ccf476945271b59ecbc40472184c8bb6296196e4fb1d32d,yes,research/results/logs/vivado/nearcore_stub_baseline.log,included summary/evidence file
+research/results/logs/vivado/nearcore_stub_plus_copper.log,82324,797b213718020c0f29000bf2902e34fc5d2a90342be288080e5b1a2cbb01a764,yes,research/results/logs/vivado/nearcore_stub_plus_copper.log,included summary/evidence file
 research/results/logs/workloads/build_workloads.log,62,1a5e5c481e2d2b35518931a921e71e3a7afcee283be60d9490debc325099ff68,yes,research/results/logs/workloads/build_workloads.log,included summary/evidence file
 research/results/lua_app_stress_runner.err,0,,no,,included summary/evidence file
 research/results/lua_app_stress_runner.out,0,,no,,included summary/evidence file
@@ -10871,8 +10896,8 @@ research/results/lua_medium_run_20260616.err,0,,no,,included summary/evidence fi
 research/results/lua_medium_run_20260616.out,0,,no,,included summary/evidence file
 research/results/lua_table_workload_build/build.log,0,e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855,yes,research/results/lua_table_workload_build/build.log,included summary/evidence file
 research/results/lua_table_workload_build/LUA_TABLE_WORKLOAD_BUILD.md,3282,,no,,excluded local-only file containing a private absolute path
-research/results/mapped_ppa.csv,1808,0a40ce187ad8c2cbe0bed10bba04ff4a9040bab5bfcfceb4ec3974526b5d260b,yes,research/results/mapped_ppa.csv,included summary/evidence file
-research/results/mapped_ppa_overhead.csv,1968,62d402c914ce26512fa14a4c305b0b9e63326a863eebd1acb85e87025c5f9f66,yes,research/results/mapped_ppa_overhead.csv,included summary/evidence file
+research/results/mapped_ppa.csv,4865,6822da611a8d7155dd60fa0eb2ad7eb16aa24b96df60c05dbbee89025e32cb41,yes,research/results/mapped_ppa.csv,included summary/evidence file
+research/results/mapped_ppa_overhead.csv,6064,8fc55bad6f6e5eff129e14ea7da041eaf4742e1192fd0bc1687013b6ef361194,yes,research/results/mapped_ppa_overhead.csv,included summary/evidence file
 research/results/mcpat_copper_sensitivity_20260618/mcpat_out/cachesvc_medium_copper_clpd64k_peb_ooo_proxy.txt,26393,a3499c4d66c3dd9182c6c4b1d33090d3ba63df802b292ceeebb603c1c8956296,yes,research/results/mcpat_copper_sensitivity_20260618/mcpat_out/cachesvc_medium_copper_clpd64k_peb_ooo_proxy.txt,included summary/evidence file
 research/results/mcpat_copper_sensitivity_20260618/mcpat_out/cachesvc_medium_naive_ooo_proxy.txt,26397,365358b7e79d84f3eaf780f1a5d04be791319482525bf99c9a0f6d021118e5d1,yes,research/results/mcpat_copper_sensitivity_20260618/mcpat_out/cachesvc_medium_naive_ooo_proxy.txt,included summary/evidence file
 research/results/mcpat_copper_sensitivity_20260618/mcpat_out/cachesvc_medium_none_ooo_proxy.txt,26392,8dbba4e2d80ece99865529ffd0d308208b6c1849b836b35ae54026c4cfb9887a,yes,research/results/mcpat_copper_sensitivity_20260618/mcpat_out/cachesvc_medium_none_ooo_proxy.txt,included summary/evidence file
@@ -11298,7 +11323,7 @@ research/results/PCRE2_REGEX_SEED_STABILITY_20260620.md,1400,b564e45a277daa9ef40
 research/results/pcre2_regex_workload_build/build.log,0,e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855,yes,research/results/pcre2_regex_workload_build/build.log,included summary/evidence file
 research/results/pcre2_regex_workload_build/PCRE2_REGEX_WORKLOAD_BUILD.md,947,,no,,excluded local-only file containing a private absolute path
 research/results/performance.csv,38946,236ff155285760a11b2bed376417465808f8936d7d4c4526d77dd6f861b0667d,yes,research/results/performance.csv,included summary/evidence file
-research/results/power_report_index.csv,1335,0f6fb1f9140b3d91cef77b2b94fb465edb97856ad14c27bcf463b08808825e13,yes,research/results/power_report_index.csv,included summary/evidence file
+research/results/power_report_index.csv,1530,777e4b71c651197e43aa7452360f5f35844e985e6ff7404e8088451aa14a47d8,yes,research/results/power_report_index.csv,included summary/evidence file
 research/results/ppa_before/CONFERENCE_READINESS_DASHBOARD.md,5788,16f7982e20dcd3167b646240b8539899a562556e5333b7266d9b4b7140096ce1,yes,research/results/ppa_before/CONFERENCE_READINESS_DASHBOARD.md,included summary/evidence file
 research/results/ppa_before/COPPER_CLAIM_LEDGER.md,4523,f6b9a78da3037611ead87195188e44bd0260e7f0126aead6637c772e52dc4560,yes,research/results/ppa_before/COPPER_CLAIM_LEDGER.md,included summary/evidence file
 research/results/ppa_before/COPPER_FINAL_SUBMISSION_BLOCKERS.md,1848,4bdfd34384b7dfd4bdc1a4ba29a3a6d32285dc962a224b9fd47b7f2b7cec04bb,yes,research/results/ppa_before/COPPER_FINAL_SUBMISSION_BLOCKERS.md,included summary/evidence file
@@ -11366,12 +11391,13 @@ research/results/reproduction/pcre2_seed_summary.log,203,,no,,excluded local-onl
 research/results/reproduction/public_artifact_manifest_final.log,106,,no,,excluded local-only file containing a private absolute path
 research/results/reproduction/public_artifact_manifest_precheck.log,106,,no,,excluded local-only file containing a private absolute path
 research/results/reproduction/python_compile_check.log,0,e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855,yes,research/results/reproduction/python_compile_check.log,included summary/evidence file
+research/results/rtl/copper_prefetch_unit_open_tb.vvp,29694,,no,,included summary/evidence file
 research/results/rtl/logs/iverilog_copper_prefetch_gate.log,28,f998dd62fde17d0a1dba58d49887c26cfab2b68102852e7e7443a582f945fb0a,yes,research/results/rtl/logs/iverilog_copper_prefetch_gate.log,included summary/evidence file
 research/results/rtl/logs/iverilog_copper_prefetch_unit_open.log,28,f998dd62fde17d0a1dba58d49887c26cfab2b68102852e7e7443a582f945fb0a,yes,research/results/rtl/logs/iverilog_copper_prefetch_unit_open.log,included summary/evidence file
 research/results/rtl/logs/vvp_copper_prefetch_gate_tb.log,49,33c93dbf33c1afa6374ed80cb04ce9aa5bd8cc1c2a3a39975d21b24bd4b86759,yes,research/results/rtl/logs/vvp_copper_prefetch_gate_tb.log,included summary/evidence file
 research/results/rtl/logs/vvp_copper_prefetch_unit_open_tb.log,49,33c93dbf33c1afa6374ed80cb04ce9aa5bd8cc1c2a3a39975d21b24bd4b86759,yes,research/results/rtl/logs/vvp_copper_prefetch_unit_open_tb.log,included summary/evidence file
-research/results/rtl_compile.csv,268,b63bd91fb817da4743f39d45e12435629594773d0c441d3c89a75385ae82cb8f,yes,research/results/rtl_compile.csv,included summary/evidence file
-research/results/rtl_simulation.csv,452,7d5fe5b1a583adb28f5329f1d7d89f3ecb78bba8fefea2bddfc49aa2ec76f85e,yes,research/results/rtl_simulation.csv,included summary/evidence file
+research/results/rtl_compile.csv,472,853a841ced950874f4da0655cade9739155a98afab99985166eae1fb603e1f3c,yes,research/results/rtl_compile.csv,included summary/evidence file
+research/results/rtl_simulation.csv,798,7f5297018231d76b20eb6acf66f58b865bd506af04eb3b4deff0cac2e44c0dcf,yes,research/results/rtl_simulation.csv,included summary/evidence file
 research/results/run_logs/osslspeed_app_smoke_campaign.err,0,,no,,included summary/evidence file
 research/results/run_logs/osslspeed_app_smoke_campaign.out,0,,no,,included summary/evidence file
 research/results/run_logs/ossltlssocket_socket_smoke_key_campaign.err,0,,no,,included summary/evidence file
@@ -11390,19 +11416,19 @@ research/results/SQLITE_SPEEDTEST1_COMPONENTS_20260619.md,1686,0ead597757eb028a8
 research/results/start_process_bash_test.err,0,,no,,included summary/evidence file
 research/results/start_process_bash_test.out,53,,no,,included summary/evidence file
 research/results/statistical_summary.csv,130515,4f4459e78cc8953de3409617d12e0910be83e16307265d6aeee764781f8d1cae,yes,research/results/statistical_summary.csv,included summary/evidence file
-research/results/synthesis.csv,7135,b2b8ff02cadc45788c2abe9ab47f22b1a36167e9b7537a70ced6710f2d1d5ce7,yes,research/results/synthesis.csv,included summary/evidence file
+research/results/synthesis.csv,7500,3f153d9a2c8f4d987cd7da877c5182aca51b1a580170f04660438d10c1223e73,yes,research/results/synthesis.csv,included summary/evidence file
 research/results/synthesis_logs/yosys_baseline_prefetch_unit.log,25,986a5d1dc17909a60035ec9494b8916f2d2e5d044501d7d098b0d3854a450b6a,yes,research/results/synthesis_logs/yosys_baseline_prefetch_unit.log,included summary/evidence file
 research/results/synthesis_logs/yosys_copper_prefetch_gate.log,25,986a5d1dc17909a60035ec9494b8916f2d2e5d044501d7d098b0d3854a450b6a,yes,research/results/synthesis_logs/yosys_copper_prefetch_gate.log,included summary/evidence file
 research/results/synthesis_logs/yosys_copper_unit.log,25,986a5d1dc17909a60035ec9494b8916f2d2e5d044501d7d098b0d3854a450b6a,yes,research/results/synthesis_logs/yosys_copper_unit.log,included summary/evidence file
 research/results/synthesis_logs/yosys_copper_with_queue.log,25,986a5d1dc17909a60035ec9494b8916f2d2e5d044501d7d098b0d3854a450b6a,yes,research/results/synthesis_logs/yosys_copper_with_queue.log,included summary/evidence file
 research/results/synthesis_logs/yosys_copper_with_tables.log,25,986a5d1dc17909a60035ec9494b8916f2d2e5d044501d7d098b0d3854a450b6a,yes,research/results/synthesis_logs/yosys_copper_with_tables.log,included summary/evidence file
-research/results/synthesis_overhead.csv,5705,b484aebf8be1e04832a1e724ac03e9753eb5aad476eaae6a2097c1da02fa8840,yes,research/results/synthesis_overhead.csv,included summary/evidence file
+research/results/synthesis_overhead.csv,6136,5ebf010eec190ae3ceed3d7e35f285519cfc68a9977dc949b8729e6a8a410113,yes,research/results/synthesis_overhead.csv,included summary/evidence file
 research/results/tcp_netns_process_seed1.batch.err,0,,no,,included summary/evidence file
 research/results/tcp_netns_process_seed1.batch.out,427,,no,,included summary/evidence file
 research/results/tls_session_workload_build/build.log,0,e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855,yes,research/results/tls_session_workload_build/build.log,included summary/evidence file
 research/results/tls_session_workload_build/TLS_SESSION_WORKLOAD_BUILD.md,867,,no,,excluded local-only file containing a private absolute path
 research/results/todo_audit.csv,75,a2a83ca1afd8016b337a6c6d837723279d8cbc1d3bb0967870e437d406761a2a,yes,research/results/todo_audit.csv,included summary/evidence file
-research/results/toolchain_status.csv,2826,6cc829320cb65ce1546bc6890999d53ee014975c71c3f2423225e8419733963a,yes,research/results/toolchain_status.csv,included summary/evidence file
+research/results/toolchain_status.csv,5403,baaa238b68e89a4916400fce5d6fa13b54f4e4e0fa1f910745581a84f6507f82,yes,research/results/toolchain_status.csv,included summary/evidence file
 research/results/tooling_availability.md,2726,,no,,excluded local-only file containing a private absolute path
 research/results/vivado_cs_sari_manifest_disabled.jou,1351,,no,,excluded heavy or archive artifact
 research/results/vivado_cs_sari_manifest_disabled.log,1878,,no,,excluded local-only file containing a private absolute path
@@ -11434,7 +11460,8 @@ research/results/zstd_seed1_batch_20260620.err,0,,no,,included summary/evidence 
 research/results/zstd_seed1_batch_20260620.out,317,,no,,included summary/evidence file
 research/results/zstd_workload_build/build.log,0,e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855,yes,research/results/zstd_workload_build/build.log,included summary/evidence file
 research/results/zstd_workload_build/ZSTD_WORKLOAD_BUILD.md,872,,no,,excluded local-only file containing a private absolute path
-research/rtl/fullcore/README.md,610,7d4d77d4f6140b976e265e6b6d44953b2aa172e07d3733fe62a35b5133679c5d,yes,research/rtl/fullcore/README.md,included source or reviewer file
+research/rtl/fullcore/picorv32_copper_wrapper.sv,7864,11bad9b910c5aedf2e12a034a723fd63d1fd6214707d0de5b4a3d22746447a09,yes,research/rtl/fullcore/picorv32_copper_wrapper.sv,included source or reviewer file
+research/rtl/fullcore/README.md,602,010e1fb28c87613a4c74e69f1c1d03390e8fb6a332a66fa680dd3baa53fd5fce,yes,research/rtl/fullcore/README.md,included source or reviewer file
 research/rtl/integration/copper_near_core_stub.sv,4796,b1953884782a897df467b1bbc82e43b673f011de1df672f70a78775a696c12a7,yes,research/rtl/integration/copper_near_core_stub.sv,included source or reviewer file
 research/run_app_conventional_baseline_gap_fs.sh,1236,,no,,excluded local-only file containing a private absolute path
 research/run_cache_service_app_fs.sh,2667,,no,,excluded local-only file containing a private absolute path
@@ -11575,6 +11602,7 @@ research/scripts/__pycache__/build_conference_docs.cpython-312.pyc,71621,,no,,ex
 research/scripts/__pycache__/build_paper.cpython-312.pyc,9297,,no,,excluded scratch/private/build directory
 research/scripts/__pycache__/build_workloads.cpython-312.pyc,9160,,no,,excluded scratch/private/build directory
 research/scripts/__pycache__/check_toolchain.cpython-312.pyc,8873,,no,,excluded scratch/private/build directory
+research/scripts/__pycache__/copper_eval_model.cpython-311.pyc,28557,,no,,excluded scratch/private/build directory
 research/scripts/__pycache__/copper_eval_model.cpython-312.pyc,24440,,no,,excluded scratch/private/build directory
 research/scripts/__pycache__/import_ci_artifacts.cpython-312.pyc,24848,,no,,excluded scratch/private/build directory
 research/scripts/__pycache__/package_artifact.cpython-312.pyc,8428,,no,,excluded scratch/private/build directory
@@ -11592,24 +11620,24 @@ research/scripts/__pycache__/run_synthesis.cpython-312.pyc,22972,,no,,excluded s
 research/scripts/audit_claims.py,1641,cb359de924e64d38c1a5ab31e7b45f95169eff2951c17b6dcc94c075b579d0a8,yes,research/scripts/audit_claims.py,included source or reviewer file
 research/scripts/audit_numbers.py,1886,c17b5ec19c7255bab03f932a98a8508a374b88329ce65a9d5896562a3d3af7e0,yes,research/scripts/audit_numbers.py,included source or reviewer file
 research/scripts/audit_todos.py,1221,4ee4563c9dc961dd4493690e904dbb2863357374976c6530a6df972b313e748e,yes,research/scripts/audit_todos.py,included source or reviewer file
-research/scripts/build_conference_docs.py,61802,a54a9e79b97333bbefc1af347c2810fafe6ec0e50d1ed6408a1c186a58c6f38b,yes,research/scripts/build_conference_docs.py,included source or reviewer file
+research/scripts/build_conference_docs.py,66635,9bcef7aa7ffc0c706c8e9e21a68c4b9160fc40c880bab60f42712eda075af1df,yes,research/scripts/build_conference_docs.py,included source or reviewer file
 research/scripts/build_paper.py,5697,ca4250b8b05a7fedee4f3bea95bc7a4dad150ab6777465652247f28297ceea72,yes,research/scripts/build_paper.py,included source or reviewer file
 research/scripts/build_workloads.py,6377,8120b2e9a571a7d7519e7ff9f2f4f405f1df8bc09bde748d6006923d2b90423d,yes,research/scripts/build_workloads.py,included source or reviewer file
 research/scripts/check_toolchain.py,6271,45a47f5a8bbd509fa32990a30be33732ab56b8faacaf6575b48287399bab2fc5,yes,research/scripts/check_toolchain.py,included source or reviewer file
 research/scripts/copper_eval_model.py,16546,09fdd920664a1d995418f40ab2d1b5b4f292d3e1ca2fa0bb16e305e52809d1cb,yes,research/scripts/copper_eval_model.py,included source or reviewer file
 research/scripts/import_ci_artifacts.py,17739,1baa00bc967afadd62235e245942d391d8bfaffbc983dd816ddf29a8006c5566,yes,research/scripts/import_ci_artifacts.py,included source or reviewer file
-research/scripts/package_artifact.py,5413,5b531331d70725683c0a413e3d113026b519c38814dec91b69bf8c33b58aea22,yes,research/scripts/package_artifact.py,included source or reviewer file
+research/scripts/package_artifact.py,5824,045394e11d2ebc0e024e35872e9873a7af71eade167c5ee601a485fc495091b6,yes,research/scripts/package_artifact.py,included source or reviewer file
 research/scripts/run_core_eval.py,12180,62e50395eaf25c34ee4478a8eb9ce70e4388e89c5ce4d409f38590bcff708532,yes,research/scripts/run_core_eval.py,included source or reviewer file
 research/scripts/run_cycle_eval.py,16586,aaaa54e74f43f1c77cb1ffa832d9e3fbaf2f7aaebfe1096646b6e1214df6750e,yes,research/scripts/run_cycle_eval.py,included source or reviewer file
-research/scripts/run_energy_estimate.py,12628,97c4eededa05c3e17fe32131e506eb67edca2dbb9b9d1ad2d9f255287c814cac,yes,research/scripts/run_energy_estimate.py,included source or reviewer file
+research/scripts/run_energy_estimate.py,13217,06a2de42809b01a156eb5e9b62acea0fadb9ae6c473820dfcd07c8c14a730675,yes,research/scripts/run_energy_estimate.py,included source or reviewer file
 research/scripts/run_evaluation.py,16582,2e0b02116d985d531f1057df61b86e310acc8045db6c9308e26c171446b11623,yes,research/scripts/run_evaluation.py,included source or reviewer file
-research/scripts/run_fullcore_synthesis.py,9834,ad9284ee96fc54b43c5c858ed59038bf3f80b4a33804e1749683ed8c2fa43ea8,yes,research/scripts/run_fullcore_synthesis.py,included source or reviewer file
-research/scripts/run_gem5_eval.py,5400,2c850e22d468216831fee92ec4c715b177133bdd1ee7d005b050082e071f1da6,yes,research/scripts/run_gem5_eval.py,included source or reviewer file
+research/scripts/run_fullcore_synthesis.py,11526,8cd007920534153f29445cd76e9e0c5488d785b5441c9da39e6e2fef843df044,yes,research/scripts/run_fullcore_synthesis.py,included source or reviewer file
+research/scripts/run_gem5_eval.py,15301,154d634eb456297c0e224f3f2c7b33798c5516ac1b962b33deb79e3947521bc1,yes,research/scripts/run_gem5_eval.py,included source or reviewer file
 research/scripts/run_independent_sim_eval.py,23479,70e73d79c9db9ff02c61c5ed56e8e1edf91e4a1ca35c17ce4cc87c4dc7a83f5b,yes,research/scripts/run_independent_sim_eval.py,included source or reviewer file
-research/scripts/run_mapped_ppa.py,23546,8bf0121aea2c1ee2bb6510bef811c4820c83a51428e651cd41a52961ab1703af,yes,research/scripts/run_mapped_ppa.py,included source or reviewer file
+research/scripts/run_mapped_ppa.py,27017,1cc46d6dbb6eeb2f71a7a19469dc5fadbfa1b57b601cf7cf3d90ed87baead1d9,yes,research/scripts/run_mapped_ppa.py,included source or reviewer file
 research/scripts/run_model_tests.py,6935,abf80fdf15e904a82d42d74cd6ebd1fcc283b82beefa4e646e469ac9e19ddbb8,yes,research/scripts/run_model_tests.py,included source or reviewer file
 research/scripts/run_rtl.py,10516,48a9fc2145fa2072d3cbd86c91a5d6f5bc75712d4fbfff943617308ef72272fb,yes,research/scripts/run_rtl.py,included source or reviewer file
-research/scripts/run_synthesis.py,17305,068073fb96a06279c223eadc412e5b7683c96a2d9b64ff3e2511c784ce34c8c9,yes,research/scripts/run_synthesis.py,included source or reviewer file
+research/scripts/run_synthesis.py,17567,5a4b974304322f5eb015658065be996b63bf07d8a223df0f7a0a6bb67ec2868a,yes,research/scripts/run_synthesis.py,included source or reviewer file
 research/setup_vivado.ps1,380,b106aaf0fc2372f7f272de7cb68e5f677aeb7cd5bcfc147848f4cd3fd5212242,yes,research/setup_vivado.ps1,included source or reviewer file
 research/summarize_application_workload_portfolio.py,11590,6db59308c37d0247a13a02c95c63bc90bda116c3bf481186a1f40a9757e1b949,yes,research/summarize_application_workload_portfolio.py,included source or reviewer file
 research/summarize_cache_service_app_fs.py,10133,fa2b7427169117d5e534852211a59b73312563591266f5ec33750a4d30f9d013,yes,research/summarize_cache_service_app_fs.py,included source or reviewer file
