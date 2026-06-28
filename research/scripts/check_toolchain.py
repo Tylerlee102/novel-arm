@@ -36,11 +36,71 @@ def current_environment() -> str:
 ENVIRONMENT = current_environment()
 
 
+def tool_path(name: str) -> str | None:
+    found = shutil.which(name)
+    if found:
+        return found
+    aliases = {
+        "vivado": ("vivado", "vivado.bat"),
+        "sta": ("sta", "opensta"),
+    }
+    names: list[str] = []
+    for alias in aliases.get(name, (name,)):
+        if platform.system().lower().startswith("win") and not alias.endswith((".exe", ".bat", ".cmd")):
+            names.extend((f"{alias}.bat", f"{alias}.exe", f"{alias}.cmd", alias))
+        else:
+            names.append(alias)
+    names = list(dict.fromkeys(names))
+    tool_roots = [
+        os.environ.get("COPPER_OSS_CAD_SUITE", ""),
+        os.environ.get("COPPER_MSYS64_HOME", ""),
+        os.environ.get("COPPER_VIVADO_HOME", ""),
+        str(Path.home() / "tools" / "oss-cad-suite"),
+        str(Path.home() / "msys64" / "usr"),
+        str(Path.home() / "msys64" / "mingw64"),
+        str(ROOT / "tools" / "oss-cad-suite"),
+        str(ROOT / "tools" / "msys64" / "usr"),
+        str(ROOT / "tools" / "msys64" / "mingw64"),
+        str(ROOT / ".tools" / "winlibs" / "mingw64"),
+        str(ROOT / ".tools" / "oss-cad-suite" / "oss-cad-suite"),
+        "C:/AMDDesignTools/2025.2/Vivado",
+        "C:/Xilinx/Vivado/2025.2",
+        "C:/Xilinx/Vivado/2024.2",
+    ]
+    for root in tool_roots:
+        if not root:
+            continue
+        for candidate in names:
+            base = Path(root)
+            for path in (base / candidate, base / "bin" / candidate):
+                if path.exists():
+                    return str(path)
+    return None
+
+
+def command_env(command: list[str]) -> dict[str, str]:
+    env = os.environ.copy()
+    paths = []
+    for item in command:
+        try:
+            path = Path(item)
+        except (TypeError, ValueError):
+            continue
+        if path.exists() and path.parent:
+            paths.append(str(path.parent))
+            if path.parent.name == "bin" and (path.parent.parent / "lib").exists():
+                paths.append(str(path.parent.parent / "lib"))
+    if paths:
+        env["PATH"] = os.pathsep.join(paths + [env.get("PATH", "")])
+    return env
+
+
 def run_version(command: list[str]) -> str:
     try:
         proc = subprocess.run(
             command,
             cwd=ROOT,
+            env=command_env(command),
             text=True,
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
@@ -88,7 +148,7 @@ def tool_row(
         version = sys.version.split()[0]
         source = source_label(sys.executable)
     elif command:
-        exe = shutil.which(command[0])
+        exe = tool_path(command[0])
         available = exe is not None
         version = run_version([exe, *command[1:]]) if exe else ""
         source = source_label(exe or "")

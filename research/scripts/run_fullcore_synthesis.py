@@ -124,7 +124,7 @@ def tool_path(name: str) -> str | None:
     candidates: list[Path] = []
     oss_roots = [
         os.environ.get("COPPER_OSS_CAD_SUITE", ""),
-        "C:/Users/tyboy/tools/oss-cad-suite",
+        str(Path.home() / "tools" / "oss-cad-suite"),
         str(ROOT / "tools" / "oss-cad-suite"),
         str(ROOT / ".tools" / "oss-cad-suite" / "oss-cad-suite"),
     ]

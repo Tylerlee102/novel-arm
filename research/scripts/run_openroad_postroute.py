@@ -152,18 +152,26 @@ def tool_path(name: str) -> str | None:
     if found:
         return found
     candidates: list[Path] = []
-    oss_roots = [
+    tool_roots = [
         os.environ.get("COPPER_OSS_CAD_SUITE", ""),
+        os.environ.get("COPPER_MSYS64_HOME", ""),
         str(Path.home() / "tools" / "oss-cad-suite"),
+        str(Path.home() / "msys64" / "usr"),
+        str(Path.home() / "msys64" / "mingw64"),
         str(ROOT / "tools" / "oss-cad-suite"),
+        str(ROOT / "tools" / "msys64" / "usr"),
+        str(ROOT / "tools" / "msys64" / "mingw64"),
+        str(ROOT / ".tools" / "winlibs" / "mingw64"),
         str(ROOT / ".tools" / "oss-cad-suite" / "oss-cad-suite"),
     ]
     names = [name]
-    if platform.system().lower().startswith("win") and not name.endswith(".exe"):
-        names.append(f"{name}.exe")
-    for root in oss_roots:
+    if platform.system().lower().startswith("win") and not name.endswith((".exe", ".bat", ".cmd")):
+        names = [f"{name}.bat", f"{name}.exe", f"{name}.cmd", name]
+    for root in tool_roots:
         if root:
-            candidates.extend(Path(root) / "bin" / candidate for candidate in names)
+            base = Path(root)
+            for candidate in names:
+                candidates.extend((base / candidate, base / "bin" / candidate))
     for candidate in candidates:
         if candidate.exists():
             return str(candidate)
@@ -173,7 +181,7 @@ def tool_path(name: str) -> str | None:
 def command_env(extra_paths: list[str] | None = None) -> dict[str, str]:
     env = os.environ.copy()
     paths = list(extra_paths or [])
-    for tool in ("openroad", "yosys"):
+    for tool in ("openroad", "yosys", "make", "bash", "git"):
         found = tool_path(tool)
         if found:
             tool_dir = str(Path(found).parent)
@@ -235,9 +243,9 @@ def blank_row(design: Design, status: str, report_path: Path, notes: str) -> dic
 
 def dependency_blocker() -> str | None:
     required = {
-        "git": shutil.which("git"),
-        "make": shutil.which("make"),
-        "bash": shutil.which("bash"),
+        "git": tool_path("git"),
+        "make": tool_path("make"),
+        "bash": tool_path("bash"),
         "yosys": tool_path("yosys"),
         "openroad": tool_path("openroad"),
     }
@@ -255,7 +263,7 @@ def prepare_orfs(parent: Path) -> tuple[Path | None, str]:
             return flow, f"using configured OpenROAD-flow-scripts at {configured}"
         return None, f"BLOCKED: COPPER_ORFS_HOME does not contain flow/Makefile: {configured}"
 
-    git = shutil.which("git")
+    git = tool_path("git")
     if not git:
         return None, "BLOCKED: git is required to fetch OpenROAD-flow-scripts."
     repo = parent / "OpenROAD-flow-scripts"
@@ -554,7 +562,7 @@ def run_design(design: Design, flow_home: Path, temp_root: Path) -> dict[str, st
     config_root = temp_root / "designs"
     work_home = temp_root / "work" / design.name
     config = design_config(design, config_root, work_home)
-    make = shutil.which("make") or "make"
+    make = tool_path("make") or "make"
     route_code, route_output = run_capture(
         [make, "-C", str(flow_home), f"DESIGN_CONFIG={config}", "route"],
         timeout=2400,

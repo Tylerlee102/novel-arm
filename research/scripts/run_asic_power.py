@@ -158,18 +158,33 @@ def tool_path(name: str) -> str | None:
     if found:
         return found
     candidates: list[Path] = []
-    oss_roots = [
+    aliases = {
+        "sta": ("sta", "opensta"),
+    }
+    tool_roots = [
         os.environ.get("COPPER_OSS_CAD_SUITE", ""),
-        "C:/Users/tyboy/tools/oss-cad-suite",
+        os.environ.get("COPPER_MSYS64_HOME", ""),
+        str(Path.home() / "tools" / "oss-cad-suite"),
+        str(Path.home() / "msys64" / "usr"),
+        str(Path.home() / "msys64" / "mingw64"),
         str(ROOT / "tools" / "oss-cad-suite"),
+        str(ROOT / "tools" / "msys64" / "usr"),
+        str(ROOT / "tools" / "msys64" / "mingw64"),
+        str(ROOT / ".tools" / "winlibs" / "mingw64"),
         str(ROOT / ".tools" / "oss-cad-suite" / "oss-cad-suite"),
     ]
-    names = [name]
-    if platform.system().lower().startswith("win") and not name.endswith(".exe"):
-        names.append(f"{name}.exe")
-    for root in oss_roots:
+    names: list[str] = []
+    for alias in aliases.get(name, (name,)):
+        if platform.system().lower().startswith("win") and not alias.endswith((".exe", ".bat", ".cmd")):
+            names.extend((f"{alias}.bat", f"{alias}.exe", f"{alias}.cmd", alias))
+        else:
+            names.append(alias)
+    names = list(dict.fromkeys(names))
+    for root in tool_roots:
         if root:
-            candidates.extend(Path(root) / "bin" / candidate for candidate in names)
+            base = Path(root)
+            for candidate in names:
+                candidates.extend((base / candidate, base / "bin" / candidate))
     for candidate in candidates:
         if candidate.exists():
             return str(candidate)
