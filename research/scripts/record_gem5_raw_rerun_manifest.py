@@ -338,6 +338,162 @@ SPECS = (
             "workload/config matrix."
         ),
     ),
+    RawRerunSpec(
+        tag="jsonsqlite_medium_existing",
+        run_prefix="gem5_arm_ubuntu_fs_jsonsqlite_app_medium_",
+        summary_path=RESULTS / "gem5_arm_ubuntu_fs_jsonsqlite_app" / "jsonsqlite_app_medium_summary.csv",
+        terminal_result="JSONSQLITE_COPPER_RESULT",
+        policies=COMMON_RERUN_POLICIES,
+        notes=(
+            "Existing local raw gem5 ARM full-system combined JSON/SQLite medium run "
+            "with retained stats and terminal logs. This adds another public benchmark "
+            "family to the raw provenance ledger; it is not a clone-local CI proof or "
+            "full workload/config matrix."
+        ),
+    ),
+    RawRerunSpec(
+        tag="jsonsqlite_medium_existing_seed1",
+        run_prefix="gem5_arm_ubuntu_fs_jsonsqlite_medium_seed1_",
+        summary_path=RESULTS / "gem5_arm_ubuntu_fs_jsonsqlite_app" / "jsonsqlite_medium_seed1_summary.csv",
+        terminal_result="JSONSQLITE_COPPER_RESULT",
+        policies=COMMON_RERUN_POLICIES,
+        notes=(
+            "Existing local raw gem5 ARM full-system combined JSON/SQLite medium seed-1 run "
+            "with retained stats and terminal logs. Together with jsonsqlite_medium_existing, "
+            "this provides repeated local raw samples; it is not the full final "
+            "workload/config matrix."
+        ),
+    ),
+    RawRerunSpec(
+        tag="jsonsqlite_stress_existing",
+        run_prefix="gem5_arm_ubuntu_fs_jsonsqlite_app_stress_",
+        summary_path=RESULTS / "gem5_arm_ubuntu_fs_jsonsqlite_app" / "jsonsqlite_app_stress_summary.csv",
+        terminal_result="JSONSQLITE_COPPER_RESULT",
+        policies=COMMON_RERUN_POLICIES,
+        notes=(
+            "Existing local raw gem5 ARM full-system combined JSON/SQLite stress run "
+            "with retained stats and terminal logs. This records the repeated-policy "
+            "subset for stress input provenance; it is not a clone-local CI proof or "
+            "full workload/config matrix."
+        ),
+    ),
+    RawRerunSpec(
+        tag="jsonsqlite_stress_existing_seed1",
+        run_prefix="gem5_arm_ubuntu_fs_jsonsqlite_stress_seed1_",
+        summary_path=RESULTS / "gem5_arm_ubuntu_fs_jsonsqlite_app" / "jsonsqlite_stress_seed1_summary.csv",
+        terminal_result="JSONSQLITE_COPPER_RESULT",
+        policies=COMMON_RERUN_POLICIES,
+        notes=(
+            "Existing local raw gem5 ARM full-system combined JSON/SQLite stress seed-1 run "
+            "with retained stats and terminal logs. Together with jsonsqlite_stress_existing, "
+            "this provides repeated local raw samples; it is not the full final "
+            "workload/config matrix."
+        ),
+    ),
+    RawRerunSpec(
+        tag="yyjson_medium_existing",
+        run_prefix="gem5_arm_ubuntu_fs_yyjson_app_medium_",
+        summary_path=RESULTS / "gem5_arm_ubuntu_fs_yyjson_app" / "yyjson_app_medium_summary.csv",
+        terminal_result="YYJSON_COPPER_RESULT",
+        policies=COMMON_RERUN_POLICIES,
+        notes=(
+            "Existing local raw gem5 ARM full-system yyjson parser medium run "
+            "with retained stats and terminal logs. This adds another public benchmark "
+            "family to the raw provenance ledger; it is not a clone-local CI proof or "
+            "full workload/config matrix."
+        ),
+    ),
+    RawRerunSpec(
+        tag="yyjson_medium_existing_seed3",
+        run_prefix="gem5_arm_ubuntu_fs_yyjson_app_medium_seed3_",
+        summary_path=RESULTS / "gem5_arm_ubuntu_fs_yyjson_app" / "yyjson_app_medium_seed3_summary.csv",
+        terminal_result="YYJSON_COPPER_RESULT",
+        policies=COMMON_RERUN_POLICIES,
+        notes=(
+            "Existing local raw gem5 ARM full-system yyjson parser medium seed-3 run "
+            "with retained stats and terminal logs. Together with yyjson_medium_existing, "
+            "this provides repeated local raw samples; it is not the full final "
+            "workload/config matrix."
+        ),
+    ),
+    RawRerunSpec(
+        tag="yyjson_stress_existing",
+        run_prefix="gem5_arm_ubuntu_fs_yyjson_app_stress_",
+        summary_path=RESULTS / "gem5_arm_ubuntu_fs_yyjson_app" / "yyjson_app_stress_summary.csv",
+        terminal_result="YYJSON_COPPER_RESULT",
+        policies=COMMON_RERUN_POLICIES,
+        notes=(
+            "Existing local raw gem5 ARM full-system yyjson parser stress run "
+            "with retained stats and terminal logs. This records the repeated-policy "
+            "subset for stress input provenance; it is not a clone-local CI proof or "
+            "full workload/config matrix."
+        ),
+    ),
+    RawRerunSpec(
+        tag="yyjson_stress_existing_seed3",
+        run_prefix="gem5_arm_ubuntu_fs_yyjson_app_stress_seed3_",
+        summary_path=RESULTS / "gem5_arm_ubuntu_fs_yyjson_app" / "yyjson_app_stress_seed3_summary.csv",
+        terminal_result="YYJSON_COPPER_RESULT",
+        policies=COMMON_RERUN_POLICIES,
+        notes=(
+            "Existing local raw gem5 ARM full-system yyjson parser stress seed-3 run "
+            "with retained stats and terminal logs. Together with yyjson_stress_existing, "
+            "this provides repeated local raw samples; it is not the full final "
+            "workload/config matrix."
+        ),
+    ),
+    RawRerunSpec(
+        tag="pcre2_smoke_existing",
+        run_prefix="gem5_arm_ubuntu_fs_pcre2_pcre2_smoke_",
+        summary_path=RESULTS / "gem5_arm_ubuntu_fs_pcre2_app" / "pcre2_pcre2_smoke_summary.csv",
+        terminal_result="PCRE2_COPPER_RESULT",
+        policies=COMMON_RERUN_POLICIES,
+        notes=(
+            "Existing local raw gem5 ARM full-system PCRE2 regular-expression smoke run "
+            "with retained stats and terminal logs. This adds another public benchmark "
+            "family to the raw provenance ledger; it is not a clone-local CI proof or "
+            "full workload/config matrix."
+        ),
+    ),
+    RawRerunSpec(
+        tag="pcre2_smoke_existing_seed1",
+        run_prefix="gem5_arm_ubuntu_fs_pcre2_pcre2_seed1_",
+        summary_path=RESULTS / "gem5_arm_ubuntu_fs_pcre2_app" / "pcre2_pcre2_seed1_summary.csv",
+        terminal_result="PCRE2_COPPER_RESULT",
+        policies=COMMON_RERUN_POLICIES,
+        notes=(
+            "Existing local raw gem5 ARM full-system PCRE2 regular-expression seed-1 run "
+            "with retained stats and terminal logs. Together with pcre2_smoke_existing, "
+            "this provides repeated local raw samples; it is not the full final "
+            "workload/config matrix."
+        ),
+    ),
+    RawRerunSpec(
+        tag="osslspeed_smoke_existing",
+        run_prefix="gem5_arm_ubuntu_fs_osslspeed_app_smoke_",
+        summary_path=RESULTS / "gem5_arm_ubuntu_fs_osslspeed_app" / "osslspeed_app_smoke_summary.csv",
+        terminal_result="OPENSSL_SPEEDLIKE_COPPER_RESULT",
+        policies=COMMON_RERUN_POLICIES,
+        notes=(
+            "Existing local raw gem5 ARM full-system OpenSSL speed-like smoke run "
+            "with retained stats and terminal logs. This adds another public benchmark "
+            "family to the raw provenance ledger; it is not a clone-local CI proof or "
+            "full workload/config matrix."
+        ),
+    ),
+    RawRerunSpec(
+        tag="osslspeed_smoke_existing_seed1",
+        run_prefix="gem5_arm_ubuntu_fs_osslspeed_app_smoke_seed1_",
+        summary_path=RESULTS / "gem5_arm_ubuntu_fs_osslspeed_app" / "osslspeed_app_smoke_seed1_summary.csv",
+        terminal_result="OPENSSL_SPEEDLIKE_COPPER_RESULT",
+        policies=COMMON_RERUN_POLICIES,
+        notes=(
+            "Existing local raw gem5 ARM full-system OpenSSL speed-like smoke seed-1 run "
+            "with retained stats and terminal logs. Together with osslspeed_smoke_existing, "
+            "this provides repeated local raw samples; it is not the full final "
+            "workload/config matrix."
+        ),
+    ),
 )
 
 
