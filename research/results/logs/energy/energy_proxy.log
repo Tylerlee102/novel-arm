@@ -1,2 +1,2 @@
-Generated proxy_assumed energy rows from core_integrated traffic/performance CSVs.
-proxy_assumed; source=explicit_local_assumption_not_measured; demand_access_pj=120.0; prefetch_access_pj=120.0; logic_cycle_pj=0.05; not calibrated to silicon, CACTI, McPAT, Vivado, or a process library
+Generated proxy_assumed_memory_energy rows from core_integrated traffic/performance CSVs.
+proxy_assumed_memory_energy; source=explicit_local_assumption_not_measured; demand_access_pj=120.0; prefetch_access_pj=120.0; logic_cycle_pj=0.05; not calibrated to silicon, CACTI, McPAT, Vivado, or a process library

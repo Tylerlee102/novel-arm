@@ -56,13 +56,13 @@ jobs:
         if: always()
         run: make test
 
-      - name: Run model evaluation
-        if: always()
-        run: make eval
-
       - name: Build C workloads
         if: always()
         run: make workloads
+
+      - name: Run model evaluation
+        if: always()
+        run: make eval
 
       - name: Compile RTL
         if: always()

@@ -1,5 +1,3 @@
-target,flow,environment,metric,baseline,with_copper,delta,percent_overhead,scope,notes
-generic,yosys,local_windows,cells_near_core_baseline_vs_core_stub_plus_copper,,,,,near_core_stub,BLOCKED: matched near_core_stub overhead requires PASS rows and measured cells for both designs.
-generic,yosys,local_windows,cells_unit_baseline_vs_copper_unit,,,,,unit_prefetch,BLOCKED: matched unit_prefetch overhead requires PASS rows and measured cells for both designs.
-generic,yosys,local_windows,cells_unit_baseline_vs_copper_with_queue,,,,,unit_prefetch,BLOCKED: matched unit_prefetch overhead requires PASS rows and measured cells for both designs.
-generic,yosys,local_windows,cells_unit_baseline_vs_copper_with_tables,,,,,unit_prefetch,BLOCKED: matched unit_prefetch overhead requires PASS rows and measured cells for both designs.
+target,flow,environment,metric,baseline_design,with_copper_design,baseline,with_copper,delta,percent_overhead,scope,status,notes
+full_core,not_run,local_windows,full_core_cells_core_wrapper_baseline_vs_copper,baseline_core_wrapper,core_wrapper_plus_copper,,,,,full_core,BLOCKED,"BLOCKED: no real full-core or accepted core-wrapper RTL is present in this open artifact, so no full-core area/timing/power row is claimed."
+generic,yosys,local_windows,near_core_stub_cells_baseline_vs_copper,nearcore_stub_baseline,nearcore_stub_plus_copper,,,,,near_core_stub,BLOCKED,BLOCKED: matched near_core_stub overhead requires PASS rows and measured cells for nearcore_stub_baseline and nearcore_stub_plus_copper.

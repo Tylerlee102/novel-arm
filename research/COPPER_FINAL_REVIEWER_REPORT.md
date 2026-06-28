@@ -2,7 +2,7 @@
 
 ## Computer Architecture Reviewer
 
-Leaning: workshop accept / top-tier reject. Strengths: clear committed-provenance invariant, CI-proven RTL unit simulation, source workload build path, deterministic cycle-model rows, and deterministic core-integrated rows across positive, negative, and stress workloads. Weaknesses: Phase 0 confirms gem5 is not runnable in this environment; the core-integrated harness is deterministic and repo-local, not an independent simulator. Fatal blockers: no real gem5 or comparable external core simulator campaign. Required fixes: validate the same workload/config matrix in gem5 or another independent core simulator. Claim risks: performance claims must stay per-row and evidence-level scoped. Phase 0 discrepancy check: claimed PR/push evidence matched; main-branch Actions state was not verifiable because the API returned no main runs, so main-branch status must not be cited.
+Leaning: workshop accept / top-tier reject. Strengths: clear committed-provenance invariant, CI-proven RTL unit simulation, source workload build path, deterministic cycle-model rows, deterministic core-integrated rows, and an independent source-backed trace/event simulator across the required workload/config matrix. Weaknesses: gem5 remains unavailable, and the independent simulator is not a full-system gem5 campaign. Fatal blockers: no real gem5/full-system external simulator campaign for top-tier architecture claims. Required fixes: validate the same workload/config matrix in gem5 or another accepted external core simulator. Claim risks: performance claims must stay per-row and evidence-level scoped. Phase 0 discrepancy check: claimed PR/push evidence matched; main-branch Actions state was not verifiable because the API returned no main runs, so main-branch status must not be cited.
 
 ## Prefetching And Memory-Systems Reviewer
 
@@ -14,7 +14,7 @@ Leaning: artifact accept / architecture-paper reject. Strengths: SystemVerilog u
 
 ## Evaluation And Statistics Reviewer
 
-Leaning: workshop accept if scoped, top-tier weak reject. Strengths: deterministic cycle and core-integrated rows cover seeds 1-3, multiple input sizes, and both positive/control/stress workloads; regressions are retained. Weaknesses: the core-integrated model is deterministic and shares workload/model ancestry with the cycle model, so it is not independent validation. Fatal blockers: no independent simulator statistics. Required fixes: add external simulator runs and confidence intervals from those runs. Claim risks: robust speedup must be described per benchmark/configuration, not as a suite-wide win. Phase 0 discrepancy check: row counts matched claimed 630/630/630.
+Leaning: workshop accept if scoped, top-tier weak reject. Strengths: deterministic cycle and core-integrated rows cover seeds 1-3, multiple input sizes, and both positive/control/stress workloads; the independent simulator executes the source-built workload binary and retains regressions. Weaknesses: the independent simulator is still an artifact-local trace/event model, not gem5 or a full-system external simulator. Fatal blockers: no external full-system simulator statistics. Required fixes: add gem5 or another accepted external simulator run and confidence intervals from those runs. Claim risks: robust speedup must be described per benchmark/configuration, not as a suite-wide win. Phase 0 discrepancy check: row counts matched claimed deterministic-model rows.
 
 ## Artifact Evaluation Reviewer
 

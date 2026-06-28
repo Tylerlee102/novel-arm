@@ -38,6 +38,56 @@ module baseline_core_stub_with_prefetch_interface #(
     end
 endmodule
 
+module nearcore_stub_baseline #(
+    parameter int ADDR_W = 48
+) (
+    input  logic clk,
+    input  logic rst_n,
+    input  logic enable,
+    output logic prefetch_valid,
+    output logic [ADDR_W-1:0] prefetch_addr,
+    output logic [15:0] retire_count
+);
+    baseline_core_stub_with_prefetch_interface #(
+        .ADDR_W(ADDR_W)
+    ) u_nearcore_baseline (
+        .clk(clk),
+        .rst_n(rst_n),
+        .enable(enable),
+        .prefetch_valid(prefetch_valid),
+        .prefetch_addr(prefetch_addr),
+        .retire_count(retire_count)
+    );
+endmodule
+
+module nearcore_stub_plus_copper #(
+    parameter int ADDR_W = 48,
+    parameter int TOKEN_W = 16,
+    parameter int ENTRIES = 8,
+    parameter int QUEUE_DEPTH = 4
+) (
+    input  logic clk,
+    input  logic rst_n,
+    input  logic enable,
+    output logic prefetch_valid,
+    output logic [15:0] retire_count,
+    output logic [7:0] core_status
+);
+    core_stub_plus_copper #(
+        .ADDR_W(ADDR_W),
+        .TOKEN_W(TOKEN_W),
+        .ENTRIES(ENTRIES),
+        .QUEUE_DEPTH(QUEUE_DEPTH)
+    ) u_nearcore_copper (
+        .clk(clk),
+        .rst_n(rst_n),
+        .enable(enable),
+        .prefetch_valid(prefetch_valid),
+        .retire_count(retire_count),
+        .core_status(core_status)
+    );
+endmodule
+
 module core_stub_plus_copper #(
     parameter int ADDR_W = 48,
     parameter int TOKEN_W = 16,

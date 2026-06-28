@@ -1,0 +1,1 @@
+BLOCKED: near_core_stub synthesis requires Yosys on PATH. No cells, timing, or power are inferred.

@@ -48,10 +48,12 @@ cache hit/miss latency, memory latency, prefetch lateness, queue drops, and
 demand/prefetch traffic accounting. The top-tier pass adds a deterministic
 `core_integrated` validation harness, explicit `gem5_*` BLOCKED rows when gem5
 is not runnable, source-built C workload evidence via `make workloads`, a
-near-core-stub synthesis flow, and `proxy_assumed` energy rows. These are
-scoped evidence levels: `core_integrated` is not gem5, the near-core stub is not
-a full CPU, and the energy proxy is not measured power. Vivado and full gem5
-campaign reruns remain optional external-tool paths.
+source-backed `independent_sim` trace/event simulator, a near-core-stub
+synthesis flow, and `proxy_assumed_memory_energy` rows. These are scoped
+evidence levels: `independent_sim` is not gem5, `core_integrated` is not gem5,
+the near-core stub is not a full CPU or mapped timing/power result, and the
+energy proxy is not measured power. Vivado and full gem5 campaign reruns remain
+optional external-tool paths.
 
 If `gh` or Docker is unavailable on the local machine, use
 `docs/RUN_CI_NOW.md` to trigger the GitHub Actions run from the GitHub web UI,
@@ -90,4 +92,5 @@ upload. The evaluation flow generates no-prefetch, next-line, stride, simple
 pointer-chase, and COPPER baseline rows with accuracy, coverage, lateness,
 queue-drop, traffic, ablation, sensitivity, and seed/input-stability CSVs at
 model, deterministic cycle-model, and deterministic core-integrated levels.
-These are not fresh gem5 results.
+The independent simulator rows add a separate source-backed trace/event path,
+but these are still not fresh gem5 results.

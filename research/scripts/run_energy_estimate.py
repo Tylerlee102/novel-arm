@@ -20,12 +20,14 @@ TRAFFIC = RESULTS / "core_integrated_memory_traffic.csv"
 PERF = RESULTS / "core_integrated_performance.csv"
 OUT = RESULTS / "energy_proxy.csv"
 SUMMARY = RESULTS / "energy_summary.csv"
+POWER_INDEX = RESULTS / "power_report_index.csv"
 
 DEMAND_ACCESS_PJ = 120.0
 PREFETCH_ACCESS_PJ = 120.0
 LOGIC_CYCLE_PJ = 0.05
+SOURCE = "explicit_local_assumption_not_measured"
 ASSUMPTIONS = (
-    "proxy_assumed; source=explicit_local_assumption_not_measured;"
+    "proxy_assumed_memory_energy; source=explicit_local_assumption_not_measured;"
     " demand_access_pj=120.0; prefetch_access_pj=120.0; logic_cycle_pj=0.05;"
     " not calibrated to silicon, CACTI, McPAT, Vivado, or a process library"
 )
@@ -49,6 +51,33 @@ def write_csv(path: Path, fields: list[str], rows: list[dict[str, object]]) -> N
         writer.writeheader()
         for row in rows:
             writer.writerow({field: row.get(field, "") for field in fields})
+
+
+def write_power_index(proxy_status: str) -> None:
+    write_csv(
+        POWER_INDEX,
+        ["evidence_level", "status", "source", "report_path", "tool", "environment", "notes"],
+        [
+            {
+                "evidence_level": "measured_tool_power",
+                "status": "BLOCKED",
+                "source": "none",
+                "report_path": "",
+                "tool": "",
+                "environment": "current",
+                "notes": "No Vivado, ASIC, CACTI, McPAT, or process-calibrated power report was found in this open evidence pass.",
+            },
+            {
+                "evidence_level": "proxy_assumed_memory_energy",
+                "status": proxy_status,
+                "source": f"{rel(TRAFFIC)}; {rel(PERF)}",
+                "report_path": rel(OUT),
+                "tool": "research/scripts/run_energy_estimate.py",
+                "environment": "current",
+                "notes": ASSUMPTIONS,
+            },
+        ],
+    )
 
 
 def fnum(value: str) -> float:
@@ -88,6 +117,7 @@ def main() -> int:
                 "total_estimated_energy_pj",
                 "energy_overhead_pct",
                 "assumptions",
+                "source",
                 "notes",
             ],
             [
@@ -96,7 +126,7 @@ def main() -> int:
                     "input": "NA",
                     "seed": "NA",
                     "config": "NA",
-                    "evidence_level": "proxy_assumed",
+                    "evidence_level": "proxy_assumed_memory_energy",
                     "energy_model": "memory_traffic_proxy_v1",
                     "demand_accesses": "NA",
                     "prefetch_accesses": "NA",
@@ -106,10 +136,12 @@ def main() -> int:
                     "total_estimated_energy_pj": "NA",
                     "energy_overhead_pct": "NA",
                     "assumptions": ASSUMPTIONS,
+                    "source": SOURCE,
                     "notes": note,
                 }
             ],
         )
+        write_power_index("BLOCKED")
         log_path.write_text(note + "\n", encoding="utf-8")
         return 0
 
@@ -134,7 +166,7 @@ def main() -> int:
                 "input": row["input"],
                 "seed": row["seed"],
                 "config": row["config"],
-                "evidence_level": "proxy_assumed",
+                "evidence_level": "proxy_assumed_memory_energy",
                 "energy_model": "memory_traffic_proxy_v1",
                 "demand_accesses": f"{demand:.0f}",
                 "prefetch_accesses": f"{prefetch:.0f}",
@@ -144,6 +176,7 @@ def main() -> int:
                 "total_estimated_energy_pj": f"{total:.3f}",
                 "energy_overhead_pct": "",
                 "assumptions": ASSUMPTIONS,
+                "source": SOURCE,
                 "notes": f"Proxy derived from {rel(TRAFFIC)} and {rel(PERF)}; not measured power.",
             }
         )
@@ -172,6 +205,7 @@ def main() -> int:
         "total_estimated_energy_pj",
         "energy_overhead_pct",
         "assumptions",
+        "source",
         "notes",
     ]
     write_csv(OUT, fields, rows)
@@ -182,7 +216,7 @@ def main() -> int:
         ["evidence_level", "energy_model", "rows", "copper_mean_energy_overhead_pct", "copper_median_energy_overhead_pct", "status", "notes"],
         [
             {
-                "evidence_level": "proxy_assumed",
+                "evidence_level": "proxy_assumed_memory_energy",
                 "energy_model": "memory_traffic_proxy_v1",
                 "rows": len(rows),
                 "copper_mean_energy_overhead_pct": f"{mean(copper_overheads):.6f}" if copper_overheads else "NA",
@@ -192,8 +226,9 @@ def main() -> int:
             }
         ],
     )
+    write_power_index("PASS" if rows else "BLOCKED")
     log_path.write_text(
-        "Generated proxy_assumed energy rows from core_integrated traffic/performance CSVs.\n"
+        "Generated proxy_assumed_memory_energy rows from core_integrated traffic/performance CSVs.\n"
         + ASSUMPTIONS
         + "\n",
         encoding="utf-8",

@@ -150,16 +150,41 @@ def core_csv_pass(name: str) -> bool:
     return bool(rows) and any(row.get("evidence_level") == "core_integrated" for row in rows)
 
 
+def independent_sim_pass() -> bool:
+    rows = read_rows(RESULTS / "independent_sim_performance.csv")
+    required = {"no_prefetch", "next_line", "stride", "simple_pointer_chase", "copper"}
+    configs = {row.get("config", "") for row in rows if row.get("evidence_level") == "independent_sim" and row.get("status") == "PASS"}
+    benches = {row.get("benchmark", "") for row in rows if row.get("evidence_level") == "independent_sim" and row.get("status") == "PASS"}
+    required_benches = {
+        "linked_list",
+        "tree_traversal",
+        "hash_table_chaining",
+        "graph_adjacency_walk",
+        "array_scan",
+        "matrix_or_array_loop",
+        "random_non_pointer_access",
+        "long_pointer_chains",
+        "mixed_pointer_array",
+        "branchy_pointer_chains",
+    }
+    return required.issubset(configs) and required_benches.issubset(benches)
+
+
+def independent_csv_pass(name: str) -> bool:
+    rows = read_rows(RESULTS / name)
+    return independent_sim_pass() and bool(rows) and any(row.get("evidence_level") == "independent_sim" for row in rows)
+
+
 def near_core_synthesis_pass() -> bool:
     return any(
-        row.get("scope") == "near_core_stub" and row.get("percent_overhead")
+        row.get("scope") == "near_core_stub" and row.get("status") == "PASS" and row.get("percent_overhead")
         for row in read_rows(RESULTS / "fullcore_synthesis_overhead.csv")
     )
 
 
 def energy_proxy_present() -> bool:
     rows = read_rows(RESULTS / "energy_summary.csv")
-    return any(row.get("status") == "PASS" and row.get("evidence_level") == "proxy_assumed" for row in rows)
+    return any(row.get("status") == "PASS" and row.get("evidence_level", "").startswith("proxy_") for row in rows)
 
 
 def build_inventory() -> None:
@@ -268,16 +293,16 @@ def gate_status() -> list[dict[str, str]]:
         gate("G4. SystemVerilog RTL compile", "Yes", rtl_compile_status, "research/results/rtl_compile.csv; research/results/logs/rtl/", "Open-source smoke compile passes in GitHub Actions, Docker, or Codespaces", "No CI/Docker/Codespaces PASS row has been collected yet." if rtl_compile_status != "PASS" else ""),
         gate("G5. RTL simulation", "Yes", rtl_sim_status, "research/results/rtl_simulation.csv; research/results/logs/rtl/", "Directed RTL smoke simulation passes in GitHub Actions, Docker, or Codespaces", "No CI/Docker/Codespaces PASS row has been collected yet." if rtl_sim_status != "PASS" else ""),
         gate("G6. C benchmark/workload build", "Yes", "PASS" if workload_build_pass() else "PARTIAL", "research/results/workload_build.csv; research/workloads/copper_workload_suite.c", "Required workload suite builds from source and records one row per benchmark", "" if workload_build_pass() else "Current environment has not produced PASS rows for every required workload build."),
-        gate("G7. Benchmark execution", "Yes", "PASS" if (cycle_eval_pass() and core_integrated_pass()) else ("PARTIAL" if cycle_eval_pass() else "TODO"), "research/results/performance.csv; research/results/cycle_performance.csv; research/results/core_integrated_performance.csv", "Model, cycle_model, and core_integrated rows exist for the public benchmark suite", "" if core_integrated_pass() else "Core-integrated validation rows are missing or non-PASS."),
+        gate("G7. Benchmark execution", "Yes", "PASS" if (cycle_eval_pass() and core_integrated_pass() and independent_sim_pass()) else ("PARTIAL" if cycle_eval_pass() or core_integrated_pass() or independent_sim_pass() else "TODO"), "research/results/performance.csv; research/results/cycle_performance.csv; research/results/core_integrated_performance.csv; research/results/independent_sim_performance.csv", "Model, cycle_model, core_integrated, and independent_sim rows exist for the public benchmark suite", "" if independent_sim_pass() else "Independent simulator rows are missing, blocked, or non-PASS."),
         gate("G8. Baseline prefetcher implementation", "Yes", "PASS" if baseline_pass() else "PARTIAL", "research/results/baseline_inventory.csv", "No-prefetch, next-line, stride, simple pointer-chase, and COPPER run through the same model path", "" if baseline_pass() else "At least one baseline is missing."),
         gate("G9. COPPER prefetcher implementation", "Yes", "PASS", "research/scripts/copper_eval_model.py; research/copper_prefetch_unit_open.sv; research/results/performance.csv", "Model and RTL-unit implementation exist", "Not a production core integration."),
-        gate("G10. Prefetch usefulness/accuracy/coverage metrics", "Yes", "PASS" if core_csv_pass("core_integrated_prefetch_metrics.csv") or cycle_csv_pass("cycle_prefetch_metrics.csv") or (RESULTS / "prefetch_metrics.csv").exists() else "TODO", "research/results/prefetch_metrics.csv; research/results/cycle_prefetch_metrics.csv; research/results/core_integrated_prefetch_metrics.csv", "Issued/useful/useless/late/queue/coverage/accuracy metrics are generated with evidence-level labels", ""),
-        gate("G11. Speedup/performance metrics", "Yes", "PASS" if core_integrated_pass() else ("PARTIAL" if cycle_eval_pass() else ("PARTIAL" if (RESULTS / "performance.csv").exists() else "TODO")), "research/results/performance.csv; research/results/cycle_performance.csv; research/results/core_integrated_performance.csv", "Per-workload speedup versus no-prefetch is reported with evidence-level labels", "" if core_integrated_pass() else "Core-integrated speedup rows are missing; do not promote beyond cycle_model."),
-        gate("G12. Memory traffic/bandwidth overhead metrics", "Yes", "PASS" if core_csv_pass("core_integrated_memory_traffic.csv") or cycle_csv_pass("cycle_memory_traffic.csv") or (RESULTS / "memory_traffic.csv").exists() else "TODO", "research/results/memory_traffic.csv; research/results/cycle_memory_traffic.csv; research/results/core_integrated_memory_traffic.csv", "Traffic overhead is generated from model, cycle-model, and core-integrated request counts where available", ""),
+        gate("G10. Prefetch usefulness/accuracy/coverage metrics", "Yes", "PASS" if independent_csv_pass("independent_sim_prefetch_metrics.csv") or core_csv_pass("core_integrated_prefetch_metrics.csv") or cycle_csv_pass("cycle_prefetch_metrics.csv") or (RESULTS / "prefetch_metrics.csv").exists() else "TODO", "research/results/prefetch_metrics.csv; research/results/cycle_prefetch_metrics.csv; research/results/core_integrated_prefetch_metrics.csv; research/results/independent_sim_prefetch_metrics.csv", "Issued/useful/useless/late/queue/coverage/accuracy metrics are generated with evidence-level labels", ""),
+        gate("G11. Speedup/performance metrics", "Yes", "PASS" if independent_sim_pass() else ("PARTIAL" if core_integrated_pass() or cycle_eval_pass() else ("PARTIAL" if (RESULTS / "performance.csv").exists() else "TODO")), "research/results/performance.csv; research/results/cycle_performance.csv; research/results/core_integrated_performance.csv; research/results/independent_sim_performance.csv", "Per-workload speedup versus no-prefetch is reported with evidence-level labels", "" if independent_sim_pass() else "Independent simulator speedup rows are missing or blocked; do not promote beyond local deterministic models."),
+        gate("G12. Memory traffic/bandwidth overhead metrics", "Yes", "PASS" if independent_csv_pass("independent_sim_memory_traffic.csv") or core_csv_pass("core_integrated_memory_traffic.csv") or cycle_csv_pass("cycle_memory_traffic.csv") or (RESULTS / "memory_traffic.csv").exists() else "TODO", "research/results/memory_traffic.csv; research/results/cycle_memory_traffic.csv; research/results/core_integrated_memory_traffic.csv; research/results/independent_sim_memory_traffic.csv", "Traffic overhead is generated from model, cycle-model, core-integrated, and independent-simulator request counts where available", ""),
         gate("G13. Sensitivity studies", "Yes", "PASS" if cycle_csv_pass("sensitivity.csv") or csv_has_no_todo(RESULTS / "sensitivity.csv") else ("PARTIAL" if (RESULTS / "sensitivity.csv").exists() else "TODO"), "research/results/sensitivity.csv", "Queue, confidence, chain depth, distance, table size, and latency sensitivities are captured", ""),
         gate("G14. Ablation studies", "Yes", "PASS" if cycle_csv_pass("ablation.csv") or csv_has_no_todo(RESULTS / "ablation.csv") else ("PARTIAL" if (RESULTS / "ablation.csv").exists() else "TODO"), "research/results/ablation.csv", "A0-A5 ablations are generated with evidence-level labels", ""),
-        gate("G15. Area/resource/timing synthesis", "Yes", "PASS" if (near_core_synthesis_pass() or synthesis_overhead_pass()) else ("PARTIAL" if (RESULTS / "synthesis.csv").exists() or (RESULTS / "fullcore_synthesis.csv").exists() else "TODO"), "research/results/synthesis.csv; research/results/synthesis_overhead.csv; research/results/fullcore_synthesis.csv; research/results/fullcore_synthesis_overhead.csv", "Matched unit-level and, when available, near-core-stub overhead exists from the same flow", "No matched near-core or unit overhead row has been collected yet." if not (near_core_synthesis_pass() or synthesis_overhead_pass()) else ""),
-        gate("G16. Power/energy proxy or measured estimate", "Yes", "PARTIAL" if energy_proxy_present() else "TODO", "research/results/energy_proxy.csv; research/results/energy_summary.csv", "Proxy energy rows are generated with explicit assumptions", "Proxy is assumption-based and not calibrated measured power." if energy_proxy_present() else "No energy proxy or measured report has been generated."),
+        gate("G15. Area/resource/timing synthesis", "Yes", "PARTIAL" if near_core_synthesis_pass() or synthesis_overhead_pass() else ("TODO" if not (RESULTS / "fullcore_synthesis.csv").exists() else "BLOCKED"), "research/results/synthesis.csv; research/results/synthesis_overhead.csv; research/results/fullcore_synthesis.csv; research/results/fullcore_synthesis_overhead.csv", "Matched unit-level and near-core-stub resource rows exist; mapped timing/power requires real reports", "No full-core or mapped near-core timing/power report exists; generic Yosys cells are resource evidence only." if near_core_synthesis_pass() or synthesis_overhead_pass() else "No matched near-core or unit overhead row has been collected yet."),
+        gate("G16. Power/energy proxy or measured estimate", "Yes", "PARTIAL" if energy_proxy_present() else "TODO", "research/results/energy_proxy.csv; research/results/energy_summary.csv; research/results/power_report_index.csv", "Proxy energy rows are generated with explicit assumptions and measured power is indexed if present", "Proxy is assumption-based and not calibrated measured power." if energy_proxy_present() else "No energy proxy or measured report has been generated."),
         gate("G17. Statistical stability across seeds/input sizes", "Yes", "PASS" if cycle_stats_pass() else ("PARTIAL" if (RESULTS / "statistical_summary.csv").exists() else "TODO"), "research/results/seed_stability.csv; research/results/statistical_summary.csv", "Stability covers seeds 1-3 and multiple input sizes with evidence-level labels", ""),
         gate("G18. Artifact package", "Yes", "PASS" if ci_artifact_package else ("PARTIAL" if package_exists else "TODO"), "dist/copper-artifact.zip; research/results/artifact_manifest.csv; research/results/ci_artifacts_manifest.csv", "Package regenerates in GitHub Actions, Docker, or Codespaces or the zip appears in imported artifacts", "" if ci_artifact_package else "Local package output is not final packaging proof."),
         gate("G19. Paper build", "Yes", "PASS" if paper_built else "BLOCKED", "research/paper/main.tex; research/results/paper_build_status.csv", "PDF builds in GitHub Actions, Docker, or Codespaces", "" if paper_built else "No CI/Docker/Codespaces paper PASS row has been collected yet."),
@@ -324,14 +349,14 @@ def build_claim_ledger() -> None:
     claims = [
         ("C1", "COPPER tracks committed pointer provenance.", "ALLOWED", "research/results/model_tests.csv; research/copper_prefetch_unit_open.sv", "model; rtl-unit only when GitHub Actions/Codespaces/Docker rtl_compile.csv and rtl_simulation.csv are PASS", "Allowed for the executable model; RTL wording requires open-environment PASS rows."),
         ("C2", "COPPER issues prefetches based on committed provenance rather than arbitrary speculation.", "ALLOWED", "research/results/model_tests.csv; research/results/rtl_simulation.csv", "model; rtl-unit only when GitHub Actions/Codespaces/Docker rtl_simulation.csv is PASS", "Do not extend to a production core without integration evidence."),
-        ("C3", "COPPER improves prefetch usefulness on exact measured model, cycle-model, or core-integrated workloads where generated rows show improvement.", "ALLOWED", "research/results/prefetch_metrics.csv; research/results/cycle_prefetch_metrics.csv; research/results/core_integrated_prefetch_metrics.csv", "model; cycle_model; core_integrated", "Allowed only per generated row; gem5 remains BLOCKED unless gem5 CSVs contain real PASS rows."),
-        ("C4", "COPPER reports accuracy, coverage, lateness, queue drops, and traffic overhead versus shared baselines.", "ALLOWED", "research/results/prefetch_metrics.csv; research/results/memory_traffic.csv; research/results/cycle_prefetch_metrics.csv; research/results/cycle_memory_traffic.csv; research/results/core_integrated_prefetch_metrics.csv; research/results/core_integrated_memory_traffic.csv", "model; cycle_model; core_integrated", "Use per-workload language and report where overhead increases."),
-        ("C5", "COPPER improves performance/speedup on exact measured workloads where performance CSVs show speedup.", "ALLOWED", "research/results/performance.csv; research/results/cycle_performance.csv; research/results/core_integrated_performance.csv", "model; cycle_model; core_integrated", "Do not claim universal speedup or superiority over every baseline."),
+        ("C3", "COPPER improves prefetch usefulness on exact measured model, cycle-model, core-integrated, or independent-sim workloads where generated rows show improvement.", "ALLOWED", "research/results/prefetch_metrics.csv; research/results/cycle_prefetch_metrics.csv; research/results/core_integrated_prefetch_metrics.csv; research/results/independent_sim_prefetch_metrics.csv", "model; cycle_model; core_integrated; independent_sim", "Allowed only per generated row; independent_sim is not gem5, and gem5 remains BLOCKED unless gem5 CSVs contain real PASS rows."),
+        ("C4", "COPPER reports accuracy, coverage, lateness, queue drops, and traffic overhead versus shared baselines.", "ALLOWED", "research/results/prefetch_metrics.csv; research/results/memory_traffic.csv; research/results/cycle_prefetch_metrics.csv; research/results/cycle_memory_traffic.csv; research/results/core_integrated_prefetch_metrics.csv; research/results/core_integrated_memory_traffic.csv; research/results/independent_sim_prefetch_metrics.csv; research/results/independent_sim_memory_traffic.csv", "model; cycle_model; core_integrated; independent_sim", "Use per-workload language and report where overhead increases."),
+        ("C5", "COPPER improves performance/speedup on exact measured workloads where performance CSVs show speedup.", "ALLOWED", "research/results/performance.csv; research/results/cycle_performance.csv; research/results/core_integrated_performance.csv; research/results/independent_sim_performance.csv", "model; cycle_model; core_integrated; independent_sim", "Do not claim universal speedup or superiority over every baseline."),
         ("C6", "COPPER avoids architectural output changes in the executable model.", "ALLOWED", "research/results/model_tests.csv; research/results/seed_stability.csv; research/results/rtl_simulation.csv", "model; rtl-unit only when GitHub Actions/Codespaces/Docker rtl_simulation.csv is PASS", "Checksum equality is model-level, and RTL smoke coverage is unit-level, not a formal ISA proof."),
         ("C7", "COPPER has matched unit-level generic-synthesis overhead.", c7_status, "research/results/synthesis.csv; research/results/synthesis_overhead.csv", "unit synthesis", "Allowed only if an open-environment Yosys flow produced matched overhead rows; not full-core overhead."),
         ("C8", "COPPER has matched near-core-stub generic-synthesis overhead.", c8_status, "research/results/fullcore_synthesis.csv; research/results/fullcore_synthesis_overhead.csv", "near_core_stub", "Allowed only when scope is called near_core_stub; not full-core overhead or mapped timing."),
-        ("C9", "COPPER generalizes across the evaluated model, cycle-model, and core-integrated workload suite.", "ALLOWED", "research/results/benchmark_inventory.csv; research/results/cycle_performance.csv; research/results/core_integrated_performance.csv; research/results/statistical_summary.csv", "model; cycle_model; core_integrated", "Breadth is still not a gem5 campaign or production-core result."),
-        ("C10", "COPPER has an energy result.", energy_status, "research/results/energy_proxy.csv; research/results/energy_summary.csv", "proxy_assumed", "Only assumption-based proxy energy may be discussed; no measured power or power-efficiency claim."),
+        ("C9", "COPPER generalizes across the evaluated model, cycle-model, core-integrated, and independent-sim workload suite.", "ALLOWED", "research/results/benchmark_inventory.csv; research/results/cycle_performance.csv; research/results/core_integrated_performance.csv; research/results/independent_sim_performance.csv; research/results/statistical_summary.csv", "model; cycle_model; core_integrated; independent_sim", "Breadth is still not a gem5 campaign or production-core result."),
+        ("C10", "COPPER has an energy result.", energy_status, "research/results/energy_proxy.csv; research/results/energy_summary.csv; research/results/power_report_index.csv", "proxy_assumed_memory_energy", "Only assumption-based proxy energy may be discussed; no measured power or power-efficiency claim."),
         ("C11", "COPPER is novel versus existing pointer-chasing prefetchers.", "TODO", "research/COPPER_RELATED_WORK_MATRIX.md; research/COPPER_PRIOR_ART.md", "related-work matrix", "Use distinction language; do not claim first or publication-level novelty without a fresh literature audit."),
     ]
     lines = [
@@ -356,7 +381,7 @@ Source includes the Python model and analysis scripts under `research/*.py` and 
 
 ## Generated
 
-Generated evidence lives under `research/results`. The new conference-facing generated CSVs are `toolchain_status.csv`, `model_tests.csv`, `rtl_compile.csv`, `rtl_simulation.csv`, `workload_build.csv`, `benchmark_inventory.csv`, `baseline_inventory.csv`, `performance.csv`, `prefetch_metrics.csv`, `memory_traffic.csv`, `cycle_performance.csv`, `cycle_prefetch_metrics.csv`, `cycle_memory_traffic.csv`, `gem5_performance.csv`, `gem5_prefetch_metrics.csv`, `gem5_memory_traffic.csv`, `core_integrated_performance.csv`, `core_integrated_prefetch_metrics.csv`, `core_integrated_memory_traffic.csv`, `energy_proxy.csv`, `energy_summary.csv`, `ablation.csv`, `sensitivity.csv`, `seed_stability.csv`, `statistical_summary.csv`, `synthesis.csv`, `synthesis_overhead.csv`, `fullcore_synthesis.csv`, `fullcore_synthesis_overhead.csv`, `ci_status.csv`, `ci_artifacts_manifest.csv`, `ci_failure_summary.csv`, `artifact_inventory.csv`, and `artifact_manifest.csv`. Tool logs for open-source hardware gates are written under `research/results/logs/`.
+Generated evidence lives under `research/results`. The new conference-facing generated CSVs are `toolchain_status.csv`, `model_tests.csv`, `rtl_compile.csv`, `rtl_simulation.csv`, `workload_build.csv`, `benchmark_inventory.csv`, `baseline_inventory.csv`, `performance.csv`, `prefetch_metrics.csv`, `memory_traffic.csv`, `cycle_performance.csv`, `cycle_prefetch_metrics.csv`, `cycle_memory_traffic.csv`, `gem5_performance.csv`, `gem5_prefetch_metrics.csv`, `gem5_memory_traffic.csv`, `independent_sim_performance.csv`, `independent_sim_prefetch_metrics.csv`, `independent_sim_memory_traffic.csv`, `core_integrated_performance.csv`, `core_integrated_prefetch_metrics.csv`, `core_integrated_memory_traffic.csv`, `energy_proxy.csv`, `energy_summary.csv`, `power_report_index.csv`, `ablation.csv`, `sensitivity.csv`, `seed_stability.csv`, `statistical_summary.csv`, `synthesis.csv`, `synthesis_overhead.csv`, `fullcore_synthesis.csv`, `fullcore_synthesis_overhead.csv`, `ci_status.csv`, `ci_artifacts_manifest.csv`, `ci_failure_summary.csv`, `artifact_inventory.csv`, and `artifact_manifest.csv`. Tool logs for open-source hardware gates are written under `research/results/logs/`.
 
 ## Evidence
 
@@ -404,7 +429,7 @@ def build_reviewer_reports() -> None:
 
 ## Computer Architecture Reviewer
 
-Leaning: workshop accept / top-tier reject. Strengths: clear committed-provenance invariant, CI-proven RTL unit simulation, source workload build path, deterministic cycle-model rows, and deterministic core-integrated rows across positive, negative, and stress workloads. Weaknesses: Phase 0 confirms gem5 is not runnable in this environment; the core-integrated harness is deterministic and repo-local, not an independent simulator. Fatal blockers: no real gem5 or comparable external core simulator campaign. Required fixes: validate the same workload/config matrix in gem5 or another independent core simulator. Claim risks: performance claims must stay per-row and evidence-level scoped. Phase 0 discrepancy check: claimed PR/push evidence matched; main-branch Actions state was not verifiable because the API returned no main runs, so main-branch status must not be cited.
+Leaning: workshop accept / top-tier reject. Strengths: clear committed-provenance invariant, CI-proven RTL unit simulation, source workload build path, deterministic cycle-model rows, deterministic core-integrated rows, and an independent source-backed trace/event simulator across the required workload/config matrix. Weaknesses: gem5 remains unavailable, and the independent simulator is not a full-system gem5 campaign. Fatal blockers: no real gem5/full-system external simulator campaign for top-tier architecture claims. Required fixes: validate the same workload/config matrix in gem5 or another accepted external core simulator. Claim risks: performance claims must stay per-row and evidence-level scoped. Phase 0 discrepancy check: claimed PR/push evidence matched; main-branch Actions state was not verifiable because the API returned no main runs, so main-branch status must not be cited.
 
 ## Prefetching And Memory-Systems Reviewer
 
@@ -416,7 +441,7 @@ Leaning: artifact accept / architecture-paper reject. Strengths: SystemVerilog u
 
 ## Evaluation And Statistics Reviewer
 
-Leaning: workshop accept if scoped, top-tier weak reject. Strengths: deterministic cycle and core-integrated rows cover seeds 1-3, multiple input sizes, and both positive/control/stress workloads; regressions are retained. Weaknesses: the core-integrated model is deterministic and shares workload/model ancestry with the cycle model, so it is not independent validation. Fatal blockers: no independent simulator statistics. Required fixes: add external simulator runs and confidence intervals from those runs. Claim risks: robust speedup must be described per benchmark/configuration, not as a suite-wide win. Phase 0 discrepancy check: row counts matched claimed 630/630/630.
+Leaning: workshop accept if scoped, top-tier weak reject. Strengths: deterministic cycle and core-integrated rows cover seeds 1-3, multiple input sizes, and both positive/control/stress workloads; the independent simulator executes the source-built workload binary and retains regressions. Weaknesses: the independent simulator is still an artifact-local trace/event model, not gem5 or a full-system external simulator. Fatal blockers: no external full-system simulator statistics. Required fixes: add gem5 or another accepted external simulator run and confidence intervals from those runs. Claim risks: robust speedup must be described per benchmark/configuration, not as a suite-wide win. Phase 0 discrepancy check: row counts matched claimed deterministic-model rows.
 
 ## Artifact Evaluation Reviewer
 
@@ -430,10 +455,10 @@ Leaning: reject for broad novelty, acceptable for a narrow artifact/mechanism pa
 
 | Class | Blocker | Evidence | Required fix |
 | --- | --- | --- | --- |
-| FATAL | No real gem5 or independent external core-simulator validation. | gem5_performance.csv; core_integrated_performance.csv; preflight_baseline_check.csv | Run the same workload/config matrix in gem5 or a comparable independent simulator and retain logs. |
+| SERIOUS BUT CAVEATABLE | Gem5 remains unavailable; independent_sim is source-backed trace/event validation, not a full-system external simulator. | gem5_performance.csv; independent_sim_performance.csv; independent_sim_prefetch_metrics.csv; independent_sim_memory_traffic.csv | Run the same workload/config matrix in gem5 or another accepted external simulator before making top-tier architecture claims. |
 | FATAL | No full-core matched timing/area/power result. | fullcore_synthesis.csv; fullcore_synthesis_overhead.csv | Integrate baseline and COPPER into the same real core or accepted core wrapper and close a mapped flow. |
 | SERIOUS BUT CAVEATABLE | Near-core-stub synthesis is not full-core overhead. | fullcore_synthesis_overhead.csv | Keep the scope labeled near_core_stub everywhere. |
-| SERIOUS BUT CAVEATABLE | Energy is proxy_assumed, not measured or calibrated. | energy_proxy.csv; energy_summary.csv | Add a real power report or calibrated model before claiming power efficiency. |
+| SERIOUS BUT CAVEATABLE | Energy is proxy_assumed_memory_energy, not measured or calibrated. | energy_proxy.csv; energy_summary.csv; power_report_index.csv | Add a real power report or calibrated model before claiming power efficiency. |
 | SERIOUS BUT CAVEATABLE | Some workloads regress versus the best baseline. | cycle_performance.csv; core_integrated_performance.csv | Discuss regressions directly and keep speedup claims per-row. |
 | SERIOUS BUT CAVEATABLE | Main-branch Actions status was not verifiable in Phase 0. | preflight_baseline_check.csv | Verify main branch separately before release claims. |
 | NICE TO HAVE | Local Windows cannot run paper/RTL/synthesis/workload compilers. | tooling_availability.md | Use Docker/Codespaces/GitHub Actions as the proof environment. |
@@ -550,7 +575,7 @@ def build_paper_source() -> None:
 \maketitle
 
 \begin{abstract}
-COPPER explores whether committed pointer-provenance signals can improve the selectivity of hardware data-derived prefetching for pointer-intensive workloads. The mechanism records pointer-source evidence only after architectural commit, invalidates or blocks stale and mismatched sources, and uses that evidence to gate later prefetch issue. The artifact now supports a careful claim: COPPER is a measurable research mechanism with executable-model evidence, deterministic cycle-model evidence, deterministic core-integrated evidence, CI-proven RTL unit simulation, CI-proven paper/artifact reproduction, matched unit-level synthesis evidence, near-core-stub synthesis when the open-source flow is available, and assumption-based energy-proxy rows. It does not claim state-of-the-art performance, production readiness, gem5 validation unless gem5 CSVs contain PASS rows, full-system integration, measured power efficiency, or silicon signoff.
+COPPER explores whether committed pointer-provenance signals can improve the selectivity of hardware data-derived prefetching for pointer-intensive workloads. The mechanism records pointer-source evidence only after architectural commit, invalidates or blocks stale and mismatched sources, and uses that evidence to gate later prefetch issue. The artifact now supports a careful claim: COPPER is a measurable research mechanism with executable-model evidence, deterministic cycle-model evidence, deterministic core-integrated evidence, source-backed independent-simulator evidence, CI-proven RTL unit simulation, CI-proven paper/artifact reproduction, matched unit-level synthesis evidence, near-core-stub generic-resource evidence when the open-source flow is available, and assumption-based proxy-energy rows. It does not claim state-of-the-art performance, production readiness, gem5 validation unless gem5 CSVs contain PASS rows, full-system integration, mapped timing, measured power efficiency, or silicon signoff.
 \end{abstract}
 
 \section{Introduction}
@@ -603,9 +628,9 @@ The artifact contains a Python model, a trace-driven evaluation harness, SystemV
 \hline
 Class & Examples & Evidence file \\
 \hline
-Pointer-heavy & linked list, tree, hash, graph, Patricia & workload\_build.csv; core\_integrated\_performance.csv \\
-Controls & array, matrix, compute, random access & workload\_build.csv; core\_integrated\_performance.csv \\
-Stress & short chains, long chains, mixed, noisy, branchy & workload\_build.csv; core\_integrated\_performance.csv \\
+Pointer-heavy & linked list, tree, hash, graph, Patricia & workload\_build.csv; independent\_sim\_performance.csv \\
+Controls & array, matrix, compute, random access & workload\_build.csv; independent\_sim\_performance.csv \\
+Stress & short chains, long chains, mixed, noisy, branchy & workload\_build.csv; independent\_sim\_performance.csv \\
 \hline
 \end{tabular}
 \end{table}
@@ -626,13 +651,13 @@ copper & committed-provenance policy & cycle\_performance.csv \\
 \end{tabular}
 \end{table}
 
-The normalized CSVs report per-workload rows rather than hiding negative results inside averages. Evidence levels are explicit: \texttt{model} rows come from the executable policy model, \texttt{cycle\_model} rows come from a deterministic memory-system model with hit/miss latency, memory latency, outstanding prefetches, queue drops, lateness, and demand/prefetch traffic accounting. \texttt{core\_integrated} rows add a deterministic core envelope with fetch/issue width, reorder-window pressure, load-queue pressure, branch penalties, and memory-system timing. Gem5 rows are reported separately and remain blocked unless \texttt{gem5\_*.csv} contains real PASS rows. None of these rows claim complete CPU integration.
+The normalized CSVs report per-workload rows rather than hiding negative results inside averages. Evidence levels are explicit: \texttt{model} rows come from the executable policy model, \texttt{cycle\_model} rows come from a deterministic memory-system model with hit/miss latency, memory latency, outstanding prefetches, queue drops, lateness, and demand/prefetch traffic accounting. \texttt{core\_integrated} rows add a deterministic core envelope with fetch/issue width, reorder-window pressure, load-queue pressure, branch penalties, and memory-system timing. \texttt{independent\_sim} rows execute the source-built C workload driver for checksums and then use a separate trace/event cache simulator that does not import the cycle-model or core-integrated harness. Gem5 rows are reported separately and remain blocked unless \texttt{gem5\_*.csv} contains real PASS rows. None of these rows claim complete CPU integration.
 
 \section{Evaluation}
 \begin{figure}[t]
 \centering
 \fbox{\begin{minipage}{\linewidth}\centering
-Speedup rows are generated in \texttt{research/results/performance.csv}, \texttt{research/results/cycle\_performance.csv}, and \texttt{research/results/core\_integrated\_performance.csv}. The paper does not collapse them into a single broad win claim.
+Speedup rows are generated in \texttt{research/results/performance.csv}, \texttt{research/results/cycle\_performance.csv}, \texttt{research/results/core\_integrated\_performance.csv}, and \texttt{research/results/independent\_sim\_performance.csv}. The paper does not collapse them into a single broad win claim.
 \end{minipage}}
 \caption{Speedup by benchmark.}
 \label{fig:speedup}
@@ -641,7 +666,7 @@ Speedup rows are generated in \texttt{research/results/performance.csv}, \texttt
 \begin{figure}[t]
 \centering
 \fbox{\begin{minipage}{\linewidth}\centering
-Issued, useful, useless, accuracy, coverage, lateness, and queue-drop fields are generated in \texttt{research/results/prefetch\_metrics.csv}, \texttt{research/results/cycle\_prefetch\_metrics.csv}, and \texttt{research/results/core\_integrated\_prefetch\_metrics.csv}.
+Issued, useful, useless, accuracy, coverage, lateness, and queue-drop fields are generated in \texttt{research/results/prefetch\_metrics.csv}, \texttt{research/results/cycle\_prefetch\_metrics.csv}, \texttt{research/results/core\_integrated\_prefetch\_metrics.csv}, and \texttt{research/results/independent\_sim\_prefetch\_metrics.csv}.
 \end{minipage}}
 \caption{Prefetch accuracy and coverage.}
 \label{fig:prefetch}
@@ -650,13 +675,13 @@ Issued, useful, useless, accuracy, coverage, lateness, and queue-drop fields are
 \begin{figure}[t]
 \centering
 \fbox{\begin{minipage}{\linewidth}\centering
-Demand-load, prefetch-load, total-request, and traffic-overhead fields are generated in \texttt{research/results/memory\_traffic.csv}, \texttt{research/results/cycle\_memory\_traffic.csv}, and \texttt{research/results/core\_integrated\_memory\_traffic.csv}.
+Demand-load, prefetch-load, total-request, and traffic-overhead fields are generated in \texttt{research/results/memory\_traffic.csv}, \texttt{research/results/cycle\_memory\_traffic.csv}, \texttt{research/results/core\_integrated\_memory\_traffic.csv}, and \texttt{research/results/independent\_sim\_memory\_traffic.csv}.
 \end{minipage}}
 \caption{Traffic overhead.}
 \label{fig:traffic}
 \end{figure}
 
-Current evidence supports selective, per-workload discussion. Several cycle-model and core-integrated rows show COPPER behind the best baseline; those regressions remain in the CSVs and block a universal speedup claim.
+Current evidence supports selective, per-workload discussion. Several cycle-model, core-integrated, and independent-sim rows show COPPER behind the best baseline; those regressions remain in the CSVs and block a universal speedup claim.
 
 \section{Ablation And Sensitivity}
 \begin{figure}[t]
@@ -683,11 +708,12 @@ Yosys & generic unit resource context & synthesis.csv \\
 nextpnr & mapped unit resource context when available & synthesis.csv \\
 Overhead & matched unit rows from same flow & synthesis\_overhead.csv \\
 Near-core stub & matched generic near-core-stub rows when Yosys runs & fullcore\_synthesis\_overhead.csv \\
+Full-core wrapper & BLOCKED unless real core-wrapper RTL exists & fullcore\_synthesis.csv \\
 \hline
 \end{tabular}
 \end{table}
 
-The artifact supports unit-level hardware plausibility and, when Yosys is available, a matched near-core-stub overhead row. The near-core stub is not a full CPU. Generic Yosys rows do not provide mapped timing, Fmax, ASIC area, or measured power.
+The artifact supports unit-level hardware plausibility and, when Yosys is available, a matched near-core-stub resource-overhead row. The near-core stub is not a full CPU. Generic Yosys rows do not provide mapped timing, Fmax, ASIC area, or measured power. Full-core wrapper rows remain BLOCKED unless real core-wrapper RTL and a mapped flow are added.
 
 \section{Energy Proxy}
 \begin{table}[t]
@@ -698,12 +724,13 @@ The artifact supports unit-level hardware plausibility and, when Yosys is availa
 Evidence & Scope & File \\
 \hline
 Memory traffic proxy & assumption-based, not measured & energy\_proxy.csv \\
+Measured power index & BLOCKED unless real report exists & power\_report\_index.csv \\
 Summary & proxy overhead statistics & energy\_summary.csv \\
 \hline
 \end{tabular}
 \end{table}
 
-Energy rows use explicit assumptions recorded in \texttt{energy\_proxy.csv}. They are \texttt{proxy\_assumed} rows, not calibrated power, not silicon measurements, and not a basis for claiming power efficiency.
+Energy rows use explicit assumptions recorded in \texttt{energy\_proxy.csv}. They are \texttt{proxy\_assumed\_memory\_energy} rows, not calibrated power, not silicon measurements, and not a basis for claiming power efficiency.
 
 \section{Limitations}
 \begin{table}[t]
@@ -714,8 +741,8 @@ Energy rows use explicit assumptions recorded in \texttt{energy\_proxy.csv}. The
 Limitation & Consequence \\
 \hline
 Gem5 rows may be BLOCKED & Gem5 validation cannot be claimed without PASS rows \\
-Core-integrated model is deterministic & Trends still need an independent simulator for stronger claims \\
-No full-core integration & Full-core area and timing claims remain blocked \\
+Independent simulator is trace/event level & It is not a system-level gem5 campaign \\
+No full-core integration & Full-core area, timing, and power claims remain blocked \\
 Energy is proxy-assumed & Measured power-efficiency claims remain blocked \\
 External gem5 and Vivado setup & Large external-tool reruns are not clone-local \\
 \hline
@@ -733,15 +760,16 @@ Gate class & Status source & Interpretation \\
 CI RTL evidence & rtl\_simulation.csv & GitHub Actions unit simulation \\
 Cycle-model evidence & cycle\_performance.csv & deterministic memory-system timing model \\
 Core-integrated evidence & core\_integrated\_performance.csv & deterministic core-envelope model \\
-Hardware cost & synthesis\_overhead.csv; fullcore\_synthesis\_overhead.csv & matched unit or near-core-stub overhead \\
-Energy proxy & energy\_proxy.csv & assumption-based proxy only \\
+Independent simulator & independent\_sim\_performance.csv & source-backed trace/event simulator \\
+Hardware cost & synthesis\_overhead.csv; fullcore\_synthesis\_overhead.csv & matched unit or near-core-stub resources \\
+Energy proxy & energy\_proxy.csv; power\_report\_index.csv & assumption-based proxy only \\
 Package & artifact\_manifest.csv & included and excluded files \\
 \hline
 \end{tabular}
 \end{table}
 
 \section{Conclusion}
-COPPER is best framed as a committed-provenance authority mechanism for data-derived prefetch issue. The artifact now has a CI-proven open-source path, deterministic cycle-model and core-integrated evidence, matched unit-level and near-core-stub synthesis paths, proxy energy rows, a claim ledger, audits, and a package manifest. The honest next step for a stronger architecture submission is real gem5 or comparable independent core validation plus full-core timing/area/power evidence without changing the scoped claims in this artifact.
+COPPER is best framed as a committed-provenance authority mechanism for data-derived prefetch issue. The artifact now has a CI-proven open-source path, deterministic cycle-model and core-integrated evidence, source-backed independent-simulator rows, matched unit-level and near-core-stub generic-resource paths, proxy energy rows, a claim ledger, audits, and a package manifest. The honest next step for a stronger architecture submission is real gem5 or comparable external core validation plus full-core timing/area/power evidence without changing the scoped claims in this artifact.
 
 \bibliographystyle{plain}
 \bibliography{references}

@@ -24,6 +24,11 @@ machine or one-command full-system artifact.
 - `make workloads` builds the public C workload driver from source when a C
   compiler is available and records one row per required workload in
   `research/results/workload_build.csv`.
+- `research/scripts/run_independent_sim_eval.py` requires PASS source-workload
+  build rows, executes the compiled workload driver for each required
+  benchmark, and writes `independent_sim_*` CSVs from a separate trace/event
+  simulator. This is independent of the cycle-model and core-integrated
+  harnesses, but it is not gem5.
 - The top-tier pass adds deterministic `core_integrated` CSVs. This is a
   core-envelope validation harness with fetch/issue, reorder-window,
   load-queue, branch, and memory timing parameters. It is not gem5 and does not
@@ -32,10 +37,12 @@ machine or one-command full-system artifact.
   performance evidence; it records that gem5 was unavailable or not runnable in
   the current environment.
 - `fullcore_synthesis*.csv` records unit and near-core-stub synthesis scope.
-  Near-core-stub rows must not be described as full-core overhead.
-- `energy_proxy.csv` and `energy_summary.csv` are `proxy_assumed` evidence only.
-  They are not measured silicon, Vivado, CACTI, McPAT, or process-calibrated
-  power reports.
+  Near-core-stub rows must not be described as full-core overhead, mapped
+  timing, or measured power.
+- `energy_proxy.csv`, `energy_summary.csv`, and `power_report_index.csv` are
+  `proxy_assumed_memory_energy` evidence only unless a measured-tool-power row
+  appears. They are not measured silicon, Vivado, CACTI, McPAT, or
+  process-calibrated power reports.
 - Paper-facing documents, tables, summaries, RTL sources, testbenches, and
   reproduction scripts are included with stable relative paths.
 - The Python audit and summary scripts can be rerun with a local Python 3
@@ -76,11 +83,12 @@ standard tools, and reproduce selected public-workload points after installing
 the external simulator/toolchain stack. They should not expect a fresh clone to
 reproduce the entire long-running full-system campaign without that setup.
 
-The model-level, cycle-model, and core-integrated evidence improve baseline
-discipline but do not replace real gem5/full-system evidence. Claims in the
-paper and claim ledger must identify model-level, cycle-model, core-integrated,
-RTL-level, unit-synthesis, near-core-stub synthesis, proxy-energy,
-existing-Vivado, and external summary evidence separately.
+The model-level, cycle-model, core-integrated, and independent-sim evidence
+improve baseline discipline but do not replace real gem5/full-system evidence.
+Claims in the paper and claim ledger must identify model-level, cycle-model,
+core-integrated, independent-sim, RTL-level, unit-synthesis,
+near-core-stub synthesis, proxy-energy, existing-Vivado, and external summary
+evidence separately.
 
 The clone-local runner is intended to make this boundary explicit: it should pass
 from a fresh clone after Python dependencies are installed, while full gem5 and
