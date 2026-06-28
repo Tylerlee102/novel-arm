@@ -114,6 +114,8 @@ jobs:
 
   reproduce:
     name: Open-source evidence flow
+    needs: mapped-ppa
+    if: ${{ always() }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -173,6 +175,19 @@ jobs:
       - name: Run synthesis
         if: always()
         run: make synth
+
+      - name: Download mapped PPA evidence
+        if: ${{ needs.mapped-ppa.result == 'success' }}
+        uses: actions/download-artifact@v4
+        with:
+          name: copper-mapped-ppa-${{ github.run_id }}
+          path: .mapped-ppa-evidence
+
+      - name: Merge mapped PPA evidence
+        if: ${{ needs.mapped-ppa.result == 'success' }}
+        run: |
+          cp -a .mapped-ppa-evidence/research/results/. research/results/
+          python3 research/scripts/build_conference_docs.py
 
       - name: Build paper
         if: always()

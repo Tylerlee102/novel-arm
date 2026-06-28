@@ -1,6 +1,6 @@
 path,size_bytes,sha256,included,package_path,notes
 .devcontainer/devcontainer.json,441,ec95ce2d3ceb9960e9ab9a85a60ae90d8dc7b3a62556e100a15ac8b462481ae7,yes,.devcontainer/devcontainer.json,included source or reviewer file
-.github/workflows/reproduce.yml,6663,075b873bcd74fcc5bbc504fbbe449d789782abc9736b024c837315f4caf049ea,yes,.github/workflows/reproduce.yml,included source or reviewer file
+.github/workflows/reproduce.yml,7204,e65f1fbfb9a1aaccb5ce58a7489d2c7d4a82f0bf541c615f5c2088795c4b8b7e,yes,.github/workflows/reproduce.yml,included source or reviewer file
 AUDIT.md,7027,9f18873f486060d353da88ca91a8427955186fbc47f409a2e4ec58f07f662cf9,yes,AUDIT.md,included source or reviewer file
 AUDIT_REPORT.md,9681,a498ce507a1bc1ce8436e89895009c428e66481241a61fa1539c5bfe39f1e34d,yes,AUDIT_REPORT.md,included source or reviewer file
 Dockerfile,1396,4dcbf5293fefc0106dd8f5aaf92dffcf6b8800cc6733892f6214788431b0d9dd,yes,Dockerfile,included source or reviewer file
@@ -590,7 +590,7 @@ research/results/aarch64_gapbs_mini_suite_fs.s,24111,,no,,included summary/evide
 research/results/aarch64_gapbs_mini_suite_fs_small.s,20597,,no,,included summary/evidence file
 research/results/ablation.csv,11431,5121591a6b88d9308f397ca6444f1d32704bcd3c30b36aee5a0aa0ddf3d01ccd,yes,research/results/ablation.csv,included summary/evidence file
 research/results/artifact_inventory.csv,3517652,5d8f4f1d6d20cb273472fcb97357559375621ac0610ef6abe288f7c8ffc0460c,yes,research/results/artifact_inventory.csv,included summary/evidence file
-research/results/artifact_manifest.csv,1896025,02b76d52deb67d423f0ca03a1293195174d52af3e9fe19a2d4c415cf538dc3a0,yes,research/results/artifact_manifest.csv,included summary/evidence file
+research/results/artifact_manifest.csv,1896239,c26fd1f0401072a2625e5fb8ea57abc466f2aa09bc04799eb85459aa32541191,yes,research/results/artifact_manifest.csv,included summary/evidence file
 research/results/asic_power/core_wrapper_plus_copper/core_wrapper_plus_copper_nangate45.v,1337348,629c8890e3d747905c83c7945261b954e58646df7af3bcf5e1a08068cf67090e,yes,research/results/asic_power/core_wrapper_plus_copper/core_wrapper_plus_copper_nangate45.v,included summary/evidence file
 research/results/asic_power/core_wrapper_plus_copper/sta_power.tcl,506,,no,,excluded local-only file containing a private absolute path
 research/results/asic_power/nangate45/NangateOpenCellLibrary_typical.lib,6692032,,no,,included summary/evidence file
@@ -11612,13 +11612,13 @@ research/run_yyjson_app_fs.sh,2602,,no,,excluded local-only file containing a pr
 research/run_zlib_app_fs.sh,2166,,no,,excluded local-only file containing a private absolute path
 research/run_zstd_app_fs.sh,2166,,no,,excluded local-only file containing a private absolute path
 research/scoop_companion_state_space.py,4243,6e6aa03dc7cfd08cc7481603a578ac544b38c7a5d3678d106cb1d4c74db327b2,yes,research/scoop_companion_state_space.py,included source or reviewer file
-research/scripts/__pycache__/build_conference_docs.cpython-312.pyc,85683,,no,,excluded scratch/private/build directory
+research/scripts/__pycache__/build_conference_docs.cpython-312.pyc,87158,,no,,excluded scratch/private/build directory
 research/scripts/__pycache__/build_paper.cpython-312.pyc,9297,,no,,excluded scratch/private/build directory
 research/scripts/__pycache__/build_workloads.cpython-312.pyc,9160,,no,,excluded scratch/private/build directory
 research/scripts/__pycache__/check_toolchain.cpython-312.pyc,12347,,no,,excluded scratch/private/build directory
 research/scripts/__pycache__/copper_eval_model.cpython-311.pyc,28557,,no,,excluded scratch/private/build directory
 research/scripts/__pycache__/copper_eval_model.cpython-312.pyc,24440,,no,,excluded scratch/private/build directory
-research/scripts/__pycache__/import_ci_artifacts.cpython-312.pyc,24848,,no,,excluded scratch/private/build directory
+research/scripts/__pycache__/import_ci_artifacts.cpython-312.pyc,24888,,no,,excluded scratch/private/build directory
 research/scripts/__pycache__/package_artifact.cpython-312.pyc,10796,,no,,excluded scratch/private/build directory
 research/scripts/__pycache__/run_asic_power.cpython-312.pyc,28106,,no,,excluded scratch/private/build directory
 research/scripts/__pycache__/run_core_eval.cpython-312.pyc,13969,,no,,excluded scratch/private/build directory
