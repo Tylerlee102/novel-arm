@@ -10,6 +10,7 @@ tool estimate, not silicon measurement and not full-core signoff.
 from __future__ import annotations
 
 import csv
+import json
 import os
 import platform
 import re
@@ -382,7 +383,13 @@ def parse_report_section_number(section: str, text: str) -> str:
 
 
 def parse_power(text: str) -> tuple[str, str, str, str]:
-    total_lines = [line for line in text.splitlines() if re.match(r"\s*Total\b", line)]
+    lines = text.splitlines()
+    report_power_lines: list[str] = []
+    for idx, line in enumerate(lines):
+        if "report_power" in line.lower():
+            report_power_lines.extend(lines[idx : idx + 40])
+    search_lines = report_power_lines or lines
+    total_lines = [line for line in search_lines if re.match(r"\s*Total\b", line)]
     for line in reversed(total_lines):
         numbers = re.findall(r"-?[0-9]+(?:\.[0-9]+)?(?:e[-+]?\d+)?", line, re.I)
         if len(numbers) >= 4:
@@ -392,13 +399,12 @@ def parse_power(text: str) -> tuple[str, str, str, str]:
 
 
 def parse_cells(text: str) -> str:
+    totals = re.findall(r"^\s*Total\s+([0-9]+)\s+[0-9.]+\s*$", text, re.I | re.M)
+    if totals:
+        return totals[-1]
     matches = re.findall(r"^\s*(?:Number of cells:|Insts:)\s*([0-9]+)\s*$", text, re.I | re.M)
     if matches:
         return matches[-1]
-    usage = re.findall(r"^\s*[A-Za-z0-9_]+(?:_X[0-9]+)?\s+([0-9]+)\s*$", text, re.M)
-    if usage:
-        total = sum(int(value) for value in usage)
-        return str(total) if total else "NA"
     return "NA"
 
 
@@ -411,6 +417,56 @@ def parse_area(text: str) -> str:
         ),
         text,
     )
+
+
+def fmt(value: object, scale: float = 1.0) -> str:
+    try:
+        return f"{float(value) * scale:.6g}"
+    except (TypeError, ValueError):
+        return "NA"
+
+
+def report_json_path(report_path: Path) -> Path | None:
+    candidates = sorted(report_path.parent.rglob("6_report.json"))
+    return candidates[-1] if candidates else None
+
+
+def parse_json_metrics(report_path: Path) -> dict[str, str]:
+    json_path = report_json_path(report_path)
+    if not json_path:
+        return {}
+    try:
+        metrics = json.loads(json_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+
+    def value(*keys: str) -> object:
+        for key in keys:
+            if key in metrics:
+                return metrics[key]
+        return None
+
+    out = {
+        "cells": fmt(value("finish__design__instance__count__stdcell", "finish__design__instance__count")),
+        "area_um2": fmt(value("finish__design__instance__area__stdcell", "finish__design__instance__area")),
+        "die_area_um2": fmt(value("finish__design__die__area")),
+        "utilization_pct": fmt(value("finish__design__instance__utilization__stdcell", "finish__design__instance__utilization"), 100.0),
+        "wns": fmt(value("finish__timing__setup__ws")),
+        "tns": fmt(value("finish__timing__setup__tns")),
+        "internal_power_mw": fmt(value("finish__power__internal__total"), 1000.0),
+        "switching_power_mw": fmt(value("finish__power__switching__total"), 1000.0),
+        "leakage_power_mw": fmt(value("finish__power__leakage__total"), 1000.0),
+        "total_power_mw": fmt(value("finish__power__total"), 1000.0),
+        "flow_errors": fmt(value("finish__flow__errors__count")),
+    }
+    try:
+        period_ns = float(CLOCK_PERIOD_NS)
+        slack_ns = float(out["wns"])
+        critical_ns = period_ns - slack_ns
+        out["fmax_mhz"] = f"{1000.0 / critical_ns:.3f}" if critical_ns > 0 else "NA"
+    except ValueError:
+        out["fmax_mhz"] = "NA"
+    return {key: value for key, value in out.items() if value != "NA"}
 
 
 def parse_design(design: Design, code: int, report_path: Path, text: str) -> dict[str, str]:
@@ -433,13 +489,27 @@ def parse_design(design: Design, code: int, report_path: Path, text: str) -> dic
             fmax = f"{1000.0 / period:.3f}"
     except ValueError:
         pass
-    status = "PASS" if code == 0 and total != "NA" and (wns != "NA" or tns != "NA" or fmax != "NA") else "FAIL"
+    json_metrics = parse_json_metrics(report_path)
+    cells = json_metrics.get("cells", parse_cells(text))
+    area = json_metrics.get("area_um2", parse_area(text))
+    die_area = json_metrics.get("die_area_um2", "NA")
+    utilization = json_metrics.get("utilization_pct", "NA")
+    wns = json_metrics.get("wns", wns)
+    tns = json_metrics.get("tns", tns)
+    fmax = json_metrics.get("fmax_mhz", fmax)
+    internal = json_metrics.get("internal_power_mw", internal)
+    switching = json_metrics.get("switching_power_mw", switching)
+    leakage = json_metrics.get("leakage_power_mw", leakage)
+    total = json_metrics.get("total_power_mw", total)
+    flow_errors = json_metrics.get("flow_errors", "0")
+    status = "PASS" if code == 0 and flow_errors == "0" and total != "NA" and (wns != "NA" or tns != "NA" or fmax != "NA") else "FAIL"
     notes = (
-        "OpenROAD-flow-scripts route plus final report completed for PicoRV32 core_wrapper; "
+        "OpenROAD-flow-scripts route plus final timing/power reports completed for PicoRV32 core_wrapper; "
         f"clock_period_ns={CLOCK_PERIOD_NS}; core_utilization={CORE_UTILIZATION}; "
         f"place_density={PLACE_DENSITY}; ORFS ref={ORFS_REF}. This is post-route "
         "OpenROAD/Nangate45 tool-estimated power/timing, not silicon measurement, "
-        "not foundry signoff, and not full-core power."
+        "not foundry signoff, and not full-core power. GDS/image export is not required "
+        "for this row."
     )
     if status == "FAIL":
         notes = "FAIL: OpenROAD-flow-scripts did not complete route/final report or did not emit parseable timing and power."
@@ -450,10 +520,10 @@ def parse_design(design: Design, code: int, report_path: Path, text: str) -> dic
         "environment": ENVIRONMENT,
         "status": status,
         "scope": design.scope,
-        "cells": parse_cells(text),
-        "area_um2": parse_area(text),
-        "die_area_um2": "NA",
-        "utilization_pct": "NA",
+        "cells": cells,
+        "area_um2": area,
+        "die_area_um2": die_area,
+        "utilization_pct": utilization,
         "wns": wns,
         "tns": tns,
         "fmax_mhz": fmax,
@@ -496,7 +566,7 @@ def run_design(design: Design, flow_home: Path, temp_root: Path) -> dict[str, st
         )
     combined = route_output + "\n" + finish_output
     report_path, text = copy_evidence(work_home, design, config, LOG_DIR / design.name, combined)
-    return parse_design(design, 0 if route_code == 0 and finish_code == 0 else 1, report_path, text)
+    return parse_design(design, route_code, report_path, text)
 
 
 def numeric(value: str) -> float | None:
