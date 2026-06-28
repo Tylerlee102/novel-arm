@@ -291,7 +291,7 @@ create_clock -name clk -period {CLOCK_PERIOD_NS} [get_ports clk]
 set_power_activity -global -activity {ACTIVITY}
 report_checks -path_delay max
 report_worst_slack -max
-report_tns -max
+report_tns
 report_power
 exit
 """.lstrip()
