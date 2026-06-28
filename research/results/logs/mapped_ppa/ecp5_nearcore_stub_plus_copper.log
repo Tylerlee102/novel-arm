@@ -1,1 +1,2389 @@
-BLOCKED: ECP5 mapped PPA requires yosys on PATH.
+$ {USER_HOME}\tools\oss-cad-suite\bin\yosys.EXE -p read_verilog -sv research/copper_prefetch_unit_open.sv; read_verilog -sv research/rtl/integration/copper_near_core_stub.sv; chparam -set ENTRIES 8 -set QUEUE_DEPTH 4 nearcore_stub_plus_copper; synth_ecp5 -top nearcore_stub_plus_copper -json {USER_HOME}/AppData/Local/Temp/copper_mapped_ecp5_e_gjez6l/nearcore_stub_plus_copper.json; stat
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.66+154 (git sha1 23aadd92a, Release, GNU /usr/bin/x86_64-w64-mingw32-g++ 13.2.1)
+
+-- Running command `read_verilog -sv research/copper_prefetch_unit_open.sv; read_verilog -sv research/rtl/integration/copper_near_core_stub.sv; chparam -set ENTRIES 8 -set QUEUE_DEPTH 4 nearcore_stub_plus_copper; synth_ecp5 -top nearcore_stub_plus_copper -json {USER_HOME}/AppData/Local/Temp/copper_mapped_ecp5_e_gjez6l/nearcore_stub_plus_copper.json; stat' --
+
+1. Executing Verilog-2005 frontend: research/copper_prefetch_unit_open.sv
+Parsing SystemVerilog input from `research/copper_prefetch_unit_open.sv' to AST representation.
+Generating RTLIL representation for module `\copper_prefetch_unit_open'.
+Warning: Replacing memory \token_table with list of registers. See research/copper_prefetch_unit_open.sv:68
+Warning: Replacing memory \src_table with list of registers. See research/copper_prefetch_unit_open.sv:67
+Warning: Replacing memory \valid_table with list of registers. See research/copper_prefetch_unit_open.sv:66
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: research/rtl/integration/copper_near_core_stub.sv
+Parsing SystemVerilog input from `research/rtl/integration/copper_near_core_stub.sv' to AST representation.
+Generating RTLIL representation for module `\baseline_core_stub_with_prefetch_interface'.
+Generating RTLIL representation for module `\nearcore_stub_baseline'.
+Generating RTLIL representation for module `\nearcore_stub_plus_copper'.
+Generating RTLIL representation for module `\core_stub_plus_copper'.
+Successfully finished Verilog frontend.
+Parameter \ENTRIES = 8
+Parameter \QUEUE_DEPTH = 4
+
+3. Executing AST frontend in derive mode using pre-parsed AST for module `\nearcore_stub_plus_copper'.
+Parameter \ENTRIES = 8
+Parameter \QUEUE_DEPTH = 4
+Generating RTLIL representation for module `$paramod$977dbc26883b7dd257dfd37181135b51274c5f68\nearcore_stub_plus_copper'.
+
+4. Executing SYNTH_LATTICE pass.
+
+4.1. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_sim_ecp5.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_sim_ecp5.v' to AST representation.
+Generating RTLIL representation for module `\LUT4'.
+Generating RTLIL representation for module `\$__ABC9_LUT5'.
+Generating RTLIL representation for module `\$__ABC9_LUT6'.
+Generating RTLIL representation for module `\$__ABC9_LUT7'.
+Generating RTLIL representation for module `\L6MUX21'.
+Generating RTLIL representation for module `\TRELLIS_RAM16X2'.
+Generating RTLIL representation for module `\PFUMX'.
+Generating RTLIL representation for module `\TRELLIS_DPR16X4'.
+Generating RTLIL representation for module `\DPR16X4C'.
+Generating RTLIL representation for module `\LUT2'.
+Generating RTLIL representation for module `\TRELLIS_FF'.
+Generating RTLIL representation for module `\TRELLIS_IO'.
+Generating RTLIL representation for module `\INV'.
+Generating RTLIL representation for module `\TRELLIS_COMB'.
+Generating RTLIL representation for module `\VLO'.
+Generating RTLIL representation for module `\VHI'.
+Generating RTLIL representation for module `\FD1P3AX'.
+Generating RTLIL representation for module `\FD1P3AY'.
+Generating RTLIL representation for module `\FD1P3BX'.
+Generating RTLIL representation for module `\FD1P3DX'.
+Generating RTLIL representation for module `\FD1P3IX'.
+Generating RTLIL representation for module `\FD1P3JX'.
+Generating RTLIL representation for module `\FD1S3AX'.
+Generating RTLIL representation for module `\FD1S3AY'.
+Generating RTLIL representation for module `\FD1S3BX'.
+Generating RTLIL representation for module `\FD1S3DX'.
+Generating RTLIL representation for module `\FD1S3IX'.
+Generating RTLIL representation for module `\FD1S3JX'.
+Generating RTLIL representation for module `\IFS1P3BX'.
+Generating RTLIL representation for module `\IFS1P3DX'.
+Generating RTLIL representation for module `\IFS1P3IX'.
+Generating RTLIL representation for module `\IFS1P3JX'.
+Generating RTLIL representation for module `\OFS1P3BX'.
+Generating RTLIL representation for module `\OFS1P3DX'.
+Generating RTLIL representation for module `\OFS1P3IX'.
+Generating RTLIL representation for module `\OFS1P3JX'.
+Generating RTLIL representation for module `\IB'.
+Generating RTLIL representation for module `\IBPU'.
+Generating RTLIL representation for module `\IBPD'.
+Generating RTLIL representation for module `\OB'.
+Generating RTLIL representation for module `\OBZ'.
+Generating RTLIL representation for module `\OBZPU'.
+Generating RTLIL representation for module `\OBZPD'.
+Generating RTLIL representation for module `\OBCO'.
+Generating RTLIL representation for module `\BB'.
+Generating RTLIL representation for module `\BBPU'.
+Generating RTLIL representation for module `\BBPD'.
+Generating RTLIL representation for module `\ILVDS'.
+Generating RTLIL representation for module `\OLVDS'.
+Generating RTLIL representation for module `\CCU2C'.
+Generating RTLIL representation for module `\DP16KD'.
+Replacing existing blackbox module `\FD1P3AX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:2.1-2.261.
+Generating RTLIL representation for module `\FD1P3AX'.
+Replacing existing blackbox module `\FD1P3AY' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:3.1-3.261.
+Generating RTLIL representation for module `\FD1P3AY'.
+Replacing existing blackbox module `\FD1P3BX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:4.1-4.261.
+Generating RTLIL representation for module `\FD1P3BX'.
+Replacing existing blackbox module `\FD1P3DX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:5.1-5.261.
+Generating RTLIL representation for module `\FD1P3DX'.
+Replacing existing blackbox module `\FD1P3IX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:6.1-6.261.
+Generating RTLIL representation for module `\FD1P3IX'.
+Replacing existing blackbox module `\FD1P3JX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:7.1-7.261.
+Generating RTLIL representation for module `\FD1P3JX'.
+Replacing existing blackbox module `\FD1S3AX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:8.1-8.261.
+Generating RTLIL representation for module `\FD1S3AX'.
+Replacing existing blackbox module `\FD1S3AY' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:9.1-9.261.
+Generating RTLIL representation for module `\FD1S3AY'.
+Replacing existing blackbox module `\FD1S3BX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:10.1-10.261.
+Generating RTLIL representation for module `\FD1S3BX'.
+Replacing existing blackbox module `\FD1S3DX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:11.1-11.261.
+Generating RTLIL representation for module `\FD1S3DX'.
+Replacing existing blackbox module `\FD1S3IX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:12.1-12.261.
+Generating RTLIL representation for module `\FD1S3IX'.
+Replacing existing blackbox module `\FD1S3JX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:13.1-13.261.
+Generating RTLIL representation for module `\FD1S3JX'.
+Replacing existing blackbox module `\IFS1P3BX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:26.1-26.301.
+Generating RTLIL representation for module `\IFS1P3BX'.
+Replacing existing blackbox module `\IFS1P3DX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:27.1-27.301.
+Generating RTLIL representation for module `\IFS1P3DX'.
+Replacing existing blackbox module `\IFS1P3IX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:28.1-28.301.
+Generating RTLIL representation for module `\IFS1P3IX'.
+Replacing existing blackbox module `\IFS1P3JX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:29.1-29.301.
+Generating RTLIL representation for module `\IFS1P3JX'.
+Replacing existing blackbox module `\OFS1P3BX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:31.1-31.302.
+Generating RTLIL representation for module `\OFS1P3BX'.
+Replacing existing blackbox module `\OFS1P3DX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:32.1-32.302.
+Generating RTLIL representation for module `\OFS1P3DX'.
+Replacing existing blackbox module `\OFS1P3IX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:33.1-33.302.
+Generating RTLIL representation for module `\OFS1P3IX'.
+Replacing existing blackbox module `\OFS1P3JX' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_ff.vh:34.1-34.302.
+Generating RTLIL representation for module `\OFS1P3JX'.
+Replacing existing blackbox module `\IB' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_io.vh:2.1-2.157.
+Generating RTLIL representation for module `\IB'.
+Replacing existing blackbox module `\IBPU' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_io.vh:3.1-3.157.
+Generating RTLIL representation for module `\IBPU'.
+Replacing existing blackbox module `\IBPD' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_io.vh:4.1-4.157.
+Generating RTLIL representation for module `\IBPD'.
+Replacing existing blackbox module `\OB' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_io.vh:5.1-5.157.
+Generating RTLIL representation for module `\OB'.
+Replacing existing blackbox module `\OBZ' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_io.vh:6.1-6.164.
+Generating RTLIL representation for module `\OBZ'.
+Replacing existing blackbox module `\OBZPU' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_io.vh:7.1-7.164.
+Generating RTLIL representation for module `\OBZPU'.
+Replacing existing blackbox module `\OBZPD' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_io.vh:8.1-8.164.
+Generating RTLIL representation for module `\OBZPD'.
+Replacing existing blackbox module `\OBCO' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_io.vh:9.1-9.90.
+Generating RTLIL representation for module `\OBCO'.
+Replacing existing blackbox module `\BB' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_io.vh:10.1-10.179.
+Generating RTLIL representation for module `\BB'.
+Replacing existing blackbox module `\BBPU' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_io.vh:11.1-11.179.
+Generating RTLIL representation for module `\BBPU'.
+Replacing existing blackbox module `\BBPD' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_io.vh:12.1-12.179.
+Generating RTLIL representation for module `\BBPD'.
+Replacing existing blackbox module `\ILVDS' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_io.vh:13.1-13.139.
+Generating RTLIL representation for module `\ILVDS'.
+Replacing existing blackbox module `\OLVDS' at {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\cells_io.vh:14.1-14.146.
+Generating RTLIL representation for module `\OLVDS'.
+Successfully finished Verilog frontend.
+
+4.2. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_bb_ecp5.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_bb_ecp5.v' to AST representation.
+Generating RTLIL representation for module `\GSR'.
+Generating RTLIL representation for module `\PUR'.
+Generating RTLIL representation for module `\SGSR'.
+Generating RTLIL representation for module `\PDPW16KD'.
+Generating RTLIL representation for module `\MULT18X18D'.
+Generating RTLIL representation for module `\ALU54B'.
+Generating RTLIL representation for module `\CLKDIVF'.
+Generating RTLIL representation for module `\PCSCLKDIV'.
+Generating RTLIL representation for module `\DCSC'.
+Generating RTLIL representation for module `\DCCA'.
+Generating RTLIL representation for module `\ECLKSYNCB'.
+Generating RTLIL representation for module `\ECLKBRIDGECS'.
+Generating RTLIL representation for module `\DELAYF'.
+Generating RTLIL representation for module `\DELAYG'.
+Generating RTLIL representation for module `\USRMCLK'.
+Generating RTLIL representation for module `\DQSBUFM'.
+Generating RTLIL representation for module `\DDRDLLA'.
+Generating RTLIL representation for module `\DLLDELD'.
+Generating RTLIL representation for module `\IDDRX1F'.
+Generating RTLIL representation for module `\IDDRX2F'.
+Generating RTLIL representation for module `\IDDR71B'.
+Generating RTLIL representation for module `\IDDRX2DQA'.
+Generating RTLIL representation for module `\ODDRX1F'.
+Generating RTLIL representation for module `\ODDRX2F'.
+Generating RTLIL representation for module `\ODDR71B'.
+Generating RTLIL representation for module `\OSHX2A'.
+Generating RTLIL representation for module `\TSHX2DQA'.
+Generating RTLIL representation for module `\TSHX2DQSA'.
+Generating RTLIL representation for module `\ODDRX2DQA'.
+Generating RTLIL representation for module `\ODDRX2DQSB'.
+Generating RTLIL representation for module `\EHXPLLL'.
+Generating RTLIL representation for module `\DTR'.
+Generating RTLIL representation for module `\OSCG'.
+Generating RTLIL representation for module `\EXTREFB'.
+Generating RTLIL representation for module `\JTAGG'.
+Generating RTLIL representation for module `\DCUA'.
+Successfully finished Verilog frontend.
+
+4.3. Executing HIERARCHY pass (managing design hierarchy).
+
+4.3.1. Analyzing design hierarchy..
+Top module:  \nearcore_stub_plus_copper
+Used module:     \core_stub_plus_copper
+Used module:         \copper_prefetch_unit_open
+Parameter \ADDR_W = 48
+Parameter \TOKEN_W = 16
+Parameter \ENTRIES = 8
+Parameter \QUEUE_DEPTH = 4
+
+4.3.2. Executing AST frontend in derive mode using pre-parsed AST for module `\core_stub_plus_copper'.
+Parameter \ADDR_W = 48
+Parameter \TOKEN_W = 16
+Parameter \ENTRIES = 8
+Parameter \QUEUE_DEPTH = 4
+Generating RTLIL representation for module `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\core_stub_plus_copper'.
+Parameter \ADDR_W = 48
+Parameter \TOKEN_W = 16
+Parameter \ENTRIES = 8
+Parameter \QUEUE_DEPTH = 4
+
+4.3.3. Executing AST frontend in derive mode using pre-parsed AST for module `\copper_prefetch_unit_open'.
+Parameter \ADDR_W = 48
+Parameter \TOKEN_W = 16
+Parameter \ENTRIES = 8
+Parameter \QUEUE_DEPTH = 4
+Generating RTLIL representation for module `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open'.
+Warning: Replacing memory \token_table with list of registers. See research/copper_prefetch_unit_open.sv:68
+Warning: Replacing memory \src_table with list of registers. See research/copper_prefetch_unit_open.sv:67
+Warning: Replacing memory \valid_table with list of registers. See research/copper_prefetch_unit_open.sv:66
+
+4.3.4. Analyzing design hierarchy..
+Top module:  \nearcore_stub_plus_copper
+Used module:     $paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\core_stub_plus_copper
+Used module:         \copper_prefetch_unit_open
+Parameter \ADDR_W = 48
+Parameter \TOKEN_W = 16
+Parameter \ENTRIES = 8
+Parameter \QUEUE_DEPTH = 4
+Found cached RTLIL representation for module `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open'.
+
+4.3.5. Analyzing design hierarchy..
+Top module:  \nearcore_stub_plus_copper
+Used module:     $paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\core_stub_plus_copper
+Used module:         $paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open
+
+4.3.6. Analyzing design hierarchy..
+Top module:  \nearcore_stub_plus_copper
+Used module:     $paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\core_stub_plus_copper
+Used module:         $paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open
+Removing unused module `\core_stub_plus_copper'.
+Removing unused module `\nearcore_stub_baseline'.
+Removing unused module `\baseline_core_stub_with_prefetch_interface'.
+Removing unused module `\copper_prefetch_unit_open'.
+Removed 4 unused modules.
+
+4.4. Executing PROC pass (convert processes to netlists).
+
+4.4.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+4.4.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 6 switch rules as full_case in process $proc$research/copper_prefetch_unit_open.sv:61$332 in module $paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.
+Marked 1 switch rules as full_case in process $proc$research/rtl/integration/copper_near_core_stub.sv:143$305 in module $paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\core_stub_plus_copper.
+Removed a total of 0 dead cases.
+
+4.4.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 6 redundant assignments.
+Promoted 7 assignments to connections.
+
+4.4.4. Executing PROC_INIT pass (extract init attributes).
+
+4.4.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \rst_n in `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$proc$research/copper_prefetch_unit_open.sv:61$332'.
+Found async reset \rst_n in `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\core_stub_plus_copper.$proc$research/rtl/integration/copper_near_core_stub.sv:143$305'.
+
+4.4.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~6 debug messages>
+
+4.4.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$proc$research/copper_prefetch_unit_open.sv:61$332'.
+     1/39: $2$mem2reg_wr$\token_table$research/copper_prefetch_unit_open.sv:74$312_ADDR[2:0]$354
+     2/39: $2$mem2reg_wr$\token_table$research/copper_prefetch_unit_open.sv:74$312_DATA[15:0]$355
+     3/39: $2$mem2reg_wr$\src_table$research/copper_prefetch_unit_open.sv:73$311_ADDR[2:0]$352
+     4/39: $2$mem2reg_wr$\src_table$research/copper_prefetch_unit_open.sv:73$311_DATA[47:0]$353
+     5/39: $2$mem2reg_wr$\valid_table$research/copper_prefetch_unit_open.sv:72$310_ADDR[2:0]$350
+     6/39: $2$mem2reg_wr$\valid_table$research/copper_prefetch_unit_open.sv:72$310_DATA[0:0]$351
+     7/39: $1$mem2reg_wr$\token_table$research/copper_prefetch_unit_open.sv:74$312_DATA[15:0]$347
+     8/39: $1$mem2reg_wr$\token_table$research/copper_prefetch_unit_open.sv:74$312_ADDR[2:0]$346
+     9/39: $1$mem2reg_wr$\src_table$research/copper_prefetch_unit_open.sv:73$311_DATA[47:0]$345
+    10/39: $1$mem2reg_wr$\src_table$research/copper_prefetch_unit_open.sv:73$311_ADDR[2:0]$344
+    11/39: $1$mem2reg_wr$\valid_table$research/copper_prefetch_unit_open.sv:72$310_DATA[0:0]$343
+    12/39: $1$mem2reg_wr$\valid_table$research/copper_prefetch_unit_open.sv:72$310_ADDR[2:0]$342
+    13/39: $1$fordecl_block$2.i[31:0]$341
+    14/39: $0\token_table[7][15:0]
+    15/39: $0\token_table[6][15:0]
+    16/39: $0\token_table[5][15:0]
+    17/39: $0\token_table[4][15:0]
+    18/39: $0\src_table[7][47:0]
+    19/39: $0\src_table[6][47:0]
+    20/39: $0\src_table[5][47:0]
+    21/39: $0\src_table[4][47:0]
+    22/39: $0\valid_table[7][0:0]
+    23/39: $0\valid_table[6][0:0]
+    24/39: $0\valid_table[5][0:0]
+    25/39: $0\valid_table[4][0:0]
+    26/39: $0\token_table[3][15:0]
+    27/39: $0\token_table[2][15:0]
+    28/39: $0\token_table[1][15:0]
+    29/39: $0\token_table[0][15:0]
+    30/39: $0\src_table[3][47:0]
+    31/39: $0\src_table[2][47:0]
+    32/39: $0\src_table[1][47:0]
+    33/39: $0\src_table[0][47:0]
+    34/39: $0\valid_table[3][0:0]
+    35/39: $0\valid_table[2][0:0]
+    36/39: $0\valid_table[1][0:0]
+    37/39: $0\valid_table[0][0:0]
+    38/39: $0\insert_ptr[2:0]
+    39/39: $0\queue_count[3:0]
+Creating decoders for process `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\core_stub_plus_copper.$proc$research/rtl/integration/copper_near_core_stub.sv:143$305'.
+     1/6: $0\core_status[7:0]
+     2/6: $0\queue_pop[0:0]
+     3/6: $0\retire_count[15:0]
+     4/6: $0\token[15:0]
+     5/6: $0\demand_addr[47:0]
+     6/6: $0\committed_addr[47:0]
+
+4.4.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+4.4.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.\queue_count' using process `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$proc$research/copper_prefetch_unit_open.sv:61$332'.
+  created $adff cell `$procdff$627' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.\insert_ptr' using process `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$proc$research/copper_prefetch_unit_open.sv:61$332'.
+  created $adff cell `$procdff$632' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$fordecl_block$2.i' using process `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$proc$research/copper_prefetch_unit_open.sv:61$332'.
+  created $adff cell `$procdff$637' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.\valid_table[0]' using process `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$proc$research/copper_prefetch_unit_open.sv:61$332'.
+  created $adff cell `$procdff$642' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.\valid_table[1]' using process `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$proc$research/copper_prefetch_unit_open.sv:61$332'.
+  created $adff cell `$procdff$647' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.\valid_table[2]' using process `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$proc$research/copper_prefetch_unit_open.sv:61$332'.
+  created $adff cell `$procdff$652' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.\valid_table[3]' using process `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$proc$research/copper_prefetch_unit_open.sv:61$332'.
+  created $adff cell `$procdff$657' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.\src_table[0]' using process `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$proc$research/copper_prefetch_unit_open.sv:61$332'.
+  created $adff cell `$procdff$662' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.\src_table[1]' using process `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$proc$research/copper_prefetch_unit_open.sv:61$332'.
+  created $adff cell `$procdff$667' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.\src_table[2]' using process `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$proc$research/copper_prefetch_unit_open.sv:61$332'.
+  created $adff cell `$procdff$672' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.\src_table[3]' using process `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$proc$research/copper_prefetch_unit_open.sv:61$332'.
+  created $adff cell `$procdff$677' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.\token_table[0]' using process `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$proc$research/copper_prefetch_unit_open.sv:61$332'.
+  created $adff cell `$procdff$682' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.\token_table[1]' using process `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$proc$research/copper_prefetch_unit_open.sv:61$332'.
+  created $adff cell `$procdff$687' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.\token_table[2]' using process `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$proc$research/copper_prefetch_unit_open.sv:61$332'.
+  created $adff cell `$procdff$692' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.\token_table[3]' using process `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$proc$research/copper_prefetch_unit_open.sv:61$332'.
+  created $adff cell `$procdff$697' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.\valid_table[4]' using process `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$proc$research/copper_prefetch_unit_open.sv:61$332'.
+  created $adff cell `$procdff$702' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.\valid_table[5]' using process `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$proc$research/copper_prefetch_unit_open.sv:61$332'.
+  created $adff cell `$procdff$707' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.\valid_table[6]' using process `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$proc$research/copper_prefetch_unit_open.sv:61$332'.
+  created $adff cell `$procdff$712' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.\valid_table[7]' using process `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$proc$research/copper_prefetch_unit_open.sv:61$332'.
+  created $adff cell `$procdff$717' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.\src_table[4]' using process `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$proc$research/copper_prefetch_unit_open.sv:61$332'.
+  created $adff cell `$procdff$722' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.\src_table[5]' using process `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$proc$research/copper_prefetch_unit_open.sv:61$332'.
+  created $adff cell `$procdff$727' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.\src_table[6]' using process `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$proc$research/copper_prefetch_unit_open.sv:61$332'.
+  created $adff cell `$procdff$732' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.\src_table[7]' using process `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$proc$research/copper_prefetch_unit_open.sv:61$332'.
+  created $adff cell `$procdff$737' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.\token_table[4]' using process `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$proc$research/copper_prefetch_unit_open.sv:61$332'.
+  created $adff cell `$procdff$742' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.\token_table[5]' using process `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$proc$research/copper_prefetch_unit_open.sv:61$332'.
+  created $adff cell `$procdff$747' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.\token_table[6]' using process `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$proc$research/copper_prefetch_unit_open.sv:61$332'.
+  created $adff cell `$procdff$752' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.\token_table[7]' using process `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$proc$research/copper_prefetch_unit_open.sv:61$332'.
+  created $adff cell `$procdff$757' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$mem2reg_wr$\valid_table$research/copper_prefetch_unit_open.sv:72$310_ADDR' using process `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$proc$research/copper_prefetch_unit_open.sv:61$332'.
+  created $adff cell `$procdff$762' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$mem2reg_wr$\valid_table$research/copper_prefetch_unit_open.sv:72$310_DATA' using process `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$proc$research/copper_prefetch_unit_open.sv:61$332'.
+  created $adff cell `$procdff$767' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$mem2reg_wr$\src_table$research/copper_prefetch_unit_open.sv:73$311_ADDR' using process `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$proc$research/copper_prefetch_unit_open.sv:61$332'.
+  created $adff cell `$procdff$772' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$mem2reg_wr$\src_table$research/copper_prefetch_unit_open.sv:73$311_DATA' using process `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$proc$research/copper_prefetch_unit_open.sv:61$332'.
+  created $adff cell `$procdff$777' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$mem2reg_wr$\token_table$research/copper_prefetch_unit_open.sv:74$312_ADDR' using process `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$proc$research/copper_prefetch_unit_open.sv:61$332'.
+  created $adff cell `$procdff$782' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$mem2reg_wr$\token_table$research/copper_prefetch_unit_open.sv:74$312_DATA' using process `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$proc$research/copper_prefetch_unit_open.sv:61$332'.
+  created $adff cell `$procdff$787' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\core_stub_plus_copper.\queue_pop' using process `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\core_stub_plus_copper.$proc$research/rtl/integration/copper_near_core_stub.sv:143$305'.
+  created $adff cell `$procdff$792' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\core_stub_plus_copper.\retire_count' using process `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\core_stub_plus_copper.$proc$research/rtl/integration/copper_near_core_stub.sv:143$305'.
+  created $adff cell `$procdff$797' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\core_stub_plus_copper.\demand_addr' using process `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\core_stub_plus_copper.$proc$research/rtl/integration/copper_near_core_stub.sv:143$305'.
+  created $adff cell `$procdff$802' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\core_stub_plus_copper.\core_status' using process `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\core_stub_plus_copper.$proc$research/rtl/integration/copper_near_core_stub.sv:143$305'.
+  created $adff cell `$procdff$807' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\core_stub_plus_copper.\committed_addr' using process `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\core_stub_plus_copper.$proc$research/rtl/integration/copper_near_core_stub.sv:143$305'.
+  created $adff cell `$procdff$812' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\core_stub_plus_copper.\token' using process `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\core_stub_plus_copper.$proc$research/rtl/integration/copper_near_core_stub.sv:143$305'.
+  created $adff cell `$procdff$817' with positive edge clock and positive level reset.
+
+4.4.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+4.4.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 6 empty switches in `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$proc$research/copper_prefetch_unit_open.sv:61$332'.
+Removing empty process `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.$proc$research/copper_prefetch_unit_open.sv:61$332'.
+Removing empty process `$paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\core_stub_plus_copper.$proc$research/rtl/integration/copper_near_core_stub.sv:143$305'.
+Cleaned up 6 empty switches.
+
+4.4.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.
+<suppressed ~70 debug messages>
+Optimizing module nearcore_stub_plus_copper.
+Optimizing module $paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\core_stub_plus_copper.
+<suppressed ~12 debug messages>
+
+4.5. Executing CHECK pass (checking for obvious problems).
+Checking module $paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open...
+Checking module nearcore_stub_plus_copper...
+Checking module $paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\core_stub_plus_copper...
+Found and reported 0 problems.
+
+4.6. Executing FLATTEN pass (flatten design).
+Deleting now unused module $paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\copper_prefetch_unit_open.
+Deleting now unused module $paramod$0d84ce695baf7936cdf8442ab4c1bfe9bb0446fc\core_stub_plus_copper.
+<suppressed ~2 debug messages>
+
+4.7. Executing TRIBUF pass.
+
+4.8. Executing DEMINOUT pass (demote inout ports to input or output).
+
+4.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module nearcore_stub_plus_copper.
+<suppressed ~43 debug messages>
+
+4.10. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \nearcore_stub_plus_copper..
+Removed 49 unused cells and 229 unused wires.
+<suppressed ~50 debug messages>
+
+4.11. Executing CHECK pass (checking for obvious problems).
+Checking module nearcore_stub_plus_copper...
+Found and reported 0 problems.
+
+4.12. Executing OPT pass (performing simple optimizations).
+
+4.12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module nearcore_stub_plus_copper.
+
+4.12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\nearcore_stub_plus_copper'.
+Computing hashes of 132 cells of `\nearcore_stub_plus_copper'.
+Finding duplicate cells in `\nearcore_stub_plus_copper'.
+Computing hashes of 116 cells of `\nearcore_stub_plus_copper'.
+Finding duplicate cells in `\nearcore_stub_plus_copper'.
+<suppressed ~48 debug messages>
+Removed a total of 16 cells.
+
+4.12.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \nearcore_stub_plus_copper..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~51 debug messages>
+
+4.12.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \nearcore_stub_plus_copper.
+Performed a total of 0 changes.
+
+4.12.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\nearcore_stub_plus_copper'.
+Computing hashes of 116 cells of `\nearcore_stub_plus_copper'.
+Finding duplicate cells in `\nearcore_stub_plus_copper'.
+Removed a total of 0 cells.
+
+4.12.6. Executing OPT_DFF pass (perform DFF optimizations).
+Setting constant 0-bit at position 2 on $flatten\u_nearcore_copper.$procdff$807 ($adff) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 3 on $flatten\u_nearcore_copper.$procdff$807 ($adff) from module nearcore_stub_plus_copper.
+
+4.12.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \nearcore_stub_plus_copper..
+Removed 0 unused cells and 16 unused wires.
+<suppressed ~1 debug messages>
+
+4.12.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module nearcore_stub_plus_copper.
+
+4.12.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.12.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \nearcore_stub_plus_copper..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~51 debug messages>
+
+4.12.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \nearcore_stub_plus_copper.
+Performed a total of 0 changes.
+
+4.12.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\nearcore_stub_plus_copper'.
+Computing hashes of 116 cells of `\nearcore_stub_plus_copper'.
+Finding duplicate cells in `\nearcore_stub_plus_copper'.
+Removed a total of 0 cells.
+
+4.12.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.12.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \nearcore_stub_plus_copper..
+
+4.12.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module nearcore_stub_plus_copper.
+
+4.12.16. Finished fast OPT passes. (There is nothing left to do.)
+
+4.13. Executing FSM pass (extract and optimize FSM).
+
+4.13.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+4.13.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+4.13.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+4.13.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \nearcore_stub_plus_copper..
+
+4.13.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+4.13.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+4.13.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+4.13.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+4.14. Executing OPT pass (performing simple optimizations).
+
+4.14.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module nearcore_stub_plus_copper.
+
+4.14.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\nearcore_stub_plus_copper'.
+Computing hashes of 116 cells of `\nearcore_stub_plus_copper'.
+Finding duplicate cells in `\nearcore_stub_plus_copper'.
+Removed a total of 0 cells.
+
+4.14.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \nearcore_stub_plus_copper..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~51 debug messages>
+
+4.14.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \nearcore_stub_plus_copper.
+Performed a total of 0 changes.
+
+4.14.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\nearcore_stub_plus_copper'.
+Computing hashes of 116 cells of `\nearcore_stub_plus_copper'.
+Finding duplicate cells in `\nearcore_stub_plus_copper'.
+Removed a total of 0 cells.
+
+4.14.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $flatten\u_nearcore_copper.\u_copper_prefetch.$procdff$667 ($adff) from module nearcore_stub_plus_copper (D = \u_nearcore_copper.committed_addr, Q = \u_nearcore_copper.u_copper_prefetch.src_table[1]).
+Adding EN signal on $flatten\u_nearcore_copper.\u_copper_prefetch.$procdff$647 ($adff) from module nearcore_stub_plus_copper (D = 1'1, Q = \u_nearcore_copper.u_copper_prefetch.valid_table[1]).
+Adding EN signal on $flatten\u_nearcore_copper.\u_copper_prefetch.$procdff$672 ($adff) from module nearcore_stub_plus_copper (D = \u_nearcore_copper.committed_addr, Q = \u_nearcore_copper.u_copper_prefetch.src_table[2]).
+Adding EN signal on $flatten\u_nearcore_copper.\u_copper_prefetch.$procdff$757 ($adff) from module nearcore_stub_plus_copper (D = \u_nearcore_copper.token, Q = \u_nearcore_copper.u_copper_prefetch.token_table[7]).
+Adding EN signal on $flatten\u_nearcore_copper.\u_copper_prefetch.$procdff$687 ($adff) from module nearcore_stub_plus_copper (D = \u_nearcore_copper.token, Q = \u_nearcore_copper.u_copper_prefetch.token_table[1]).
+Adding EN signal on $flatten\u_nearcore_copper.\u_copper_prefetch.$procdff$692 ($adff) from module nearcore_stub_plus_copper (D = \u_nearcore_copper.token, Q = \u_nearcore_copper.u_copper_prefetch.token_table[2]).
+Adding EN signal on $flatten\u_nearcore_copper.\u_copper_prefetch.$procdff$657 ($adff) from module nearcore_stub_plus_copper (D = 1'1, Q = \u_nearcore_copper.u_copper_prefetch.valid_table[3]).
+Adding EN signal on $flatten\u_nearcore_copper.\u_copper_prefetch.$procdff$732 ($adff) from module nearcore_stub_plus_copper (D = \u_nearcore_copper.committed_addr, Q = \u_nearcore_copper.u_copper_prefetch.src_table[6]).
+Adding EN signal on $flatten\u_nearcore_copper.\u_copper_prefetch.$procdff$702 ($adff) from module nearcore_stub_plus_copper (D = 1'1, Q = \u_nearcore_copper.u_copper_prefetch.valid_table[4]).
+Adding EN signal on $flatten\u_nearcore_copper.\u_copper_prefetch.$procdff$727 ($adff) from module nearcore_stub_plus_copper (D = \u_nearcore_copper.committed_addr, Q = \u_nearcore_copper.u_copper_prefetch.src_table[5]).
+Adding EN signal on $flatten\u_nearcore_copper.\u_copper_prefetch.$procdff$662 ($adff) from module nearcore_stub_plus_copper (D = \u_nearcore_copper.committed_addr, Q = \u_nearcore_copper.u_copper_prefetch.src_table[0]).
+Adding EN signal on $flatten\u_nearcore_copper.\u_copper_prefetch.$procdff$747 ($adff) from module nearcore_stub_plus_copper (D = \u_nearcore_copper.token, Q = \u_nearcore_copper.u_copper_prefetch.token_table[5]).
+Adding EN signal on $flatten\u_nearcore_copper.\u_copper_prefetch.$procdff$742 ($adff) from module nearcore_stub_plus_copper (D = \u_nearcore_copper.token, Q = \u_nearcore_copper.u_copper_prefetch.token_table[4]).
+Adding EN signal on $flatten\u_nearcore_copper.\u_copper_prefetch.$procdff$722 ($adff) from module nearcore_stub_plus_copper (D = \u_nearcore_copper.committed_addr, Q = \u_nearcore_copper.u_copper_prefetch.src_table[4]).
+Adding EN signal on $flatten\u_nearcore_copper.\u_copper_prefetch.$procdff$627 ($adff) from module nearcore_stub_plus_copper (D = $flatten\u_nearcore_copper.\u_copper_prefetch.$0\queue_count[3:0], Q = \u_nearcore_copper.u_copper_prefetch.queue_count).
+Adding EN signal on $flatten\u_nearcore_copper.\u_copper_prefetch.$procdff$642 ($adff) from module nearcore_stub_plus_copper (D = 1'1, Q = \u_nearcore_copper.u_copper_prefetch.valid_table[0]).
+Adding EN signal on $flatten\u_nearcore_copper.\u_copper_prefetch.$procdff$682 ($adff) from module nearcore_stub_plus_copper (D = \u_nearcore_copper.token, Q = \u_nearcore_copper.u_copper_prefetch.token_table[0]).
+Adding EN signal on $flatten\u_nearcore_copper.\u_copper_prefetch.$procdff$717 ($adff) from module nearcore_stub_plus_copper (D = 1'1, Q = \u_nearcore_copper.u_copper_prefetch.valid_table[7]).
+Adding EN signal on $flatten\u_nearcore_copper.\u_copper_prefetch.$procdff$752 ($adff) from module nearcore_stub_plus_copper (D = \u_nearcore_copper.token, Q = \u_nearcore_copper.u_copper_prefetch.token_table[6]).
+Adding EN signal on $flatten\u_nearcore_copper.\u_copper_prefetch.$procdff$712 ($adff) from module nearcore_stub_plus_copper (D = 1'1, Q = \u_nearcore_copper.u_copper_prefetch.valid_table[6]).
+Adding EN signal on $flatten\u_nearcore_copper.\u_copper_prefetch.$procdff$652 ($adff) from module nearcore_stub_plus_copper (D = 1'1, Q = \u_nearcore_copper.u_copper_prefetch.valid_table[2]).
+Adding EN signal on $flatten\u_nearcore_copper.\u_copper_prefetch.$procdff$737 ($adff) from module nearcore_stub_plus_copper (D = \u_nearcore_copper.committed_addr, Q = \u_nearcore_copper.u_copper_prefetch.src_table[7]).
+Adding EN signal on $flatten\u_nearcore_copper.\u_copper_prefetch.$procdff$697 ($adff) from module nearcore_stub_plus_copper (D = \u_nearcore_copper.token, Q = \u_nearcore_copper.u_copper_prefetch.token_table[3]).
+Adding EN signal on $flatten\u_nearcore_copper.\u_copper_prefetch.$procdff$707 ($adff) from module nearcore_stub_plus_copper (D = 1'1, Q = \u_nearcore_copper.u_copper_prefetch.valid_table[5]).
+Adding EN signal on $flatten\u_nearcore_copper.\u_copper_prefetch.$procdff$677 ($adff) from module nearcore_stub_plus_copper (D = \u_nearcore_copper.committed_addr, Q = \u_nearcore_copper.u_copper_prefetch.src_table[3]).
+
+4.14.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \nearcore_stub_plus_copper..
+Removed 24 unused cells and 24 unused wires.
+<suppressed ~25 debug messages>
+
+4.14.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module nearcore_stub_plus_copper.
+<suppressed ~1 debug messages>
+
+4.14.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.14.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \nearcore_stub_plus_copper..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~3 debug messages>
+
+4.14.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \nearcore_stub_plus_copper.
+Performed a total of 0 changes.
+
+4.14.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\nearcore_stub_plus_copper'.
+Computing hashes of 93 cells of `\nearcore_stub_plus_copper'.
+Finding duplicate cells in `\nearcore_stub_plus_copper'.
+Removed a total of 0 cells.
+
+4.14.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.14.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \nearcore_stub_plus_copper..
+
+4.14.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module nearcore_stub_plus_copper.
+
+4.14.16. Finished fast OPT passes. (There is nothing left to do.)
+
+4.15. Executing WREDUCE pass (reducing word size of cells).
+Removed top 1 bits (of 4) from port B of cell nearcore_stub_plus_copper.$flatten\u_nearcore_copper.\u_copper_prefetch.$ge$research/copper_prefetch_unit_open.sv:52$314 ($ge).
+Removed top 2 bits (of 3) from port B of cell nearcore_stub_plus_copper.$flatten\u_nearcore_copper.\u_copper_prefetch.$procmux$558_CMP0 ($eq).
+Removed top 1 bits (of 3) from port B of cell nearcore_stub_plus_copper.$flatten\u_nearcore_copper.\u_copper_prefetch.$procmux$579_CMP0 ($eq).
+Removed top 1 bits (of 3) from port B of cell nearcore_stub_plus_copper.$flatten\u_nearcore_copper.\u_copper_prefetch.$procmux$589_CMP0 ($eq).
+Removed top 15 bits (of 16) from port B of cell nearcore_stub_plus_copper.$flatten\u_nearcore_copper.$add$research/rtl/integration/copper_near_core_stub.sv:155$309 ($add).
+Removed top 15 bits (of 16) from port B of cell nearcore_stub_plus_copper.$flatten\u_nearcore_copper.$add$research/rtl/integration/copper_near_core_stub.sv:154$308 ($add).
+Removed top 41 bits (of 48) from port B of cell nearcore_stub_plus_copper.$flatten\u_nearcore_copper.$add$research/rtl/integration/copper_near_core_stub.sv:153$307 ($add).
+
+4.16. Executing PEEPOPT pass (run peephole optimizers).
+
+4.17. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \nearcore_stub_plus_copper..
+
+4.18. Executing SHARE pass (SAT-based resource sharing).
+
+4.19. Executing TECHMAP pass (map to technology primitives).
+
+4.19.1. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/cmp2lut.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/cmp2lut.v' to AST representation.
+Generating RTLIL representation for module `\_90_lut_cmp_'.
+Successfully finished Verilog frontend.
+
+4.19.2. Continuing TECHMAP pass.
+Using template $paramod$b3d49a3939f549699a90aacd40babab33a159b4f\_90_lut_cmp_ for cells of type $ge.
+No more expansions possible.
+<suppressed ~36 debug messages>
+
+4.20. Executing OPT_EXPR pass (perform const folding).
+Optimizing module nearcore_stub_plus_copper.
+
+4.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \nearcore_stub_plus_copper..
+Removed 0 unused cells and 3 unused wires.
+<suppressed ~1 debug messages>
+
+4.22. Executing TECHMAP pass (map to technology primitives).
+
+4.22.1. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/mul2dsp.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/mul2dsp.v' to AST representation.
+Generating RTLIL representation for module `\_80_mul'.
+Generating RTLIL representation for module `\_90_soft_mul'.
+Successfully finished Verilog frontend.
+
+4.22.2. Continuing TECHMAP pass.
+No more expansions possible.
+<suppressed ~4 debug messages>
+
+4.23. Executing TECHMAP pass (map to technology primitives).
+
+4.23.1. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/dsp_map_18x18.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/dsp_map_18x18.v' to AST representation.
+Generating RTLIL representation for module `$__MUL18X18'.
+Successfully finished Verilog frontend.
+
+4.23.2. Continuing TECHMAP pass.
+No more expansions possible.
+<suppressed ~3 debug messages>
+
+4.24. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module nearcore_stub_plus_copper:
+  creating $macc model for $flatten\u_nearcore_copper.\u_copper_prefetch.$sub$research/copper_prefetch_unit_open.sv:81$360 ($sub).
+  creating $macc model for $flatten\u_nearcore_copper.\u_copper_prefetch.$add$research/copper_prefetch_unit_open.sv:79$357 ($add).
+  creating $macc model for $flatten\u_nearcore_copper.\u_copper_prefetch.$add$research/copper_prefetch_unit_open.sv:75$356 ($add).
+  creating $macc model for $flatten\u_nearcore_copper.$add$research/rtl/integration/copper_near_core_stub.sv:155$309 ($add).
+  creating $macc model for $flatten\u_nearcore_copper.$add$research/rtl/integration/copper_near_core_stub.sv:154$308 ($add).
+  creating $macc model for $flatten\u_nearcore_copper.$add$research/rtl/integration/copper_near_core_stub.sv:153$307 ($add).
+  creating $alu model for $macc $flatten\u_nearcore_copper.$add$research/rtl/integration/copper_near_core_stub.sv:153$307.
+  creating $alu model for $macc $flatten\u_nearcore_copper.$add$research/rtl/integration/copper_near_core_stub.sv:154$308.
+  creating $alu model for $macc $flatten\u_nearcore_copper.$add$research/rtl/integration/copper_near_core_stub.sv:155$309.
+  creating $alu model for $macc $flatten\u_nearcore_copper.\u_copper_prefetch.$add$research/copper_prefetch_unit_open.sv:75$356.
+  creating $alu model for $macc $flatten\u_nearcore_copper.\u_copper_prefetch.$add$research/copper_prefetch_unit_open.sv:79$357.
+  creating $alu model for $macc $flatten\u_nearcore_copper.\u_copper_prefetch.$sub$research/copper_prefetch_unit_open.sv:81$360.
+  creating $alu cell for $flatten\u_nearcore_copper.\u_copper_prefetch.$sub$research/copper_prefetch_unit_open.sv:81$360: $auto$alumacc.cc:512:replace_alu$851
+  creating $alu cell for $flatten\u_nearcore_copper.\u_copper_prefetch.$add$research/copper_prefetch_unit_open.sv:79$357: $auto$alumacc.cc:512:replace_alu$854
+  creating $alu cell for $flatten\u_nearcore_copper.\u_copper_prefetch.$add$research/copper_prefetch_unit_open.sv:75$356: $auto$alumacc.cc:512:replace_alu$857
+  creating $alu cell for $flatten\u_nearcore_copper.$add$research/rtl/integration/copper_near_core_stub.sv:155$309: $auto$alumacc.cc:512:replace_alu$860
+  creating $alu cell for $flatten\u_nearcore_copper.$add$research/rtl/integration/copper_near_core_stub.sv:154$308: $auto$alumacc.cc:512:replace_alu$863
+  creating $alu cell for $flatten\u_nearcore_copper.$add$research/rtl/integration/copper_near_core_stub.sv:153$307: $auto$alumacc.cc:512:replace_alu$866
+  created 6 $alu and 0 $macc cells.
+
+4.25. Executing OPT pass (performing simple optimizations).
+
+4.25.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module nearcore_stub_plus_copper.
+
+4.25.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\nearcore_stub_plus_copper'.
+Computing hashes of 93 cells of `\nearcore_stub_plus_copper'.
+Finding duplicate cells in `\nearcore_stub_plus_copper'.
+Removed a total of 0 cells.
+
+4.25.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \nearcore_stub_plus_copper..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~3 debug messages>
+
+4.25.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \nearcore_stub_plus_copper.
+Performed a total of 0 changes.
+
+4.25.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\nearcore_stub_plus_copper'.
+Computing hashes of 93 cells of `\nearcore_stub_plus_copper'.
+Finding duplicate cells in `\nearcore_stub_plus_copper'.
+Removed a total of 0 cells.
+
+4.25.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.25.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \nearcore_stub_plus_copper..
+
+4.25.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module nearcore_stub_plus_copper.
+
+4.25.9. Finished fast OPT passes. (There is nothing left to do.)
+
+4.26. Executing MEMORY pass.
+
+4.26.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+4.26.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+4.26.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+4.26.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+4.26.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+4.26.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \nearcore_stub_plus_copper..
+
+4.26.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+4.26.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+4.26.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \nearcore_stub_plus_copper..
+
+4.26.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+4.27. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \nearcore_stub_plus_copper..
+
+4.28. Executing MEMORY_LIBMAP pass (mapping memories to cells).
+
+4.29. Executing TECHMAP pass (map to technology primitives).
+
+4.29.1. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/lutrams_map_trellis.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/lutrams_map_trellis.v' to AST representation.
+Generating RTLIL representation for module `$__TRELLIS_DPR16X4_'.
+Successfully finished Verilog frontend.
+
+4.29.2. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/brams_map_16kd.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/brams_map_16kd.v' to AST representation.
+Generating RTLIL representation for module `$__DP16KD_'.
+Generating RTLIL representation for module `$__PDPW16KD_'.
+Successfully finished Verilog frontend.
+
+4.29.3. Continuing TECHMAP pass.
+No more expansions possible.
+<suppressed ~5 debug messages>
+
+4.30. Executing OPT pass (performing simple optimizations).
+
+4.30.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module nearcore_stub_plus_copper.
+<suppressed ~2 debug messages>
+
+4.30.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\nearcore_stub_plus_copper'.
+Computing hashes of 92 cells of `\nearcore_stub_plus_copper'.
+Finding duplicate cells in `\nearcore_stub_plus_copper'.
+Removed a total of 0 cells.
+
+4.30.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.30.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \nearcore_stub_plus_copper..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+4.30.5. Finished fast OPT passes.
+
+4.31. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+4.32. Executing OPT pass (performing simple optimizations).
+
+4.32.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module nearcore_stub_plus_copper.
+
+4.32.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\nearcore_stub_plus_copper'.
+Computing hashes of 92 cells of `\nearcore_stub_plus_copper'.
+Finding duplicate cells in `\nearcore_stub_plus_copper'.
+Removed a total of 0 cells.
+
+4.32.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \nearcore_stub_plus_copper..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~2 debug messages>
+
+4.32.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \nearcore_stub_plus_copper.
+Performed a total of 0 changes.
+
+4.32.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\nearcore_stub_plus_copper'.
+Computing hashes of 92 cells of `\nearcore_stub_plus_copper'.
+Finding duplicate cells in `\nearcore_stub_plus_copper'.
+Removed a total of 0 cells.
+
+4.32.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $flatten\u_nearcore_copper.$procdff$802 ($adff) from module nearcore_stub_plus_copper (D = \u_nearcore_copper.demand_addr [5:0], Q = \u_nearcore_copper.demand_addr [5:0]).
+Handling D = Q on $auto$ff.cc:337:slice$999 ($adffe) from module nearcore_stub_plus_copper (removing D path).
+Setting constant 0-bit at position 0 on $auto$ff.cc:337:slice$999 ($dlatch) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 1 on $auto$ff.cc:337:slice$999 ($dlatch) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 2 on $auto$ff.cc:337:slice$999 ($dlatch) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 3 on $auto$ff.cc:337:slice$999 ($dlatch) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 4 on $auto$ff.cc:337:slice$999 ($dlatch) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 5 on $auto$ff.cc:337:slice$999 ($dlatch) from module nearcore_stub_plus_copper.
+
+4.32.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \nearcore_stub_plus_copper..
+Removed 1 unused cells and 1 unused wires.
+<suppressed ~2 debug messages>
+
+4.32.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module nearcore_stub_plus_copper.
+
+4.32.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.32.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \nearcore_stub_plus_copper..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~2 debug messages>
+
+4.32.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \nearcore_stub_plus_copper.
+Performed a total of 0 changes.
+
+4.32.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\nearcore_stub_plus_copper'.
+Computing hashes of 92 cells of `\nearcore_stub_plus_copper'.
+Finding duplicate cells in `\nearcore_stub_plus_copper'.
+Removed a total of 0 cells.
+
+4.32.13. Executing OPT_DFF pass (perform DFF optimizations).
+Setting constant 0-bit at position 0 on $flatten\u_nearcore_copper.$procdff$812 ($adff) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 1 on $flatten\u_nearcore_copper.$procdff$812 ($adff) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 2 on $flatten\u_nearcore_copper.$procdff$812 ($adff) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 3 on $flatten\u_nearcore_copper.$procdff$812 ($adff) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 4 on $flatten\u_nearcore_copper.$procdff$812 ($adff) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 5 on $flatten\u_nearcore_copper.$procdff$812 ($adff) from module nearcore_stub_plus_copper.
+
+4.32.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \nearcore_stub_plus_copper..
+
+4.32.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module nearcore_stub_plus_copper.
+
+4.32.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.32.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \nearcore_stub_plus_copper..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~2 debug messages>
+
+4.32.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \nearcore_stub_plus_copper.
+Performed a total of 0 changes.
+
+4.32.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\nearcore_stub_plus_copper'.
+Computing hashes of 92 cells of `\nearcore_stub_plus_copper'.
+Finding duplicate cells in `\nearcore_stub_plus_copper'.
+Removed a total of 0 cells.
+
+4.32.20. Executing OPT_DFF pass (perform DFF optimizations).
+Setting constant 0-bit at position 0 on $auto$ff.cc:337:slice$834 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 1 on $auto$ff.cc:337:slice$834 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 2 on $auto$ff.cc:337:slice$834 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 3 on $auto$ff.cc:337:slice$834 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 4 on $auto$ff.cc:337:slice$834 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 5 on $auto$ff.cc:337:slice$834 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 0 on $auto$ff.cc:337:slice$831 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 1 on $auto$ff.cc:337:slice$831 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 2 on $auto$ff.cc:337:slice$831 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 3 on $auto$ff.cc:337:slice$831 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 4 on $auto$ff.cc:337:slice$831 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 5 on $auto$ff.cc:337:slice$831 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 0 on $auto$ff.cc:337:slice$847 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 1 on $auto$ff.cc:337:slice$847 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 2 on $auto$ff.cc:337:slice$847 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 3 on $auto$ff.cc:337:slice$847 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 4 on $auto$ff.cc:337:slice$847 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 5 on $auto$ff.cc:337:slice$847 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 0 on $auto$ff.cc:337:slice$830 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 1 on $auto$ff.cc:337:slice$830 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 2 on $auto$ff.cc:337:slice$830 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 3 on $auto$ff.cc:337:slice$830 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 4 on $auto$ff.cc:337:slice$830 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 5 on $auto$ff.cc:337:slice$830 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 0 on $auto$ff.cc:337:slice$828 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 1 on $auto$ff.cc:337:slice$828 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 2 on $auto$ff.cc:337:slice$828 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 3 on $auto$ff.cc:337:slice$828 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 4 on $auto$ff.cc:337:slice$828 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 5 on $auto$ff.cc:337:slice$828 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 0 on $auto$ff.cc:337:slice$823 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 1 on $auto$ff.cc:337:slice$823 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 2 on $auto$ff.cc:337:slice$823 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 3 on $auto$ff.cc:337:slice$823 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 4 on $auto$ff.cc:337:slice$823 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 5 on $auto$ff.cc:337:slice$823 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 0 on $auto$ff.cc:337:slice$844 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 1 on $auto$ff.cc:337:slice$844 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 2 on $auto$ff.cc:337:slice$844 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 3 on $auto$ff.cc:337:slice$844 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 4 on $auto$ff.cc:337:slice$844 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 5 on $auto$ff.cc:337:slice$844 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 0 on $auto$ff.cc:337:slice$821 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 1 on $auto$ff.cc:337:slice$821 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 2 on $auto$ff.cc:337:slice$821 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 3 on $auto$ff.cc:337:slice$821 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 4 on $auto$ff.cc:337:slice$821 ($adffe) from module nearcore_stub_plus_copper.
+Setting constant 0-bit at position 5 on $auto$ff.cc:337:slice$821 ($adffe) from module nearcore_stub_plus_copper.
+
+4.32.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \nearcore_stub_plus_copper..
+
+4.32.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module nearcore_stub_plus_copper.
+
+4.32.23. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.32.24. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \nearcore_stub_plus_copper..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~2 debug messages>
+
+4.32.25. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \nearcore_stub_plus_copper.
+Performed a total of 0 changes.
+
+4.32.26. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\nearcore_stub_plus_copper'.
+Computing hashes of 92 cells of `\nearcore_stub_plus_copper'.
+Finding duplicate cells in `\nearcore_stub_plus_copper'.
+Removed a total of 0 cells.
+
+4.32.27. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.32.28. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \nearcore_stub_plus_copper..
+
+4.32.29. Executing OPT_EXPR pass (perform const folding).
+Optimizing module nearcore_stub_plus_copper.
+
+4.32.30. Finished fast OPT passes. (There is nothing left to do.)
+
+4.33. Executing TECHMAP pass (map to technology primitives).
+
+4.33.1. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/techmap.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `$__div_mod_u'.
+Generating RTLIL representation for module `$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Generating RTLIL representation for module `$connect'.
+Generating RTLIL representation for module `$input_port'.
+Successfully finished Verilog frontend.
+
+4.33.2. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/arith_map_ccu2c.v' to AST representation.
+Generating RTLIL representation for module `\_80_ccu2c_alu'.
+Successfully finished Verilog frontend.
+
+4.33.3. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $adffe.
+Using extmapper simplemap for cells of type $adff.
+Using template $paramod$ac602bf6f8804b85f01552976a3b94773e929abd\_80_ccu2c_alu for cells of type $alu.
+Using template $paramod$2af30114e9bd4ccb04dad757b3f0a8f6bf0615b0\_80_ccu2c_alu for cells of type $alu.
+Using template $paramod$3ef7d3dd227da7627a99c5e5a6a4deb817573e39\_90_alu for cells of type $alu.
+Using template $paramod$32a7b7b86c07519b7537abc18e96f0331f97914d\_90_alu for cells of type $alu.
+Using template $paramod$8742280fdebca84e1c87f2a86ed84f62d558f4cc\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $reduce_bool.
+Using extmapper simplemap for cells of type $lut.
+Using extmapper simplemap for cells of type $logic_not.
+Using extmapper simplemap for cells of type $logic_and.
+Using extmapper simplemap for cells of type $eq.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $reduce_or.
+Using extmapper simplemap for cells of type $logic_or.
+Using extmapper simplemap for cells of type $xor.
+Using extmapper simplemap for cells of type $not.
+Using extmapper simplemap for cells of type $pos.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000000011 for cells of type $fa.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000011 for cells of type $lcu.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000000100 for cells of type $fa.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000100 for cells of type $lcu.
+Using extmapper simplemap for cells of type $or.
+Using extmapper simplemap for cells of type $and.
+No more expansions possible.
+<suppressed ~780 debug messages>
+
+4.34. Executing OPT pass (performing simple optimizations).
+
+4.34.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module nearcore_stub_plus_copper.
+<suppressed ~386 debug messages>
+
+4.34.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\nearcore_stub_plus_copper'.
+Computing hashes of 1791 cells of `\nearcore_stub_plus_copper'.
+Finding duplicate cells in `\nearcore_stub_plus_copper'.
+Computing hashes of 1769 cells of `\nearcore_stub_plus_copper'.
+Finding duplicate cells in `\nearcore_stub_plus_copper'.
+Computing hashes of 1766 cells of `\nearcore_stub_plus_copper'.
+Finding duplicate cells in `\nearcore_stub_plus_copper'.
+<suppressed ~75 debug messages>
+Removed a total of 25 cells.
+
+4.34.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.34.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \nearcore_stub_plus_copper..
+Removed 116 unused cells and 398 unused wires.
+<suppressed ~117 debug messages>
+
+4.34.5. Finished fast OPT passes.
+
+4.35. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \nearcore_stub_plus_copper..
+
+4.36. Executing DFFLEGALIZE pass (convert FFs to types supported by the target).
+
+4.37. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\nearcore_stub_plus_copper'.
+Computing hashes of 2252 cells of `\nearcore_stub_plus_copper'.
+Finding duplicate cells in `\nearcore_stub_plus_copper'.
+Computing hashes of 1651 cells of `\nearcore_stub_plus_copper'.
+Finding duplicate cells in `\nearcore_stub_plus_copper'.
+<suppressed ~1803 debug messages>
+Removed a total of 601 cells.
+
+4.38. Executing TECHMAP pass (map to technology primitives).
+
+4.38.1. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v' to AST representation.
+Generating RTLIL representation for module `$_DFF_N_'.
+Generating RTLIL representation for module `$_DFF_P_'.
+Generating RTLIL representation for module `$_DFFE_NN_'.
+Generating RTLIL representation for module `$_DFFE_PN_'.
+Generating RTLIL representation for module `$_DFFE_NP_'.
+Generating RTLIL representation for module `$_DFFE_PP_'.
+Generating RTLIL representation for module `$_DFF_NP0_'.
+Generating RTLIL representation for module `$_DFF_NP1_'.
+Generating RTLIL representation for module `$_DFF_PP0_'.
+Generating RTLIL representation for module `$_DFF_PP1_'.
+Generating RTLIL representation for module `$_SDFF_NP0_'.
+Generating RTLIL representation for module `$_SDFF_NP1_'.
+Generating RTLIL representation for module `$_SDFF_PP0_'.
+Generating RTLIL representation for module `$_SDFF_PP1_'.
+Generating RTLIL representation for module `$_DFFE_NP0P_'.
+Generating RTLIL representation for module `$_DFFE_NP1P_'.
+Generating RTLIL representation for module `$_DFFE_PP0P_'.
+Generating RTLIL representation for module `$_DFFE_PP1P_'.
+Generating RTLIL representation for module `$_DFFE_NP0N_'.
+Generating RTLIL representation for module `$_DFFE_NP1N_'.
+Generating RTLIL representation for module `$_DFFE_PP0N_'.
+Generating RTLIL representation for module `$_DFFE_PP1N_'.
+Generating RTLIL representation for module `$_SDFFE_NP0P_'.
+Generating RTLIL representation for module `$_SDFFE_NP1P_'.
+Generating RTLIL representation for module `$_SDFFE_PP0P_'.
+Generating RTLIL representation for module `$_SDFFE_PP1P_'.
+Generating RTLIL representation for module `$_SDFFE_NP0N_'.
+Generating RTLIL representation for module `$_SDFFE_NP1N_'.
+Generating RTLIL representation for module `$_SDFFE_PP0N_'.
+Generating RTLIL representation for module `$_SDFFE_PP1N_'.
+Generating RTLIL representation for module `$_ALDFF_NP_'.
+Generating RTLIL representation for module `$_ALDFF_PP_'.
+Generating RTLIL representation for module `$_ALDFFE_NPN_'.
+Generating RTLIL representation for module `$_ALDFFE_NPP_'.
+Generating RTLIL representation for module `$_ALDFFE_PPN_'.
+Generating RTLIL representation for module `$_ALDFFE_PPP_'.
+Generating RTLIL representation for module `\FD1P3AX'.
+Generating RTLIL representation for module `\FD1P3AY'.
+Generating RTLIL representation for module `\FD1P3BX'.
+Generating RTLIL representation for module `\FD1P3DX'.
+Generating RTLIL representation for module `\FD1P3IX'.
+Generating RTLIL representation for module `\FD1P3JX'.
+Generating RTLIL representation for module `\FD1S3AX'.
+Generating RTLIL representation for module `\FD1S3AY'.
+Generating RTLIL representation for module `\FD1S3BX'.
+Generating RTLIL representation for module `\FD1S3DX'.
+Generating RTLIL representation for module `\FD1S3IX'.
+Generating RTLIL representation for module `\FD1S3JX'.
+Generating RTLIL representation for module `\IFS1P3BX'.
+Generating RTLIL representation for module `\IFS1P3DX'.
+Generating RTLIL representation for module `\IFS1P3IX'.
+Generating RTLIL representation for module `\IFS1P3JX'.
+Generating RTLIL representation for module `\OFS1P3BX'.
+Generating RTLIL representation for module `\OFS1P3DX'.
+Generating RTLIL representation for module `\OFS1P3IX'.
+Generating RTLIL representation for module `\OFS1P3JX'.
+Generating RTLIL representation for module `\IB'.
+Generating RTLIL representation for module `\IBPU'.
+Generating RTLIL representation for module `\IBPD'.
+Generating RTLIL representation for module `\OB'.
+Generating RTLIL representation for module `\OBZ'.
+Generating RTLIL representation for module `\OBZPU'.
+Generating RTLIL representation for module `\OBZPD'.
+Generating RTLIL representation for module `\OBCO'.
+Generating RTLIL representation for module `\BB'.
+Generating RTLIL representation for module `\BBPU'.
+Generating RTLIL representation for module `\BBPD'.
+Generating RTLIL representation for module `\ILVDS'.
+Generating RTLIL representation for module `\OLVDS'.
+Successfully finished Verilog frontend.
+
+4.38.2. Continuing TECHMAP pass.
+Using template $_DFF_PP0_ for cells of type $_DFF_PP0_.
+Using template $_DFFE_PP0P_ for cells of type $_DFFE_PP0P_.
+No more expansions possible.
+<suppressed ~673 debug messages>
+
+4.39. Executing OPT_EXPR pass (perform const folding).
+Optimizing module nearcore_stub_plus_copper.
+<suppressed ~1 debug messages>
+
+4.40. Executing SIMPLEMAP pass (map simple cells to gate primitives).
+
+4.41. Executing LATTICE_GSR pass (implement FF init values).
+Handling GSR in nearcore_stub_plus_copper.
+
+4.42. Executing ATTRMVCP pass (move or copy attributes).
+
+4.43. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \nearcore_stub_plus_copper..
+Removed 0 unused cells and 4087 unused wires.
+<suppressed ~1 debug messages>
+
+4.44. Executing TECHMAP pass (map to technology primitives).
+
+4.44.1. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/latches_map.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/latches_map.v' to AST representation.
+Generating RTLIL representation for module `$_DLATCH_N_'.
+Generating RTLIL representation for module `$_DLATCH_P_'.
+Successfully finished Verilog frontend.
+
+4.44.2. Continuing TECHMAP pass.
+No more expansions possible.
+<suppressed ~4 debug messages>
+
+4.45. Executing ABC9 pass.
+
+4.45.1. Executing ABC9_OPS pass (helper functions for ABC9).
+
+4.45.2. Executing ABC9_OPS pass (helper functions for ABC9).
+
+4.45.3. Executing PROC pass (convert processes to netlists).
+
+4.45.3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+4.45.3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:282$5494 in module $paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF.
+Removed a total of 0 dead cases.
+
+4.45.3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 1 assignment to connection.
+
+4.45.3.4. Executing PROC_INIT pass (extract init attributes).
+Found init rule in `$paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF.$proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:278$5495'.
+  Set init value: \Q = 1'0
+
+4.45.3.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \muxlsr in `$paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF.$proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:282$5494'.
+
+4.45.3.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~1 debug messages>
+
+4.45.3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `$paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF.$proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:278$5495'.
+Creating decoders for process `$paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF.$proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:282$5494'.
+     1/1: $0\Q[0:0]
+
+4.45.3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+4.45.3.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `$paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF.\Q' using process `$paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF.$proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:282$5494'.
+  created $adff cell `$procdff$5500' with positive edge clock and positive level reset.
+
+4.45.3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+4.45.3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `$paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF.$proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:278$5495'.
+Found and cleaned up 1 empty switch in `$paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF.$proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:282$5494'.
+Removing empty process `$paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF.$proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:282$5494'.
+Cleaned up 1 empty switch.
+
+4.45.4. Executing PROC pass (convert processes to netlists).
+
+4.45.4.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+4.45.4.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:282$5508 in module $paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.
+Removed a total of 0 dead cases.
+
+4.45.4.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 1 assignment to connection.
+
+4.45.4.4. Executing PROC_INIT pass (extract init attributes).
+Found init rule in `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.$proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:278$5509'.
+  Set init value: \Q = 1'0
+
+4.45.4.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \muxlsr in `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.$proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:282$5508'.
+
+4.45.4.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~1 debug messages>
+
+4.45.4.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.$proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:278$5509'.
+Creating decoders for process `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.$proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:282$5508'.
+     1/1: $0\Q[0:0]
+
+4.45.4.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+4.45.4.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.\Q' using process `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.$proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:282$5508'.
+  created $adff cell `$procdff$5514' with positive edge clock and positive level reset.
+
+4.45.4.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+4.45.4.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.$proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:278$5509'.
+Found and cleaned up 1 empty switch in `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.$proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:282$5508'.
+Removing empty process `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.$proc${USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice\common_sim.vh:282$5508'.
+Cleaned up 1 empty switch.
+
+4.45.5. Executing SCC pass (detecting logic loops).
+Found 0 SCCs in module nearcore_stub_plus_copper.
+Found 0 SCCs.
+
+4.45.6. Executing ABC9_OPS pass (helper functions for ABC9).
+
+4.45.7. Executing TECHMAP pass (map to technology primitives).
+
+4.45.7.1. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/techmap.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `$__div_mod_u'.
+Generating RTLIL representation for module `$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Generating RTLIL representation for module `$connect'.
+Generating RTLIL representation for module `$input_port'.
+Successfully finished Verilog frontend.
+
+4.45.7.2. Continuing TECHMAP pass.
+No more expansions possible.
+<suppressed ~170 debug messages>
+
+4.45.8. Executing OPT pass (performing simple optimizations).
+
+4.45.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF.
+Optimizing module $paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.
+
+4.45.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF'.
+Computing hashes of 2 cells of `$paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF'.
+Finding duplicate cells in `$paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF'.
+Finding identical cells in module `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF'.
+Computing hashes of 2 cells of `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF'.
+Finding duplicate cells in `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF'.
+Removed a total of 0 cells.
+
+4.45.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+4.45.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF.
+  Optimizing cells in module $paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.
+Performed a total of 0 changes.
+
+4.45.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF'.
+Computing hashes of 2 cells of `$paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF'.
+Finding duplicate cells in `$paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF'.
+Finding identical cells in module `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF'.
+Computing hashes of 2 cells of `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF'.
+Finding duplicate cells in `$paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF'.
+Removed a total of 0 cells.
+
+4.45.8.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.45.8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF..
+Finding unused cells or wires in module $paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF..
+
+4.45.8.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF.
+Optimizing module $paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.
+
+4.45.8.9. Finished fast OPT passes. (There is nothing left to do.)
+
+4.45.9. Executing TECHMAP pass (map to technology primitives).
+
+4.45.9.1. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/abc9_map.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/abc9_map.v' to AST representation.
+Successfully finished Verilog frontend.
+
+4.45.9.2. Continuing TECHMAP pass.
+Using template $paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF for cells of type $paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.
+Using template $paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF for cells of type $paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF.
+No more expansions possible.
+<suppressed ~606 debug messages>
+
+4.45.10. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/abc9_model.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/abc9_model.v' to AST representation.
+Generating RTLIL representation for module `$__ABC9_DELAY'.
+Generating RTLIL representation for module `$__ABC9_SCC_BREAKER'.
+Generating RTLIL representation for module `$__DFF_N__$abc9_flop'.
+Generating RTLIL representation for module `$__DFF_P__$abc9_flop'.
+Successfully finished Verilog frontend.
+
+4.45.11. Executing ABC9_OPS pass (helper functions for ABC9).
+<suppressed ~2 debug messages>
+
+4.45.12. Executing ABC9_OPS pass (helper functions for ABC9).
+
+4.45.13. Executing ABC9_OPS pass (helper functions for ABC9).
+<suppressed ~2 debug messages>
+
+4.45.14. Executing TECHMAP pass (map to technology primitives).
+
+4.45.14.1. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/techmap.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `$__div_mod_u'.
+Generating RTLIL representation for module `$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Generating RTLIL representation for module `$connect'.
+Generating RTLIL representation for module `$input_port'.
+Successfully finished Verilog frontend.
+
+4.45.14.2. Continuing TECHMAP pass.
+Using template $paramod$838872d5a4bab89607f53482b205c0fd50d8b82e\CCU2C for cells of type $paramod$838872d5a4bab89607f53482b205c0fd50d8b82e\CCU2C.
+Using extmapper simplemap for cells of type $or.
+Using extmapper simplemap for cells of type $and.
+Using extmapper simplemap for cells of type $not.
+Using extmapper simplemap for cells of type $xor.
+Using template $paramod\LUT2\INIT=4'1010 for cells of type LUT2.
+Using template $paramod\LUT4\INIT=16'1001011010101010 for cells of type LUT4.
+Using extmapper simplemap for cells of type $mux.
+No more expansions possible.
+<suppressed ~209 debug messages>
+
+4.45.15. Executing OPT pass (performing simple optimizations).
+
+4.45.15.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module nearcore_stub_plus_copper.
+<suppressed ~18 debug messages>
+
+4.45.15.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\nearcore_stub_plus_copper'.
+Computing hashes of 59 cells of `\nearcore_stub_plus_copper'.
+Finding duplicate cells in `\nearcore_stub_plus_copper'.
+Computing hashes of 57 cells of `\nearcore_stub_plus_copper'.
+Finding duplicate cells in `\nearcore_stub_plus_copper'.
+<suppressed ~6 debug messages>
+Removed a total of 2 cells.
+
+4.45.15.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \nearcore_stub_plus_copper..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+4.45.15.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \nearcore_stub_plus_copper.
+Performed a total of 0 changes.
+
+4.45.15.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\nearcore_stub_plus_copper'.
+Computing hashes of 57 cells of `\nearcore_stub_plus_copper'.
+Finding duplicate cells in `\nearcore_stub_plus_copper'.
+Removed a total of 0 cells.
+
+4.45.15.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.45.15.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \nearcore_stub_plus_copper..
+Removed 0 unused cells and 55 unused wires.
+<suppressed ~1 debug messages>
+
+4.45.15.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module nearcore_stub_plus_copper.
+
+4.45.15.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.45.15.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \nearcore_stub_plus_copper..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+4.45.15.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \nearcore_stub_plus_copper.
+Performed a total of 0 changes.
+
+4.45.15.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\nearcore_stub_plus_copper'.
+Computing hashes of 57 cells of `\nearcore_stub_plus_copper'.
+Finding duplicate cells in `\nearcore_stub_plus_copper'.
+Removed a total of 0 cells.
+
+4.45.15.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.45.15.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \nearcore_stub_plus_copper..
+
+4.45.15.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module nearcore_stub_plus_copper.
+
+4.45.15.16. Finished fast OPT passes. (There is nothing left to do.)
+
+4.45.16. Executing AIGMAP pass (map logic to AIG).
+Module nearcore_stub_plus_copper: replaced 18 cells with 120 new cells, skipped 39 cells.
+  replaced 3 cell types:
+      14 $_MUX_
+       2 $_OR_
+       2 $_XOR_
+  not replaced 3 cell types:
+       4 $_AND_
+       4 $_NOT_
+      31 $specify2
+
+4.45.17. Executing AIGMAP pass (map logic to AIG).
+Module nearcore_stub_plus_copper: replaced 949 cells with 5224 new cells, skipped 1303 cells.
+  replaced 3 cell types:
+       4 $_MUX_
+     473 $_OR_
+     472 $_XOR_
+  not replaced 8 cell types:
+      25 $_AND_
+      35 $_NOT_
+       2 $scopeinfo
+     476 $paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF
+     126 $paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF
+      37 $paramod$838872d5a4bab89607f53482b205c0fd50d8b82e\CCU2C
+     476 $paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF_$abc9_byp
+     126 $paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF_$abc9_byp
+
+4.45.17.1. Executing ABC9_OPS pass (helper functions for ABC9).
+
+4.45.17.2. Executing ABC9_OPS pass (helper functions for ABC9).
+
+4.45.17.3. Executing XAIGER backend.
+<suppressed ~11 debug messages>
+Extracted 1926 AND gates and 6638 wires from module `nearcore_stub_plus_copper' to a netlist network with 605 inputs and 224 outputs.
+
+4.45.17.4. Executing ABC9_EXE pass (technology mapping using ABC9).
+
+4.45.17.5. Executing ABC9.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
+ABC: + read_lut <abc-temp-dir>/input.lut 
+ABC: + read_box <abc-temp-dir>/input.box 
+ABC: + &read <abc-temp-dir>/input.xaig 
+ABC: + &ps 
+ABC: <abc-temp-dir>/input : i/o =    605/    224  and =    1916  lev =   17 (   0.08)  mem = 0.07 MB  box = 639  bb = 602
+ABC: + &scorr 
+ABC: Warning: The network is combinational.
+ABC: + &sweep 
+ABC: + &dc2 
+ABC: + &dch -f -r 
+ABC: + &ps 
+ABC: <abc-temp-dir>/input : i/o =    605/    224  and =    3747  lev =   15 (   0.07)  mem = 0.09 MB  ch =  145  box = 639  bb = 602
+ABC: cst =       0  cls =    140  lit =     145  unused =    4780  proof =     0
+ABC: + &if -W 300 -v 
+ABC: K = 7. Memory (bytes): Truth =    0. Cut =   76. Obj =  156. Set =  780. CutMin = no
+ABC: Node =    3747.  Ch =   140.  Total mem =    1.12 MB. Peak cut mem =    0.62 MB.
+ABC: P:  Del = 3854.00.  Ar =    3615.0.  Edge =     5018.  Cut =    33241.  T =     0.00 sec
+ABC: P:  Del = 3802.00.  Ar =    3680.0.  Edge =     5018.  Cut =    32950.  T =     0.00 sec
+ABC: P:  Del = 3802.00.  Ar =    1943.0.  Edge =     4863.  Cut =    46030.  T =     0.01 sec
+ABC: F:  Del = 3798.00.  Ar =    1536.0.  Edge =     5016.  Cut =    37556.  T =     0.00 sec
+ABC: A:  Del = 3798.00.  Ar =    1522.0.  Edge =     4868.  Cut =    33374.  T =     0.01 sec
+ABC: A:  Del = 3798.00.  Ar =    1521.0.  Edge =     4861.  Cut =    33539.  T =     0.01 sec
+ABC: Total time =     0.03 sec
+ABC: + &write -n <abc-temp-dir>/output.aig 
+ABC: + &mfs 
+ABC: + &ps -l 
+ABC: <abc-temp-dir>/input : i/o =    605/    224  and =    2498  lev =   19 (   0.08)  mem = 0.08 MB  box = 639  bb = 602
+ABC: Mapping (K=7)  :  lut =    707  edge =    2596  lev =    8 (0.04)  levB =   22  mem = 0.04 MB
+ABC: LUT = 707 : 2=135 19.1 %  3=68 9.6 %  4=426 60.3 %  5=61 8.6 %  6=6 0.8 %  7=11 1.6 %  Ave = 3.67
+ABC: + &write -n <abc-temp-dir>/output.aig 
+ABC: + &verify 
+ABC: Networks are equivalent.  Time =     0.07 sec
+ABC: + time 
+ABC: elapse: 1.39 seconds, total: 1.39 seconds
+
+4.45.17.6. Executing AIGER frontend.
+<suppressed ~1668 debug messages>
+Removed 3627 unused cells and 6782 unused wires.
+
+4.45.17.7. Executing ABC_OPS_REINTEGRATE pass (reintegrate ABC mapped design into module).
+ABC RESULTS:              $lut cells:      714
+ABC RESULTS:   $paramod$838872d5a4bab89607f53482b205c0fd50d8b82e\CCU2C cells:       37
+ABC RESULTS:   $paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF_$abc9_byp cells:      476
+ABC RESULTS:   $paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF_$abc9_byp cells:      126
+ABC RESULTS:           input signals:      605
+ABC RESULTS:          output signals:       30
+Removing temp directory.
+
+4.45.18. Executing TECHMAP pass (map to technology primitives).
+
+4.45.18.1. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/abc9_unmap.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/abc9_unmap.v' to AST representation.
+Generating RTLIL representation for module `$__DFF_x__$abc9_flop'.
+Generating RTLIL representation for module `$__ABC9_SCC_BREAKER'.
+Successfully finished Verilog frontend.
+
+4.45.18.2. Continuing TECHMAP pass.
+Using template $paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF for cells of type $paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF.
+Using template $paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF_$abc9_byp for cells of type $paramod$68581f66a8fa831820fa7633bd24ba569ae9d7e3\TRELLIS_FF_$abc9_byp.
+Using template $paramod$838872d5a4bab89607f53482b205c0fd50d8b82e\CCU2C for cells of type $paramod$838872d5a4bab89607f53482b205c0fd50d8b82e\CCU2C.
+Using template $paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF for cells of type $paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF.
+Using template $paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF_$abc9_byp for cells of type $paramod$37e41664cab9052a9b41c89036e0524f666a0fee\TRELLIS_FF_$abc9_byp.
+No more expansions possible.
+<suppressed ~1251 debug messages>
+Removed 7 unused cells and 18652 unused wires.
+
+4.46. Executing TECHMAP pass (map to technology primitives).
+
+4.46.1. Executing Verilog-2005 frontend: {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v
+Parsing Verilog input from `{USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v' to AST representation.
+Generating RTLIL representation for module `$_DFF_N_'.
+Generating RTLIL representation for module `$_DFF_P_'.
+Generating RTLIL representation for module `$_DFFE_NN_'.
+Generating RTLIL representation for module `$_DFFE_PN_'.
+Generating RTLIL representation for module `$_DFFE_NP_'.
+Generating RTLIL representation for module `$_DFFE_PP_'.
+Generating RTLIL representation for module `$_DFF_NP0_'.
+Generating RTLIL representation for module `$_DFF_NP1_'.
+Generating RTLIL representation for module `$_DFF_PP0_'.
+Generating RTLIL representation for module `$_DFF_PP1_'.
+Generating RTLIL representation for module `$_SDFF_NP0_'.
+Generating RTLIL representation for module `$_SDFF_NP1_'.
+Generating RTLIL representation for module `$_SDFF_PP0_'.
+Generating RTLIL representation for module `$_SDFF_PP1_'.
+Generating RTLIL representation for module `$_DFFE_NP0P_'.
+Generating RTLIL representation for module `$_DFFE_NP1P_'.
+Generating RTLIL representation for module `$_DFFE_PP0P_'.
+Generating RTLIL representation for module `$_DFFE_PP1P_'.
+Generating RTLIL representation for module `$_DFFE_NP0N_'.
+Generating RTLIL representation for module `$_DFFE_NP1N_'.
+Generating RTLIL representation for module `$_DFFE_PP0N_'.
+Generating RTLIL representation for module `$_DFFE_PP1N_'.
+Generating RTLIL representation for module `$_SDFFE_NP0P_'.
+Generating RTLIL representation for module `$_SDFFE_NP1P_'.
+Generating RTLIL representation for module `$_SDFFE_PP0P_'.
+Generating RTLIL representation for module `$_SDFFE_PP1P_'.
+Generating RTLIL representation for module `$_SDFFE_NP0N_'.
+Generating RTLIL representation for module `$_SDFFE_NP1N_'.
+Generating RTLIL representation for module `$_SDFFE_PP0N_'.
+Generating RTLIL representation for module `$_SDFFE_PP1N_'.
+Generating RTLIL representation for module `$_ALDFF_NP_'.
+Generating RTLIL representation for module `$_ALDFF_PP_'.
+Generating RTLIL representation for module `$_ALDFFE_NPN_'.
+Generating RTLIL representation for module `$_ALDFFE_NPP_'.
+Generating RTLIL representation for module `$_ALDFFE_PPN_'.
+Generating RTLIL representation for module `$_ALDFFE_PPP_'.
+Generating RTLIL representation for module `\FD1P3AX'.
+Generating RTLIL representation for module `\FD1P3AY'.
+Generating RTLIL representation for module `\FD1P3BX'.
+Generating RTLIL representation for module `\FD1P3DX'.
+Generating RTLIL representation for module `\FD1P3IX'.
+Generating RTLIL representation for module `\FD1P3JX'.
+Generating RTLIL representation for module `\FD1S3AX'.
+Generating RTLIL representation for module `\FD1S3AY'.
+Generating RTLIL representation for module `\FD1S3BX'.
+Generating RTLIL representation for module `\FD1S3DX'.
+Generating RTLIL representation for module `\FD1S3IX'.
+Generating RTLIL representation for module `\FD1S3JX'.
+Generating RTLIL representation for module `\IFS1P3BX'.
+Generating RTLIL representation for module `\IFS1P3DX'.
+Generating RTLIL representation for module `\IFS1P3IX'.
+Generating RTLIL representation for module `\IFS1P3JX'.
+Generating RTLIL representation for module `\OFS1P3BX'.
+Generating RTLIL representation for module `\OFS1P3DX'.
+Generating RTLIL representation for module `\OFS1P3IX'.
+Generating RTLIL representation for module `\OFS1P3JX'.
+Generating RTLIL representation for module `\IB'.
+Generating RTLIL representation for module `\IBPU'.
+Generating RTLIL representation for module `\IBPD'.
+Generating RTLIL representation for module `\OB'.
+Generating RTLIL representation for module `\OBZ'.
+Generating RTLIL representation for module `\OBZPU'.
+Generating RTLIL representation for module `\OBZPD'.
+Generating RTLIL representation for module `\OBCO'.
+Generating RTLIL representation for module `\BB'.
+Generating RTLIL representation for module `\BBPU'.
+Generating RTLIL representation for module `\BBPD'.
+Generating RTLIL representation for module `\ILVDS'.
+Generating RTLIL representation for module `\OLVDS'.
+Generating RTLIL representation for module `$lut'.
+Successfully finished Verilog frontend.
+
+4.46.2. Continuing TECHMAP pass.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000010\LUT=4'1110 for cells of type $lut.
+Using template $paramod$8512f4fb47fa9596f76cdbe5b407a5b54df368e7$lut for cells of type $lut.
+Using template $paramod$b287726797d0722f64e731f1134f7c05af8f1578$lut for cells of type $lut.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'10010000 for cells of type $lut.
+Using template $paramod$fca001e3e0b52158a872e76e56c01ec10dfbb1de$lut for cells of type $lut.
+Using template $paramod$7d35f3eb4056e6484203c99fe42cfcf1dfaba704$lut for cells of type $lut.
+Using template $paramod$1241d759e3df4cac11dc7c99c36b0d1b07f7a673$lut for cells of type $lut.
+Using template $paramod$571404c0889eaf57f492cb5e37f8acb5df5852f9$lut for cells of type $lut.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'10000000 for cells of type $lut.
+Using template $paramod$cad45b6c9da81941161a13849773fe2ed4bc1c6f$lut for cells of type $lut.
+Using template $paramod$c71ed138d834112b80a85f4478e2e21f72e5c48b$lut for cells of type $lut.
+Using template $paramod$234fd643079033ba0cbc98ff572df9b7b7a0dc86$lut for cells of type $lut.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000010\LUT=4'0100 for cells of type $lut.
+Using template $paramod$41326ad8644342a66dfb051d050f2b6fbf15015b$lut for cells of type $lut.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'00001011 for cells of type $lut.
+Using template $paramod$8d7a8d6e3356de09670738ba85f2c6b874f6b06d$lut for cells of type $lut.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000010\LUT=4'0010 for cells of type $lut.
+Using template $paramod$2b29ccbd5fb8b9c557f92ddec1023c75686f32ae$lut for cells of type $lut.
+Using template $paramod$c0b24172d263163a8e6b59024cdb9dfb57b52d61$lut for cells of type $lut.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000010\LUT=4'1001 for cells of type $lut.
+Using template $paramod$df196ed0a1da5c4a58c5e08a1dac304fd3fccaab$lut for cells of type $lut.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000010\LUT=4'0110 for cells of type $lut.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'00001001 for cells of type $lut.
+Using template $paramod$ba7c22fadfbf9ee7abcb895a21403114111dd201$lut for cells of type $lut.
+Using template $paramod$b93d1ea7a612a32c185108f67a153d44ffb9aac2$lut for cells of type $lut.
+Using template $paramod$c0a4d9417755c1bd5ec9a311325000b8535d91ad$lut for cells of type $lut.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'00100000 for cells of type $lut.
+Using template $paramod$233b70872b0d11ad6386b65bc4d8864ac02395bb$lut for cells of type $lut.
+Using template $paramod$251994398653c4cf8de320f1e306e535d5d2d624$lut for cells of type $lut.
+Using template $paramod$19451f719aa4a75f15cb977ed4212a1c1a1550e9$lut for cells of type $lut.
+Using template $paramod$b26fbfdb68e98cf016d61a8611b449e9f4a30f3c$lut for cells of type $lut.
+Using template $paramod$800ad51c173ef1531dc8c2197ac409be85e8cb0a$lut for cells of type $lut.
+Using template $paramod$cd6fd17f6160f21f832268d89beb1757768dfe41$lut for cells of type $lut.
+Using template $paramod$e3e4230bb990723642112b292aa705ee0cbad0d4$lut for cells of type $lut.
+Using template $paramod$86d1a43c2f1d620ff2cef866448dd1258c868fad$lut for cells of type $lut.
+Using template $paramod$9f677d578ecfdb7840a8908616cfaf32846c4c7e$lut for cells of type $lut.
+Using template $paramod$d2845ee2da121e591069744d16cf238f53bde61d$lut for cells of type $lut.
+Using template $paramod$549a24c0b77071744eefd28bf11342e15d6bc181$lut for cells of type $lut.
+Using template $paramod$6aa5f9edeff65083243ff7232574bd7153ef5865$lut for cells of type $lut.
+Using template $paramod$dfdd6bef3b5207037fd171940f875033e0454cc6$lut for cells of type $lut.
+Using template $paramod$d35cd6da93047ca09ad3e7fd87a4e53d4d11ccfc$lut for cells of type $lut.
+Using template $paramod$32ccf65669c41e1e3bce1f16051f6d60ad96a2a0$lut for cells of type $lut.
+Using template $paramod$f45429e380905f064bb0bad3a8bdb941708e63a7$lut for cells of type $lut.
+Using template $paramod$e29904909f9ea6e7cfb5808fad44e8e0beb86199$lut for cells of type $lut.
+Using template $paramod$8adf7fbd410d2cc654c288d5be5f7508ee8809b0$lut for cells of type $lut.
+Using template $paramod$33e58adf67c6b686a154c9ce8ebbc4b04b8cabc5$lut for cells of type $lut.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000010\LUT=4'0001 for cells of type $lut.
+Using template $paramod$b4f85a6321a00b090afc4e21d68e7b99eb94d149$lut for cells of type $lut.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'00001101 for cells of type $lut.
+Using template $paramod$782961deb8dc512aef835b73aa3765da3ab3c15c$lut for cells of type $lut.
+Using template $paramod$993c4247bd27277eb9f982be96e0f00c20b6c4f9$lut for cells of type $lut.
+Using template $paramod$d025c981edcdf9979c2b684eb1bb27dcdeaf92b6$lut for cells of type $lut.
+Using template $paramod$a6597eda4608f36e684c1dd07ed552fcbec112b2$lut for cells of type $lut.
+Using template $paramod$272652f6c6fbe9a75eff76e45cc7e2788835518b$lut for cells of type $lut.
+Using template $paramod$b698dd2b885039c9e1d53e243fc4e0191632dfd9$lut for cells of type $lut.
+Using template $paramod$364c9ffbffac467d60dfec81bba4e18476c15602$lut for cells of type $lut.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'00010000 for cells of type $lut.
+Using template $paramod$57cf7fbf84518d9e7604ec42b59ba9511e1f3caf$lut for cells of type $lut.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000010\LUT=4'1000 for cells of type $lut.
+Using template $paramod$914a3c3276fdacf0130c124f5c674e351df87a89$lut for cells of type $lut.
+Using template $paramod$bf87823c144e511d827619a96c260b3c5f5b9a04$lut for cells of type $lut.
+Using template $paramod$525425bfbe66d72ee88210d059d9a74f55ab8de8$lut for cells of type $lut.
+Using template $paramod$9cf9969abb36689e56cd29234749189449d35aad$lut for cells of type $lut.
+Using template $paramod$9ea34eb01f9b75f8b9132856d9e5332a707924f2$lut for cells of type $lut.
+Using template $paramod$1769b870d47911d7a8ec3b7224a7974dbc5fe069$lut for cells of type $lut.
+Using template $paramod$a4a2067504e3d9b618348bfb39c67862a7e99a52$lut for cells of type $lut.
+Using template $paramod$08abd66d667b19fbace04751a91fec580ab48cae$lut for cells of type $lut.
+Using template $paramod$480273aedff341609bb0d70e79d3d629c4101764$lut for cells of type $lut.
+Using template $paramod$67866ce6ce8e28d840bb0e08a717641f042e6be3$lut for cells of type $lut.
+Using template $paramod$c388bdf5bc34e848632d723db494e9a79bee28dd$lut for cells of type $lut.
+Using template $paramod$0f6c862d8374cc285498d06c13e4ad7613380f7a$lut for cells of type $lut.
+Using template $paramod$5c7d886f3b88971ac55fed4bca034a87bf180f7d$lut for cells of type $lut.
+Using template $paramod$09aa9417fd88913fc6bc6c592566d96eaea6c5a3$lut for cells of type $lut.
+Using template $paramod$3b383aa74b05b60cb9cabc0ba0eca4dea92c2b33$lut for cells of type $lut.
+Using template $paramod$6d6beead1425af15cf78b27fd9b11b41b5d4bce8$lut for cells of type $lut.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'00000001 for cells of type $lut.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'10001010 for cells of type $lut.
+Using template $paramod$53eebbda080d15b7a5bf0e0829b8c8f9fd0c07aa$lut for cells of type $lut.
+Using template $paramod$15b1be980a14edac79713e171a9494e1b4bd5060$lut for cells of type $lut.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'10000010 for cells of type $lut.
+Using template $paramod$6f9324703e8fcc3b6df2bc2bec54ec19a446ae96$lut for cells of type $lut.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'11010000 for cells of type $lut.
+Using template $paramod$0383ea234f9fd03480ea2f8696098da806b349de$lut for cells of type $lut.
+Using template $paramod$810e0f22d547104f8208898922f6ac2444aeece7$lut for cells of type $lut.
+Using template $paramod$658b9ed803f0d3d335616d3858b53e0a2522f1e8$lut for cells of type $lut.
+Using template $paramod$1eeac18386fa14a89ac3612c228b5ecb32a4e3f4$lut for cells of type $lut.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'01101100 for cells of type $lut.
+Using template $paramod$b4410865e8124402796f9dfbf73ef8d279fdbd08$lut for cells of type $lut.
+Using template $paramod$20235ca863361fbc253329cfc7eeea38c77404dc$lut for cells of type $lut.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'10101001 for cells of type $lut.
+Using template $paramod$a62f0828ff3474e6ad760a23c8885f979e59f06e$lut for cells of type $lut.
+Using template $paramod$c483c2ae6515d59f9d59a93dea8020bbaaa57475$lut for cells of type $lut.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'00001000 for cells of type $lut.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'01000000 for cells of type $lut.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'00000100 for cells of type $lut.
+Using template $paramod$f787bc64f9c4df667d2b119e04d9b028535df02e$lut for cells of type $lut.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000011\LUT=8'00000010 for cells of type $lut.
+Using template $paramod$lut\WIDTH=32'00000000000000000000000000000001\LUT=2'01 for cells of type $lut.
+No more expansions possible.
+<suppressed ~2060 debug messages>
+
+4.47. Executing OPT_LUT_INS pass (discard unused LUT inputs).
+Optimizing LUTs in nearcore_stub_plus_copper.
+  Optimizing lut $auto$abc_ops_reintegrate.cc:450:reintegrate$17025.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut7 (4 -> 1)
+  Optimizing lut $auto$abc_ops_reintegrate.cc:450:reintegrate$17027.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut2 (4 -> 3)
+  Optimizing lut $auto$abc_ops_reintegrate.cc:450:reintegrate$17027.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut3 (4 -> 3)
+  Optimizing lut $auto$abc_ops_reintegrate.cc:450:reintegrate$17027.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut4 (4 -> 3)
+  Optimizing lut $auto$abc_ops_reintegrate.cc:450:reintegrate$17027.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut5 (4 -> 3)
+  Optimizing lut $auto$abc_ops_reintegrate.cc:450:reintegrate$17027.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut7 (4 -> 3)
+  Optimizing lut $abc$17022$lut$aiger17021$3049.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2746.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut2 (4 -> 3)
+  Optimizing lut $abc$17022$lut$aiger17021$2746.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut3 (4 -> 3)
+  Optimizing lut $abc$17022$lut$aiger17021$2746.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut4 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2746.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut5 (4 -> 1)
+  Optimizing lut $abc$17022$lut$aiger17021$2746.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut6 (4 -> 3)
+  Optimizing lut $abc$17022$lut$aiger17021$2617.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2617.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut2 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2612.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2561.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2504.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut3 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2693.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut2 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2693.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut3 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2693.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut5 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2693.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut6 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2693.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut7 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2669.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut2 (4 -> 2)
+  Optimizing lut $abc$17022$lut$aiger17021$2669.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut3 (4 -> 3)
+  Optimizing lut $abc$17022$lut$aiger17021$2669.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut4 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2669.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut5 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2669.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut6 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2669.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut7 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2647.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut2 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2647.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut3 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2647.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut4 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2647.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut5 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2647.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut7 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2662.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut3 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2491.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut2 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2491.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut3 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2491.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut4 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2491.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut5 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2491.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut6 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2724.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut2 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2724.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut3 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2724.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut5 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2724.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut6 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2724.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut7 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2359.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$1567.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut2 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$1339.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut4 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$1339.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut5 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$1339.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut6 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$1339.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut7 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$1417.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut2 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$1417.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut3 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$1417.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut4 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$1417.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut5 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$1417.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut7 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$1432.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut3 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$1439.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut2 (4 -> 2)
+  Optimizing lut $abc$17022$lut$aiger17021$1439.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut3 (4 -> 3)
+  Optimizing lut $abc$17022$lut$aiger17021$1439.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut4 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$1439.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut5 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$1439.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut6 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$1439.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut7 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$1505.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut3 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2871.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 3)
+  Optimizing lut $abc$17022$lut$aiger17021$2504.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2865.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2416.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2491.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2662.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$3489.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2406.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$1482.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$1907.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2367.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2662.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$1387.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2491.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2746.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$1595.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2047.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$1456.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 3)
+  Optimizing lut $abc$17022$lut$aiger17021$3460.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$1450.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2504.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$3568.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$1417.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2724.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$1505.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$3298.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2693.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$3541.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2693.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2669.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 3)
+  Optimizing lut $abc$17022$lut$aiger17021$1567.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$3640.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2474.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut\prefetch_valid.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 3)
+  Optimizing lut $abc$17022$lut$aiger17021$1567.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$1562.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$1377.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2273.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$1922.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2647.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$3576.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2746.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2382.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$1432.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$1402.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$1417.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2724.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$1439.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 3)
+  Optimizing lut $abc$17022$lut$aiger17021$1446.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$1432.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$3345.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$3617.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$3561.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2617.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$1505.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$1612.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2569.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$1861.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$1689.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$1512.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$3624.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$3226.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2605.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$1965.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$1489.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2554.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2110.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$1464.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$1811.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$3419.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2647.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+  Optimizing lut $auto$abc_ops_reintegrate.cc:450:reintegrate$17027.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 3)
+  Optimizing lut $auto$abc_ops_reintegrate.cc:450:reintegrate$17027.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 3)
+  Optimizing lut $auto$abc_ops_reintegrate.cc:450:reintegrate$17024.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 3)
+  Optimizing lut $auto$abc_ops_reintegrate.cc:450:reintegrate$17029.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 3)
+  Optimizing lut $abc$17022$lut$aiger17021$3730.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2303.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 3)
+  Optimizing lut $abc$17022$lut$aiger17021$2977.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2632.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$3055.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 3)
+  Optimizing lut $abc$17022$lut$aiger17021$2981.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2676.genblk1.genblk1.genblk1.genblk1.genblk1.lut1 (4 -> 0)
+  Optimizing lut $abc$17022$lut$aiger17021$2680.genblk1.genblk1.genblk1.genblk1.genblk1.lut0 (4 -> 0)
+Removed 0 unused cells and 2091 unused wires.
+
+4.48. Executing AUTONAME pass.
+Renamed 2538 objects in module nearcore_stub_plus_copper (621 iterations).
+<suppressed ~2538 debug messages>
+
+4.49. Executing HIERARCHY pass (managing design hierarchy).
+Attribute `top' found on module `nearcore_stub_plus_copper'. Setting top module to nearcore_stub_plus_copper.
+
+4.49.1. Analyzing design hierarchy..
+Top module:  \nearcore_stub_plus_copper
+
+4.49.2. Analyzing design hierarchy..
+Top module:  \nearcore_stub_plus_copper
+Removed 0 unused modules.
+
+4.50. Printing statistics.
+
+=== nearcore_stub_plus_copper ===
+
+        +----------Local Count, excluding submodules.
+        | 
+      923 wires
+     3092 wire bits
+      923 public wires
+     3092 public wire bits
+        6 ports
+       28 port bits
+        2 cells
+        2   $scopeinfo
+     1665 submodules
+       37   CCU2C
+       39   L6MUX21
+      870   LUT4
+      117   PFUMX
+      602   TRELLIS_FF
+
+=== design hierarchy ===
+
+        +----------Count including submodules.
+        | 
+        2 nearcore_stub_plus_copper
+
+        +----------Count including submodules.
+        | 
+      923 wires
+     3092 wire bits
+      923 public wires
+     3092 public wire bits
+        6 ports
+       28 port bits
+        - memories
+        - memory bits
+        - processes
+        2 cells
+        2   $scopeinfo
+     1665 submodules
+       37   CCU2C
+       39   L6MUX21
+      870   LUT4
+      117   PFUMX
+      602   TRELLIS_FF
+
+4.51. Executing CHECK pass (checking for obvious problems).
+Checking module nearcore_stub_plus_copper...
+Found and reported 0 problems.
+
+4.52. Executing JSON backend.
+
+5. Printing statistics.
+
+=== nearcore_stub_plus_copper ===
+
+        +----------Local Count, excluding submodules.
+        | 
+      923 wires
+     3092 wire bits
+      923 public wires
+     3092 public wire bits
+        6 ports
+       28 port bits
+     1667 cells
+        2   $scopeinfo
+       37   CCU2C
+       39   L6MUX21
+      870   LUT4
+      117   PFUMX
+      602   TRELLIS_FF
+
+Warnings: 3 unique messages, 6 total
+End of script. Logfile hash: cc86edb141
+Yosys 0.66+154 (git sha1 23aadd92a, Release, GNU /usr/bin/x86_64-w64-mingw32-g++ 13.2.1)
+Time spent: 1% 28x opt_expr (0 sec), 1% 25x opt_clean (0 sec), ...
+
+$ {USER_HOME}\tools\oss-cad-suite\bin\nextpnr-ecp5.EXE --85k --package CABGA381 --speed 6 --freq 50 --lpf-allow-unconstrained --json {USER_HOME}\AppData\Local\Temp\copper_mapped_ecp5_e_gjez6l\nearcore_stub_plus_copper.json --textcfg {USER_HOME}\AppData\Local\Temp\copper_mapped_ecp5_e_gjez6l\nearcore_stub_plus_copper.config
+
+
+Info: Logic utilisation before packing:
+Info:     Total LUT4s:       944/83640     1%
+Info:         logic LUTs:    870/83640     1%
+Info:         carry LUTs:     74/83640     0%
+Info:           RAM LUTs:      0/10455     0%
+Info:          RAMW LUTs:      0/20910     0%
+
+Info:      Total DFFs:       602/83640     0%
+
+Info: Packing IOs..
+Info: Packing constants..
+Info: Packing carries...
+Info: Packing LUTs...
+Info: Packing LUT5-7s...
+Info: Packing FFs...
+Info:     82 FFs paired with LUTs.
+Info: Generating derived timing constraints...
+Info: Promoting globals...
+Info:     promoting clock net clk$TRELLIS_IO_IN to global network
+Info: Checksum: 0xb005016e
+
+Info: Device utilisation:
+Info: 	          TRELLIS_IO:      28/    365     7%
+Info: 	                DCCA:       1/     56     1%
+Info: 	              DP16KD:       0/    208     0%
+Info: 	          MULT18X18D:       0/    156     0%
+Info: 	              ALU54B:       0/     78     0%
+Info: 	             EHXPLLL:       0/      4     0%
+Info: 	             EXTREFB:       0/      2     0%
+Info: 	                DCUA:       0/      2     0%
+Info: 	           PCSCLKDIV:       0/      2     0%
+Info: 	             IOLOGIC:       0/    224     0%
+Info: 	            SIOLOGIC:       0/    141     0%
+Info: 	                 GSR:       0/      1     0%
+Info: 	               JTAGG:       0/      1     0%
+Info: 	                OSCG:       0/      1     0%
+Info: 	               SEDGA:       0/      1     0%
+Info: 	                 DTR:       0/      1     0%
+Info: 	             USRMCLK:       0/      1     0%
+Info: 	             CLKDIVF:       0/      4     0%
+Info: 	           ECLKSYNCB:       0/     10     0%
+Info: 	             DLLDELD:       0/      8     0%
+Info: 	              DDRDLL:       0/      4     0%
+Info: 	             DQSBUFM:       0/     14     0%
+Info: 	     TRELLIS_ECLKBUF:       0/      8     0%
+Info: 	        ECLKBRIDGECS:       0/      2     0%
+Info: 	                DCSC:       0/      2     0%
+Info: 	          TRELLIS_FF:     602/  83640     0%
+Info: 	        TRELLIS_COMB:     958/  83640     1%
+Info: 	        TRELLIS_RAMW:       0/  10455     0%
+
+Info: Placed 0 cells based on constraints.
+Info: Creating initial analytic placement for 1239 cells, random placement wirelen = 125768.
+Info:     at initial placer iter 0, wirelen = 2803
+Info:     at initial placer iter 1, wirelen = 2556
+Info:     at initial placer iter 2, wirelen = 2488
+Info:     at initial placer iter 3, wirelen = 2664
+Info: Running main analytical placer, max placement attempts per cell = 315615.
+Info:     at iteration #1, type ALL: wirelen solved = 2446, spread = 7943, legal = 8021; time = 0.04s
+Info:     at iteration #2, type ALL: wirelen solved = 2439, spread = 7246, legal = 7334; time = 0.02s
+Info:     at iteration #3, type ALL: wirelen solved = 2678, spread = 7135, legal = 7338; time = 0.02s
+Info:     at iteration #4, type ALL: wirelen solved = 2852, spread = 7067, legal = 7253; time = 0.02s
+Info:     at iteration #5, type ALL: wirelen solved = 2967, spread = 7094, legal = 7226; time = 0.02s
+Info:     at iteration #6, type ALL: wirelen solved = 3487, spread = 7051, legal = 7154; time = 0.02s
+Info:     at iteration #7, type ALL: wirelen solved = 3610, spread = 7034, legal = 7131; time = 0.02s
+Info:     at iteration #8, type ALL: wirelen solved = 3765, spread = 6715, legal = 6822; time = 0.02s
+Info:     at iteration #9, type ALL: wirelen solved = 3877, spread = 6547, legal = 6730; time = 0.02s
+Info:     at iteration #10, type ALL: wirelen solved = 4172, spread = 6612, legal = 6672; time = 0.02s
+Info:     at iteration #11, type ALL: wirelen solved = 4277, spread = 6622, legal = 6780; time = 0.02s
+Info:     at iteration #12, type ALL: wirelen solved = 4491, spread = 6379, legal = 6494; time = 0.02s
+Info:     at iteration #13, type ALL: wirelen solved = 4457, spread = 6154, legal = 6568; time = 0.02s
+Info:     at iteration #14, type ALL: wirelen solved = 4435, spread = 6138, legal = 6358; time = 0.02s
+Info:     at iteration #15, type ALL: wirelen solved = 4595, spread = 6274, legal = 6391; time = 0.02s
+Info:     at iteration #16, type ALL: wirelen solved = 4762, spread = 6273, legal = 6605; time = 0.02s
+Info:     at iteration #17, type ALL: wirelen solved = 4697, spread = 6330, legal = 6462; time = 0.02s
+Info:     at iteration #18, type ALL: wirelen solved = 4977, spread = 6360, legal = 6540; time = 0.02s
+Info:     at iteration #19, type ALL: wirelen solved = 4886, spread = 6093, legal = 6281; time = 0.02s
+Info:     at iteration #20, type ALL: wirelen solved = 4784, spread = 5961, legal = 6135; time = 0.02s
+Info:     at iteration #21, type ALL: wirelen solved = 4903, spread = 5951, legal = 6104; time = 0.02s
+Info: HeAP Placer Time: 0.64s
+Info:   of which solving equations: 0.29s
+Info:   of which spreading cells: 0.09s
+Info:   of which strict legalisation: 0.02s
+
+Info: Running simulated annealing placer for refinement.
+Info:   at iteration #1: temp = 0.000000, timing cost = 594, wirelen = 6104
+Info:   at iteration #5: temp = 0.000000, timing cost = 512, wirelen = 5056
+Info:   at iteration #10: temp = 0.000000, timing cost = 473, wirelen = 4893
+Info:   at iteration #15: temp = 0.000000, timing cost = 438, wirelen = 4750
+Info:   at iteration #20: temp = 0.000000, timing cost = 555, wirelen = 4692
+Info:   at iteration #21: temp = 0.000000, timing cost = 552, wirelen = 4676 
+Info: SA placement time 0.90s
+
+Info: Max frequency for clock '$glbnet$clk$TRELLIS_IO_IN': 60.65 MHz (PASS at 50.00 MHz)
+
+Info: Max delay <async>                           -> <async>                          : 12.72 ns
+Info: Max delay <async>                           -> posedge $glbnet$clk$TRELLIS_IO_IN: 12.56 ns
+Info: Max delay posedge $glbnet$clk$TRELLIS_IO_IN -> <async>                          : 16.65 ns
+
+Info: Slack histogram:
+Info:  legend: * represents 6 endpoint(s)
+Info:          + represents [1,6) endpoint(s)
+Info: [  3512,   4299) |+
+Info: [  4299,   5086) | 
+Info: [  5086,   5873) | 
+Info: [  5873,   6660) | 
+Info: [  6660,   7447) | 
+Info: [  7447,   8234) | 
+Info: [  8234,   9021) |*+
+Info: [  9021,   9808) |+
+Info: [  9808,  10595) | 
+Info: [ 10595,  11382) | 
+Info: [ 11382,  12169) | 
+Info: [ 12169,  12956) | 
+Info: [ 12956,  13743) | 
+Info: [ 13743,  14530) | 
+Info: [ 14530,  15317) | 
+Info: [ 15317,  16104) |****************+
+Info: [ 16104,  16891) |*************************+
+Info: [ 16891,  17678) |************************************************************ 
+Info: [ 17678,  18465) |**************************************************+
+Info: [ 18465,  19252) |**************+
+Info: Checksum: 0x0241f524
+Info: Routing globals...
+Info:     routing clock net $glbnet$clk$TRELLIS_IO_IN using global 0
+
+Info: Routing..
+Info: Setting up routing queue.
+Info: Routing 4519 arcs.
+Info:            |   (re-)routed arcs  |   delta    | remaining|       time spent     |
+Info:    IterCnt |  w/ripup   wo/ripup |  w/r  wo/r |      arcs| batch(sec) total(sec)|
+Info:       1000 |      465        534 |  465   534 |      4150|       0.27       0.27|
+Info:       2000 |      914       1085 |  449   551 |      3811|       0.19       0.46|
+Info:       3000 |     1448       1551 |  534   466 |      3582|       0.22       0.68|
+Info:       4000 |     1972       2027 |  524   476 |      3182|       0.17       0.85|
+Info:       5000 |     2465       2503 |  493   476 |      2803|       0.17       1.02|
+Info:       6000 |     3091       2869 |  626   366 |      2495|       0.19       1.21|
+Info:       7000 |     3735       3220 |  644   351 |      2166|       0.23       1.44|
+Info:       8000 |     4230       3722 |  495   502 |      1727|       0.26       1.70|
+Info:       9000 |     4582       4364 |  352   642 |      1126|       0.59       2.29|
+Info:      10000 |     4909       4989 |  327   625 |       547|       0.79       3.07|
+Info:      10689 |     5016       5513 |  107   524 |         0|       0.76       3.83|
+Info: Routing complete.
+Info: Router1 time 3.83s
+Info: Checksum: 0xbb8f9545
+
+Info: Critical path report for clock '$glbnet$clk$TRELLIS_IO_IN' (posedge -> posedge):
+Info:       type curr  total name
+Info:   clk-to-q  0.52  0.52 Source u_nearcore_copper.demand_addr_TRELLIS_FF_Q_19.Q
+Info:    routing  1.59  2.11 Net u_nearcore_copper.demand_addr[17] (58,40) -> (65,35)
+Info:                          Sink u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_2_D_LUT4_Z_1_D_LUT4_Z_B_LUT4_A_1_Z_LUT4_Z_1_D_LUT4_Z.D
+Info:                          Defined in:
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
+Info:      logic  0.24  2.35 Source u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_2_D_LUT4_Z_1_D_LUT4_Z_B_LUT4_A_1_Z_LUT4_Z_1_D_LUT4_Z.F
+Info:    routing  0.61  2.96 Net u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_2_D_LUT4_Z_1_D_LUT4_Z_B_LUT4_A_1_Z_LUT4_Z_1_D[2] (65,35) -> (65,35)
+Info:                          Sink u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_2_D_LUT4_Z_1_D_LUT4_Z_B_LUT4_A_1_Z_LUT4_Z_1.C
+Info:                          Defined in:
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
+Info:      logic  0.24  3.20 Source u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_2_D_LUT4_Z_1_D_LUT4_Z_B_LUT4_A_1_Z_LUT4_Z_1.F
+Info:    routing  0.88  4.08 Net u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_2_D_LUT4_Z_1_D_LUT4_Z_B_LUT4_A_1_Z[2] (65,35) -> (64,35)
+Info:                          Sink u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_2_D_LUT4_Z_1_D_LUT4_Z_B_LUT4_A_1_Z_LUT4_D.C
+Info:                          Defined in:
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
+Info:      logic  0.24  4.31 Source u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_2_D_LUT4_Z_1_D_LUT4_Z_B_LUT4_A_1_Z_LUT4_D.F
+Info:    routing  0.65  4.96 Net u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_4_D[3] (64,35) -> (65,36)
+Info:                          Sink u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_4.D
+Info:                          Defined in:
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
+Info:      logic  0.24  5.20 Source u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_4.F
+Info:    routing  0.67  5.86 Net u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0[4] (65,36) -> (65,37)
+Info:                          Sink u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_BLUT_LUT4_Z.M
+Info:                          Defined in:
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
+Info:      logic  0.26  6.12 Source u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_BLUT_LUT4_Z.OFX
+Info:    routing  1.20  7.32 Net u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_2_D[3] (65,37) -> (63,43)
+Info:                          Sink u_nearcore_copper.u_copper_prefetch.queue_count_TRELLIS_FF_Q_CE_TRELLIS_FF_CE_Q_LUT4_Z_D_LUT4_Z_1.C
+Info:                          Defined in:
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
+Info:      logic  0.24  7.55 Source u_nearcore_copper.u_copper_prefetch.queue_count_TRELLIS_FF_Q_CE_TRELLIS_FF_CE_Q_LUT4_Z_D_LUT4_Z_1.F
+Info:    routing  0.61  8.16 Net u_nearcore_copper.u_copper_prefetch.queue_count_TRELLIS_FF_Q_CE_TRELLIS_FF_CE_Q_LUT4_Z_D[2] (63,43) -> (63,43)
+Info:                          Sink u_nearcore_copper.u_copper_prefetch.queue_count_TRELLIS_FF_Q_CE_TRELLIS_FF_CE_Q_LUT4_Z.D
+Info:                          Defined in:
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
+Info:      logic  0.24  8.40 Source u_nearcore_copper.u_copper_prefetch.queue_count_TRELLIS_FF_Q_CE_TRELLIS_FF_CE_Q_LUT4_Z.F
+Info:    routing  0.67  9.07 Net u_nearcore_copper.queue_pop_LUT4_B_D[4] (63,43) -> (63,44)
+Info:                          Sink u_nearcore_copper.prefetch_valid_PFUMX_Z_BLUT_LUT4_Z.M
+Info:                          Defined in:
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
+Info:      logic  0.26  9.32 Source u_nearcore_copper.prefetch_valid_PFUMX_Z_BLUT_LUT4_Z.OFX
+Info:    routing  3.48  12.81 Net prefetch_valid$TRELLIS_IO_OUT (63,44) -> (124,44)
+Info:                          Sink core_status_TRELLIS_FF_Q.M
+Info:                          Defined in:
+Info:                               research/copper_prefetch_unit_open.sv:26.18-26.32
+Info:      setup  0.00  12.81 Source core_status_TRELLIS_FF_Q.M
+Info: 2.45 ns logic, 10.35 ns routing
+
+Info: Critical path report for cross-domain path '<async>' -> '<async>':
+Info:       type curr  total name
+Info:     source  0.00  0.00 Source enable$tr_io.O
+Info:    routing  3.88  3.88 Net enable$TRELLIS_IO_IN (126,44) -> (63,44)
+Info:                          Sink u_nearcore_copper.prefetch_valid_PFUMX_Z_BLUT_LUT4_Z.D
+Info:                          Defined in:
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
+Info:      logic  0.40  4.28 Source u_nearcore_copper.prefetch_valid_PFUMX_Z_BLUT_LUT4_Z.OFX
+Info:    routing  3.72  8.01 Net prefetch_valid$TRELLIS_IO_OUT (63,44) -> (126,44)
+Info:                          Sink prefetch_valid$tr_io.I
+Info:                          Defined in:
+Info:                               research/copper_prefetch_unit_open.sv:26.18-26.32
+Info: 0.40 ns logic, 7.61 ns routing
+
+Info: Critical path report for cross-domain path '<async>' -> 'posedge $glbnet$clk$TRELLIS_IO_IN':
+Info:       type curr  total name
+Info:     source  0.00  0.00 Source enable$tr_io.O
+Info:    routing  3.88  3.88 Net enable$TRELLIS_IO_IN (126,44) -> (63,44)
+Info:                          Sink u_nearcore_copper.prefetch_valid_PFUMX_Z_BLUT_LUT4_Z.D
+Info:                          Defined in:
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
+Info:      logic  0.40  4.28 Source u_nearcore_copper.prefetch_valid_PFUMX_Z_BLUT_LUT4_Z.OFX
+Info:    routing  3.48  7.76 Net prefetch_valid$TRELLIS_IO_OUT (63,44) -> (124,44)
+Info:                          Sink core_status_TRELLIS_FF_Q.M
+Info:                          Defined in:
+Info:                               research/copper_prefetch_unit_open.sv:26.18-26.32
+Info:      setup  0.00  7.76 Source core_status_TRELLIS_FF_Q.M
+Info: 0.40 ns logic, 7.36 ns routing
+
+Info: Critical path report for cross-domain path 'posedge $glbnet$clk$TRELLIS_IO_IN' -> '<async>':
+Info:       type curr  total name
+Info:   clk-to-q  0.52  0.52 Source u_nearcore_copper.demand_addr_TRELLIS_FF_Q_19.Q
+Info:    routing  1.59  2.11 Net u_nearcore_copper.demand_addr[17] (58,40) -> (65,35)
+Info:                          Sink u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_2_D_LUT4_Z_1_D_LUT4_Z_B_LUT4_A_1_Z_LUT4_Z_1_D_LUT4_Z.D
+Info:                          Defined in:
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
+Info:      logic  0.24  2.35 Source u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_2_D_LUT4_Z_1_D_LUT4_Z_B_LUT4_A_1_Z_LUT4_Z_1_D_LUT4_Z.F
+Info:    routing  0.61  2.96 Net u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_2_D_LUT4_Z_1_D_LUT4_Z_B_LUT4_A_1_Z_LUT4_Z_1_D[2] (65,35) -> (65,35)
+Info:                          Sink u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_2_D_LUT4_Z_1_D_LUT4_Z_B_LUT4_A_1_Z_LUT4_Z_1.C
+Info:                          Defined in:
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
+Info:      logic  0.24  3.20 Source u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_2_D_LUT4_Z_1_D_LUT4_Z_B_LUT4_A_1_Z_LUT4_Z_1.F
+Info:    routing  0.88  4.08 Net u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_2_D_LUT4_Z_1_D_LUT4_Z_B_LUT4_A_1_Z[2] (65,35) -> (64,35)
+Info:                          Sink u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_2_D_LUT4_Z_1_D_LUT4_Z_B_LUT4_A_1_Z_LUT4_D.C
+Info:                          Defined in:
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
+Info:      logic  0.24  4.31 Source u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_2_D_LUT4_Z_1_D_LUT4_Z_B_LUT4_A_1_Z_LUT4_D.F
+Info:    routing  0.65  4.96 Net u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_4_D[3] (64,35) -> (65,36)
+Info:                          Sink u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_4.D
+Info:                          Defined in:
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
+Info:      logic  0.24  5.20 Source u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0_LUT4_Z_4.F
+Info:    routing  0.67  5.86 Net u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_C0[4] (65,36) -> (65,37)
+Info:                          Sink u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_BLUT_LUT4_Z.M
+Info:                          Defined in:
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
+Info:      logic  0.26  6.12 Source u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_C_PFUMX_Z_BLUT_LUT4_Z.OFX
+Info:    routing  1.20  7.32 Net u_nearcore_copper.u_copper_prefetch.queue_count_LUT4_D_Z_LUT4_Z_2_D[3] (65,37) -> (63,43)
+Info:                          Sink u_nearcore_copper.u_copper_prefetch.queue_count_TRELLIS_FF_Q_CE_TRELLIS_FF_CE_Q_LUT4_Z_D_LUT4_Z_1.C
+Info:                          Defined in:
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
+Info:      logic  0.24  7.55 Source u_nearcore_copper.u_copper_prefetch.queue_count_TRELLIS_FF_Q_CE_TRELLIS_FF_CE_Q_LUT4_Z_D_LUT4_Z_1.F
+Info:    routing  0.61  8.16 Net u_nearcore_copper.u_copper_prefetch.queue_count_TRELLIS_FF_Q_CE_TRELLIS_FF_CE_Q_LUT4_Z_D[2] (63,43) -> (63,43)
+Info:                          Sink u_nearcore_copper.u_copper_prefetch.queue_count_TRELLIS_FF_Q_CE_TRELLIS_FF_CE_Q_LUT4_Z.D
+Info:                          Defined in:
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
+Info:      logic  0.24  8.40 Source u_nearcore_copper.u_copper_prefetch.queue_count_TRELLIS_FF_Q_CE_TRELLIS_FF_CE_Q_LUT4_Z.F
+Info:    routing  0.67  9.07 Net u_nearcore_copper.queue_pop_LUT4_B_D[4] (63,43) -> (63,44)
+Info:                          Sink u_nearcore_copper.prefetch_valid_PFUMX_Z_BLUT_LUT4_Z.M
+Info:                          Defined in:
+Info:                               {USER_HOME}\tools\OSS-CA~1\bin\../share/yosys/lattice/cells_map_trellis.v:108.23-108.24
+Info:      logic  0.26  9.32 Source u_nearcore_copper.prefetch_valid_PFUMX_Z_BLUT_LUT4_Z.OFX
+Info:    routing  3.72  13.05 Net prefetch_valid$TRELLIS_IO_OUT (63,44) -> (126,44)
+Info:                          Sink prefetch_valid$tr_io.I
+Info:                          Defined in:
+Info:                               research/copper_prefetch_unit_open.sv:26.18-26.32
+Info: 2.45 ns logic, 10.60 ns routing
+
+Info: Max frequency for clock '$glbnet$clk$TRELLIS_IO_IN': 78.09 MHz (PASS at 50.00 MHz)
+
+Info: Max delay <async>                           -> <async>                          : 8.01 ns
+Info: Max delay <async>                           -> posedge $glbnet$clk$TRELLIS_IO_IN: 7.76 ns
+Info: Max delay posedge $glbnet$clk$TRELLIS_IO_IN -> <async>                          : 13.05 ns
+
+Info: Slack histogram:
+Info:  legend: * represents 5 endpoint(s)
+Info:          + represents [1,5) endpoint(s)
+Info: [  7195,   7788) |+
+Info: [  7788,   8381) | 
+Info: [  8381,   8974) | 
+Info: [  8974,   9567) |+
+Info: [  9567,  10160) |+
+Info: [ 10160,  10753) |+
+Info: [ 10753,  11346) | 
+Info: [ 11346,  11939) | 
+Info: [ 11939,  12532) | 
+Info: [ 12532,  13125) | 
+Info: [ 13125,  13718) | 
+Info: [ 13718,  14311) | 
+Info: [ 14311,  14904) | 
+Info: [ 14904,  15497) |+
+Info: [ 15497,  16090) |***+
+Info: [ 16090,  16683) |*****************+
+Info: [ 16683,  17276) |******************************************************+
+Info: [ 17276,  17869) |*********************************************+
+Info: [ 17869,  18462) |************************************************************ 
+Info: [ 18462,  19055) |*******************+
+
+Info: Program finished normally.

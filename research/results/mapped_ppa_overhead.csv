@@ -1,7 +1,9 @@
 target,flow,scope,metric,baseline,with_copper,delta,percent_overhead,notes
-ecp5-85k,yosys+nextpnr-ecp5,near_core_stub,near_core_stub_mapped_timing,,,,,BLOCKED: matched mapped PPA overhead requires PASS rows for baseline and COPPER.
-ice40-hx8k,yosys+nextpnr-ice40,near_core_stub,near_core_stub_mapped_timing,,,,,BLOCKED: matched mapped PPA overhead requires PASS rows for baseline and COPPER.
-full-core-wrapper,not_run,full_core,full_core_mapped_timing,,,,,BLOCKED: matched mapped PPA overhead requires PASS rows for baseline and COPPER.
-unit-fallback,not_run,unit,unit_mapped_timing,,,,,BLOCKED: matched mapped PPA overhead requires PASS rows for baseline and COPPER.
+ecp5-85k,yosys+nextpnr-ecp5,near_core_stub,near_core_stub_lut,62,944,882,1422.580645,"Matched mapped PPA overhead from same target, flow, and constraints."
+ecp5-85k,yosys+nextpnr-ecp5,near_core_stub,near_core_stub_ff,59,602,543,920.338983,"Matched mapped PPA overhead from same target, flow, and constraints."
+ecp5-85k,yosys+nextpnr-ecp5,near_core_stub,near_core_stub_bram,0,0,0,0.000000,"Matched mapped PPA overhead from same target, flow, and constraints."
+ecp5-85k,yosys+nextpnr-ecp5,near_core_stub,near_core_stub_dsp,0,0,0,0.000000,"Matched mapped PPA overhead from same target, flow, and constraints."
+ecp5-85k,yosys+nextpnr-ecp5,near_core_stub,near_core_stub_cells,72,958,886,1230.555556,"Matched mapped PPA overhead from same target, flow, and constraints."
+ecp5-85k,yosys+nextpnr-ecp5,near_core_stub,near_core_stub_fmax_mhz,262.74,78.09,-184.65,-70.278602,"Matched mapped PPA overhead from same target, flow, and constraints."
 openroad,openroad,near_core_stub,near_core_stub_mapped_timing,,,,,BLOCKED: matched mapped PPA overhead requires PASS rows for baseline and COPPER.
 vivado-xc7a35tcsg324-1,vivado-impl,near_core_stub,near_core_stub_mapped_timing,,,,,BLOCKED: matched mapped PPA overhead requires PASS rows for baseline and COPPER.

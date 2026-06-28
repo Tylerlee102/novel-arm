@@ -13,6 +13,7 @@ RESEARCH = ROOT / "research"
 RESULTS = RESEARCH / "results"
 PAPER = RESEARCH / "paper"
 OPEN_ENVIRONMENTS = {"github_actions", "docker", "codespaces"}
+MAPPED_PPA_ENVIRONMENTS = OPEN_ENVIRONMENTS | {"local_windows"}
 
 
 def rel(path: Path) -> str:
@@ -195,7 +196,7 @@ def matched_mapped_ppa_pass(scope: str = "near_core_stub") -> bool:
     rows = [
         row
         for row in read_rows(RESULTS / "mapped_ppa.csv")
-        if row.get("environment") in OPEN_ENVIRONMENTS
+        if row.get("environment") in MAPPED_PPA_ENVIRONMENTS
         and row.get("status") == "PASS"
         and row.get("flow") not in {"yosys", "not_run", ""}
         and has_real_timing(row)

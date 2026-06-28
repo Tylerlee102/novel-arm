@@ -125,7 +125,8 @@ def rel(path: Path) -> str:
 
 def write_text(path: Path, text: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(text, encoding="utf-8")
+    sanitized = text.replace(str(Path.home()), "{USER_HOME}").replace(Path.home().as_posix(), "{USER_HOME}")
+    path.write_text(sanitized, encoding="utf-8")
 
 
 def write_csv(path: Path, fields: list[str], rows: list[dict[str, str]]) -> None:
@@ -197,6 +198,27 @@ def parse_cell_counts(output: str) -> dict[str, int]:
 def parse_total_cells(output: str) -> str:
     matches = re.findall(r"Number of cells:\s+(\d+)", output)
     return matches[-1] if matches else ""
+
+
+def parse_count_line(output: str, pattern: str) -> str:
+    matches = re.findall(pattern, output, re.I | re.M)
+    return matches[-1] if matches else ""
+
+
+def parse_device_count(output: str, primitive: str) -> str:
+    return parse_count_line(output, rf"Info:\s+{re.escape(primitive)}:\s+(\d+)\s*/")
+
+
+def parse_ecp5_luts(output: str) -> str:
+    logic = parse_count_line(output, r"Info:\s+logic LUTs:\s+(\d+)\s*/")
+    carry = parse_count_line(output, r"Info:\s+carry LUTs:\s+(\d+)\s*/")
+    if logic or carry:
+        return str(int(logic or 0) + int(carry or 0))
+    return parse_count_line(output, r"Info:\s+Total LUT4s:\s+(\d+)\s*/")
+
+
+def parse_ecp5_ffs(output: str) -> str:
+    return parse_count_line(output, r"Info:\s+Total DFFs:\s+(\d+)\s*/")
 
 
 def sum_prefix(counts: dict[str, int], prefixes: tuple[str, ...]) -> str:
@@ -331,6 +353,11 @@ def mapped_row(
     output: str,
 ) -> dict[str, str]:
     counts = parse_cell_counts(output)
+    lut = parse_ecp5_luts(output) if flow == "yosys+nextpnr-ecp5" else sum_prefix(counts, ("LUT4", "SB_LUT4"))
+    ff = parse_ecp5_ffs(output) if flow == "yosys+nextpnr-ecp5" else sum_prefix(counts, ("TRELLIS_FF", "SB_DFF", "FD", "$_DFF"))
+    bram = parse_device_count(output, "DP16KD") if flow == "yosys+nextpnr-ecp5" else sum_prefix(counts, ("DP16KD", "PDPW16KD", "SB_RAM", "RAMB"))
+    dsp = parse_device_count(output, "MULT18X18D") if flow == "yosys+nextpnr-ecp5" else sum_prefix(counts, ("MULT18X18", "SB_MAC", "DSP"))
+    cells = parse_device_count(output, "TRELLIS_COMB") if flow == "yosys+nextpnr-ecp5" else parse_total_cells(output)
     status = "PASS" if synth_code == 0 and pnr_code == 0 else "FAIL"
     note = (
         f"Mapped {design.scope} place-and-route completed at {CLOCK_MHZ} MHz target; "
@@ -344,11 +371,11 @@ def mapped_row(
         "flow": flow,
         "environment": ENVIRONMENT,
         "status": status,
-        "lut": value_or_na(sum_prefix(counts, ("LUT4", "SB_LUT4"))),
-        "ff": value_or_na(sum_prefix(counts, ("TRELLIS_FF", "SB_DFF", "FD", "$_DFF"))),
-        "bram": value_or_na(sum_prefix(counts, ("DP16KD", "PDPW16KD", "SB_RAM", "RAMB"))),
-        "dsp": value_or_na(sum_prefix(counts, ("MULT18X18", "SB_MAC", "DSP"))),
-        "cells": value_or_na(parse_total_cells(output)),
+        "lut": value_or_na(lut),
+        "ff": value_or_na(ff),
+        "bram": value_or_na(bram),
+        "dsp": value_or_na(dsp),
+        "cells": value_or_na(cells),
         "area_um2": "NA",
         "fmax_mhz": value_or_na(parse_fmax(output)),
         "wns": value_or_na(parse_wns(output)),
