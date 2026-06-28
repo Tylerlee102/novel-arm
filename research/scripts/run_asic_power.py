@@ -299,7 +299,10 @@ exit
 
 def parse_total_cells(output: str) -> str:
     matches = re.findall(r"Number of cells:\s+(\d+)", output)
-    return matches[-1] if matches else "NA"
+    if matches:
+        return matches[-1]
+    table_matches = re.findall(r"^\s*(\d+)\s+[0-9.Ee+-]+\s+cells\s*$", output, re.M)
+    return table_matches[-1] if table_matches else "NA"
 
 
 def parse_area(output: str) -> str:
@@ -330,8 +333,9 @@ def parse_power(output: str) -> tuple[str, str, str, str]:
     for line in reversed(total_lines):
         numbers = re.findall(r"-?[0-9]+(?:\.[0-9]+)?(?:e[-+]?\d+)?", line, re.I)
         if len(numbers) >= 4:
-            internal, switching, leakage, total = numbers[-4:]
-            return internal, switching, leakage, total
+            watts = [float(value) for value in numbers[:4]]
+            converted = tuple(f"{value * 1000.0:.6g}" for value in watts)
+            return converted[0], converted[1], converted[2], converted[3]
     return "NA", "NA", "NA", "NA"
 
 
