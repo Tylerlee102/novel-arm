@@ -1,0 +1,3 @@
+environment,status,pdf_path,latex_engine,errors,warnings,log_path,notes
+github_actions,PASS,research/paper/main.pdf,latexmk,3,2,research/paper/main.log,LaTeX build completed.
+local_windows,BLOCKED,,,1,0,research/results/logs/paper/build_paper.log,latexmk/pdflatex not found on PATH.

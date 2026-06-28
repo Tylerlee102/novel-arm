@@ -1,0 +1,3 @@
+design,tool,environment,status,warnings,errors,log_path,notes
+copper_prefetch_unit_open,iverilog,local_windows,BLOCKED,0,1,research/results/logs/rtl/iverilog_copper_prefetch_unit_open.log,Open-source RTL compile requires Icarus Verilog. Docker/CI installs it; local Windows may block.
+copper_prefetch_unit_open,iverilog,github_actions,PASS,0,0,research/results/logs/rtl/iverilog_copper_prefetch_unit_open.log,Open-source smoke compile of COPPER unit with queue/disable/speculation checks.

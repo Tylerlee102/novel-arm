@@ -1,0 +1,31 @@
+target,flow,environment,metric,baseline,copper,delta,percent_overhead,notes
+generic,yosys,local_windows,cells_baseline_prefetch_unit_vs_copper_unit,,,,,BLOCKED: matched overhead requires PASS rows and metric values for both designs.
+generic,yosys,local_windows,cells_baseline_prefetch_unit_vs_copper_with_queue,,,,,BLOCKED: matched overhead requires PASS rows and metric values for both designs.
+generic,yosys,local_windows,cells_baseline_prefetch_unit_vs_copper_with_tables,,,,,BLOCKED: matched overhead requires PASS rows and metric values for both designs.
+ice40-hx8k,yosys+nextpnr-ice40,local_windows,lut_baseline_prefetch_unit_vs_copper_unit,,,,,BLOCKED: matched overhead requires PASS rows and metric values for both designs.
+ice40-hx8k,yosys+nextpnr-ice40,local_windows,lut_baseline_prefetch_unit_vs_copper_with_queue,,,,,BLOCKED: matched overhead requires PASS rows and metric values for both designs.
+ice40-hx8k,yosys+nextpnr-ice40,local_windows,lut_baseline_prefetch_unit_vs_copper_with_tables,,,,,BLOCKED: matched overhead requires PASS rows and metric values for both designs.
+ice40-hx8k,yosys+nextpnr-ice40,local_windows,ff_baseline_prefetch_unit_vs_copper_unit,,,,,BLOCKED: matched overhead requires PASS rows and metric values for both designs.
+ice40-hx8k,yosys+nextpnr-ice40,local_windows,ff_baseline_prefetch_unit_vs_copper_with_queue,,,,,BLOCKED: matched overhead requires PASS rows and metric values for both designs.
+ice40-hx8k,yosys+nextpnr-ice40,local_windows,ff_baseline_prefetch_unit_vs_copper_with_tables,,,,,BLOCKED: matched overhead requires PASS rows and metric values for both designs.
+ecp5-85k,yosys+nextpnr-ecp5,local_windows,lut_baseline_prefetch_unit_vs_copper_unit,,,,,BLOCKED: matched overhead requires PASS rows and metric values for both designs.
+ecp5-85k,yosys+nextpnr-ecp5,local_windows,lut_baseline_prefetch_unit_vs_copper_with_queue,,,,,BLOCKED: matched overhead requires PASS rows and metric values for both designs.
+ecp5-85k,yosys+nextpnr-ecp5,local_windows,lut_baseline_prefetch_unit_vs_copper_with_tables,,,,,BLOCKED: matched overhead requires PASS rows and metric values for both designs.
+ecp5-85k,yosys+nextpnr-ecp5,local_windows,ff_baseline_prefetch_unit_vs_copper_unit,,,,,BLOCKED: matched overhead requires PASS rows and metric values for both designs.
+ecp5-85k,yosys+nextpnr-ecp5,local_windows,ff_baseline_prefetch_unit_vs_copper_with_queue,,,,,BLOCKED: matched overhead requires PASS rows and metric values for both designs.
+ecp5-85k,yosys+nextpnr-ecp5,local_windows,ff_baseline_prefetch_unit_vs_copper_with_tables,,,,,BLOCKED: matched overhead requires PASS rows and metric values for both designs.
+generic,yosys,github_actions,cells_baseline_prefetch_unit_vs_copper_unit,116,428,312,268.965517,"Matched unit-level overhead from the same open-source flow; scope is the prefetch unit, not a full core."
+generic,yosys,github_actions,cells_baseline_prefetch_unit_vs_copper_with_queue,116,822,706,608.620690,"Matched unit-level overhead from the same open-source flow; scope is the prefetch unit, not a full core."
+generic,yosys,github_actions,cells_baseline_prefetch_unit_vs_copper_with_tables,116,3185,3069,2645.689655,"Matched unit-level overhead from the same open-source flow; scope is the prefetch unit, not a full core."
+ice40-hx8k,yosys+nextpnr-ice40,github_actions,lut_baseline_prefetch_unit_vs_copper_unit,43,163,120,279.069767,"Matched unit-level overhead from the same open-source flow; scope is the prefetch unit, not a full core."
+ice40-hx8k,yosys+nextpnr-ice40,github_actions,lut_baseline_prefetch_unit_vs_copper_with_queue,43,333,290,674.418605,"Matched unit-level overhead from the same open-source flow; scope is the prefetch unit, not a full core."
+ice40-hx8k,yosys+nextpnr-ice40,github_actions,lut_baseline_prefetch_unit_vs_copper_with_tables,43,1227,1184,2753.488372,"Matched unit-level overhead from the same open-source flow; scope is the prefetch unit, not a full core."
+ice40-hx8k,yosys+nextpnr-ice40,github_actions,ff_baseline_prefetch_unit_vs_copper_unit,,135,,,BLOCKED: matched overhead requires PASS rows and metric values for both designs.
+ice40-hx8k,yosys+nextpnr-ice40,github_actions,ff_baseline_prefetch_unit_vs_copper_with_queue,,266,,,BLOCKED: matched overhead requires PASS rows and metric values for both designs.
+ice40-hx8k,yosys+nextpnr-ice40,github_actions,ff_baseline_prefetch_unit_vs_copper_with_tables,,1048,,,BLOCKED: matched overhead requires PASS rows and metric values for both designs.
+ecp5-85k,yosys+nextpnr-ecp5,github_actions,lut_baseline_prefetch_unit_vs_copper_unit,1,561,560,56000.000000,"Matched unit-level overhead from the same open-source flow; scope is the prefetch unit, not a full core."
+ecp5-85k,yosys+nextpnr-ecp5,github_actions,lut_baseline_prefetch_unit_vs_copper_with_queue,1,765,764,76400.000000,"Matched unit-level overhead from the same open-source flow; scope is the prefetch unit, not a full core."
+ecp5-85k,yosys+nextpnr-ecp5,github_actions,lut_baseline_prefetch_unit_vs_copper_with_tables,1,2563,2562,256200.000000,"Matched unit-level overhead from the same open-source flow; scope is the prefetch unit, not a full core."
+ecp5-85k,yosys+nextpnr-ecp5,github_actions,ff_baseline_prefetch_unit_vs_copper_unit,,135,,,BLOCKED: matched overhead requires PASS rows and metric values for both designs.
+ecp5-85k,yosys+nextpnr-ecp5,github_actions,ff_baseline_prefetch_unit_vs_copper_with_queue,,266,,,BLOCKED: matched overhead requires PASS rows and metric values for both designs.
+ecp5-85k,yosys+nextpnr-ecp5,github_actions,ff_baseline_prefetch_unit_vs_copper_with_tables,,1048,,,BLOCKED: matched overhead requires PASS rows and metric values for both designs.
