@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import csv
 import hashlib
+import subprocess
 import zipfile
 from pathlib import Path
 
@@ -62,6 +63,7 @@ PRIVATE_PATH_PATTERNS = {
     "/c/Users/" + "tyboy",
     "home/" + "tyboy",
 }
+GEM5_SUMMARY_PREFIX = "gem5_arm_ubuntu_fs_"
 ROOT_FILES = {
     "README.md",
     "REPRODUCIBILITY_STATUS.md",
@@ -75,9 +77,38 @@ ROOT_FILES = {
     "AUDIT_REPORT.md",
 }
 
+_TRACKED_PATHS: set[str] | None = None
+
 
 def rel(path: Path) -> str:
     return str(path.relative_to(ROOT)).replace("\\", "/")
+
+
+def tracked_paths() -> set[str]:
+    global _TRACKED_PATHS
+    if _TRACKED_PATHS is not None:
+        return _TRACKED_PATHS
+    try:
+        proc = subprocess.run(
+            ["git", "-C", str(ROOT), "ls-files"],
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.DEVNULL,
+            timeout=20,
+        )
+    except Exception:
+        _TRACKED_PATHS = set()
+        return _TRACKED_PATHS
+    if proc.returncode != 0:
+        _TRACKED_PATHS = set()
+        return _TRACKED_PATHS
+    _TRACKED_PATHS = {line.strip().replace("\\", "/") for line in proc.stdout.splitlines() if line.strip()}
+    return _TRACKED_PATHS
+
+
+def is_tracked(path: Path) -> bool:
+    tracked = tracked_paths()
+    return bool(tracked) and rel(path) in tracked
 
 
 def sha256(path: Path) -> str:
@@ -127,6 +158,13 @@ def should_include(path: Path) -> tuple[bool, str]:
         if any(part.startswith("gem5_") for part in result_parts):
             if len(result_parts) == 1 and path.suffix.lower() == ".csv":
                 return True, "included generated gem5 summary/evidence csv"
+            if (
+                len(result_parts) >= 2
+                and result_parts[0].startswith(GEM5_SUMMARY_PREFIX)
+                and path.name.endswith("_summary.csv")
+                and is_tracked(path)
+            ):
+                return True, "included public tracked gem5 summary input csv"
             return False, "excluded raw gem5 output tree; summaries are included"
         return path.suffix.lower() in INCLUDE_SUFFIXES, "included summary/evidence file"
     if path == ZIP_PATH:
