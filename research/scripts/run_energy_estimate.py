@@ -51,6 +51,8 @@ POWER_INDEX_FIELDS = [
     "fpga_estimate",
     "asic_tool_estimate",
     "postroute_estimate",
+    "physical_layout_present",
+    "parasitics_present",
     "activity_proxy",
     "assumption_proxy",
     "silicon_measured",
@@ -102,6 +104,8 @@ def power_index_row(
     fpga_estimate: bool = False,
     asic_tool_estimate: bool = False,
     postroute_estimate: bool = False,
+    physical_layout_present: bool = False,
+    parasitics_present: bool = False,
     activity_proxy: bool = False,
     assumption_proxy: bool = False,
     silicon_measured: bool = False,
@@ -127,6 +131,8 @@ def power_index_row(
         "fpga_estimate": yn(fpga_estimate),
         "asic_tool_estimate": yn(asic_tool_estimate),
         "postroute_estimate": yn(postroute_estimate),
+        "physical_layout_present": yn(physical_layout_present),
+        "parasitics_present": yn(parasitics_present),
         "activity_proxy": yn(activity_proxy),
         "assumption_proxy": yn(assumption_proxy),
         "silicon_measured": yn(silicon_measured),
@@ -257,6 +263,13 @@ def asic_liberty_power_evidence() -> dict[str, str] | None:
 
 
 def openroad_postroute_power_evidence() -> dict[str, str] | None:
+    def physical_artifacts_present(row: dict[str, str]) -> bool:
+        required = ("final_report_json_path", "final_def_path", "final_spef_path", "final_netlist_path")
+        # Legacy rows did not expose these columns, so keep old artifacts readable.
+        if not any(row.get(field, "") for field in required):
+            return True
+        return all(row.get(field, "") and (ROOT / row.get(field, "")).exists() for field in required)
+
     rows = [
         row
         for row in read_csv(OPENROAD_POSTROUTE_POWER)
@@ -265,6 +278,7 @@ def openroad_postroute_power_evidence() -> dict[str, str] | None:
         and positive_float(row.get("total_power_mw", ""))
         and row.get("report_path")
         and (ROOT / row.get("report_path", "")).exists()
+        and physical_artifacts_present(row)
     ]
     by_design = {row.get("design", ""): row for row in rows}
     if not {"baseline_core_wrapper", "core_wrapper_plus_copper"}.issubset(by_design):
@@ -285,6 +299,9 @@ def openroad_postroute_power_evidence() -> dict[str, str] | None:
         f"{row.get('design', '')} total_power_mw={row.get('total_power_mw', '')}"
         for row in rows[:4]
     )
+    physical_note = ""
+    if first.get("final_spef_path"):
+        physical_note = " Final DEF/SPEF/netlist/report JSON artifacts are indexed for the matched rows."
     return {
         "source": rel(OPENROAD_POSTROUTE_POWER),
         "report_path": first.get("report_path", ""),
@@ -293,10 +310,13 @@ def openroad_postroute_power_evidence() -> dict[str, str] | None:
         "scope": first.get("scope", "core_wrapper"),
         "baseline_design": "baseline_core_wrapper",
         "copper_design": "core_wrapper_plus_copper",
+        "physical_layout_present": first.get("physical_artifacts", "no"),
+        "parasitics_present": first.get("parasitics_present", "no"),
         "notes": (
             f"OpenROAD post-route tool-estimate rows found: {designs}. "
             "This is an OpenROAD-flow-scripts Nangate45 post-route estimate, "
             "not silicon measurement, not foundry signoff, and not full-core power."
+            f"{physical_note}"
         ),
     }
 
@@ -351,6 +371,8 @@ def write_power_index(proxy_status: str) -> None:
                 tool_report_power=bool(openroad_postroute),
                 asic_tool_estimate=bool(openroad_postroute),
                 postroute_estimate=bool(openroad_postroute),
+                physical_layout_present=openroad_postroute.get("physical_layout_present") == "yes" if openroad_postroute else False,
+                parasitics_present=openroad_postroute.get("parasitics_present") == "yes" if openroad_postroute else False,
                 notes=openroad_postroute["notes"]
                 if openroad_postroute
                 else (

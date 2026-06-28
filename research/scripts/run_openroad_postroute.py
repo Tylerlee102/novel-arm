@@ -86,6 +86,13 @@ FIELDS = [
     "leakage_power_mw",
     "total_power_mw",
     "report_path",
+    "final_report_json_path",
+    "final_def_path",
+    "final_spef_path",
+    "final_netlist_path",
+    "route_drc_path",
+    "physical_artifacts",
+    "parasitics_present",
     "orfs_ref",
     "notes",
 ]
@@ -236,6 +243,13 @@ def blank_row(design: Design, status: str, report_path: Path, notes: str) -> dic
         "leakage_power_mw": "NA",
         "total_power_mw": "NA",
         "report_path": rel(report_path),
+        "final_report_json_path": "",
+        "final_def_path": "",
+        "final_spef_path": "",
+        "final_netlist_path": "",
+        "route_drc_path": "",
+        "physical_artifacts": "no",
+        "parasitics_present": "no",
         "orfs_ref": ORFS_REF,
         "notes": notes,
     }
@@ -351,7 +365,21 @@ def copy_if_exists(src: Path, dst: Path) -> None:
         dst.write_bytes(src.read_bytes())
 
 
-def copy_evidence(work_home: Path, design: Design, config: Path, evidence_dir: Path, make_output: str) -> tuple[Path, str]:
+def copied_physical_paths(evidence_dir: Path) -> dict[str, Path]:
+    return {
+        "final_report_json_path": evidence_dir / "base" / "6_report.json",
+        "final_def_path": evidence_dir / "results" / "6_final.def",
+        "final_spef_path": evidence_dir / "results" / "6_final.spef",
+        "final_netlist_path": evidence_dir / "results" / "6_final.v",
+        "route_drc_path": evidence_dir / "base" / "5_route_drc.rpt",
+    }
+
+
+def existing_rel(path: Path) -> str:
+    return rel(path) if path.exists() else ""
+
+
+def copy_evidence(work_home: Path, design: Design, config: Path, evidence_dir: Path, make_output: str) -> tuple[Path, str, dict[str, Path]]:
     design_dir = Path("nangate45") / design.name / "base"
     reports = work_home / "reports" / design_dir
     logs = work_home / "logs" / design_dir
@@ -370,7 +398,7 @@ def copy_evidence(work_home: Path, design: Design, config: Path, evidence_dir: P
     text_paths = [evidence_dir / "orfs_make.log"]
     text_paths.extend(sorted(evidence_dir.rglob("*.rpt")))
     text_paths.extend(sorted(evidence_dir.rglob("*.log")))
-    return evidence_dir / "orfs_make.log", collect_text(text_paths)
+    return evidence_dir / "orfs_make.log", collect_text(text_paths), copied_physical_paths(evidence_dir)
 
 
 def parse_first_float(patterns: tuple[str, ...], text: str) -> str:
@@ -478,7 +506,7 @@ def parse_json_metrics(report_path: Path) -> dict[str, str]:
     return {key: value for key, value in out.items() if value != "NA"}
 
 
-def parse_design(design: Design, code: int, report_path: Path, text: str) -> dict[str, str]:
+def parse_design(design: Design, code: int, report_path: Path, text: str, physical_paths: dict[str, Path]) -> dict[str, str]:
     internal, switching, leakage, total = parse_power(text)
     wns = parse_first_float((r"wns\s+(-?[0-9.]+)", r"worst slack\s+(-?[0-9.]+)"), text)
     if wns == "NA":
@@ -511,18 +539,34 @@ def parse_design(design: Design, code: int, report_path: Path, text: str) -> dic
     leakage = json_metrics.get("leakage_power_mw", leakage)
     total = json_metrics.get("total_power_mw", total)
     flow_errors = json_metrics.get("flow_errors", "0")
-    status = "PASS" if code == 0 and flow_errors == "0" and total != "NA" and (wns != "NA" or tns != "NA" or fmax != "NA") else "FAIL"
+    physical_required = ("final_report_json_path", "final_def_path", "final_spef_path", "final_netlist_path")
+    physical_artifacts = all((path := physical_paths.get(name)) is not None and path.exists() for name in physical_required)
+    spef_path = physical_paths.get("final_spef_path")
+    parasitics_present = spef_path is not None and spef_path.exists()
+    status = (
+        "PASS"
+        if code == 0
+        and flow_errors == "0"
+        and total != "NA"
+        and (wns != "NA" or tns != "NA" or fmax != "NA")
+        and physical_artifacts
+        else "FAIL"
+    )
     notes = (
         "OpenROAD-flow-scripts route plus final timing/power reports completed for PicoRV32 core_wrapper; "
         f"clock_period_ns={CLOCK_PERIOD_NS}; core_utilization={CORE_UTILIZATION}; "
         f"place_density={PLACE_DENSITY}; ORFS ref={ORFS_REF}. This is post-route "
         "OpenROAD/Nangate45 tool-estimated power/timing, not silicon measurement, "
         "not foundry signoff, and not full-core power. fmax_mhz is inferred from "
-        "reported worst setup slack and the configured clock period. GDS/image export "
-        "is not required for this row."
+        "reported worst setup slack and the configured clock period. Final DEF, SPEF, "
+        "netlist, report JSON, and route DRC artifacts are copied into the evidence "
+        "directory when present; this is stronger physical provenance but still not "
+        "foundry signoff."
     )
     if status == "FAIL":
-        notes = "FAIL: OpenROAD-flow-scripts did not complete route/final report or did not emit parseable timing and power."
+        missing = [name for name in physical_required if (path := physical_paths.get(name)) is None or not path.exists()]
+        suffix = f" Missing physical artifact(s): {', '.join(missing)}." if missing else ""
+        notes = "FAIL: OpenROAD-flow-scripts did not complete route/final report or did not emit parseable timing, power, and physical artifacts." + suffix
     return {
         "design": design.name,
         "target": "nangate45",
@@ -542,6 +586,13 @@ def parse_design(design: Design, code: int, report_path: Path, text: str) -> dic
         "leakage_power_mw": leakage,
         "total_power_mw": total,
         "report_path": rel(report_path),
+        "final_report_json_path": existing_rel(physical_paths["final_report_json_path"]),
+        "final_def_path": existing_rel(physical_paths["final_def_path"]),
+        "final_spef_path": existing_rel(physical_paths["final_spef_path"]),
+        "final_netlist_path": existing_rel(physical_paths["final_netlist_path"]),
+        "route_drc_path": existing_rel(physical_paths["route_drc_path"]),
+        "physical_artifacts": "yes" if physical_artifacts else "no",
+        "parasitics_present": "yes" if parasitics_present else "no",
         "orfs_ref": ORFS_REF,
         "notes": notes,
     }
@@ -575,8 +626,8 @@ def run_design(design: Design, flow_home: Path, temp_root: Path) -> dict[str, st
             timeout=900,
         )
     combined = route_output + "\n" + finish_output
-    report_path, text = copy_evidence(work_home, design, config, LOG_DIR / design.name, combined)
-    return parse_design(design, route_code, report_path, text)
+    report_path, text, physical_paths = copy_evidence(work_home, design, config, LOG_DIR / design.name, combined)
+    return parse_design(design, route_code, report_path, text, physical_paths)
 
 
 def numeric(value: str) -> float | None:

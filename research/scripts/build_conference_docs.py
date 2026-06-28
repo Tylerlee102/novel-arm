@@ -340,6 +340,8 @@ def power_index_pass(evidence_level: str) -> bool:
             legacy_or_true(row, "tool_report_power")
             and legacy_or_true(row, "asic_tool_estimate")
             and legacy_or_true(row, "postroute_estimate")
+            and legacy_or_true(row, "physical_layout_present")
+            and legacy_or_true(row, "parasitics_present")
             for row in rows
         )
     if evidence_level == "asic_liberty_tool_estimate":
@@ -390,7 +392,7 @@ def energy_evidence_levels() -> str:
 
 def energy_claim_caveat() -> str:
     if power_index_pass("openroad_postroute_tool_estimate"):
-        return "OpenROAD post-route power is a Nangate45 tool estimate with OpenROAD-flow-scripts reports; do not call it silicon measurement, foundry signoff, or full-core power."
+        return "OpenROAD post-route power is a Nangate45 tool estimate with OpenROAD-flow-scripts reports and indexed final DEF/SPEF/netlist artifacts; do not call it silicon measurement, foundry signoff, or full-core power."
     if power_index_pass("asic_liberty_tool_estimate"):
         return "ASIC Liberty power is a Nangate45 standard-cell tool estimate; do not call it silicon measurement, post-route signoff with extracted parasitics, or full-core power."
     if power_index_pass("fpga_tool_estimate") or power_index_pass("measured_tool_power"):
@@ -609,7 +611,7 @@ Generated evidence lives under `research/results`. The new conference-facing gen
 
 ## Evidence
 
-Evidence used by the paper and dashboard comes from generated CSVs and explicit logs. Gem5 rows are promoted only from public tracked summaries that pass `gem5_validation.csv`: a no-prefetch baseline, a COPPER-family row, matching checksums, clean return codes, and positive tick counts; `gem5_statistical_summary.csv` is derived only from those promoted rows and marks single-sample statistics explicitly. The package includes the tracked `gem5_arm_ubuntu_fs_*/*_summary.csv` input files used by that validation ledger. `gem5_raw_rerun_manifest.csv` records local raw full-system rows with retained stats and terminal logs for the `cachesvc_codex_raw_smoke`, `zlib_codex_raw_zlib_tiny`, `zlib_codex_raw_zlib_tiny_seed12`, and `zstd_zstd_*` summaries; `gem5_raw_rerun_statistical_summary.csv` reports raw-only repeated statistics where those rerun rows have multiple samples. The current gem5 rows span multiple ARM-system benchmark families, but only the rows in `gem5_raw_rerun_manifest.csv` have retained local raw stats/terminal provenance in this workspace; the rest remain validated summaries. OpenROAD post-route rows are tool estimates only when OpenROAD-flow-scripts emits real route/final reports; ASIC Liberty rows are standard-cell tool estimates only when OpenSTA/OpenROAD emits a real report; Vivado report_power rows are FPGA tool estimates. None should be called measured silicon or full-core signoff power. Paper claims are controlled by `research/COPPER_CLAIM_LEDGER.md`.
+Evidence used by the paper and dashboard comes from generated CSVs and explicit logs. Gem5 rows are promoted only from public tracked summaries that pass `gem5_validation.csv`: a no-prefetch baseline, a COPPER-family row, matching checksums, clean return codes, and positive tick counts; `gem5_statistical_summary.csv` is derived only from those promoted rows and marks single-sample statistics explicitly. The package includes the tracked `gem5_arm_ubuntu_fs_*/*_summary.csv` input files used by that validation ledger. `gem5_raw_rerun_manifest.csv` records local raw full-system rows with retained stats and terminal logs for the `cachesvc_codex_raw_smoke`, `zlib_codex_raw_zlib_tiny`, `zlib_codex_raw_zlib_tiny_seed12`, and `zstd_zstd_*` summaries; `gem5_raw_rerun_statistical_summary.csv` reports raw-only repeated statistics where those rerun rows have multiple samples. The current gem5 rows span multiple ARM-system benchmark families, but only the rows in `gem5_raw_rerun_manifest.csv` have retained local raw stats/terminal provenance in this workspace; the rest remain validated summaries. OpenROAD post-route rows are tool estimates only when OpenROAD-flow-scripts emits real route/final reports and, for current-schema rows, indexed final DEF/SPEF/netlist/report JSON artifacts; ASIC Liberty rows are standard-cell tool estimates only when OpenSTA/OpenROAD emits a real report; Vivado report_power rows are FPGA tool estimates. None should be called measured silicon or full-core signoff power. Paper claims are controlled by `research/COPPER_CLAIM_LEDGER.md`.
 
 ## Old Or Local-Only
 
@@ -962,7 +964,7 @@ Evidence & Scope & File \\
 \hline
 Memory traffic proxy & assumption-based, not measured & energy\_proxy.csv \\
 ASIC Liberty tool-power index & Nangate45 standard-cell estimate when indexed PASS & asic\_power.csv; power\_report\_index.csv \\
-OpenROAD post-route power index & Nangate45 post-route tool estimate when indexed PASS & openroad\_postroute\_power.csv; power\_report\_index.csv \\
+OpenROAD post-route power index & Nangate45 post-route tool estimate with indexed final DEF/SPEF/netlist when PASS & openroad\_postroute\_power.csv; power\_report\_index.csv \\
 FPGA tool-power index & Vivado FPGA tool estimate when indexed PASS & power\_report\_index.csv; mapped\_ppa.csv \\
 Activity proxy & McPAT proxy when indexed PASS & power\_report\_index.csv; copper\_mcpat\_sensitivity\_20260618.csv \\
 Summary & proxy overhead statistics & energy\_summary.csv \\
@@ -970,7 +972,7 @@ Summary & proxy overhead statistics & energy\_summary.csv \\
 \end{tabular}
 \end{table}
 
-Energy rows use explicit assumptions recorded in \texttt{energy\_proxy.csv}. When \texttt{power\_report\_index.csv} marks \texttt{openroad\_postroute\_tool\_estimate} PASS, the row is a Nangate45 OpenROAD-flow-scripts post-route estimate, not silicon measurement or foundry signoff. When \texttt{asic\_liberty\_tool\_estimate} is PASS, the row is a Nangate45 standard-cell Liberty estimate from OpenSTA/OpenROAD, not silicon measurement or post-route signoff with extracted parasitics. When \texttt{fpga\_tool\_estimate} is PASS, the row is Vivado \texttt{report\_power} for the mapped FPGA target, not silicon or ASIC signoff. When \texttt{proxy\_activity} is PASS, the activity proxy is the fixed-architecture McPAT sensitivity run driven by measured gem5 ROI counters. This supports scoped tool-power and proxy/model energy discussion, not full-core, foundry-signoff, or silicon power-efficiency claims.
+Energy rows use explicit assumptions recorded in \texttt{energy\_proxy.csv}. When \texttt{power\_report\_index.csv} marks \texttt{openroad\_postroute\_tool\_estimate} PASS, the row is a Nangate45 OpenROAD-flow-scripts post-route estimate with indexed final DEF/SPEF/netlist artifacts, not silicon measurement or foundry signoff. When \texttt{asic\_liberty\_tool\_estimate} is PASS, the row is a Nangate45 standard-cell Liberty estimate from OpenSTA/OpenROAD, not silicon measurement or post-route signoff with extracted parasitics. When \texttt{fpga\_tool\_estimate} is PASS, the row is Vivado \texttt{report\_power} for the mapped FPGA target, not silicon or ASIC signoff. When \texttt{proxy\_activity} is PASS, the activity proxy is the fixed-architecture McPAT sensitivity run driven by measured gem5 ROI counters. This supports scoped tool-power and proxy/model energy discussion, not full-core, foundry-signoff, or silicon power-efficiency claims.
 
 \section{Limitations}
 \begin{table}[t]
