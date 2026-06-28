@@ -1,6 +1,6 @@
 path,size_bytes,sha256,included,package_path,notes
 .devcontainer/devcontainer.json,441,ec95ce2d3ceb9960e9ab9a85a60ae90d8dc7b3a62556e100a15ac8b462481ae7,yes,.devcontainer/devcontainer.json,included source or reviewer file
-.github/workflows/reproduce.yml,4880,294189869a379f4cc997e3939750d883d4169a687a852cd06708c70049b0f648,yes,.github/workflows/reproduce.yml,included source or reviewer file
+.github/workflows/reproduce.yml,6421,f980c2e9ab8d2fd636ec8706967f1d25e394a87b11769d0e3591b442cdcc0870,yes,.github/workflows/reproduce.yml,included source or reviewer file
 AUDIT.md,7027,9f18873f486060d353da88ca91a8427955186fbc47f409a2e4ec58f07f662cf9,yes,AUDIT.md,included source or reviewer file
 AUDIT_REPORT.md,9681,a498ce507a1bc1ce8436e89895009c428e66481241a61fa1539c5bfe39f1e34d,yes,AUDIT_REPORT.md,included source or reviewer file
 Dockerfile,1396,4dcbf5293fefc0106dd8f5aaf92dffcf6b8800cc6733892f6214788431b0d9dd,yes,Dockerfile,included source or reviewer file
@@ -27,11 +27,11 @@ external/picorv32/COPYING,792,469f6264d9c56452736ade78938592c520fff2fd9f2d29b067
 external/picorv32/picorv32.v,97706,fd142889e8178ef67f1cff17cb2d18b3adae56fcae2badf7cbcc4c4f5ac7960e,yes,external/picorv32/picorv32.v,included minimal PicoRV32 source/license file
 external/picorv32/README.md,31025,1c3aa9f5de9e713f284108ce170cd8fcb89f281b2b9544529a77a3dd48daf39c,yes,external/picorv32/README.md,included minimal PicoRV32 source/license file
 Makefile,2033,34bbf688ca09b685e509a1369c092d1eb6c25cfb9cd4651cd05ad9584966a77e,yes,Makefile,included source or reviewer file
-README.md,5605,088580a011976864458dbfea8ea54abb91d09f2046906fd46f1a2797b3162679,yes,README.md,included source or reviewer file
+README.md,5665,9ca5d897841936cded39574858ee5f36ee047ac4369b4d92b2b165c0cbf8926f,yes,README.md,included source or reviewer file
 reproduce.ps1,967,eff68e79cdc1cf85e7d9f4903e7409418d3e59d0bdcc172e4a6d60bd0c1a9b1d,yes,reproduce.ps1,included source or reviewer file
 reproduce.py,10603,9fbdf605b17da202a692801d521be204168a521952ce2d10b3aec8e72beef28d,yes,reproduce.py,included source or reviewer file
 reproduce.sh,330,e88875bb21f1637d4701689487ec70877dc0076a511cbb2f6e72fa6701c0eee0,yes,reproduce.sh,included source or reviewer file
-REPRODUCIBILITY_STATUS.md,6823,f3bf60d96e4f3bb22e30bc98c5dd2da95bfd596071439b66f12e0f56dac21200,yes,REPRODUCIBILITY_STATUS.md,included source or reviewer file
+REPRODUCIBILITY_STATUS.md,6850,494040937169dfdef2fb0439ca8ba53319d3d5e8ceeb5d44777067fb467607c5,yes,REPRODUCIBILITY_STATUS.md,included source or reviewer file
 requirements.txt,312,8df7b6b0f162b144707c20956493509edd0dc42bb5239fa75122035c8422561f,yes,requirements.txt,included source or reviewer file
 research/__pycache__/analyze_copper_dram_energy_scorecard.cpython-312.pyc,14167,,no,,excluded scratch/private/build directory
 research/__pycache__/analyze_copper_energy_pollution_scorecard.cpython-312.pyc,24570,,no,,excluded scratch/private/build directory
@@ -433,7 +433,7 @@ research/copper_authority_state_space.py,10586,a75f2c66ebf37f1a07403efc059056842
 research/copper_cavi_authority_issue_gate.sv,9763,8a32c7539e431792fdda0afd022e77d960bb3c6f3a25e31530a7467327a4efaa,yes,research/copper_cavi_authority_issue_gate.sv,included source or reviewer file
 research/copper_cavi_authority_issue_gate_tb.sv,21023,b8ad75546148481154503dbaf2556ce8e63aa585a6c16d273636b702b1022bec,yes,research/copper_cavi_authority_issue_gate_tb.sv,included source or reviewer file
 research/copper_cepf_line_e2e_sva_tb.sv,20115,2c19cbcfa95e29a5e5f1786591944b2e93320c618eab10a8bd26afda898bb3cc,yes,research/copper_cepf_line_e2e_sva_tb.sv,included source or reviewer file
-research/COPPER_CLAIM_LEDGER.md,6653,75e20c3df4ec1f66010d15b3df6c3c5bc56c64b6e5905c3950da9a89cd81684d,yes,research/COPPER_CLAIM_LEDGER.md,included source or reviewer file
+research/COPPER_CLAIM_LEDGER.md,6785,44f2ffc979642c0958f8ae565418721ebe071eab76ef7c712973754b58af7acb,yes,research/COPPER_CLAIM_LEDGER.md,included source or reviewer file
 research/copper_clpd_constraints.xdc,44,,no,,suffix not included
 research/copper_clpd_ctlw_authority_e2e_tb.sv,25956,175c323f1c22abc92c62d6f28ff4460cd0d97574de0bf5ae55520923a1f13a3b,yes,research/copper_clpd_ctlw_authority_e2e_tb.sv,included source or reviewer file
 research/copper_clpd_gate.sv,6531,971acb8bbf013fbe1b148624d8b68623c1e1b781c391fde3d25364f1bdba8a30,yes,research/copper_clpd_gate.sv,included source or reviewer file
@@ -473,8 +473,8 @@ research/COPPER_DOCX_QA.md,13190,c0110d089e5afda8beeb592f991e6386135d7f1369f7ef0
 research/COPPER_ENVIRONMENT_ARTIFACT_MANIFEST_20260619.md,5389,,no,,excluded local-only file containing a private absolute path
 research/copper_final_eval.py,13907,1279787e97eca6456355cd43e3c8c7b86fc8959953bde4f8679d1b0d65875550,yes,research/copper_final_eval.py,included source or reviewer file
 research/COPPER_FINAL_OUTPUT.md,105697,77837d2061122ffa81dc01d5a9129071a45b4dee8f868bdf8dc02638289830a4,yes,research/COPPER_FINAL_OUTPUT.md,included source or reviewer file
-research/COPPER_FINAL_REVIEWER_REPORT.md,5989,ff997993a2422b216cc0360d946b477bccc4ec61300417acd0e5a34a60b76d0f,yes,research/COPPER_FINAL_REVIEWER_REPORT.md,included source or reviewer file
-research/COPPER_FINAL_SUBMISSION_BLOCKERS.md,2396,28297c4b5e15a3c464b5a9ca43a2c43507f66f3124579bb81c5995b8f7b48eae,yes,research/COPPER_FINAL_SUBMISSION_BLOCKERS.md,included source or reviewer file
+research/COPPER_FINAL_REVIEWER_REPORT.md,6272,e7e92750a88845f8772e4fab16234eecf3337f169d54391984cd79b109cfb8eb,yes,research/COPPER_FINAL_REVIEWER_REPORT.md,included source or reviewer file
+research/COPPER_FINAL_SUBMISSION_BLOCKERS.md,2629,b588b794d8e5b4c7612184a8bebf7b751a44cef1d4d63915caac5f8f1ada391a,yes,research/COPPER_FINAL_SUBMISSION_BLOCKERS.md,included source or reviewer file
 research/COPPER_FREE_RUN_RESULTS.md,32147,,no,,excluded local-only file containing a private absolute path
 research/copper_full_authority_constraints.xdc,58,,no,,suffix not included
 research/copper_full_authority_gate.sv,4129,4758407ffa1cd484ee7cb78ae11e3dfcd8851fb8b00ee7383b9d341172b6a945,yes,research/copper_full_authority_gate.sv,included source or reviewer file
@@ -578,7 +578,7 @@ research/olden_compat/olden_random_alloc.c,672,c50fa66bdebe72782434ffc6c815f17ed
 research/olden_compat/olden_runtime_compat.c,998,bfe5f5b7b4f4a84ebe8a7d4eb9285f62fd1ddff043173523dc1dede7ef6fc9c8,yes,research/olden_compat/olden_runtime_compat.c,included source or reviewer file
 research/openssl_cli_tls_pair_guest.sh,1901,908f19955a4d744237fcc8565a56a0363052a3df84cc07ba01cb442cf4f7040c,yes,research/openssl_cli_tls_pair_guest.sh,included source or reviewer file
 research/openssl_guest_probe.sh,207,bd17320d4a32b19e29703bd4c71f3e7e0fa914277a6156793e97795ecc455b3c,yes,research/openssl_guest_probe.sh,included source or reviewer file
-research/paper/main.tex,14641,ae90ecab8db17c72edb9b14c0c9ee0aaf7da2d6e49b6f1777af122b84bd47f3f,yes,research/paper/main.tex,included source or reviewer file
+research/paper/main.tex,14705,6347ec4611d5aba30a5b1303f000e022fb273742a8647bdb98682cc8ddc161e3,yes,research/paper/main.tex,included source or reviewer file
 research/paper/references.bib,1227,4fc7f4263c3bf76759a6b6d90721c295054fc9bce70ac3f67b497dc0433f3784,yes,research/paper/references.bib,included source or reviewer file
 research/plot_copper_app_full_baseline_runtime.py,6449,55f542c872c48b0ba545599616744558f3d9e266c8badded676b3fcab1ea4fb6,yes,research/plot_copper_app_full_baseline_runtime.py,included source or reviewer file
 research/plot_copper_app_overhead_figures.py,11904,5d516fe4767370a8df2f47d461fca8c15d34781a7eabeec1dd57b08ddde82287,yes,research/plot_copper_app_overhead_figures.py,included source or reviewer file
@@ -590,7 +590,10 @@ research/results/aarch64_gapbs_mini_suite_fs.s,24111,,no,,included summary/evide
 research/results/aarch64_gapbs_mini_suite_fs_small.s,20597,,no,,included summary/evidence file
 research/results/ablation.csv,11431,5121591a6b88d9308f397ca6444f1d32704bcd3c30b36aee5a0aa0ddf3d01ccd,yes,research/results/ablation.csv,included summary/evidence file
 research/results/artifact_inventory.csv,3516265,4e7decc65259bd44e62bf70262d33f24c7a584162008115eef85bc22e8d3c86d,yes,research/results/artifact_inventory.csv,included summary/evidence file
-research/results/artifact_manifest.csv,1889739,e9e22399b3925528a6fbdb77db9a10ba416c3e4a0686fc8dffcd08ec7b4febaf,yes,research/results/artifact_manifest.csv,included summary/evidence file
+research/results/artifact_manifest.csv,1889737,24fb95237f07381f245a360d591ab33aafbb9597d9a41a6999b30de568d72394,yes,research/results/artifact_manifest.csv,included summary/evidence file
+research/results/asic_power/core_wrapper_plus_copper/core_wrapper_plus_copper_nangate45.v,1337348,629c8890e3d747905c83c7945261b954e58646df7af3bcf5e1a08068cf67090e,yes,research/results/asic_power/core_wrapper_plus_copper/core_wrapper_plus_copper_nangate45.v,included summary/evidence file
+research/results/asic_power/core_wrapper_plus_copper/sta_power.tcl,506,,no,,excluded local-only file containing a private absolute path
+research/results/asic_power/nangate45/NangateOpenCellLibrary_typical.lib,6692032,,no,,included summary/evidence file
 research/results/asic_power.csv,1265,b93496d9aabff57e3bc547bae8b0266bcb25bc4bf6a5dd980895bbcee3dac0d7,yes,research/results/asic_power.csv,included summary/evidence file
 research/results/asic_power_overhead.csv,247,ef3a0395aaa0083553223bcdd67a622e2142f384d312c65d4213008faf643c48,yes,research/results/asic_power_overhead.csv,included summary/evidence file
 research/results/authority_regression/run_copper_cepf_line_e2e_xsim.log,5176,de1284fdcb7e889420f17bd87bd155f27672cade11d139de745bcc2a81497b70,yes,research/results/authority_regression/run_copper_cepf_line_e2e_xsim.log,included summary/evidence file
@@ -10821,6 +10824,7 @@ research/results/libarchive_tar_workload_build/LIBARCHIVE_TAR_WORKLOAD_BUILD.md,
 research/results/libxml2_xml_workload_build/build.log,0,e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855,yes,research/results/libxml2_xml_workload_build/build.log,included summary/evidence file
 research/results/libxml2_xml_workload_build/LIBXML2_XML_WORKLOAD_BUILD.md,1330,,no,,excluded local-only file containing a private absolute path
 research/results/logs/asic_power/asic_power_availability.log,109,1d311a07d88a0c09f01560286fc9b841309b79d6746608125b0860574bb23370,yes,research/results/logs/asic_power/asic_power_availability.log,included summary/evidence file
+research/results/logs/asic_power/core_wrapper_plus_copper.log,332372,b412786e8330fe6f48604464bfc36bc430f49ece482df8a96d29e429973b1221,yes,research/results/logs/asic_power/core_wrapper_plus_copper.log,included summary/evidence file
 research/results/logs/ci/gh_unavailable.log,327,90e471031a78146461a63f200a30ff3b095747e2e14c2380870199ee8e4598dd,yes,research/results/logs/ci/gh_unavailable.log,included summary/evidence file
 research/results/logs/ci/web_ui_trigger_ready.log,344,af28d6361d458932b15c08ff75ea4f14689f0920624a621eeb3cd1b425361a58,yes,research/results/logs/ci/web_ui_trigger_ready.log,included summary/evidence file
 research/results/logs/core_integrated/core_integrated_eval.jsonl,399686,,no,,included summary/evidence file
@@ -11603,7 +11607,7 @@ research/run_yyjson_app_fs.sh,2602,,no,,excluded local-only file containing a pr
 research/run_zlib_app_fs.sh,2166,,no,,excluded local-only file containing a private absolute path
 research/run_zstd_app_fs.sh,2166,,no,,excluded local-only file containing a private absolute path
 research/scoop_companion_state_space.py,4243,6e6aa03dc7cfd08cc7481603a578ac544b38c7a5d3678d106cb1d4c74db327b2,yes,research/scoop_companion_state_space.py,included source or reviewer file
-research/scripts/__pycache__/build_conference_docs.cpython-312.pyc,71621,,no,,excluded scratch/private/build directory
+research/scripts/__pycache__/build_conference_docs.cpython-312.pyc,83520,,no,,excluded scratch/private/build directory
 research/scripts/__pycache__/build_paper.cpython-312.pyc,9297,,no,,excluded scratch/private/build directory
 research/scripts/__pycache__/build_workloads.cpython-312.pyc,9160,,no,,excluded scratch/private/build directory
 research/scripts/__pycache__/check_toolchain.cpython-312.pyc,8873,,no,,excluded scratch/private/build directory
@@ -11611,17 +11615,18 @@ research/scripts/__pycache__/copper_eval_model.cpython-311.pyc,28557,,no,,exclud
 research/scripts/__pycache__/copper_eval_model.cpython-312.pyc,24440,,no,,excluded scratch/private/build directory
 research/scripts/__pycache__/import_ci_artifacts.cpython-312.pyc,24848,,no,,excluded scratch/private/build directory
 research/scripts/__pycache__/package_artifact.cpython-312.pyc,8428,,no,,excluded scratch/private/build directory
+research/scripts/__pycache__/run_asic_power.cpython-312.pyc,27313,,no,,excluded scratch/private/build directory
 research/scripts/__pycache__/run_core_eval.cpython-312.pyc,13969,,no,,excluded scratch/private/build directory
 research/scripts/__pycache__/run_cycle_eval.cpython-312.pyc,18368,,no,,excluded scratch/private/build directory
-research/scripts/__pycache__/run_energy_estimate.cpython-312.pyc,10839,,no,,excluded scratch/private/build directory
+research/scripts/__pycache__/run_energy_estimate.cpython-312.pyc,16499,,no,,excluded scratch/private/build directory
 research/scripts/__pycache__/run_evaluation.cpython-312.pyc,16951,,no,,excluded scratch/private/build directory
-research/scripts/__pycache__/run_fullcore_synthesis.cpython-312.pyc,12971,,no,,excluded scratch/private/build directory
-research/scripts/__pycache__/run_gem5_eval.cpython-312.pyc,6692,,no,,excluded scratch/private/build directory
+research/scripts/__pycache__/run_fullcore_synthesis.cpython-312.pyc,17289,,no,,excluded scratch/private/build directory
+research/scripts/__pycache__/run_gem5_eval.cpython-312.pyc,23558,,no,,excluded scratch/private/build directory
 research/scripts/__pycache__/run_independent_sim_eval.cpython-312.pyc,32057,,no,,excluded scratch/private/build directory
-research/scripts/__pycache__/run_mapped_ppa.cpython-312.pyc,31333,,no,,excluded scratch/private/build directory
+research/scripts/__pycache__/run_mapped_ppa.cpython-312.pyc,40023,,no,,excluded scratch/private/build directory
 research/scripts/__pycache__/run_model_tests.cpython-312.pyc,7831,,no,,excluded scratch/private/build directory
 research/scripts/__pycache__/run_rtl.cpython-312.pyc,14525,,no,,excluded scratch/private/build directory
-research/scripts/__pycache__/run_synthesis.cpython-312.pyc,22972,,no,,excluded scratch/private/build directory
+research/scripts/__pycache__/run_synthesis.cpython-312.pyc,25754,,no,,excluded scratch/private/build directory
 research/scripts/audit_claims.py,1641,cb359de924e64d38c1a5ab31e7b45f95169eff2951c17b6dcc94c075b579d0a8,yes,research/scripts/audit_claims.py,included source or reviewer file
 research/scripts/audit_numbers.py,1886,c17b5ec19c7255bab03f932a98a8508a374b88329ce65a9d5896562a3d3af7e0,yes,research/scripts/audit_numbers.py,included source or reviewer file
 research/scripts/audit_todos.py,1221,4ee4563c9dc961dd4493690e904dbb2863357374976c6530a6df972b313e748e,yes,research/scripts/audit_todos.py,included source or reviewer file
@@ -11632,7 +11637,7 @@ research/scripts/check_toolchain.py,6271,45a47f5a8bbd509fa32990a30be33732ab56b8f
 research/scripts/copper_eval_model.py,16546,09fdd920664a1d995418f40ab2d1b5b4f292d3e1ca2fa0bb16e305e52809d1cb,yes,research/scripts/copper_eval_model.py,included source or reviewer file
 research/scripts/import_ci_artifacts.py,17739,1baa00bc967afadd62235e245942d391d8bfaffbc983dd816ddf29a8006c5566,yes,research/scripts/import_ci_artifacts.py,included source or reviewer file
 research/scripts/package_artifact.py,5824,045394e11d2ebc0e024e35872e9873a7af71eade167c5ee601a485fc495091b6,yes,research/scripts/package_artifact.py,included source or reviewer file
-research/scripts/run_asic_power.py,16621,,no,,excluded local-only file containing a private absolute path
+research/scripts/run_asic_power.py,18380,,no,,excluded local-only file containing a private absolute path
 research/scripts/run_core_eval.py,12180,62e50395eaf25c34ee4478a8eb9ce70e4388e89c5ce4d409f38590bcff708532,yes,research/scripts/run_core_eval.py,included source or reviewer file
 research/scripts/run_cycle_eval.py,16586,aaaa54e74f43f1c77cb1ffa832d9e3fbaf2f7aaebfe1096646b6e1214df6750e,yes,research/scripts/run_cycle_eval.py,included source or reviewer file
 research/scripts/run_energy_estimate.py,15439,2910dd13c304f9a68bed8ae79c04abdc6480809f8181613d8ebadbe085f3637d,yes,research/scripts/run_energy_estimate.py,included source or reviewer file

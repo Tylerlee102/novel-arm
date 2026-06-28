@@ -70,8 +70,9 @@ rows from nextpnr, Vivado, or OpenROAD and real timing fields are not `NA`.
 Vivado, OpenSTA/OpenROAD, and broader gem5 campaign reruns remain optional
 external-tool paths.
 The strongest current hardware claim is PicoRV32 core-wrapper mapped FPGA PPA
-plus scoped FPGA tool-estimated power when those rows are present; it is not a
-full-core, ASIC, silicon, or top-tier architecture-readiness claim.
+plus scoped PicoRV32 core-wrapper ASIC-Liberty or FPGA tool-power when those
+rows are present; it is not a full-core, post-route ASIC signoff, silicon, or
+top-tier architecture-readiness claim.
 
 If `gh` or Docker is unavailable on the local machine, use
 `docs/RUN_CI_NOW.md` to trigger the GitHub Actions run from the GitHub web UI,
@@ -113,5 +114,6 @@ model, deterministic cycle-model, and deterministic core-integrated levels.
 The independent simulator rows add a separate source-backed trace/event path,
 and gem5 rows add validated imported ARM full-system summary evidence. The
 remaining blocker for a top-tier/full-core architecture claim is real mapped
-full-core evidence plus silicon/signoff-grade power; missing PPA or ASIC-power
-tools must stay BLOCKED rather than being replaced by generic resource counts.
+full-core evidence plus post-route/silicon signoff-grade power; missing
+full-core or signoff rows must stay BLOCKED rather than being replaced by
+generic resource counts.

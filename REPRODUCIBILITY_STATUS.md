@@ -55,8 +55,9 @@ machine or one-command full-system artifact.
   `copper_mcpat_sensitivity_20260618.csv` separate assumption-based memory
   energy, activity-based McPAT proxy evidence, optional Nangate45
   ASIC-Liberty tool-power rows when OpenSTA/OpenROAD is available, and Vivado
-  `report_power` rows when Vivado is available. ASIC-Liberty rows are
-  standard-cell tool estimates, not post-route signoff or silicon measurement.
+  `report_power` rows when Vivado is available. ASIC-Liberty rows are scoped
+  standard-cell tool estimates, not post-route signoff, full-core power, or
+  silicon measurement.
   Vivado power rows are tool-estimated FPGA power for the stated mapped target,
   not measured silicon, ASIC signoff power, or full-core power.
 - Paper-facing documents, tables, summaries, RTL sources, testbenches, and
