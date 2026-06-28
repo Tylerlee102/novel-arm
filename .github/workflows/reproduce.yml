@@ -16,7 +16,7 @@ env:
 jobs:
   mapped-ppa:
     name: mapped-ppa
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
 
@@ -45,6 +45,14 @@ jobs:
           sudo apt-get install -y --no-install-recommends openroad || true
           python3 -m pip install -r requirements.txt pytest numpy pandas
 
+      - name: Install pinned OpenROAD prebuilt for ASIC Liberty estimate
+        run: |
+          OPENROAD_DEB="openroad_2.0-17598-ga008522d8_amd64-ubuntu-22.04.deb"
+          OPENROAD_URL="https://github.com/Precision-Innovations/OpenROAD/releases/download/2024-12-14/${OPENROAD_DEB}"
+          curl -L --retry 3 --retry-delay 5 -o "${OPENROAD_DEB}" "${OPENROAD_URL}"
+          sudo apt-get install -y "./${OPENROAD_DEB}"
+          openroad -version
+
       - name: Show mapped PPA tool availability
         if: always()
         run: |
@@ -59,7 +67,19 @@ jobs:
         run: |
           make mapped-ppa
           python3 research/scripts/run_mapped_ppa.py
+          python3 research/scripts/run_asic_power.py
           python3 research/scripts/run_energy_estimate.py
+          python3 - <<'PY'
+          import csv, sys
+          rows = list(csv.DictReader(open("research/results/power_report_index.csv", newline="", encoding="utf-8")))
+          ok = any(row.get("evidence_level") == "asic_liberty_tool_estimate" and row.get("status") == "PASS" for row in rows)
+          if not ok:
+              print("ASIC Liberty tool estimate did not produce a PASS row.")
+              for row in rows:
+                  if row.get("evidence_level") == "asic_liberty_tool_estimate":
+                      print(row)
+              sys.exit(1)
+          PY
           python3 research/scripts/build_conference_docs.py
           python3 research/scripts/package_artifact.py
 
