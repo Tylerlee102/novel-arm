@@ -1,4 +1,4 @@
-$ {USER_HOME}\tools\oss-cad-suite\bin\yosys.exe -p read_verilog -sv research/copper_prefetch_unit_open.sv; read_verilog -sv research/rtl/integration/copper_near_core_stub.sv; chparam -set ENTRIES 8 -set QUEUE_DEPTH 4 nearcore_stub_plus_copper; synth_ecp5 -top nearcore_stub_plus_copper -json {USER_HOME}/AppData/Local/Temp/copper_mapped_ecp5_cu6t57c5/nearcore_stub_plus_copper.json; stat
+$ {USER_HOME}\tools\oss-cad-suite\bin\yosys.exe -p read_verilog -sv research/copper_prefetch_unit_open.sv; read_verilog -sv research/rtl/integration/copper_near_core_stub.sv; chparam -set ENTRIES 8 -set QUEUE_DEPTH 4 nearcore_stub_plus_copper; synth_ecp5 -top nearcore_stub_plus_copper -json {USER_HOME}/AppData/Local/Temp/copper_mapped_ecp5__vk93jce/nearcore_stub_plus_copper.json; stat
 
  /----------------------------------------------------------------------------\
  |  yosys -- Yosys Open SYnthesis Suite                                       |
@@ -7,7 +7,7 @@ $ {USER_HOME}\tools\oss-cad-suite\bin\yosys.exe -p read_verilog -sv research/cop
  \----------------------------------------------------------------------------/
  Yosys 0.66+154 (git sha1 23aadd92a, Release, GNU /usr/bin/x86_64-w64-mingw32-g++ 13.2.1)
 
--- Running command `read_verilog -sv research/copper_prefetch_unit_open.sv; read_verilog -sv research/rtl/integration/copper_near_core_stub.sv; chparam -set ENTRIES 8 -set QUEUE_DEPTH 4 nearcore_stub_plus_copper; synth_ecp5 -top nearcore_stub_plus_copper -json {USER_HOME}/AppData/Local/Temp/copper_mapped_ecp5_cu6t57c5/nearcore_stub_plus_copper.json; stat' --
+-- Running command `read_verilog -sv research/copper_prefetch_unit_open.sv; read_verilog -sv research/rtl/integration/copper_near_core_stub.sv; chparam -set ENTRIES 8 -set QUEUE_DEPTH 4 nearcore_stub_plus_copper; synth_ecp5 -top nearcore_stub_plus_copper -json {USER_HOME}/AppData/Local/Temp/copper_mapped_ecp5__vk93jce/nearcore_stub_plus_copper.json; stat' --
 
 1. Executing Verilog-2005 frontend: research/copper_prefetch_unit_open.sv
 Parsing SystemVerilog input from `research/copper_prefetch_unit_open.sv' to AST representation.
@@ -1612,7 +1612,7 @@ ABC: Node =    3747.  Ch =   140.  Total mem =    1.12 MB. Peak cut mem =    0.6
 ABC: P:  Del = 3854.00.  Ar =    3615.0.  Edge =     5018.  Cut =    33241.  T =     0.00 sec
 ABC: P:  Del = 3802.00.  Ar =    3680.0.  Edge =     5018.  Cut =    32950.  T =     0.00 sec
 ABC: P:  Del = 3802.00.  Ar =    1943.0.  Edge =     4863.  Cut =    46030.  T =     0.01 sec
-ABC: F:  Del = 3798.00.  Ar =    1536.0.  Edge =     5016.  Cut =    37556.  T =     0.00 sec
+ABC: F:  Del = 3798.00.  Ar =    1536.0.  Edge =     5016.  Cut =    37556.  T =     0.01 sec
 ABC: A:  Del = 3798.00.  Ar =    1522.0.  Edge =     4868.  Cut =    33374.  T =     0.01 sec
 ABC: A:  Del = 3798.00.  Ar =    1521.0.  Edge =     4861.  Cut =    33539.  T =     0.01 sec
 ABC: Total time =     0.03 sec
@@ -2075,11 +2075,11 @@ Found and reported 0 problems.
       602   TRELLIS_FF
 
 Warnings: 3 unique messages, 6 total
-End of script. Logfile hash: eb94ac5a76
+End of script. Logfile hash: e201db6679
 Yosys 0.66+154 (git sha1 23aadd92a, Release, GNU /usr/bin/x86_64-w64-mingw32-g++ 13.2.1)
 Time spent: 1% 28x opt_expr (0 sec), 1% 25x opt_clean (0 sec), ...
 
-$ {USER_HOME}\tools\oss-cad-suite\bin\nextpnr-ecp5.exe --85k --package CABGA381 --speed 6 --freq 50 --lpf-allow-unconstrained --json {USER_HOME}\AppData\Local\Temp\copper_mapped_ecp5_cu6t57c5\nearcore_stub_plus_copper.json --textcfg {USER_HOME}\AppData\Local\Temp\copper_mapped_ecp5_cu6t57c5\nearcore_stub_plus_copper.config
+$ {USER_HOME}\tools\oss-cad-suite\bin\nextpnr-ecp5.exe --85k --package CABGA381 --speed 6 --freq 50 --lpf-allow-unconstrained --json {USER_HOME}\AppData\Local\Temp\copper_mapped_ecp5__vk93jce\nearcore_stub_plus_copper.json --textcfg {USER_HOME}\AppData\Local\Temp\copper_mapped_ecp5__vk93jce\nearcore_stub_plus_copper.config
 
 
 Info: Logic utilisation before packing:
@@ -2152,18 +2152,18 @@ Info:     at iteration #9, type ALL: wirelen solved = 3877, spread = 6547, legal
 Info:     at iteration #10, type ALL: wirelen solved = 4172, spread = 6612, legal = 6672; time = 0.01s
 Info:     at iteration #11, type ALL: wirelen solved = 4277, spread = 6622, legal = 6780; time = 0.01s
 Info:     at iteration #12, type ALL: wirelen solved = 4491, spread = 6379, legal = 6494; time = 0.01s
-Info:     at iteration #13, type ALL: wirelen solved = 4457, spread = 6154, legal = 6568; time = 0.01s
-Info:     at iteration #14, type ALL: wirelen solved = 4435, spread = 6138, legal = 6358; time = 0.01s
+Info:     at iteration #13, type ALL: wirelen solved = 4457, spread = 6154, legal = 6568; time = 0.02s
+Info:     at iteration #14, type ALL: wirelen solved = 4435, spread = 6138, legal = 6358; time = 0.02s
 Info:     at iteration #15, type ALL: wirelen solved = 4595, spread = 6274, legal = 6391; time = 0.01s
 Info:     at iteration #16, type ALL: wirelen solved = 4762, spread = 6273, legal = 6605; time = 0.01s
-Info:     at iteration #17, type ALL: wirelen solved = 4697, spread = 6330, legal = 6462; time = 0.01s
+Info:     at iteration #17, type ALL: wirelen solved = 4697, spread = 6330, legal = 6462; time = 0.02s
 Info:     at iteration #18, type ALL: wirelen solved = 4977, spread = 6360, legal = 6540; time = 0.01s
 Info:     at iteration #19, type ALL: wirelen solved = 4886, spread = 6093, legal = 6281; time = 0.01s
 Info:     at iteration #20, type ALL: wirelen solved = 4784, spread = 5961, legal = 6135; time = 0.01s
 Info:     at iteration #21, type ALL: wirelen solved = 4903, spread = 5951, legal = 6104; time = 0.01s
-Info: HeAP Placer Time: 0.51s
-Info:   of which solving equations: 0.25s
-Info:   of which spreading cells: 0.07s
+Info: HeAP Placer Time: 0.52s
+Info:   of which solving equations: 0.26s
+Info:   of which spreading cells: 0.08s
 Info:   of which strict legalisation: 0.01s
 
 Info: Running simulated annealing placer for refinement.
@@ -2173,7 +2173,7 @@ Info:   at iteration #10: temp = 0.000000, timing cost = 473, wirelen = 4893
 Info:   at iteration #15: temp = 0.000000, timing cost = 438, wirelen = 4750
 Info:   at iteration #20: temp = 0.000000, timing cost = 555, wirelen = 4692
 Info:   at iteration #21: temp = 0.000000, timing cost = 552, wirelen = 4676 
-Info: SA placement time 0.62s
+Info: SA placement time 0.60s
 
 Info: Max frequency for clock '$glbnet$clk$TRELLIS_IO_IN': 60.65 MHz (PASS at 50.00 MHz)
 
@@ -2213,19 +2213,19 @@ Info: Setting up routing queue.
 Info: Routing 4519 arcs.
 Info:            |   (re-)routed arcs  |   delta    | remaining|       time spent     |
 Info:    IterCnt |  w/ripup   wo/ripup |  w/r  wo/r |      arcs| batch(sec) total(sec)|
-Info:       1000 |      465        534 |  465   534 |      4150|       0.20       0.20|
-Info:       2000 |      914       1085 |  449   551 |      3811|       0.15       0.35|
-Info:       3000 |     1448       1551 |  534   466 |      3582|       0.18       0.52|
-Info:       4000 |     1972       2027 |  524   476 |      3182|       0.14       0.66|
-Info:       5000 |     2465       2503 |  493   476 |      2803|       0.14       0.80|
-Info:       6000 |     3091       2869 |  626   366 |      2495|       0.14       0.95|
-Info:       7000 |     3735       3220 |  644   351 |      2166|       0.15       1.10|
-Info:       8000 |     4230       3722 |  495   502 |      1727|       0.15       1.25|
-Info:       9000 |     4582       4364 |  352   642 |      1126|       0.35       1.60|
-Info:      10000 |     4909       4989 |  327   625 |       547|       0.50       2.11|
-Info:      10689 |     5016       5513 |  107   524 |         0|       0.45       2.55|
+Info:       1000 |      465        534 |  465   534 |      4150|       0.19       0.19|
+Info:       2000 |      914       1085 |  449   551 |      3811|       0.17       0.35|
+Info:       3000 |     1448       1551 |  534   466 |      3582|       0.27       0.62|
+Info:       4000 |     1972       2027 |  524   476 |      3182|       0.14       0.76|
+Info:       5000 |     2465       2503 |  493   476 |      2803|       0.13       0.89|
+Info:       6000 |     3091       2869 |  626   366 |      2495|       0.13       1.02|
+Info:       7000 |     3735       3220 |  644   351 |      2166|       0.15       1.17|
+Info:       8000 |     4230       3722 |  495   502 |      1727|       0.16       1.33|
+Info:       9000 |     4582       4364 |  352   642 |      1126|       0.33       1.66|
+Info:      10000 |     4909       4989 |  327   625 |       547|       0.55       2.21|
+Info:      10689 |     5016       5513 |  107   524 |         0|       0.52       2.72|
 Info: Routing complete.
-Info: Router1 time 2.55s
+Info: Router1 time 2.72s
 Info: Checksum: 0xbb8f9545
 
 Info: Critical path report for clock '$glbnet$clk$TRELLIS_IO_IN' (posedge -> posedge):

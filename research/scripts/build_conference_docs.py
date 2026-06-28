@@ -259,6 +259,22 @@ def core_wrapper_synthesis_pass() -> bool:
     )
 
 
+def mapped_row_scope(row: dict[str, str]) -> str:
+    explicit = row.get("scope", "").strip()
+    if explicit:
+        return explicit
+    design = row.get("design", "")
+    if design in {"nearcore_stub_baseline", "nearcore_stub_plus_copper"}:
+        return "near_core_stub"
+    if design in {"baseline_core_wrapper", "core_wrapper_plus_baseline_prefetch", "core_wrapper_plus_copper"}:
+        return "core_wrapper"
+    if design in {"baseline_prefetch_unit", "copper_unit"}:
+        return "unit"
+    if design in {"full_core_baseline", "full_core_plus_copper"}:
+        return "full_core"
+    return ""
+
+
 def matched_mapped_ppa_pass(scope: str = "near_core_stub") -> bool:
     if scope == "near_core_stub":
         baseline, copper = "nearcore_stub_baseline", "nearcore_stub_plus_copper"
@@ -276,6 +292,7 @@ def matched_mapped_ppa_pass(scope: str = "near_core_stub") -> bool:
         for row in read_rows(RESULTS / "mapped_ppa.csv")
         if row.get("environment") in MAPPED_PPA_ENVIRONMENTS
         and row.get("status") == "PASS"
+        and mapped_row_scope(row) == scope
         and row.get("flow") not in {"yosys", "not_run", ""}
         and has_real_timing(row)
     ]

@@ -1,4 +1,4 @@
-$ {USER_HOME}\tools\oss-cad-suite\bin\yosys.exe -p read_verilog -sv external/picorv32/picorv32.v; read_verilog -sv research/baseline_prefetch_unit.sv; read_verilog -sv research/copper_prefetch_unit_open.sv; read_verilog -sv research/rtl/fullcore/picorv32_copper_wrapper.sv; synth_ecp5 -top core_wrapper_plus_baseline_prefetch -json {USER_HOME}/AppData/Local/Temp/copper_mapped_ecp5_6avxikl1/core_wrapper_plus_baseline_prefetch.json; stat
+$ {USER_HOME}\tools\oss-cad-suite\bin\yosys.exe -p read_verilog -sv external/picorv32/picorv32.v; read_verilog -sv research/baseline_prefetch_unit.sv; read_verilog -sv research/copper_prefetch_unit_open.sv; read_verilog -sv research/rtl/fullcore/picorv32_copper_wrapper.sv; synth_ecp5 -top core_wrapper_plus_baseline_prefetch -json {USER_HOME}/AppData/Local/Temp/copper_mapped_ecp5_dveyj67t/core_wrapper_plus_baseline_prefetch.json; stat
 
  /----------------------------------------------------------------------------\
  |  yosys -- Yosys Open SYnthesis Suite                                       |
@@ -7,7 +7,7 @@ $ {USER_HOME}\tools\oss-cad-suite\bin\yosys.exe -p read_verilog -sv external/pic
  \----------------------------------------------------------------------------/
  Yosys 0.66+154 (git sha1 23aadd92a, Release, GNU /usr/bin/x86_64-w64-mingw32-g++ 13.2.1)
 
--- Running command `read_verilog -sv external/picorv32/picorv32.v; read_verilog -sv research/baseline_prefetch_unit.sv; read_verilog -sv research/copper_prefetch_unit_open.sv; read_verilog -sv research/rtl/fullcore/picorv32_copper_wrapper.sv; synth_ecp5 -top core_wrapper_plus_baseline_prefetch -json {USER_HOME}/AppData/Local/Temp/copper_mapped_ecp5_6avxikl1/core_wrapper_plus_baseline_prefetch.json; stat' --
+-- Running command `read_verilog -sv external/picorv32/picorv32.v; read_verilog -sv research/baseline_prefetch_unit.sv; read_verilog -sv research/copper_prefetch_unit_open.sv; read_verilog -sv research/rtl/fullcore/picorv32_copper_wrapper.sv; synth_ecp5 -top core_wrapper_plus_baseline_prefetch -json {USER_HOME}/AppData/Local/Temp/copper_mapped_ecp5_dveyj67t/core_wrapper_plus_baseline_prefetch.json; stat' --
 
 1. Executing Verilog-2005 frontend: external/picorv32/picorv32.v
 Parsing SystemVerilog input from `external/picorv32/picorv32.v' to AST representation.
@@ -3928,11 +3928,11 @@ Found and reported 0 problems.
        90   TRELLIS_FF
 
 Warnings: 3 unique messages, 3 total
-End of script. Logfile hash: b2b81a9872
+End of script. Logfile hash: e309b9cc4c
 Yosys 0.66+154 (git sha1 23aadd92a, Release, GNU /usr/bin/x86_64-w64-mingw32-g++ 13.2.1)
 Time spent: 1% 39x opt_expr (0 sec), 1% 37x opt_clean (0 sec), ...
 
-$ {USER_HOME}\tools\oss-cad-suite\bin\nextpnr-ecp5.exe --85k --package CABGA381 --speed 6 --freq 50 --lpf-allow-unconstrained --json {USER_HOME}\AppData\Local\Temp\copper_mapped_ecp5_6avxikl1\core_wrapper_plus_baseline_prefetch.json --textcfg {USER_HOME}\AppData\Local\Temp\copper_mapped_ecp5_6avxikl1\core_wrapper_plus_baseline_prefetch.config
+$ {USER_HOME}\tools\oss-cad-suite\bin\nextpnr-ecp5.exe --85k --package CABGA381 --speed 6 --freq 50 --lpf-allow-unconstrained --json {USER_HOME}\AppData\Local\Temp\copper_mapped_ecp5_dveyj67t\core_wrapper_plus_baseline_prefetch.json --textcfg {USER_HOME}\AppData\Local\Temp\copper_mapped_ecp5_dveyj67t\core_wrapper_plus_baseline_prefetch.config
 
 
 Info: Logic utilisation before packing:
@@ -4045,10 +4045,10 @@ Info: Setting up routing queue.
 Info: Routing 1061 arcs.
 Info:            |   (re-)routed arcs  |   delta    | remaining|       time spent     |
 Info:    IterCnt |  w/ripup   wo/ripup |  w/r  wo/r |      arcs| batch(sec) total(sec)|
-Info:       1000 |      116        818 |  116   818 |       181|       0.13       0.13|
-Info:       1193 |      126        980 |   10   162 |         0|       0.03       0.16|
+Info:       1000 |      116        818 |  116   818 |       181|       0.15       0.15|
+Info:       1193 |      126        980 |   10   162 |         0|       0.03       0.18|
 Info: Routing complete.
-Info: Router1 time 0.16s
+Info: Router1 time 0.18s
 Info: Checksum: 0x68533788
 
 Info: Critical path report for clock '$glbnet$clk$TRELLIS_IO_IN' (posedge -> posedge):
