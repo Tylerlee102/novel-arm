@@ -1,6 +1,7 @@
 ignored 87 local-only gem5 summary file(s); set COPPER_ALLOW_LOCAL_GEM5_SUMMARIES=1 to include non-tracked local experiments outside the public CI evidence path
 research/results/gem5_arm_ubuntu_fs_cachesvc_app/cachesvc_app_medium_key_summary.csv__seed2__poison1 imported: imported 8 rows, checksum 0x3d38f00f0464cb72, rc=0
 research/results/gem5_arm_ubuntu_fs_cachesvc_app/cachesvc_app_small_summary.csv__seed2__poison1 imported: imported 8 rows, checksum 0xd8e12b7b2c5a2f4b, rc=0
+research/results/gem5_arm_ubuntu_fs_cachesvc_app/cachesvc_codex_raw_smoke_summary.csv__seed7__poison1 imported: imported 2 rows, checksum 0x37fad5aec212d5f4, rc=0
 research/results/gem5_arm_ubuntu_fs_duktape_app/duktape_app_medium_summary.csv__poison1 imported: imported 8 rows, checksum 0x2e53ef0, rc=0
 research/results/gem5_arm_ubuntu_fs_duktape_app/duktape_app_stress_summary.csv__poison1 imported: imported 8 rows, checksum 0x3928cced, rc=0
 research/results/gem5_arm_ubuntu_fs_jsonsqlite_app/jsonsqlite_app_medium_summary.csv__seed3__poison1 imported: imported 8 rows, checksum 0xb8236aed9f7723ec, rc=0

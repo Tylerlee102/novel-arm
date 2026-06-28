@@ -164,10 +164,10 @@ def should_include(path: Path) -> tuple[bool, str]:
             if (
                 len(result_parts) >= 2
                 and result_parts[0].startswith(GEM5_SUMMARY_PREFIX)
-                and path.name.endswith("_summary.csv")
+                and (path.name.endswith("_summary.csv") or path.name.endswith("_SUMMARY.md"))
                 and is_tracked(path)
             ):
-                return True, "included public tracked gem5 summary input csv"
+                return True, "included public tracked gem5 summary input/report"
             return False, "excluded raw gem5 output tree; summaries are included"
         return path.suffix.lower() in INCLUDE_SUFFIXES, "included summary/evidence file"
     if path == ZIP_PATH:
