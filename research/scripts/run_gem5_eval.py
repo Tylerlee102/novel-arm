@@ -11,11 +11,14 @@ from __future__ import annotations
 
 import csv
 import hashlib
+import math
 import os
 import platform
 import shutil
 import subprocess
+from collections import defaultdict
 from pathlib import Path
+from statistics import mean, median, stdev
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -25,6 +28,7 @@ PERF = RESULTS / "gem5_performance.csv"
 PREF = RESULTS / "gem5_prefetch_metrics.csv"
 TRAFFIC = RESULTS / "gem5_memory_traffic.csv"
 VALIDATION = RESULTS / "gem5_validation.csv"
+STATS = RESULTS / "gem5_statistical_summary.csv"
 SUMMARY_PREFIX = "gem5_arm_ubuntu_fs_"
 
 POLICY_TO_CONFIG = {
@@ -334,6 +338,25 @@ VALIDATION_FIELDS = [
     "notes",
 ]
 
+STATS_FIELDS = [
+    "benchmark",
+    "config",
+    "metric",
+    "evidence_level",
+    "status",
+    "n",
+    "mean",
+    "median",
+    "std",
+    "min",
+    "max",
+    "ci95_low",
+    "ci95_high",
+    "source_rows",
+    "source_inputs",
+    "notes",
+]
+
 
 def validation_row(
     path: Path,
@@ -524,6 +547,86 @@ def import_summaries() -> tuple[list[dict[str, str]], list[dict[str, str]], list
     return perf_rows, pref_rows, traffic_rows, notes
 
 
+def metric_float(value: str) -> float | None:
+    if value in {"", "NA", None}:
+        return None
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return None
+
+
+def write_statistical_summary(
+    perf_rows: list[dict[str, str]],
+    pref_rows: list[dict[str, str]],
+    traffic_rows: list[dict[str, str]],
+) -> None:
+    prefetch_index = {
+        (row["benchmark"], row["input"], row["seed"], row["config"]): row for row in pref_rows
+    }
+    traffic_index = {
+        (row["benchmark"], row["input"], row["seed"], row["config"]): row for row in traffic_rows
+    }
+    values: dict[tuple[str, str, str, str], list[tuple[float, str]]] = defaultdict(list)
+    for row in perf_rows:
+        key = (row["benchmark"], row["input"], row["seed"], row["config"])
+        source_id = f"{row['input']}|seed={row['seed']}"
+        for metric in (
+            "cycles",
+            "ipc",
+            "cache_misses",
+            "speedup_vs_no_prefetch",
+            "speedup_vs_best_baseline",
+        ):
+            val = metric_float(row.get(metric, ""))
+            if val is not None:
+                values[(row["benchmark"], row["config"], row["evidence_level"], metric)].append((val, source_id))
+        pref = prefetch_index.get(key, {})
+        for metric in ("coverage", "accuracy", "lateness_rate", "queue_drops"):
+            val = metric_float(pref.get(metric, ""))
+            if val is not None:
+                values[(row["benchmark"], row["config"], row["evidence_level"], metric)].append((val, source_id))
+        traffic = traffic_index.get(key, {})
+        for metric in ("traffic_overhead_pct", "bandwidth_pressure_metric"):
+            val = metric_float(traffic.get(metric, ""))
+            if val is not None:
+                values[(row["benchmark"], row["config"], row["evidence_level"], metric)].append((val, source_id))
+
+    summary_rows: list[dict[str, str]] = []
+    for (benchmark, config, evidence_level, metric), samples in sorted(values.items()):
+        vals = [sample[0] for sample in samples]
+        sources = sorted({sample[1] for sample in samples})
+        n = len(vals)
+        avg = mean(vals)
+        sd = stdev(vals) if n > 1 else 0.0
+        ci = 1.96 * sd / math.sqrt(n) if n > 1 else 0.0
+        summary_rows.append(
+            {
+                "benchmark": benchmark,
+                "config": config,
+                "metric": metric,
+                "evidence_level": evidence_level,
+                "status": "PASS" if n > 1 else "SINGLE_SAMPLE",
+                "n": str(n),
+                "mean": f"{avg:.6f}",
+                "median": f"{median(vals):.6f}",
+                "std": f"{sd:.6f}",
+                "min": f"{min(vals):.6f}",
+                "max": f"{max(vals):.6f}",
+                "ci95_low": f"{avg - ci:.6f}",
+                "ci95_high": f"{avg + ci:.6f}",
+                "source_rows": str(len(samples)),
+                "source_inputs": str(len(sources)),
+                "notes": (
+                    "Imported gem5 ARM-system summary statistics across validated public summary rows; "
+                    "n counts imported benchmark/input/seed samples, regressions are retained, and this "
+                    "is not a fresh clone-local raw gem5 rerun."
+                ),
+            }
+        )
+    write_csv(STATS, STATS_FIELDS, summary_rows)
+
+
 def write_blocked(note: str, gem5: str = "") -> None:
     log_path = LOG_DIR / "gem5_availability.log"
     log_path.write_text(note + "\n", encoding="utf-8")
@@ -627,6 +730,30 @@ def write_blocked(note: str, gem5: str = "") -> None:
         ],
         [{**common, "demand_loads": "NA", "prefetch_loads": "NA", "total_memory_requests": "NA", "traffic_overhead_pct": "NA", "bandwidth_pressure_metric": "NA"}],
     )
+    write_csv(
+        STATS,
+        STATS_FIELDS,
+        [
+            {
+                "benchmark": "ALL",
+                "config": "NA",
+                "metric": "NA",
+                "evidence_level": "gem5",
+                "status": "BLOCKED",
+                "n": "0",
+                "mean": "NA",
+                "median": "NA",
+                "std": "NA",
+                "min": "NA",
+                "max": "NA",
+                "ci95_low": "NA",
+                "ci95_high": "NA",
+                "source_rows": "0",
+                "source_inputs": "0",
+                "notes": note,
+            }
+        ],
+    )
 
 
 def main() -> int:
@@ -636,6 +763,7 @@ def main() -> int:
     log_path = LOG_DIR / "gem5_import.log"
     if perf_rows:
         log_path.write_text("\n".join(import_notes) + "\n", encoding="utf-8")
+        write_statistical_summary(perf_rows, pref_rows, traffic_rows)
         write_csv(
             PERF,
             [
@@ -700,7 +828,7 @@ def main() -> int:
             traffic_rows,
         )
         print(
-            f"wrote {rel(PERF)}, {rel(PREF)}, and {rel(TRAFFIC)} "
+            f"wrote {rel(PERF)}, {rel(PREF)}, {rel(TRAFFIC)}, and {rel(STATS)} "
             f"from {len(perf_rows)} imported gem5 full-system rows"
         )
         return 0
@@ -714,7 +842,7 @@ def main() -> int:
             "are promoted."
         )
     write_blocked(note, gem5)
-    print(f"wrote {rel(PERF)}, {rel(PREF)}, and {rel(TRAFFIC)} with BLOCKED gem5 rows")
+    print(f"wrote {rel(PERF)}, {rel(PREF)}, {rel(TRAFFIC)}, and {rel(STATS)} with BLOCKED gem5 rows")
     return 0
 
 

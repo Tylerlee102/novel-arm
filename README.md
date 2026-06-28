@@ -53,6 +53,8 @@ demand/prefetch traffic accounting. The final evidence pass adds a deterministic
 is not runnable, source-built C workload evidence via `make workloads`, a
 source-backed `independent_sim` trace/event simulator, imported gem5
 ARM full-system summary rows when checksum/return-code validation passes,
+`gem5_statistical_summary.csv` imported-summary confidence rows where repeated
+validated samples exist,
 near-core-stub and PicoRV32 core-wrapper synthesis flows, a strict
 `mapped_ppa.csv` place-and-route ledger, `proxy_assumed_memory_energy` rows,
 optional Nangate45 ASIC-Liberty tool-power rows when OpenSTA/OpenROAD is
@@ -60,7 +62,8 @@ available, Vivado `report_power` rows when Vivado is available, and a McPAT
 activity-proxy index when the local McPAT sensitivity output is present. These
 are scoped evidence levels: `independent_sim` is not gem5, `core_integrated` is
 not gem5, imported gem5 summary rows are not a clone-local rerun of every raw
-full-system simulation,
+full-system simulation, gem5 statistical rows are imported-summary statistics
+rather than fresh raw-run confidence intervals,
 the near-core stub is not a full CPU, the PicoRV32 wrapper is not the target
 full-core/ARM integration, generic Yosys is not mapped timing, and Vivado
 `report_power` is tool-estimated FPGA power rather than silicon or ASIC signoff

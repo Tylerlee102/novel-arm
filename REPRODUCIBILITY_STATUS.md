@@ -37,9 +37,11 @@ machine or one-command full-system artifact.
   a no-prefetch baseline, a COPPER-family row, matching checksums, clean
   return codes, and positive tick counts. Current PASS gem5 rows are imported
   ARM full-system summaries across multiple benchmark families, not a
-  clone-local rerun of every raw full-system simulation. A BLOCKED gem5 row is
-  not performance evidence; it records that gem5 was unavailable or not runnable
-  in the current environment.
+  clone-local rerun of every raw full-system simulation. `gem5_statistical_summary.csv`
+  reports statistics only over those imported validated rows and marks
+  single-sample cases explicitly. A BLOCKED gem5 row is not performance
+  evidence; it records that gem5 was unavailable or not runnable in the current
+  environment.
 - `fullcore_synthesis*.csv` records unit, near-core-stub, and PicoRV32
   core-wrapper synthesis scope. Near-core-stub and PicoRV32 wrapper rows must
   not be described as full-core overhead, ARM-core integration, ASIC timing, or
