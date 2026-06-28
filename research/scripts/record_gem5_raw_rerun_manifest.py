@@ -24,6 +24,9 @@ class RawRerunSpec:
     notes: str
 
 
+COMMON_RERUN_POLICIES = ("none", "naive", "copper_clpd64k_peb", "spp", "spp_copper_slack")
+
+
 SPECS = (
     RawRerunSpec(
         tag="codex_raw_smoke",
@@ -162,6 +165,175 @@ SPECS = (
         notes=(
             "Existing local raw gem5 ARM full-system Duktape JavaScript-runtime stress seed-1 "
             "run with retained stats and terminal logs. Together with duktape_stress_existing, "
+            "this provides repeated local raw samples; it is not the full final "
+            "workload/config matrix."
+        ),
+    ),
+    RawRerunSpec(
+        tag="lua_medium_existing",
+        run_prefix="gem5_arm_ubuntu_fs_lua_app_medium_",
+        summary_path=RESULTS / "gem5_arm_ubuntu_fs_lua_app" / "lua_app_medium_summary.csv",
+        terminal_result="LUA_COPPER_RESULT",
+        policies=COMMON_RERUN_POLICIES,
+        notes=(
+            "Existing local raw gem5 ARM full-system Lua interpreter medium run "
+            "with retained stats and terminal logs. This adds another public benchmark "
+            "family to the raw provenance ledger; it is not a clone-local CI proof or "
+            "full workload/config matrix."
+        ),
+    ),
+    RawRerunSpec(
+        tag="lua_medium_existing_seed1",
+        run_prefix="gem5_arm_ubuntu_fs_lua_app_medium_seed1_",
+        summary_path=RESULTS / "gem5_arm_ubuntu_fs_lua_app" / "lua_app_medium_seed1_summary.csv",
+        terminal_result="LUA_COPPER_RESULT",
+        policies=COMMON_RERUN_POLICIES,
+        notes=(
+            "Existing local raw gem5 ARM full-system Lua interpreter medium seed-1 run "
+            "with retained stats and terminal logs. Together with the medium base and "
+            "seed-2 runs, this provides repeated local raw samples; it is not the full "
+            "final workload/config matrix."
+        ),
+    ),
+    RawRerunSpec(
+        tag="lua_medium_existing_seed2",
+        run_prefix="gem5_arm_ubuntu_fs_lua_app_medium_seed2_",
+        summary_path=RESULTS / "gem5_arm_ubuntu_fs_lua_app" / "lua_app_medium_seed2_summary.csv",
+        terminal_result="LUA_COPPER_RESULT",
+        policies=COMMON_RERUN_POLICIES,
+        notes=(
+            "Existing local raw gem5 ARM full-system Lua interpreter medium seed-2 run "
+            "with retained stats and terminal logs. Together with the medium base and "
+            "seed-1 runs, this provides repeated local raw samples; it is not the full "
+            "final workload/config matrix."
+        ),
+    ),
+    RawRerunSpec(
+        tag="lua_small_existing",
+        run_prefix="gem5_arm_ubuntu_fs_lua_app_small_",
+        summary_path=RESULTS / "gem5_arm_ubuntu_fs_lua_app" / "lua_app_small_summary.csv",
+        terminal_result="LUA_COPPER_RESULT",
+        policies=COMMON_RERUN_POLICIES,
+        notes=(
+            "Existing local raw gem5 ARM full-system Lua interpreter small run "
+            "with retained stats and terminal logs. This records the repeated-policy "
+            "subset for small input provenance; it is not a clone-local CI proof or "
+            "full workload/config matrix."
+        ),
+    ),
+    RawRerunSpec(
+        tag="lua_small_existing_seed1",
+        run_prefix="gem5_arm_ubuntu_fs_lua_app_small_seed1_",
+        summary_path=RESULTS / "gem5_arm_ubuntu_fs_lua_app" / "lua_app_small_seed1_summary.csv",
+        terminal_result="LUA_COPPER_RESULT",
+        policies=COMMON_RERUN_POLICIES,
+        notes=(
+            "Existing local raw gem5 ARM full-system Lua interpreter small seed-1 run "
+            "with retained stats and terminal logs. Together with the small base and "
+            "seed-2 runs, this provides repeated local raw samples; it is not the full "
+            "final workload/config matrix."
+        ),
+    ),
+    RawRerunSpec(
+        tag="lua_small_existing_seed2",
+        run_prefix="gem5_arm_ubuntu_fs_lua_app_small_seed2_",
+        summary_path=RESULTS / "gem5_arm_ubuntu_fs_lua_app" / "lua_app_small_seed2_summary.csv",
+        terminal_result="LUA_COPPER_RESULT",
+        policies=COMMON_RERUN_POLICIES,
+        notes=(
+            "Existing local raw gem5 ARM full-system Lua interpreter small seed-2 run "
+            "with retained stats and terminal logs. Together with the small base and "
+            "seed-1 runs, this provides repeated local raw samples; it is not the full "
+            "final workload/config matrix."
+        ),
+    ),
+    RawRerunSpec(
+        tag="lua_stress_existing",
+        run_prefix="gem5_arm_ubuntu_fs_lua_app_stress_",
+        summary_path=RESULTS / "gem5_arm_ubuntu_fs_lua_app" / "lua_app_stress_summary.csv",
+        terminal_result="LUA_COPPER_RESULT",
+        policies=COMMON_RERUN_POLICIES,
+        notes=(
+            "Existing local raw gem5 ARM full-system Lua interpreter stress run "
+            "with retained stats and terminal logs. This records the repeated-policy "
+            "subset for stress input provenance; it is not a clone-local CI proof or "
+            "full workload/config matrix."
+        ),
+    ),
+    RawRerunSpec(
+        tag="lua_stress_existing_seed1",
+        run_prefix="gem5_arm_ubuntu_fs_lua_app_stress_seed1_",
+        summary_path=RESULTS / "gem5_arm_ubuntu_fs_lua_app" / "lua_app_stress_seed1_summary.csv",
+        terminal_result="LUA_COPPER_RESULT",
+        policies=COMMON_RERUN_POLICIES,
+        notes=(
+            "Existing local raw gem5 ARM full-system Lua interpreter stress seed-1 run "
+            "with retained stats and terminal logs. Together with lua_stress_existing, "
+            "this provides repeated local raw samples; it is not the full final "
+            "workload/config matrix."
+        ),
+    ),
+    RawRerunSpec(
+        tag="sqlite_medium_existing",
+        run_prefix="gem5_arm_ubuntu_fs_sqlite_app_medium_",
+        summary_path=RESULTS / "gem5_arm_ubuntu_fs_sqlite_app" / "sqlite_app_medium_summary.csv",
+        terminal_result="SQLITE_COPPER_RESULT",
+        policies=COMMON_RERUN_POLICIES,
+        notes=(
+            "Existing local raw gem5 ARM full-system SQLite database medium run "
+            "with retained stats and terminal logs. This adds another public benchmark "
+            "family to the raw provenance ledger; it is not a clone-local CI proof or "
+            "full workload/config matrix."
+        ),
+    ),
+    RawRerunSpec(
+        tag="sqlite_medium_existing_seed1",
+        run_prefix="gem5_arm_ubuntu_fs_sqlite_app_medium_seed1_",
+        summary_path=RESULTS / "gem5_arm_ubuntu_fs_sqlite_app" / "sqlite_app_medium_seed1_summary.csv",
+        terminal_result="SQLITE_COPPER_RESULT",
+        policies=COMMON_RERUN_POLICIES,
+        notes=(
+            "Existing local raw gem5 ARM full-system SQLite database medium seed-1 run "
+            "with retained stats and terminal logs. Together with the medium base and "
+            "seed-2 runs, this provides repeated local raw samples; it is not the full "
+            "final workload/config matrix."
+        ),
+    ),
+    RawRerunSpec(
+        tag="sqlite_medium_existing_seed2",
+        run_prefix="gem5_arm_ubuntu_fs_sqlite_app_medium_seed2_",
+        summary_path=RESULTS / "gem5_arm_ubuntu_fs_sqlite_app" / "sqlite_app_medium_seed2_summary.csv",
+        terminal_result="SQLITE_COPPER_RESULT",
+        policies=COMMON_RERUN_POLICIES,
+        notes=(
+            "Existing local raw gem5 ARM full-system SQLite database medium seed-2 run "
+            "with retained stats and terminal logs. Together with the medium base and "
+            "seed-1 runs, this provides repeated local raw samples; it is not the full "
+            "final workload/config matrix."
+        ),
+    ),
+    RawRerunSpec(
+        tag="sqlite_stress_existing",
+        run_prefix="gem5_arm_ubuntu_fs_sqlite_app_stress_",
+        summary_path=RESULTS / "gem5_arm_ubuntu_fs_sqlite_app" / "sqlite_app_stress_summary.csv",
+        terminal_result="SQLITE_COPPER_RESULT",
+        policies=COMMON_RERUN_POLICIES,
+        notes=(
+            "Existing local raw gem5 ARM full-system SQLite database stress run "
+            "with retained stats and terminal logs. This records the repeated-policy "
+            "subset for stress input provenance; it is not a clone-local CI proof or "
+            "full workload/config matrix."
+        ),
+    ),
+    RawRerunSpec(
+        tag="sqlite_stress_existing_seed1",
+        run_prefix="gem5_arm_ubuntu_fs_sqlite_app_stress_seed1_",
+        summary_path=RESULTS / "gem5_arm_ubuntu_fs_sqlite_app" / "sqlite_app_stress_seed1_summary.csv",
+        terminal_result="SQLITE_COPPER_RESULT",
+        policies=COMMON_RERUN_POLICIES,
+        notes=(
+            "Existing local raw gem5 ARM full-system SQLite database stress seed-1 run "
+            "with retained stats and terminal logs. Together with sqlite_stress_existing, "
             "this provides repeated local raw samples; it is not the full final "
             "workload/config matrix."
         ),
