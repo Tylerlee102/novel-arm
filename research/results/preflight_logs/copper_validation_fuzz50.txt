@@ -1,0 +1,7 @@
+COPPER adversarial validation
+directed_tests: 6
+fuzz_trials: 50
+fuzz_avg_speedup_vs_disabled: 1.684
+fuzz_avg_prefetches: 446.760
+fuzz_avg_blocked_unproven_values: 62.340
+failures: 0

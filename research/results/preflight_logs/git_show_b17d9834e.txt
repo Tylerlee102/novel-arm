@@ -1,0 +1,6 @@
+b17d9834e Record current-run artifact proof in dashboard
+ Makefile                                   |   2 ++
+ dist/copper-artifact.zip                   | Bin 28182647 -> 28182835 bytes
+ research/CONFERENCE_READINESS_DASHBOARD.md |   4 ++--
+ research/scripts/build_conference_docs.py  |  25 ++++++++++++++++++++++---
+ 4 files changed, 26 insertions(+), 5 deletions(-)

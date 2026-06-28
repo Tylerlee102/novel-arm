@@ -1,0 +1,4 @@
+COPPER_ASSERTIONS_PASSED=15
+COPPER_ASSERTIONS_FAILED=0
+COPPER open RTL directed tests completed
+/home/runner/work/novel-arm/novel-arm/research/copper_prefetch_unit_open_tb.sv:157: $finish called at 107000 (1ps)

@@ -1,0 +1,5 @@
+b17d9834e Record current-run artifact proof in dashboard
+5bde68b2f Add COPPER cycle-model readiness evidence
+7c0825575 Import passing COPPER CI evidence
+53caef736 Fix COPPER RTL testbench sampling
+b0cacdf07 Stabilize COPPER RTL reset smoke test
