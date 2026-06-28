@@ -38,6 +38,19 @@ SPECS = (
         ),
     ),
     RawRerunSpec(
+        tag="codex_raw_smoke_seed8",
+        run_prefix="gem5_arm_ubuntu_fs_cachesvc_codex_raw_smoke_seed8_",
+        summary_path=RESULTS / "gem5_arm_ubuntu_fs_cachesvc_app" / "cachesvc_codex_raw_smoke_seed8_summary.csv",
+        terminal_result="CACHESVC_COPPER_RESULT",
+        policies=("none", "copper_clpd64k_peb"),
+        notes=(
+            "Fresh local raw gem5 ARM full-system cache-service seed-8 rerun. "
+            "Together with codex_raw_smoke, this provides repeated raw samples for "
+            "the no-prefetch and COPPER smoke comparison; it is not the full final "
+            "workload/config matrix."
+        ),
+    ),
+    RawRerunSpec(
         tag="codex_raw_zlib_tiny",
         run_prefix="gem5_arm_ubuntu_fs_zlib_codex_raw_zlib_tiny_",
         summary_path=RESULTS / "gem5_arm_ubuntu_fs_zlib_app" / "zlib_codex_raw_zlib_tiny_summary.csv",
