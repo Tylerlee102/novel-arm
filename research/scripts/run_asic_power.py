@@ -232,11 +232,15 @@ def blank_row(design: Design, status: str, report_path: Path, notes: str) -> dic
 
 def liberty_path() -> tuple[Path | None, str]:
     configured = os.environ.get("COPPER_NANGATE45_LIB", "").strip()
-    candidates = [
-        Path(configured) if configured else Path(),
-        WORK_DIR / "nangate45" / "NangateOpenCellLibrary_typical.lib",
-        ROOT / "external" / "nangate45" / "NangateOpenCellLibrary_typical.lib",
-    ]
+    candidates = []
+    if configured:
+        candidates.append(Path(configured))
+    candidates.extend(
+        [
+            WORK_DIR / "nangate45" / "NangateOpenCellLibrary_typical.lib",
+            ROOT / "external" / "nangate45" / "NangateOpenCellLibrary_typical.lib",
+        ]
+    )
     for candidate in candidates:
         if candidate and candidate.exists():
             return candidate, f"using existing Nangate45 liberty {rel(candidate) if candidate.is_relative_to(ROOT) else candidate}"
