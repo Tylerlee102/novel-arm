@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import csv
+import hashlib
 import re
 from dataclasses import dataclass
 from pathlib import Path
@@ -25,6 +26,31 @@ class RawRerunSpec:
 
 
 COMMON_RERUN_POLICIES = ("none", "naive", "copper_clpd64k_peb", "spp", "spp_copper_slack")
+AUTO_POLICIES = tuple(
+    sorted(
+        {
+            "spp_copper_slack",
+            "copper_clpd64k_peb",
+            "copper_clpd64k",
+            "copper_exact131k",
+            "copper_exact16k",
+            "copper_clpd32k",
+            "copper_clpd16k",
+            "copper_clpd8k",
+            "spp_copper",
+            "copper",
+            "naive",
+            "none",
+            "stride",
+            "dcpt",
+            "spp",
+            "ampm",
+            "bop",
+        },
+        key=len,
+        reverse=True,
+    )
+)
 
 
 SPECS = (
@@ -507,9 +533,14 @@ FIELDS = [
     "command_line",
     "output_dir",
     "stats_path",
+    "stats_size_bytes",
+    "stats_sha256",
     "terminal_path",
+    "terminal_sha256",
     "host_stdout",
+    "host_stdout_sha256",
     "host_stderr",
+    "host_stderr_sha256",
     "summary_path",
     "summary_checksum",
     "rc",
@@ -522,6 +553,37 @@ FIELDS = [
 
 def rel(path: Path) -> str:
     return str(path.relative_to(ROOT)).replace("\\", "/")
+
+
+def sha256(path: Path) -> str:
+    if not path.exists() or not path.is_file():
+        return ""
+    h = hashlib.sha256()
+    with path.open("rb") as fh:
+        for chunk in iter(lambda: fh.read(1024 * 1024), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def size_bytes(path: Path) -> str:
+    return str(path.stat().st_size) if path.exists() and path.is_file() else ""
+
+
+def public_command_line(command: str) -> str:
+    if not command:
+        return ""
+    root_win = str(ROOT)
+    root_posix = root_win.replace("\\", "/")
+    replacements = {
+        root_win: ".",
+        root_posix: ".",
+    }
+    if len(root_posix) > 2 and root_posix[1] == ":":
+        replacements[f"/{root_posix[0].lower()}/{root_posix[3:]}"] = "."
+    cleaned = command
+    for needle, replacement in replacements.items():
+        cleaned = cleaned.replace(needle, replacement)
+    return cleaned
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
@@ -547,6 +609,115 @@ def terminal_info(path: Path, result_token: str) -> tuple[str, str]:
     return checksum, rc
 
 
+def generic_terminal_info(path: Path) -> tuple[str, str]:
+    text = path.read_text(encoding="utf-8", errors="replace") if path.exists() else ""
+    checksum = first_match(r"checksum=(0x[0-9a-fA-F]+)", text)
+    rc = first_match(r"COPPER_FS_NATIVE_A64_DONE rc=(\d+)", text)
+    return checksum, rc
+
+
+def stats_value(path: Path, name: str) -> str:
+    if not path.exists():
+        return ""
+    with path.open(encoding="utf-8", errors="replace") as fh:
+        for line in fh:
+            parts = line.split()
+            if len(parts) >= 2 and parts[0] == name:
+                return parts[1]
+    return ""
+
+
+def stats_sum(path: Path, includes: tuple[str, ...]) -> str:
+    total = 0
+    found = False
+    if not path.exists():
+        return ""
+    with path.open(encoding="utf-8", errors="replace") as fh:
+        for line in fh:
+            parts = line.split()
+            if len(parts) < 2:
+                continue
+            stat = parts[0]
+            if all(token in stat for token in includes):
+                try:
+                    total += int(float(parts[1]))
+                except ValueError:
+                    continue
+                found = True
+    return str(total) if found else ""
+
+
+def detect_policy(run_dir: Path) -> tuple[str, str] | None:
+    name = run_dir.name
+    if not name.startswith("gem5_arm_ubuntu_fs_"):
+        return None
+    stem = name.removeprefix("gem5_arm_ubuntu_fs_")
+    for policy in AUTO_POLICIES:
+        suffix = f"_{policy}"
+        if stem.endswith(suffix):
+            tag = stem[: -len(suffix)]
+            if tag:
+                return tag, policy
+    return None
+
+
+def auto_discovered_rows(existing_output_dirs: set[str]) -> list[dict[str, str]]:
+    rows: list[dict[str, str]] = []
+    for run_dir in sorted(RESULTS.glob("gem5_arm_ubuntu_fs_*")):
+        if not run_dir.is_dir():
+            continue
+        if rel(run_dir) in existing_output_dirs:
+            continue
+        detected = detect_policy(run_dir)
+        if not detected:
+            continue
+        tag, policy = detected
+        stats = run_dir / "stats.txt"
+        terminal = run_dir / "board.terminal"
+        host_stdout = run_dir.with_suffix(".host.out")
+        host_stderr = run_dir.with_suffix(".host.err")
+        if not stats.exists() or stats.stat().st_size == 0 or not terminal.exists():
+            continue
+        checksum, rc = generic_terminal_info(terminal)
+        if rc != "0" or not checksum:
+            continue
+        host_text = host_stdout.read_text(encoding="utf-8", errors="replace") if host_stdout.exists() else ""
+        rows.append(
+            {
+                "tag": tag,
+                "policy": policy,
+                "status": "PASS",
+                "environment": "local_windows",
+                "gem5_version": first_match(r"gem5 version\s+([^\r\n]+)", host_text),
+                "gem5_started": first_match(r"gem5 started\s+([^\r\n]+)", host_text),
+                "command_line": public_command_line(first_match(r"command line:\s+([^\r\n]+)", host_text)),
+                "output_dir": rel(run_dir),
+                "stats_path": rel(stats),
+                "stats_size_bytes": size_bytes(stats),
+                "stats_sha256": sha256(stats),
+                "terminal_path": rel(terminal),
+                "terminal_sha256": sha256(terminal),
+                "host_stdout": rel(host_stdout) if host_stdout.exists() else "",
+                "host_stdout_sha256": sha256(host_stdout),
+                "host_stderr": rel(host_stderr) if host_stderr.exists() else "",
+                "host_stderr_sha256": sha256(host_stderr),
+                "summary_path": "",
+                "summary_checksum": checksum,
+                "rc": rc,
+                "roi_ticks": stats_value(stats, "simTicks"),
+                "instructions": stats_sum(stats, ("commitStats0.numInstsNotNOP",)),
+                "l1d_demand_misses": stats_sum(stats, ("l1d-cache-", "demandMisses::total")),
+                "notes": (
+                    "Auto-discovered retained local raw gem5 ARM full-system run with "
+                    "nonempty stats, terminal checksum, and rc=0. This broadens raw-run "
+                    "provenance only; it is not a clone-local CI proof or a complete "
+                    "top-tier workload/config matrix by itself."
+                ),
+            }
+        )
+    return rows
+
+
 def row_for(spec: RawRerunSpec, policy: str, summary_by_policy: dict[str, dict[str, str]]) -> dict[str, str]:
     run_dir = RESULTS / f"{spec.run_prefix}{policy}"
     host_stdout = run_dir.with_suffix(".host.out")
@@ -564,12 +735,17 @@ def row_for(spec: RawRerunSpec, policy: str, summary_by_policy: dict[str, dict[s
         "environment": "local_windows",
         "gem5_version": first_match(r"gem5 version\s+([^\r\n]+)", host_text),
         "gem5_started": first_match(r"gem5 started\s+([^\r\n]+)", host_text),
-        "command_line": first_match(r"command line:\s+([^\r\n]+)", host_text),
+        "command_line": public_command_line(first_match(r"command line:\s+([^\r\n]+)", host_text)),
         "output_dir": rel(run_dir),
         "stats_path": rel(stats) if stats.exists() else "",
+        "stats_size_bytes": size_bytes(stats),
+        "stats_sha256": sha256(stats),
         "terminal_path": rel(terminal) if terminal.exists() else "",
+        "terminal_sha256": sha256(terminal),
         "host_stdout": rel(host_stdout) if host_stdout.exists() else "",
+        "host_stdout_sha256": sha256(host_stdout),
         "host_stderr": rel(host_stderr) if host_stderr.exists() else "",
+        "host_stderr_sha256": sha256(host_stderr),
         "summary_path": rel(spec.summary_path) if spec.summary_path.exists() else "",
         "summary_checksum": summary.get("checksum", checksum),
         "rc": summary.get("rc", rc),
@@ -585,6 +761,7 @@ def main() -> int:
     for spec in SPECS:
         summary_by_policy = {row.get("policy", ""): row for row in read_csv(spec.summary_path)}
         rows.extend(row_for(spec, policy, summary_by_policy) for policy in spec.policies)
+    rows.extend(auto_discovered_rows({row["output_dir"] for row in rows if row.get("output_dir")}))
     OUT.parent.mkdir(parents=True, exist_ok=True)
     with OUT.open("w", newline="", encoding="utf-8") as fh:
         writer = csv.DictWriter(fh, fieldnames=FIELDS)
