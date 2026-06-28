@@ -132,6 +132,11 @@ def write_text(path: Path, text: str) -> None:
     path.write_text(scrub(text), encoding="utf-8")
 
 
+def write_raw_text(path: Path, text: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(text, encoding="utf-8")
+
+
 def write_csv(path: Path, fields: list[str], rows: list[dict[str, str]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", newline="", encoding="utf-8") as fh:
@@ -361,7 +366,7 @@ def run_design(design: Design, liberty: Path, sta_tool: str, sta_kind: str) -> d
         row["area_um2"] = parse_area(synth_output)
         return row
 
-    write_text(sta_tcl, sta_script(design, liberty, netlist))
+    write_raw_text(sta_tcl, sta_script(design, liberty, netlist))
     if sta_kind == "openroad":
         sta_command = [sta_tool, "-exit", str(sta_tcl)]
     else:
