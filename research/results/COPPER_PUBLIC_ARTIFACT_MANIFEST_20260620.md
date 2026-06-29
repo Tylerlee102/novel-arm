@@ -6,9 +6,9 @@ Purpose: define a practical reviewer-facing artifact package for the current COP
 
 ## Package Summary
 
-- Manifest entries: 586
+- Manifest entries: 589
 - Missing referenced files: 0
-- Minimal-package bytes: 6,185,557
+- Minimal-package bytes: 6,244,630
 - External-store bytes: 13,479,413
 - CSV manifest: `research/results/copper_public_artifact_manifest_20260620.csv`
 - SHA-256 manifest: `research/results/copper_public_artifact_manifest_20260620.sha256`
@@ -19,11 +19,11 @@ Purpose: define a practical reviewer-facing artifact package for the current COP
 |---|---:|---:|
 | derived_table_or_config | 9 | 9,313 |
 | heavy_raw_evidence | 2 | 13,479,413 |
-| measured_summary | 114 | 372,029 |
-| paper_or_reproduction_doc | 8 | 342,883 |
-| reproduction_script | 274 | 1,662,517 |
-| rtl_or_tool_flow_source | 102 | 756,048 |
-| source_or_note | 21 | 2,409,100 |
+| measured_summary | 114 | 372,025 |
+| paper_or_reproduction_doc | 8 | 343,722 |
+| reproduction_script | 274 | 1,663,392 |
+| rtl_or_tool_flow_source | 102 | 756,895 |
+| source_or_note | 24 | 2,465,616 |
 | tool_report_or_log | 26 | 326,011 |
 | workload_source | 30 | 307,656 |
 
@@ -32,7 +32,7 @@ Purpose: define a practical reviewer-facing artifact package for the current COP
 | Recommendation | Files | Bytes | Meaning |
 |---|---:|---:|---|
 | external-store-with-hash | 2 | 13,479,413 | Large raw artifacts that should be hosted separately or made optional, with this manifest providing hashes. |
-| include-in-minimal-package | 584 | 6,185,557 | Small or central artifacts that should be copied directly into a public package. |
+| include-in-minimal-package | 587 | 6,244,630 | Small or central artifacts that should be copied directly into a public package. |
 
 ## Largest Entries
 
@@ -43,8 +43,8 @@ Purpose: define a practical reviewer-facing artifact package for the current COP
 | `external/mibench_network/network/patricia/large.udp` | source_or_note | 1,514,237 | include-in-minimal-package | `07d04080d9aaf158` |
 | `external/mibench_download/network.tar.gz` | source_or_note | 470,094 | include-in-minimal-package | `e23b6b744ad3056a` |
 | `external/mibench_network/network/patricia/small.udp` | source_or_note | 251,969 | include-in-minimal-package | `ed0c6a4791b07cad` |
-| `research/COPPER_FULL_PAPER.md` | paper_or_reproduction_doc | 169,725 | include-in-minimal-package | `d053051e741aa88b` |
-| `research/COPPER_FINAL_OUTPUT.md` | paper_or_reproduction_doc | 105,697 | include-in-minimal-package | `77837d2061122ffa` |
+| `research/COPPER_FULL_PAPER.md` | paper_or_reproduction_doc | 169,879 | include-in-minimal-package | `c55fe30944f21faf` |
+| `research/COPPER_FINAL_OUTPUT.md` | paper_or_reproduction_doc | 105,888 | include-in-minimal-package | `6ce57c1247396651` |
 | `research/verify_copper_artifacts.py` | reproduction_script | 81,193 | include-in-minimal-package | `432fc6b22d20cf9a` |
 | `research/build_copper_claim_evidence_matrix.py` | reproduction_script | 64,503 | include-in-minimal-package | `735db085f1245eaf` |
 | `research/build_copper_scoop_conference_docx.py` | reproduction_script | 42,331 | include-in-minimal-package | `4fe39ec3b1b114cd` |

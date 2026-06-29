@@ -64,6 +64,7 @@ def emit_github_error(file_path: str, message: str) -> None:
 
 def build_reportlab_fallback(tex: Path, pdf: Path, log_path: Path) -> bool:
     try:
+        from reportlab import rl_config
         from reportlab.lib.pagesizes import letter
         from reportlab.pdfgen import canvas
     except Exception as exc:
@@ -72,6 +73,7 @@ def build_reportlab_fallback(tex: Path, pdf: Path, log_path: Path) -> bool:
 
     text = tex.read_text(encoding="utf-8", errors="replace")
     pdf.parent.mkdir(parents=True, exist_ok=True)
+    rl_config.invariant = 1
     c = canvas.Canvas(str(pdf), pagesize=letter)
     width, height = letter
     x = 54
@@ -113,6 +115,13 @@ def existing_rows(fieldnames: list[str]) -> list[dict[str, str]]:
             row["pdf_path"] = row.get("pdf", "")
         if not row.get("log_path") and row.get("log"):
             row["log_path"] = row.get("log", "")
+        if row.get("status") == "PASS":
+            pdf = row.get("pdf_path", "")
+            log = row.get("log_path", "")
+            if not pdf or not (ROOT / pdf).exists():
+                continue
+            if log and not (ROOT / log).exists():
+                continue
         out.append({field: row.get(field, "") for field in fieldnames})
     return out
 
@@ -132,7 +141,7 @@ def write_status(status: str, pdf_path: str, latex_engine: str, errors: str, war
         "notes": notes,
     }
     with OUT.open("w", newline="", encoding="utf-8") as fh:
-        writer = csv.DictWriter(fh, fieldnames=fieldnames)
+        writer = csv.DictWriter(fh, fieldnames=fieldnames, lineterminator="\n")
         writer.writeheader()
         writer.writerows(keep + [row])
 
@@ -182,7 +191,7 @@ def main() -> int:
     errors = str(count_word(combined, "error"))
     warnings = str(count_word(combined, "warning"))
     if ok and pdf.exists():
-        write_status("PASS", rel(pdf), engine, errors, warnings, rel(log) if log.exists() else rel(combined_log), "LaTeX build completed.")
+        write_status("PASS", rel(pdf), engine, errors, warnings, rel(combined_log), "LaTeX build completed.")
         print(f"built {rel(pdf)}")
         return 0
     first_error = first_error_line(combined)

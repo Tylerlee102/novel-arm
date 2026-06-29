@@ -131,6 +131,11 @@ def sha256(path: Path) -> str:
     return h.hexdigest()
 
 
+def write_text_lf(path: Path, text: str) -> None:
+    with path.open("w", encoding="utf-8", newline="\n") as fh:
+        fh.write(text)
+
+
 def is_under(path: Path, parent: Path) -> bool:
     try:
         path.relative_to(parent)
@@ -268,6 +273,7 @@ def main() -> None:
                 "sha256",
                 "package_recommendation",
             ],
+            lineterminator="\n",
         )
         writer.writeheader()
         for entry in entries:
@@ -281,9 +287,9 @@ def main() -> None:
                 }
             )
 
-    OUT_SHA256.write_text(
+    write_text_lf(
+        OUT_SHA256,
         "".join(f"{entry.sha256}  {entry.rel}\n" for entry in entries),
-        encoding="utf-8",
     )
 
     by_class: dict[str, list[Entry]] = defaultdict(list)
@@ -389,7 +395,7 @@ def main() -> None:
             "",
         ]
     )
-    OUT_MD.write_text("\n".join(lines), encoding="utf-8")
+    write_text_lf(OUT_MD, "\n".join(lines))
     print(OUT_MD)
     if missing:
         raise SystemExit(1)

@@ -1,6 +1,6 @@
 PYTHON ?= python3
 
-.PHONY: check-toolchain test reproduce rtl sim benchmarks workloads eval synth fullcore-synth mapped-ppa power-evidence sync-hardware-evidence hardware-evidence asic-power openroad-postroute paper paper-audit artifact readiness
+.PHONY: check-toolchain test reproduce rtl sim benchmarks workloads eval synth fullcore-synth mapped-ppa power-evidence sync-hardware-evidence hardware-evidence asic-power openroad-postroute paper paper-audit public-artifact artifact readiness
 
 check-toolchain:
 	$(PYTHON) research/scripts/check_toolchain.py
@@ -88,6 +88,12 @@ paper-audit:
 
 artifact:
 	$(PYTHON) research/scripts/build_conference_docs.py
+	$(PYTHON) research/build_copper_public_artifact_manifest.py
+	$(PYTHON) research/build_copper_public_artifact_package.py
 	$(PYTHON) research/scripts/package_artifact.py
+
+public-artifact:
+	$(PYTHON) research/build_copper_public_artifact_manifest.py
+	$(PYTHON) research/build_copper_public_artifact_package.py
 
 readiness: check-toolchain test workloads rtl sim eval synth hardware-evidence
