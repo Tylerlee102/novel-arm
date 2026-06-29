@@ -6,11 +6,11 @@ Purpose: materialize the generated COPPER public artifact manifest into a compac
 
 ## Package Build Summary
 
-- Manifest rows read: 589
-- Direct-package rows copied: 587
-- Direct-package row bytes copied: 6,244,630
+- Manifest rows read: 587
+- Direct-package rows copied: 585
+- Direct-package row bytes copied: 6,206,355
 - Generated metadata files copied: 4
-- Package files present: 591
+- Package files present: 589
 - Heavy external-store rows not copied: 2
 - Missing files: 0
 - Hash mismatches: 0

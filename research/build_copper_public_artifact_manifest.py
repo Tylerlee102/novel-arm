@@ -85,9 +85,22 @@ EXPLICIT_EVIDENCE = [
     ROOT / "external" / "mibench_network" / "network" / "patricia" / "patricia.h",
     ROOT / "external" / "mibench_network" / "network" / "patricia" / "small.udp",
     ROOT / "external" / "mibench_network" / "network" / "patricia" / "large.udp",
-    ROOT / "external" / "gem5" / "src" / "mem" / "cache" / "prefetch" / "copper.cc",
-    ROOT / "external" / "gem5" / "src" / "mem" / "cache" / "prefetch" / "copper.hh",
 ]
+
+OPTIONAL_EXTERNAL_EVIDENCE = {
+    (RESULTS / "copper_clpd_sram_workload_activity.saif").resolve(): {
+        "artifact_class": "heavy_raw_evidence",
+        "size": 6_680_592,
+        "sha256": "02ccc7ab1095b5b2937039019607c1f68b69cc41e58ea12b90b6aff5212b9242",
+        "package_recommendation": "external-store-with-hash",
+    },
+    (RESULTS / "copper_clpd_sram_tcp_process_activity.saif").resolve(): {
+        "artifact_class": "heavy_raw_evidence",
+        "size": 6_798_821,
+        "sha256": "a405e60dfea7150965474680459e9f9c65d7640170aaa1f959bdb477aeae7534",
+        "package_recommendation": "external-store-with-hash",
+    },
+}
 
 SOURCE_EXTS = {
     ".c",
@@ -216,14 +229,20 @@ def collect_entries() -> tuple[list[Entry], list[str], list[str]]:
     missing = [rel(doc) for doc in SEED_DOCS if not doc.exists()]
     candidates = set(seed_doc_set)
     candidates |= source_paths()
+    optional_external: set[Path] = set()
     for path in EXPLICIT_EVIDENCE:
         if path.exists():
             candidates.add(path.resolve())
+        elif path.resolve() in OPTIONAL_EXTERNAL_EVIDENCE:
+            optional_external.add(path.resolve())
         else:
             missing.append(rel(path))
 
     for path in referenced_paths():
         if not path.exists():
+            if path.resolve() in OPTIONAL_EXTERNAL_EVIDENCE:
+                optional_external.add(path.resolve())
+                continue
             missing.append(rel(path) if is_under(path, ROOT) else str(path))
             continue
         if path.is_file() and (path.suffix.lower() in RESULT_EXTS or not is_under(path, RESULTS)):
@@ -257,6 +276,19 @@ def collect_entries() -> tuple[list[Entry], list[str], list[str]]:
                 package_recommendation=recommendation(path, artifact_class),
             )
         )
+    for path in sorted(optional_external, key=rel):
+        metadata = OPTIONAL_EXTERNAL_EVIDENCE[path]
+        entries.append(
+            Entry(
+                path=path,
+                rel=rel(path),
+                artifact_class=metadata["artifact_class"],
+                size=int(metadata["size"]),
+                sha256=str(metadata["sha256"]),
+                package_recommendation=str(metadata["package_recommendation"]),
+            )
+        )
+    entries.sort(key=lambda entry: entry.rel)
     return entries, sorted(set(missing)), sorted(set(skipped_dirs))
 
 
