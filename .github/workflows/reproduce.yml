@@ -135,7 +135,8 @@ jobs:
       - name: Install lane tools
         run: |
           sudo apt-get update
-          sudo apt-get install -y --no-install-recommends ca-certificates git make openroad python3 python3-pip yosys
+          sudo apt-get install -y --no-install-recommends ca-certificates git make python3 python3-pip yosys
+          sudo apt-get install -y --no-install-recommends openroad || true
           python3 -m pip install -r requirements.txt pytest numpy pandas
 
       - name: Run ASIC/OpenROAD power producers
