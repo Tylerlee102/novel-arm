@@ -101,6 +101,46 @@ class PublicArtifactManifestTests(unittest.TestCase):
         self.assertFalse(missing)
         self.assertFalse(any(entry.rel == "research/results/copper_public_artifact_package_20260620" for entry in entries))
 
+    def test_backslash_research_reference_is_normalized(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            research = root / "research"
+            results = research / "results"
+            research.mkdir(parents=True)
+            results.mkdir(parents=True)
+            evidence = results / "evidence.csv"
+            evidence.write_text("metric,value\nx,1\n", encoding="utf-8")
+            seed = research / "seed.md"
+            seed.write_text("`research\\results\\evidence.csv`\n", encoding="utf-8")
+
+            old_values = {
+                "ROOT": manifest.ROOT,
+                "RESEARCH": manifest.RESEARCH,
+                "RESULTS": manifest.RESULTS,
+                "SEED_DOCS": manifest.SEED_DOCS,
+                "EXPLICIT_EVIDENCE": manifest.EXPLICIT_EVIDENCE,
+                "SELF_OUTPUTS": manifest.SELF_OUTPUTS,
+                "SELF_OUTPUT_DIRS": manifest.SELF_OUTPUT_DIRS,
+                "OPTIONAL_EXTERNAL_EVIDENCE": manifest.OPTIONAL_EXTERNAL_EVIDENCE,
+            }
+            try:
+                manifest.ROOT = root
+                manifest.RESEARCH = research
+                manifest.RESULTS = results
+                manifest.SEED_DOCS = [seed]
+                manifest.EXPLICIT_EVIDENCE = []
+                manifest.SELF_OUTPUTS = set()
+                manifest.SELF_OUTPUT_DIRS = set()
+                manifest.OPTIONAL_EXTERNAL_EVIDENCE = {}
+
+                entries, missing, _skipped = manifest.collect_entries()
+            finally:
+                for key, value in old_values.items():
+                    setattr(manifest, key, value)
+
+        self.assertFalse(missing)
+        self.assertTrue(any(entry.rel == "research/results/evidence.csv" for entry in entries))
+
 
 if __name__ == "__main__":
     unittest.main()

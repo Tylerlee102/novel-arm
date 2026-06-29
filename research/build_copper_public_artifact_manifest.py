@@ -169,9 +169,10 @@ def normalize_candidate(token: str) -> Path | None:
         return None
     if token.startswith("C:") or token.startswith("http:") or token.startswith("https:"):
         return None
-    if token.startswith("research/") or token.startswith("research\\"):
-        return (ROOT / token).resolve()
-    if token.startswith("external/") or token.startswith("external\\"):
+    normalized = token.replace("\\", "/")
+    if normalized.startswith("research/"):
+        return (ROOT / normalized).resolve()
+    if normalized.startswith("external/"):
         return None
     return None
 

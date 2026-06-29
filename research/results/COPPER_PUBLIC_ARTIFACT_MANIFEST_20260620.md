@@ -8,7 +8,7 @@ Purpose: define a practical reviewer-facing artifact package for the current COP
 
 - Manifest entries: 587
 - Missing referenced files: 0
-- Minimal-package bytes: 6,206,622
+- Minimal-package bytes: 6,206,611
 - External-store bytes: 13,479,413
 - CSV manifest: `research/results/copper_public_artifact_manifest_20260620.csv`
 - SHA-256 manifest: `research/results/copper_public_artifact_manifest_20260620.sha256`
@@ -21,7 +21,7 @@ Purpose: define a practical reviewer-facing artifact package for the current COP
 | heavy_raw_evidence | 2 | 13,479,413 |
 | measured_summary | 114 | 372,025 |
 | paper_or_reproduction_doc | 8 | 343,722 |
-| reproduction_script | 274 | 1,664,924 |
+| reproduction_script | 274 | 1,664,913 |
 | rtl_or_tool_flow_source | 102 | 756,895 |
 | source_or_note | 23 | 2,455,010 |
 | tool_report_or_log | 26 | 326,011 |
@@ -32,7 +32,7 @@ Purpose: define a practical reviewer-facing artifact package for the current COP
 | Recommendation | Files | Bytes | Meaning |
 |---|---:|---:|---|
 | external-store-with-hash | 2 | 13,479,413 | Large raw artifacts that should be hosted separately or made optional, with this manifest providing hashes. |
-| include-in-minimal-package | 585 | 6,206,622 | Small or central artifacts that should be copied directly into a public package. |
+| include-in-minimal-package | 585 | 6,206,611 | Small or central artifacts that should be copied directly into a public package. |
 
 ## Largest Entries
 
