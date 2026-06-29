@@ -1,6 +1,6 @@
 # COPPER Final Submission Blockers
 
-Final scoped status: submission-ready for a constrained artifact/mechanism submission only after the current branch's CI run passes, with the blockers below preserved for stronger production-core, signoff, silicon, or top-tier architecture claims.
+Final scoped status from `research/results/top_tier_gate_status.csv`: SUBMISSION-READY. The blockers below are preserved for stronger production-core, signoff, silicon, or top-tier architecture claims.
 
 | Class | Blocker | Evidence | Required fix |
 | --- | --- | --- | --- |

@@ -4,7 +4,7 @@ This dashboard is intentionally strict. PASS means the current artifact has repr
 
 Local Windows is editing-only. GitHub Actions/Codespaces/Docker is the intended evidence environment for open-source hardware and paper gates.
 
-Final scoped status: submission-ready only for a constrained artifact/mechanism submission after the current branch's CI run passes. This dashboard does not certify full-core mapped PPA, silicon power, production readiness, state-of-the-art performance, or top-tier full-architecture readiness.
+Final scoped status from `research/results/top_tier_gate_status.csv`: SUBMISSION-READY. This dashboard certifies only constrained artifact/mechanism readiness. It supports scoped PicoRV32 tiny-SoC full-core mapped PPA where generated `scope=full_core` rows PASS, but it does not certify production ARM/OoO integration, measured silicon power, ASIC/foundry signoff, state-of-the-art performance, or top-tier full-architecture readiness.
 
 | Gate | Required for full submission? | Current status | Evidence file/script | Pass condition | Blocker |
 | --- | --- | --- | --- | --- | --- |

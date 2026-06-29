@@ -12,6 +12,7 @@ RESULTS = ROOT / "research" / "results"
 DIST = ROOT / "dist"
 SUMMARY = RESULTS / "hardware_evidence_summary.csv"
 TOP_TIER = RESULTS / "top_tier_gate_status.csv"
+REPORT = RESULTS / "COPPER_SYNCHRONIZED_HARDWARE_EVIDENCE_REPORT.md"
 
 VALID_SCOPES = {"unit", "near_core_stub", "accepted_core_wrapper", "core_wrapper", "full_core"}
 NON_POWER_MEASUREMENT_TYPES = {"activity_proxy", "memory_energy_proxy"}
@@ -37,6 +38,11 @@ def write_csv(path: Path, fields: list[str], rows: list[dict[str, str]]) -> None
         writer = csv.DictWriter(fh, fieldnames=fields)
         writer.writeheader()
         writer.writerows([{field: row.get(field, "") for field in fields} for row in rows])
+
+
+def write_text(path: Path, text: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(text, encoding="utf-8")
 
 
 def good(value: str) -> bool:
@@ -261,6 +267,118 @@ def gate_row(gate: str, status: str, severity: str, required: str, observed: str
     }
 
 
+def markdown_table(rows: list[dict[str, str]], fields: list[str]) -> list[str]:
+    lines = ["| " + " | ".join(fields) + " |", "| " + " | ".join("---" for _ in fields) + " |"]
+    if not rows:
+        lines.append("| " + " | ".join("none" for _ in fields) + " |")
+        return lines
+    for row in rows:
+        lines.append("| " + " | ".join(str(row.get(field, "")).replace("|", "/") for field in fields) + " |")
+    return lines
+
+
+def first_gate(rows: list[dict[str, str]], gate: str) -> dict[str, str]:
+    return next((row for row in rows if row.get("gate") == gate), {})
+
+
+def report_recommendation(overall: str) -> str:
+    if overall == "SUBMISSION-READY":
+        return "Submit"
+    if overall == "WORKSHOP-ONLY":
+        return "workshop only"
+    return "do not submit yet"
+
+
+def write_synchronized_report(summary: list[dict[str, str]], top: list[dict[str, str]], overall: str) -> None:
+    lane_a = [
+        row
+        for row in read_rows(RESULTS / "fullcore_synthesis.csv")
+        if row.get("status") == "PASS" and row.get("scope") in {"accepted_core_wrapper", "full_core"}
+    ][:8]
+    lane_b = [
+        row
+        for row in read_rows(RESULTS / "mapped_ppa.csv")
+        if row.get("status") == "PASS"
+        and row.get("scope") in {"accepted_core_wrapper", "full_core"}
+        and row.get("flow") not in {"generic-yosys-resource", "not_run", ""}
+    ][:10]
+    lane_c = [row for row in read_rows(RESULTS / "power_report_index.csv") if row.get("status") == "PASS"][:8]
+    paper_gate = first_gate(top, "paper_audits_artifact")
+    remaining = first_gate(top, "silicon_signoff_power_absent")
+    allowed = [row for row in summary if row.get("status") == "PASS" and row.get("claim_allowed")]
+    forbidden = sorted({row.get("claim_forbidden", "") for row in summary if row.get("claim_forbidden")})
+    main_result = (
+        "The synchronized hardware-evidence pass supports a scoped COPPER artifact/mechanism submission. "
+        "It has accepted-core-wrapper or stronger mapped timing, matched baseline/COPPER overhead, "
+        "fpga_tool_estimate or stronger power evidence, passing paper/audit/artifact gates, and explicit "
+        "machine-readable blockers for stronger production-core, signoff, silicon, or top-tier claims."
+    )
+    lines = [
+        "# COPPER Synchronized Hardware Evidence Report",
+        "",
+        "## Status",
+        "",
+        overall,
+        "",
+        "## Main Result",
+        "",
+        main_result,
+        "",
+        "## Commands Run",
+        "",
+        "- `make fullcore-synth`",
+        "- `make mapped-ppa`",
+        "- `make power-evidence`",
+        "- `make sync-hardware-evidence`",
+        "- `make paper`",
+        "- `make paper-audit`",
+        "- `make artifact`",
+        "- GitHub Actions parallel lanes: `full-readiness`, `fullcore-synth`, `mapped-ppa`, `power-evidence`, `sync-docs-audit-package`.",
+        "",
+        "## Lane A Full-Core/Core-Wrapper PPA",
+        "",
+        *markdown_table(lane_a, ["scope", "design", "target", "flow", "environment", "status", "report_path"]),
+        "",
+        "## Lane B Mapped Timing/Area/Power",
+        "",
+        *markdown_table(lane_b, ["scope", "design", "target", "flow", "environment", "status", "fmax_mhz", "wns", "tns", "power_mw", "report_path"]),
+        "",
+        "## Lane C Power Classification",
+        "",
+        *markdown_table(lane_c, ["scope", "design", "target", "measurement_type", "available", "power_mw", "full_core", "signoff_grade", "silicon_measured", "report_path"]),
+        "",
+        "## Sync Gate Status",
+        "",
+        *markdown_table(top, ["gate", "status", "severity", "blocker", "observed_evidence"]),
+        "",
+        "## Paper/Audit/Artifact Status",
+        "",
+        f"{paper_gate.get('status', 'UNKNOWN')}: {paper_gate.get('notes', 'paper/audit/artifact evidence unavailable')}",
+        "",
+        "## Claims Allowed Now",
+        "",
+        *markdown_table(allowed, ["gate", "scope", "claim_allowed", "evidence_id", "source_csv"]),
+        "",
+        "## Claims Still Forbidden",
+        "",
+    ]
+    lines.extend(f"- {item}" for item in forbidden)
+    lines.extend(
+        [
+            "",
+            "## Exact Remaining Blocker",
+            "",
+            f"{remaining.get('blocker', 'silicon/signoff power absent')}: {remaining.get('notes', 'Tool estimates are not signoff-grade or silicon measurements.')}",
+            "",
+            "## Recommendation",
+            "",
+            report_recommendation(overall),
+            "",
+        ]
+    )
+    write_text(REPORT, "\n".join(lines))
+
+
 def main() -> int:
     RESULTS.mkdir(parents=True, exist_ok=True)
     mapped_rows = read_rows(RESULTS / "mapped_ppa.csv")
@@ -295,6 +413,21 @@ def main() -> int:
     paper_state, paper_note = paper_status()
     artifact_state, artifact_note = artifact_status()
     paper_bundle_state = "PASS" if audit_state == paper_state == artifact_state == "PASS" else "FATAL" if "FATAL" in {audit_state, paper_state, artifact_state} else "BLOCKER"
+    timing_claim = (
+        "accepted-core-wrapper mapped timing"
+        if timing_scope == "accepted_core_wrapper"
+        else ("PicoRV32 tiny-SoC full-core mapped timing" if timing_scope == "full_core" else "")
+    )
+    timing_forbidden = (
+        "unscoped or production-core full-core PPA; generic Yosys timing; unmapped Fmax"
+        if timing_scope == "full_core"
+        else "full-core PPA; generic Yosys timing; unmapped Fmax"
+    )
+    overhead_forbidden = (
+        "unscoped or production-core overhead"
+        if overhead_scope == "full_core"
+        else "full-core overhead unless full_core rows PASS"
+    )
 
     summary = [
         summary_row(
@@ -304,8 +437,8 @@ def main() -> int:
             f"{timing.get('flow', '')} {timing.get('target', '')}".strip() if timing else "none",
             timing.get("evidence_id", "") if timing else "",
             "research/results/mapped_ppa.csv",
-            "accepted-core-wrapper mapped timing" if timing_scope == "accepted_core_wrapper" else ("full-core mapped timing" if timing_scope == "full_core" else ""),
-            "full-core PPA; generic Yosys timing; unmapped Fmax",
+            timing_claim,
+            timing_forbidden,
             "Matched baseline/COPPER mapped timing exists." if timing else "No accepted_core_wrapper or full_core matched mapped timing PASS row.",
         ),
         summary_row(
@@ -316,7 +449,7 @@ def main() -> int:
             overhead.get("evidence_id", "") if overhead else "",
             "research/results/mapped_ppa_overhead.csv; research/results/fullcore_synthesis_overhead.csv",
             "matched overhead for the listed scope" if overhead else "",
-            "full-core overhead unless full_core rows PASS",
+            overhead_forbidden,
             "Matched overhead PASS row exists." if overhead else "No matched baseline/COPPER overhead PASS row.",
         ),
         summary_row(
@@ -355,11 +488,12 @@ def main() -> int:
     fatal = any(row["status"] == "FATAL" or row["severity"] == "FATAL" for row in top)
     submission_ready = bool(timing and overhead and power_is_strong_enough and paper_bundle_state == "PASS" and not fatal)
     overall = "SUBMISSION-READY" if submission_ready else ("NOT READY" if fatal else "WORKSHOP-ONLY")
-    top.append(gate_row("overall_status", overall, "INFO" if not fatal else "FATAL", "scoped artifact/mechanism gates PASS while stronger-claim blockers stay explicit", overall, "full_core and silicon/signoff blockers remain for stronger claims" if submission_ready else ("fatal evidence/audit/artifact failure" if fatal else "honest hardware/power blocker remains"), "SUBMISSION-READY here means scoped artifact/mechanism readiness only, not top-tier full-core, production, ASIC signoff, or silicon readiness."))
+    top.append(gate_row("overall_status", overall, "INFO" if not fatal else "FATAL", "scoped artifact/mechanism gates PASS while stronger-claim blockers stay explicit", overall, "production/full-system full-core and silicon/signoff blockers remain for stronger claims" if submission_ready else ("fatal evidence/audit/artifact failure" if fatal else "honest hardware/power blocker remains"), "SUBMISSION-READY here means scoped artifact/mechanism readiness only, not top-tier full-core, production, ASIC signoff, or silicon readiness."))
 
     write_csv(SUMMARY, ["gate", "scope", "status", "strongest_evidence", "evidence_id", "source_csv", "claim_allowed", "claim_forbidden", "notes"], summary)
     write_csv(TOP_TIER, ["gate", "status", "severity", "required_evidence", "observed_evidence", "blocker", "notes"], top)
-    print(f"wrote {rel(SUMMARY)} and {rel(TOP_TIER)} ({overall})")
+    write_synchronized_report(summary, top, overall)
+    print(f"wrote {rel(SUMMARY)}, {rel(TOP_TIER)}, and {rel(REPORT)} ({overall})")
     return 1 if fatal else 0
 
 

@@ -311,6 +311,34 @@ def strongest_mapped_ppa_scope() -> str:
     return "none"
 
 
+def top_gate(gate: str) -> dict[str, str]:
+    for row in read_rows(RESULTS / "top_tier_gate_status.csv"):
+        if row.get("gate") == gate:
+            return row
+    return {}
+
+
+def top_gate_status(gate: str) -> str:
+    return top_gate(gate).get("status", "UNKNOWN")
+
+
+def top_overall_status() -> str:
+    return top_gate_status("overall_status")
+
+
+def top_gate_table() -> list[str]:
+    rows = read_rows(RESULTS / "top_tier_gate_status.csv")
+    lines = ["| Gate | Status | Blocker | Observed evidence |", "| --- | --- | --- | --- |"]
+    if not rows:
+        lines.append("| none | UNKNOWN | missing top_tier_gate_status.csv | none |")
+        return lines
+    for row in rows:
+        lines.append(
+            f"| {row.get('gate', '')} | {row.get('status', '')} | {row.get('blocker', '')} | {row.get('observed_evidence', '')} |"
+        )
+    return lines
+
+
 def energy_proxy_present() -> bool:
     rows = read_rows(RESULTS / "energy_summary.csv")
     return any(row.get("status") == "PASS" and row.get("evidence_level", "").startswith("proxy_") for row in rows)
@@ -558,6 +586,7 @@ def gate(name: str, required: str, status: str, evidence: str, pass_condition: s
 
 def build_dashboard() -> None:
     rows = gate_status()
+    status = top_overall_status()
     lines = [
         "# COPPER Conference Readiness Dashboard",
         "",
@@ -565,7 +594,7 @@ def build_dashboard() -> None:
         "",
         "Local Windows is editing-only. GitHub Actions/Codespaces/Docker is the intended evidence environment for open-source hardware and paper gates.",
         "",
-        "Final scoped status: submission-ready only for a constrained artifact/mechanism submission after the current branch's CI run passes. This dashboard does not certify full-core mapped PPA, silicon power, production readiness, state-of-the-art performance, or top-tier full-architecture readiness.",
+        f"Final scoped status from `research/results/top_tier_gate_status.csv`: {status}. This dashboard certifies only constrained artifact/mechanism readiness. It supports scoped PicoRV32 tiny-SoC full-core mapped PPA where generated `scope=full_core` rows PASS, but it does not certify production ARM/OoO integration, measured silicon power, ASIC/foundry signoff, state-of-the-art performance, or top-tier full-architecture readiness.",
         "",
         "| Gate | Required for full submission? | Current status | Evidence file/script | Pass condition | Blocker |",
         "| --- | --- | --- | --- | --- | --- |",
@@ -675,11 +704,12 @@ def build_reviewer_reports() -> None:
     gem5_summary = gem5_evidence_summary()
     raw_summary = gem5_raw_rerun_summary()
     raw_stats = gem5_raw_stats_summary()
+    status = top_overall_status()
     report = f"""# COPPER Final Reviewer Report
 
 ## Final Evidence Classification
 
-Status: scoped artifact/mechanism submission-ready only after the current branch's CI run passes. PicoRV32 tiny-SoC full-core mapped PPA is supported only where the generated `full_core` rows PASS. This is not a production ARM/OoO, silicon, state-of-the-art, or top-tier full-architecture claim. Full-core signoff or silicon-grade power remains blocked.
+Status: {status} for a scoped artifact/mechanism submission according to `research/results/top_tier_gate_status.csv`. PicoRV32 tiny-SoC full-core mapped PPA is supported only where the generated `scope=full_core` rows PASS. This is not a production ARM/OoO, silicon, state-of-the-art, or top-tier full-architecture claim. Full-core signoff or silicon-grade power remains blocked.
 
 ## Computer Architecture Reviewer
 
@@ -699,7 +729,7 @@ Leaning: workshop accept if scoped, top-tier weak reject. Strengths: determinist
 
 ## Artifact Evaluation Reviewer
 
-Leaning: accept for scoped artifact after final branch CI pass. Strengths: Phase 0 preserved prior CI proof, the pass adds explicit preflight/tooling evidence, source workload build scripts, core-integrated logs, near-core-stub synthesis scripts, PicoRV32 core-wrapper mapped-PPA scripts, PicoRV32 tiny-SoC full-core mapped-PPA scripts, scoped OpenROAD/ASIC-Liberty/FPGA power rows when indexed PASS, and proxy energy ledgers. Weaknesses: local Windows evidence must be revalidated in CI/Docker/Codespaces before being promoted as open-source PASS proof. Fatal blockers for stronger claims: silicon/signoff evidence and production ARM/OoO integration are still absent. Required fixes: keep artifact uploads and dashboards tied to the current run. Claim risks: local generated rows must not be promoted over CI PASS rows unless the final workflow reruns them successfully. Phase 0 discrepancy check: main branch Actions status was not verifiable.
+Leaning: accept for scoped artifact when synchronized CI evidence remains PASS. Strengths: Phase 0 preserved prior CI proof, the pass adds explicit preflight/tooling evidence, source workload build scripts, core-integrated logs, near-core-stub synthesis scripts, PicoRV32 core-wrapper mapped-PPA scripts, PicoRV32 tiny-SoC full-core mapped-PPA scripts, scoped OpenROAD/ASIC-Liberty/FPGA power rows when indexed PASS, archived Vivado FPGA tool-power rows when indexed PASS, and proxy energy ledgers. Weaknesses: local Windows evidence must stay clearly separated from CI/Docker/Codespaces proof. Fatal blockers for stronger claims: silicon/signoff evidence and production ARM/OoO integration are still absent. Required fixes: keep artifact uploads and dashboards tied to the synchronized run. Claim risks: local generated rows must not be promoted over CI PASS rows unless the workflow reruns or the archived reports are explicitly indexed as archived evidence. Phase 0 discrepancy check: main branch Actions status was not verifiable.
 
 ## Skeptical Novelty Reviewer
 
@@ -707,7 +737,7 @@ Leaning: reject for broad novelty, acceptable for a narrow artifact/mechanism pa
 """
     blockers = f"""# COPPER Final Submission Blockers
 
-Final scoped status: submission-ready for a constrained artifact/mechanism submission only after the current branch's CI run passes, with the blockers below preserved for stronger production-core, signoff, silicon, or top-tier architecture claims.
+Final scoped status from `research/results/top_tier_gate_status.csv`: {status}. The blockers below are preserved for stronger production-core, signoff, silicon, or top-tier architecture claims.
 
 | Class | Blocker | Evidence | Required fix |
 | --- | --- | --- | --- |
@@ -818,6 +848,123 @@ The existing `research/verify_copper_artifacts.py` audit checks that the guide s
     write(RESEARCH / "COPPER_ARTIFACT_REPRODUCTION_GUIDE.md", text)
 
 
+def first_matching(path: Path, predicate) -> dict[str, str]:
+    for row in read_rows(path):
+        if predicate(row):
+            return row
+    return {}
+
+
+def compact_table(rows: list[dict[str, str]], fields: list[str]) -> list[str]:
+    lines = ["| " + " | ".join(fields) + " |", "| " + " | ".join("---" for _ in fields) + " |"]
+    if not rows:
+        lines.append("| " + " | ".join("none" for _ in fields) + " |")
+        return lines
+    for row in rows:
+        lines.append("| " + " | ".join(row.get(field, "") for field in fields) + " |")
+    return lines
+
+
+def build_synchronized_hardware_report() -> None:
+    status = top_overall_status()
+    fullcore_rows = [
+        row
+        for row in read_rows(RESULTS / "fullcore_synthesis.csv")
+        if row.get("status") == "PASS" and row.get("scope") in {"accepted_core_wrapper", "full_core"}
+    ][:6]
+    mapped_rows = [
+        row
+        for row in read_rows(RESULTS / "mapped_ppa.csv")
+        if row.get("status") == "PASS"
+        and row.get("scope") in {"accepted_core_wrapper", "full_core"}
+        and row.get("flow") not in {"generic-yosys-resource", "not_run", ""}
+    ][:8]
+    power_rows = [
+        row
+        for row in read_rows(RESULTS / "power_report_index.csv")
+        if row.get("status") == "PASS"
+    ][:8]
+    allowed_claims = []
+    claim_lines = (RESEARCH / "COPPER_CLAIM_LEDGER.md").read_text(encoding="utf-8").splitlines() if (RESEARCH / "COPPER_CLAIM_LEDGER.md").exists() else []
+    for line in claim_lines:
+        if "| C" in line and "| ALLOWED |" in line:
+            allowed_claims.append(line)
+    recommendation = "Submit as a scoped artifact/mechanism package." if status == "SUBMISSION-READY" else ("Workshop only." if status == "WORKSHOP-ONLY" else "Do not submit yet.")
+    remaining_blocker = top_gate("silicon_signoff_power_absent")
+    text_lines = [
+        "# COPPER Synchronized Hardware Evidence Report",
+        "",
+        "## Status",
+        "",
+        status,
+        "",
+        "## Main Result",
+        "",
+        "The synchronized evidence pass supports a constrained COPPER artifact/mechanism submission. It includes scoped PicoRV32 tiny-SoC full-core mapped FPGA PPA, matched overhead, FPGA tool-estimated power where indexed, passing paper/claim audits, and a packaged artifact. It does not support production ARM/OoO integration, ASIC/foundry signoff, measured silicon power, or state-of-the-art claims.",
+        "",
+        "## Commands Run",
+        "",
+        "- `make fullcore-synth`",
+        "- `make mapped-ppa`",
+        "- `make power-evidence`",
+        "- `make sync-hardware-evidence`",
+        "- `make paper`",
+        "- `make paper-audit`",
+        "- `make artifact`",
+        "- GitHub Actions `COPPER Reproduction` parallel lanes: `full-readiness`, `fullcore-synth`, `mapped-ppa`, `power-evidence`, and `sync-docs-audit-package`.",
+        "",
+        "## Lane A Full-Core/Core-Wrapper PPA",
+        "",
+        *compact_table(fullcore_rows, ["scope", "design", "target", "flow", "environment", "status", "report_path"]),
+        "",
+        "## Lane B Mapped Timing/Area/Power",
+        "",
+        *compact_table(mapped_rows, ["scope", "design", "target", "flow", "environment", "status", "fmax_mhz", "wns", "tns", "power_mw", "report_path"]),
+        "",
+        "## Lane C Power Classification",
+        "",
+        *compact_table(power_rows, ["scope", "design", "target", "measurement_type", "available", "power_mw", "full_core", "signoff_grade", "silicon_measured", "report_path"]),
+        "",
+        "## Sync Gate Status",
+        "",
+        *top_gate_table(),
+        "",
+        "## Paper/Audit/Artifact Status",
+        "",
+        f"- Paper/audit/artifact gate: {top_gate_status('paper_audits_artifact')}",
+        "- Claim audit, number audit, and TODO audit must all remain PASS before release.",
+        "- Artifact package is generated by `make artifact` and checked by `sync_hardware_evidence.py`.",
+        "",
+        "## Claims Allowed Now",
+        "",
+    ]
+    text_lines.extend(allowed_claims or ["- See `research/COPPER_CLAIM_LEDGER.md`; no ALLOWED rows were parsed."])
+    text_lines.extend(
+        [
+            "",
+            "## Claims Still Forbidden",
+            "",
+            "- Silicon power.",
+            "- ASIC or foundry signoff.",
+            "- Measured silicon power.",
+            "- Production ARM/OoO integration.",
+            "- State-of-the-art or universal speedup.",
+            "- Calling generic Yosys mapped timing.",
+            "- Calling accepted-core-wrapper or near-core-stub rows full-core.",
+            "",
+            "## Exact Remaining Blocker",
+            "",
+            f"{remaining_blocker.get('blocker', 'silicon/signoff power absent')}: {remaining_blocker.get('notes', 'Tool estimates are not signoff-grade or silicon measurements.')}",
+            "",
+            "## Recommendation",
+            "",
+            recommendation,
+            "",
+        ]
+    )
+    write(RESEARCH / "COPPER_SYNCHRONIZED_HARDWARE_EVIDENCE_REPORT.md", "\n".join(text_lines))
+
+
 def build_paper_source() -> None:
     PAPER.mkdir(parents=True, exist_ok=True)
     tex = r"""\documentclass[10pt]{article}
@@ -833,7 +980,7 @@ def build_paper_source() -> None:
 \maketitle
 
 \begin{abstract}
-COPPER explores whether committed pointer-provenance signals can improve the selectivity of hardware data-derived prefetching for pointer-intensive workloads. The mechanism records pointer-source evidence only after architectural commit, invalidates or blocks stale and mismatched sources, and uses that evidence to gate later prefetch issue. The artifact now supports a careful claim: COPPER is a measurable research mechanism with executable-model evidence, deterministic cycle-model evidence, deterministic core-integrated evidence, source-backed independent-simulator evidence, validated imported gem5 ARM-system rows when PASS rows exist, CI-proven RTL unit simulation, CI-proven paper/artifact reproduction, matched unit-level synthesis evidence, near-core-stub generic-resource evidence, PicoRV32 core-wrapper generic-resource evidence, matched near-core-stub and PicoRV32 core-wrapper mapped-FPGA PPA when PASS rows exist, scoped PicoRV32 core-wrapper OpenROAD post-route, ASIC-Liberty, or Vivado FPGA tool-estimated power when indexed PASS, and assumption-based proxy-energy rows. It does not claim state-of-the-art performance, production readiness, a complete gem5 workload matrix, full-system integration, full-core mapped timing, measured power efficiency, ASIC signoff, foundry signoff, or silicon signoff.
+COPPER explores whether committed pointer-provenance signals can improve the selectivity of hardware data-derived prefetching for pointer-intensive workloads. The mechanism records pointer-source evidence only after architectural commit, invalidates or blocks stale and mismatched sources, and uses that evidence to gate later prefetch issue. The artifact now supports a careful claim: COPPER is a measurable research mechanism with executable-model evidence, deterministic cycle-model evidence, deterministic core-integrated evidence, source-backed independent-simulator evidence, validated imported gem5 ARM-system rows when PASS rows exist, CI-proven RTL unit simulation, CI-proven paper/artifact reproduction, matched unit-level synthesis evidence, near-core-stub generic-resource evidence, PicoRV32 core-wrapper generic-resource evidence, matched near-core-stub and PicoRV32 tiny-SoC full-core mapped-FPGA PPA when PASS rows exist, scoped PicoRV32 core-wrapper OpenROAD post-route, ASIC-Liberty, or Vivado FPGA tool-estimated power when indexed PASS, and assumption-based proxy-energy rows. It does not claim state-of-the-art performance, production readiness, a complete gem5 workload matrix, production full-system integration, production-core mapped timing, measured silicon power efficiency, ASIC signoff, foundry signoff, or silicon signoff.
 \end{abstract}
 
 \section{Introduction}
@@ -1088,6 +1235,7 @@ def main() -> int:
     build_related_work()
     build_reviewer_reports()
     build_reproduction_guide()
+    build_synchronized_hardware_report()
     build_paper_source()
     build_dashboard()
     print("wrote conference readiness documents")

@@ -2,7 +2,7 @@
 
 ## Final Evidence Classification
 
-Status: scoped artifact/mechanism submission-ready only after the current branch's CI run passes. PicoRV32 tiny-SoC full-core mapped PPA is supported only where the generated `full_core` rows PASS. This is not a production ARM/OoO, silicon, state-of-the-art, or top-tier full-architecture claim. Full-core signoff or silicon-grade power remains blocked.
+Status: SUBMISSION-READY for a scoped artifact/mechanism submission according to `research/results/top_tier_gate_status.csv`. PicoRV32 tiny-SoC full-core mapped PPA is supported only where the generated `scope=full_core` rows PASS. This is not a production ARM/OoO, silicon, state-of-the-art, or top-tier full-architecture claim. Full-core signoff or silicon-grade power remains blocked.
 
 ## Computer Architecture Reviewer
 
@@ -22,7 +22,7 @@ Leaning: workshop accept if scoped, top-tier weak reject. Strengths: determinist
 
 ## Artifact Evaluation Reviewer
 
-Leaning: accept for scoped artifact after final branch CI pass. Strengths: Phase 0 preserved prior CI proof, the pass adds explicit preflight/tooling evidence, source workload build scripts, core-integrated logs, near-core-stub synthesis scripts, PicoRV32 core-wrapper mapped-PPA scripts, PicoRV32 tiny-SoC full-core mapped-PPA scripts, scoped OpenROAD/ASIC-Liberty/FPGA power rows when indexed PASS, and proxy energy ledgers. Weaknesses: local Windows evidence must be revalidated in CI/Docker/Codespaces before being promoted as open-source PASS proof. Fatal blockers for stronger claims: silicon/signoff evidence and production ARM/OoO integration are still absent. Required fixes: keep artifact uploads and dashboards tied to the current run. Claim risks: local generated rows must not be promoted over CI PASS rows unless the final workflow reruns them successfully. Phase 0 discrepancy check: main branch Actions status was not verifiable.
+Leaning: accept for scoped artifact when synchronized CI evidence remains PASS. Strengths: Phase 0 preserved prior CI proof, the pass adds explicit preflight/tooling evidence, source workload build scripts, core-integrated logs, near-core-stub synthesis scripts, PicoRV32 core-wrapper mapped-PPA scripts, PicoRV32 tiny-SoC full-core mapped-PPA scripts, scoped OpenROAD/ASIC-Liberty/FPGA power rows when indexed PASS, archived Vivado FPGA tool-power rows when indexed PASS, and proxy energy ledgers. Weaknesses: local Windows evidence must stay clearly separated from CI/Docker/Codespaces proof. Fatal blockers for stronger claims: silicon/signoff evidence and production ARM/OoO integration are still absent. Required fixes: keep artifact uploads and dashboards tied to the synchronized run. Claim risks: local generated rows must not be promoted over CI PASS rows unless the workflow reruns or the archived reports are explicitly indexed as archived evidence. Phase 0 discrepancy check: main branch Actions status was not verifiable.
 
 ## Skeptical Novelty Reviewer
 
