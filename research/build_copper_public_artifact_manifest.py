@@ -24,12 +24,14 @@ OUT_MD = RESULTS / "COPPER_PUBLIC_ARTIFACT_MANIFEST_20260620.md"
 OUT_CSV = RESULTS / "copper_public_artifact_manifest_20260620.csv"
 OUT_SHA256 = RESULTS / "copper_public_artifact_manifest_20260620.sha256"
 OUT_PACKAGE_SUMMARY = RESULTS / "COPPER_PUBLIC_ARTIFACT_PACKAGE_BUILD_20260620.md"
+OUT_PACKAGE_DIR = RESULTS / "copper_public_artifact_package_20260620"
 SELF_OUTPUTS = {
     OUT_MD.resolve(),
     OUT_CSV.resolve(),
     OUT_SHA256.resolve(),
     OUT_PACKAGE_SUMMARY.resolve(),
 }
+SELF_OUTPUT_DIRS = {OUT_PACKAGE_DIR.resolve()}
 
 SEED_DOCS = [
     RESEARCH / "COPPER_FULL_PAPER.md",
@@ -239,9 +241,12 @@ def collect_entries() -> tuple[list[Entry], list[str], list[str]]:
             missing.append(rel(path))
 
     for path in referenced_paths():
+        resolved = path.resolve()
+        if resolved in SELF_OUTPUTS or any(is_under(resolved, self_dir) for self_dir in SELF_OUTPUT_DIRS):
+            continue
         if not path.exists():
-            if path.resolve() in OPTIONAL_EXTERNAL_EVIDENCE:
-                optional_external.add(path.resolve())
+            if resolved in OPTIONAL_EXTERNAL_EVIDENCE:
+                optional_external.add(resolved)
                 continue
             missing.append(rel(path) if is_under(path, ROOT) else str(path))
             continue
