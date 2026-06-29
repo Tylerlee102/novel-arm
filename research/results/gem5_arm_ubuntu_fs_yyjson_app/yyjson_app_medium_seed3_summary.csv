@@ -1,0 +1,6 @@
+policy,roi_ticks,insts_not_nop,l1d_demand_misses,l1d_demand_accesses,l2_demand_misses,checksum,rc,rows,lookups,traversals,rounds,seed,poison,bytes,version,pfIssued,pfUseful,pointerLikeCandidates,learnedProofs,proofEvictions,allowedCandidates,blockedNoProvenance,fillPrefetchTranslated,fillPrefetchTranslationFault,targetLineWitnessHits,targetLineWitnessMisses,carriedProvenanceTerminalStops,boundaryFlushes,boundaryAuthorityEntriesDropped,boundaryPrefetchesDropped,tick_delta_vs_none_pct,l1d_miss_delta_vs_none_pct
+none,14655426237,21932355,139743,6598003,85237,0x36a08ae1ee1a75c2,0,1024,2400,2400,1,3,1,144128,3072,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.000,0.000
+naive,14649147189,21932333,139473,6597998,85165,0x36a08ae1ee1a75c2,0,1024,2400,2400,1,3,1,144128,3072,8313,486,12216,465,0,12216,0,8080,0,8080,3901,0,0,0,0,-0.043,-0.193
+copper_clpd64k_peb,14654955375,21932333,139506,6597998,85126,0x36a08ae1ee1a75c2,0,1024,2400,2400,1,3,1,144128,3072,7191,349,12900,460,0,7235,5665,7008,0,7008,44,9506,2,18356,0,-0.003,-0.170
+spp,12304612071,21971458,59620,6612512,118780,0x36a08ae1ee1a75c2,0,1024,2400,2400,1,3,1,144128,3072,655385,91060,0,0,0,0,0,0,0,0,0,0,0,0,0,-16.041,-57.336
+spp_copper_slack,12305581434,21971458,59616,6612512,118873,0x36a08ae1ee1a75c2,0,1024,2400,2400,1,3,1,144128,3072,670354,90914,20471,267,0,733,19738,519,0,519,54,1038,2,10358,0,-16.034,-57.339

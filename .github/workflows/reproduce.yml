@@ -1,0 +1,311 @@
+name: COPPER Reproduction
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+      - main
+      - copper-ci-proof
+      - top-tier-pass-2026-06-28
+  pull_request:
+
+env:
+  PIP_BREAK_SYSTEM_PACKAGES: "1"
+  COPPER_ENVIRONMENT: github_actions
+
+jobs:
+  full-readiness:
+    name: full-readiness
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install readiness tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            build-essential \
+            ca-certificates \
+            git \
+            iverilog \
+            make \
+            python3 \
+            python3-pip \
+            yosys
+          python3 -m pip install -r requirements.txt pytest numpy pandas
+
+      - name: Run model, workload, RTL, and evaluation gates
+        if: always()
+        run: |
+          make check-toolchain
+          make test
+          make workloads
+          make rtl
+          make sim
+          make eval
+
+      - name: Upload readiness evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: copper-readiness-${{ github.run_id }}
+          if-no-files-found: ignore
+          path: |
+            research/results/*.csv
+            research/results/**/*.csv
+            research/results/logs/**
+
+  fullcore-synth:
+    name: fullcore-synth
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install lane tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends ca-certificates git make python3 python3-pip yosys
+          python3 -m pip install -r requirements.txt pytest numpy pandas
+
+      - name: Try OSS CAD Suite
+        if: always()
+        continue-on-error: true
+        uses: YosysHQ/setup-oss-cad-suite@v3
+
+      - name: Show synthesis tool availability
+        if: always()
+        run: yosys -V
+
+      - name: Run full-core/core-wrapper synthesis ledger
+        if: always()
+        run: make fullcore-synth
+
+      - name: Upload full-core/core-wrapper evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: copper-fullcore-synth-${{ github.run_id }}
+          if-no-files-found: ignore
+          path: |
+            research/results/full_core_design_inventory.csv
+            research/results/full_core_target_inventory.csv
+            research/results/fullcore_synthesis*.csv
+            research/results/logs/**
+
+  mapped-ppa:
+    name: mapped-ppa
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install lane tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends ca-certificates curl git make python3 python3-pip yosys
+          sudo apt-get install -y --no-install-recommends nextpnr-ecp5 || true
+          sudo apt-get install -y --no-install-recommends nextpnr-ice40 || true
+          sudo apt-get install -y --no-install-recommends openroad || true
+          python3 -m pip install -r requirements.txt pytest numpy pandas
+
+      - name: Try OSS CAD Suite
+        if: always()
+        continue-on-error: true
+        uses: YosysHQ/setup-oss-cad-suite@v3
+
+      - name: Show mapped PPA tool availability
+        if: always()
+        run: |
+          yosys -V || true
+          nextpnr-ecp5 --version || true
+          nextpnr-ice40 --version || true
+          openroad -version || true
+          vivado -version || true
+
+      - name: Run mapped PPA ledger
+        if: always()
+        run: make mapped-ppa
+
+      - name: Upload mapped PPA evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: copper-mapped-ppa-${{ github.run_id }}
+          if-no-files-found: ignore
+          path: |
+            research/results/mapped_ppa*.csv
+            research/results/logs/**
+
+  power-evidence:
+    name: power-evidence
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install lane tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends ca-certificates git make python3 python3-pip yosys
+          sudo apt-get install -y --no-install-recommends openroad || true
+          python3 -m pip install -r requirements.txt pytest numpy pandas
+
+      - name: Run ASIC/OpenROAD power producers
+        if: always()
+        run: make asic-power
+
+      - name: Run power classification ledger
+        if: always()
+        run: make power-evidence
+
+      - name: Upload power evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: copper-power-evidence-${{ github.run_id }}
+          if-no-files-found: ignore
+          path: |
+            research/results/power_report_index.csv
+            research/results/energy_*.csv
+            research/results/asic_power*.csv
+            research/results/openroad_postroute_power*.csv
+            research/results/logs/**
+
+  sync-docs-audit-package:
+    name: sync-docs-audit-package
+    needs:
+      - full-readiness
+      - fullcore-synth
+      - mapped-ppa
+      - power-evidence
+    if: always()
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install doc and package tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            ca-certificates \
+            git \
+            make \
+            python3 \
+            python3-pip \
+            latexmk \
+            texlive-latex-base \
+            texlive-latex-recommended \
+            texlive-latex-extra \
+            texlive-fonts-recommended \
+            texlive-publishers \
+            texlive-bibtex-extra \
+            biber
+          python3 -m pip install -r requirements.txt pytest numpy pandas
+
+      - name: Download full-core/core-wrapper evidence
+        if: always()
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          name: copper-fullcore-synth-${{ github.run_id }}
+          path: .lane-fullcore
+
+      - name: Download readiness evidence
+        if: always()
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          name: copper-readiness-${{ github.run_id }}
+          path: .lane-readiness
+
+      - name: Download mapped PPA evidence
+        if: always()
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          name: copper-mapped-ppa-${{ github.run_id }}
+          path: .lane-mapped
+
+      - name: Download power evidence
+        if: always()
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          name: copper-power-evidence-${{ github.run_id }}
+          path: .lane-power
+
+      - name: Merge lane artifacts
+        if: always()
+        run: |
+          mkdir -p .lane-readiness .lane-fullcore .lane-mapped .lane-power
+          mkdir -p research/results research/results/logs dist
+          for lane in .lane-readiness .lane-fullcore .lane-mapped .lane-power; do
+            [ -d "$lane" ] || continue
+            if [ -d "$lane/research/results" ]; then
+              cp -a "$lane/research/results/." research/results/
+            fi
+            find "$lane" -maxdepth 1 -type f -name '*.csv' -exec cp -f {} research/results/ \;
+            if [ -d "$lane/logs" ]; then
+              cp -a "$lane/logs/." research/results/logs/
+            fi
+            if [ -d "$lane/dist" ]; then
+              cp -a "$lane/dist/." dist/
+            fi
+          done
+
+      - name: Rebuild power index after mapped evidence merge
+        if: always()
+        run: make power-evidence
+
+      - name: Synchronize hardware evidence
+        if: always()
+        run: make sync-hardware-evidence
+
+      - name: Build paper docs
+        if: always()
+        run: make paper
+
+      - name: Audit paper
+        if: always()
+        run: make paper-audit
+
+      - name: Package synchronized artifact
+        if: always()
+        run: make artifact
+
+      - name: Final synchronized evidence check
+        if: always()
+        run: |
+          make sync-hardware-evidence
+          python3 - <<'PY'
+          import csv
+          import sys
+          from pathlib import Path
+
+          rows = list(csv.DictReader(Path("research/results/top_tier_gate_status.csv").open()))
+          required_pass = {
+              "schema_integrity",
+              "accepted_or_full_mapped_timing",
+              "matched_overhead",
+              "power_evidence",
+              "full_core_absent",
+              "paper_audits_artifact",
+          }
+          bad = [row for row in rows if row.get("gate") in required_pass and row.get("status") != "PASS"]
+          if bad:
+              for row in bad:
+                  print(f"{row.get('gate')}: {row.get('status')} - {row.get('blocker') or row.get('notes')}")
+              sys.exit(1)
+          print("required synchronized full-core artifact gates passed")
+          PY
+
+      - name: Upload synchronized COPPER evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: copper-synchronized-evidence-${{ github.run_id }}
+          if-no-files-found: ignore
+          path: |
+            research/results/*.csv
+            research/results/**/*.csv
+            research/results/logs/**
+            dist/copper-artifact.zip

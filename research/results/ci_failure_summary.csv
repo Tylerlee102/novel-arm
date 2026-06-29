@@ -1,0 +1,2 @@
+gate,job,step,status,first_error,log_path,suggested_fix,notes
+ALL,github_actions,imported artifacts,PASS,,,,All required imported CI evidence checks passed.

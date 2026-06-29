@@ -1,0 +1,8 @@
+{
+  "cycle_performance.csv": 630,
+  "cycle_prefetch_metrics.csv": 630,
+  "cycle_memory_traffic.csv": 630,
+  "statistical_summary.csv": 636,
+  "ablation.csv": 72,
+  "sensitivity.csv": 22
+}

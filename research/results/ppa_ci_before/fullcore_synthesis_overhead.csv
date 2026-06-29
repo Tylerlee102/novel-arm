@@ -1,0 +1,3 @@
+target,flow,environment,metric,baseline_design,with_copper_design,baseline,with_copper,delta,percent_overhead,scope,status,notes
+full_core,not_run,github_actions,full_core_cells_core_wrapper_baseline_vs_copper,baseline_core_wrapper,core_wrapper_plus_copper,,,,,full_core,BLOCKED,"BLOCKED: no real full-core or accepted core-wrapper RTL is present in this open artifact, so no full-core area/timing/power row is claimed."
+generic,yosys,github_actions,near_core_stub_cells_baseline_vs_copper,nearcore_stub_baseline,nearcore_stub_plus_copper,328,1929,1601,488.109756,near_core_stub,PASS,Matched near_core_stub generic Yosys resource overhead only; no mapped timing or power claim.

@@ -1,0 +1,3 @@
+target,flow,scope,metric,baseline,with_copper,delta,percent_overhead,notes
+nangate45,openroad-flow-scripts-postroute,full_core,full_core_openroad_postroute_power,,,,,BLOCKED: matched OpenROAD post-route overhead requires PASS rows for baseline and COPPER.
+nangate45,openroad-flow-scripts-postroute,core_wrapper,core_wrapper_openroad_postroute_power,,,,,BLOCKED: matched OpenROAD post-route overhead requires PASS rows for baseline and COPPER.

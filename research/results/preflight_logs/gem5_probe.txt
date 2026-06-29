@@ -1,0 +1,4 @@
+external_gem5_exists=True
+gem5_opt_path=external/gem5/build/ARM/gem5.opt
+gem5_opt_size=4478200434
+temporary_exe_error=[WinError 193] %1 is not a valid Win32 application

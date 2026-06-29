@@ -60,6 +60,10 @@ WORKLOADS = {
 POLICIES = ["none", "naive", "copper_clpd64k_peb", "spp", "spp_copper_slack"]
 
 
+def rel(path: Path) -> str:
+    return str(path.relative_to(ROOT)).replace("\\", "/")
+
+
 def parse_stats_sections(path: Path) -> list[dict[str, float]]:
     text = path.read_text(encoding="utf-8", errors="replace")
     sections: list[dict[str, float]] = []
@@ -241,7 +245,7 @@ def workload_activity(workload: str, tag: str, policy: str) -> dict[str, float |
     return {
         "workload": workload,
         "policy": policy,
-        "run_dir": str(directory),
+        "run_dir": rel(directory),
         "sim_ticks": sim_ticks,
         "roi_cycles": roi_cycles,
         "clock_mhz": clock_mhz,
@@ -547,8 +551,8 @@ def row_for(workload: str, tag: str, policy: str, core_model: str, timeout_s: in
         "policy": policy,
         "core_model": core_model,
         "status": status,
-        "xml": str(xml_path.relative_to(ROOT)),
-        "mcpat_output": str(out_path.relative_to(ROOT)),
+        "xml": rel(xml_path),
+        "mcpat_output": rel(out_path),
     }
     if bad_metrics:
         row["error"] = "nonphysical metrics: " + ",".join(bad_metrics)

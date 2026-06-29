@@ -48,6 +48,11 @@ def rel(path: Path) -> str:
     return str(path.relative_to(ROOT)).replace("\\", "/")
 
 
+def write_text_lf(path: Path, text: str) -> None:
+    with path.open("w", encoding="utf-8", newline="\n") as fh:
+        fh.write(text)
+
+
 def read_manifest() -> list[ManifestRow]:
     rows: list[ManifestRow] = []
     with MANIFEST_CSV.open(newline="", encoding="utf-8") as fh:
@@ -177,7 +182,7 @@ def main() -> None:
             lines.append(f"| `{item}` |")
 
     lines.extend(["", f"status={status}", ""])
-    SUMMARY.write_text("\n".join(lines), encoding="utf-8")
+    write_text_lf(SUMMARY, "\n".join(lines))
 
     summary_copy = copy_rel(SUMMARY)
     if sha256(summary_copy) != sha256(SUMMARY):

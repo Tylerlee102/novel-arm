@@ -1,0 +1,71 @@
+# COPPER Reproducibility Status
+
+This repository is a compact public artifact package, not a complete virtual
+machine or one-command full-system artifact.
+
+## Reproducible From This Repository
+
+- `reproduce.ps1`, `reproduce.sh`, or `python reproduce.py --mode all-local`
+  reruns the clone-local reproduction path and writes
+  `research/results/reproduction/LOCAL_REPRODUCTION_REPORT.md`.
+- In a Linux container, Codespaces, or GitHub Actions runner with the Dockerfile
+  dependencies, the open-source flow runs through `make check-toolchain`,
+  `make test`, `make rtl`, `make sim`, `make eval`, `make synth`,
+  `make paper`, `make paper-audit`, and `make artifact`.
+- The model-level evaluation regenerates same-path baselines for
+  `no_prefetch`, `next_line`, `stride`, `simple_pointer_chase`, and `copper`,
+  including queue drops, lateness, accuracy, coverage, traffic overhead,
+  ablations, sensitivity, and seed/input stability.
+- The deterministic cycle-model evaluation regenerates `cycle_performance.csv`,
+  `cycle_prefetch_metrics.csv`, and `cycle_memory_traffic.csv` for the same
+  baseline names. It models cache hit/miss latency, memory latency, outstanding
+  prefetches, queue drops, lateness, and demand/prefetch traffic, but it is not
+  gem5.
+- Paper-facing documents, tables, summaries, RTL sources, testbenches, and
+  reproduction scripts are included with stable relative paths.
+- The Python audit and summary scripts can be rerun with a local Python 3
+  interpreter, subject to normal package availability.
+- Included measured-summary files can be checked against the claim matrix and
+  artifact manifest.
+- MiBench Patricia source and public inputs used by the 12K seed-stability
+  result are included under `external/`.
+- Vivado RTL simulations and synthesis scripts are included, but require a
+  local Vivado installation and may need path edits for the installed version.
+- Local Windows is editing-only for final open-source RTL, Yosys synthesis,
+  paper PDF, and artifact-package proof. It may edit files, run Python syntax
+  checks, commit, push, or trigger CI, but it must not decide final PASS status
+  for those gates.
+- GitHub Actions, Docker, and Codespaces are the intended source of truth for
+  the open-source hardware and paper gates. Missing local tools are not a
+  license to substitute fake reports.
+- This checkout includes imported GitHub Actions proof for the open-source RTL,
+  synthesis, paper, audit, and artifact-packaging gates. Future evidence changes
+  should still be imported with `research/scripts/import_ci_artifacts.py` before
+  promoting new CI-backed claims.
+
+## Requires External Setup
+
+- Full-system AArch64/gem5 reruns require a local gem5 build, guest/runtime
+  setup, cross-compilation support, and workload staging environment. Those
+  large toolchain and simulator artifacts are not stored in this compact repo.
+- The repo includes result summaries and runner scripts for the full-system
+  points, but a fresh clone alone is not sufficient to regenerate every raw
+  gem5 run.
+- Two large SAIF power-activity files are intentionally excluded from the compact
+  package and recorded by SHA-256 in the public artifact manifest.
+
+## Honest Interpretation
+
+Reviewers can audit the reported evidence, rerun many Python and RTL checks with
+standard tools, and reproduce selected public-workload points after installing
+the external simulator/toolchain stack. They should not expect a fresh clone to
+reproduce the entire long-running full-system campaign without that setup.
+
+The model-level and cycle-model evidence improve baseline discipline but do not
+replace gem5 or core-integrated evidence. Claims in the paper and claim ledger
+must identify model-level, cycle-model, RTL-level, generic-synthesis,
+existing-Vivado, and external summary evidence separately.
+
+The clone-local runner is intended to make this boundary explicit: it should pass
+from a fresh clone after Python dependencies are installed, while full gem5 and
+Vivado reruns remain external-tool modes.

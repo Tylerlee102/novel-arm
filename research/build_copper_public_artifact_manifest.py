@@ -24,12 +24,14 @@ OUT_MD = RESULTS / "COPPER_PUBLIC_ARTIFACT_MANIFEST_20260620.md"
 OUT_CSV = RESULTS / "copper_public_artifact_manifest_20260620.csv"
 OUT_SHA256 = RESULTS / "copper_public_artifact_manifest_20260620.sha256"
 OUT_PACKAGE_SUMMARY = RESULTS / "COPPER_PUBLIC_ARTIFACT_PACKAGE_BUILD_20260620.md"
+OUT_PACKAGE_DIR = RESULTS / "copper_public_artifact_package_20260620"
 SELF_OUTPUTS = {
     OUT_MD.resolve(),
     OUT_CSV.resolve(),
     OUT_SHA256.resolve(),
     OUT_PACKAGE_SUMMARY.resolve(),
 }
+SELF_OUTPUT_DIRS = {OUT_PACKAGE_DIR.resolve()}
 
 SEED_DOCS = [
     RESEARCH / "COPPER_FULL_PAPER.md",
@@ -85,9 +87,22 @@ EXPLICIT_EVIDENCE = [
     ROOT / "external" / "mibench_network" / "network" / "patricia" / "patricia.h",
     ROOT / "external" / "mibench_network" / "network" / "patricia" / "small.udp",
     ROOT / "external" / "mibench_network" / "network" / "patricia" / "large.udp",
-    ROOT / "external" / "gem5" / "src" / "mem" / "cache" / "prefetch" / "copper.cc",
-    ROOT / "external" / "gem5" / "src" / "mem" / "cache" / "prefetch" / "copper.hh",
 ]
+
+OPTIONAL_EXTERNAL_EVIDENCE = {
+    (RESULTS / "copper_clpd_sram_workload_activity.saif").resolve(): {
+        "artifact_class": "heavy_raw_evidence",
+        "size": 6_680_592,
+        "sha256": "02ccc7ab1095b5b2937039019607c1f68b69cc41e58ea12b90b6aff5212b9242",
+        "package_recommendation": "external-store-with-hash",
+    },
+    (RESULTS / "copper_clpd_sram_tcp_process_activity.saif").resolve(): {
+        "artifact_class": "heavy_raw_evidence",
+        "size": 6_798_821,
+        "sha256": "a405e60dfea7150965474680459e9f9c65d7640170aaa1f959bdb477aeae7534",
+        "package_recommendation": "external-store-with-hash",
+    },
+}
 
 SOURCE_EXTS = {
     ".c",
@@ -131,6 +146,11 @@ def sha256(path: Path) -> str:
     return h.hexdigest()
 
 
+def write_text_lf(path: Path, text: str) -> None:
+    with path.open("w", encoding="utf-8", newline="\n") as fh:
+        fh.write(text)
+
+
 def is_under(path: Path, parent: Path) -> bool:
     try:
         path.relative_to(parent)
@@ -149,9 +169,10 @@ def normalize_candidate(token: str) -> Path | None:
         return None
     if token.startswith("C:") or token.startswith("http:") or token.startswith("https:"):
         return None
-    if token.startswith("research/") or token.startswith("research\\"):
-        return (ROOT / token).resolve()
-    if token.startswith("external/") or token.startswith("external\\"):
+    normalized = token.replace("\\", "/")
+    if normalized.startswith("research/"):
+        return (ROOT / normalized).resolve()
+    if normalized.startswith("external/"):
         return None
     return None
 
@@ -211,14 +232,23 @@ def collect_entries() -> tuple[list[Entry], list[str], list[str]]:
     missing = [rel(doc) for doc in SEED_DOCS if not doc.exists()]
     candidates = set(seed_doc_set)
     candidates |= source_paths()
+    optional_external: set[Path] = set()
     for path in EXPLICIT_EVIDENCE:
         if path.exists():
             candidates.add(path.resolve())
+        elif path.resolve() in OPTIONAL_EXTERNAL_EVIDENCE:
+            optional_external.add(path.resolve())
         else:
             missing.append(rel(path))
 
     for path in referenced_paths():
+        resolved = path.resolve()
+        if resolved in SELF_OUTPUTS or any(is_under(resolved, self_dir) for self_dir in SELF_OUTPUT_DIRS):
+            continue
         if not path.exists():
+            if resolved in OPTIONAL_EXTERNAL_EVIDENCE:
+                optional_external.add(resolved)
+                continue
             missing.append(rel(path) if is_under(path, ROOT) else str(path))
             continue
         if path.is_file() and (path.suffix.lower() in RESULT_EXTS or not is_under(path, RESULTS)):
@@ -252,6 +282,19 @@ def collect_entries() -> tuple[list[Entry], list[str], list[str]]:
                 package_recommendation=recommendation(path, artifact_class),
             )
         )
+    for path in sorted(optional_external, key=rel):
+        metadata = OPTIONAL_EXTERNAL_EVIDENCE[path]
+        entries.append(
+            Entry(
+                path=path,
+                rel=rel(path),
+                artifact_class=metadata["artifact_class"],
+                size=int(metadata["size"]),
+                sha256=str(metadata["sha256"]),
+                package_recommendation=str(metadata["package_recommendation"]),
+            )
+        )
+    entries.sort(key=lambda entry: entry.rel)
     return entries, sorted(set(missing)), sorted(set(skipped_dirs))
 
 
@@ -268,6 +311,7 @@ def main() -> None:
                 "sha256",
                 "package_recommendation",
             ],
+            lineterminator="\n",
         )
         writer.writeheader()
         for entry in entries:
@@ -281,9 +325,9 @@ def main() -> None:
                 }
             )
 
-    OUT_SHA256.write_text(
+    write_text_lf(
+        OUT_SHA256,
         "".join(f"{entry.sha256}  {entry.rel}\n" for entry in entries),
-        encoding="utf-8",
     )
 
     by_class: dict[str, list[Entry]] = defaultdict(list)
@@ -389,7 +433,7 @@ def main() -> None:
             "",
         ]
     )
-    OUT_MD.write_text("\n".join(lines), encoding="utf-8")
+    write_text_lf(OUT_MD, "\n".join(lines))
     print(OUT_MD)
     if missing:
         raise SystemExit(1)

@@ -1,0 +1,10 @@
+test_name,component,status,seed,input_size,expected,actual,notes
+committed-only provenance update,copper_eval_model,PASS,deterministic,tiny,committed proof authorizes one prefetch,prefetches=1,
+wrong-path/speculative update rejection,copper_eval_model,PASS,deterministic,tiny,copper rejects uncommitted proof; speculative ablation exposes risk,"copper=0, speculative=1",
+non-pointer load rejection,copper_eval_model,PASS,deterministic,tiny,non-pointer source does not prefetch,prefetches=0,
+pointer-chain detection,copper_eval_model,PASS,deterministic,tiny,reused committed chain sources issue prefetches,prefetches=2,
+duplicate prefetch suppression,copper_eval_model,PASS,deterministic,tiny,duplicate candidate is suppressed while queued or cached,duplicate_suppressed=3,
+queue-capacity behavior,copper_eval_model,PASS,deterministic,tiny,queue full causes drops,queue_drops=2,
+queue overflow/drop accounting,copper_eval_model,PASS,deterministic,tiny,one queued request and two drops with queue_size=1,"issued=1, drops=2",
+disabled-COPPER behavior,copper_eval_model,PASS,deterministic,tiny,no prefetches and same architectural checksum,"disabled_prefetches=0, checksum_match=True",
+boundary/overflow cases,copper_eval_model,PASS,deterministic,tiny,old proof evicted from bounded table,prefetches=0,

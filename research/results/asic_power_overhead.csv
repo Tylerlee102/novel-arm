@@ -1,0 +1,3 @@
+target,flow,scope,metric,baseline,with_copper,delta,percent_overhead,notes
+nangate45,yosys+opensta-liberty,full_core,full_core_asic_liberty_power,,,,,BLOCKED: matched ASIC Liberty power overhead requires PASS rows for baseline and COPPER.
+nangate45,yosys+opensta-liberty,core_wrapper,core_wrapper_asic_liberty_power,,,,,BLOCKED: matched ASIC Liberty power overhead requires PASS rows for baseline and COPPER.

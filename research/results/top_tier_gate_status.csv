@@ -1,0 +1,9 @@
+gate,status,severity,required_evidence,observed_evidence,blocker,notes
+schema_integrity,PASS,INFO,shared schema and valid scope rows,all checked ledgers have required columns,,Exit 1 only when this or another FATAL row is present.
+accepted_or_full_mapped_timing,PASS,INFO,accepted_core_wrapper or full_core matched mapped timing PASS,mapped_full_core_full_core_plus_copper_vivado_xc7a35tcsg324_1_vivado_impl_local_windows,,Generic Yosys resource rows are deliberately excluded.
+matched_overhead,PASS,INFO,matched baseline/COPPER overhead PASS,mapped_overhead_full_core_lut_vivado_xc7a35tcsg324_1_vivado_impl_full_core_baseline_full_core_plus_copper_local_windows,,Overhead may be mapped or generic but must be scope-labeled.
+power_evidence,PASS,INFO,fpga_tool_estimate or stronger,fpga_tool_estimate,,Proxy rows remain useful but do not satisfy this gate alone.
+full_core_absent,PASS,INFO,true full_core mapped PPA,mapped_full_core_full_core_plus_copper_vivado_xc7a35tcsg324_1_vivado_impl_local_windows,,Accepted core-wrapper rows are not full-core rows.
+silicon_signoff_power_absent,BLOCKER,BLOCKER,measured_silicon or asic_signoff power,none,silicon/signoff power absent,Tool estimates are not signoff-grade or silicon measurements.
+paper_audits_artifact,PASS,INFO,"paper build, audits, and artifact package PASS",paper=PASS; audit=PASS; artifact=PASS,,"paper_build_status.csv contains a PASS row with existing PDF/log for local_windows; claim, stronger-claim, number, and todo audits pass; artifact zip and manifest exist"
+overall_status,SUBMISSION-READY,INFO,scoped artifact/mechanism gates PASS while stronger-claim blockers stay explicit,SUBMISSION-READY,production/full-system full-core and silicon/signoff blockers remain for stronger claims,"SUBMISSION-READY here means scoped artifact/mechanism readiness only, not top-tier full-core, production, ASIC signoff, or silicon readiness."

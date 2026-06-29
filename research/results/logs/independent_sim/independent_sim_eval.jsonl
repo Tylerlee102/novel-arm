@@ -1,0 +1,11 @@
+{"environment": "github_actions", "sim_params": {"cache_lines": 160, "hit_latency": 4, "issue_cost": 1, "memory_latency": 112, "prefetch_latency": 36, "queue_size": 12}, "simulator": "source_backed_trace_event_sim_v1"}
+{"command": ["/home/runner/work/novel-arm/novel-arm/research/bin/workloads/copper_workload_suite", "linked_list", "small"], "returncode": 0, "stdout": "linked_list,small,16986874778739416114"}
+{"command": ["/home/runner/work/novel-arm/novel-arm/research/bin/workloads/copper_workload_suite", "tree_traversal", "small"], "returncode": 0, "stdout": "tree_traversal,small,15086284695804067481"}
+{"command": ["/home/runner/work/novel-arm/novel-arm/research/bin/workloads/copper_workload_suite", "hash_table_chaining", "small"], "returncode": 0, "stdout": "hash_table_chaining,small,980128408300144093"}
+{"command": ["/home/runner/work/novel-arm/novel-arm/research/bin/workloads/copper_workload_suite", "graph_adjacency_walk", "small"], "returncode": 0, "stdout": "graph_adjacency_walk,small,11136773161684914095"}
+{"command": ["/home/runner/work/novel-arm/novel-arm/research/bin/workloads/copper_workload_suite", "array_scan", "small"], "returncode": 0, "stdout": "array_scan,small,4025755879505935645"}
+{"command": ["/home/runner/work/novel-arm/novel-arm/research/bin/workloads/copper_workload_suite", "matrix_or_array_loop", "small"], "returncode": 0, "stdout": "matrix_or_array_loop,small,285056"}
+{"command": ["/home/runner/work/novel-arm/novel-arm/research/bin/workloads/copper_workload_suite", "random_non_pointer_access", "small"], "returncode": 0, "stdout": "random_non_pointer_access,small,5973751691701659227"}
+{"command": ["/home/runner/work/novel-arm/novel-arm/research/bin/workloads/copper_workload_suite", "long_pointer_chains", "small"], "returncode": 0, "stdout": "long_pointer_chains,small,0"}
+{"command": ["/home/runner/work/novel-arm/novel-arm/research/bin/workloads/copper_workload_suite", "mixed_pointer_array", "small"], "returncode": 0, "stdout": "mixed_pointer_array,small,4025755879505935645"}
+{"command": ["/home/runner/work/novel-arm/novel-arm/research/bin/workloads/copper_workload_suite", "branchy_pointer_chains", "small"], "returncode": 0, "stdout": "branchy_pointer_chains,small,15336385910619440673"}

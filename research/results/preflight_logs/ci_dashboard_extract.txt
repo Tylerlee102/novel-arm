@@ -1,0 +1,3 @@
+| G1. Open-source CI/Docker reproduction | Yes | PASS | Makefile; Dockerfile; .github/workflows/reproduce.yml; .devcontainer/devcontainer.json; research/results/ci_status.csv; research/results/artifact_manifest.csv | make readiness completes in GitHub Actions, Docker, or Codespaces with logs/artifacts |  |
+| G18. Artifact package | Yes | PASS | dist/copper-artifact.zip; research/results/artifact_manifest.csv; research/results/ci_artifacts_manifest.csv | Package regenerates in GitHub Actions, Docker, or Codespaces or the zip appears in imported artifacts |  |
+| G19. Paper build | Yes | PASS | research/paper/main.tex; research/results/paper_build_status.csv | PDF builds in GitHub Actions, Docker, or Codespaces |  |

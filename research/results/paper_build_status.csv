@@ -1,0 +1,2 @@
+environment,status,pdf_path,latex_engine,errors,warnings,log_path,notes
+local_windows,PASS,research/paper/main.pdf,reportlab-fallback,0,0,research/results/logs/paper/build_paper.log,LaTeX unavailable; generated plain-text fallback PDF. CI/Docker should use latexmk when available.
