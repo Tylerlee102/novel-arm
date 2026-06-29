@@ -236,10 +236,20 @@ jobs:
         if: always()
         run: |
           mkdir -p .lane-readiness .lane-fullcore .lane-mapped .lane-power
-          cp -a .lane-readiness/. . || true
-          cp -a .lane-fullcore/. . || true
-          cp -a .lane-mapped/. . || true
-          cp -a .lane-power/. . || true
+          mkdir -p research/results research/results/logs dist
+          for lane in .lane-readiness .lane-fullcore .lane-mapped .lane-power; do
+            [ -d "$lane" ] || continue
+            if [ -d "$lane/research/results" ]; then
+              cp -a "$lane/research/results/." research/results/
+            fi
+            find "$lane" -maxdepth 1 -type f -name '*.csv' -exec cp -f {} research/results/ \;
+            if [ -d "$lane/logs" ]; then
+              cp -a "$lane/logs/." research/results/logs/
+            fi
+            if [ -d "$lane/dist" ]; then
+              cp -a "$lane/dist/." dist/
+            fi
+          done
 
       - name: Rebuild power index after mapped evidence merge
         if: always()

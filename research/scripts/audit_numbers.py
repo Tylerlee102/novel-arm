@@ -15,6 +15,14 @@ OUT = RESULTS / "number_audit.csv"
 NUMBER = re.compile(r"(?<![A-Za-z])[-+]?\d+(?:\.\d+)?(?:x|%|K|M|ns|KiB|W)?")
 
 
+def material_paper_text(text: str) -> str:
+    """Drop LaTeX setup so layout options are not audited as evidence claims."""
+    marker = "\\begin{document}"
+    if marker not in text:
+        return text
+    return text[text.index(marker) :]
+
+
 def evidence_numbers() -> set[str]:
     nums: set[str] = set()
     for path in RESULTS.glob("*.csv"):
@@ -26,7 +34,7 @@ def evidence_numbers() -> set[str]:
 
 
 def main() -> int:
-    text = PAPER.read_text(encoding="utf-8") if PAPER.exists() else ""
+    text = material_paper_text(PAPER.read_text(encoding="utf-8")) if PAPER.exists() else ""
     source_nums = evidence_numbers()
     rows = []
     for match in NUMBER.finditer(text):
