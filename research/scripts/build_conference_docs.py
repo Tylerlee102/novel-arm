@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import csv
 import os
+import re
 from pathlib import Path
 
 
@@ -689,11 +690,11 @@ def build_dashboard() -> None:
     lines = [
         "# COPPER Conference Readiness Dashboard",
         "",
-        "This dashboard is intentionally strict. PASS means the current artifact has reproducible evidence for that gate. PARTIAL means useful evidence exists but is not yet enough for a full conference submission.",
+        "This dashboard is intentionally strict. PASS means the current artifact has reproducible evidence for that gate. PARTIAL means useful evidence exists, but not enough to widen the claim. The intended target is a scoped regular paper, workshop paper, or artifact/reproducibility submission.",
         "",
         "Local Windows is editing-only. GitHub Actions/Codespaces/Docker is the intended evidence environment for open-source hardware and paper gates.",
         "",
-        f"Final scoped status from `research/results/top_tier_gate_status.csv`: {status}. This dashboard certifies only constrained artifact/mechanism readiness. It supports scoped PicoRV32 tiny-SoC full-core mapped PPA where generated `scope=full_core` rows PASS, but it does not certify production ARM/OoO integration, measured silicon power, ASIC/foundry signoff, state-of-the-art performance, or top-tier full-architecture readiness.",
+        f"Final scoped status from `research/results/top_tier_gate_status.csv`: {status}. This dashboard certifies only constrained artifact/mechanism readiness. It supports CI-proven RTL simulation, raw gem5 full-system provenance where indexed, independent simulator evidence, accepted-core-wrapper or scoped PicoRV32 tiny-SoC full-core mapped FPGA PPA where generated PASS rows exist, and scoped tool-estimated/proxy power. It does not certify production ARM/OoO integration, measured silicon power, ASIC/foundry signoff, state-of-the-art performance, or broad production readiness.",
         "",
         "| Gate | Required for full submission? | Current status | Evidence file/script | Pass condition | Blocker |",
         "| --- | --- | --- | --- | --- | --- |",
@@ -747,7 +748,7 @@ def build_claim_ledger() -> None:
     lines = [
         "# COPPER Claim Ledger",
         "",
-        "Allowed statuses: ALLOWED, PARTIAL, FORBIDDEN, TODO. The paper must not make stronger claims than this table supports.",
+        "Allowed statuses: ALLOWED, PARTIAL, FORBIDDEN, TODO. The paper must not make stronger claims than this table supports. The intended submission claim is scoped mechanism reproducibility, not silicon, signoff, production ARM/OoO, broad dominance, or production readiness.",
         "",
         "| claim_id | claim_text | allowed_status | evidence_file | evidence_level | caveat |",
         "| --- | --- | --- | --- | --- | --- |",
@@ -818,11 +819,11 @@ def build_reviewer_reports() -> None:
 
 ## Final Evidence Classification
 
-Status: {status} for a scoped artifact/mechanism submission according to `research/results/top_tier_gate_status.csv`. PicoRV32 tiny-SoC full-core mapped PPA is supported only where the generated `scope=full_core` rows PASS. This is not a production ARM/OoO, silicon, state-of-the-art, or top-tier full-architecture claim. Full-core signoff or silicon-grade power remains blocked.
+Status: {status} for a scoped artifact/mechanism submission according to `research/results/top_tier_gate_status.csv`. The strongest defensible framing is a reproducible hardware mechanism study. The paper can cite CI-proven RTL simulation, raw gem5 full-system provenance where retained, validated imported gem5 ARM-system summaries where PASS, independent simulator evidence, accepted-core-wrapper/scoped PicoRV32 tiny-SoC full-core FPGA mapped PPA where PASS, FPGA tool-estimated power, and proxy energy with caveats. It must not claim production ARM/OoO integration, measured silicon power, ASIC/foundry signoff, state-of-the-art efficiency, universal speedup, production readiness, or full silicon PPA.
 
 ## Computer Architecture Reviewer
 
-Leaning: workshop accept / top-tier weak reject. Strengths: clear committed-provenance invariant, CI-proven RTL unit simulation, source workload build path, deterministic cycle-model rows, deterministic core-integrated rows, an independent source-backed trace/event simulator across the required workload/config matrix, imported gem5 ARM-system rows with checksum/return-code agreement ({gem5_summary}) plus imported-summary confidence intervals where repeated samples exist, a local raw gem5 rerun manifest ({raw_summary}) with raw-only repeated statistics ({raw_stats}), and scoped PicoRV32 tiny-SoC full-core mapped PPA where the generated rows PASS. Weaknesses: most gem5 evidence is still imported from validated summaries, and the local raw rerun set is still small, so it does not prove a complete top-tier simulator campaign with full raw-run confidence intervals. Fatal blockers for top-tier claims: no production ARM/OoO integration and no full-core post-route/silicon-grade power. Required fixes: validate the final workload/config matrix in gem5 or another accepted external core simulator with a reproducible raw-run path. Claim risks: performance claims must stay per-row and evidence-level scoped. Phase 0 discrepancy check: claimed PR/push evidence matched; main-branch Actions state was not verifiable because the API returned no main runs, so main-branch status must not be cited.
+Leaning: workshop/artifact accept or scoped regular-paper borderline. Strengths: clear committed-provenance invariant, CI-proven RTL unit simulation, source workload build path, deterministic cycle-model rows, deterministic core-integrated rows, an independent source-backed trace/event simulator across the required workload/config matrix, imported gem5 ARM-system rows with checksum/return-code agreement ({gem5_summary}) plus imported-summary confidence intervals where repeated samples exist, a local raw gem5 rerun manifest ({raw_summary}) with raw-only repeated statistics ({raw_stats}), and scoped PicoRV32 tiny-SoC full-core mapped PPA where the generated rows PASS. Weaknesses: most gem5 evidence is still imported from validated summaries, and the local raw rerun set is still small, so it does not prove a complete broad simulator campaign with full raw-run confidence intervals. Stronger-claim blockers: no production ARM/OoO integration and no full-core post-route/silicon-grade power. Required fix for a broader venue: validate the final workload/config matrix in gem5 or another accepted external core simulator with a reproducible raw-run path. Claim risks: performance claims must stay per-row and evidence-level scoped. Phase 0 discrepancy check: claimed PR/push evidence matched; main-branch Actions state was not verifiable because the API returned no main runs, so main-branch status must not be cited.
 
 ## Prefetching And Memory-Systems Reviewer
 
@@ -830,11 +831,11 @@ Leaning: weak accept for scoped mechanism, reject for replacement claims. Streng
 
 ## Hardware Implementation Reviewer
 
-Leaning: scoped artifact accept / top-tier architecture-paper reject. Strengths: SystemVerilog unit, CI-proven open-source simulation, matched unit-level synthesis, near-core-stub synthesis, matched near-core-stub mapped-FPGA PPA, matched PicoRV32 accepted core-wrapper mapped-FPGA PPA, matched PicoRV32 tiny-SoC full-core synthesis/mapped-FPGA PPA when those rows are PASS, Vivado FPGA tool-estimated power when fpga_tool_estimate is PASS, and activity-based McPAT proxy evidence when proxy_activity is PASS. Weaknesses: the PicoRV32 tiny-SoC full-core harness is still not a production ARM/OoO integration, and generic Yosys has no mapped timing or power. Fatal blockers: silicon or foundry-signoff power remain unsupported; OpenROAD, ASIC-Liberty, and Vivado rows are tool estimates, not silicon/signoff power. Required fixes: add a signoff-calibrated or silicon-measured flow before stronger power claims. Claim risks: near-core-stub and accepted-core-wrapper rows must never be called full-core, PicoRV32 tiny-SoC full-core rows must not be called production ARM/OoO, OpenROAD/ASIC-Liberty/Vivado report_power must not be called silicon measurement, and McPAT proxy must not be called measured silicon or RTL signoff power.
+Leaning: scoped artifact accept / broad architecture-paper reject. Strengths: SystemVerilog unit, CI-proven open-source simulation, matched unit-level synthesis, near-core-stub synthesis, matched near-core-stub mapped-FPGA PPA, matched PicoRV32 accepted core-wrapper mapped-FPGA PPA, matched PicoRV32 tiny-SoC full-core synthesis/mapped-FPGA PPA when those rows are PASS, Vivado FPGA tool-estimated power when fpga_tool_estimate is PASS, and activity-based McPAT proxy evidence when proxy_activity is PASS. Weaknesses: the PicoRV32 tiny-SoC full-core harness is still not a production ARM/OoO integration, and generic Yosys has no mapped timing or power. Fatal blockers for stronger claims: silicon or foundry-signoff power remain unsupported; OpenROAD, ASIC-Liberty, and Vivado rows are tool estimates, not silicon/signoff power. Required fixes: add a signoff-calibrated or silicon-measured flow before stronger power claims. Claim risks: near-core-stub and accepted-core-wrapper rows must not be called full-core, PicoRV32 tiny-SoC full-core rows must not be called production ARM/OoO, OpenROAD/ASIC-Liberty/Vivado report_power must not be called silicon measurement, and McPAT proxy must not be called measured silicon or RTL signoff power.
 
 ## Evaluation And Statistics Reviewer
 
-Leaning: workshop accept if scoped, top-tier weak reject. Strengths: deterministic cycle and core-integrated rows cover seeds 1-3, multiple input sizes, and both positive/control/stress workloads; the independent simulator executes the source-built workload binary and retains regressions; gem5 ARM-system summaries are validated with checksum/return-code checks ({gem5_summary}), imported-summary confidence intervals are emitted where repeated samples exist, and the raw rerun manifest records {raw_summary} with {raw_stats}. Weaknesses: the local raw gem5 rerun set is still too small to provide confidence intervals for a final top-tier workload/config matrix. Fatal blockers for top-tier claims: no broad external simulator statistics with a reproducible raw-run path. Required fixes: add gem5 or another accepted external simulator run for the same workload/config matrix and confidence intervals from those runs. Claim risks: robust speedup must be described per benchmark/configuration, not as a suite-wide win. Phase 0 discrepancy check: row counts matched claimed deterministic-model rows.
+Leaning: workshop/artifact accept if scoped. Strengths: deterministic cycle and core-integrated rows cover seeds 1-3, multiple input sizes, and both positive/control/stress workloads; the independent simulator executes the source-built workload binary and retains regressions; gem5 ARM-system summaries are validated with checksum/return-code checks ({gem5_summary}), imported-summary confidence intervals are emitted where repeated samples exist, and the raw rerun manifest records {raw_summary} with {raw_stats}. Weaknesses: the local raw gem5 rerun set is still too small to provide confidence intervals for a final broad workload/config matrix. Fatal blockers for stronger claims: no broad external simulator statistics with a reproducible raw-run path. Required fixes: add gem5 or another accepted external simulator run for the same workload/config matrix and confidence intervals from those runs. Claim risks: robust speedup must be described per benchmark/configuration, not as a suite-wide win. Phase 0 discrepancy check: row counts matched claimed deterministic-model rows.
 
 ## Artifact Evaluation Reviewer
 
@@ -842,11 +843,11 @@ Leaning: accept for scoped artifact when synchronized CI evidence remains PASS. 
 
 ## Skeptical Novelty Reviewer
 
-Leaning: reject for broad novelty, acceptable for a narrow artifact/mechanism paper. Strengths: the committed-provenance authority invariant is concrete and has model, cycle-model, core-integrated, imported gem5, RTL-unit, and synthesis-scope support. Weaknesses: adjacent pointer-chase, taint, capability, dependence, and DMP-defense work is crowded; this pass did not perform a fresh literature audit. Fatal blockers: any first/priority/state-of-the-art language would be fatal. Required fixes: update the related-work matrix before aiming at a top-tier venue. Claim risks: paper must not imply production ARM/OoO integration, measured power, or universal superiority. Phase 0 discrepancy check: unresolved main-branch status is at least SERIOUS BUT CAVEATABLE for release claims.
+Leaning: acceptable for a narrow artifact/mechanism paper, weak for broad novelty. Strengths: the committed-provenance authority invariant is concrete and has model, cycle-model, core-integrated, imported gem5, RTL-unit, and synthesis-scope support. Weaknesses: adjacent pointer-chase, taint, capability, dependence, and DMP-defense work is crowded; this pass did not perform a fresh literature audit. Fatal blockers: any first/priority/state-of-the-art language would be fatal. Required fixes: update the related-work matrix before aiming at a broader venue. Claim risks: paper must not imply production ARM/OoO integration, measured power, or universal superiority. Phase 0 discrepancy check: unresolved main-branch status is at least SERIOUS BUT CAVEATABLE for release claims.
 """
     blockers = f"""# COPPER Final Submission Blockers
 
-Final scoped status from `research/results/top_tier_gate_status.csv`: {status}. The blockers below are preserved for stronger production-core, signoff, silicon, or top-tier architecture claims.
+Final scoped status from `research/results/top_tier_gate_status.csv`: {status}. These are not blockers for a scoped reproducible hardware mechanism submission. They are preserved only to prevent stronger production-core, signoff, silicon, or broad architecture claims.
 
 | Class | Blocker | Evidence | Required fix |
 | --- | --- | --- | --- |
@@ -861,6 +862,106 @@ Final scoped status from `research/results/top_tier_gate_status.csv`: {status}. 
 """
     write(RESEARCH / "COPPER_FINAL_REVIEWER_REPORT.md", report)
     write(RESEARCH / "COPPER_FINAL_SUBMISSION_BLOCKERS.md", blockers)
+
+
+def latest_imported_ci_label() -> str:
+    text = (RESULTS / "ci_status.csv").read_text(encoding="utf-8", errors="ignore") if (RESULTS / "ci_status.csv").exists() else ""
+    match = re.search(r"copper_ci_(\d+)_([0-9]{8}_[0-9]{6})", text)
+    if not match:
+        return "not recorded in ci_status.csv"
+    return f"GitHub Actions run {match.group(1)} imported at {match.group(2)}"
+
+
+def build_reviewer_response_notes() -> None:
+    status = top_overall_status()
+    text = f"""# COPPER Reviewer Response Notes
+
+## 1. Is this full-core or scoped core-wrapper evidence?
+
+Both scopes appear, but the claim is scoped. The artifact has unit evidence, near-core-stub evidence, accepted-core-wrapper evidence, and PicoRV32 tiny-SoC full-core rows only where the generated CSVs mark those rows PASS. It is not production ARM/OoO evidence.
+
+## 2. Is the power measured or estimated?
+
+Estimated/proxy only. Vivado rows are FPGA tool estimates, OpenROAD/ASIC-Liberty rows are tool estimates when indexed, and McPAT/memory-energy rows are proxy evidence. The repo has no measured silicon power claim.
+
+## 3. Why is this not silicon-proven?
+
+No. There is no PASS fabricated-silicon manifest, no tapeout/fabrication/package/bring-up evidence, and no post-silicon validation. The stronger-claim audit blocks unqualified silicon wording.
+
+## 4. Is the comparison to prior work fair?
+
+Yes only within the stated evidence level. The paper compares generated model, cycle-model, core-integrated, independent-sim, imported gem5, FPGA PPA, and proxy/tool-power rows separately. It does not compare FPGA/tool estimates against silicon-measured prior work as if they were equivalent.
+
+## 5. Are negative/regression cases shown?
+
+Yes. The CSVs retain per-workload rows, including cases where COPPER trails the best baseline. This blocks a universal-speedup claim.
+
+## 6. Can the artifact reproduce the claims?
+
+For the scoped claims, yes when the CI/Docker/Codespaces path is used. The expected checks are paper build, artifact package, claim/number/TODO/stronger-claim audits, RTL unit simulation, independent simulator rows, and hardware evidence ledgers.
+
+## 7. What exactly is novel?
+
+The contribution is the committed pointer-provenance authority rule for data-derived prefetch issue: a candidate must be backed by committed source-word evidence and must survive invalidation, permission, and context checks before issue. The paper does not claim pointer prefetching itself is new.
+
+## Current Readiness
+
+{status} for a scoped reproducible hardware mechanism submission only.
+"""
+    write(RESEARCH / "COPPER_REVIEWER_RESPONSE_NOTES.md", text)
+
+
+def build_submission_readiness_summary() -> None:
+    status = top_overall_status()
+    artifact = ROOT / "dist" / "copper-artifact.zip"
+    paper = PAPER / "main.pdf"
+    recommendation = "Submit as a scoped workshop/artifact-track or scoped regular-paper package." if status == "SUBMISSION-READY" else "Do not submit yet."
+    text = f"""# COPPER Submission Readiness Summary
+
+## Target Submission Type
+
+Workshop, artifact/reproducibility track, or scoped regular conference paper. The paper should be framed as a scoped reproducible hardware mechanism study.
+
+## Strongest Supported Claims
+
+- COPPER is a committed pointer-provenance prefetch mechanism.
+- CI/Docker/Codespaces reproduce the open-source checks when the workflow passes.
+- RTL unit simulation, model tests, independent simulator evidence, raw gem5 full-system provenance where retained, and validated imported gem5 ARM-system rows support the scoped evaluation.
+- Accepted-core-wrapper/scoped PicoRV32 tiny-SoC full-core FPGA mapped PPA may be cited only where generated rows PASS.
+- FPGA tool-estimated power and proxy energy may be cited with caveats.
+
+## Claims Still Forbidden
+
+- Do not claim silicon-proven, taped-out, fabricated-chip, or post-silicon validation.
+- Do not claim ASIC/foundry signoff or full silicon PPA.
+- Do not claim measured silicon power.
+- Do not claim production ARM/OoO/TLB/cache/coherence/interrupt integration.
+- Do not claim state-of-the-art silicon efficiency, universal speedup, or production-ready status.
+
+## Exact CI Run
+
+Last imported CI evidence: {latest_imported_ci_label()}. The final post-push GitHub Actions run must pass before submission.
+
+## Artifact Path
+
+`{rel(artifact)}` if present after `make artifact`.
+
+## Paper Path
+
+`{rel(paper)}` if present after `make paper`.
+
+## Remaining Limitations
+
+- Full gem5 raw reruns are not clone-local for every imported summary row.
+- PicoRV32 tiny-SoC evidence is a scoped open-source harness, not production ARM/OoO integration.
+- Power is tool-estimated or proxy/model based, not measured silicon.
+- Stronger silicon/signoff/commercial-production claims remain blocked by missing physical evidence.
+
+## Recommendation
+
+{recommendation}
+"""
+    write(RESEARCH / "SUBMISSION_READINESS_SUMMARY.md", text)
 
 
 def build_reproduction_guide() -> None:
@@ -1084,18 +1185,22 @@ def build_paper_source() -> None:
 \usepackage{graphicx}
 
 \title{COPPER: Committed Pointer-Provenance Prefetching}
-\author{Artifact draft}
+\author{Anonymous Artifact Submission}
 \date{}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-COPPER explores whether committed pointer-provenance signals can improve the selectivity of hardware data-derived prefetching for pointer-intensive workloads. The mechanism records pointer-source evidence only after architectural commit, invalidates or blocks stale and mismatched sources, and uses that evidence to gate later prefetch issue. The artifact now supports a careful claim: COPPER is a measurable research mechanism with executable-model evidence, deterministic cycle-model evidence, deterministic core-integrated evidence, source-backed independent-simulator evidence, validated imported gem5 ARM-system rows when PASS rows exist, CI-proven RTL unit simulation, CI-proven paper/artifact reproduction, matched unit-level synthesis evidence, near-core-stub generic-resource evidence, PicoRV32 core-wrapper generic-resource evidence, matched near-core-stub and PicoRV32 tiny-SoC full-core mapped-FPGA PPA when PASS rows exist, scoped PicoRV32 core-wrapper OpenROAD post-route, ASIC-Liberty, or Vivado FPGA tool-estimated power when indexed PASS, and assumption-based proxy-energy rows. It does not claim state-of-the-art performance, production readiness, a complete gem5 workload matrix, production full-system integration, production-core mapped timing, measured silicon power efficiency, ASIC signoff, foundry signoff, or silicon signoff.
+Data-derived prefetchers can reduce pointer-chasing latency, but they can also turn address-shaped data into prefetch authority before the program has proved that the data is a pointer. COPPER addresses that authority problem with committed pointer-provenance prefetching: it records pointer-source evidence only after architectural commit, invalidates stale or mismatched evidence, and gates later data-derived prefetch issue on that committed evidence. This submission frames COPPER as a scoped reproducible hardware mechanism study evaluated with CI-proven RTL simulation, raw gem5 full-system provenance where retained, validated imported gem5 ARM-system summaries where PASS, independent simulator evidence, accepted-core-wrapper/scoped PicoRV32 tiny-SoC full-core FPGA mapped PPA, and scoped tool-estimated/proxy power. The supported claim is deliberately narrow: COPPER is an auditable mechanism with reproducible evidence at the stated levels. It does not claim state-of-the-art performance, production readiness, a complete clone-local gem5 campaign, production ARM/OoO integration, production-core mapped timing, measured silicon power efficiency, ASIC signoff, foundry signoff, or silicon signoff.
 \end{abstract}
 
 \section{Introduction}
-Pointer-heavy programs expose memory latency that ordinary address-stream prefetchers can miss. Data-derived prefetching can help, but it can also act on data that merely resembles an address. COPPER changes the authority rule: a prefetch candidate needs committed pointer-source evidence before issue. This paper version is claim-disciplined; all measurements are routed through generated CSVs and all unsupported claims are kept out of the body.
+Pointer-heavy programs expose memory latency that ordinary address-stream prefetchers can miss. Data-derived prefetching can help by following loaded values, but the same behavior is risky when a value merely resembles an address. COPPER changes the authority rule: a prefetch candidate needs committed pointer-source evidence before issue. The mechanism is meant to filter unsafe or stale candidates while preserving the useful subset of pointer-derived prefetches.
+
+This paper makes a scoped contribution. COPPER is evaluated as a reproducible hardware mechanism, not as a silicon product or a production processor feature. The evidence consists of executable model checks, deterministic cycle-model and core-integrated rows, source-backed independent simulator rows, validated gem5 ARM-system summaries and retained raw gem5 provenance where available, CI-proven RTL unit simulation, accepted-core-wrapper/scoped PicoRV32 tiny-SoC full-core mapped FPGA PPA, FPGA tool-estimated power, and proxy energy. The artifact keeps these evidence levels separate and keeps negative rows visible.
+
+This paper does not claim silicon-proven status, ASIC/foundry signoff, measured silicon power, production ARM/OoO/TLB/cache/coherence integration, state-of-the-art silicon efficiency, universal speedup, production readiness, or full silicon PPA. The claim ledger and audits are part of the submission: if the paper drifts into unsupported language, the artifact should fail.
 
 \section{Motivation}
 \begin{figure}[t]
@@ -1107,10 +1212,10 @@ Demand execution uses a loaded pointer after commit. COPPER records that source 
 \label{fig:motivation}
 \end{figure}
 
-The motivating failure mode is not ordinary speculation alone. It is that a prefetcher may treat address-shaped data as authority. COPPER instead treats committed pointer use as authority.
+The motivating failure mode is not ordinary speculation alone. It is that a prefetcher may treat address-shaped data as authority, a concern sharpened by recent data-memory-dependent prefetcher attacks \cite{augury,gofetch}. COPPER instead treats committed pointer use as authority.
 
 \section{Background And Related Work}
-Prior work covers next-line, stride, stream, indirect, pointer-chase, runahead, helper-thread, and dependence-guided prefetching, as well as metadata and capability mechanisms. COPPER's distinction is narrower: committed source-word proof gates data-derived prefetch issue. The repository matrix records what COPPER does not claim.
+Prior work covers next-line, stream, stride, indirect, pointer-chase, runahead, helper-thread, and dependence-guided prefetching \cite{jouppi1990improving,chen1995effective,baer1991effective,roth1998dependence,srinath2007feedback}, as well as metadata and capability mechanisms \cite{cheri}. COPPER's distinction is narrower: committed source-word proof gates data-derived prefetch issue. The repository matrix records what COPPER does not claim.
 
 \section{COPPER Design}
 \begin{figure}[t]
@@ -1134,7 +1239,7 @@ Load source word, use as demand address, commit, record proof, later prefetch ca
 COPPER has three core rules: proof creation occurs after committed architectural evidence; writes, coherence updates, failed permissions, and context mismatch block or destroy proof; recursive issue does not gain authority merely because a line arrived by prefetch.
 
 \section{Implementation}
-The artifact contains a Python model, a trace-driven evaluation harness, SystemVerilog RTL units, C/C++ workload sources, reproduction scripts, and summary parsers. The open-source RTL smoke target is \texttt{copper\_prefetch\_unit\_open}; larger local Vivado summaries are treated as existing evidence rather than portable rerun proof.
+The artifact contains a Python model, a trace-driven evaluation harness, SystemVerilog RTL units, C/C++ workload sources, reproduction scripts, and summary parsers. The open-source RTL smoke target is \texttt{copper\_prefetch\_unit\_open}; larger local Vivado summaries are treated as existing evidence rather than portable rerun proof. The gem5 evidence is validated through retained summaries and provenance files where available \cite{binkert2011gem5}; the scoped full-core hardware harness uses PicoRV32 rather than a production ARM/OoO target \cite{wolf2019picorv32}.
 
 \section{Methodology}
 \begin{table}[t]
@@ -1292,7 +1397,7 @@ Package & artifact\_manifest.csv & included and excluded files \\
 \end{table}
 
 \section{Conclusion}
-COPPER is best framed as a committed-provenance authority mechanism for data-derived prefetch issue. The artifact now has a CI-proven open-source path, deterministic cycle-model and core-integrated evidence, source-backed independent-simulator rows, validated imported gem5 ARM-system rows with imported-summary statistics, matched unit-level, near-core-stub, PicoRV32 accepted-core-wrapper, and PicoRV32 tiny-SoC full-core resource/PPA paths, FPGA tool-estimated power where indexed PASS, proxy energy rows, explicit blocked OpenROAD/ASIC-Liberty entries where those reports are absent, a claim ledger, audits, and a package manifest. The honest next step for a stronger architecture submission is a final raw-rerunnable gem5 or comparable external core validation matrix plus signoff-calibrated or silicon-measured power evidence without changing the scoped claims in this artifact.
+COPPER is best framed as a committed-provenance authority mechanism for data-derived prefetch issue. The artifact supports that claim with a CI-proven open-source path, deterministic cycle-model and core-integrated evidence, source-backed independent-simulator rows, validated imported gem5 ARM-system rows with imported-summary statistics, matched unit-level, near-core-stub, PicoRV32 accepted-core-wrapper, and scoped PicoRV32 tiny-SoC full-core FPGA PPA paths, FPGA tool-estimated power where indexed PASS, proxy energy rows, a claim ledger, audits, and a package manifest. The honest next step for a broader architecture submission is a final raw-rerunnable gem5 or comparable external core validation matrix plus signoff-calibrated or silicon-measured power evidence without changing the scoped claims in this artifact.
 
 \bibliographystyle{plain}
 \bibliography{references}
@@ -1317,6 +1422,34 @@ COPPER is best framed as a committed-provenance authority mechanism for data-der
   author={Roth, Amir and Moshovos, Andreas and Sohi, Gurindar S.},
   booktitle={International Conference on Architectural Support for Programming Languages and Operating Systems},
   year={1998}
+}
+
+@inproceedings{baer1991effective,
+  title={An effective on-chip preloading scheme to reduce data access penalty},
+  author={Baer, Jean-Loup and Chen, Tien-Fu},
+  booktitle={ACM/IEEE Supercomputing Conference},
+  year={1991}
+}
+
+@inproceedings{srinath2007feedback,
+  title={Feedback directed prefetching: Improving the performance and bandwidth-efficiency of hardware prefetchers},
+  author={Srinath, Santhosh and Mutlu, Onur and Kim, Hyesoon and Patt, Yale N.},
+  booktitle={International Symposium on High-Performance Computer Architecture},
+  year={2007}
+}
+
+@article{binkert2011gem5,
+  title={The gem5 simulator},
+  author={Binkert, Nathan and Beckmann, Bradford and Black, Gabriel and Reinhardt, Steven K. and Saidi, Ali and Basu, Arkaprava and Hestness, Joel and Hower, Derek R. and Krishna, Tushar and Sardashti, Somayeh and others},
+  journal={ACM SIGARCH Computer Architecture News},
+  year={2011}
+}
+
+@misc{wolf2019picorv32,
+  title={PicoRV32: A size-optimized RISC-V CPU},
+  author={Wolf, Clifford},
+  howpublished={\url{https://github.com/YosysHQ/picorv32}},
+  year={2019}
 }
 
 @misc{augury,
@@ -1345,6 +1478,8 @@ def main() -> int:
     build_artifact_map()
     build_related_work()
     build_reviewer_reports()
+    build_reviewer_response_notes()
+    build_submission_readiness_summary()
     build_reproduction_guide()
     build_synchronized_hardware_report()
     build_paper_source()

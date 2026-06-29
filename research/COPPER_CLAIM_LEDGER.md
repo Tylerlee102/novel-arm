@@ -1,6 +1,6 @@
 # COPPER Claim Ledger
 
-Allowed statuses: ALLOWED, PARTIAL, FORBIDDEN, TODO. The paper must not make stronger claims than this table supports.
+Allowed statuses: ALLOWED, PARTIAL, FORBIDDEN, TODO. The paper must not make stronger claims than this table supports. The intended submission claim is scoped mechanism reproducibility, not silicon, signoff, production ARM/OoO, broad dominance, or production readiness.
 
 | claim_id | claim_text | allowed_status | evidence_file | evidence_level | caveat |
 | --- | --- | --- | --- | --- | --- |

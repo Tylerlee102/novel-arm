@@ -1,7 +1,16 @@
 # COPPER Reproducibility Status
 
-This repository is a compact public artifact package, not a complete virtual
-machine or one-command full-system artifact.
+This repository is a compact public artifact package for a scoped reproducible
+hardware mechanism paper. It is not a complete virtual machine or one-command
+full-system artifact. The supported evidence is CI-proven RTL simulation, raw
+gem5/full-system provenance where retained, validated imported gem5 ARM-system
+rows, independent simulator evidence, accepted-core-wrapper/scoped PicoRV32
+tiny-SoC full-core FPGA mapped PPA, FPGA tool-estimated power, and proxy energy
+with caveats.
+
+It does not support silicon-proven status, ASIC/foundry signoff, measured
+silicon power, production ARM/OoO integration, state-of-the-art silicon
+efficiency, universal speedup, production-ready status, or full silicon PPA.
 
 ## Reproducible From This Repository
 

@@ -1,7 +1,16 @@
 # COPPER Research Artifact
 
 This repository contains the public, reviewer-facing artifact package for
-COPPER: Committed Pointer-Provenance Prefetching.
+COPPER: Committed Pointer-Provenance Prefetching. COPPER is framed here as a
+scoped reproducible hardware mechanism study: the supported evidence is
+CI-proven RTL simulation, raw gem5/full-system provenance where retained,
+validated imported gem5 ARM-system rows, independent simulator evidence,
+accepted-core-wrapper/scoped PicoRV32 tiny-SoC full-core FPGA mapped PPA,
+FPGA tool-estimated power, and proxy energy with caveats.
+
+This package does not support silicon-proven, ASIC/foundry signoff, measured
+silicon power, production ARM/OoO integration, state-of-the-art silicon
+efficiency, universal-speedup, production-ready, or full silicon PPA claims.
 
 Start here:
 
@@ -10,6 +19,8 @@ Start here:
 - `research/COPPER_FULL_PAPER.md` - full paper draft.
 - `research/COPPER_FINAL_OUTPUT.md` - compact final idea summary.
 - `research/COPPER_ARTIFACT_REPRODUCTION_GUIDE.md` - how to reproduce the model and audit results.
+- `research/COPPER_REVIEWER_RESPONSE_NOTES.md` - short answers to likely reviewer concerns.
+- `research/SUBMISSION_READINESS_SUMMARY.md` - current scoped submission-readiness summary.
 - `REPRODUCIBILITY_STATUS.md` - what can and cannot be rerun from a fresh clone.
 - `docs/RUN_CI_NOW.md` - GitHub web UI and CLI paths to trigger and collect the CI-proof run.
 - `research/results/COPPER_PUBLIC_ARTIFACT_MANIFEST_20260620.md` - included artifact manifest.
@@ -124,8 +135,7 @@ pointer-chase, and COPPER baseline rows with accuracy, coverage, lateness,
 queue-drop, traffic, ablation, sensitivity, and seed/input-stability CSVs at
 model, deterministic cycle-model, and deterministic core-integrated levels.
 The independent simulator rows add a separate source-backed trace/event path,
-and gem5 rows add validated imported ARM full-system summary evidence. The
-remaining blockers for a top-tier architecture claim are post-route/silicon
-signoff-grade power, production-scale core/SoC integration, and a fresh raw-run
-external-simulator matrix with confidence intervals; missing signoff rows must
-stay BLOCKED rather than being replaced by generic resource counts.
+and gem5 rows add validated imported ARM full-system summary evidence. For a
+scoped workshop, artifact track, or regular conference submission, the paper
+should stay within those evidence levels. Stronger silicon/signoff/production
+claims remain blocked unless real matching evidence files are added.
