@@ -68,6 +68,15 @@ jobs:
           sudo apt-get install -y --no-install-recommends ca-certificates git make python3 python3-pip yosys
           python3 -m pip install -r requirements.txt pytest numpy pandas
 
+      - name: Try OSS CAD Suite
+        if: always()
+        continue-on-error: true
+        uses: YosysHQ/setup-oss-cad-suite@v3
+
+      - name: Show synthesis tool availability
+        if: always()
+        run: yosys -V
+
       - name: Run full-core/core-wrapper synthesis ledger
         if: always()
         run: make fullcore-synth
