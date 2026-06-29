@@ -27,6 +27,20 @@ ASIC_POWER = RESULTS / "asic_power.csv"
 OPENROAD_POSTROUTE_POWER = RESULTS / "openroad_postroute_power.csv"
 MCPAT_CSV = RESULTS / "copper_mcpat_sensitivity_20260618.csv"
 MCPAT_MD = RESULTS / "COPPER_MCPAT_SENSITIVITY_20260618.md"
+VIVADO_ARCHIVED_POWER_REPORTS = {
+    "full_core_baseline": RESULTS
+    / "logs"
+    / "mapped_ppa"
+    / "vivado_runs"
+    / "full_core_baseline"
+    / "full_core_baseline_power.rpt",
+    "full_core_plus_copper": RESULTS
+    / "logs"
+    / "mapped_ppa"
+    / "vivado_runs"
+    / "full_core_plus_copper"
+    / "full_core_plus_copper_power.rpt",
+}
 
 DEMAND_ACCESS_PJ = 120.0
 PREFETCH_ACCESS_PJ = 120.0
@@ -118,6 +132,40 @@ def positive_float(value: str) -> bool:
         return False
 
 
+def parse_vivado_power_report(path: Path) -> dict[str, str] | None:
+    if not path.exists():
+        return None
+    text = path.read_text(encoding="utf-8", errors="ignore")
+    total_match = re.search(r"\|\s*Total On-Chip Power \(W\)\s*\|\s*([0-9.]+)\s*\|", text)
+    design_match = re.search(r"\|\s*Design\s*:\s*([^|]+?)\s*\|", text)
+    device_match = re.search(r"\|\s*Device\s*:\s*([^|]+?)\s*\|", text)
+    if not total_match or not design_match:
+        return None
+    power_mw = float(total_match.group(1)) * 1000.0
+    device = device_match.group(1).strip() if device_match else "xc7a35tcsg324-1"
+    return {
+        "evidence_id": evidence_id("vivado_archived_power", design_match.group(1).strip(), device),
+        "scope": "full_core",
+        "design": design_match.group(1).strip(),
+        "target": f"vivado-{device}",
+        "flow": "vivado-impl",
+        "environment": "archived_vivado_report",
+        "status": "PASS",
+        "power_mw": f"{power_mw:.3f}",
+        "report_path": rel(path),
+        "notes": "Archived Vivado report_power output parsed during evidence indexing; Vivado was not rerun in this CI lane.",
+    }
+
+
+def archived_vivado_power_rows() -> list[tuple[Path, dict[str, str]]]:
+    rows: list[tuple[Path, dict[str, str]]] = []
+    for path in VIVADO_ARCHIVED_POWER_REPORTS.values():
+        row = parse_vivado_power_report(path)
+        if row:
+            rows.append((path, row))
+    return rows
+
+
 def power_index_row(
     evidence_level: str,
     status: str,
@@ -207,6 +255,7 @@ def power_index_row(
 
 def fpga_tool_power_evidence() -> dict[str, str] | None:
     evidence: list[tuple[Path, dict[str, str]]] = []
+    seen: set[tuple[str, str, str]] = set()
     for path in (MAPPED_PPA, RESULTS / "synthesis.csv", RESULTS / "fullcore_synthesis.csv"):
         for row in read_csv(path):
             report = row.get("report_path", "")
@@ -220,7 +269,12 @@ def fpga_tool_power_evidence() -> dict[str, str] | None:
                 and report
                 and report_path.exists()
             ):
+                seen.add((row.get("scope", ""), row.get("design", ""), row.get("target", "")))
                 evidence.append((path, row))
+    for path, row in archived_vivado_power_rows():
+        key = (row.get("scope", ""), row.get("design", ""), row.get("target", ""))
+        if key not in seen:
+            evidence.append((path, row))
     if not evidence:
         return None
 
@@ -300,7 +354,8 @@ def fpga_tool_power_evidence() -> dict[str, str] | None:
         "copper_design": copper_design,
         "notes": (
             f"FPGA tool-estimated power rows found: {designs}. "
-            "Treat as Vivado/EDA report power for the stated mapped FPGA target, not silicon "
+            "Treat as Vivado/EDA report power for the stated mapped FPGA target; archived Vivado "
+            "reports may be parsed in CI when Vivado itself is unavailable. This is not silicon "
             f"measurement or ASIC signoff. {full_core_note}"
         ),
     }
