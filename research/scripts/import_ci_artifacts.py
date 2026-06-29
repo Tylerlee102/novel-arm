@@ -53,6 +53,7 @@ EVIDENCE_CSVS = {
     "rtl_simulation.csv",
     "synthesis.csv",
     "synthesis_overhead.csv",
+    "full_core_target_inventory.csv",
     "fullcore_synthesis.csv",
     "fullcore_synthesis_overhead.csv",
     "mapped_ppa.csv",
@@ -66,6 +67,7 @@ EVIDENCE_CSVS = {
     "asic_power_overhead.csv",
     "paper_build_status.csv",
     "claim_audit.csv",
+    "stronger_claim_audit.csv",
     "number_audit.csv",
     "todo_audit.csv",
     "artifact_manifest.csv",
@@ -104,6 +106,7 @@ GATE_BY_FILE = {
     "rtl_simulation.csv": "G5",
     "synthesis.csv": "G15",
     "synthesis_overhead.csv": "G15",
+    "full_core_target_inventory.csv": "G15",
     "fullcore_synthesis.csv": "G15",
     "fullcore_synthesis_overhead.csv": "G15",
     "mapped_ppa.csv": "G15",
@@ -117,6 +120,7 @@ GATE_BY_FILE = {
     "asic_power_overhead.csv": "G16",
     "paper_build_status.csv": "G19",
     "claim_audit.csv": "G20",
+    "stronger_claim_audit.csv": "G20",
     "number_audit.csv": "G20",
     "todo_audit.csv": "G20",
     "artifact_manifest.csv": "G18",
@@ -379,7 +383,7 @@ def paper_status(imported_files: list[Path]) -> tuple[str, str]:
 
 
 def audits_status(imported_dir: Path, imported_files: list[Path]) -> tuple[str, str]:
-    names = ["claim_audit.csv", "number_audit.csv", "todo_audit.csv"]
+    names = ["claim_audit.csv", "stronger_claim_audit.csv", "number_audit.csv", "todo_audit.csv"]
     missing = [name for name in names if not imported_csv_rows(imported_dir, imported_files, name)]
     if missing:
         return "MISSING", "missing imported audit CSVs: " + ", ".join(missing)
@@ -390,7 +394,7 @@ def audits_status(imported_dir: Path, imported_files: list[Path]) -> tuple[str, 
             bad.append(name)
     if bad:
         return "FAIL", "non-PASS audit rows found in: " + ", ".join(bad)
-    return "PASS", "claim, number, and TODO audits are PASS"
+    return "PASS", "claim, stronger-claim, number, and TODO audits are PASS"
 
 
 def artifact_status(imported_files: list[Path]) -> tuple[str, str]:

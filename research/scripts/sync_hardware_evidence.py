@@ -68,6 +68,7 @@ def schema_findings() -> list[str]:
     findings: list[str] = []
     hardware_files = {
         "research/results/full_core_design_inventory.csv": ["evidence_id", "scope", "design", "target", "flow", "environment", "status", "report_path", "notes"],
+        "research/results/full_core_target_inventory.csv": ["evidence_id", "scope", "design", "target", "flow", "environment", "status", "report_path", "notes"],
         "research/results/fullcore_synthesis.csv": ["evidence_id", "scope", "design", "target", "flow", "environment", "status", "report_path", "notes"],
         "research/results/mapped_ppa.csv": ["evidence_id", "scope", "design", "target", "flow", "environment", "status", "report_path", "notes"],
         "research/results/power_report_index.csv": [
@@ -199,7 +200,12 @@ def strongest_power_row(rows: list[dict[str, str]]) -> tuple[dict[str, str] | No
 
 
 def audit_status() -> tuple[str, str]:
-    audit_files = [RESULTS / "claim_audit.csv", RESULTS / "number_audit.csv", RESULTS / "todo_audit.csv"]
+    audit_files = [
+        RESULTS / "claim_audit.csv",
+        RESULTS / "stronger_claim_audit.csv",
+        RESULTS / "number_audit.csv",
+        RESULTS / "todo_audit.csv",
+    ]
     missing = [rel(path) for path in audit_files if not path.exists()]
     if missing:
         return "FATAL", f"missing audit file(s): {', '.join(missing)}"
@@ -211,13 +217,20 @@ def audit_status() -> tuple[str, str]:
                 break
     if failing:
         return "FATAL", f"audit failure in {', '.join(sorted(set(failing)))}"
-    return "PASS", "claim, number, and todo audits pass"
+    return "PASS", "claim, stronger-claim, number, and todo audits pass"
 
 
 def paper_status() -> tuple[str, str]:
     rows = read_rows(RESULTS / "paper_build_status.csv")
+    for row in rows:
+        if row.get("status") != "PASS":
+            continue
+        pdf = row.get("pdf_path", "")
+        log = row.get("log_path", "")
+        if pdf and (ROOT / pdf).exists() and (not log or (ROOT / log).exists()):
+            return "PASS", f"paper_build_status.csv contains a PASS row with existing PDF/log for {row.get('environment', 'unknown')}"
     if any(row.get("status") == "PASS" for row in rows):
-        return "PASS", "paper_build_status.csv contains a PASS row"
+        return "BLOCKER", "paper build PASS row exists but its referenced PDF/log is missing"
     if any(row.get("status") == "FAIL" for row in rows):
         return "FATAL", "paper build has a FAIL row and no PASS row"
     return "BLOCKER", "paper build has no PASS row in the available evidence"
@@ -469,7 +482,7 @@ def main() -> int:
             paper_bundle_state,
             f"paper={paper_state}; audit={audit_state}; artifact={artifact_state}",
             "",
-            "research/results/claim_audit.csv; research/results/number_audit.csv; research/results/todo_audit.csv; research/results/paper_build_status.csv; research/results/artifact_manifest.csv",
+            "research/results/claim_audit.csv; research/results/stronger_claim_audit.csv; research/results/number_audit.csv; research/results/todo_audit.csv; research/results/paper_build_status.csv; research/results/artifact_manifest.csv",
             "scoped paper/artifact claims" if paper_bundle_state == "PASS" else "",
             "unsupported paper claims; failed artifact package",
             f"{paper_note}; {audit_note}; {artifact_note}",

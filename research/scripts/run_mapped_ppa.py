@@ -811,6 +811,12 @@ def overhead_rows(rows: list[dict[str, str]]) -> list[dict[str, str]]:
             copper = by_name.get(copper_name)
             if not baseline or not copper:
                 continue
+            overhead_note = (
+                "Matched generic Yosys resource overhead from same target and flow; "
+                "resource-only evidence, not mapped timing or power."
+                if flow == "generic-yosys-resource"
+                else "Matched mapped PPA overhead from same target, flow, and constraints."
+            )
             if baseline.get("status") != "PASS" or copper.get("status") != "PASS":
                 out.append(
                     {
@@ -827,7 +833,7 @@ def overhead_rows(rows: list[dict[str, str]]) -> list[dict[str, str]]:
                         "delta": "",
                         "percent_overhead": "",
                         "report_path": rel(OUT),
-                        "notes": "BLOCKED: matched mapped PPA overhead requires PASS rows for baseline and COPPER.",
+                        "notes": "BLOCKED: matched overhead requires PASS rows for baseline and COPPER.",
                     }
                 )
                 continue
@@ -853,7 +859,7 @@ def overhead_rows(rows: list[dict[str, str]]) -> list[dict[str, str]]:
                         "delta": f"{delta:.6f}".rstrip("0").rstrip("."),
                         "percent_overhead": f"{pct:.6f}",
                         "report_path": rel(OUT),
-                        "notes": "Matched mapped PPA overhead from same target, flow, and constraints.",
+                        "notes": overhead_note,
                     }
                 )
     if not out:

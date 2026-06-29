@@ -89,6 +89,7 @@ jobs:
           if-no-files-found: ignore
           path: |
             research/results/full_core_design_inventory.csv
+            research/results/full_core_target_inventory.csv
             research/results/fullcore_synthesis*.csv
             research/results/logs/**
 
@@ -281,7 +282,14 @@ jobs:
           from pathlib import Path
 
           rows = list(csv.DictReader(Path("research/results/top_tier_gate_status.csv").open()))
-          required_pass = {"schema_integrity", "full_core_absent", "paper_audits_artifact"}
+          required_pass = {
+              "schema_integrity",
+              "accepted_or_full_mapped_timing",
+              "matched_overhead",
+              "power_evidence",
+              "full_core_absent",
+              "paper_audits_artifact",
+          }
           bad = [row for row in rows if row.get("gate") in required_pass and row.get("status") != "PASS"]
           if bad:
               for row in bad:

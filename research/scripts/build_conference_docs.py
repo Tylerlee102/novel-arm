@@ -81,6 +81,13 @@ def positive_int(value: str) -> bool:
         return False
 
 
+def positive_float(value: str) -> bool:
+    try:
+        return float(value or 0) > 0.0
+    except (TypeError, ValueError):
+        return False
+
+
 def baseline_pass() -> bool:
     rows = read_rows(RESULTS / "baseline_inventory.csv")
     required = {"B0 no_prefetch", "B1 next_line", "B2 stride", "B3 simple_pointer_chase", "B4 copper"}
@@ -326,6 +333,12 @@ def top_overall_status() -> str:
     return top_gate_status("overall_status")
 
 
+def paper_pass_row_has_artifacts(row: dict[str, str]) -> bool:
+    pdf = row.get("pdf_path", "")
+    log = row.get("log_path", "")
+    return bool(pdf and (ROOT / pdf).exists() and (not log or (ROOT / log).exists()))
+
+
 def top_gate_table() -> list[str]:
     rows = read_rows(RESULTS / "top_tier_gate_status.csv")
     lines = ["| Gate | Status | Blocker | Observed evidence |", "| --- | --- | --- | --- |"]
@@ -353,6 +366,85 @@ def csv_bool(row: dict[str, str], field: str) -> bool | None:
 
 def explicit_yes(row: dict[str, str], field: str) -> bool:
     return csv_bool(row, field) is True
+
+
+def row_artifact_exists(row: dict[str, str]) -> bool:
+    for field in ("report_path", "artifact_path", "power_report_path", "rtl_path", "gds_path"):
+        value = row.get(field, "")
+        if value and (ROOT / value).exists():
+            return True
+    return False
+
+
+def manifest_has_required_types(path: Path, required: set[str], *, field: str = "evidence_type", require_signoff: bool = False) -> bool:
+    rows = read_rows(path)
+    found = set()
+    for row in rows:
+        if row.get("status") != "PASS":
+            continue
+        if require_signoff and not explicit_yes(row, "signoff_grade"):
+            continue
+        if not row_artifact_exists(row):
+            continue
+        value = row.get(field, "").strip().lower()
+        if value in required:
+            found.add(value)
+    return required.issubset(found)
+
+
+def fabricated_silicon_pass() -> bool:
+    return manifest_has_required_types(
+        RESULTS / "fabricated_silicon_manifest.csv",
+        {"tapeout_gds", "foundry_shuttle", "fabrication_lot", "package_or_board", "bringup_log"},
+    )
+
+
+def asic_signoff_pass() -> bool:
+    return manifest_has_required_types(
+        RESULTS / "asic_signoff_manifest.csv",
+        {"timing", "area", "power", "drc", "lvs"},
+        require_signoff=True,
+    )
+
+
+def measured_silicon_power_pass() -> bool:
+    for row in read_rows(RESULTS / "power_report_index.csv"):
+        report = row.get("power_report_path") or row.get("report_path", "")
+        if (
+            row.get("status") == "PASS"
+            and explicit_yes(row, "available")
+            and row.get("measurement_type") == "measured_silicon"
+            and explicit_yes(row, "silicon_measured")
+            and positive_float(row.get("power_mw", ""))
+            and report
+            and (ROOT / report).exists()
+        ):
+            return True
+    return False
+
+
+def production_arm_integration_pass() -> bool:
+    rows = read_rows(RESULTS / "production_arm_integration.csv")
+    required = {"ooo", "tlb", "caches", "coherence", "interrupts", "exceptions", "memory_system"}
+    found = {
+        row.get("capability", "").strip().lower()
+        for row in rows
+        if row.get("status") == "PASS" and row_artifact_exists(row)
+    }
+    return required.issubset(found)
+
+
+def sota_silicon_comparison_pass() -> bool:
+    comparable = {"asic_signoff", "measured_silicon"}
+    return any(
+        row.get("status") == "PASS"
+        and row.get("copper_evidence_level") in comparable
+        and row.get("prior_work_evidence_level") in comparable
+        and row.get("comparison_basis", "").strip().lower() in {"same_basis", "normalized_silicon"}
+        and row.get("normalized_metric", "").strip()
+        and row_artifact_exists(row)
+        for row in read_rows(RESULTS / "sota_silicon_comparison.csv")
+    )
 
 
 def power_index_pass(evidence_level: str) -> bool:
@@ -528,7 +620,7 @@ def gate_status() -> list[dict[str, str]]:
     )
     ci_artifact_package = imported_artifact_package or current_run_package
     paper_status = read_rows(RESULTS / "paper_build_status.csv")
-    paper_built = any(row.get("environment") in OPEN_ENVIRONMENTS and row.get("status") == "PASS" for row in paper_status)
+    paper_built = any(row.get("status") == "PASS" and paper_pass_row_has_artifacts(row) for row in paper_status)
     rtl_compile_status = open_gate_status(RESULTS / "rtl_compile.csv")
     rtl_sim_status = open_gate_status(RESULTS / "rtl_simulation.csv")
     ci_status_rows = read_rows(RESULTS / "ci_status.csv")
@@ -541,9 +633,16 @@ def gate_status() -> list[dict[str, str]]:
         and ci_artifact_package
     ) else ("BLOCKED" if ci_blocked else "PARTIAL")
     audit_claims = read_rows(RESULTS / "claim_audit.csv")
+    audit_stronger_claims = read_rows(RESULTS / "stronger_claim_audit.csv")
     audit_numbers = read_rows(RESULTS / "number_audit.csv")
     audit_todos = read_rows(RESULTS / "todo_audit.csv")
-    audits_pass = audit_claims and audit_numbers and audit_todos and all(r.get("status") == "PASS" for r in audit_claims + audit_numbers + audit_todos)
+    audits_pass = (
+        audit_claims
+        and audit_stronger_claims
+        and audit_numbers
+        and audit_todos
+        and all(r.get("status") == "PASS" for r in audit_claims + audit_stronger_claims + audit_numbers + audit_todos)
+    )
     mapped_scope = strongest_mapped_ppa_scope()
     mapped_pass = mapped_scope != "none"
     synthesis_scope_pass = full_core_synthesis_pass() or core_wrapper_synthesis_pass() or near_core_synthesis_pass() or synthesis_overhead_pass()
@@ -566,8 +665,8 @@ def gate_status() -> list[dict[str, str]]:
         gate("G16. Power/energy proxy or tool estimate", "Yes", "PASS" if energy_gate_pass() else ("PARTIAL" if energy_proxy_present() else "TODO"), "research/results/energy_proxy.csv; research/results/energy_summary.csv; research/results/power_report_index.csv; research/results/openroad_postroute_power.csv; research/results/asic_power.csv; research/results/mapped_ppa.csv; research/results/copper_mcpat_sensitivity_20260618.csv; research/results/COPPER_MCPAT_SENSITIVITY_20260618.md", "Proxy energy rows are generated and either scoped OpenROAD post-route, ASIC-Liberty, FPGA tool-power, or activity-based McPAT proxy evidence is indexed", "" if energy_gate_pass() else ("Proxy is assumption-based and not backed by activity/model power." if energy_proxy_present() else "No energy proxy or tool-power report has been generated.")),
         gate("G17. Statistical stability across seeds/input sizes", "Yes", "PASS" if cycle_stats_pass() else ("PARTIAL" if (RESULTS / "statistical_summary.csv").exists() or gem5_stats_pass() else "TODO"), "research/results/seed_stability.csv; research/results/statistical_summary.csv; research/results/gem5_statistical_summary.csv; research/results/gem5_raw_rerun_statistical_summary.csv", "Cycle-model stability covers seeds 1-3 and multiple input sizes; gem5 statistics summarize validated imported ARM-system rows and local raw rerun repeats when present", ""),
         gate("G18. Artifact package", "Yes", "PASS" if ci_artifact_package else ("PARTIAL" if package_exists else "TODO"), "dist/copper-artifact.zip; research/results/artifact_manifest.csv; research/results/ci_artifacts_manifest.csv", "Package regenerates in GitHub Actions, Docker, or Codespaces or the zip appears in imported artifacts", "" if ci_artifact_package else "Local package output is not final packaging proof."),
-        gate("G19. Paper build", "Yes", "PASS" if paper_built else "BLOCKED", "research/paper/main.tex; research/results/paper_build_status.csv", "PDF builds in GitHub Actions, Docker, or Codespaces", "" if paper_built else "No CI/Docker/Codespaces paper PASS row has been collected yet."),
-        gate("G20. Claim audit", "Yes", "PASS" if audits_pass else "TODO", "research/scripts/audit_claims.py; research/scripts/audit_numbers.py; research/scripts/audit_todos.py", "Audits pass", "" if audits_pass else "Run make paper-audit after paper generation."),
+        gate("G19. Paper build", "Yes", "PASS" if paper_built else "BLOCKED", "research/paper/main.tex; research/results/paper_build_status.csv", "PDF builds in the current environment or imported CI; CI/Docker LaTeX is preferred when available", "" if paper_built else "No paper PASS row with existing PDF/log artifact has been collected yet."),
+        gate("G20. Claim audit", "Yes", "PASS" if audits_pass else "TODO", "research/scripts/audit_claims.py; research/scripts/audit_stronger_claims.py; research/scripts/audit_numbers.py; research/scripts/audit_todos.py", "Claim, stronger-claim, number, and TODO audits pass", "" if audits_pass else "Run make paper-audit after paper generation."),
         gate("G21. Related work/novelty matrix", "Yes", "PASS", "research/COPPER_RELATED_WORK_MATRIX.md", "Matrix exists and avoids first/novel overclaim", ""),
         gate("G22. Reviewer attack response matrix", "Yes", "PASS", "research/COPPER_FINAL_REVIEWER_REPORT.md", "Reviewer panel and blockers exist", ""),
     ]
@@ -615,6 +714,11 @@ def build_claim_ledger() -> None:
     c15_status = "ALLOWED" if gem5_full_system_pass() else "TODO"
     c16_status = "ALLOWED" if full_core_synthesis_pass() else "TODO"
     c17_status = "ALLOWED" if matched_mapped_ppa_pass("full_core") else "TODO"
+    c18_status = "ALLOWED" if fabricated_silicon_pass() else "FORBIDDEN"
+    c19_status = "ALLOWED" if asic_signoff_pass() else "FORBIDDEN"
+    c20_status = "ALLOWED" if measured_silicon_power_pass() else "FORBIDDEN"
+    c21_status = "ALLOWED" if production_arm_integration_pass() else "FORBIDDEN"
+    c22_status = "ALLOWED" if sota_silicon_comparison_pass() else "FORBIDDEN"
     energy_status = "ALLOWED" if energy_gate_pass() else ("PARTIAL" if energy_proxy_present() else "TODO")
     claims = [
         ("C1", "COPPER tracks committed pointer provenance.", "ALLOWED", "research/results/model_tests.csv; research/copper_prefetch_unit_open.sv", "model; rtl-unit only when GitHub Actions/Codespaces/Docker rtl_compile.csv and rtl_simulation.csv are PASS", "Allowed for the executable model; RTL wording requires open-environment PASS rows."),
@@ -634,6 +738,11 @@ def build_claim_ledger() -> None:
         ("C15", "COPPER has validated gem5 ARM-system evidence across multiple benchmark families.", c15_status, "research/results/gem5_validation.csv; research/results/gem5_performance.csv; research/results/gem5_prefetch_metrics.csv; research/results/gem5_memory_traffic.csv; research/results/gem5_statistical_summary.csv; research/results/gem5_raw_rerun_manifest.csv; research/results/gem5_raw_rerun_statistical_summary.csv; research/results/logs/gem5/gem5_import.log", "gem5_full_system", f"Allowed only for summary groups with a no-prefetch baseline, a COPPER-family row, matching checksums, rc=0, and positive tick counts; current scope is {gem5_evidence_summary()}. Local raw rerun scope is {gem5_raw_rerun_summary()}; raw-only repeated-stat scope is {gem5_raw_stats_summary()}. gem5_statistical_summary.csv is still summary-derived and the raw-only statistics are not a full-matrix confidence interval unless the raw group covers the final matrix."),
         ("C16", "COPPER has matched PicoRV32 tiny-SoC full-core generic-synthesis overhead.", c16_status, "research/results/fullcore_synthesis.csv; research/results/fullcore_synthesis_overhead.csv", "full_core", "Allowed only for the open-source PicoRV32 tiny-SoC full-core harness; not production ARM, OoO, silicon, or signoff evidence."),
         ("C17", "COPPER has matched PicoRV32 tiny-SoC full-core mapped FPGA PPA.", c17_status, "research/results/mapped_ppa.csv; research/results/mapped_ppa_overhead.csv", "full_core mapped PPA", "Allowed only when baseline and COPPER PicoRV32 tiny-SoC full-core rows PASS in the same mapped flow with real timing fields; not production ARM, ASIC signoff, or silicon PPA."),
+        ("C18", "COPPER is silicon-proven, taped out, fabricated, or post-silicon validated.", c18_status, "research/results/fabricated_silicon_manifest.csv", "fabricated_silicon", "Forbidden unless a manifest has PASS tapeout GDS/OAS, foundry/shuttle, fabrication lot, package/board, and bring-up artifacts with existing paths."),
+        ("C19", "COPPER has ASIC or foundry signoff.", c19_status, "research/results/asic_signoff_manifest.csv", "asic_signoff", "Forbidden unless timing, area, power, DRC, and LVS signoff-grade PASS artifacts exist. OpenROAD, ASIC-Liberty, and Vivado tool estimates are not foundry signoff."),
+        ("C20", "COPPER has measured silicon power.", c20_status, "research/results/power_report_index.csv", "measured_silicon", "Forbidden unless power_report_index.csv has a measured_silicon PASS row with silicon_measured=yes, positive power_mw, and an existing raw/report artifact."),
+        ("C21", "COPPER integrates with a production ARM or OoO full-system core.", c21_status, "research/results/production_arm_integration.csv", "production_arm_integration", "Forbidden unless OoO, TLB, caches, coherence, interrupts, exceptions, and memory-system capabilities each have PASS integration artifacts. PicoRV32 tiny-SoC and gem5 prefetcher attachment do not satisfy this claim."),
+        ("C22", "COPPER has SOTA silicon or power-efficiency results.", c22_status, "research/results/sota_silicon_comparison.csv", "sota_silicon_comparison", "Forbidden unless COPPER and prior-work rows are compared on the same ASIC signoff or measured-silicon basis with a normalized metric and source artifact."),
     ]
     lines = [
         "# COPPER Claim Ledger",
@@ -657,7 +766,7 @@ Source includes the Python model and analysis scripts under `research/*.py` and 
 
 ## Generated
 
-Generated evidence lives under `research/results`. The new conference-facing generated CSVs are `toolchain_status.csv`, `model_tests.csv`, `rtl_compile.csv`, `rtl_simulation.csv`, `workload_build.csv`, `benchmark_inventory.csv`, `baseline_inventory.csv`, `performance.csv`, `prefetch_metrics.csv`, `memory_traffic.csv`, `cycle_performance.csv`, `cycle_prefetch_metrics.csv`, `cycle_memory_traffic.csv`, `gem5_validation.csv`, `gem5_performance.csv`, `gem5_prefetch_metrics.csv`, `gem5_memory_traffic.csv`, `gem5_statistical_summary.csv`, `gem5_raw_rerun_manifest.csv`, `gem5_raw_rerun_statistical_summary.csv`, `independent_sim_performance.csv`, `independent_sim_prefetch_metrics.csv`, `independent_sim_memory_traffic.csv`, `core_integrated_performance.csv`, `core_integrated_prefetch_metrics.csv`, `core_integrated_memory_traffic.csv`, `energy_proxy.csv`, `energy_summary.csv`, `power_report_index.csv`, `openroad_postroute_power.csv`, `openroad_postroute_power_overhead.csv`, `asic_power.csv`, `asic_power_overhead.csv`, `copper_mcpat_sensitivity_20260618.csv`, `ablation.csv`, `sensitivity.csv`, `seed_stability.csv`, `statistical_summary.csv`, `synthesis.csv`, `synthesis_overhead.csv`, `full_core_design_inventory.csv`, `fullcore_synthesis.csv`, `fullcore_synthesis_overhead.csv`, `mapped_ppa.csv`, `mapped_ppa_overhead.csv`, `hardware_evidence_summary.csv`, `top_tier_gate_status.csv`, `ci_status.csv`, `ci_artifacts_manifest.csv`, `ci_failure_summary.csv`, `artifact_inventory.csv`, and `artifact_manifest.csv`. Tool logs for open-source hardware gates are written under `research/results/logs/`.
+Generated evidence lives under `research/results`. The new conference-facing generated CSVs are `toolchain_status.csv`, `model_tests.csv`, `rtl_compile.csv`, `rtl_simulation.csv`, `workload_build.csv`, `benchmark_inventory.csv`, `baseline_inventory.csv`, `performance.csv`, `prefetch_metrics.csv`, `memory_traffic.csv`, `cycle_performance.csv`, `cycle_prefetch_metrics.csv`, `cycle_memory_traffic.csv`, `gem5_validation.csv`, `gem5_performance.csv`, `gem5_prefetch_metrics.csv`, `gem5_memory_traffic.csv`, `gem5_statistical_summary.csv`, `gem5_raw_rerun_manifest.csv`, `gem5_raw_rerun_statistical_summary.csv`, `independent_sim_performance.csv`, `independent_sim_prefetch_metrics.csv`, `independent_sim_memory_traffic.csv`, `core_integrated_performance.csv`, `core_integrated_prefetch_metrics.csv`, `core_integrated_memory_traffic.csv`, `energy_proxy.csv`, `energy_summary.csv`, `power_report_index.csv`, `openroad_postroute_power.csv`, `openroad_postroute_power_overhead.csv`, `asic_power.csv`, `asic_power_overhead.csv`, `copper_mcpat_sensitivity_20260618.csv`, `ablation.csv`, `sensitivity.csv`, `seed_stability.csv`, `statistical_summary.csv`, `synthesis.csv`, `synthesis_overhead.csv`, `full_core_design_inventory.csv`, `full_core_target_inventory.csv`, `fullcore_synthesis.csv`, `fullcore_synthesis_overhead.csv`, `mapped_ppa.csv`, `mapped_ppa_overhead.csv`, `hardware_evidence_summary.csv`, `top_tier_gate_status.csv`, `claim_audit.csv`, `stronger_claim_audit.csv`, `number_audit.csv`, `todo_audit.csv`, `preflight_baseline_check_public.csv`, `ci_status.csv`, `ci_artifacts_manifest.csv`, `ci_failure_summary.csv`, `artifact_inventory.csv`, and `artifact_manifest.csv`. Tool logs for open-source hardware gates are written under `research/results/logs/`.
 
 ## Evidence
 
@@ -665,7 +774,7 @@ Evidence used by the paper and dashboard comes from generated CSVs and explicit 
 
 ## Old Or Local-Only
 
-Large simulator outputs, Vivado scratch directories, DCP files, WDB files, SAIF/VCD waveforms, and raw gem5 folders are treated as local-only unless they are small summary files or explicitly listed in the package manifest. The package script records excluded heavy artifacts rather than hiding them.
+Large simulator outputs, Vivado scratch directories, DCP files, WDB files, SAIF/VCD waveforms, and raw gem5 folders are treated as local-only unless they are small summary files or explicitly listed in the package manifest. `preflight_baseline_check_public.csv` is the packaged reviewer-facing preflight ledger; the older local `preflight_baseline_check.csv` can contain private absolute paths and is allowed to remain excluded. The package script records excluded heavy and local-only artifacts rather than hiding them.
 
 ## First Reviewer Command
 
@@ -746,7 +855,7 @@ Final scoped status from `research/results/top_tier_gate_status.csv`: {status}. 
 | SERIOUS BUT CAVEATABLE | Near-core-stub synthesis is not full-core overhead. | fullcore_synthesis_overhead.csv; mapped_ppa.csv | Keep the scope labeled near_core_stub everywhere. |
 | TOP-TIER BLOCKER | Power evidence can include scoped OpenROAD post-route estimates, Nangate45 ASIC-Liberty estimates, proxy/model energy, and optional FPGA tool-power rows when indexed PASS. It is still not silicon measurement, foundry signoff, or signoff-grade power. | openroad_postroute_power.csv; asic_power.csv; asic_power_overhead.csv; mapped_ppa.csv; energy_proxy.csv; energy_summary.csv; power_report_index.csv; copper_mcpat_sensitivity_20260618.csv | Add full-core post-route/signoff or silicon-calibrated power before claiming full-system power efficiency. |
 | SERIOUS BUT CAVEATABLE | Some workloads regress versus the best baseline. | cycle_performance.csv; core_integrated_performance.csv | Discuss regressions directly and keep speedup claims per-row. |
-| SERIOUS BUT CAVEATABLE | Main-branch Actions status was not verifiable in Phase 0. | preflight_baseline_check.csv | Verify main branch separately before release claims. |
+| SERIOUS BUT CAVEATABLE | Main-branch Actions status was not verifiable in Phase 0. | preflight_baseline_check_public.csv; preflight_baseline_check.csv | Verify main branch separately before release claims. |
 | NICE TO HAVE | Local Windows cannot run paper/RTL/synthesis/workload compilers. | tooling_availability.md | Use Docker/Codespaces/GitHub Actions as the proof environment. |
 | FUTURE WORK | Full-core post-route/signoff ASIC PPA is absent. | synthesis.csv; fullcore_synthesis.csv; mapped_ppa.csv; asic_power.csv | Add full-core ASIC/OpenROAD-style signoff reports if silicon-grade PPA is needed. |
 """
@@ -932,7 +1041,7 @@ def build_synchronized_hardware_report() -> None:
         "## Paper/Audit/Artifact Status",
         "",
         f"- Paper/audit/artifact gate: {top_gate_status('paper_audits_artifact')}",
-        "- Claim audit, number audit, and TODO audit must all remain PASS before release.",
+        "- Claim audit, stronger-claim audit, number audit, and TODO audit must all remain PASS before release.",
         "- Artifact package is generated by `make artifact` and checked by `sync_hardware_evidence.py`.",
         "",
         "## Claims Allowed Now",
@@ -944,13 +1053,15 @@ def build_synchronized_hardware_report() -> None:
             "",
             "## Claims Still Forbidden",
             "",
+            "- Fabricated-chip, tapeout, or post-silicon validation.",
             "- Silicon power.",
             "- ASIC or foundry signoff.",
             "- Measured silicon power.",
             "- Production ARM/OoO integration.",
-            "- State-of-the-art or universal speedup.",
+            "- State-of-the-art silicon efficiency or universal speedup.",
             "- Calling generic Yosys mapped timing.",
             "- Calling accepted-core-wrapper or near-core-stub rows full-core.",
+            "- Calling PicoRV32 tiny-SoC rows production ARM/OoO.",
             "",
             "## Exact Remaining Blocker",
             "",
@@ -1181,7 +1292,7 @@ Package & artifact\_manifest.csv & included and excluded files \\
 \end{table}
 
 \section{Conclusion}
-COPPER is best framed as a committed-provenance authority mechanism for data-derived prefetch issue. The artifact now has a CI-proven open-source path, deterministic cycle-model and core-integrated evidence, source-backed independent-simulator rows, validated imported gem5 ARM-system rows with imported-summary statistics, matched unit-level, near-core-stub, PicoRV32 accepted-core-wrapper, and PicoRV32 tiny-SoC full-core resource/PPA paths, scoped OpenROAD post-route/ASIC-Liberty/FPGA tool-power and proxy energy rows, a claim ledger, audits, and a package manifest. The honest next step for a stronger architecture submission is a final raw-rerunnable gem5 or comparable external core validation matrix plus signoff-calibrated or silicon-measured power evidence without changing the scoped claims in this artifact.
+COPPER is best framed as a committed-provenance authority mechanism for data-derived prefetch issue. The artifact now has a CI-proven open-source path, deterministic cycle-model and core-integrated evidence, source-backed independent-simulator rows, validated imported gem5 ARM-system rows with imported-summary statistics, matched unit-level, near-core-stub, PicoRV32 accepted-core-wrapper, and PicoRV32 tiny-SoC full-core resource/PPA paths, FPGA tool-estimated power where indexed PASS, proxy energy rows, explicit blocked OpenROAD/ASIC-Liberty entries where those reports are absent, a claim ledger, audits, and a package manifest. The honest next step for a stronger architecture submission is a final raw-rerunnable gem5 or comparable external core validation matrix plus signoff-calibrated or silicon-measured power evidence without changing the scoped claims in this artifact.
 
 \bibliographystyle{plain}
 \bibliography{references}

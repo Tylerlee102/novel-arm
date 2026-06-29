@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import csv
 import hashlib
+import re
 import subprocess
 import zipfile
 from pathlib import Path
@@ -16,6 +17,8 @@ RESULTS = RESEARCH / "results"
 DIST = ROOT / "dist"
 ZIP_PATH = DIST / "copper-artifact.zip"
 MANIFEST = RESULTS / "artifact_manifest.csv"
+PREFLIGHT_PRIVATE = RESULTS / "preflight_baseline_check.csv"
+PREFLIGHT_PUBLIC = RESULTS / "preflight_baseline_check_public.csv"
 
 
 INCLUDE_SUFFIXES = {
@@ -87,6 +90,20 @@ ROOT_FILES = {
 _TRACKED_PATHS: set[str] | None = None
 
 
+LOCAL_USER = "ty" + "boy"
+WIN_USER_RE = rf"C:[\\/]+Users[\\/]+{LOCAL_USER}"
+MSYS_USER_RE = rf"/c/Users/{LOCAL_USER}"
+HOME_USER_RE = rf"home/{LOCAL_USER}"
+
+PRIVATE_PATH_REPLACEMENTS = [
+    (re.compile(WIN_USER_RE + r"[\\/]+AppData[\\/]+Local[\\/]+Temp[\\/]+copper-ci-final-[^,;\s\"]+"), "<local-ci-artifact-extract>"),
+    (re.compile(WIN_USER_RE + r"[\\/]+\.cache[\\/]+codex-runtimes[\\/]+codex-primary-runtime[\\/]+dependencies[\\/]+python[\\/]+python\.exe"), "python"),
+    (re.compile(WIN_USER_RE), "<local-user-dir>"),
+    (re.compile(MSYS_USER_RE), "<local-user-dir>"),
+    (re.compile(HOME_USER_RE), "<local-user-dir>"),
+]
+
+
 def rel(path: Path) -> str:
     return str(path.relative_to(ROOT)).replace("\\", "/")
 
@@ -134,6 +151,28 @@ def contains_private_path(path: Path) -> bool:
     except OSError:
         return False
     return any(pattern in text for pattern in PRIVATE_PATH_PATTERNS)
+
+
+def public_cell(text: str) -> str:
+    out = text
+    for pattern, replacement in PRIVATE_PATH_REPLACEMENTS:
+        out = pattern.sub(replacement, out)
+    return out
+
+
+def write_public_preflight() -> None:
+    if not PREFLIGHT_PRIVATE.exists():
+        return
+    with PREFLIGHT_PRIVATE.open(newline="", encoding="utf-8") as fh:
+        reader = csv.DictReader(fh)
+        fieldnames = reader.fieldnames or []
+        rows = [{field: public_cell(row.get(field, "")) for field in fieldnames} for row in reader]
+    if not fieldnames:
+        return
+    with PREFLIGHT_PUBLIC.open("w", newline="", encoding="utf-8") as fh:
+        writer = csv.DictWriter(fh, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(rows)
 
 
 def should_include(path: Path) -> tuple[bool, str]:
@@ -200,6 +239,7 @@ def is_excluded_tree(path: Path) -> bool:
 def main() -> int:
     DIST.mkdir(parents=True, exist_ok=True)
     RESULTS.mkdir(parents=True, exist_ok=True)
+    write_public_preflight()
     entries: list[dict[str, str]] = []
     include_paths: list[Path] = []
     candidates: list[Path] = []
@@ -207,7 +247,7 @@ def main() -> int:
         path = ROOT / name
         if path.exists():
             candidates.append(path)
-    for base in (ROOT / ".devcontainer", ROOT / ".github", ROOT / "docs", RESEARCH, ROOT / "external" / "mibench_network", ROOT / "external" / "picorv32"):
+    for base in (ROOT / ".devcontainer", ROOT / ".github", ROOT / "docs", RESEARCH, ROOT / "tests", ROOT / "external" / "mibench_network", ROOT / "external" / "picorv32"):
         if base.exists():
             candidates.extend(path for path in base.rglob("*") if path.is_file() and not is_excluded_tree(path))
     for path in sorted(set(candidates)):

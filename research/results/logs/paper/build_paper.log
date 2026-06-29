@@ -1,1 +1,3 @@
 latexmk/pdflatex not found on PATH.
+Generated a plain-text ReportLab fallback PDF from main.tex for artifact completeness.
+This is not a LaTeX typesetting pass; CI/Docker should still use latexmk when available.

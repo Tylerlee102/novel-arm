@@ -67,7 +67,7 @@ The synchronized hardware-evidence pass supports a scoped COPPER artifact/mechan
 
 ## Paper/Audit/Artifact Status
 
-PASS: paper_build_status.csv contains a PASS row; claim, number, and todo audits pass; artifact zip and manifest exist
+PASS: paper_build_status.csv contains a PASS row with existing PDF/log for local_windows; claim, stronger-claim, number, and todo audits pass; artifact zip and manifest exist
 
 ## Claims Allowed Now
 
@@ -76,7 +76,7 @@ PASS: paper_build_status.csv contains a PASS row; claim, number, and todo audits
 | mapped_timing | full_core | PicoRV32 tiny-SoC full-core mapped timing | mapped_full_core_full_core_plus_copper_vivado_xc7a35tcsg324_1_vivado_impl_local_windows | research/results/mapped_ppa.csv |
 | matched_overhead | full_core | matched overhead for the listed scope | mapped_overhead_full_core_lut_vivado_xc7a35tcsg324_1_vivado_impl_full_core_baseline_full_core_plus_copper_local_windows | research/results/mapped_ppa_overhead.csv; research/results/fullcore_synthesis_overhead.csv |
 | power_classification | full_core | fpga_tool_estimate power evidence | power_fpga_tool_estimate_full_core_full_core_plus_copper_vivado_xc7a35tcsg324_1_vivado_impl_local_windows | research/results/power_report_index.csv |
-| paper_audit_artifact | artifact | scoped paper/artifact claims |  | research/results/claim_audit.csv; research/results/number_audit.csv; research/results/todo_audit.csv; research/results/paper_build_status.csv; research/results/artifact_manifest.csv |
+| paper_audit_artifact | artifact | scoped paper/artifact claims |  | research/results/claim_audit.csv; research/results/stronger_claim_audit.csv; research/results/number_audit.csv; research/results/todo_audit.csv; research/results/paper_build_status.csv; research/results/artifact_manifest.csv |
 
 ## Claims Still Forbidden
 

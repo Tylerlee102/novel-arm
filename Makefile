@@ -1,6 +1,6 @@
 PYTHON ?= python3
 
-.PHONY: check-toolchain test reproduce rtl sim benchmarks eval synth fullcore-synth mapped-ppa power-evidence sync-hardware-evidence hardware-evidence asic-power openroad-postroute paper paper-audit artifact readiness
+.PHONY: check-toolchain test reproduce rtl sim benchmarks workloads eval synth fullcore-synth mapped-ppa power-evidence sync-hardware-evidence hardware-evidence asic-power openroad-postroute paper paper-audit artifact readiness
 
 check-toolchain:
 	$(PYTHON) research/scripts/check_toolchain.py
@@ -8,6 +8,7 @@ check-toolchain:
 test:
 	$(PYTHON) research/scripts/run_model_tests.py
 	$(PYTHON) research/copper_validation.py --fuzz-trials 50
+	$(PYTHON) -m unittest discover -s tests
 
 reproduce:
 	$(PYTHON) reproduce.py --mode all-local
@@ -81,6 +82,7 @@ paper:
 paper-audit:
 	$(PYTHON) research/scripts/build_conference_docs.py
 	$(PYTHON) research/scripts/audit_claims.py
+	$(PYTHON) research/scripts/audit_stronger_claims.py
 	$(PYTHON) research/scripts/audit_numbers.py
 	$(PYTHON) research/scripts/audit_todos.py
 

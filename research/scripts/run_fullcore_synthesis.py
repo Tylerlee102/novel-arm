@@ -24,6 +24,7 @@ LOG_DIR = RESULTS / "logs" / "fullcore_synthesis"
 OUT = RESULTS / "fullcore_synthesis.csv"
 OVERHEAD = RESULTS / "fullcore_synthesis_overhead.csv"
 INVENTORY = RESULTS / "full_core_design_inventory.csv"
+TARGET_INVENTORY = RESULTS / "full_core_target_inventory.csv"
 
 
 @dataclass(frozen=True)
@@ -448,27 +449,30 @@ def overhead_rows(rows: list[dict[str, str]]) -> list[dict[str, str]]:
 
 def main() -> int:
     RESULTS.mkdir(parents=True, exist_ok=True)
+    inventory_fields = [
+        "evidence_id",
+        "scope",
+        "design",
+        "target",
+        "flow",
+        "environment",
+        "status",
+        "available",
+        "qualifies_true_full_core",
+        "role",
+        "top",
+        "rtl_sources",
+        "search_paths",
+        "report_path",
+        "notes",
+    ]
+    inventory = inventory_rows()
     write_csv(
         INVENTORY,
-        [
-            "evidence_id",
-            "scope",
-            "design",
-            "target",
-            "flow",
-            "environment",
-            "status",
-            "available",
-            "qualifies_true_full_core",
-            "role",
-            "top",
-            "rtl_sources",
-            "search_paths",
-            "report_path",
-            "notes",
-        ],
-        inventory_rows(),
+        inventory_fields,
+        inventory,
     )
+    write_csv(TARGET_INVENTORY, inventory_fields, inventory)
     rows = [run_design(design) for design in DESIGNS]
     write_csv(
         OUT,
@@ -515,7 +519,7 @@ def main() -> int:
         ],
         overhead_rows(rows),
     )
-    print(f"wrote {rel(INVENTORY)}, {rel(OUT)}, and {rel(OVERHEAD)}")
+    print(f"wrote {rel(INVENTORY)}, {rel(TARGET_INVENTORY)}, {rel(OUT)}, and {rel(OVERHEAD)}")
     return 1 if any(row["status"] == "FAIL" for row in rows) else 0
 
 
