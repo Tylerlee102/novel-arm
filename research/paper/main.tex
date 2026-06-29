@@ -145,13 +145,14 @@ nextpnr & mapped unit resource context when available & synthesis.csv \\
 Overhead & matched unit rows from same flow & synthesis\_overhead.csv \\
 Near-core stub & matched generic near-core-stub rows when Yosys runs & fullcore\_synthesis\_overhead.csv \\
 PicoRV32 core-wrapper & matched generic accepted core-wrapper rows when Yosys runs & fullcore\_synthesis\_overhead.csv \\
-Mapped PPA & matched near-core-stub, PicoRV32 core-wrapper, or unit rows only when place-and-route succeeds & mapped\_ppa.csv; mapped\_ppa\_overhead.csv \\
-Full-core integration & BLOCKED unless real full-core RTL exists & fullcore\_synthesis.csv \\
+PicoRV32 tiny-SoC full-core & matched full-core rows when Yosys or mapped flows run & fullcore\_synthesis\_overhead.csv; mapped\_ppa.csv \\
+Mapped PPA & matched near-core-stub, PicoRV32 core-wrapper, PicoRV32 tiny-SoC full-core, or unit rows only when place-and-route succeeds & mapped\_ppa.csv; mapped\_ppa\_overhead.csv \\
+Production-core integration & not claimed & top\_tier\_gate\_status.csv \\
 \hline
 \end{tabular}
 \end{table}
 
-The artifact supports unit-level hardware plausibility, matched near-core-stub resource-overhead rows, and matched PicoRV32 core-wrapper resource-overhead rows when Yosys is available. The near-core stub is not a full CPU, and the PicoRV32 wrapper is an accepted open-source core-wrapper rather than the target full-core integration. Generic Yosys rows do not provide mapped timing, Fmax, ASIC area, or measured power. Mapped timing may be discussed only when \texttt{mapped\_ppa.csv} contains matched PASS rows from nextpnr, Vivado, or OpenROAD. Full-core rows remain BLOCKED unless real full-core RTL and a mapped flow are added.
+The artifact supports unit-level hardware plausibility, matched near-core-stub resource-overhead rows, matched PicoRV32 accepted-core-wrapper rows, and matched PicoRV32 tiny-SoC full-core rows when the generated ledgers mark them PASS. The near-core stub is not a full CPU, the accepted wrapper is not full-core, and the PicoRV32 tiny-SoC full-core harness is not a production ARM/OoO integration. Generic Yosys rows do not provide mapped timing, Fmax, ASIC area, or measured power. Mapped timing may be discussed only when \texttt{mapped\_ppa.csv} contains matched PASS rows from nextpnr, Vivado, or OpenROAD.
 
 \section{Energy Proxy}
 \begin{table}[t]
@@ -171,7 +172,7 @@ Summary & proxy overhead statistics & energy\_summary.csv \\
 \end{tabular}
 \end{table}
 
-Energy rows use explicit assumptions recorded in \texttt{energy\_proxy.csv}. When \texttt{power\_report\_index.csv} marks \texttt{openroad\_postroute\_tool\_estimate} PASS, the row is a Nangate45 OpenROAD-flow-scripts post-route estimate with indexed final DEF/SPEF/netlist artifacts, not silicon measurement or foundry signoff. When \texttt{asic\_liberty\_tool\_estimate} is PASS, the row is a Nangate45 standard-cell Liberty estimate from OpenSTA/OpenROAD, not silicon measurement or post-route signoff with extracted parasitics. When \texttt{fpga\_tool\_estimate} is PASS, the row is Vivado \texttt{report\_power} for the mapped FPGA target, not silicon or ASIC signoff. When \texttt{proxy\_activity} is PASS, the activity proxy is the fixed-architecture McPAT sensitivity run driven by measured gem5 ROI counters. This supports scoped tool-power and proxy/model energy discussion, not full-core, foundry-signoff, or silicon power-efficiency claims.
+Energy rows use explicit assumptions recorded in \texttt{energy\_proxy.csv}. When \texttt{power\_report\_index.csv} marks \texttt{openroad\_postroute\_tool\_estimate} PASS, the row is a Nangate45 OpenROAD-flow-scripts post-route estimate with indexed final DEF/SPEF/netlist artifacts, not silicon measurement or foundry signoff. When \texttt{asic\_liberty\_tool\_estimate} is PASS, the row is a Nangate45 standard-cell Liberty estimate from OpenSTA/OpenROAD, not silicon measurement or post-route signoff with extracted parasitics. When \texttt{fpga\_tool\_estimate} is PASS, the row is Vivado \texttt{report\_power} for the mapped FPGA target, not silicon or ASIC signoff. When \texttt{proxy\_activity} is PASS, the activity proxy is the fixed-architecture McPAT sensitivity run driven by measured gem5 ROI counters. This supports scoped tool-power and proxy/model energy discussion, not foundry-signoff or silicon power-efficiency claims.
 
 \section{Limitations}
 \begin{table}[t]
@@ -183,8 +184,8 @@ Limitation & Consequence \\
 \hline
 Gem5 rows are validated imported ARM-system summaries & Gem5 validation is scoped to imported PASS rows \\
 Independent simulator is trace/event level & It is not a replacement for a broad gem5 campaign \\
-No full-core integration & Full-core area, timing, and power claims remain blocked \\
-Power is tool-estimate/model based & Full-core signoff and silicon power-efficiency claims remain blocked \\
+PicoRV32 tiny-SoC is the scoped full-core target & Production ARM/OoO claims remain blocked \\
+Power is tool-estimate/model based & Signoff and silicon power-efficiency claims remain blocked \\
 External gem5 and Vivado setup & Large external-tool reruns are not clone-local \\
 \hline
 \end{tabular}
@@ -203,7 +204,7 @@ Cycle-model evidence & cycle\_performance.csv & deterministic memory-system timi
 Core-integrated evidence & core\_integrated\_performance.csv & deterministic core-envelope model \\
 Independent simulator & independent\_sim\_performance.csv & source-backed trace/event simulator \\
 Gem5 validated summaries & gem5\_validation.csv; gem5\_performance.csv; gem5\_statistical\_summary.csv & imported ARM-system rows and imported-summary statistics when PASS \\
-Hardware cost & synthesis\_overhead.csv; fullcore\_synthesis\_overhead.csv; mapped\_ppa.csv & matched unit, near-core-stub, or PicoRV32 core-wrapper resources, plus mapped timing only when PASS \\
+Hardware cost & synthesis\_overhead.csv; fullcore\_synthesis\_overhead.csv; mapped\_ppa.csv & matched unit, near-core-stub, PicoRV32 core-wrapper, or PicoRV32 tiny-SoC full-core resources, plus mapped timing only when PASS \\
 Energy proxy & energy\_proxy.csv; openroad\_postroute\_power.csv; asic\_power.csv; power\_report\_index.csv & assumption-based proxy plus OpenROAD post-route, ASIC Liberty, or FPGA tool estimates when indexed PASS \\
 Package & artifact\_manifest.csv & included and excluded files \\
 \hline
@@ -211,7 +212,7 @@ Package & artifact\_manifest.csv & included and excluded files \\
 \end{table}
 
 \section{Conclusion}
-COPPER is best framed as a committed-provenance authority mechanism for data-derived prefetch issue. The artifact now has a CI-proven open-source path, deterministic cycle-model and core-integrated evidence, source-backed independent-simulator rows, validated imported gem5 ARM-system rows with imported-summary statistics, matched unit-level, near-core-stub, and PicoRV32 core-wrapper resource paths, mapped-FPGA PPA rows when real place-and-route timing succeeds, scoped OpenROAD post-route/ASIC-Liberty/FPGA tool-power and proxy energy rows, a claim ledger, audits, and a package manifest. The honest next step for a stronger architecture submission is a final raw-rerunnable gem5 or comparable external core validation matrix plus true full-core signoff-calibrated timing/area/power evidence without changing the scoped claims in this artifact.
+COPPER is best framed as a committed-provenance authority mechanism for data-derived prefetch issue. The artifact now has a CI-proven open-source path, deterministic cycle-model and core-integrated evidence, source-backed independent-simulator rows, validated imported gem5 ARM-system rows with imported-summary statistics, matched unit-level, near-core-stub, PicoRV32 accepted-core-wrapper, and PicoRV32 tiny-SoC full-core resource/PPA paths, scoped OpenROAD post-route/ASIC-Liberty/FPGA tool-power and proxy energy rows, a claim ledger, audits, and a package manifest. The honest next step for a stronger architecture submission is a final raw-rerunnable gem5 or comparable external core validation matrix plus signoff-calibrated or silicon-measured power evidence without changing the scoped claims in this artifact.
 
 \bibliographystyle{plain}
 \bibliography{references}

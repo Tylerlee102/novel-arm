@@ -282,6 +282,12 @@ def fpga_tool_power_evidence() -> dict[str, str] | None:
         f"{row.get('design', '')} on {row.get('target', '')} power_mw={row.get('power_mw', '')}"
         for _, row in evidence[:4]
     )
+    full_core_note = (
+        "This is scoped to a matched true full_core pair, but it is still not silicon measurement "
+        "or ASIC/foundry signoff power."
+        if first_row.get("scope") == "full_core"
+        else "This is not full-core power."
+    )
     return {
         "source": "; ".join(sorted({rel(path) for path, _ in evidence})),
         "report_path": first_row.get("report_path", ""),
@@ -295,7 +301,7 @@ def fpga_tool_power_evidence() -> dict[str, str] | None:
         "notes": (
             f"FPGA tool-estimated power rows found: {designs}. "
             "Treat as Vivado/EDA report power for the stated mapped FPGA target, not silicon "
-            "measurement, ASIC signoff, or full-core power."
+            f"measurement or ASIC signoff. {full_core_note}"
         ),
     }
 

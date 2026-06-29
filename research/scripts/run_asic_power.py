@@ -51,15 +51,27 @@ PICORV32_SOURCES = (
     "research/copper_prefetch_unit_open.sv",
     "research/rtl/fullcore/picorv32_copper_wrapper.sv",
 )
+PICORV32_FULLCORE_SOURCES = (
+    "external/picorv32/picorv32.v",
+    "research/copper_prefetch_unit_open.sv",
+    "research/rtl/fullcore/picorv32_full_core_soc.sv",
+)
 
 FULLCORE_BLOCKER = (
-    "BLOCKED: no real full-core RTL integration is present, so no full-core ASIC "
-    "power row is claimed."
+    "BLOCKED: PicoRV32 tiny-SoC full-core ASIC Liberty evidence requires matched "
+    "full_core_baseline/full_core_plus_copper sources and a working Yosys/OpenSTA "
+    "or OpenROAD Liberty flow."
 )
 
 DESIGNS = (
-    Design("full_core_baseline", "", (), "full_core"),
-    Design("full_core_plus_copper", "", (), "full_core"),
+    Design("full_core_baseline", "full_core_baseline", PICORV32_FULLCORE_SOURCES, "full_core", (("MEM_WORDS", 64),)),
+    Design(
+        "full_core_plus_copper",
+        "full_core_plus_copper",
+        PICORV32_FULLCORE_SOURCES,
+        "full_core",
+        (("MEM_WORDS", 64), ("ENTRIES", 8), ("QUEUE_DEPTH", 4)),
+    ),
     Design("baseline_core_wrapper", "baseline_core_wrapper", PICORV32_SOURCES, "core_wrapper"),
     Design(
         "core_wrapper_plus_copper",
@@ -378,10 +390,6 @@ def netlist_context(output: str, netlist: Path, radius: int = 5) -> str:
 
 def run_design(design: Design, liberty: Path, sta_tool: str, sta_kind: str) -> dict[str, str]:
     log_path = LOG_DIR / f"{design.name}.log"
-    if design.scope == "full_core":
-        write_text(log_path, FULLCORE_BLOCKER + "\n")
-        return blank_row(design, "BLOCKED", log_path, FULLCORE_BLOCKER)
-
     missing_sources = [source for source in design.sources if not (ROOT / source).exists()]
     if missing_sources:
         note = f"BLOCKED: missing RTL source(s): {', '.join(missing_sources)}."
@@ -424,7 +432,7 @@ def run_design(design: Design, liberty: Path, sta_tool: str, sta_kind: str) -> d
         "Nangate45 standard-cell Liberty tool estimate from Yosys mapping plus "
         f"{sta_kind}; clock_period_ns={CLOCK_PERIOD_NS}; global_activity={ACTIVITY}. "
         "This is not silicon measurement, not post-route signoff with extracted parasitics, "
-        "and not full-core power."
+        "and not silicon/signoff power."
     )
     if status == "FAIL":
         notes = "FAIL: OpenSTA/OpenROAD did not emit parseable Liberty power; see log."
@@ -457,43 +465,49 @@ def numeric(value: str) -> float | None:
 
 def overhead_rows(rows: list[dict[str, str]]) -> list[dict[str, str]]:
     by_name = {row["design"]: row for row in rows}
-    baseline = by_name.get("baseline_core_wrapper")
-    copper = by_name.get("core_wrapper_plus_copper")
     out: list[dict[str, str]] = []
-    if not baseline or not copper or baseline.get("status") != "PASS" or copper.get("status") != "PASS":
-        return [
-            {
-                "target": "nangate45",
-                "flow": "yosys+opensta-liberty",
-                "scope": "core_wrapper",
-                "metric": "core_wrapper_asic_liberty_power",
-                "baseline": "",
-                "with_copper": "",
-                "delta": "",
-                "percent_overhead": "",
-                "notes": "BLOCKED: matched ASIC Liberty power overhead requires PASS rows for baseline and COPPER.",
-            }
-        ]
-    for metric in ("cells", "area_um2", "wns", "tns", "internal_power_mw", "switching_power_mw", "leakage_power_mw", "total_power_mw"):
-        b = numeric(baseline.get(metric, ""))
-        c = numeric(copper.get(metric, ""))
-        if b is None or c is None:
+    pairs = (
+        ("full_core", "full_core_baseline", "full_core_plus_copper"),
+        ("core_wrapper", "baseline_core_wrapper", "core_wrapper_plus_copper"),
+    )
+    for scope, baseline_name, copper_name in pairs:
+        baseline = by_name.get(baseline_name)
+        copper = by_name.get(copper_name)
+        if not baseline or not copper or baseline.get("status") != "PASS" or copper.get("status") != "PASS":
+            out.append(
+                {
+                    "target": "nangate45",
+                    "flow": "yosys+opensta-liberty",
+                    "scope": scope,
+                    "metric": f"{scope}_asic_liberty_power",
+                    "baseline": "",
+                    "with_copper": "",
+                    "delta": "",
+                    "percent_overhead": "",
+                    "notes": "BLOCKED: matched ASIC Liberty power overhead requires PASS rows for baseline and COPPER.",
+                }
+            )
             continue
-        delta = c - b
-        pct = (delta / b * 100.0) if b else 0.0
-        out.append(
-            {
-                "target": "nangate45",
-                "flow": "yosys+opensta-liberty",
-                "scope": "core_wrapper",
-                "metric": f"core_wrapper_{metric}",
-                "baseline": f"{b:.6f}".rstrip("0").rstrip("."),
-                "with_copper": f"{c:.6f}".rstrip("0").rstrip("."),
-                "delta": f"{delta:.6f}".rstrip("0").rstrip("."),
-                "percent_overhead": f"{pct:.6f}",
-                "notes": "Matched core-wrapper ASIC Liberty estimate from same library and clock/activity assumptions.",
-            }
-        )
+        for metric in ("cells", "area_um2", "wns", "tns", "internal_power_mw", "switching_power_mw", "leakage_power_mw", "total_power_mw"):
+            b = numeric(baseline.get(metric, ""))
+            c = numeric(copper.get(metric, ""))
+            if b is None or c is None:
+                continue
+            delta = c - b
+            pct = (delta / b * 100.0) if b else 0.0
+            out.append(
+                {
+                    "target": "nangate45",
+                    "flow": "yosys+opensta-liberty",
+                    "scope": scope,
+                    "metric": f"{scope}_{metric}",
+                    "baseline": f"{b:.6f}".rstrip("0").rstrip("."),
+                    "with_copper": f"{c:.6f}".rstrip("0").rstrip("."),
+                    "delta": f"{delta:.6f}".rstrip("0").rstrip("."),
+                    "percent_overhead": f"{pct:.6f}",
+                    "notes": f"Matched {scope} ASIC Liberty estimate from same library and clock/activity assumptions.",
+                }
+            )
     return out
 
 

@@ -149,7 +149,20 @@ def matched_mapped_row(rows: list[dict[str, str]], scope: str) -> dict[str, str]
             and has_real_timing(row)
         ):
             by_key.setdefault((row.get("target", ""), row.get("flow", "")), []).append(row)
-    for _key, group in sorted(by_key.items()):
+
+    def mapped_priority(item: tuple[tuple[str, str], list[dict[str, str]]]) -> tuple[int, str, str]:
+        target, flow = item[0]
+        if flow == "vivado-impl":
+            return (0, target, flow)
+        if "openroad" in flow:
+            return (1, target, flow)
+        if "nextpnr-ecp5" in flow:
+            return (2, target, flow)
+        if "nextpnr-ice40" in flow:
+            return (3, target, flow)
+        return (9, target, flow)
+
+    for _key, group in sorted(by_key.items(), key=mapped_priority):
         designs = {row.get("design", "") for row in group}
         if pairs[scope].issubset(designs):
             copper = next((row for row in group if row.get("design") in {"core_wrapper_plus_copper", "full_core_plus_copper"}), group[0])

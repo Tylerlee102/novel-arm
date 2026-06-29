@@ -57,11 +57,13 @@ sync-hardware-evidence:
 hardware-evidence:
 	$(MAKE) fullcore-synth
 	$(MAKE) mapped-ppa
+	$(MAKE) asic-power
 	$(MAKE) power-evidence
 	$(MAKE) sync-hardware-evidence
 	$(MAKE) paper
 	$(MAKE) paper-audit
 	$(MAKE) artifact
+	$(MAKE) sync-hardware-evidence
 
 asic-power:
 	$(PYTHON) research/scripts/run_asic_power.py

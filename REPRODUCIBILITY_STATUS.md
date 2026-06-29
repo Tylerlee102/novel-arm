@@ -42,10 +42,11 @@ machine or one-command full-system artifact.
   single-sample cases explicitly. A BLOCKED gem5 row is not performance
   evidence; it records that gem5 was unavailable or not runnable in the current
   environment.
-- `fullcore_synthesis*.csv` records unit, near-core-stub, and PicoRV32
-  accepted-core-wrapper synthesis scope. Near-core-stub and PicoRV32 wrapper rows must
-  not be described as full-core overhead, ARM-core integration, ASIC timing, or
-  measured power.
+- `fullcore_synthesis*.csv` records unit, near-core-stub, PicoRV32
+  accepted-core-wrapper, and PicoRV32 tiny-SoC full-core synthesis scope.
+  Near-core-stub and accepted-wrapper rows must not be described as full-core
+  overhead. PicoRV32 tiny-SoC full-core rows are not production ARM/OoO
+  integration, ASIC timing, silicon, or measured power.
 - `mapped_ppa.csv` and `mapped_ppa_overhead.csv` are the only open-source
   mapped-PPA ledgers. They record BLOCKED when Yosys, nextpnr, OpenROAD, Vivado,
   or required platform data are unavailable, FAIL when a real mapping attempt
@@ -59,9 +60,9 @@ machine or one-command full-system artifact.
   OpenROAD post-route tool-power rows when a configured OpenROAD flow is available,
   ASIC-Liberty tool-power rows when OpenSTA/OpenROAD is available, and Vivado
   `report_power` rows when Vivado is available. OpenROAD and ASIC-Liberty rows are scoped
-  tool estimates, not foundry signoff, full-core power, or silicon measurement.
+  tool estimates, not foundry signoff or silicon measurement.
   Vivado power rows are tool-estimated FPGA power for the stated mapped target,
-  not measured silicon, ASIC signoff power, or full-core power.
+  not measured silicon or ASIC signoff power.
 - `hardware_evidence_summary.csv` and `top_tier_gate_status.csv` are produced
   by `make sync-hardware-evidence` after the lane outputs are present. They
   merge mapped timing, matched overhead, power classification, paper audit, and

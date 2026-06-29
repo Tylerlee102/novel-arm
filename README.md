@@ -59,7 +59,8 @@ source-backed `independent_sim` trace/event simulator, imported gem5
 ARM full-system summary rows when checksum/return-code validation passes,
 `gem5_statistical_summary.csv` imported-summary confidence rows where repeated
 validated samples exist,
-near-core-stub and PicoRV32 accepted-core-wrapper synthesis flows, a strict
+near-core-stub, PicoRV32 accepted-core-wrapper, and PicoRV32 tiny-SoC full-core
+synthesis flows, a strict
 `mapped_ppa.csv` place-and-route ledger, `proxy_assumed_memory_energy` rows,
 optional Nangate45 ASIC-Liberty tool-power rows when OpenSTA/OpenROAD is
 available, Vivado `report_power` rows when Vivado is available, and a McPAT
@@ -68,21 +69,22 @@ are scoped evidence levels: `independent_sim` is not gem5, `core_integrated` is
 not gem5, imported gem5 summary rows are not a clone-local rerun of every raw
 full-system simulation, gem5 statistical rows are imported-summary statistics
 rather than fresh raw-run confidence intervals,
-the near-core stub is not a full CPU, the PicoRV32 accepted wrapper is not the target
-full-core/ARM integration, generic Yosys is not mapped timing, and Vivado
+the near-core stub is not a full CPU, the PicoRV32 accepted wrapper is not the
+tiny-SoC full-core target, the PicoRV32 tiny-SoC full-core target is not a
+production ARM/OoO integration, generic Yosys is not mapped timing, and Vivado
 `report_power` is tool-estimated FPGA power rather than silicon or ASIC signoff
 power. ASIC-Liberty rows, when present, are standard-cell tool estimates rather
 than post-route signoff or silicon measurements. `mapped_ppa.csv` may be cited for timing only when it has matched PASS
 rows from nextpnr, Vivado, or OpenROAD and real timing fields are not `NA`.
 Vivado, OpenSTA/OpenROAD, and broader gem5 campaign reruns remain optional
 external-tool paths.
-The strongest current hardware claim is PicoRV32 accepted-core-wrapper mapped FPGA PPA
-plus scoped PicoRV32 accepted-core-wrapper OpenROAD post-route, ASIC-Liberty, or FPGA tool-power when those
-rows are present; it is not a full-core, post-route ASIC signoff, silicon, or
-top-tier architecture-readiness claim.
+The strongest current hardware claim is PicoRV32 tiny-SoC full-core mapped FPGA
+PPA plus scoped full-core FPGA tool-power when those rows are present; it is not
+post-route ASIC signoff, silicon, production ARM/OoO, or top-tier
+architecture-readiness evidence.
 `research/results/hardware_evidence_summary.csv` and
 `research/results/top_tier_gate_status.csv` synchronize those rows and keep
-remaining full-core or silicon/signoff blockers machine-readable.
+remaining silicon/signoff blockers machine-readable.
 
 If `gh` or Docker is unavailable on the local machine, use
 `docs/RUN_CI_NOW.md` to trigger the GitHub Actions run from the GitHub web UI,
@@ -123,7 +125,7 @@ queue-drop, traffic, ablation, sensitivity, and seed/input-stability CSVs at
 model, deterministic cycle-model, and deterministic core-integrated levels.
 The independent simulator rows add a separate source-backed trace/event path,
 and gem5 rows add validated imported ARM full-system summary evidence. The
-remaining blocker for a top-tier/full-core architecture claim is real mapped
-full-core evidence plus post-route/silicon signoff-grade power; missing
-full-core or signoff rows must stay BLOCKED rather than being replaced by
-generic resource counts.
+remaining blockers for a top-tier architecture claim are post-route/silicon
+signoff-grade power, production-scale core/SoC integration, and a fresh raw-run
+external-simulator matrix with confidence intervals; missing signoff rows must
+stay BLOCKED rather than being replaced by generic resource counts.

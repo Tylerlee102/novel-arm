@@ -54,15 +54,21 @@ PICORV32_SOURCES = (
     "research/copper_prefetch_unit_open.sv",
     "research/rtl/fullcore/picorv32_copper_wrapper.sv",
 )
+PICORV32_FULLCORE_SOURCES = (
+    "external/picorv32/picorv32.v",
+    "research/copper_prefetch_unit_open.sv",
+    "research/rtl/fullcore/picorv32_full_core_soc.sv",
+)
 
 FULLCORE_BLOCKER = (
-    "BLOCKED: no real full-core RTL integration is present, so no full-core "
-    "post-route ASIC PPA/power row is claimed."
+    "BLOCKED: PicoRV32 tiny-SoC full-core OpenROAD evidence requires matched "
+    "full_core_baseline/full_core_plus_copper sources and a working OpenROAD "
+    "post-route flow."
 )
 
 DESIGNS = (
-    Design("full_core_baseline", "", (), "full_core"),
-    Design("full_core_plus_copper", "", (), "full_core"),
+    Design("full_core_baseline", "full_core_baseline", PICORV32_FULLCORE_SOURCES, "full_core"),
+    Design("full_core_plus_copper", "full_core_plus_copper", PICORV32_FULLCORE_SOURCES, "full_core"),
     Design("baseline_core_wrapper", "baseline_core_wrapper", PICORV32_SOURCES, "core_wrapper"),
     Design("core_wrapper_plus_copper", "core_wrapper_plus_copper", PICORV32_SOURCES, "core_wrapper"),
 )
@@ -306,6 +312,10 @@ def design_config(design: Design, config_dir: Path, work_home: Path) -> Path:
     sdc = config_dir / design.name / "constraint.sdc"
     config.parent.mkdir(parents=True, exist_ok=True)
     sources = " ".join((ROOT / source).as_posix() for source in design.sources)
+    if design.name == "full_core_plus_copper":
+        extra_config = "export SYNTH_HIERARCHICAL = 0\n"
+    else:
+        extra_config = ""
     write_raw_text(
         sdc,
         f"""
@@ -345,6 +355,7 @@ export PLACE_DENSITY_LB_ADDON = 0.20
 export TNS_END_PERCENT = 100
 export SYNTH_REPEATABLE_BUILD ?= 1
 export PDN_TCL ?= $(PLATFORM_DIR)/grid_strategy-M1-M4-M7.tcl
+{extra_config}
 """.lstrip(),
     )
     return config
@@ -600,10 +611,6 @@ def parse_design(design: Design, code: int, report_path: Path, text: str, physic
 
 def run_design(design: Design, flow_home: Path, temp_root: Path) -> dict[str, str]:
     log_path = LOG_DIR / design.name / "orfs_make.log"
-    if design.scope == "full_core":
-        write_text(log_path, FULLCORE_BLOCKER + "\n")
-        return blank_row(design, "BLOCKED", log_path, FULLCORE_BLOCKER)
-
     missing_sources = [source for source in design.sources if not (ROOT / source).exists()]
     if missing_sources:
         note = f"BLOCKED: missing RTL source(s): {', '.join(missing_sources)}."
@@ -639,44 +646,49 @@ def numeric(value: str) -> float | None:
 
 def overhead_rows(rows: list[dict[str, str]]) -> list[dict[str, str]]:
     by_name = {row["design"]: row for row in rows}
-    baseline = by_name.get("baseline_core_wrapper")
-    copper = by_name.get("core_wrapper_plus_copper")
-    if not baseline or not copper or baseline.get("status") != "PASS" or copper.get("status") != "PASS":
-        return [
-            {
-                "target": "nangate45",
-                "flow": "openroad-flow-scripts-postroute",
-                "scope": "core_wrapper",
-                "metric": "core_wrapper_openroad_postroute_power",
-                "baseline": "",
-                "with_copper": "",
-                "delta": "",
-                "percent_overhead": "",
-                "notes": "BLOCKED: matched OpenROAD post-route overhead requires PASS rows for baseline and COPPER.",
-            }
-        ]
-
     out: list[dict[str, str]] = []
-    for metric in ("cells", "area_um2", "wns", "tns", "fmax_mhz", "internal_power_mw", "switching_power_mw", "leakage_power_mw", "total_power_mw"):
-        b = numeric(baseline.get(metric, ""))
-        c = numeric(copper.get(metric, ""))
-        if b is None or c is None:
+    pairs = (
+        ("full_core", "full_core_baseline", "full_core_plus_copper"),
+        ("core_wrapper", "baseline_core_wrapper", "core_wrapper_plus_copper"),
+    )
+    for scope, baseline_name, copper_name in pairs:
+        baseline = by_name.get(baseline_name)
+        copper = by_name.get(copper_name)
+        if not baseline or not copper or baseline.get("status") != "PASS" or copper.get("status") != "PASS":
+            out.append(
+                {
+                    "target": "nangate45",
+                    "flow": "openroad-flow-scripts-postroute",
+                    "scope": scope,
+                    "metric": f"{scope}_openroad_postroute_power",
+                    "baseline": "",
+                    "with_copper": "",
+                    "delta": "",
+                    "percent_overhead": "",
+                    "notes": "BLOCKED: matched OpenROAD post-route overhead requires PASS rows for baseline and COPPER.",
+                }
+            )
             continue
-        delta = c - b
-        pct = (delta / b * 100.0) if b else 0.0
-        out.append(
-            {
-                "target": "nangate45",
-                "flow": "openroad-flow-scripts-postroute",
-                "scope": "core_wrapper",
-                "metric": f"core_wrapper_openroad_postroute_{metric}",
-                "baseline": f"{b:.6f}".rstrip("0").rstrip("."),
-                "with_copper": f"{c:.6f}".rstrip("0").rstrip("."),
-                "delta": f"{delta:.6f}".rstrip("0").rstrip("."),
-                "percent_overhead": f"{pct:.6f}",
-                "notes": "Matched core-wrapper OpenROAD post-route estimate from same ORFS ref, platform, and constraints.",
-            }
-        )
+        for metric in ("cells", "area_um2", "wns", "tns", "fmax_mhz", "internal_power_mw", "switching_power_mw", "leakage_power_mw", "total_power_mw"):
+            b = numeric(baseline.get(metric, ""))
+            c = numeric(copper.get(metric, ""))
+            if b is None or c is None:
+                continue
+            delta = c - b
+            pct = (delta / b * 100.0) if b else 0.0
+            out.append(
+                {
+                    "target": "nangate45",
+                    "flow": "openroad-flow-scripts-postroute",
+                    "scope": scope,
+                    "metric": f"{scope}_openroad_postroute_{metric}",
+                    "baseline": f"{b:.6f}".rstrip("0").rstrip("."),
+                    "with_copper": f"{c:.6f}".rstrip("0").rstrip("."),
+                    "delta": f"{delta:.6f}".rstrip("0").rstrip("."),
+                    "percent_overhead": f"{pct:.6f}",
+                    "notes": f"Matched {scope} OpenROAD post-route estimate from same ORFS ref, platform, and constraints.",
+                }
+            )
     return out
 
 

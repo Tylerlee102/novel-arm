@@ -1,4 +1,4 @@
-$ {USER_HOME}\tools\oss-cad-suite\bin\yosys.exe -p read_verilog -sv external/picorv32/picorv32.v; read_verilog -sv research/baseline_prefetch_unit.sv; read_verilog -sv research/copper_prefetch_unit_open.sv; read_verilog -sv research/rtl/fullcore/picorv32_copper_wrapper.sv; synth_ecp5 -top baseline_core_wrapper -json {USER_HOME}/AppData/Local/Temp/copper_mapped_ecp5_xubjupav/baseline_core_wrapper.json; stat
+$ {USER_HOME}\tools\oss-cad-suite\bin\yosys.exe -p read_verilog -sv external/picorv32/picorv32.v; read_verilog -sv research/baseline_prefetch_unit.sv; read_verilog -sv research/copper_prefetch_unit_open.sv; read_verilog -sv research/rtl/fullcore/picorv32_copper_wrapper.sv; synth_ecp5 -top baseline_core_wrapper -json {USER_HOME}/AppData/Local/Temp/copper_mapped_ecp5_ukca3hz3/baseline_core_wrapper.json; stat
 
  /----------------------------------------------------------------------------\
  |  yosys -- Yosys Open SYnthesis Suite                                       |
@@ -7,7 +7,7 @@ $ {USER_HOME}\tools\oss-cad-suite\bin\yosys.exe -p read_verilog -sv external/pic
  \----------------------------------------------------------------------------/
  Yosys 0.66+154 (git sha1 23aadd92a, Release, GNU /usr/bin/x86_64-w64-mingw32-g++ 13.2.1)
 
--- Running command `read_verilog -sv external/picorv32/picorv32.v; read_verilog -sv research/baseline_prefetch_unit.sv; read_verilog -sv research/copper_prefetch_unit_open.sv; read_verilog -sv research/rtl/fullcore/picorv32_copper_wrapper.sv; synth_ecp5 -top baseline_core_wrapper -json {USER_HOME}/AppData/Local/Temp/copper_mapped_ecp5_xubjupav/baseline_core_wrapper.json; stat' --
+-- Running command `read_verilog -sv external/picorv32/picorv32.v; read_verilog -sv research/baseline_prefetch_unit.sv; read_verilog -sv research/copper_prefetch_unit_open.sv; read_verilog -sv research/rtl/fullcore/picorv32_copper_wrapper.sv; synth_ecp5 -top baseline_core_wrapper -json {USER_HOME}/AppData/Local/Temp/copper_mapped_ecp5_ukca3hz3/baseline_core_wrapper.json; stat' --
 
 1. Executing Verilog-2005 frontend: external/picorv32/picorv32.v
 Parsing SystemVerilog input from `external/picorv32/picorv32.v' to AST representation.
@@ -3527,13 +3527,13 @@ ABC: cst =       0  cls =     26  lit =      28  unused =     297  proof =     0
 ABC: + &if -W 300 -v 
 ABC: K = 7. Memory (bytes): Truth =    0. Cut =   76. Obj =  156. Set =  780. CutMin = no
 ABC: Node =     209.  Ch =    26.  Total mem =    0.10 MB. Peak cut mem =    0.02 MB.
-ABC: P:  Del = 1507.00.  Ar =     204.0.  Edge =      273.  Cut =     1788.  T =     0.00 sec
+ABC: P:  Del = 1507.00.  Ar =     204.0.  Edge =      273.  Cut =     1788.  T =     0.01 sec
 ABC: P:  Del = 1507.00.  Ar =     203.0.  Edge =      272.  Cut =     1788.  T =     0.00 sec
 ABC: P:  Del = 1507.00.  Ar =     188.0.  Edge =      265.  Cut =     2785.  T =     0.00 sec
 ABC: F:  Del = 1507.00.  Ar =      96.0.  Edge =      226.  Cut =     1650.  T =     0.00 sec
 ABC: A:  Del = 1507.00.  Ar =      96.0.  Edge =      223.  Cut =     1611.  T =     0.00 sec
 ABC: A:  Del = 1507.00.  Ar =      96.0.  Edge =      223.  Cut =     1550.  T =     0.00 sec
-ABC: Total time =     0.00 sec
+ABC: Total time =     0.01 sec
 ABC: + &write -n <abc-temp-dir>/output.aig 
 ABC: + &mfs 
 ABC: + &ps -l 
@@ -3544,7 +3544,7 @@ ABC: + &write -n <abc-temp-dir>/output.aig
 ABC: + &verify 
 ABC: Networks are equivalent.  Time =     0.01 sec
 ABC: + time 
-ABC: elapse: 0.03 seconds, total: 0.03 seconds
+ABC: elapse: 0.02 seconds, total: 0.02 seconds
 
 5.45.15.6. Executing AIGER frontend.
 <suppressed ~480 debug messages>
@@ -3819,11 +3819,11 @@ Found and reported 0 problems.
        90   TRELLIS_FF
 
 Warnings: 3 unique messages, 3 total
-End of script. Logfile hash: 63ea46dd67
+End of script. Logfile hash: 76d2fb5f50
 Yosys 0.66+154 (git sha1 23aadd92a, Release, GNU /usr/bin/x86_64-w64-mingw32-g++ 13.2.1)
 Time spent: 1% 38x opt_expr (0 sec), 1% 36x opt_clean (0 sec), ...
 
-$ {USER_HOME}\tools\oss-cad-suite\bin\nextpnr-ecp5.exe --85k --package CABGA381 --speed 6 --freq 50 --lpf-allow-unconstrained --json {USER_HOME}\AppData\Local\Temp\copper_mapped_ecp5_xubjupav\baseline_core_wrapper.json --textcfg {USER_HOME}\AppData\Local\Temp\copper_mapped_ecp5_xubjupav\baseline_core_wrapper.config
+$ {USER_HOME}\tools\oss-cad-suite\bin\nextpnr-ecp5.exe --85k --package CABGA381 --speed 6 --freq 50 --lpf-allow-unconstrained --json {USER_HOME}\AppData\Local\Temp\copper_mapped_ecp5_ukca3hz3\baseline_core_wrapper.json --textcfg {USER_HOME}\AppData\Local\Temp\copper_mapped_ecp5_ukca3hz3\baseline_core_wrapper.config
 
 
 Info: Logic utilisation before packing:
@@ -3885,7 +3885,7 @@ Info:     at initial placer iter 2, wirelen = 3043
 Info:     at initial placer iter 3, wirelen = 3040
 Info: Running main analytical placer, max placement attempts per cell = 10000.
 Info:     at iteration #1, type ALL: wirelen solved = 3042, spread = 3288, legal = 3313; time = 0.02s
-Info: HeAP Placer Time: 0.06s
+Info: HeAP Placer Time: 0.07s
 Info:   of which solving equations: 0.01s
 Info:   of which spreading cells: 0.00s
 Info:   of which strict legalisation: 0.00s
@@ -3936,9 +3936,9 @@ Info: Setting up routing queue.
 Info: Routing 618 arcs.
 Info:            |   (re-)routed arcs  |   delta    | remaining|       time spent     |
 Info:    IterCnt |  w/ripup   wo/ripup |  w/r  wo/r |      arcs| batch(sec) total(sec)|
-Info:        767 |      127        600 |  127   600 |         0|       0.13       0.13|
+Info:        767 |      127        600 |  127   600 |         0|       0.12       0.12|
 Info: Routing complete.
-Info: Router1 time 0.13s
+Info: Router1 time 0.12s
 Info: Checksum: 0x812935ec
 
 Info: Critical path report for clock '$glbnet$clk$TRELLIS_IO_IN' (posedge -> posedge):

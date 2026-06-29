@@ -1,11 +1,14 @@
 # COPPER Full-Core Integration Status
 
-This directory exists to make the full-core PPA blocker explicit. The public
-artifact now includes a PicoRV32 accepted open-source core-wrapper with both
-baseline prefetch and COPPER integrated under the same mapped FPGA flow. That
-evidence is labeled `accepted_core_wrapper`, not `full_core`.
+This directory contains two PicoRV32-based hardware targets:
 
-`research/scripts/run_fullcore_synthesis.py` still writes BLOCKED rows for true
-full-core designs instead of fabricating full-core area, timing, or power
-numbers. Runnable open-source hardware evidence is limited to explicitly
-labeled `near_core_stub` and `accepted_core_wrapper` rows.
+- `picorv32_copper_wrapper.sv`: the older accepted open-source core-wrapper
+  target. It instantiates PicoRV32, but keeps a simple NOP memory tie-off, so
+  its evidence remains labeled `accepted_core_wrapper`.
+- `picorv32_full_core_soc.sv`: the open-source PicoRV32 tiny-SoC full-core
+  harness. It instantiates PicoRV32 with synthesizable local instruction/data
+  memory and matched `full_core_baseline` / `full_core_plus_copper` top modules.
+
+The tiny-SoC target is suitable for scoped `full_core` synthesis and mapped-FPGA
+PPA rows when the generated CSVs show PASS. It is still not a production ARM
+core, out-of-order backend, silicon result, or ASIC/foundry signoff flow.

@@ -259,6 +259,13 @@ def core_wrapper_synthesis_pass() -> bool:
     )
 
 
+def full_core_synthesis_pass() -> bool:
+    return any(
+        row.get("scope") == "full_core" and row.get("status") == "PASS" and row.get("percent_overhead")
+        for row in read_rows(RESULTS / "fullcore_synthesis_overhead.csv")
+    )
+
+
 def mapped_row_scope(row: dict[str, str]) -> str:
     return row.get("scope", "").strip()
 
@@ -268,6 +275,8 @@ def matched_mapped_ppa_pass(scope: str = "near_core_stub") -> bool:
         baseline, copper = "nearcore_stub_baseline", "nearcore_stub_plus_copper"
     elif scope == "accepted_core_wrapper":
         baseline, copper = "baseline_core_wrapper", "core_wrapper_plus_copper"
+    elif scope == "full_core":
+        baseline, copper = "full_core_baseline", "full_core_plus_copper"
     elif scope == "unit":
         baseline, copper = "baseline_prefetch_unit", "copper_unit"
     else:
@@ -291,6 +300,8 @@ def matched_mapped_ppa_pass(scope: str = "near_core_stub") -> bool:
 
 
 def strongest_mapped_ppa_scope() -> str:
+    if matched_mapped_ppa_pass("full_core"):
+        return "full_core"
     if matched_mapped_ppa_pass("accepted_core_wrapper"):
         return "accepted_core_wrapper"
     if matched_mapped_ppa_pass("near_core_stub"):
@@ -398,11 +409,11 @@ def energy_evidence_levels() -> str:
 
 def energy_claim_caveat() -> str:
     if power_index_pass("openroad_postroute_tool_estimate"):
-        return "OpenROAD post-route power is a Nangate45 tool estimate with OpenROAD-flow-scripts reports and indexed final DEF/SPEF/netlist artifacts; do not call it silicon measurement, foundry signoff, or full-core power."
+        return "OpenROAD post-route power is a Nangate45 tool estimate with OpenROAD-flow-scripts reports and indexed final DEF/SPEF/netlist artifacts; do not call it silicon measurement or foundry signoff."
     if power_index_pass("asic_liberty_tool_estimate"):
-        return "ASIC Liberty power is a Nangate45 standard-cell tool estimate; do not call it silicon measurement, post-route signoff with extracted parasitics, or full-core power."
+        return "ASIC Liberty power is a Nangate45 standard-cell tool estimate; do not call it silicon measurement or post-route signoff with extracted parasitics."
     if power_index_pass("fpga_tool_estimate"):
-        return "Vivado report_power is tool-estimated FPGA power for the mapped target; do not call it silicon measurement, ASIC signoff, or full-core power."
+        return "Vivado report_power is tool-estimated FPGA power for the mapped target; do not call it silicon measurement or ASIC signoff."
     return "Allowed only as proxy/model energy. Do not claim silicon power, RTL signoff power, or power efficiency without a real power report."
 
 
@@ -507,7 +518,7 @@ def gate_status() -> list[dict[str, str]]:
     audits_pass = audit_claims and audit_numbers and audit_todos and all(r.get("status") == "PASS" for r in audit_claims + audit_numbers + audit_todos)
     mapped_scope = strongest_mapped_ppa_scope()
     mapped_pass = mapped_scope != "none"
-    synthesis_scope_pass = core_wrapper_synthesis_pass() or near_core_synthesis_pass() or synthesis_overhead_pass()
+    synthesis_scope_pass = full_core_synthesis_pass() or core_wrapper_synthesis_pass() or near_core_synthesis_pass() or synthesis_overhead_pass()
     return [
         gate("G1. Open-source CI/Docker reproduction", "Yes", g1_status, "Makefile; Dockerfile; .github/workflows/reproduce.yml; .devcontainer/devcontainer.json; research/results/ci_status.csv; research/results/artifact_manifest.csv", "make readiness completes in GitHub Actions, Docker, or Codespaces with logs/artifacts", "CI/Docker/Codespaces proof has not been imported or produced in the current open evidence environment. Local Windows is editing-only." if g1_status != "PASS" else ""),
         gate("G2. Toolchain detection", "Yes", "PASS" if (RESULTS / "toolchain_status.csv").exists() else "TODO", "research/scripts/check_toolchain.py; research/results/toolchain_status.csv", "Required tools are detected and missing tools are explicit", ""),
@@ -523,7 +534,7 @@ def gate_status() -> list[dict[str, str]]:
         gate("G12. Memory traffic/bandwidth overhead metrics", "Yes", "PASS" if independent_csv_pass("independent_sim_memory_traffic.csv") or core_csv_pass("core_integrated_memory_traffic.csv") or cycle_csv_pass("cycle_memory_traffic.csv") or (RESULTS / "memory_traffic.csv").exists() else "TODO", "research/results/memory_traffic.csv; research/results/cycle_memory_traffic.csv; research/results/core_integrated_memory_traffic.csv; research/results/independent_sim_memory_traffic.csv", "Traffic overhead is generated from model, cycle-model, core-integrated, and independent-simulator request counts where available", ""),
         gate("G13. Sensitivity studies", "Yes", "PASS" if cycle_csv_pass("sensitivity.csv") or csv_has_no_todo(RESULTS / "sensitivity.csv") else ("PARTIAL" if (RESULTS / "sensitivity.csv").exists() else "TODO"), "research/results/sensitivity.csv", "Queue, confidence, chain depth, distance, table size, and latency sensitivities are captured", ""),
         gate("G14. Ablation studies", "Yes", "PASS" if cycle_csv_pass("ablation.csv") or csv_has_no_todo(RESULTS / "ablation.csv") else ("PARTIAL" if (RESULTS / "ablation.csv").exists() else "TODO"), "research/results/ablation.csv", "A0-A5 ablations are generated with evidence-level labels", ""),
-        gate("G15. Area/resource/timing synthesis", "Yes", "PASS" if mapped_pass else ("PARTIAL" if synthesis_scope_pass else ("TODO" if not (RESULTS / "fullcore_synthesis.csv").exists() else "BLOCKED")), "research/results/synthesis.csv; research/results/synthesis_overhead.csv; research/results/fullcore_synthesis.csv; research/results/fullcore_synthesis_overhead.csv; research/results/mapped_ppa.csv; research/results/mapped_ppa_overhead.csv", "Matched unit, near-core-stub, or accepted core-wrapper rows exist; mapped timing requires real nextpnr, Vivado, or OpenROAD reports", "" if mapped_pass else ("No mapped near-core or core-wrapper timing report exists; generic Yosys cells are resource evidence only. mapped_ppa.csv records the mapped-flow blocker." if synthesis_scope_pass else "No matched near-core, core-wrapper, or unit overhead row has been collected yet.")),
+        gate("G15. Area/resource/timing synthesis", "Yes", "PASS" if mapped_pass else ("PARTIAL" if synthesis_scope_pass else ("TODO" if not (RESULTS / "fullcore_synthesis.csv").exists() else "BLOCKED")), "research/results/synthesis.csv; research/results/synthesis_overhead.csv; research/results/fullcore_synthesis.csv; research/results/fullcore_synthesis_overhead.csv; research/results/mapped_ppa.csv; research/results/mapped_ppa_overhead.csv", "Matched unit, near-core-stub, accepted core-wrapper, or PicoRV32 tiny-SoC full-core rows exist; mapped timing requires real nextpnr, Vivado, or OpenROAD reports", "" if mapped_pass else ("No mapped full-core, near-core, or core-wrapper timing report exists; generic Yosys cells are resource evidence only. mapped_ppa.csv records the mapped-flow blocker." if synthesis_scope_pass else "No matched full-core, near-core, core-wrapper, or unit overhead row has been collected yet.")),
         gate("G16. Power/energy proxy or tool estimate", "Yes", "PASS" if energy_gate_pass() else ("PARTIAL" if energy_proxy_present() else "TODO"), "research/results/energy_proxy.csv; research/results/energy_summary.csv; research/results/power_report_index.csv; research/results/openroad_postroute_power.csv; research/results/asic_power.csv; research/results/mapped_ppa.csv; research/results/copper_mcpat_sensitivity_20260618.csv; research/results/COPPER_MCPAT_SENSITIVITY_20260618.md", "Proxy energy rows are generated and either scoped OpenROAD post-route, ASIC-Liberty, FPGA tool-power, or activity-based McPAT proxy evidence is indexed", "" if energy_gate_pass() else ("Proxy is assumption-based and not backed by activity/model power." if energy_proxy_present() else "No energy proxy or tool-power report has been generated.")),
         gate("G17. Statistical stability across seeds/input sizes", "Yes", "PASS" if cycle_stats_pass() else ("PARTIAL" if (RESULTS / "statistical_summary.csv").exists() or gem5_stats_pass() else "TODO"), "research/results/seed_stability.csv; research/results/statistical_summary.csv; research/results/gem5_statistical_summary.csv; research/results/gem5_raw_rerun_statistical_summary.csv", "Cycle-model stability covers seeds 1-3 and multiple input sizes; gem5 statistics summarize validated imported ARM-system rows and local raw rerun repeats when present", ""),
         gate("G18. Artifact package", "Yes", "PASS" if ci_artifact_package else ("PARTIAL" if package_exists else "TODO"), "dist/copper-artifact.zip; research/results/artifact_manifest.csv; research/results/ci_artifacts_manifest.csv", "Package regenerates in GitHub Actions, Docker, or Codespaces or the zip appears in imported artifacts", "" if ci_artifact_package else "Local package output is not final packaging proof."),
@@ -573,6 +584,8 @@ def build_claim_ledger() -> None:
     c13_status = "ALLOWED" if matched_mapped_ppa_pass("accepted_core_wrapper") else "TODO"
     c14_status = "ALLOWED" if core_wrapper_synthesis_pass() else "TODO"
     c15_status = "ALLOWED" if gem5_full_system_pass() else "TODO"
+    c16_status = "ALLOWED" if full_core_synthesis_pass() else "TODO"
+    c17_status = "ALLOWED" if matched_mapped_ppa_pass("full_core") else "TODO"
     energy_status = "ALLOWED" if energy_gate_pass() else ("PARTIAL" if energy_proxy_present() else "TODO")
     claims = [
         ("C1", "COPPER tracks committed pointer provenance.", "ALLOWED", "research/results/model_tests.csv; research/copper_prefetch_unit_open.sv", "model; rtl-unit only when GitHub Actions/Codespaces/Docker rtl_compile.csv and rtl_simulation.csv are PASS", "Allowed for the executable model; RTL wording requires open-environment PASS rows."),
@@ -590,6 +603,8 @@ def build_claim_ledger() -> None:
         ("C13", "COPPER has matched PicoRV32 accepted core-wrapper mapped FPGA PPA.", c13_status, "research/results/mapped_ppa.csv; research/results/mapped_ppa_overhead.csv", "accepted_core_wrapper mapped PPA", "Allowed only when baseline and COPPER PicoRV32 accepted-core-wrapper rows PASS in the same mapped flow with timing fields from nextpnr, Vivado, or OpenROAD; not full-core, ARM-core, ASIC, or silicon PPA."),
         ("C14", "COPPER has matched PicoRV32 accepted core-wrapper generic-synthesis overhead.", c14_status, "research/results/fullcore_synthesis.csv; research/results/fullcore_synthesis_overhead.csv", "accepted_core_wrapper", "Allowed only when scope is called accepted_core_wrapper; not full-core overhead or ASIC timing."),
         ("C15", "COPPER has validated gem5 ARM-system evidence across multiple benchmark families.", c15_status, "research/results/gem5_validation.csv; research/results/gem5_performance.csv; research/results/gem5_prefetch_metrics.csv; research/results/gem5_memory_traffic.csv; research/results/gem5_statistical_summary.csv; research/results/gem5_raw_rerun_manifest.csv; research/results/gem5_raw_rerun_statistical_summary.csv; research/results/logs/gem5/gem5_import.log", "gem5_full_system", f"Allowed only for summary groups with a no-prefetch baseline, a COPPER-family row, matching checksums, rc=0, and positive tick counts; current scope is {gem5_evidence_summary()}. Local raw rerun scope is {gem5_raw_rerun_summary()}; raw-only repeated-stat scope is {gem5_raw_stats_summary()}. gem5_statistical_summary.csv is still summary-derived and the raw-only statistics are not a full-matrix confidence interval unless the raw group covers the final matrix."),
+        ("C16", "COPPER has matched PicoRV32 tiny-SoC full-core generic-synthesis overhead.", c16_status, "research/results/fullcore_synthesis.csv; research/results/fullcore_synthesis_overhead.csv", "full_core", "Allowed only for the open-source PicoRV32 tiny-SoC full-core harness; not production ARM, OoO, silicon, or signoff evidence."),
+        ("C17", "COPPER has matched PicoRV32 tiny-SoC full-core mapped FPGA PPA.", c17_status, "research/results/mapped_ppa.csv; research/results/mapped_ppa_overhead.csv", "full_core mapped PPA", "Allowed only when baseline and COPPER PicoRV32 tiny-SoC full-core rows PASS in the same mapped flow with real timing fields; not production ARM, ASIC signoff, or silicon PPA."),
     ]
     lines = [
         "# COPPER Claim Ledger",
@@ -617,7 +632,7 @@ Generated evidence lives under `research/results`. The new conference-facing gen
 
 ## Evidence
 
-Evidence used by the paper and dashboard comes from generated CSVs and explicit logs. Gem5 rows are promoted only from public tracked summaries that pass `gem5_validation.csv`: a no-prefetch baseline, a COPPER-family row, matching checksums, clean return codes, and positive tick counts; `gem5_statistical_summary.csv` is derived only from those promoted rows and marks single-sample statistics explicitly. The package includes the tracked `gem5_arm_ubuntu_fs_*/*_summary.csv` input files used by that validation ledger. `gem5_raw_rerun_manifest.csv` records local raw full-system rows with retained stats and terminal logs for the `cachesvc_codex_raw_smoke`, `zlib_codex_raw_zlib_tiny`, `zlib_codex_raw_zlib_tiny_seed12`, and `zstd_zstd_*` summaries; `gem5_raw_rerun_statistical_summary.csv` reports raw-only repeated statistics where those rerun rows have multiple samples. The current gem5 rows span multiple ARM-system benchmark families, but only the rows in `gem5_raw_rerun_manifest.csv` have retained local raw stats/terminal provenance in this workspace; the rest remain validated summaries. OpenROAD post-route rows are tool estimates only when OpenROAD-flow-scripts emits real route/final reports and, for current-schema rows, indexed final DEF/SPEF/netlist/report JSON artifacts; ASIC Liberty rows are standard-cell tool estimates only when OpenSTA/OpenROAD emits a real report; Vivado report_power rows are FPGA tool estimates. `hardware_evidence_summary.csv` and `top_tier_gate_status.csv` merge those lane outputs and keep full-core and silicon/signoff gaps machine-readable. None should be called measured silicon or full-core signoff power. Paper claims are controlled by `research/COPPER_CLAIM_LEDGER.md`.
+Evidence used by the paper and dashboard comes from generated CSVs and explicit logs. Gem5 rows are promoted only from public tracked summaries that pass `gem5_validation.csv`: a no-prefetch baseline, a COPPER-family row, matching checksums, clean return codes, and positive tick counts; `gem5_statistical_summary.csv` is derived only from those promoted rows and marks single-sample statistics explicitly. The package includes the tracked `gem5_arm_ubuntu_fs_*/*_summary.csv` input files used by that validation ledger. `gem5_raw_rerun_manifest.csv` records local raw full-system rows with retained stats and terminal logs for the `cachesvc_codex_raw_smoke`, `zlib_codex_raw_zlib_tiny`, `zlib_codex_raw_zlib_tiny_seed12`, and `zstd_zstd_*` summaries; `gem5_raw_rerun_statistical_summary.csv` reports raw-only repeated statistics where those rerun rows have multiple samples. The current gem5 rows span multiple ARM-system benchmark families, but only the rows in `gem5_raw_rerun_manifest.csv` have retained local raw stats/terminal provenance in this workspace; the rest remain validated summaries. OpenROAD post-route rows are tool estimates only when OpenROAD-flow-scripts emits real route/final reports and, for current-schema rows, indexed final DEF/SPEF/netlist/report JSON artifacts; ASIC Liberty rows are standard-cell tool estimates only when OpenSTA/OpenROAD emits a real report; Vivado report_power rows are FPGA tool estimates. `hardware_evidence_summary.csv` and `top_tier_gate_status.csv` merge those lane outputs and keep production-core and silicon/signoff gaps machine-readable. None should be called measured silicon or signoff power. Paper claims are controlled by `research/COPPER_CLAIM_LEDGER.md`.
 
 ## Old Or Local-Only
 
@@ -664,11 +679,11 @@ def build_reviewer_reports() -> None:
 
 ## Final Evidence Classification
 
-Status: scoped artifact/mechanism submission-ready only after the current branch's CI run passes. This is not a full-core, production, silicon, state-of-the-art, or top-tier full-architecture claim. Full-core mapped PPA and full-core signoff or silicon-grade power remain blocked.
+Status: scoped artifact/mechanism submission-ready only after the current branch's CI run passes. PicoRV32 tiny-SoC full-core mapped PPA is supported only where the generated `full_core` rows PASS. This is not a production ARM/OoO, silicon, state-of-the-art, or top-tier full-architecture claim. Full-core signoff or silicon-grade power remains blocked.
 
 ## Computer Architecture Reviewer
 
-Leaning: workshop accept / top-tier weak reject. Strengths: clear committed-provenance invariant, CI-proven RTL unit simulation, source workload build path, deterministic cycle-model rows, deterministic core-integrated rows, an independent source-backed trace/event simulator across the required workload/config matrix, imported gem5 ARM-system rows with checksum/return-code agreement ({gem5_summary}) plus imported-summary confidence intervals where repeated samples exist, and a local raw gem5 rerun manifest ({raw_summary}) with raw-only repeated statistics ({raw_stats}). Weaknesses: most gem5 evidence is still imported from validated summaries, and the local raw rerun set is still small, so it does not prove a complete top-tier simulator campaign with full raw-run confidence intervals. Fatal blockers for top-tier claims: no true full-core PPA and no full-core post-route/silicon-grade power; the ASIC-Liberty evidence is scoped to the PicoRV32 core-wrapper. Required fixes: validate the final workload/config matrix in gem5 or another accepted external core simulator with a reproducible raw-run path. Claim risks: performance claims must stay per-row and evidence-level scoped. Phase 0 discrepancy check: claimed PR/push evidence matched; main-branch Actions state was not verifiable because the API returned no main runs, so main-branch status must not be cited.
+Leaning: workshop accept / top-tier weak reject. Strengths: clear committed-provenance invariant, CI-proven RTL unit simulation, source workload build path, deterministic cycle-model rows, deterministic core-integrated rows, an independent source-backed trace/event simulator across the required workload/config matrix, imported gem5 ARM-system rows with checksum/return-code agreement ({gem5_summary}) plus imported-summary confidence intervals where repeated samples exist, a local raw gem5 rerun manifest ({raw_summary}) with raw-only repeated statistics ({raw_stats}), and scoped PicoRV32 tiny-SoC full-core mapped PPA where the generated rows PASS. Weaknesses: most gem5 evidence is still imported from validated summaries, and the local raw rerun set is still small, so it does not prove a complete top-tier simulator campaign with full raw-run confidence intervals. Fatal blockers for top-tier claims: no production ARM/OoO integration and no full-core post-route/silicon-grade power. Required fixes: validate the final workload/config matrix in gem5 or another accepted external core simulator with a reproducible raw-run path. Claim risks: performance claims must stay per-row and evidence-level scoped. Phase 0 discrepancy check: claimed PR/push evidence matched; main-branch Actions state was not verifiable because the API returned no main runs, so main-branch status must not be cited.
 
 ## Prefetching And Memory-Systems Reviewer
 
@@ -676,7 +691,7 @@ Leaning: weak accept for scoped mechanism, reject for replacement claims. Streng
 
 ## Hardware Implementation Reviewer
 
-Leaning: scoped artifact accept / top-tier architecture-paper reject. Strengths: SystemVerilog unit, CI-proven open-source simulation, matched unit-level synthesis, near-core-stub synthesis, matched near-core-stub mapped-FPGA PPA, matched PicoRV32 core-wrapper mapped-FPGA PPA when those rows are PASS, scoped PicoRV32 core-wrapper OpenROAD post-route tool-power when power_report_index.csv marks openroad_postroute_tool_estimate PASS, scoped PicoRV32 core-wrapper Nangate45 ASIC-Liberty tool-power when asic_liberty_tool_estimate is PASS, Vivado FPGA tool-estimated power when fpga_tool_estimate is PASS, and activity-based McPAT proxy evidence when proxy_activity is PASS. Weaknesses: the PicoRV32 wrapper is an accepted open-source core-wrapper rather than the target ARM/full-core integration, and generic Yosys has no mapped timing or power. Fatal blockers: full-core overhead/timing and silicon or foundry-signoff power remain unsupported; OpenROAD and ASIC-Liberty rows are tool estimates, not full-core/signoff power. Required fixes: add a true full-core integration and signoff-calibrated flow before stronger architecture claims. Claim risks: near-core-stub and PicoRV32 core-wrapper rows must never be called full-core, OpenROAD/ASIC-Liberty/Vivado report_power must not be called silicon measurement, and McPAT proxy must not be called measured silicon or RTL signoff power.
+Leaning: scoped artifact accept / top-tier architecture-paper reject. Strengths: SystemVerilog unit, CI-proven open-source simulation, matched unit-level synthesis, near-core-stub synthesis, matched near-core-stub mapped-FPGA PPA, matched PicoRV32 accepted core-wrapper mapped-FPGA PPA, matched PicoRV32 tiny-SoC full-core synthesis/mapped-FPGA PPA when those rows are PASS, Vivado FPGA tool-estimated power when fpga_tool_estimate is PASS, and activity-based McPAT proxy evidence when proxy_activity is PASS. Weaknesses: the PicoRV32 tiny-SoC full-core harness is still not a production ARM/OoO integration, and generic Yosys has no mapped timing or power. Fatal blockers: silicon or foundry-signoff power remain unsupported; OpenROAD, ASIC-Liberty, and Vivado rows are tool estimates, not silicon/signoff power. Required fixes: add a signoff-calibrated or silicon-measured flow before stronger power claims. Claim risks: near-core-stub and accepted-core-wrapper rows must never be called full-core, PicoRV32 tiny-SoC full-core rows must not be called production ARM/OoO, OpenROAD/ASIC-Liberty/Vivado report_power must not be called silicon measurement, and McPAT proxy must not be called measured silicon or RTL signoff power.
 
 ## Evaluation And Statistics Reviewer
 
@@ -684,22 +699,22 @@ Leaning: workshop accept if scoped, top-tier weak reject. Strengths: determinist
 
 ## Artifact Evaluation Reviewer
 
-Leaning: accept for scoped artifact after final branch CI pass. Strengths: Phase 0 preserved prior CI proof, the pass adds explicit preflight/tooling evidence, source workload build scripts, core-integrated logs, near-core-stub synthesis scripts, PicoRV32 core-wrapper mapped-PPA scripts, scoped OpenROAD/ASIC-Liberty/FPGA power rows when indexed PASS, and proxy energy ledgers. Weaknesses: local Windows evidence must be revalidated in CI/Docker/Codespaces before being promoted as open-source PASS proof. Fatal blockers for stronger claims: full-core and silicon/signoff evidence are still absent. Required fixes: keep artifact uploads and dashboards tied to the current run. Claim risks: local generated rows must not be promoted over CI PASS rows unless the final workflow reruns them successfully. Phase 0 discrepancy check: main branch Actions status was not verifiable.
+Leaning: accept for scoped artifact after final branch CI pass. Strengths: Phase 0 preserved prior CI proof, the pass adds explicit preflight/tooling evidence, source workload build scripts, core-integrated logs, near-core-stub synthesis scripts, PicoRV32 core-wrapper mapped-PPA scripts, PicoRV32 tiny-SoC full-core mapped-PPA scripts, scoped OpenROAD/ASIC-Liberty/FPGA power rows when indexed PASS, and proxy energy ledgers. Weaknesses: local Windows evidence must be revalidated in CI/Docker/Codespaces before being promoted as open-source PASS proof. Fatal blockers for stronger claims: silicon/signoff evidence and production ARM/OoO integration are still absent. Required fixes: keep artifact uploads and dashboards tied to the current run. Claim risks: local generated rows must not be promoted over CI PASS rows unless the final workflow reruns them successfully. Phase 0 discrepancy check: main branch Actions status was not verifiable.
 
 ## Skeptical Novelty Reviewer
 
-Leaning: reject for broad novelty, acceptable for a narrow artifact/mechanism paper. Strengths: the committed-provenance authority invariant is concrete and has model, cycle-model, core-integrated, imported gem5, RTL-unit, and synthesis-scope support. Weaknesses: adjacent pointer-chase, taint, capability, dependence, and DMP-defense work is crowded; this pass did not perform a fresh literature audit. Fatal blockers: any first/priority/state-of-the-art language would be fatal. Required fixes: update the related-work matrix before aiming at a top-tier venue. Claim risks: paper must not imply full-core, measured power, or universal superiority. Phase 0 discrepancy check: unresolved main-branch status is at least SERIOUS BUT CAVEATABLE for release claims.
+Leaning: reject for broad novelty, acceptable for a narrow artifact/mechanism paper. Strengths: the committed-provenance authority invariant is concrete and has model, cycle-model, core-integrated, imported gem5, RTL-unit, and synthesis-scope support. Weaknesses: adjacent pointer-chase, taint, capability, dependence, and DMP-defense work is crowded; this pass did not perform a fresh literature audit. Fatal blockers: any first/priority/state-of-the-art language would be fatal. Required fixes: update the related-work matrix before aiming at a top-tier venue. Claim risks: paper must not imply production ARM/OoO integration, measured power, or universal superiority. Phase 0 discrepancy check: unresolved main-branch status is at least SERIOUS BUT CAVEATABLE for release claims.
 """
     blockers = f"""# COPPER Final Submission Blockers
 
-Final scoped status: submission-ready for a constrained artifact/mechanism submission only after the current branch's CI run passes, with the blockers below preserved for stronger full-core or top-tier architecture claims.
+Final scoped status: submission-ready for a constrained artifact/mechanism submission only after the current branch's CI run passes, with the blockers below preserved for stronger production-core, signoff, silicon, or top-tier architecture claims.
 
 | Class | Blocker | Evidence | Required fix |
 | --- | --- | --- | --- |
 | SERIOUS BUT CAVEATABLE | Gem5 evidence includes validated ARM-system summaries ({gem5_summary}), imported-summary statistics where repeated samples exist, {raw_summary}, and {raw_stats}; independent_sim remains source-backed trace/event validation. | gem5_performance.csv; gem5_prefetch_metrics.csv; gem5_memory_traffic.csv; gem5_statistical_summary.csv; gem5_raw_rerun_manifest.csv; gem5_raw_rerun_statistical_summary.csv; independent_sim_performance.csv; independent_sim_prefetch_metrics.csv; independent_sim_memory_traffic.csv | Run the final full workload/config matrix in gem5 or another accepted external simulator with a reproducible raw-run path and raw-run confidence intervals before making top-tier architecture claims. |
-| TOP-TIER BLOCKER | No full-core matched timing/area/power result. PicoRV32 core-wrapper rows are stronger than near-core stubs but still not full-core. | fullcore_synthesis.csv; fullcore_synthesis_overhead.csv; mapped_ppa.csv | Integrate baseline and COPPER into the actual target core/full-core wrapper before making full-core claims. |
+| SERIOUS BUT CAVEATABLE | PicoRV32 tiny-SoC full-core mapped PPA is present only when generated `scope=full_core` rows PASS; it is not production ARM/OoO integration. | fullcore_synthesis.csv; fullcore_synthesis_overhead.csv; mapped_ppa.csv | Keep full-core claims scoped to the PicoRV32 tiny-SoC harness unless a production target is added. |
 | SERIOUS BUT CAVEATABLE | Near-core-stub synthesis is not full-core overhead. | fullcore_synthesis_overhead.csv; mapped_ppa.csv | Keep the scope labeled near_core_stub everywhere. |
-| TOP-TIER BLOCKER | Power evidence can include scoped PicoRV32 core-wrapper OpenROAD post-route estimates, Nangate45 ASIC-Liberty estimates, proxy/model energy, and optional FPGA tool-power rows when indexed PASS. It is still not silicon measurement, foundry signoff, or full-core signoff power. | openroad_postroute_power.csv; asic_power.csv; asic_power_overhead.csv; mapped_ppa.csv; energy_proxy.csv; energy_summary.csv; power_report_index.csv; copper_mcpat_sensitivity_20260618.csv | Add full-core post-route/signoff or silicon-calibrated power before claiming full-system power efficiency. |
+| TOP-TIER BLOCKER | Power evidence can include scoped OpenROAD post-route estimates, Nangate45 ASIC-Liberty estimates, proxy/model energy, and optional FPGA tool-power rows when indexed PASS. It is still not silicon measurement, foundry signoff, or signoff-grade power. | openroad_postroute_power.csv; asic_power.csv; asic_power_overhead.csv; mapped_ppa.csv; energy_proxy.csv; energy_summary.csv; power_report_index.csv; copper_mcpat_sensitivity_20260618.csv | Add full-core post-route/signoff or silicon-calibrated power before claiming full-system power efficiency. |
 | SERIOUS BUT CAVEATABLE | Some workloads regress versus the best baseline. | cycle_performance.csv; core_integrated_performance.csv | Discuss regressions directly and keep speedup claims per-row. |
 | SERIOUS BUT CAVEATABLE | Main-branch Actions status was not verifiable in Phase 0. | preflight_baseline_check.csv | Verify main branch separately before release claims. |
 | NICE TO HAVE | Local Windows cannot run paper/RTL/synthesis/workload compilers. | tooling_availability.md | Use Docker/Codespaces/GitHub Actions as the proof environment. |
@@ -952,13 +967,14 @@ nextpnr & mapped unit resource context when available & synthesis.csv \\
 Overhead & matched unit rows from same flow & synthesis\_overhead.csv \\
 Near-core stub & matched generic near-core-stub rows when Yosys runs & fullcore\_synthesis\_overhead.csv \\
 PicoRV32 core-wrapper & matched generic accepted core-wrapper rows when Yosys runs & fullcore\_synthesis\_overhead.csv \\
-Mapped PPA & matched near-core-stub, PicoRV32 core-wrapper, or unit rows only when place-and-route succeeds & mapped\_ppa.csv; mapped\_ppa\_overhead.csv \\
-Full-core integration & BLOCKED unless real full-core RTL exists & fullcore\_synthesis.csv \\
+PicoRV32 tiny-SoC full-core & matched full-core rows when Yosys or mapped flows run & fullcore\_synthesis\_overhead.csv; mapped\_ppa.csv \\
+Mapped PPA & matched near-core-stub, PicoRV32 core-wrapper, PicoRV32 tiny-SoC full-core, or unit rows only when place-and-route succeeds & mapped\_ppa.csv; mapped\_ppa\_overhead.csv \\
+Production-core integration & not claimed & top\_tier\_gate\_status.csv \\
 \hline
 \end{tabular}
 \end{table}
 
-The artifact supports unit-level hardware plausibility, matched near-core-stub resource-overhead rows, and matched PicoRV32 core-wrapper resource-overhead rows when Yosys is available. The near-core stub is not a full CPU, and the PicoRV32 wrapper is an accepted open-source core-wrapper rather than the target full-core integration. Generic Yosys rows do not provide mapped timing, Fmax, ASIC area, or measured power. Mapped timing may be discussed only when \texttt{mapped\_ppa.csv} contains matched PASS rows from nextpnr, Vivado, or OpenROAD. Full-core rows remain BLOCKED unless real full-core RTL and a mapped flow are added.
+The artifact supports unit-level hardware plausibility, matched near-core-stub resource-overhead rows, matched PicoRV32 accepted-core-wrapper rows, and matched PicoRV32 tiny-SoC full-core rows when the generated ledgers mark them PASS. The near-core stub is not a full CPU, the accepted wrapper is not full-core, and the PicoRV32 tiny-SoC full-core harness is not a production ARM/OoO integration. Generic Yosys rows do not provide mapped timing, Fmax, ASIC area, or measured power. Mapped timing may be discussed only when \texttt{mapped\_ppa.csv} contains matched PASS rows from nextpnr, Vivado, or OpenROAD.
 
 \section{Energy Proxy}
 \begin{table}[t]
@@ -978,7 +994,7 @@ Summary & proxy overhead statistics & energy\_summary.csv \\
 \end{tabular}
 \end{table}
 
-Energy rows use explicit assumptions recorded in \texttt{energy\_proxy.csv}. When \texttt{power\_report\_index.csv} marks \texttt{openroad\_postroute\_tool\_estimate} PASS, the row is a Nangate45 OpenROAD-flow-scripts post-route estimate with indexed final DEF/SPEF/netlist artifacts, not silicon measurement or foundry signoff. When \texttt{asic\_liberty\_tool\_estimate} is PASS, the row is a Nangate45 standard-cell Liberty estimate from OpenSTA/OpenROAD, not silicon measurement or post-route signoff with extracted parasitics. When \texttt{fpga\_tool\_estimate} is PASS, the row is Vivado \texttt{report\_power} for the mapped FPGA target, not silicon or ASIC signoff. When \texttt{proxy\_activity} is PASS, the activity proxy is the fixed-architecture McPAT sensitivity run driven by measured gem5 ROI counters. This supports scoped tool-power and proxy/model energy discussion, not full-core, foundry-signoff, or silicon power-efficiency claims.
+Energy rows use explicit assumptions recorded in \texttt{energy\_proxy.csv}. When \texttt{power\_report\_index.csv} marks \texttt{openroad\_postroute\_tool\_estimate} PASS, the row is a Nangate45 OpenROAD-flow-scripts post-route estimate with indexed final DEF/SPEF/netlist artifacts, not silicon measurement or foundry signoff. When \texttt{asic\_liberty\_tool\_estimate} is PASS, the row is a Nangate45 standard-cell Liberty estimate from OpenSTA/OpenROAD, not silicon measurement or post-route signoff with extracted parasitics. When \texttt{fpga\_tool\_estimate} is PASS, the row is Vivado \texttt{report\_power} for the mapped FPGA target, not silicon or ASIC signoff. When \texttt{proxy\_activity} is PASS, the activity proxy is the fixed-architecture McPAT sensitivity run driven by measured gem5 ROI counters. This supports scoped tool-power and proxy/model energy discussion, not foundry-signoff or silicon power-efficiency claims.
 
 \section{Limitations}
 \begin{table}[t]
@@ -990,8 +1006,8 @@ Limitation & Consequence \\
 \hline
 Gem5 rows are validated imported ARM-system summaries & Gem5 validation is scoped to imported PASS rows \\
 Independent simulator is trace/event level & It is not a replacement for a broad gem5 campaign \\
-No full-core integration & Full-core area, timing, and power claims remain blocked \\
-Power is tool-estimate/model based & Full-core signoff and silicon power-efficiency claims remain blocked \\
+PicoRV32 tiny-SoC is the scoped full-core target & Production ARM/OoO claims remain blocked \\
+Power is tool-estimate/model based & Signoff and silicon power-efficiency claims remain blocked \\
 External gem5 and Vivado setup & Large external-tool reruns are not clone-local \\
 \hline
 \end{tabular}
@@ -1010,7 +1026,7 @@ Cycle-model evidence & cycle\_performance.csv & deterministic memory-system timi
 Core-integrated evidence & core\_integrated\_performance.csv & deterministic core-envelope model \\
 Independent simulator & independent\_sim\_performance.csv & source-backed trace/event simulator \\
 Gem5 validated summaries & gem5\_validation.csv; gem5\_performance.csv; gem5\_statistical\_summary.csv & imported ARM-system rows and imported-summary statistics when PASS \\
-Hardware cost & synthesis\_overhead.csv; fullcore\_synthesis\_overhead.csv; mapped\_ppa.csv & matched unit, near-core-stub, or PicoRV32 core-wrapper resources, plus mapped timing only when PASS \\
+Hardware cost & synthesis\_overhead.csv; fullcore\_synthesis\_overhead.csv; mapped\_ppa.csv & matched unit, near-core-stub, PicoRV32 core-wrapper, or PicoRV32 tiny-SoC full-core resources, plus mapped timing only when PASS \\
 Energy proxy & energy\_proxy.csv; openroad\_postroute\_power.csv; asic\_power.csv; power\_report\_index.csv & assumption-based proxy plus OpenROAD post-route, ASIC Liberty, or FPGA tool estimates when indexed PASS \\
 Package & artifact\_manifest.csv & included and excluded files \\
 \hline
@@ -1018,7 +1034,7 @@ Package & artifact\_manifest.csv & included and excluded files \\
 \end{table}
 
 \section{Conclusion}
-COPPER is best framed as a committed-provenance authority mechanism for data-derived prefetch issue. The artifact now has a CI-proven open-source path, deterministic cycle-model and core-integrated evidence, source-backed independent-simulator rows, validated imported gem5 ARM-system rows with imported-summary statistics, matched unit-level, near-core-stub, and PicoRV32 core-wrapper resource paths, mapped-FPGA PPA rows when real place-and-route timing succeeds, scoped OpenROAD post-route/ASIC-Liberty/FPGA tool-power and proxy energy rows, a claim ledger, audits, and a package manifest. The honest next step for a stronger architecture submission is a final raw-rerunnable gem5 or comparable external core validation matrix plus true full-core signoff-calibrated timing/area/power evidence without changing the scoped claims in this artifact.
+COPPER is best framed as a committed-provenance authority mechanism for data-derived prefetch issue. The artifact now has a CI-proven open-source path, deterministic cycle-model and core-integrated evidence, source-backed independent-simulator rows, validated imported gem5 ARM-system rows with imported-summary statistics, matched unit-level, near-core-stub, PicoRV32 accepted-core-wrapper, and PicoRV32 tiny-SoC full-core resource/PPA paths, scoped OpenROAD post-route/ASIC-Liberty/FPGA tool-power and proxy energy rows, a claim ledger, audits, and a package manifest. The honest next step for a stronger architecture submission is a final raw-rerunnable gem5 or comparable external core validation matrix plus signoff-calibrated or silicon-measured power evidence without changing the scoped claims in this artifact.
 
 \bibliographystyle{plain}
 \bibliography{references}

@@ -1,10 +1,3 @@
 target,flow,scope,metric,baseline,with_copper,delta,percent_overhead,notes
+nangate45,yosys+opensta-liberty,full_core,full_core_asic_liberty_power,,,,,BLOCKED: matched ASIC Liberty power overhead requires PASS rows for baseline and COPPER.
 nangate45,yosys+opensta-liberty,core_wrapper,core_wrapper_asic_liberty_power,,,,,BLOCKED: matched ASIC Liberty power overhead requires PASS rows for baseline and COPPER.
-nangate45,yosys+opensta-liberty,core_wrapper,core_wrapper_cells,9052,10796,1744,19.266460,Matched core-wrapper ASIC Liberty estimate from same library and clock/activity assumptions.
-nangate45,yosys+opensta-liberty,core_wrapper,core_wrapper_area_um2,6.384,57.456,51.072,800.000000,Matched core-wrapper ASIC Liberty estimate from same library and clock/activity assumptions.
-nangate45,yosys+opensta-liberty,core_wrapper,core_wrapper_wns,10.94,10.79,-0.15,-1.371115,Matched core-wrapper ASIC Liberty estimate from same library and clock/activity assumptions.
-nangate45,yosys+opensta-liberty,core_wrapper,core_wrapper_tns,0,0,0,0.000000,Matched core-wrapper ASIC Liberty estimate from same library and clock/activity assumptions.
-nangate45,yosys+opensta-liberty,core_wrapper,core_wrapper_internal_power_mw,0.522,0.664,0.142,27.203065,Matched core-wrapper ASIC Liberty estimate from same library and clock/activity assumptions.
-nangate45,yosys+opensta-liberty,core_wrapper,core_wrapper_switching_power_mw,0.103,0.12,0.017,16.504854,Matched core-wrapper ASIC Liberty estimate from same library and clock/activity assumptions.
-nangate45,yosys+opensta-liberty,core_wrapper,core_wrapper_leakage_power_mw,0.308,0.398,0.09,29.220779,Matched core-wrapper ASIC Liberty estimate from same library and clock/activity assumptions.
-nangate45,yosys+opensta-liberty,core_wrapper,core_wrapper_total_power_mw,0.934,1.18,0.246,26.338330,Matched core-wrapper ASIC Liberty estimate from same library and clock/activity assumptions.

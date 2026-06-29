@@ -39,10 +39,10 @@ class Design:
 
 
 FULLCORE_BLOCKER = (
-    "BLOCKED: no true full-core RTL target with both baseline and COPPER variants "
-    "exists under research/rtl/fullcore, research/rtl/integration, or external/. "
-    "PicoRV32 rows are accepted_core_wrapper only; near-core stubs are "
-    "near_core_stub only. No full-core area/timing/power row is claimed."
+    "BLOCKED: the PicoRV32 tiny-SoC full-core RTL target requires both "
+    "full_core_baseline and full_core_plus_copper sources plus an available "
+    "synthesis/mapped flow. No full-core row is claimed unless the matched "
+    "full_core rows pass."
 )
 
 PICORV32_SOURCES = (
@@ -52,6 +52,12 @@ PICORV32_SOURCES = (
     "research/rtl/fullcore/picorv32_copper_wrapper.sv",
 )
 
+PICORV32_FULLCORE_SOURCES = (
+    "external/picorv32/picorv32.v",
+    "research/copper_prefetch_unit_open.sv",
+    "research/rtl/fullcore/picorv32_full_core_soc.sv",
+)
+
 FULL_CORE_SEARCH_PATHS = (
     "research/rtl/fullcore",
     "research/rtl/integration",
@@ -59,8 +65,26 @@ FULL_CORE_SEARCH_PATHS = (
 )
 
 DESIGNS = (
-    Design("full_core_baseline", "", (), "full_core", "full_core", False, FULLCORE_BLOCKER),
-    Design("full_core_plus_copper", "", (), "full_core", "full_core", False, FULLCORE_BLOCKER),
+    Design(
+        "full_core_baseline",
+        "full_core_baseline",
+        PICORV32_FULLCORE_SOURCES,
+        "full_core",
+        "picorv32_tiny_soc",
+        True,
+        "",
+        (("MEM_WORDS", 64),),
+    ),
+    Design(
+        "full_core_plus_copper",
+        "full_core_plus_copper",
+        PICORV32_FULLCORE_SOURCES,
+        "full_core",
+        "picorv32_tiny_soc",
+        True,
+        "",
+        (("MEM_WORDS", 64), ("ENTRIES", 8), ("QUEUE_DEPTH", 4)),
+    ),
     Design(
         "baseline_core_wrapper",
         "baseline_core_wrapper",
@@ -202,17 +226,22 @@ def sources_present(sources: tuple[str, ...]) -> bool:
 def inventory_rows() -> list[dict[str, str]]:
     scan_notes = (
         "Scanned research/rtl/fullcore, research/rtl/integration, and external/picorv32. "
-        "Only the PicoRV32 accepted core-wrapper and near-core stub RTL are present; "
-        "no target full CPU-core baseline/COPPER integration pair is present."
+        "The PicoRV32 tiny-SoC full-core harness is the open-source full_core target; "
+        "the older NOP tie-off PicoRV32 wrapper remains accepted_core_wrapper only."
     )
     rows: list[dict[str, str]] = []
     for design in DESIGNS:
         if design.scope == "full_core":
-            available = "no"
-            qualifies = "no"
-            status = "BLOCKED"
-            role = "required_true_full_core"
-            notes = FULLCORE_BLOCKER + " " + scan_notes
+            available = "yes" if sources_present(design.sources) else "no"
+            qualifies = "yes" if available == "yes" else "no"
+            status = "AVAILABLE" if available == "yes" else "BLOCKED"
+            role = "picorv32_tiny_soc_full_core"
+            notes = (
+                "Open-source PicoRV32 tiny-SoC full-core harness with real local instruction/data "
+                "memory and matched baseline/COPPER top modules. This is not production ARM, "
+                "OoO, silicon, or signoff evidence. "
+                + scan_notes
+            )
         elif design.scope == "accepted_core_wrapper":
             available = "yes" if sources_present(design.sources) else "no"
             qualifies = "no"

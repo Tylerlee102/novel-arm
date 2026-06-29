@@ -59,17 +59,24 @@ PICORV32_SOURCES = (
     "research/copper_prefetch_unit_open.sv",
     "research/rtl/fullcore/picorv32_copper_wrapper.sv",
 )
+PICORV32_FULLCORE_SOURCES = (
+    "external/picorv32/picorv32.v",
+    "research/copper_prefetch_unit_open.sv",
+    "research/rtl/fullcore/picorv32_full_core_soc.sv",
+)
 FULLCORE_BASELINE = Design(
     "full_core_baseline",
-    "",
-    (),
+    "full_core_baseline",
+    PICORV32_FULLCORE_SOURCES,
     "full_core",
+    (("MEM_WORDS", 64),),
 )
 FULLCORE_COPPER = Design(
     "full_core_plus_copper",
-    "",
-    (),
+    "full_core_plus_copper",
+    PICORV32_FULLCORE_SOURCES,
     "full_core",
+    (("MEM_WORDS", 64), ("ENTRIES", 8), ("QUEUE_DEPTH", 4)),
 )
 CORE_WRAPPER_BASELINE = Design(
     "baseline_core_wrapper",
@@ -104,6 +111,8 @@ UNIT_COPPER = Design(
     (("ENTRIES", 2), ("QUEUE_DEPTH", 1)),
 )
 MAPPED_DESIGNS = (
+    FULLCORE_BASELINE,
+    FULLCORE_COPPER,
     NEARCORE_BASELINE,
     NEARCORE_COPPER,
     CORE_WRAPPER_BASELINE,
@@ -277,6 +286,10 @@ def run_capture(command: list[str], timeout: int) -> tuple[int, str]:
 
 def source_reads(design: Design) -> str:
     return " ".join(f"read_verilog -sv {source};" for source in design.sources)
+
+
+def sources_present(design: Design) -> bool:
+    return bool(design.sources) and all((ROOT / source).exists() for source in design.sources)
 
 
 def chparam(design: Design) -> str:
@@ -697,15 +710,32 @@ def openroad_blocked_rows() -> list[dict[str, str]]:
 
 def fullcore_blocked_rows() -> list[dict[str, str]]:
     log_path = LOG_DIR / "fullcore_wrapper_availability.log"
+    missing = [
+        source
+        for design in (FULLCORE_BASELINE, FULLCORE_COPPER)
+        for source in design.sources
+        if not (ROOT / source).exists()
+    ]
     note = (
-        "BLOCKED: no real full-core RTL integration is present. Accepted core-wrapper rows "
-        "are reported separately with scope=accepted_core_wrapper and must not be called full-core PPA."
+        "BLOCKED: PicoRV32 tiny-SoC full-core mapped PPA requires matched "
+        "full_core_baseline/full_core_plus_copper RTL sources. Missing: "
+        + ", ".join(sorted(set(missing)))
     )
     write_text(log_path, note + "\n")
     return [
         blank_row(FULLCORE_BASELINE, "full_core", "not_run", "BLOCKED", log_path, note),
         blank_row(FULLCORE_COPPER, "full_core", "not_run", "BLOCKED", log_path, note),
     ]
+
+
+def write_fullcore_available_log() -> None:
+    log_path = LOG_DIR / "fullcore_wrapper_availability.log"
+    note = (
+        "PicoRV32 tiny-SoC full-core RTL sources are present. Full-core rows are "
+        "run through the same mapped PPA flow as other hardware targets; PASS "
+        "requires real timing from Vivado, nextpnr, or OpenROAD."
+    )
+    write_text(log_path, note + "\n")
 
 
 def matched_pass(rows: list[dict[str, str]], target: str, flow: str, scope: str) -> bool:
@@ -744,7 +774,10 @@ def has_matched_mapped_timing(rows: list[dict[str, str]], scope: str) -> bool:
 
 def run_ordered_flows() -> list[dict[str, str]]:
     rows: list[dict[str, str]] = []
-    rows.extend(fullcore_blocked_rows())
+    if not all(sources_present(design) for design in (FULLCORE_BASELINE, FULLCORE_COPPER)):
+        rows.extend(fullcore_blocked_rows())
+    else:
+        write_fullcore_available_log()
     rows.extend(vivado_impl(design) for design in MAPPED_DESIGNS)
     rows.extend(nextpnr_ecp5(design) for design in MAPPED_DESIGNS)
     rows.extend(nextpnr_ice40(design) for design in MAPPED_DESIGNS)

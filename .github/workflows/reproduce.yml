@@ -7,6 +7,7 @@ on:
       - master
       - main
       - copper-ci-proof
+      - top-tier-pass-2026-06-28
   pull_request:
 
 env:
@@ -14,6 +15,47 @@ env:
   COPPER_ENVIRONMENT: github_actions
 
 jobs:
+  full-readiness:
+    name: full-readiness
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install readiness tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            build-essential \
+            ca-certificates \
+            git \
+            iverilog \
+            make \
+            python3 \
+            python3-pip \
+            yosys
+          python3 -m pip install -r requirements.txt pytest numpy pandas
+
+      - name: Run model, workload, RTL, and evaluation gates
+        if: always()
+        run: |
+          make check-toolchain
+          make test
+          make workloads
+          make rtl
+          make sim
+          make eval
+
+      - name: Upload readiness evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: copper-readiness-${{ github.run_id }}
+          if-no-files-found: ignore
+          path: |
+            research/results/*.csv
+            research/results/**/*.csv
+            research/results/logs/**
+
   fullcore-synth:
     name: fullcore-synth
     runs-on: ubuntu-22.04
@@ -93,8 +135,12 @@ jobs:
       - name: Install lane tools
         run: |
           sudo apt-get update
-          sudo apt-get install -y --no-install-recommends ca-certificates git make python3 python3-pip
+          sudo apt-get install -y --no-install-recommends ca-certificates git make openroad python3 python3-pip yosys
           python3 -m pip install -r requirements.txt pytest numpy pandas
+
+      - name: Run ASIC/OpenROAD power producers
+        if: always()
+        run: make asic-power
 
       - name: Run power classification ledger
         if: always()
@@ -109,11 +155,14 @@ jobs:
           path: |
             research/results/power_report_index.csv
             research/results/energy_*.csv
+            research/results/asic_power*.csv
+            research/results/openroad_postroute_power*.csv
             research/results/logs/**
 
   sync-docs-audit-package:
     name: sync-docs-audit-package
     needs:
+      - full-readiness
       - fullcore-synth
       - mapped-ppa
       - power-evidence
@@ -149,6 +198,14 @@ jobs:
           name: copper-fullcore-synth-${{ github.run_id }}
           path: .lane-fullcore
 
+      - name: Download readiness evidence
+        if: always()
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          name: copper-readiness-${{ github.run_id }}
+          path: .lane-readiness
+
       - name: Download mapped PPA evidence
         if: always()
         continue-on-error: true
@@ -168,7 +225,8 @@ jobs:
       - name: Merge lane artifacts
         if: always()
         run: |
-          mkdir -p .lane-fullcore .lane-mapped .lane-power
+          mkdir -p .lane-readiness .lane-fullcore .lane-mapped .lane-power
+          cp -a .lane-readiness/. . || true
           cp -a .lane-fullcore/. . || true
           cp -a .lane-mapped/. . || true
           cp -a .lane-power/. . || true
@@ -192,6 +250,25 @@ jobs:
       - name: Package synchronized artifact
         if: always()
         run: make artifact
+
+      - name: Final synchronized evidence check
+        if: always()
+        run: |
+          make sync-hardware-evidence
+          python3 - <<'PY'
+          import csv
+          import sys
+          from pathlib import Path
+
+          rows = list(csv.DictReader(Path("research/results/top_tier_gate_status.csv").open()))
+          required_pass = {"schema_integrity", "full_core_absent", "paper_audits_artifact"}
+          bad = [row for row in rows if row.get("gate") in required_pass and row.get("status") != "PASS"]
+          if bad:
+              for row in bad:
+                  print(f"{row.get('gate')}: {row.get('status')} - {row.get('blocker') or row.get('notes')}")
+              sys.exit(1)
+          print("required synchronized full-core artifact gates passed")
+          PY
 
       - name: Upload synchronized COPPER evidence
         if: always()
