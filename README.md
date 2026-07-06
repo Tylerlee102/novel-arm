@@ -1,11 +1,11 @@
 # COPPER Research Artifact
 
 This repository contains the public, reviewer-facing artifact package for
-COPPER: Committed Pointer-Provenance Prefetching. COPPER is framed here as a
-scoped reproducible hardware mechanism study: the supported evidence is
+COPPER: Committed Pointer-Provenance Prefetching. COPPER is framed here as an
+evidence-bounded reproducible hardware mechanism study: the supported evidence is
 CI-proven RTL simulation, raw gem5/full-system provenance where retained,
 validated imported gem5 ARM-system rows, independent simulator evidence,
-accepted-core-wrapper/scoped PicoRV32 tiny-SoC full-core FPGA mapped PPA,
+accepted-core-wrapper/PicoRV32 tiny-SoC full-core FPGA mapped PPA,
 FPGA tool-estimated power, and proxy energy with caveats.
 
 This package does not support silicon-proven, ASIC/foundry signoff, measured
@@ -20,7 +20,7 @@ Start here:
 - `research/COPPER_FINAL_OUTPUT.md` - compact final idea summary.
 - `research/COPPER_ARTIFACT_REPRODUCTION_GUIDE.md` - how to reproduce the model and audit results.
 - `research/COPPER_REVIEWER_RESPONSE_NOTES.md` - short answers to likely reviewer concerns.
-- `research/SUBMISSION_READINESS_SUMMARY.md` - current scoped submission-readiness summary.
+- `research/SUBMISSION_READINESS_SUMMARY.md` - current submission-readiness summary.
 - `REPRODUCIBILITY_STATUS.md` - what can and cannot be rerun from a fresh clone.
 - `docs/RUN_CI_NOW.md` - GitHub web UI and CLI paths to trigger and collect the CI-proof run.
 - `research/results/COPPER_PUBLIC_ARTIFACT_MANIFEST_20260620.md` - included artifact manifest.
@@ -76,7 +76,7 @@ synthesis flows, a strict
 optional Nangate45 ASIC-Liberty tool-power rows when OpenSTA/OpenROAD is
 available, Vivado `report_power` rows when Vivado is available, and a McPAT
 activity-proxy index when the local McPAT sensitivity output is present. These
-are scoped evidence levels: `independent_sim` is not gem5, `core_integrated` is
+are evidence-level labels: `independent_sim` is not gem5, `core_integrated` is
 not gem5, imported gem5 summary rows are not a clone-local rerun of every raw
 full-system simulation, gem5 statistical rows are imported-summary statistics
 rather than fresh raw-run confidence intervals,
@@ -90,7 +90,7 @@ rows from nextpnr, Vivado, or OpenROAD and real timing fields are not `NA`.
 Vivado, OpenSTA/OpenROAD, and broader gem5 campaign reruns remain optional
 external-tool paths.
 The strongest current hardware claim is PicoRV32 tiny-SoC full-core mapped FPGA
-PPA plus scoped full-core FPGA tool-power when those rows are present; it is not
+PPA plus evidence-bounded full-core FPGA tool-power when those rows are present; it is not
 post-route ASIC signoff, silicon, production ARM/OoO, or top-tier
 architecture-readiness evidence.
 `research/results/hardware_evidence_summary.csv` and
@@ -136,6 +136,6 @@ queue-drop, traffic, ablation, sensitivity, and seed/input-stability CSVs at
 model, deterministic cycle-model, and deterministic core-integrated levels.
 The independent simulator rows add a separate source-backed trace/event path,
 and gem5 rows add validated imported ARM full-system summary evidence. For a
-scoped workshop, artifact track, or regular conference submission, the paper
-should stay within those evidence levels. Stronger silicon/signoff/production
+regular conference submission with an artifact package, the paper should stay
+within those evidence levels. Stronger silicon/signoff/production
 claims remain blocked unless real matching evidence files are added.

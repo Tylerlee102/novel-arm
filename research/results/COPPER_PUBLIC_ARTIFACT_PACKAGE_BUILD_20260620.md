@@ -8,7 +8,7 @@ Purpose: materialize the generated COPPER public artifact manifest into a compac
 
 - Manifest rows read: 589
 - Direct-package rows copied: 587
-- Direct-package row bytes copied: 6,212,865
+- Direct-package row bytes copied: 6,221,006
 - Generated metadata files copied: 4
 - Package files present: 591
 - Heavy external-store rows not copied: 2

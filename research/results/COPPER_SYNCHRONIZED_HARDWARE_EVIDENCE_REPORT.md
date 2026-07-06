@@ -6,7 +6,7 @@ SUBMISSION-READY
 
 ## Main Result
 
-The synchronized hardware-evidence pass supports a scoped COPPER artifact/mechanism submission. It has accepted-core-wrapper or stronger mapped timing, matched baseline/COPPER overhead, fpga_tool_estimate or stronger power evidence, passing paper/audit/artifact gates, and explicit machine-readable blockers for stronger production-core, signoff, silicon, or top-tier claims.
+The synchronized hardware-evidence pass supports the COPPER conference submission package. It has accepted-core-wrapper or stronger mapped timing, matched baseline/COPPER overhead, fpga_tool_estimate or stronger power evidence, passing paper/audit/artifact gates, and explicit machine-readable boundaries for production-core, signoff, silicon, or broad-dominance claims.
 
 ## Commands Run
 
@@ -63,7 +63,7 @@ The synchronized hardware-evidence pass supports a scoped COPPER artifact/mechan
 | full_core_absent | PASS | INFO |  | mapped_full_core_full_core_plus_copper_vivado_xc7a35tcsg324_1_vivado_impl_local_windows |
 | silicon_signoff_power_absent | BLOCKER | BLOCKER | silicon/signoff power absent | none |
 | paper_audits_artifact | PASS | INFO |  | paper=PASS; audit=PASS; artifact=PASS |
-| overall_status | SUBMISSION-READY | INFO | production/full-system full-core and silicon/signoff blockers remain for stronger claims | SUBMISSION-READY |
+| overall_status | SUBMISSION-READY | INFO | production/full-system full-core and silicon/signoff evidence absent for claims that require it | SUBMISSION-READY |
 
 ## Paper/Audit/Artifact Status
 
@@ -76,7 +76,7 @@ PASS: paper_build_status.csv contains a PASS row with existing PDF/log for local
 | mapped_timing | full_core | PicoRV32 tiny-SoC full-core mapped timing | mapped_full_core_full_core_plus_copper_vivado_xc7a35tcsg324_1_vivado_impl_local_windows | research/results/mapped_ppa.csv |
 | matched_overhead | full_core | matched overhead for the listed scope | mapped_overhead_full_core_lut_vivado_xc7a35tcsg324_1_vivado_impl_full_core_baseline_full_core_plus_copper_local_windows | research/results/mapped_ppa_overhead.csv; research/results/fullcore_synthesis_overhead.csv |
 | power_classification | full_core | fpga_tool_estimate power evidence | power_fpga_tool_estimate_full_core_full_core_plus_copper_vivado_xc7a35tcsg324_1_vivado_impl_local_windows | research/results/power_report_index.csv |
-| paper_audit_artifact | artifact | scoped paper/artifact claims |  | research/results/claim_audit.csv; research/results/stronger_claim_audit.csv; research/results/number_audit.csv; research/results/todo_audit.csv; research/results/paper_build_status.csv; research/results/artifact_manifest.csv |
+| paper_audit_artifact | artifact | evidence-bounded paper/artifact claims |  | research/results/claim_audit.csv; research/results/stronger_claim_audit.csv; research/results/number_audit.csv; research/results/todo_audit.csv; research/results/paper_build_status.csv; research/results/artifact_manifest.csv |
 
 ## Claims Still Forbidden
 
@@ -91,4 +91,4 @@ silicon/signoff power absent: Tool estimates are not signoff-grade or silicon me
 
 ## Recommendation
 
-Submit
+submit the evidence-bounded conference package

@@ -2,14 +2,14 @@
 
 ## Target Submission Type
 
-Workshop, artifact/reproducibility track, or scoped regular conference paper. The paper should be framed as a scoped reproducible hardware mechanism study.
+Regular conference paper with an artifact/reproducibility package. The paper should be framed as an evidence-bounded reproducible hardware mechanism study.
 
 ## Strongest Supported Claims
 
 - COPPER is a committed pointer-provenance prefetch mechanism.
 - CI/Docker/Codespaces reproduce the open-source checks when the workflow passes.
-- RTL unit simulation, model tests, independent simulator evidence, raw gem5 full-system provenance where retained, and validated imported gem5 ARM-system rows support the scoped evaluation.
-- Accepted-core-wrapper/scoped PicoRV32 tiny-SoC full-core FPGA mapped PPA may be cited only where generated rows PASS.
+- RTL unit simulation, model tests, independent simulator evidence, raw gem5 full-system provenance where retained, and validated imported gem5 ARM-system rows support the evidence-bounded evaluation.
+- Accepted-core-wrapper/PicoRV32 tiny-SoC full-core FPGA mapped PPA may be cited only where generated rows PASS.
 - FPGA tool-estimated power and proxy energy may be cited with caveats.
 
 ## Claims Still Forbidden
@@ -35,10 +35,10 @@ Last imported CI evidence: GitHub Actions run 28321186683 imported at 20260628_0
 ## Remaining Limitations
 
 - Full gem5 raw reruns are not clone-local for every imported summary row.
-- PicoRV32 tiny-SoC evidence is a scoped open-source harness, not production ARM/OoO integration.
+- PicoRV32 tiny-SoC evidence is the open-source full-core harness, not production ARM/OoO integration.
 - Power is tool-estimated or proxy/model based, not measured silicon.
 - Stronger silicon/signoff/commercial-production claims remain blocked by missing physical evidence.
 
 ## Recommendation
 
-Submit as a scoped workshop/artifact-track or scoped regular-paper package.
+Submit as an evidence-bounded regular conference or artifact-track package after the post-change CI run is attached.

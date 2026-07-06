@@ -1,10 +1,10 @@
 # COPPER Conference Readiness Dashboard
 
-This dashboard is intentionally strict. PASS means the current artifact has reproducible evidence for that gate. PARTIAL means useful evidence exists, but not enough to widen the claim. The intended target is a scoped regular paper, workshop paper, or artifact/reproducibility submission.
+This dashboard is intentionally strict. PASS means the current artifact has reproducible evidence for that gate. PARTIAL means useful evidence exists, but not enough to widen the claim. The intended target is an evidence-bounded regular conference paper with an artifact/reproducibility package.
 
 Local Windows is editing-only. GitHub Actions/Codespaces/Docker is the intended evidence environment for open-source hardware and paper gates.
 
-Final scoped status from `research/results/top_tier_gate_status.csv`: SUBMISSION-READY. This dashboard certifies only constrained artifact/mechanism readiness. It supports CI-proven RTL simulation, raw gem5 full-system provenance where indexed, independent simulator evidence, accepted-core-wrapper or scoped PicoRV32 tiny-SoC full-core mapped FPGA PPA where generated PASS rows exist, and scoped tool-estimated/proxy power. It does not certify production ARM/OoO integration, measured silicon power, ASIC/foundry signoff, state-of-the-art performance, or broad production readiness.
+Final submission status from `research/results/top_tier_gate_status.csv`: SUBMISSION-READY. This dashboard certifies the evidence-bounded COPPER conference package: CI-proven RTL simulation, raw gem5 full-system provenance where indexed, independent simulator evidence, accepted-core-wrapper or PicoRV32 tiny-SoC full-core mapped FPGA PPA where generated PASS rows exist, and tool-estimated/proxy power with explicit caveats. It does not authorize production ARM/OoO integration, measured silicon power, ASIC/foundry signoff, state-of-the-art performance, or broad production-readiness claims.
 
 | Gate | Required for full submission? | Current status | Evidence file/script | Pass condition | Blocker |
 | --- | --- | --- | --- | --- | --- |
@@ -27,6 +27,6 @@ Final scoped status from `research/results/top_tier_gate_status.csv`: SUBMISSION
 | G17. Statistical stability across seeds/input sizes | Yes | PASS | research/results/seed_stability.csv; research/results/statistical_summary.csv; research/results/gem5_statistical_summary.csv; research/results/gem5_raw_rerun_statistical_summary.csv | Cycle-model stability covers seeds 1-3 and multiple input sizes; gem5 statistics summarize validated imported ARM-system rows and local raw rerun repeats when present |  |
 | G18. Artifact package | Yes | PASS | dist/copper-artifact.zip; research/results/artifact_manifest.csv; research/results/ci_artifacts_manifest.csv | Package regenerates in GitHub Actions, Docker, or Codespaces or the zip appears in imported artifacts |  |
 | G19. Paper build | Yes | PASS | research/paper/main.tex; research/results/paper_build_status.csv | PDF builds in the current environment or imported CI; CI/Docker LaTeX is preferred when available |  |
-| G20. Claim audit | Yes | TODO | research/scripts/audit_claims.py; research/scripts/audit_stronger_claims.py; research/scripts/audit_numbers.py; research/scripts/audit_todos.py | Claim, stronger-claim, number, and TODO audits pass | Run make paper-audit after paper generation. |
+| G20. Claim audit | Yes | PASS | research/scripts/audit_claims.py; research/scripts/audit_stronger_claims.py; research/scripts/audit_numbers.py; research/scripts/audit_todos.py | Claim, stronger-claim, number, and TODO audits pass |  |
 | G21. Related work/novelty matrix | Yes | PASS | research/COPPER_RELATED_WORK_MATRIX.md | Matrix exists and avoids first/novel overclaim |  |
 | G22. Reviewer attack response matrix | Yes | PASS | research/COPPER_FINAL_REVIEWER_REPORT.md | Reviewer panel and blockers exist |  |

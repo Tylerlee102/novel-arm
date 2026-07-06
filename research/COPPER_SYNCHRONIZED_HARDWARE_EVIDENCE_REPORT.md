@@ -6,7 +6,7 @@ SUBMISSION-READY
 
 ## Main Result
 
-The synchronized evidence pass supports a constrained COPPER artifact/mechanism submission. It includes scoped PicoRV32 tiny-SoC full-core mapped FPGA PPA, matched overhead, FPGA tool-estimated power where indexed, passing paper/claim audits, and a packaged artifact. It does not support production ARM/OoO integration, ASIC/foundry signoff, measured silicon power, or state-of-the-art claims.
+The synchronized evidence pass supports the COPPER conference artifact/mechanism submission package. It includes PicoRV32 tiny-SoC full-core mapped FPGA PPA, matched overhead, FPGA tool-estimated power where indexed, passing paper/claim audits, and a packaged artifact. It does not support production ARM/OoO integration, ASIC/foundry signoff, measured silicon power, or state-of-the-art claims.
 
 ## Commands Run
 
@@ -61,7 +61,7 @@ The synchronized evidence pass supports a constrained COPPER artifact/mechanism 
 | full_core_absent | PASS |  | mapped_full_core_full_core_plus_copper_vivado_xc7a35tcsg324_1_vivado_impl_local_windows |
 | silicon_signoff_power_absent | BLOCKER | silicon/signoff power absent | none |
 | paper_audits_artifact | PASS |  | paper=PASS; audit=PASS; artifact=PASS |
-| overall_status | SUBMISSION-READY | production/full-system full-core and silicon/signoff blockers remain for stronger claims | SUBMISSION-READY |
+| overall_status | SUBMISSION-READY | production/full-system full-core and silicon/signoff evidence absent for claims that require it | SUBMISSION-READY |
 
 ## Paper/Audit/Artifact Status
 
@@ -80,7 +80,7 @@ The synchronized evidence pass supports a constrained COPPER artifact/mechanism 
 | C7 | COPPER has matched unit-level generic-synthesis overhead. | ALLOWED | research/results/synthesis.csv; research/results/synthesis_overhead.csv | unit synthesis | Allowed only if an open-environment Yosys flow produced matched overhead rows; not full-core overhead. |
 | C8 | COPPER has matched near-core-stub generic-synthesis overhead. | ALLOWED | research/results/fullcore_synthesis.csv; research/results/fullcore_synthesis_overhead.csv | near_core_stub | Allowed only when scope is called near_core_stub; not full-core overhead or mapped timing. |
 | C9 | COPPER generalizes across the evaluated model, cycle-model, core-integrated, and independent-sim workload suite. | ALLOWED | research/results/benchmark_inventory.csv; research/results/cycle_performance.csv; research/results/core_integrated_performance.csv; research/results/independent_sim_performance.csv; research/results/statistical_summary.csv | model; cycle_model; core_integrated; independent_sim | Breadth is still not a gem5 campaign or production-core result. |
-| C10 | COPPER has scoped OpenROAD post-route, ASIC-Liberty/FPGA tool-power, and proxy/model energy results where indexed PASS. | ALLOWED | research/results/openroad_postroute_power.csv; research/results/openroad_postroute_power_overhead.csv; research/results/asic_power.csv; research/results/asic_power_overhead.csv; research/results/energy_proxy.csv; research/results/energy_summary.csv; research/results/power_report_index.csv; research/results/mapped_ppa.csv; research/results/copper_mcpat_sensitivity_20260618.csv | fpga_tool_estimate; proxy_activity; proxy_assumed_memory_energy | Vivado report_power is tool-estimated FPGA power for the mapped target; do not call it silicon measurement or ASIC signoff. |
+| C10 | COPPER has evidence-bounded OpenROAD post-route, ASIC-Liberty/FPGA tool-power, and proxy/model energy results where indexed PASS. | ALLOWED | research/results/openroad_postroute_power.csv; research/results/openroad_postroute_power_overhead.csv; research/results/asic_power.csv; research/results/asic_power_overhead.csv; research/results/energy_proxy.csv; research/results/energy_summary.csv; research/results/power_report_index.csv; research/results/mapped_ppa.csv; research/results/copper_mcpat_sensitivity_20260618.csv | fpga_tool_estimate; proxy_activity; proxy_assumed_memory_energy | Vivado report_power is tool-estimated FPGA power for the mapped target; do not call it silicon measurement or ASIC signoff. |
 | C12 | COPPER has matched near-core-stub mapped timing. | ALLOWED | research/results/mapped_ppa.csv; research/results/mapped_ppa_overhead.csv | near_core_stub mapped PPA | Allowed only when baseline and COPPER near-core-stub rows PASS in the same mapped flow with timing fields from nextpnr, Vivado, or OpenROAD; not full-core PPA. |
 | C13 | COPPER has matched PicoRV32 accepted core-wrapper mapped FPGA PPA. | ALLOWED | research/results/mapped_ppa.csv; research/results/mapped_ppa_overhead.csv | accepted_core_wrapper mapped PPA | Allowed only when baseline and COPPER PicoRV32 accepted-core-wrapper rows PASS in the same mapped flow with timing fields from nextpnr, Vivado, or OpenROAD; not full-core, ARM-core, ASIC, or silicon PPA. |
 | C14 | COPPER has matched PicoRV32 accepted core-wrapper generic-synthesis overhead. | ALLOWED | research/results/fullcore_synthesis.csv; research/results/fullcore_synthesis_overhead.csv | accepted_core_wrapper | Allowed only when scope is called accepted_core_wrapper; not full-core overhead or ASIC timing. |
@@ -106,4 +106,4 @@ silicon/signoff power absent: Tool estimates are not signoff-grade or silicon me
 
 ## Recommendation
 
-Submit as a scoped artifact/mechanism package.
+Submit as an evidence-bounded conference artifact/mechanism package.

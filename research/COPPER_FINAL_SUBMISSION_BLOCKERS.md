@@ -1,6 +1,6 @@
 # COPPER Final Submission Blockers
 
-Final scoped status from `research/results/top_tier_gate_status.csv`: SUBMISSION-READY. These are not blockers for a scoped reproducible hardware mechanism submission. They are preserved only to prevent stronger production-core, signoff, silicon, or broad architecture claims.
+Final submission status from `research/results/top_tier_gate_status.csv`: SUBMISSION-READY. These are release boundary conditions for the evidence-bounded COPPER conference package. They are not blockers for submission at the stated evidence levels, but they are binding blockers for stronger production-core, signoff, silicon, or broad-dominance claims.
 
 | Class | Blocker | Evidence | Required fix |
 | --- | --- | --- | --- |

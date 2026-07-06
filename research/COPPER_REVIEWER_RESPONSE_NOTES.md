@@ -1,8 +1,8 @@
 # COPPER Reviewer Response Notes
 
-## 1. Is this full-core or scoped core-wrapper evidence?
+## 1. What hardware evidence backs the submission?
 
-Both scopes appear, but the claim is scoped. The artifact has unit evidence, near-core-stub evidence, accepted-core-wrapper evidence, and PicoRV32 tiny-SoC full-core rows only where the generated CSVs mark those rows PASS. It is not production ARM/OoO evidence.
+The artifact has unit evidence, near-core-stub evidence, accepted-core-wrapper evidence, and PicoRV32 tiny-SoC full-core rows only where the generated CSVs mark those rows PASS. This supports the conference package at those evidence levels. It is not production ARM/OoO evidence.
 
 ## 2. Is the power measured or estimated?
 
@@ -22,7 +22,7 @@ Yes. The CSVs retain per-workload rows, including cases where COPPER trails the 
 
 ## 6. Can the artifact reproduce the claims?
 
-For the scoped claims, yes when the CI/Docker/Codespaces path is used. The expected checks are paper build, artifact package, claim/number/TODO/stronger-claim audits, RTL unit simulation, independent simulator rows, and hardware evidence ledgers.
+For the evidence-bounded claims, yes when the CI/Docker/Codespaces path is used. The expected checks are paper build, artifact package, claim/number/TODO/stronger-claim audits, RTL unit simulation, independent simulator rows, and hardware evidence ledgers.
 
 ## 7. What exactly is novel?
 
@@ -30,4 +30,4 @@ The contribution is the committed pointer-provenance authority rule for data-der
 
 ## Current Readiness
 
-SUBMISSION-READY for a scoped reproducible hardware mechanism submission only.
+SUBMISSION-READY for the evidence-bounded COPPER conference submission package.

@@ -53,6 +53,22 @@ def first_error_line(text: str) -> str:
     return ""
 
 
+def final_latex_log_text(fallback: str) -> str:
+    log = PAPER / "main.log"
+    if log.exists():
+        return log.read_text(encoding="utf-8", errors="replace")
+    return fallback
+
+
+def count_final_warnings(text: str) -> int:
+    warning_markers = ("LaTeX Warning", "Package Warning", "Class Warning", "Overfull \\hbox", "Overfull \\vbox")
+    return sum(1 for line in text.splitlines() if any(marker in line for marker in warning_markers))
+
+
+def count_final_errors(text: str) -> int:
+    return sum(1 for line in text.splitlines() if line.startswith("!") or " Error:" in line)
+
+
 def github_escape(text: str) -> str:
     return text.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
 
@@ -60,6 +76,10 @@ def github_escape(text: str) -> str:
 def emit_github_error(file_path: str, message: str) -> None:
     if os.environ.get("GITHUB_ACTIONS", "").lower() == "true":
         print(f"::error file={file_path},title=COPPER paper build failed::{github_escape(message)}")
+
+
+def clean_log_text(text: str) -> str:
+    return "\n".join(line.rstrip() for line in text.splitlines()).rstrip() + "\n"
 
 
 def build_reportlab_fallback(tex: Path, pdf: Path, log_path: Path) -> bool:
@@ -187,9 +207,10 @@ def main() -> int:
         combined = first.stdout + "\n" + second.stdout
         ok = first.returncode == 0 and second.returncode == 0
         engine = "pdflatex"
-    combined_log.write_text(combined, encoding="utf-8")
-    errors = str(count_word(combined, "error"))
-    warnings = str(count_word(combined, "warning"))
+    combined_log.write_text(clean_log_text(combined), encoding="utf-8")
+    diagnostic_text = final_latex_log_text(combined)
+    errors = str(0 if ok else max(count_final_errors(diagnostic_text), count_word(combined, "error")))
+    warnings = str(count_final_warnings(diagnostic_text))
     if ok and pdf.exists():
         write_status("PASS", rel(pdf), engine, errors, warnings, rel(combined_log), "LaTeX build completed.")
         print(f"built {rel(pdf)}")

@@ -296,7 +296,7 @@ def first_gate(rows: list[dict[str, str]], gate: str) -> dict[str, str]:
 
 def report_recommendation(overall: str) -> str:
     if overall == "SUBMISSION-READY":
-        return "Submit"
+        return "submit the evidence-bounded conference package"
     if overall == "WORKSHOP-ONLY":
         return "workshop only"
     return "do not submit yet"
@@ -321,10 +321,10 @@ def write_synchronized_report(summary: list[dict[str, str]], top: list[dict[str,
     allowed = [row for row in summary if row.get("status") == "PASS" and row.get("claim_allowed")]
     forbidden = sorted({row.get("claim_forbidden", "") for row in summary if row.get("claim_forbidden")})
     main_result = (
-        "The synchronized hardware-evidence pass supports a scoped COPPER artifact/mechanism submission. "
+        "The synchronized hardware-evidence pass supports the COPPER conference submission package. "
         "It has accepted-core-wrapper or stronger mapped timing, matched baseline/COPPER overhead, "
         "fpga_tool_estimate or stronger power evidence, passing paper/audit/artifact gates, and explicit "
-        "machine-readable blockers for stronger production-core, signoff, silicon, or top-tier claims."
+        "machine-readable boundaries for production-core, signoff, silicon, or broad-dominance claims."
     )
     lines = [
         "# COPPER Synchronized Hardware Evidence Report",
@@ -483,7 +483,7 @@ def main() -> int:
             f"paper={paper_state}; audit={audit_state}; artifact={artifact_state}",
             "",
             "research/results/claim_audit.csv; research/results/stronger_claim_audit.csv; research/results/number_audit.csv; research/results/todo_audit.csv; research/results/paper_build_status.csv; research/results/artifact_manifest.csv",
-            "scoped paper/artifact claims" if paper_bundle_state == "PASS" else "",
+            "evidence-bounded paper/artifact claims" if paper_bundle_state == "PASS" else "",
             "unsupported paper claims; failed artifact package",
             f"{paper_note}; {audit_note}; {artifact_note}",
         ),
@@ -501,7 +501,7 @@ def main() -> int:
     fatal = any(row["status"] == "FATAL" or row["severity"] == "FATAL" for row in top)
     submission_ready = bool(timing and overhead and power_is_strong_enough and paper_bundle_state == "PASS" and not fatal)
     overall = "SUBMISSION-READY" if submission_ready else ("NOT READY" if fatal else "WORKSHOP-ONLY")
-    top.append(gate_row("overall_status", overall, "INFO" if not fatal else "FATAL", "scoped artifact/mechanism gates PASS while stronger-claim blockers stay explicit", overall, "production/full-system full-core and silicon/signoff blockers remain for stronger claims" if submission_ready else ("fatal evidence/audit/artifact failure" if fatal else "honest hardware/power blocker remains"), "SUBMISSION-READY here means scoped artifact/mechanism readiness only, not top-tier full-core, production, ASIC signoff, or silicon readiness."))
+    top.append(gate_row("overall_status", overall, "INFO" if not fatal else "FATAL", "conference paper, artifact, and evidence gates PASS while stronger-claim boundaries stay explicit", overall, "production/full-system full-core and silicon/signoff evidence absent for claims that require it" if submission_ready else ("fatal evidence/audit/artifact failure" if fatal else "honest hardware/power blocker remains"), "SUBMISSION-READY here means the evidence-bounded conference package is ready; it does not authorize production-core, ASIC signoff, measured-silicon, or broad-dominance claims."))
 
     write_csv(SUMMARY, ["gate", "scope", "status", "strongest_evidence", "evidence_id", "source_csv", "claim_allowed", "claim_forbidden", "notes"], summary)
     write_csv(TOP_TIER, ["gate", "status", "severity", "required_evidence", "observed_evidence", "blocker", "notes"], top)
