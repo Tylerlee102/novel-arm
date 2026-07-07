@@ -34,148 +34,31 @@ reproduce.py,10603,9fbdf605b17da202a692801d521be204168a521952ce2d10b3aec8e72beef
 reproduce.sh,330,e88875bb21f1637d4701689487ec70877dc0076a511cbb2f6e72fa6701c0eee0,yes,reproduce.sh,included source or reviewer file
 requirements.txt,312,8df7b6b0f162b144707c20956493509edd0dc42bb5239fa75122035c8422561f,yes,requirements.txt,included source or reviewer file
 research/ARTIFACT_MAP.md,4827,de385a65254df97fafff2895da888ec699476890da3c4473ace2e9305a1c4175,yes,research/ARTIFACT_MAP.md,included source or reviewer file
-research/CONFERENCE_READINESS_DASHBOARD.md,7252,facf1dca66011114f4e6d8cb9602f5647fb748c30b93813716a588110a5c616c,yes,research/CONFERENCE_READINESS_DASHBOARD.md,included source or reviewer file
+research/CONFERENCE_READINESS_DASHBOARD.md,7250,ce99d114d8e291085597b086683152706aa57392f73468cf00dffeb9534b4fd8,yes,research/CONFERENCE_READINESS_DASHBOARD.md,included source or reviewer file
 research/COPPER_AMBA_CHI_ACE_EVENT_MAP_20260619.md,6938,5e612d00a84f525e51c06ea05a5e1df97203de0e1b7d9955126874089a7be6d8,yes,research/COPPER_AMBA_CHI_ACE_EVENT_MAP_20260619.md,included source or reviewer file
 research/COPPER_ARTIFACT_REPRODUCTION_GUIDE.md,3575,0f80cd47c1017f66409bcf6b7b40b74f632a83ad8536b09b4c26e73de851a148,yes,research/COPPER_ARTIFACT_REPRODUCTION_GUIDE.md,included source or reviewer file
 research/COPPER_CLAIM_LEDGER.md,10601,403fe593cc28934760ad7c28a010758128cd26fd6579f6f9a43ae060eef0e173,yes,research/COPPER_CLAIM_LEDGER.md,included source or reviewer file
-research/COPPER_CONFERENCE_DRAFT.docx,48901,,no,,suffix not included
+research/COPPER_CONFERENCE_DRAFT.docx,48808,,no,,suffix not included
 research/COPPER_DOCX_QA.md,13190,c0110d089e5afda8beeb592f991e6386135d7f1369f7ef0cf708d761f2938408,yes,research/COPPER_DOCX_QA.md,included source or reviewer file
 research/COPPER_ENVIRONMENT_ARTIFACT_MANIFEST_20260619.md,5389,,no,,excluded local-only file containing a private absolute path
-research/COPPER_FINAL_OUTPUT.md,105888,2b0236e887a0888ee5aee1e82a01061456d6d0a459dac573697f346f484f094f,yes,research/COPPER_FINAL_OUTPUT.md,included source or reviewer file
-research/COPPER_FINAL_REVIEWER_REPORT.md,8923,2be9393c47eb9a86b616d9230d05e8d61ffbde9c104d98d04d12c6fca9109c02,yes,research/COPPER_FINAL_REVIEWER_REPORT.md,included source or reviewer file
-research/COPPER_FINAL_SUBMISSION_BLOCKERS.md,3761,aa0715dc91eb54ca67f7543cee6b5b380502656eb84105f4273c2a3255e2ad3c,yes,research/COPPER_FINAL_SUBMISSION_BLOCKERS.md,included source or reviewer file
+research/COPPER_FINAL_OUTPUT.md,105934,83884fbefb3c8b544abd98fa98484f78ba2d257ad1455eeac8ea031039dc0bee,yes,research/COPPER_FINAL_OUTPUT.md,included source or reviewer file
+research/COPPER_FINAL_REVIEWER_REPORT.md,8928,dc16dfd41e8cd2d2bd15c2c7fa73560f15cfad2dd67f8b023abc96e2d3eb7774,yes,research/COPPER_FINAL_REVIEWER_REPORT.md,included source or reviewer file
+research/COPPER_FINAL_SUBMISSION_BLOCKERS.md,3846,1aeaaa98d3018a8f4c5ffd6e687927bb5dfc1e663b294ea1979e8395761844a4,yes,research/COPPER_FINAL_SUBMISSION_BLOCKERS.md,included source or reviewer file
 research/COPPER_FREE_RUN_RESULTS.md,32147,,no,,excluded local-only file containing a private absolute path
-research/COPPER_FULL_PAPER.md,169879,478934f4a69d6d2aad62fa1563de944f128143247882c3199247302c8bf725e9,yes,research/COPPER_FULL_PAPER.md,included source or reviewer file
+research/COPPER_FULL_PAPER.md,169916,62abdea84c115214893b71becc79f9579865179e6c22453b8bcc881d1ab20f91,yes,research/COPPER_FULL_PAPER.md,included source or reviewer file
 research/COPPER_NOTE.md,7316,f3c6fd7d5dc8c8048c7e9ac40dd4811ae57f4bd0260f39c351ee2ae0c3c450ce,yes,research/COPPER_NOTE.md,included source or reviewer file
 research/COPPER_PAPER_EVAL.md,9626,e3db1e1a83a0b86dd15c4e60080f9f3c11ba6fea96958d04c39c52c5de7be1b5,yes,research/COPPER_PAPER_EVAL.md,included source or reviewer file
 research/COPPER_PRIOR_ART.md,16124,367b3ace2f18620ecf4e1836fcec47b5be6674d6765e7713d946efa50ced8621,yes,research/COPPER_PRIOR_ART.md,included source or reviewer file
 research/COPPER_RELATED_WORK_MATRIX.md,2416,f2cc21896006faed73b6140ef2e8921118a4e400538e3ee7ad2affd6313d2ace,yes,research/COPPER_RELATED_WORK_MATRIX.md,included source or reviewer file
 research/COPPER_REVIEWER_RESPONSE_NOTES.md,2111,b9c7dac52855870de270e3137776bfbf1c657782e0b5c3b9181b94f9299c850f,yes,research/COPPER_REVIEWER_RESPONSE_NOTES.md,included source or reviewer file
-research/COPPER_SCOOP_CONFERENCE_DRAFT.docx,51809,,no,,suffix not included
+research/COPPER_SCOOP_CONFERENCE_DRAFT.docx,52246,,no,,suffix not included
 research/COPPER_SCOOP_DOCX_QA.md,1354,9fd21c2e433f2d3a29ffa510c089abc5f282db89b6aa88b4027bf9940d4871f4,yes,research/COPPER_SCOOP_DOCX_QA.md,included source or reviewer file
 research/COPPER_STRONGER_CLAIM_BLOCKERS.md,5024,bfa2e8a1becd8c6f7892aac7cae7b5bdeed992ec2d5379141fdfec8153195e65,yes,research/COPPER_STRONGER_CLAIM_BLOCKERS.md,included source or reviewer file
 research/COPPER_SUBMISSION_RESTRUCTURED.md,29437,7f3da2d62c96aee5ae486265efb8015ce0b28b708bcb1a083f533e55ad6aa0fa,yes,research/COPPER_SUBMISSION_RESTRUCTURED.md,included source or reviewer file
 research/COPPER_SYNCHRONIZED_HARDWARE_EVIDENCE_REPORT.md,14473,3b908b9dd5519b6ee9e76d97a0b2728385f4e919545c010564b61919cba8ff6d,yes,research/COPPER_SYNCHRONIZED_HARDWARE_EVIDENCE_REPORT.md,included source or reviewer file
 research/COPPER_VALIDATION_REPORT.md,9544,738dcc00418077b795695be194d36dbe998644dfc109614b8dd47317e0a6a23b,yes,research/COPPER_VALIDATION_REPORT.md,included source or reviewer file
 research/COPPER_VIVADO_SUMMARY.md,21037,2bbbdf86e2307fdebb3fe96a01a317814a9ab618baf96b6bc22e8861c93fb1cb,yes,research/COPPER_VIVADO_SUMMARY.md,included source or reviewer file
-research/SUBMISSION_READINESS_SUMMARY.md,2011,db19f4051bc0bca54ba86eeb4552e5e75f20fd2d02e076aa71f87ebdcb3940e0,yes,research/SUBMISSION_READINESS_SUMMARY.md,included source or reviewer file
-research/_vendor/pymupdf/bin/pymupdf.exe,108388,,no,,suffix not included
-research/_vendor/pymupdf/fitz/__init__.py,479,23dae7eac8bbdcae7fc175de7fa168b849c25b6fec1a7196a7a9e9f6141a372f,yes,research/_vendor/pymupdf/fitz/__init__.py,included source or reviewer file
-research/_vendor/pymupdf/fitz/table.py,85,8ab84abc4a59ff83cdfbe4c95ccdaf6eb4ac438415bdee3747d0b2d8a65e2713,yes,research/_vendor/pymupdf/fitz/table.py,included source or reviewer file
-research/_vendor/pymupdf/fitz/utils.py,85,4e72ca23d6bad3e263113f4a8fda7b1a5e0ca00be96847031bd64fef2c2fa130,yes,research/_vendor/pymupdf/fitz/utils.py,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/__init__.py,916826,1b8fe9fd941fac2bfb45143c2d21be04e0a8eb0599c92a29de7ec913914d4568,yes,research/_vendor/pymupdf/pymupdf/__init__.py,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/__main__.py,41358,763a97305937d0665a43d4b6920924efb15d8f87795ec2926c09f9da69bfd2cb,yes,research/_vendor/pymupdf/pymupdf/__main__.py,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/_apply_pages.py,7716,720b52015d70320bb3603c1a724c0741c9b53e87a9943ec96a911ef38b5bd457,yes,research/_vendor/pymupdf/pymupdf/_apply_pages.py,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/_build.py,302,8f6d54b5d2499182d1fc43a0fff64a92348719cd011b5f34ec179c388372176c,yes,research/_vendor/pymupdf/pymupdf/_build.py,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/_extra.pyd,190464,,no,,suffix not included
-research/_vendor/pymupdf/pymupdf/_mupdf.pyd,12301824,,no,,suffix not included
-research/_vendor/pymupdf/pymupdf/_wxcolors.py,20533,02363faab89d46857e25e7ca88707ca2975d36754a4fa9fd1d15081fc523ac1d,yes,research/_vendor/pymupdf/pymupdf/_wxcolors.py,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/extra.py,6882,1888affc6f914edef4730c87bcb19849d5f10c9f65334fd329e728565a9980a3,yes,research/_vendor/pymupdf/pymupdf/extra.py,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/classes.h,731449,3bb4df28ccf08fe707b69f989894eb8ea22f23cd44a6c79e7064f30b3933b6e0,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/classes.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/classes2.h,496596,e0c3c3da5a914667421426901f095bdfa5700a7d10110b3946fe8f7d834e30e5,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/classes2.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/exceptions.h,2197,f8a94473f9470c5866fcbb28451452e7357d1b686ede9488cb80791ec7421512,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/exceptions.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/extra.h,6228,bdd4d215bfb19796f61f3f96de9c991c2bb30f1a8e10399934b4c50aa45f5a0e,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/extra.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/archive.h,12458,2eba82c2015535f41de90e94ad7389e8b252f26e7364e7e190b6b18227395061,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/archive.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/band-writer.h,3759,44be4eca94818d624772bec2eea3d9912734a6c631a1f0ece0af379b3d44dfa9,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/band-writer.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/barcode.h,4245,75f0e4ce540f571db2f5c9e2ee897f8d73a4002f42a66f7d8c39978d6e1f2cc1,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/barcode.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/bidi.h,2530,627146b07faf503c9434cdc6a2fa3efa75a036f2fb96d6d2c4e6fd47afa19b37,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/bidi.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/bitmap.h,5350,1a8fad7b399b82630b83a44951c50802f5581c69ba0c62af61fdda3857fba5cd,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/bitmap.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/buffer.h,7786,343abc421623a77f40d7d2652aee64996fc2051d0b4798aafe91a0c7397df18e,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/buffer.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/color.h,13094,99e003b6512a7a043799ac15c479b36566f599f0a5525e015752e3142e53ff2f,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/color.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/compress.h,5188,ab336a35dad5c56e1cf8b62a70727086081ce11e0082c0c207dc52b80a2ac7f7,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/compress.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/compressed-buffer.h,4643,4cec63441089eac89ea77197b82077682a740625782a555f48980c653ef3f24b,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/compressed-buffer.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/config.h,8433,4474703220b871e21128776252d0f4551aacc6b9cb13e0aa07f7ebe9ffeeb70a,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/config.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/context.h,29721,de6b0a6bf3361c2b7a94796f905bf400825ec89e79243bd87d63837fa03d3f25,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/context.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/crypt.h,6750,b450f276736931a98595c20ba397f05a742237563e6a5a14113a60b9dcaaa546,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/crypt.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/deskew.h,1442,537342f379f7ac930dfc93a121fe9f3983478f897489a9de9eb78c95625759f5,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/deskew.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/device.h,22930,9fa3018d85c29363fd2471b49f6f13f912a536692ee3286863481915e23ca87f,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/device.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/display-list.h,4954,c98b57de844757c0c50a38c16b210357e70b99db51156d921891fffa3c6f2e9a,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/display-list.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/document.h,34854,682a2d9ba6780347072fde974b5c6003f0058005391ceb8e8ab6ffebca0ed14d,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/document.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/export.h,1689,f93587a7b608eeb8396d83a060c3721b13951942c9dd2465c6d47314b0113d2c,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/export.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/filter.h,8104,173b32b75dac41c6661782e1fc283e55621d9e607571ef2bb71bd830b529731f,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/filter.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/font.h,24988,ac867258928b83fce9f2a66ee12d360fd2b16c8a531ba5bbaba68aaeb863b53a,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/font.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/geometry.h,21046,2f7501e4a178d85942f731689b6570667c1b086d8f4d58e25acd523cb498fb97,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/geometry.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/getopt.h,4934,27ea89de11d5be647d9f5994bfbc68bad50752f6c6bbce7f34c2ef135851e261,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/getopt.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/glyph-cache.h,3417,e45eeb4a37a3f6fc3e3410cb992774cddc29b14ea8923b850f11c1dada74c4c3,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/glyph-cache.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/glyph.h,2397,8d28fe8eca52390351d1cfd58bdaad98758daa483a1b14890bf16ce1a138ecb4,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/glyph.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/hash.h,4107,dabd114f9476b54a75c4368624fda367ed52b8bef510140dee55cf1ca74ef72c,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/hash.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/heap-imp.h,4514,29fd176fa89d50b117b2b56fcd53d3ce20514feb3ec185fe6916e0e5d60a3523,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/heap-imp.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/heap.h,5171,36392e523b8b51d6259c001dcae7a7e0c134af4b2b5fae45411a904ae07c549f,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/heap.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/hyphen.h,2018,8cfdfbfc9fa1c40cbf10faed8b5239940d0177083431a1a8e586793f3717848f,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/hyphen.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/image.h,15070,e8d6bdac2b333a0964de3154fe6350138ba762e3a9514fc65662baa2d82ae829,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/image.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/json.h,3263,d399be259e5c589c8beec3b9b41038251f4837c2add27854fe6ba82385df3223,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/json.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/link.h,4129,ccc11438759247393d9dddaf9026920e400d24e346cd8915cc35946a6f766c35,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/link.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/log.h,1961,e319a159d830b81b45a9b7f5d8e5217ca8014f81cb10439d59e66a1e323e0917,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/log.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/outline.h,8148,e85933f83ca4d1a91657169019160165d55a941f4d1b48961ce74e442bcfad34,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/outline.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/output-svg.h,2767,ab8e1526d9219726cacea69cffb8daa2b8defa45ec180a077454c0b507ca0faa,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/output-svg.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/output.h,13780,24e7b9a0dd4cbc99264cf19f399f6d7f6f1e8a0fd83a49918390ac1a6e415325,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/output.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/path.h,14146,1644bfa7df3549cf8028b3eba7f93d3473f18fa3116bd8190855c56c64a61bc5,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/path.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/pixmap.h,16252,a6cd7aafbd8b1bfae091e080a3b184a161eae449283540750c153703219477ca,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/pixmap.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/pool.h,3168,1bea702150ef807c5c6418776a851e858d410d64746ecad3e9f82008632daea6,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/pool.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/separation.h,4603,d8df4cb980c86ba8c3e67e11a4e8cfa962649f4e6f2a496a1839b511241cabdd,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/separation.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/shade.h,6211,74f1e40ab5f10faadaec0d92441ab10d2e1aa09bf4f43e90d9d3557ab3c7f9cb,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/shade.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/store.h,14139,bf3a29039908745131714a84f8602faf8f2b772de23b7532c5cc6296b1545588,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/store.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/story-writer.h,6916,1b7f9e778667b7c7e390f3e142f9cceb788d103861380574aa9eb15fac530d3e,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/story-writer.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/story.h,7681,774d15d23dd1efb428a8a5e6a2f141d584e24c6b6a3eccd1256ac49e1100fdbe,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/story.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/stream.h,16512,29636766752fa8145c5c67451245cedde38c21c46222ff7a87828c3ed0bc04c7,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/stream.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/string-util.h,9169,34011f7301ca57336f7c339556af0df8087646cf75f871f71fd66af00520a0a9,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/string-util.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/structured-text.h,38905,b5114b4c5f4562be273e3559aa4806333dd1c247f9735d9f3e277c384f1a684a,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/structured-text.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/system.h,14720,115f5a667d4fc5d5a3b3a65ec6f2c09bd3433ee659167354a462cc1d407a255a,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/system.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/text.h,6456,174b56b21d13fe18246427dd68d712b0a81c254fbc17cd48154d023a4c1195c9,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/text.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/track-usage.h,1707,a25792ab5670596a8cb00ca4bc52aac5c4c60470d0a568e643845114bb1d072a,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/track-usage.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/transition.h,2188,07951b7fd6e3fd65a8a9ad3922721d93defcf95460eab474ecfbb16ad7eee7ac,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/transition.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/tree.h,1983,e36e427266db0748fd3c5b6ae12e13c0b9445af2d310c27dda685e5e8116585f,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/tree.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/types.h,1470,3f458b09794660dc954ab76f8e546074b528647a6d13f582937e5892c59ed9fd,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/types.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/util.h,10640,e26177cdd041e5b52d37baf751359b23ac0240b4934385f962e32975f60fe57d,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/util.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/version.h,1200,e4d0847df37be1a1956ad3e652a4579cb349e649d3c8da1dd48acdde5abb2507,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/version.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/write-pixmap.h,15960,80217f6188e1edd41eb74ad5e408a8e206718013e484db5ebc516b01dbe4250f,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/write-pixmap.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/writer.h,11196,aed5c80b44db796c99c01c9620f3a7dad16ea2ac1cce4bc8c83c6bee350a5ed1,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/writer.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/xml.h,12937,d80c67814bf1adfd4f52c6585bf6a1ff6f1112564dc0e177adf2dd0167578436,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz/xml.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz.h,2845,15d20b9123017fec2d7544f9ee27f85a549ccb07c98df406e3d81b8e334330d6,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/fitz.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/functions.h,548889,e89607977903605125e374338bade4e1baf637b67910e53bd8e4a32eab11482e,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/functions.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/helpers/mu-office-lib.h,22192,cb1bc9e41f747354eee6caaaf1de8ee1d21924ee3c641bd75a5bb913a6d54811,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/helpers/mu-office-lib.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/helpers/mu-threads.h,5774,f594589fe460ff4d968c74eda602fa03d806b94f122169be18cd49417e09f210,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/helpers/mu-threads.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/helpers/pkcs7-openssl.h,2427,8d06f568c3447200bc11a2a17d7e2623313b29cbc010d94affe8cc893a5e961e,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/helpers/pkcs7-openssl.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/html.h,1937,6bbae186696b4307d33eb1c86a55f7a42e7c8ab0ebc95c390eb274533dac9f55,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/html.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/internal.h,1391,c4365a086fb77cc3cf08eefb385ff9a3e76b6760d6efa8c2c2b4965599284d33,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/internal.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/memento.h,17041,312a318d0270fb6a7dc4f92fb8f9f95606983c2e648db0730629ef4ad64e7179,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/memento.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/pdf/annot.h,35202,a62171f99183d5134ae84acecc0840cef9a6cebf08b2c897236b71e2efa1bd15,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/pdf/annot.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/pdf/clean.h,2872,c989642f135090ee63fce8e8db09152e7fa2d6faa50c72fa73e5d0032eebba16,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/pdf/clean.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/pdf/cmap.h,3954,ba25bb58f39c235b67125053c4022d3889cd1c8727e6de89a3e6c288920ab7fe,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/pdf/cmap.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/pdf/crypt.h,4548,e546987708e80e0f65163d4ba773ec3368f6d3a8566a4dc38f192ee5feacbea6,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/pdf/crypt.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/pdf/document.h,29093,8a730ce464c4b85729b084911d556c4c8963ef3d032495ce5f5a2e85c6054f91,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/pdf/document.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/pdf/event.h,4777,27fc16c1e10772f553073bb103b73f8cebf5a5fd9c08494ac02b243baf750ea6,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/pdf/event.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/pdf/font.h,5407,638aad7d1cebd82e0ac080967e584a023dfd850d33f903c16bc9344094a2122c,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/pdf/font.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/pdf/form.h,15059,91969646a2d9cead53f9be1d3e8cd8109023709572e9ef5556aa2cac5a57cdb2,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/pdf/form.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/pdf/image-rewriter.h,3565,d7999b657f43edcba6e4b8a527fc9301308a6f15b9513bb0f0f3590b1267361e,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/pdf/image-rewriter.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/pdf/interpret.h,20454,ceef021a047db71c924a7a7e4f487ab7646f547c9e83ca49018bc07e84cefb27,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/pdf/interpret.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/pdf/javascript.h,1823,342addf0d1bfaa23498a270456ef284f52189e9bd726570d8e525b3a840dc2e0,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/pdf/javascript.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/pdf/name-table.h,20702,8a2f379b0b899c5513a3e4eb8297ea0739db94b4f978fac2927e3b3cff38049f,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/pdf/name-table.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/pdf/object.h,20560,f82be0f1e231eff9caab3a612d1158a5c950b36533202ea584fca0180bf3bf07,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/pdf/object.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/pdf/page.h,12357,7dff7d128997e278a6165b6f166e0cb775cec187b825ffdbbe459b4296ad1a0c,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/pdf/page.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/pdf/parse.h,2581,b29d100caca46cf0d261f911384a4c097399d02e301e2316a2e114ebe2bbc12f,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/pdf/parse.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/pdf/recolor.h,1563,284afd1764a75be4b7a7ddae9d3291b6526d84a2375e5918f7168e014b871930,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/pdf/recolor.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/pdf/resource.h,6277,4a2f841f55af9809dce3bf0da4b8c0d45d7f7f8041180428a04beac65468d246,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/pdf/resource.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/pdf/xref.h,11942,f70fab2bc98ec0db670f6e81e8840dc5650d3d65fc16f7d2c2c508915b88c0f2,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/pdf/xref.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/pdf/zugferd.h,1616,99adf5e050ccdfb24576dab245830b8011bc171c339087911344e96cd5d44fcf,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/pdf/zugferd.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/pdf.h,1692,1b31e9a7ef52807a8ce361e52a778e3361644b616e0eb39ee44f9f3c10e646c8,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/pdf.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/ucdn.h,14378,872446ff16664050594bc1e6c2b4a95a35f5c1c9a65565430efa8c286235ca75,yes,research/_vendor/pymupdf/pymupdf/mupdf-devel/include/mupdf/ucdn.h,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdf-devel/lib/libmuthreads.lib,24968,,no,,suffix not included
-research/_vendor/pymupdf/pymupdf/mupdf-devel/lib/mupdfcpp64.lib,3806382,,no,,suffix not included
-research/_vendor/pymupdf/pymupdf/mupdf.py,2604453,be2567b4ccbe696d661b2fda1dd30a7e01460b822e51da1e215a641c0f5f8f3c,yes,research/_vendor/pymupdf/pymupdf/mupdf.py,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/mupdfcpp64.dll,25651200,,no,,suffix not included
-research/_vendor/pymupdf/pymupdf/py.typed,0,,no,,suffix not included
-research/_vendor/pymupdf/pymupdf/pymupdf.py,64,4e6040168b78f7ddf96f6ce4b0ddb59e6702a979b55704e62c38b9b430596352,yes,research/_vendor/pymupdf/pymupdf/pymupdf.py,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/table.py,95317,fde260d7c885eae39c65766107c80016956c4a91a9cd19eb82b64a724daf90b6,yes,research/_vendor/pymupdf/pymupdf/table.py,included source or reviewer file
-research/_vendor/pymupdf/pymupdf/utils.py,39718,cc172067fe277068a3abdb9c8886efbfacaabc9b261f82ecb686ecd85fb7622d,yes,research/_vendor/pymupdf/pymupdf/utils.py,included source or reviewer file
-research/_vendor/pymupdf/pymupdf-1.27.2.3.dist-info/COPYING,64,,no,,suffix not included
-research/_vendor/pymupdf/pymupdf-1.27.2.3.dist-info/INSTALLER,4,,no,,suffix not included
-research/_vendor/pymupdf/pymupdf-1.27.2.3.dist-info/METADATA,24032,,no,,suffix not included
-research/_vendor/pymupdf/pymupdf-1.27.2.3.dist-info/README.md,22771,4eef1b30b5195bef78def8405ce4842f0d218ffb932f25c33c669f01382ff8f6,yes,research/_vendor/pymupdf/pymupdf-1.27.2.3.dist-info/README.md,included source or reviewer file
-research/_vendor/pymupdf/pymupdf-1.27.2.3.dist-info/RECORD,12247,,no,,suffix not included
-research/_vendor/pymupdf/pymupdf-1.27.2.3.dist-info/REQUESTED,0,,no,,suffix not included
-research/_vendor/pymupdf/pymupdf-1.27.2.3.dist-info/WHEEL,85,,no,,suffix not included
-research/_vendor/pymupdf/pymupdf-1.27.2.3.dist-info/entry_points.txt,51,f4d707fc25641d5b8b3711354d86dfc17c0295590c70cf3dd133132770b97c30,yes,research/_vendor/pymupdf/pymupdf-1.27.2.3.dist-info/entry_points.txt,included source or reviewer file
+research/SUBMISSION_READINESS_SUMMARY.md,2095,ac6d64a7cad13a56549b26b6a8d517671b6fa7d43259d5da6c5dc7a0c603cae5,yes,research/SUBMISSION_READINESS_SUMMARY.md,included source or reviewer file
 research/aarch64_c_kernel_suite.c,5562,60e5d42ddaa7c87cb86d0c4aa5294724cbdd0672bcc84d99c53694e79090f617,yes,research/aarch64_c_kernel_suite.c,included source or reviewer file
 research/aarch64_cache_service_workload.c,10266,ea85c523e676df583118c1bbce43f670a8ae83cfd90867ccb70413e775a7123b,yes,research/aarch64_cache_service_workload.c,included source or reviewer file
 research/aarch64_dmp_oracle_probe.cc,5976,8cda00083259d8ac4da8a6293c60582453a1a71e69ad9b456d48f77796e65ff5,yes,research/aarch64_dmp_oracle_probe.cc,included source or reviewer file
@@ -297,13 +180,13 @@ research/bin/olden_health_aarch64_test,12128,,no,,suffix not included
 research/bin/olden_mst_aarch64_test,11496,,no,,suffix not included
 research/bin/yyjson_workload_host.exe,359168,,no,,suffix not included
 research/build_cache_service_workload_aarch64.py,1836,2f30f1b32810ae31dbd60d32ff30ee56e151c3a19abed29e01d47bc46fd1f688,yes,research/build_cache_service_workload_aarch64.py,included source or reviewer file
-research/build_copper_claim_evidence_matrix.py,64503,735db085f1245eafb6178f7a3f4cf7f34a87e4eb93c9a667597162a6f7bf509c,yes,research/build_copper_claim_evidence_matrix.py,included source or reviewer file
-research/build_copper_conference_docx.py,34053,e333066d5ddffab318971b87513196da9fab0f5cef4d0dfebba8ceaa91339657,yes,research/build_copper_conference_docx.py,included source or reviewer file
+research/build_copper_claim_evidence_matrix.py,63670,7fb9efac5695a0be923c9c32412dc9f8e3292ec672023e8a6442d32d94ead481,yes,research/build_copper_claim_evidence_matrix.py,included source or reviewer file
+research/build_copper_conference_docx.py,33696,e0be56b2a08312e86bf19970b2b017d02600003643111f4e05eb6ecaff8f9979,yes,research/build_copper_conference_docx.py,included source or reviewer file
 research/build_copper_full_docx.py,10224,9e186e6d5f7c47569eae28f385df0a09fd06a7b88fbe3931ad7876d600f06b69,yes,research/build_copper_full_docx.py,included source or reviewer file
-research/build_copper_public_artifact_manifest.py,17256,b9c4f92e6331d997ef47e9b7931ff101c9d59eaaecf2575b777090f9d37379bf,yes,research/build_copper_public_artifact_manifest.py,included source or reviewer file
-research/build_copper_public_artifact_package.py,6269,2538ab7f66a2e68eeebf89b07692f74eaa07473a15a48f6338fa5a38898e5072,yes,research/build_copper_public_artifact_package.py,included source or reviewer file
+research/build_copper_public_artifact_manifest.py,17487,2552ce0e1f55dbfe2ebda31ec7ac009b5132cbc5107001134540b3a701bde38f,yes,research/build_copper_public_artifact_manifest.py,included source or reviewer file
+research/build_copper_public_artifact_package.py,6517,364e88f74b380d78b8088d6e5a971a5c5039565c7e835f856d21e5f2603fa2b0,yes,research/build_copper_public_artifact_package.py,included source or reviewer file
 research/build_copper_review_pdf.py,9898,d6d7c9172a1d7fb1172293dfcc10c775152129fddfe1ec8987702384b8aee8b2,yes,research/build_copper_review_pdf.py,included source or reviewer file
-research/build_copper_scoop_conference_docx.py,42331,4fe39ec3b1b114cdaba2f8fd87aeec2e499e2eee61bee7a9209b16bee7f06da3,yes,research/build_copper_scoop_conference_docx.py,included source or reviewer file
+research/build_copper_scoop_conference_docx.py,42360,6def3809a27abfbe196c89a801f2af65a6023b9c134d85a87469b569e0fa0b1f,yes,research/build_copper_scoop_conference_docx.py,included source or reviewer file
 research/build_copper_tcp_process_clpd_replay.py,6750,78d9abe573633405ce01fdb598f3603618b54daed2ffef973759831c13abf01d,yes,research/build_copper_tcp_process_clpd_replay.py,included source or reviewer file
 research/build_copper_workload_clpd_replay.py,5217,028da7ef877f04b70645420ecf4b539a8f73854c1fdf2ebada1e0d0d2c8d30cc,yes,research/build_copper_workload_clpd_replay.py,included source or reviewer file
 research/build_dmp_oracle_probe_aarch64.py,1438,6a478551f37b271ef9e22508d9ccabf52d224fa01500f9e132ed710603dcad2e,yes,research/build_dmp_oracle_probe_aarch64.py,included source or reviewer file
@@ -474,8 +357,8 @@ research/paper/main.bbl,3095,,no,,suffix not included
 research/paper/main.blg,1063,,no,,suffix not included
 research/paper/main.fdb_latexmk,16214,,no,,suffix not included
 research/paper/main.fls,15260,,no,,suffix not included
-research/paper/main.log,20893,50d3e9f894294eb715ef0f77c5ed85cd57df7ce846aff85e1d734120b3b3d37b,yes,research/paper/main.log,included source or reviewer file
-research/paper/main.pdf,577854,c234c75c3e1062aaf32c61097f72c3c60320ce8655c92c0110fced709b5a862d,yes,research/paper/main.pdf,included source or reviewer file
+research/paper/main.log,20893,883160ade2d422eb821e239b569c236316430a30707908b02742ac9ce66766a8,yes,research/paper/main.log,included source or reviewer file
+research/paper/main.pdf,577854,e1064f0f699d2d8c245bfce9bafc330144ea7d3f5a809e22137527cff624a37a,yes,research/paper/main.pdf,included source or reviewer file
 research/paper/main.tex,25010,51c5a14107e5bc3386c2a5a9debc5aa1b273ec00b92595b50069a5d50f506e07,yes,research/paper/main.tex,included source or reviewer file
 research/paper/references.bib,3388,e581c0ca2dff62665870d0540d2e089032e51e9dea28c48b85372f01e8b50c27,yes,research/paper/references.bib,included source or reviewer file
 research/plot_copper_app_full_baseline_runtime.py,6449,55f542c872c48b0ba545599616744558f3d9e266c8badded676b3fcab1ea4fb6,yes,research/plot_copper_app_full_baseline_runtime.py,included source or reviewer file
@@ -488,13 +371,13 @@ research/results/COPPER_APPLICATION_WORKLOAD_PORTFOLIO_20260615.md,2974,9d8f9ad7
 research/results/COPPER_APPLICATION_WORKLOAD_PORTFOLIO_20260616.md,9583,1db54365d1d7a7a5e70bb47be4823ecc111e3f192227c5dfef04fac703bf470c,yes,research/results/COPPER_APPLICATION_WORKLOAD_PORTFOLIO_20260616.md,included summary/evidence file
 research/results/COPPER_APP_BASELINE_MATRIX_20260617.md,3451,bf087468bf83e721a0b86c3ba8dc1345fa4c2494dc0ce8d7289ce8c6b39a1f4a,yes,research/results/COPPER_APP_BASELINE_MATRIX_20260617.md,included summary/evidence file
 research/results/COPPER_ARTIFACT_AUDIT_20260615.md,1205,24867d29cfb0e5896e423a42dd01bb922986d6edaaba1503b1fdba58c2349884,yes,research/results/COPPER_ARTIFACT_AUDIT_20260615.md,included summary/evidence file
-research/results/COPPER_ARTIFACT_AUDIT_20260616.md,16958,cecdd3b366e5d8329b925148bde6aa7c18026e55e7a8266034640fe799ef8b7d,yes,research/results/COPPER_ARTIFACT_AUDIT_20260616.md,included summary/evidence file
+research/results/COPPER_ARTIFACT_AUDIT_20260616.md,16767,58cf8f2d57189932017e6ef27bb92b91b69b4fc8b4976d2c971591c375f5d8b2,yes,research/results/COPPER_ARTIFACT_AUDIT_20260616.md,included summary/evidence file
 research/results/COPPER_AUTHORITY_REGRESSION_SUMMARY.md,1669,8f941f4ffe82f95f9fe7cda7a4f4dbea1dafd8bcdb1c0c4a477d6bb8b7d3dc97,yes,research/results/COPPER_AUTHORITY_REGRESSION_SUMMARY.md,included summary/evidence file
 research/results/COPPER_AUTHORITY_STATE_SPACE.md,5728,94ce074230a62ae21ac2211a2a7eb54fa22c7a0a157218d138a0f8f35d578f4a,yes,research/results/COPPER_AUTHORITY_STATE_SPACE.md,included summary/evidence file
 research/results/COPPER_BACKEND_LSQ_PROOF_PATH_20260616.md,3928,903e85e189a8c3165f549396e600157af4bb68e81354628222b9bdb5d34766d4,yes,research/results/COPPER_BACKEND_LSQ_PROOF_PATH_20260616.md,included summary/evidence file
 research/results/COPPER_CAVI_AUTHORITY_ISSUE_GATE_RTL_SUMMARY.md,2600,15ddb12d81f17c197cada1a1962dd90e9656f2f7c05003531d5667b75f79c944,yes,research/results/COPPER_CAVI_AUTHORITY_ISSUE_GATE_RTL_SUMMARY.md,included summary/evidence file
 research/results/COPPER_CEPF_LINE_E2E_SVA_SUMMARY.md,1983,7e4596cba88dbf202958b61421eae7e89721859746adb58374d5315d7de62dc9,yes,research/results/COPPER_CEPF_LINE_E2E_SVA_SUMMARY.md,included summary/evidence file
-research/results/COPPER_CLAIM_EVIDENCE_MATRIX_20260617.md,17435,7334e17b1de7b3f2caeac83d41e7ad29f23cbe256c49eb7f7486856378b85440,yes,research/results/COPPER_CLAIM_EVIDENCE_MATRIX_20260617.md,included summary/evidence file
+research/results/COPPER_CLAIM_EVIDENCE_MATRIX_20260617.md,16538,9e59aea62b58ac2d58bfcae1410e0ba1e356d9d6e987e2703f76b8110c798095,yes,research/results/COPPER_CLAIM_EVIDENCE_MATRIX_20260617.md,included summary/evidence file
 research/results/COPPER_CLPD_ACTIVITY_POWER_20260619.md,3263,9670a99fa187fcf1d8e4e651b2368127c0c8239aba4c7d676fae21aa487ede41,yes,research/results/COPPER_CLPD_ACTIVITY_POWER_20260619.md,included summary/evidence file
 research/results/COPPER_CLPD_CTLW_AUTHORITY_E2E_SUMMARY.md,1947,e0b3b959d91e0beaffd146bac0a9fc894827a7af7f9a752970f1d5075c75f91f,yes,research/results/COPPER_CLPD_CTLW_AUTHORITY_E2E_SUMMARY.md,included summary/evidence file
 research/results/COPPER_CLPD_RTL_SUMMARY.md,2942,8a9c14dafbcb99e977a777362ff81c89daa7cc5a90383981dbf71601dcfec793,yes,research/results/COPPER_CLPD_RTL_SUMMARY.md,included summary/evidence file
@@ -526,15 +409,15 @@ research/results/COPPER_PRIOR_ART_DELTA_20260617.md,4474,78717440669650f4010b54f
 research/results/COPPER_PRIOR_ART_REFRESH_20260614.md,11523,a0524e55ed8f011bca5e348a2525ae5516de9c42c24e7360c61743c51cd41f22,yes,research/results/COPPER_PRIOR_ART_REFRESH_20260614.md,included summary/evidence file
 research/results/COPPER_PRIOR_ART_REFRESH_20260619.md,6450,cbb879d3be279bfd4e1cc505b49610bb69b4dd65dd4f58ebeb5d915f251d77a7,yes,research/results/COPPER_PRIOR_ART_REFRESH_20260619.md,included summary/evidence file
 research/results/COPPER_PRIOR_ART_UPDATE_20260615.md,7722,ed896c6a7aef8ef167d1eccdb96564ba7eb6d44dc460963d0b333ca70e6ef8cd,yes,research/results/COPPER_PRIOR_ART_UPDATE_20260615.md,included summary/evidence file
-research/results/COPPER_PRIOR_ART_UPDATE_20260616.md,6933,417d1782af05c9b516ef5ef59789c36acbb68a3707a5c4b1f7675bc5aa1635d9,yes,research/results/COPPER_PRIOR_ART_UPDATE_20260616.md,included summary/evidence file
+research/results/COPPER_PRIOR_ART_UPDATE_20260616.md,6954,5f99354626d285e8e752c8f55b1075718476dc305831675f23b44c667549944c,yes,research/results/COPPER_PRIOR_ART_UPDATE_20260616.md,included summary/evidence file
 research/results/COPPER_PUBLIC_APP_MEDIUM_SEED_SWEEP_20260617.md,2768,5774483c691e0bf561847c4d9a13b22ad0ea40fd55bb4b2a3e9aa413ce2436b2,yes,research/results/COPPER_PUBLIC_APP_MEDIUM_SEED_SWEEP_20260617.md,included summary/evidence file
 research/results/COPPER_PUBLIC_APP_REPEATED_SEED_PORTFOLIO_20260617.md,2150,aa47e0aa67435806567db536fba43d51368a143b641a8704ba56348567bd8fe3,yes,research/results/COPPER_PUBLIC_APP_REPEATED_SEED_PORTFOLIO_20260617.md,included summary/evidence file
 research/results/COPPER_PUBLIC_APP_STRESS_SEED_SWEEP_20260617.md,2329,e8dd402ccd65cce0ec5155c2817692b61492487d691ab00342288541780d8a38,yes,research/results/COPPER_PUBLIC_APP_STRESS_SEED_SWEEP_20260617.md,included summary/evidence file
-research/results/COPPER_PUBLIC_ARTIFACT_MANIFEST_20260620.md,3878,cba304061e093763c1141241dc7c3ecad50ecbaf2da40d255d961193daf491b6,yes,research/results/COPPER_PUBLIC_ARTIFACT_MANIFEST_20260620.md,included summary/evidence file
-research/results/COPPER_PUBLIC_ARTIFACT_PACKAGE_BUILD_20260620.md,1211,d9b68931b20b08c329b1e5ebff82dc6d1259a823ebad2201a36a3a4c2b2ffee7,yes,research/results/COPPER_PUBLIC_ARTIFACT_PACKAGE_BUILD_20260620.md,included summary/evidence file
+research/results/COPPER_PUBLIC_ARTIFACT_MANIFEST_20260620.md,4094,ea01f39397903d398f1aba6a8f8ed001e47f731584b4ed8b368b337b8d7e8bce,yes,research/results/COPPER_PUBLIC_ARTIFACT_MANIFEST_20260620.md,included summary/evidence file
+research/results/COPPER_PUBLIC_ARTIFACT_PACKAGE_BUILD_20260620.md,1447,e7d8ed509163626cfba5fd4d75294cdd6d28d633f7a0e4d9b16a991e35580a79,yes,research/results/COPPER_PUBLIC_ARTIFACT_PACKAGE_BUILD_20260620.md,included summary/evidence file
 research/results/COPPER_READINESS_AUDIT_20260614.md,5514,d368f3109916e6b0fce2fa54569459103096a8a2b6cc77bbfea42bedaa15d8fb,yes,research/results/COPPER_READINESS_AUDIT_20260614.md,included summary/evidence file
 research/results/COPPER_READINESS_AUDIT_20260615.md,6504,63eeac6409a6f0d9686684dd794b2a9f7305a0abfa56610e805946be46bbfccf,yes,research/results/COPPER_READINESS_AUDIT_20260615.md,included summary/evidence file
-research/results/COPPER_READINESS_AUDIT_20260616.md,12606,bdc98e1525f264c255b597545fffa7eaf2452df6706ac6447515cdda61bbd9df,yes,research/results/COPPER_READINESS_AUDIT_20260616.md,included summary/evidence file
+research/results/COPPER_READINESS_AUDIT_20260616.md,12646,1aef7ad79fa6d13878e1fc16c313f9120fe66f70efd76654d426eb670a2e8533,yes,research/results/COPPER_READINESS_AUDIT_20260616.md,included summary/evidence file
 research/results/COPPER_RESULTS.md,3765,ce66b64c7dc4664d6e67d6e60b3ee898f80806d4e1c1ad8069105f26a5be5ec5,yes,research/results/COPPER_RESULTS.md,included summary/evidence file
 research/results/COPPER_ROCCA_CLPD_COMMIT_ADAPTER_RTL_SUMMARY.md,2592,092ac8692ff41d6b4ccb6363e9f5c40e33b3189489f742de87c92cb55e2c0aeb,yes,research/results/COPPER_ROCCA_CLPD_COMMIT_ADAPTER_RTL_SUMMARY.md,included summary/evidence file
 research/results/COPPER_ROPL_LSQ_RETIRE_GUARD_RTL_SUMMARY.md,2700,08e774cbf1b3e13454ca4364885f13338f542a0cbeeab9f4d573eedc248c7ae2,yes,research/results/COPPER_ROPL_LSQ_RETIRE_GUARD_RTL_SUMMARY.md,included summary/evidence file
@@ -550,8 +433,8 @@ research/results/COPPER_SYNCHRONIZED_HARDWARE_EVIDENCE_REPORT.md,7502,212decf31c
 research/results/COPPER_TCP_PROCESS_CLPD_ACTIVITY_POWER_20260620.md,4158,97b707324800c8679cc7bb13bb2e99b941038c7e25b338362a8fd790d14d1336,yes,research/results/COPPER_TCP_PROCESS_CLPD_ACTIVITY_POWER_20260620.md,included summary/evidence file
 research/results/COPPER_TLB_COHERENCE_AUTHORITY_FILTER_RTL_SUMMARY.md,3062,036bd33cd1ea2b0a65aa286c1fa8948f1cddcb78ac6214f9d962c706d5444858,yes,research/results/COPPER_TLB_COHERENCE_AUTHORITY_FILTER_RTL_SUMMARY.md,included summary/evidence file
 research/results/COPPER_TLB_COHERENCE_CONTRACT.md,9125,e36572af2e024fca8d3e82ad316782c8e93b578e33df160795312cd32730041c,yes,research/results/COPPER_TLB_COHERENCE_CONTRACT.md,included summary/evidence file
-research/results/COPPER_TOP_TIER_GAP_TRACKER_20260619.md,20499,d7db2a762ab3448d1b41a9c40469b5be16ec14020949613fdda08287695d8e94,yes,research/results/COPPER_TOP_TIER_GAP_TRACKER_20260619.md,included summary/evidence file
-research/results/COPPER_TOP_TIER_GATE_AUDIT_20260617.md,4010,80deeb2705b0adf3b1d219c59716c9ffd95a7776ef0e8f160531c44efb37662b,yes,research/results/COPPER_TOP_TIER_GATE_AUDIT_20260617.md,included summary/evidence file
+research/results/COPPER_TOP_TIER_GAP_TRACKER_20260619.md,20561,e2cdb2b582143225605735586a765d4bfc43085fe0cc84ce57bd0d281b39fe20,yes,research/results/COPPER_TOP_TIER_GAP_TRACKER_20260619.md,included summary/evidence file
+research/results/COPPER_TOP_TIER_GATE_AUDIT_20260617.md,4037,b5aa72d0a38a6d08fe4664bc382764ac4ba5b44cb077e35d0aab889efc03caa6,yes,research/results/COPPER_TOP_TIER_GATE_AUDIT_20260617.md,included summary/evidence file
 research/results/COPPER_VIVADO_2025_2_TCLSTORE_TRIAGE.md,3212,,no,,excluded local-only file containing a private absolute path
 research/results/COPPER_WORKLOAD_CLPD_ACTIVITY_POWER_20260619.md,3653,9b5bbe4530237dd2df146df71a27441ea82a1ad660fa5031874a182156a78bef,yes,research/results/COPPER_WORKLOAD_CLPD_ACTIVITY_POWER_20260619.md,included summary/evidence file
 research/results/EXPAT_XML_FEASIBILITY_20260620.md,1710,833bfac179f1551114ed73b4f69c5ab6c4f74950d5822f294d060818cb6c988f,yes,research/results/EXPAT_XML_FEASIBILITY_20260620.md,included summary/evidence file
@@ -585,22 +468,21 @@ research/results/aarch64_gapbs_mini_suite_fs.s,24111,,no,,included summary/evide
 research/results/aarch64_gapbs_mini_suite_fs_small.s,20597,,no,,included summary/evidence file
 research/results/ablation.csv,11431,5121591a6b88d9308f397ca6444f1d32704bcd3c30b36aee5a0aa0ddf3d01ccd,yes,research/results/ablation.csv,included summary/evidence file
 research/results/artifact_inventory.csv,4716123,7865425005b7a606454fb7ea527d3a4df036107322cd8d15905fc81e252a352e,yes,research/results/artifact_inventory.csv,included summary/evidence file
-research/results/artifact_manifest.csv,1807264,22c71dc7e3a79244f13b7248a632ee18a975d28bf1f4bd486f020585d7be98a2,yes,research/results/artifact_manifest.csv,included summary/evidence file
 research/results/asic_power/core_wrapper_plus_copper/core_wrapper_plus_copper_nangate45.v,1337348,629c8890e3d747905c83c7945261b954e58646df7af3bcf5e1a08068cf67090e,yes,research/results/asic_power/core_wrapper_plus_copper/core_wrapper_plus_copper_nangate45.v,included summary/evidence file
 research/results/asic_power/core_wrapper_plus_copper/sta_power.tcl,506,,no,,excluded local-only file containing a private absolute path
 research/results/asic_power/nangate45/NangateOpenCellLibrary_typical.lib,6692032,,no,,included summary/evidence file
 research/results/asic_power.csv,1423,c1cc9e18556f34e3e1d96521139bd27b466bb400bf017e4d12cf771a51f6d10d,yes,research/results/asic_power.csv,included summary/evidence file
 research/results/asic_power_overhead.csv,412,aa4c6aed429372715c7295f6b7553530e848587f75caeee5a795235fb058a4b1,yes,research/results/asic_power_overhead.csv,included summary/evidence file
-research/results/authority_regression/run_copper_cepf_line_e2e_xsim.log,5176,de1284fdcb7e889420f17bd87bd155f27672cade11d139de745bcc2a81497b70,yes,research/results/authority_regression/run_copper_cepf_line_e2e_xsim.log,included summary/evidence file
-research/results/authority_regression/run_copper_clpd_ctlw_authority_e2e_xsim.log,6006,68d7a0a7ade621a5e57c99da833d13b7a95efabb1c49ac018c091112479a5a26,yes,research/results/authority_regression/run_copper_clpd_ctlw_authority_e2e_xsim.log,included summary/evidence file
-research/results/authority_regression/run_copper_clpd_xsim.log,4134,0fadb5ebeef3464c873dc162261be6ab84c91a619de233145038c66798aa64fe,yes,research/results/authority_regression/run_copper_clpd_xsim.log,included summary/evidence file
-research/results/authority_regression/run_copper_ctlw_full_authority_e2e_xsim.log,5256,b72c3d2526f620f2eb3324e231ce93e06a9e9120a52a9267c90c1f4f23301086,yes,research/results/authority_regression/run_copper_ctlw_full_authority_e2e_xsim.log,included summary/evidence file
-research/results/authority_regression/run_copper_ctlw_witness_xsim.log,4384,d4b36ef11b86d554a12c76eccd29d6dc3111adb496221d4d607475ea0da6bb0d,yes,research/results/authority_regression/run_copper_ctlw_witness_xsim.log,included summary/evidence file
-research/results/authority_regression/run_copper_full_authority_sva_xsim.log,4438,b6f92452648b048bd102c69e23af6172daab1bf7bb7793ea738d5c4999f51eb4,yes,research/results/authority_regression/run_copper_full_authority_sva_xsim.log,included summary/evidence file
-research/results/authority_regression/run_copper_full_authority_xsim.log,4706,aa9d8594014c8b60814aa60c5baaac40756193555e707dd8d084375a5d6079ce,yes,research/results/authority_regression/run_copper_full_authority_xsim.log,included summary/evidence file
-research/results/authority_regression/run_copper_sari_clpd_ctlw_authority_e2e_xsim.log,6614,5d169b164777e099320b979f28b5ef93208d31005105c4ca47963b23004ed0ff,yes,research/results/authority_regression/run_copper_sari_clpd_ctlw_authority_e2e_xsim.log,included summary/evidence file
-research/results/authority_regression/run_copper_sari_revoker_xsim.log,4132,28665579ea5ad14b7af106ea389572c57a265430b76db82e16898be24e3d24cc,yes,research/results/authority_regression/run_copper_sari_revoker_xsim.log,included summary/evidence file
-research/results/authority_regression/run_copper_sari_scoped_authority_e2e_xsim.log,6836,0449f4ef73b56721b6a55aed36097402f3246df49e206bbb322808f2730e7626,yes,research/results/authority_regression/run_copper_sari_scoped_authority_e2e_xsim.log,included summary/evidence file
+research/results/authority_regression/run_copper_cepf_line_e2e_xsim.log,5176,,no,,excluded local-only file containing a private absolute path
+research/results/authority_regression/run_copper_clpd_ctlw_authority_e2e_xsim.log,6006,,no,,excluded local-only file containing a private absolute path
+research/results/authority_regression/run_copper_clpd_xsim.log,4134,,no,,excluded local-only file containing a private absolute path
+research/results/authority_regression/run_copper_ctlw_full_authority_e2e_xsim.log,5256,,no,,excluded local-only file containing a private absolute path
+research/results/authority_regression/run_copper_ctlw_witness_xsim.log,4384,,no,,excluded local-only file containing a private absolute path
+research/results/authority_regression/run_copper_full_authority_sva_xsim.log,4438,,no,,excluded local-only file containing a private absolute path
+research/results/authority_regression/run_copper_full_authority_xsim.log,4706,,no,,excluded local-only file containing a private absolute path
+research/results/authority_regression/run_copper_sari_clpd_ctlw_authority_e2e_xsim.log,6614,,no,,excluded local-only file containing a private absolute path
+research/results/authority_regression/run_copper_sari_revoker_xsim.log,4132,,no,,excluded local-only file containing a private absolute path
+research/results/authority_regression/run_copper_sari_scoped_authority_e2e_xsim.log,6836,,no,,excluded local-only file containing a private absolute path
 research/results/baseline_inventory.csv,460,2b12222cb141fc6e4b249f7b0bede313dd4ae085335ed8544756603e4458efd8,yes,research/results/baseline_inventory.csv,included summary/evidence file
 research/results/bash_startprocess_probe.err,0,,no,,included summary/evidence file
 research/results/bash_startprocess_probe.out,0,,no,,included summary/evidence file
@@ -658,7 +540,7 @@ research/results/copper_amba_sari_authority_bridge_top_synth_28284.backup.log,22
 research/results/copper_amba_sari_authority_bridge_top_synth_power_proxy.rpt,8785,e53233550473eff6a2b7c7d0a0d04e6f4fcc028392ab8802023f2cff8a444ba1,yes,research/results/copper_amba_sari_authority_bridge_top_synth_power_proxy.rpt,included summary/evidence file
 research/results/copper_amba_sari_authority_bridge_top_timing.rpt,19795,abff9d389ed63a75eb8d1e3b472ee30044015d22d8e681dbc18a9861cceccc70,yes,research/results/copper_amba_sari_authority_bridge_top_timing.rpt,included summary/evidence file
 research/results/copper_amba_sari_authority_bridge_top_utilization.rpt,8663,31ce127a2deb17ed8252c0b2ae0cbaf9cf653289e4649c5e803025a95c5ed189,yes,research/results/copper_amba_sari_authority_bridge_top_utilization.rpt,included summary/evidence file
-research/results/copper_amba_sari_authority_bridge_xsim_20260616.log,6962,33171a4644c87044701ec06247120cb182aa7ec24928ac1c162613385d38f98e,yes,research/results/copper_amba_sari_authority_bridge_xsim_20260616.log,included summary/evidence file
+research/results/copper_amba_sari_authority_bridge_xsim_20260616.log,6962,,no,,excluded local-only file containing a private absolute path
 research/results/copper_amba_sari_frontdoor_regslice_synth.dcp,65428,,no,,excluded heavy or archive artifact
 research/results/copper_amba_sari_frontdoor_regslice_synth.jou,1430,,no,,excluded heavy or archive artifact
 research/results/copper_amba_sari_frontdoor_regslice_synth.log,18875,,no,,excluded local-only file containing a private absolute path
@@ -671,7 +553,7 @@ research/results/copper_amba_sari_frontdoor_synth.log,18611,,no,,excluded local-
 research/results/copper_amba_sari_frontdoor_synth_power_proxy.rpt,8382,63f34b61ed38d89a81d81b8039ce939be0d7fcb0a8cf2e2db20ff6d727b354cf,yes,research/results/copper_amba_sari_frontdoor_synth_power_proxy.rpt,included summary/evidence file
 research/results/copper_amba_sari_frontdoor_timing.rpt,8025,ac025511b7d4216e014f488aa56ce9e556dabbc378c82b5b3a4c3bef84279e85,yes,research/results/copper_amba_sari_frontdoor_timing.rpt,included summary/evidence file
 research/results/copper_amba_sari_frontdoor_utilization.rpt,8389,235f581d22c19ac66847c6222f57a31c2019f5dc0b00a36256b475e1e3627e9d,yes,research/results/copper_amba_sari_frontdoor_utilization.rpt,included summary/evidence file
-research/results/copper_amba_sari_frontdoor_xsim_20260616.log,4464,945347126a8758fa28a7319c3cb8b67ecdabb1e9e283be5e80d13bbc5d9b9963,yes,research/results/copper_amba_sari_frontdoor_xsim_20260616.log,included summary/evidence file
+research/results/copper_amba_sari_frontdoor_xsim_20260616.log,4464,,no,,excluded local-only file containing a private absolute path
 research/results/copper_amba_sari_frontdoor_xsim_20260620.log,1874,,no,,excluded local-only file containing a private absolute path
 research/results/copper_app_baseline_matrix_20260617.csv,1309,0b52f48616c1a02836fa30ca854cc1bcc4ec31cd475ebf18595fb0f3263baeff,yes,research/results/copper_app_baseline_matrix_20260617.csv,included summary/evidence file
 research/results/copper_cavi_authority_issue_gate_synth.dcp,1243848,,no,,excluded heavy or archive artifact
@@ -680,9 +562,9 @@ research/results/copper_cavi_authority_issue_gate_synth.log,21937,,no,,excluded 
 research/results/copper_cavi_authority_issue_gate_timing.rpt,20086,d80eff0c5ce19c96967eb3f03114ef32cf28db0a762469b9148587fc4aeddcbf,yes,research/results/copper_cavi_authority_issue_gate_timing.rpt,included summary/evidence file
 research/results/copper_cavi_authority_issue_gate_utilization.rpt,8653,c513217df17426bba8df582411c91eb525408a2e3a3ae53b09fa00c3247b1cfd,yes,research/results/copper_cavi_authority_issue_gate_utilization.rpt,included summary/evidence file
 research/results/copper_cavi_authority_issue_gate_xsim_20260620.log,1831,,no,,excluded local-only file containing a private absolute path
-research/results/copper_cepf_line_e2e_xsim.log,5176,6cbeb2e6cec4c3fe80eea5aca3fd94c533064fe797f4aaa71b77c5a66ac8b43e,yes,research/results/copper_cepf_line_e2e_xsim.log,included summary/evidence file
-research/results/copper_clpd_ctlw_authority_e2e_xsim.log,6006,8f768680844824946f598042ad6b138bdeb1732214ba26f58b4bfc00d44f6eaf,yes,research/results/copper_clpd_ctlw_authority_e2e_xsim.log,included summary/evidence file
-research/results/copper_clpd_ctlw_authority_e2e_xsim_20260614.log,6006,0d27e76203388bd12df724f331750c516d65d806aa2533dd0668f23a08c2c699,yes,research/results/copper_clpd_ctlw_authority_e2e_xsim_20260614.log,included summary/evidence file
+research/results/copper_cepf_line_e2e_xsim.log,5176,,no,,excluded local-only file containing a private absolute path
+research/results/copper_clpd_ctlw_authority_e2e_xsim.log,6006,,no,,excluded local-only file containing a private absolute path
+research/results/copper_clpd_ctlw_authority_e2e_xsim_20260614.log,6006,,no,,excluded local-only file containing a private absolute path
 research/results/copper_clpd_sram_activity_saif_xsim.log,2067,,no,,excluded local-only file containing a private absolute path
 research/results/copper_clpd_sram_activity_xelab.log,780,5b9e84cd42792b79e098fb5cfb7c1429674e86b1894e80f1c79e36e6553f3553,yes,research/results/copper_clpd_sram_activity_xelab.log,included summary/evidence file
 research/results/copper_clpd_sram_activity_xsim.log,2211,,no,,excluded local-only file containing a private absolute path
@@ -798,11 +680,11 @@ research/results/copper_clpd_tcp_process_replay_counts_20260620.svh,430,,no,,inc
 research/results/copper_clpd_workload_replay_counts_20260619.csv,371,66f55797e367ae6e56888c60e37f771bab46fb7d1f36e5e98bdd2a9d8e33683a,yes,research/results/copper_clpd_workload_replay_counts_20260619.csv,included summary/evidence file
 research/results/copper_clpd_workload_replay_counts_20260619.json,4619,a29be45be8ea332ab3fc3a4939125b3b74a320fec90e93ec73a5a8f3817beea2,yes,research/results/copper_clpd_workload_replay_counts_20260619.json,included summary/evidence file
 research/results/copper_clpd_workload_replay_counts_20260619.svh,428,,no,,included summary/evidence file
-research/results/copper_clpd_xsim.log,4134,4002e1aaab65d5a6794fca5b4c5ca2400a225786e54353f41c0efc420d9867b9,yes,research/results/copper_clpd_xsim.log,included summary/evidence file
-research/results/copper_clpd_xsim_20260614.log,4134,c28c0f82a62b58845b61dbe6e0f67c29c3d30cac49352d1e75db43cdbf62514d,yes,research/results/copper_clpd_xsim_20260614.log,included summary/evidence file
-research/results/copper_cs_sari_synth_attempt.log,2416,34763f39e1164014c507110386fe06431a43392c1e24079dc0e8d6efa740da0d,yes,research/results/copper_cs_sari_synth_attempt.log,included summary/evidence file
-research/results/copper_ctlw_full_authority_e2e_xsim.log,5256,7ff9d1ebf785d7f659781f150093599b7f2b96078d2f6f3f5f44751e6dcae852,yes,research/results/copper_ctlw_full_authority_e2e_xsim.log,included summary/evidence file
-research/results/copper_ctlw_witness_xsim.log,4384,85b4bf1166de6775b7263b16885b2cee28e5d60b36baaea453acdd76b02b4ff4,yes,research/results/copper_ctlw_witness_xsim.log,included summary/evidence file
+research/results/copper_clpd_xsim.log,4134,,no,,excluded local-only file containing a private absolute path
+research/results/copper_clpd_xsim_20260614.log,4134,,no,,excluded local-only file containing a private absolute path
+research/results/copper_cs_sari_synth_attempt.log,2416,,no,,excluded local-only file containing a private absolute path
+research/results/copper_ctlw_full_authority_e2e_xsim.log,5256,,no,,excluded local-only file containing a private absolute path
+research/results/copper_ctlw_witness_xsim.log,4384,,no,,excluded local-only file containing a private absolute path
 research/results/copper_docx_render_latest/contact_sheet.png,615778,38ee7a22bacd9cffc64399eb4f8fd2ff072edde220dff64d21d116c27ce10a54,yes,research/results/copper_docx_render_latest/contact_sheet.png,included summary/evidence file
 research/results/copper_docx_render_latest/edge_docx_page1.png,8940,b5308e9f574c24647ca297305f80442337b44c61fb499c9c1c47467c688cee07,yes,research/results/copper_docx_render_latest/edge_docx_page1.png,included summary/evidence file
 research/results/copper_docx_render_latest/pages/page_01.png,407255,5bc462cae6af6ba79672442462aed2ceca492ffc8cc70a9b71c52497c27a1039,yes,research/results/copper_docx_render_latest/pages/page_01.png,included summary/evidence file
@@ -820,7 +702,7 @@ research/results/copper_dram_energy_scorecard_20260618.csv,24798,c6054625784510d
 research/results/copper_energy_pollution_scorecard_20260617.csv,7704,9dbfe37bd1ffd1f1bb127831c4617c0f07e11ad6aa8c883e1df8809ff5cf072a,yes,research/results/copper_energy_pollution_scorecard_20260617.csv,included summary/evidence file
 research/results/copper_energy_pollution_weight_sensitivity_20260617.csv,955,eb83f4e43a8f43c27ea8ae2b1a9d0b0a359f98e7c5d972b19623645127215118,yes,research/results/copper_energy_pollution_weight_sensitivity_20260617.csv,included summary/evidence file
 research/results/copper_final_results.csv,110536,34fb17ef0dfed55356f970fc32270f474be519879e45a942cb6c3821fd63c391,yes,research/results/copper_final_results.csv,included summary/evidence file
-research/results/copper_full_authority_sva_xsim.log,4438,8fadd89251feef507b2fa40a8d44c1c9af7278d3342374a69299529b63096278,yes,research/results/copper_full_authority_sva_xsim.log,included summary/evidence file
+research/results/copper_full_authority_sva_xsim.log,4438,,no,,excluded local-only file containing a private absolute path
 research/results/copper_full_authority_synth_attempt.log,2260,434b45e5ee9d8c954aa487996e81d324a7a41941434cc0f73c5499c7ab092812,yes,research/results/copper_full_authority_synth_attempt.log,included summary/evidence file
 research/results/copper_full_authority_xsim.log,2357,,no,,excluded local-only file containing a private absolute path
 research/results/copper_full_docx_render_word/COPPER_CONFERENCE_DRAFT.pdf,70530,8e6b71b985eae371ff48d1415b30ea090b04cb6898f5acf810555768f6a2cd62,yes,research/results/copper_full_docx_render_word/COPPER_CONFERENCE_DRAFT.pdf,included summary/evidence file
@@ -846,21 +728,21 @@ research/results/copper_full_lsq_amba_authority_top_synth_33412.backup.log,24424
 research/results/copper_full_lsq_amba_authority_top_synth_power_proxy.rpt,8807,dbd7b19b6366c44f1ab6dd06cf8b2d4f350c4ccaf587b9b1f52b25b390c31e5b,yes,research/results/copper_full_lsq_amba_authority_top_synth_power_proxy.rpt,included summary/evidence file
 research/results/copper_full_lsq_amba_authority_top_timing.rpt,19647,8e75b9378026e37e3ed61872215adb6546d8cf899d3ae348b651742d2deffabb,yes,research/results/copper_full_lsq_amba_authority_top_timing.rpt,included summary/evidence file
 research/results/copper_full_lsq_amba_authority_top_utilization.rpt,8657,f17e8b4172331f9c72ce014bdfa301a194040ed2b3140c3956d8b11980e2b8bd,yes,research/results/copper_full_lsq_amba_authority_top_utilization.rpt,included summary/evidence file
-research/results/copper_full_lsq_amba_authority_xsim_20260616.log,8822,41ad85989a7a6b9fd079e4c4559f25f470d49c46527e313e5af2d8f56eb3288b,yes,research/results/copper_full_lsq_amba_authority_xsim_20260616.log,included summary/evidence file
+research/results/copper_full_lsq_amba_authority_xsim_20260616.log,8822,,no,,excluded local-only file containing a private absolute path
 research/results/copper_lsq_cepf_line_e2e_top_synth.dcp,676942,,no,,excluded heavy or archive artifact
 research/results/copper_lsq_cepf_line_e2e_top_synth.jou,1387,,no,,excluded heavy or archive artifact
 research/results/copper_lsq_cepf_line_e2e_top_synth.log,20603,,no,,excluded local-only file containing a private absolute path
 research/results/copper_lsq_cepf_line_e2e_top_synth_power_proxy.rpt,8649,be99239a6438da6182b571e90c74cc4e40b8846d6a82e5442b3984cc429491de,yes,research/results/copper_lsq_cepf_line_e2e_top_synth_power_proxy.rpt,included summary/evidence file
 research/results/copper_lsq_cepf_line_e2e_top_timing.rpt,19241,38a66c9e62f8d516179dda4aacde6584ba977feff3ca034ae6088cd3d32fb750,yes,research/results/copper_lsq_cepf_line_e2e_top_timing.rpt,included summary/evidence file
 research/results/copper_lsq_cepf_line_e2e_top_utilization.rpt,8645,fe841d613e89e4fe9f29582f19f59042560c413bf350b944c3be4dbd81755e67,yes,research/results/copper_lsq_cepf_line_e2e_top_utilization.rpt,included summary/evidence file
-research/results/copper_lsq_cepf_line_e2e_xsim_20260616.log,5856,2cde123e253ca5458c1eb431379f186f20902761d90214a3020a57f6af3f433a,yes,research/results/copper_lsq_cepf_line_e2e_xsim_20260616.log,included summary/evidence file
+research/results/copper_lsq_cepf_line_e2e_xsim_20260616.log,5856,,no,,excluded local-only file containing a private absolute path
 research/results/copper_lsq_source_tag_tracker_synth.dcp,115190,,no,,excluded heavy or archive artifact
 research/results/copper_lsq_source_tag_tracker_synth.jou,1394,,no,,excluded heavy or archive artifact
 research/results/copper_lsq_source_tag_tracker_synth.log,18340,,no,,excluded local-only file containing a private absolute path
 research/results/copper_lsq_source_tag_tracker_synth_power_proxy.rpt,8564,1234ac0243f4a69278cf3be0d171532638a335c8656cfe7f530d4e84519b35c6,yes,research/results/copper_lsq_source_tag_tracker_synth_power_proxy.rpt,included summary/evidence file
 research/results/copper_lsq_source_tag_tracker_timing.rpt,18186,a32c826b9139ba99814a7f77e6e4363c881690024d5833bf5e116337694b9867,yes,research/results/copper_lsq_source_tag_tracker_timing.rpt,included summary/evidence file
 research/results/copper_lsq_source_tag_tracker_utilization.rpt,8605,a331353001346c2ce5dff333b036b8185771328c241a53c13f69063a67b07f97,yes,research/results/copper_lsq_source_tag_tracker_utilization.rpt,included summary/evidence file
-research/results/copper_lsq_source_tag_tracker_xsim_20260616.log,4548,248ce7ccf0eb8bedf0169c832ac535db6b31c874b33669f98c0838f219c25f04,yes,research/results/copper_lsq_source_tag_tracker_xsim_20260616.log,included summary/evidence file
+research/results/copper_lsq_source_tag_tracker_xsim_20260616.log,4548,,no,,excluded local-only file containing a private absolute path
 research/results/copper_mcpat_sensitivity_20260618.csv,120815,9854a5b4085b0d2d19bf392cec7f73bcc9781cb7920b8437ee39ae019d848971,yes,research/results/copper_mcpat_sensitivity_20260618.csv,included summary/evidence file
 research/results/copper_metadata_toggle_bound_20260619.csv,522,717a437abfcf81ca45bcd4372685e74e170241c8f5308eef287ed7c827600bc2,yes,research/results/copper_metadata_toggle_bound_20260619.csv,included summary/evidence file
 research/results/copper_peb_synth.dcp,123149,,no,,excluded heavy or archive artifact
@@ -869,11 +751,11 @@ research/results/copper_peb_synth.log,16760,,no,,excluded local-only file contai
 research/results/copper_peb_synth_power_proxy.rpt,8563,ac4e1aa8e023c53d66235547efc1416fbcd03a5cda986f157f8dbb8a2cebf13f,yes,research/results/copper_peb_synth_power_proxy.rpt,included summary/evidence file
 research/results/copper_peb_timing.rpt,18459,bb445d53c45efd34008110c14d181cba1c1b137f98e70aed7559cdc24af6e0b6,yes,research/results/copper_peb_timing.rpt,included summary/evidence file
 research/results/copper_peb_utilization.rpt,8631,f60e4bd1c719585d40b23ba12f819a7286b7fb123eda032f78b8d9eb1c52d41a,yes,research/results/copper_peb_utilization.rpt,included summary/evidence file
-research/results/copper_peb_xsim.log,4280,615120cf0d4a0c5491981f8a409ed985139e8d1a73b71fc5e31a9a6e0c7aaa14,yes,research/results/copper_peb_xsim.log,included summary/evidence file
-research/results/copper_peb_xsim_20260615_rerun.log,4280,c39f4df5f609bd4d17e6c240558a1937ffebda287bc85f1684613542edc00322,yes,research/results/copper_peb_xsim_20260615_rerun.log,included summary/evidence file
+research/results/copper_peb_xsim.log,4280,,no,,excluded local-only file containing a private absolute path
+research/results/copper_peb_xsim_20260615_rerun.log,4280,,no,,excluded local-only file containing a private absolute path
 research/results/copper_prefetch_traffic_overhead_20260616.csv,41167,d37f42213e7f9e6e3f1aa517b113c1ffec8e3b7439acc5a6ce7dba22f36807ae,yes,research/results/copper_prefetch_traffic_overhead_20260616.csv,included summary/evidence file
-research/results/copper_public_artifact_manifest_20260620.csv,98914,29323bcb19ef3235b2170652642ef5691d9b7ec24b732eb00464b4b958e43678,yes,research/results/copper_public_artifact_manifest_20260620.csv,included summary/evidence file
-research/results/copper_public_artifact_manifest_20260620.sha256,68940,,no,,included summary/evidence file
+research/results/copper_public_artifact_manifest_20260620.csv,98914,d44c5aa8ed651e2ccd8c8ebb73ba8ad2be19db10a17440917b1b52d9668c9e5d,yes,research/results/copper_public_artifact_manifest_20260620.csv,included summary/evidence file
+research/results/copper_public_artifact_manifest_20260620.sha256,68940,7f370fe34fa9983194be8a29125d8bf044f05d9f006a5a3204dacf946375816f,yes,research/results/copper_public_artifact_manifest_20260620.sha256,included summary/evidence file
 research/results/copper_review_pdf_render/contact_sheet.png,1008912,4ae59e118baa0291a28e2ac13661cb85e36d1163ece28da19af2b084c56dade2,yes,research/results/copper_review_pdf_render/contact_sheet.png,included summary/evidence file
 research/results/copper_review_pdf_render/pages/page_01.png,443024,7260fa7a0d464bd48b6401d0fd0296e54084de6d3e1b91cb510e854c3db3a802,yes,research/results/copper_review_pdf_render/pages/page_01.png,included summary/evidence file
 research/results/copper_review_pdf_render/pages/page_02.png,289268,4ad6966e86da423f38a3d6226ea95187a8811e75fff52d014226e4abf639fcae,yes,research/results/copper_review_pdf_render/pages/page_02.png,included summary/evidence file
@@ -906,10 +788,10 @@ research/results/copper_ropl_lsq_retire_guard_top_utilization.rpt,8465,8da1183dc
 research/results/copper_ropl_lsq_retire_guard_xsim_20260620.log,1886,,no,,excluded local-only file containing a private absolute path
 research/results/copper_rtl_power_proxy_20260618.csv,4898,1bf0d87a5cc5e288809aef0c3e4dec5b01d064655a3b3e04f08665edf117f94c,yes,research/results/copper_rtl_power_proxy_20260618.csv,included summary/evidence file
 research/results/copper_rtl_power_proxy_manifest_20260618.csv,2569,c6554188fc0e9bc53ae32b1561ace56a7a00cb18c466f0b67edcb587ffec3b75,yes,research/results/copper_rtl_power_proxy_manifest_20260618.csv,included summary/evidence file
-research/results/copper_sari_clpd_ctlw_authority_e2e_xsim.log,6614,d9dee439ce47962f7cc2e5e2488b34d1f26940fdb9af5cf3dfb170ab90d4afd8,yes,research/results/copper_sari_clpd_ctlw_authority_e2e_xsim.log,included summary/evidence file
-research/results/copper_sari_revoker_xsim.log,4132,5eb7fa007f0e179c1da2d919202237ccb4eb8746c99953b5c8a46f10a6a0d8b8,yes,research/results/copper_sari_revoker_xsim.log,included summary/evidence file
-research/results/copper_sari_scoped_authority_e2e_xsim.log,6836,90e4233ffed23708a72fc0bee0c64672b5d337bf270c5ec9120b0fbfc179c8a6,yes,research/results/copper_sari_scoped_authority_e2e_xsim.log,included summary/evidence file
-research/results/copper_scoop_arbiter_xsim_20260615.log,4076,ad93b9088b8c0a9d27146596673c2a52e1ada3fd13401f5dc1414502932c78c2,yes,research/results/copper_scoop_arbiter_xsim_20260615.log,included summary/evidence file
+research/results/copper_sari_clpd_ctlw_authority_e2e_xsim.log,6614,,no,,excluded local-only file containing a private absolute path
+research/results/copper_sari_revoker_xsim.log,4132,,no,,excluded local-only file containing a private absolute path
+research/results/copper_sari_scoped_authority_e2e_xsim.log,6836,,no,,excluded local-only file containing a private absolute path
+research/results/copper_scoop_arbiter_xsim_20260615.log,4076,,no,,excluded local-only file containing a private absolute path
 research/results/copper_scoop_docx_render_word/export_progress.txt,242,05ba5a7ce7b25c7e9837ea2675fe69682ea993c131522a4baac386c14531f820,yes,research/results/copper_scoop_docx_render_word/export_progress.txt,included summary/evidence file
 research/results/copper_scoop_docx_word_export_pages/contact_sheet.png,903677,dc8474e252a22e9bd7402beb2231bbb88103e19d4aca87a598ddf0d100ae1104,yes,research/results/copper_scoop_docx_word_export_pages/contact_sheet.png,included summary/evidence file
 research/results/copper_scoop_docx_word_export_pages/pages/page_01.png,304278,67a105e7f28c1880e24bebfad9554c5aaec29a85367d8c240b78f95c849176b5,yes,research/results/copper_scoop_docx_word_export_pages/pages/page_01.png,included summary/evidence file
@@ -1011,8 +893,8 @@ research/results/gapbs_aarch64_official_build/cc.log,0,e3b0c44298fc1c149afbf4c89
 research/results/gapbs_aarch64_official_build/pr.log,0,e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855,yes,research/results/gapbs_aarch64_official_build/pr.log,included summary/evidence file
 research/results/gapbs_aarch64_official_build/sssp.log,0,e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855,yes,research/results/gapbs_aarch64_official_build/sssp.log,included summary/evidence file
 research/results/gapbs_aarch64_official_build/tc.log,0,e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855,yes,research/results/gapbs_aarch64_official_build/tc.log,included summary/evidence file
-research/results/gapbs_bfs_aarch64_compile_probe.txt,1164,36099416c5ed9b410e97334e4504f0921e179bada263d451398c1da871ae47ed,yes,research/results/gapbs_bfs_aarch64_compile_probe.txt,included summary/evidence file
-research/results/gapbs_bfs_aarch64_compile_probe_lld.txt,1596,e618474068ced63cf5f4faa59202d4e6c9fdf076d5feb1cdb68d5db0bfdf2510,yes,research/results/gapbs_bfs_aarch64_compile_probe_lld.txt,included summary/evidence file
+research/results/gapbs_bfs_aarch64_compile_probe.txt,1164,,no,,excluded local-only file containing a private absolute path
+research/results/gapbs_bfs_aarch64_compile_probe_lld.txt,1596,,no,,excluded local-only file containing a private absolute path
 research/results/gapbs_copper_kernel_sensitivity/GAPBS_COPPER_KERNEL_SENSITIVITY.md,3079,bd6924adfa3ef2637d8d727a2fc54855eda8ae94d1bf1fdeed8f4ae4b588fafe,yes,research/results/gapbs_copper_kernel_sensitivity/GAPBS_COPPER_KERNEL_SENSITIVITY.md,included summary/evidence file
 research/results/gapbs_copper_kernel_sensitivity/gapbs_copper_kernel_sensitivity.csv,561120,97b4b975c4f1f33e89325245b92ddc6696be493cb422d16c57185ea9db47e5a2,yes,research/results/gapbs_copper_kernel_sensitivity/gapbs_copper_kernel_sensitivity.csv,included summary/evidence file
 research/results/gapbs_copper_kernel_trace/GAPBS_COPPER_KERNEL_TRACE_SUMMARY.md,3001,a88dace2be54f965b548588682443caf7d8b21e1512ba0fe25a8a67830d86d7b,yes,research/results/gapbs_copper_kernel_trace/GAPBS_COPPER_KERNEL_TRACE_SUMMARY.md,included summary/evidence file
@@ -9877,7 +9759,7 @@ research/results/gem5_build_msys.pid,6,,no,,excluded raw gem5 output tree; summa
 research/results/gem5_build_msys_linkfail_20260610_015157.err,123306,,no,,excluded raw gem5 output tree; summaries are included
 research/results/gem5_build_msys_linkfail_20260610_015157.log,308903,,no,,excluded local-only file containing a private absolute path
 research/results/gem5_copper_build_msys.err,0,,no,,excluded raw gem5 output tree; summaries are included
-research/results/gem5_copper_build_msys.log,10032,,no,,excluded raw gem5 output tree; summaries are included
+research/results/gem5_copper_build_msys.log,10032,,no,,excluded local-only file containing a private absolute path
 research/results/gem5_copper_build_msys.pid,0,,no,,excluded raw gem5 output tree; summaries are included
 research/results/gem5_copper_copper/citations.bib,4664,,no,,excluded raw gem5 output tree; summaries are included
 research/results/gem5_copper_copper/config.ini,22342,,no,,excluded raw gem5 output tree; summaries are included
@@ -9925,7 +9807,7 @@ research/results/gem5_copper_none_med/stats.txt,121698,,no,,excluded raw gem5 ou
 research/results/gem5_copper_none_med.err,544,,no,,excluded raw gem5 output tree; summaries are included
 research/results/gem5_copper_none_med.log,760,,no,,excluded local-only file containing a private absolute path
 research/results/gem5_copper_probe.err,0,,no,,excluded raw gem5 output tree; summaries are included
-research/results/gem5_copper_probe.log,1060,,no,,excluded raw gem5 output tree; summaries are included
+research/results/gem5_copper_probe.log,1060,,no,,excluded local-only file containing a private absolute path
 research/results/gem5_copper_stride/citations.bib,4664,,no,,excluded raw gem5 output tree; summaries are included
 research/results/gem5_copper_stride/config.ini,22692,,no,,excluded raw gem5 output tree; summaries are included
 research/results/gem5_copper_stride/config.json,57482,,no,,excluded local-only file containing a private absolute path
@@ -9984,9 +9866,9 @@ research/results/gem5_med_pageperm_stride.err,544,,no,,excluded raw gem5 output 
 research/results/gem5_med_pageperm_stride.log,776,,no,,excluded local-only file containing a private absolute path
 research/results/gem5_memory_traffic.csv,92001,54e320210bf9d96345ba4b74cbb826589ba55d27dbed68283c93c170f3d24a57,yes,research/results/gem5_memory_traffic.csv,included generated gem5 summary/evidence csv
 research/results/gem5_objects_probe.err,0,,no,,excluded raw gem5 output tree; summaries are included
-research/results/gem5_objects_probe.log,1204,,no,,excluded raw gem5 output tree; summaries are included
+research/results/gem5_objects_probe.log,1204,,no,,excluded local-only file containing a private absolute path
 research/results/gem5_objects_probe_cpu.err,0,,no,,excluded raw gem5 output tree; summaries are included
-research/results/gem5_objects_probe_cpu.log,2944,,no,,excluded raw gem5 output tree; summaries are included
+research/results/gem5_objects_probe_cpu.log,2944,,no,,excluded local-only file containing a private absolute path
 research/results/gem5_pageperm_copper/citations.bib,4664,,no,,excluded raw gem5 output tree; summaries are included
 research/results/gem5_pageperm_copper/config.ini,22351,,no,,excluded raw gem5 output tree; summaries are included
 research/results/gem5_pageperm_copper/config.json,56724,,no,,excluded local-only file containing a private absolute path
@@ -10373,7 +10255,7 @@ research/results/logs/openroad_postroute/core_wrapper_plus_copper/results/6_fina
 research/results/logs/openroad_postroute/full_core_baseline/orfs_make.log,113,5b5a0608cdfc3ad8829f09fed4040c8949e18fcec576696056a1c04673c75f4b,yes,research/results/logs/openroad_postroute/full_core_baseline/orfs_make.log,included summary/evidence file
 research/results/logs/openroad_postroute/full_core_plus_copper/orfs_make.log,113,5b5a0608cdfc3ad8829f09fed4040c8949e18fcec576696056a1c04673c75f4b,yes,research/results/logs/openroad_postroute/full_core_plus_copper/orfs_make.log,included summary/evidence file
 research/results/logs/openroad_postroute/openroad_postroute_availability.log,62,f9910061b60b69d0cd965daf9f4e654a83c59a5ee8b8e91889d349dd55e6a1f1,yes,research/results/logs/openroad_postroute/openroad_postroute_availability.log,included summary/evidence file
-research/results/logs/paper/build_paper.log,184,794ab7c8a6fbb853e1a3aa706241355e8d06f1f12bf22a4414d1899a2d5345e3,yes,research/results/logs/paper/build_paper.log,included summary/evidence file
+research/results/logs/paper/build_paper.log,32427,dcdf2e99a7b3ca20783633986284f023cf03b81fcd163ff9c82184abce0d3c07,yes,research/results/logs/paper/build_paper.log,included summary/evidence file
 research/results/logs/rtl/iverilog_copper_prefetch_unit_open.log,0,e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855,yes,research/results/logs/rtl/iverilog_copper_prefetch_unit_open.log,included summary/evidence file
 research/results/logs/rtl/vvp_copper_prefetch_unit_open_tb.log,221,,no,,excluded local-only file containing a private absolute path
 research/results/logs/synthesis/nextpnr_ecp5_baseline_prefetch_unit.log,75702,,no,,excluded local-only file containing a private absolute path
@@ -10887,7 +10769,7 @@ research/results/sqlite_speedtest1_build/build.log,0,e3b0c44298fc1c149afbf4c8996
 research/results/start_process_bash_test.err,0,,no,,included summary/evidence file
 research/results/start_process_bash_test.out,53,,no,,included summary/evidence file
 research/results/statistical_summary.csv,130515,4f4459e78cc8953de3409617d12e0910be83e16307265d6aeee764781f8d1cae,yes,research/results/statistical_summary.csv,included summary/evidence file
-research/results/stronger_claim_audit.csv,81781,b868223560db6f8e1c875f7d77da2c1952383616d8a07337b551be9623e40dab,yes,research/results/stronger_claim_audit.csv,included summary/evidence file
+research/results/stronger_claim_audit.csv,151433,ecab97dfa6f98d9db9be8527af14a3fe6bca23621b6f1b37009f95f1504c20f2,yes,research/results/stronger_claim_audit.csv,included summary/evidence file
 research/results/synthesis.csv,7500,3f153d9a2c8f4d987cd7da877c5182aca51b1a580170f04660438d10c1223e73,yes,research/results/synthesis.csv,included summary/evidence file
 research/results/synthesis_logs/yosys_baseline_prefetch_unit.log,25,986a5d1dc17909a60035ec9494b8916f2d2e5d044501d7d098b0d3854a450b6a,yes,research/results/synthesis_logs/yosys_baseline_prefetch_unit.log,included summary/evidence file
 research/results/synthesis_logs/yosys_copper_prefetch_gate.log,25,986a5d1dc17909a60035ec9494b8916f2d2e5d044501d7d098b0d3854a450b6a,yes,research/results/synthesis_logs/yosys_copper_prefetch_gate.log,included summary/evidence file
@@ -11073,15 +10955,15 @@ research/run_zstd_app_fs.sh,2166,,no,,excluded local-only file containing a priv
 research/scoop_companion_state_space.py,4243,6e6aa03dc7cfd08cc7481603a578ac544b38c7a5d3678d106cb1d4c74db327b2,yes,research/scoop_companion_state_space.py,included source or reviewer file
 research/scripts/audit_claims.py,1641,cb359de924e64d38c1a5ab31e7b45f95169eff2951c17b6dcc94c075b579d0a8,yes,research/scripts/audit_claims.py,included source or reviewer file
 research/scripts/audit_numbers.py,2151,59a53db7527ea0c06543bf4c39ce5bca28ea8365bb2517a4da120a7dbecc9eeb,yes,research/scripts/audit_numbers.py,included source or reviewer file
-research/scripts/audit_stronger_claims.py,13954,8847fef59869f59e6af459cf7501ea4bc63b229b714e64a40781f2d283d1740b,yes,research/scripts/audit_stronger_claims.py,included source or reviewer file
+research/scripts/audit_stronger_claims.py,15674,85f2b30f058e6134768ce3c6fbd3a8ed0c05f917caba8c2146f961a237d68047,yes,research/scripts/audit_stronger_claims.py,included source or reviewer file
 research/scripts/audit_todos.py,1221,4ee4563c9dc961dd4493690e904dbb2863357374976c6530a6df972b313e748e,yes,research/scripts/audit_todos.py,included source or reviewer file
-research/scripts/build_conference_docs.py,110371,a523843794da50635b64961539fc796c054ce2d6d758f5620384d011ab3f7108,yes,research/scripts/build_conference_docs.py,included source or reviewer file
+research/scripts/build_conference_docs.py,110543,f4bc0975e13e041897219d599c0bed830a7cfa8c5204590e32e50c3dbe30974b,yes,research/scripts/build_conference_docs.py,included source or reviewer file
 research/scripts/build_paper.py,8677,8b7ce80df04358c56536704f7015af85e1c4b6245de6934d04219729977838c4,yes,research/scripts/build_paper.py,included source or reviewer file
 research/scripts/build_workloads.py,6377,8120b2e9a571a7d7519e7ff9f2f4f405f1df8bc09bde748d6006923d2b90423d,yes,research/scripts/build_workloads.py,included source or reviewer file
 research/scripts/check_toolchain.py,8410,3f873413e2021c7305c1463bf39649e1b35d81fe950ba83f323be2ca31a32a54,yes,research/scripts/check_toolchain.py,included source or reviewer file
 research/scripts/copper_eval_model.py,16546,09fdd920664a1d995418f40ab2d1b5b4f292d3e1ca2fa0bb16e305e52809d1cb,yes,research/scripts/copper_eval_model.py,included source or reviewer file
 research/scripts/import_ci_artifacts.py,21268,87734dade9e17802bea59081b7b79b8e9a8ecc69a1fca63f23be8b4fe63c5987,yes,research/scripts/import_ci_artifacts.py,included source or reviewer file
-research/scripts/package_artifact.py,9553,6ca0e9c13cb15baaa2e52ab387cc1b7e805cfe603872dd28a9a521018895507d,yes,research/scripts/package_artifact.py,included source or reviewer file
+research/scripts/package_artifact.py,10287,52ea760a22e4a50ff08202b79ea44b792e04f4fa2fbe025c15b5b19a26e5268f,yes,research/scripts/package_artifact.py,included source or reviewer file
 research/scripts/record_gem5_raw_rerun_manifest.py,35152,56d5285314b7f24713ede784afbc0b71fbe25af5c6dd4956cd6a5a77e7501103,yes,research/scripts/record_gem5_raw_rerun_manifest.py,included source or reviewer file
 research/scripts/run_asic_power.py,19655,cc45927ca7b4e060b7fe86148ae5439c70c16d1e715da6eb1555ccdc8e81de3d,yes,research/scripts/run_asic_power.py,included source or reviewer file
 research/scripts/run_core_eval.py,12180,62e50395eaf25c34ee4478a8eb9ce70e4388e89c5ce4d409f38590bcff708532,yes,research/scripts/run_core_eval.py,included source or reviewer file
@@ -11181,7 +11063,7 @@ research/traces/paper_adversarial.csv,2669,639008873b8c6b762e681682a39ecd86b35a6
 research/traces/paper_primary.csv,469844,2eb3c354f39cd6df57b955be97015f6e905aa7f3586b7c4e0673c79b09afd1ae,yes,research/traces/paper_primary.csv,included source or reviewer file
 research/traces/synthetic.csv,469844,2eb3c354f39cd6df57b955be97015f6e905aa7f3586b7c4e0673c79b09afd1ae,yes,research/traces/synthetic.csv,included source or reviewer file
 research/traces/synthetic_recheck.csv,469844,2eb3c354f39cd6df57b955be97015f6e905aa7f3586b7c4e0673c79b09afd1ae,yes,research/traces/synthetic_recheck.csv,included source or reviewer file
-research/verify_copper_artifacts.py,81193,432fc6b22d20cf9af2c9944cf657df311c919f48abe2efc50c6f9b70d1da1f58,yes,research/verify_copper_artifacts.py,included source or reviewer file
+research/verify_copper_artifacts.py,81265,d0dd7224510ac76924bb99f8398f2a37c5317c407666b73c844b60786739ea6a,yes,research/verify_copper_artifacts.py,included source or reviewer file
 research/vivado_read_saif_help.tcl,21,b1a71c708dd14bf4bf490a61f10651901c0e351ebf8961f3abad006bc8256fd3,yes,research/vivado_read_saif_help.tcl,included source or reviewer file
 research/vivado_read_vcd_help.tcl,20,c3cf3ba89d37efcce908be64c14eb35fa69073e4d4be1fdb5388d89b12af309c,yes,research/vivado_read_vcd_help.tcl,included source or reviewer file
 research/vivado_tclapp_probe.tcl,1379,e20d54028569924416c7f73c4bbe19b4fb59c7f3758a586c54f55672d44c8747,yes,research/vivado_tclapp_probe.tcl,included source or reviewer file

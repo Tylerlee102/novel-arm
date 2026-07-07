@@ -4,7 +4,7 @@ Date: 2026-06-17
 
 ## Current Verdict
 
-**Focused-conference plausible; top-tier not guaranteed.**
+**Evidence-bounded regular-conference or artifact-track candidate; acceptance is not guaranteed.**
 
 The project is materially stronger than the 2026-06-15 state. The biggest
 improvement is that SCOOP is no longer just a plausible hybrid idea: it now has

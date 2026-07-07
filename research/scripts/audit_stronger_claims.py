@@ -10,7 +10,9 @@ manifest or generated power index row.
 from __future__ import annotations
 
 import csv
+import html
 import re
+import zipfile
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Callable
@@ -19,6 +21,13 @@ from typing import Callable
 ROOT = Path(__file__).resolve().parents[2]
 RESULTS = ROOT / "research" / "results"
 OUT = RESULTS / "stronger_claim_audit.csv"
+PY_CLAIM_SURFACES = {
+    "build_conference_docs.py",
+    "build_copper_claim_evidence_matrix.py",
+    "build_copper_conference_docx.py",
+    "build_copper_full_docx.py",
+    "build_copper_scoop_conference_docx.py",
+}
 
 ALLOW_CONTEXT = re.compile(
     r"\b("
@@ -158,6 +167,16 @@ def sota_efficiency_evidence(root: Path) -> tuple[bool, str]:
     return False, "no comparable asic_signoff/measured_silicon PASS row with a normalized metric and artifact"
 
 
+def fresh_literature_audit_evidence(root: Path) -> tuple[bool, str]:
+    rows = read_rows(root, "research/results/literature_priority_audit.csv")
+    if not rows:
+        return False, "missing research/results/literature_priority_audit.csv"
+    for row in rows:
+        if row.get("status") == "PASS" and row.get("claim_scope", "").strip().lower() == "priority":
+            return True, "literature_priority_audit.csv has PASS priority scope"
+    return False, "no PASS priority-scope row in literature_priority_audit.csv"
+
+
 @dataclass(frozen=True)
 class ClaimPolicy:
     term: str
@@ -221,7 +240,26 @@ POLICIES = [
         "power_report_index.csv measured_silicon PASS row with positive power_mw and existing report",
         measured_silicon_power_evidence,
     ),
+    ClaimPolicy(
+        "priority novelty",
+        re.compile(r"\bfirst\s+public\b|\bfirst\s+public\s+DMP\s+defen[cs]e\b|\bpublication[- ]level\s+novelty\b", re.I),
+        "fresh literature-priority audit with claim_scope=priority",
+        fresh_literature_audit_evidence,
+    ),
 ]
+
+
+def read_claim_surface(path: Path) -> str:
+    if path.suffix.lower() != ".docx":
+        return path.read_text(encoding="utf-8", errors="ignore")
+    try:
+        with zipfile.ZipFile(path) as zf:
+            xml = zf.read("word/document.xml").decode("utf-8", errors="ignore")
+    except (KeyError, OSError, zipfile.BadZipFile):
+        return ""
+    xml = re.sub(r"</w:p>", "\n", xml)
+    xml = re.sub(r"<[^>]+>", " ", xml)
+    return html.unescape(xml)
 
 
 def default_documents(root: Path) -> list[Path]:
@@ -236,7 +274,10 @@ def default_documents(root: Path) -> list[Path]:
         if not base.exists():
             continue
         for path in base.rglob("*"):
-            if path.is_file() and path.suffix.lower() in {".md", ".tex"} and "results" not in path.parts:
+            if not path.is_file() or "results" in path.parts:
+                continue
+            suffix = path.suffix.lower()
+            if suffix in {".md", ".tex", ".docx"} or (suffix == ".py" and path.name in PY_CLAIM_SURFACES):
                 candidates.append(path)
     return sorted(set(path for path in candidates if path.exists()))
 
@@ -268,16 +309,17 @@ def audit(root: Path = ROOT, documents: list[Path] | None = None) -> tuple[list[
     evidence_cache = {policy.term: policy.checker(root) for policy in POLICIES}
 
     for path in documents:
-        text = path.read_text(encoding="utf-8", errors="ignore")
+        text = read_claim_surface(path)
         previous_line = ""
         in_forbidden_section = False
         for lineno, line in enumerate(text.splitlines(), 1):
             stripped = line.strip()
-            if re.match(r"#+\s+claims\s+still\s+forbidden\b", stripped, re.I):
+            heading_probe = stripped.strip('",')
+            if re.match(r"#+\s+claims\s+still\s+forbidden\b", heading_probe, re.I):
                 in_forbidden_section = True
-            elif stripped.startswith("#") and "claims still forbidden" not in stripped.lower():
+            elif heading_probe.startswith("#") and "claims still forbidden" not in heading_probe.lower():
                 in_forbidden_section = False
-            row_is_forbidden = "| forbidden |" in line.lower()
+            row_is_forbidden = "| forbidden |" in line.lower() or "forbidden unless" in line.lower()
             for policy in POLICIES:
                 for match in policy.pattern.finditer(line):
                     term_seen.add(policy.term)

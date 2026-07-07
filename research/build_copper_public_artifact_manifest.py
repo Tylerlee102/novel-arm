@@ -346,7 +346,7 @@ def main() -> None:
         "",
         "Date: 2026-06-20",
         "",
-        "Purpose: define a practical reviewer-facing artifact package for the current COPPER paper state. This generated manifest lists paper-facing documents, source/reproduction files, and explicitly cited evidence artifacts with sizes and SHA-256 hashes. It does not claim top-tier acceptance or replace the full local results tree.",
+        "Purpose: define a compact reviewer-facing materialization map for the current COPPER paper state. This generated manifest lists paper-facing documents, source/reproduction files, and explicitly cited evidence artifacts with sizes and SHA-256 hashes. It does not claim top-tier acceptance, replace the full local results tree, or define the exact contents of `dist/copper-artifact.zip`.",
         "",
         "## Package Summary",
         "",
@@ -376,7 +376,7 @@ def main() -> None:
         ]
     )
     meaning = {
-        "include-in-minimal-package": "Small or central artifacts that should be copied directly into a public package.",
+        "include-in-minimal-package": "Small or central artifacts for the compact local materialization check.",
         "external-store-with-hash": "Large raw artifacts that should be hosted separately or made optional, with this manifest providing hashes.",
     }
     for rec in sorted(by_recommendation):
@@ -426,7 +426,8 @@ def main() -> None:
             "- The manifest is generated from the current claim matrix, reproduction guide, final output, full paper, and top-level research source files.",
             "- It intentionally separates direct-package files from optional heavy raw evidence.",
             "- Generated public-manifest and package-build output files are excluded from the hashed entry table to avoid self-referential checksums.",
-            "- A public artifact release should copy the direct-package files, preserve relative paths, and either host or omit heavy raw evidence according to reviewer artifact-size limits.",
+            "- `research/results/copper_public_artifact_package_20260620/` is a local compact materialization check and is not embedded as a directory inside `dist/copper-artifact.zip`.",
+            "- A public artifact release should preserve relative paths for direct-package files and either host or omit heavy raw evidence according to reviewer artifact-size limits.",
             "- The full local `research/results` tree is still the authoritative internal evidence store; this file is a packaging map.",
             "",
             f"status={status}",

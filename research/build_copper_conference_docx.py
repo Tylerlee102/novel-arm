@@ -242,10 +242,7 @@ def build() -> None:
         "pointer-shaped DMP issues 40 prefetches, none useful, and 30 "
         "translation-faulted recursive attempts; pre-PASB COPPER still permits "
         "5 faulting candidates; PASB-COPPER blocks all 102 pointer-shaped "
-        "unproven candidates with zero translation faults. Larger generated full-system ROIs then show CTLW-terminal COPPER at -0.531% ticks on page-permuted pointers and -0.271% on random pointers, with zero recursive translation faults and about 15k unproven candidates blocked per run. A generated full-system AArch64 graph-gather control gives COPPER-CTLW -0.367% ticks, 8,660 blocked unproven candidates, and zero translation faults, while stride wins because the edge array is sequential. LLVM/clang C suites add graph/hash/tree/fake-pointer and GAPBS-inspired graph kernels; COPPER blocks 679 unproven candidates on the first suite, 952 on GAPBS-mini, and 1,340 on a larger 1024-node/degree-8/3-pass GAPBS-inspired run, all with zero translation faults. Bounded checkers pass the full rule, including a richer 11,419-state CEPF/PASB/CTLW authority search, a 24,354-state CLPD search, and a 7,555-state CS-SARI/CLPD/CTLW composition search, while weakened variants fail; full-authority and CEPF-line SVA harnesses pass 10,000 randomized assertion samples each, CTLW witness, CTLW-to-full-authority, CLPD-CTLW, SARI, and CS-SARI revocation RTL pass randomized XSIM checks, and a source-backed coverage matrix passes for ten modeled unsafe classes. To the best of public knowledge, "
-        "COPPER is the first "
-        "public DMP defense to use committed pointer provenance plus address-space and target-line witnesses as the "
-        "authority for recursive data-driven prefetch."
+        "unproven candidates with zero translation faults. Larger generated full-system ROIs then show CTLW-terminal COPPER at -0.531% ticks on page-permuted pointers and -0.271% on random pointers, with zero recursive translation faults and about 15k unproven candidates blocked per run. A generated full-system AArch64 graph-gather control gives COPPER-CTLW -0.367% ticks, 8,660 blocked unproven candidates, and zero translation faults, while stride wins because the edge array is sequential. LLVM/clang C suites add graph/hash/tree/fake-pointer and GAPBS-inspired graph kernels; COPPER blocks 679 unproven candidates on the first suite, 952 on GAPBS-mini, and 1,340 on a larger 1024-node/degree-8/3-pass GAPBS-inspired run, all with zero translation faults. Bounded checkers pass the full rule, including a richer 11,419-state CEPF/PASB/CTLW authority search, a 24,354-state CLPD search, and a 7,555-state CS-SARI/CLPD/CTLW composition search, while weakened variants fail; full-authority and CEPF-line SVA harnesses pass 10,000 randomized assertion samples each, CTLW witness, CTLW-to-full-authority, CLPD-CTLW, SARI, and CS-SARI revocation RTL pass randomized XSIM checks, and a source-backed coverage matrix passes for ten modeled unsafe classes. The defensible contribution is the committed pointer-provenance authority rule for recursive data-driven prefetch, not a priority claim."
     )
 
     doc.add_heading("1. Problem and Thesis", level=1)
@@ -491,7 +488,7 @@ def build() -> None:
 
     doc.add_heading("9. Reviewer Risk Assessment", level=1)
     add_bullets(doc, [
-        "Synthetic workloads: ARM gem5 integration is stronger than a toy model and the ARM64 full-system path now boots Linux and runs native AArch64 pointer, graph-gather, compiled C, and small/larger GAPBS-inspired timing ROIs with the prefetcher attached, and GAPBS-backed topology replay plus kernel sensitivity now tests proof behavior on generated graph structure, but COPPER speedup is still measured on controlled/static binaries rather than official full-system AArch64 GAP/SPEC/crypto runs.",
+        "Gem5 scope: validated ARM-system summaries and retained raw-run manifests provide full-system AArch64 evidence for rows marked PASS, but the package must not present this as a complete raw-run GAP/SPEC/crypto campaign.",
         "Backend proof path: a production core needs measured load-store-queue or dependency-tag integration to identify committed pointer-source words.",
         "First-use loss: COPPER intentionally cannot prefetch through a source word before committed proof exists.",
         "Industry secrecy: commercial DMP safety rules may exist without public documentation, so claims must remain public-knowledge scoped.",
@@ -507,16 +504,16 @@ def build() -> None:
             ["Feasibility", "8/10", "Trace model, RTL simulation/synthesis, gem5 cache-model integration, and ARM64 full-system timing ROI all run locally."],
             ["Measurability", "8/10", "Unsafe prefetch counts, demand MSHR misses, translated prefetches, and timing are measurable."],
             ["Hardware cost", "7.5/10", "Core gate is cheap; CLPD storage proxy is strong; backend proof tracking and fresh CLPD synthesis remain open."],
-            ["Paper strength", "8/10 workshop, 9.2/10 focused conference", "Strong mechanism, full-system CTLW timing plus witness, consumer-gate, CLPD-CTLW, SARI/CS-SARI RTL, graph/C/small-larger GAPBS-mini controls, expanded kernel sensitivity, CLPD capacity/storage/checker evidence, composition and sensitivity checks, SVA evidence, security audit, and richer bounded checker; real applications remain missing."],
+            ["Paper strength", "Evidence-bounded regular submission candidate", "Strong mechanism, full-system CTLW timing plus witness, consumer-gate, CLPD-CTLW, SARI/CS-SARI RTL, graph/C/small-larger GAPBS-mini controls, expanded kernel sensitivity, CLPD capacity/storage/checker evidence, composition and sensitivity checks, SVA evidence, security audit, and richer bounded checker; broader raw-run coverage remains open."],
         ],
         [1800, 1500, 6060],
     )
     add_paragraph(
         doc,
-        "Final verdict: workshop-strong now; main-conference plausible but not "
-        "yet safe for a top PhD architecture/security venue. The remaining "
-        "weakness is real-application full-system COPPER-CTLW timing, not the "
-        "basic ARM64/Linux execution, graph/C controls, GAPBS-backed topology replay, prefetcher-attachment, bounded invariant check, CLPD capacity fix, or translation-witness consumer path."
+        "Final verdict: evidence-bounded regular-conference or artifact-track candidate, "
+        "not an acceptance guarantee. The remaining "
+        "weaknesses are broader raw-run workload coverage and production-grade integration, "
+        "not the basic ARM64/Linux execution, graph/C controls, GAPBS-backed topology replay, prefetcher-attachment, bounded invariant check, CLPD capacity fix, or translation-witness consumer path."
     )
 
     doc.add_heading("11. Remaining Evidence Gates", level=1)

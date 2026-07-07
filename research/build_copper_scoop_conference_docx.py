@@ -249,7 +249,7 @@ def build() -> None:
     doc.add_heading("Abstract", level=1)
     paragraph(
         doc,
-        "Data-memory-dependent prefetchers (DMPs) can accelerate irregular pointer-heavy code, but Augury and GoFetch show that pointer-looking data can also trigger secret-dependent cache activity even when software never uses that data as an address. COPPER changes the DMP authority model: a data-derived prefetch may issue only when committed execution has proven the exact source word as a pointer source, the source remains clean, the address-space/protection token matches, and recursive cross-page targets have committed target-line witnesses. This paper adds SCOOP, Slack-only COPPER Companion Prefetching, which runs COPPER as a content-derived companion beside a conventional primary prefetcher; the primary has strict issue priority and COPPER issues only in slack cycles. In AArch64 full-system gem5, unsafe DMP emits 32,760 extra prefetches when a secret bit changes data words from high-bit junk to heap addresses. COPPER and SCOOP reduce the unauthorized scan-phase allowed-candidate delta to zero; a split scan/probe audit shows unsafe DMP leaks before the observer probe, while COPPER/SCOOP block the scan-phase candidates. A 12-point SQLite/Lua/Duktape/yyjson plus JSON+SQLite and cache-service app matrix shows SPP is the best conventional baseline, while SCOOP stays within 0.360 percentage points worst-case and preserves COPPER's authority checks and zero translation faults; a 15-point public-engine seed portfolio cuts naive CTLW misses by 90.706%. A 22-point gem5-counter scorecard gives standalone COPPER an 18.8% lower base-weighted mean pollution proxy than naive DMP, with 18.1%-20.6% lower results across six checked weight scenarios, and quantifies SCOOP's incremental traffic over SPP. Vivado XSim and bounded checkers verify SCOOP arbitration plus OoO-LSQ and TLB/coherence contracts; the TLB/coherence issue filter passes 27 directed plus 10,000 randomized XSim checks and synthesizes with WNS +6.898 ns. To the best of public knowledge, COPPER/SCOOP is the first public DMP defense to make committed pointer provenance the authority for recursive content-derived prefetching while coexisting with conventional address-correlation prefetchers.",
+        "Data-memory-dependent prefetchers (DMPs) can accelerate irregular pointer-heavy code, but Augury and GoFetch show that pointer-looking data can also trigger secret-dependent cache activity even when software never uses that data as an address. COPPER changes the DMP authority model: a data-derived prefetch may issue only when committed execution has proven the exact source word as a pointer source, the source remains clean, the address-space/protection token matches, and recursive cross-page targets have committed target-line witnesses. This paper adds SCOOP, Slack-only COPPER Companion Prefetching, which runs COPPER as a content-derived companion beside a conventional primary prefetcher; the primary has strict issue priority and COPPER issues only in slack cycles. In AArch64 full-system gem5, unsafe DMP emits 32,760 extra prefetches when a secret bit changes data words from high-bit junk to heap addresses. COPPER and SCOOP reduce the unauthorized scan-phase allowed-candidate delta to zero; a split scan/probe audit shows unsafe DMP leaks before the observer probe, while COPPER/SCOOP block the scan-phase candidates. A 12-point SQLite/Lua/Duktape/yyjson plus JSON+SQLite and cache-service app matrix shows SPP is the best conventional baseline, while SCOOP stays within 0.360 percentage points worst-case and preserves COPPER's authority checks and zero translation faults; a 15-point public-engine seed portfolio cuts naive CTLW misses by 90.706%. A 22-point gem5-counter scorecard gives standalone COPPER an 18.8% lower base-weighted mean pollution proxy than naive DMP, with 18.1%-20.6% lower results across six checked weight scenarios, and quantifies SCOOP's incremental traffic over SPP. Vivado XSim and bounded checkers verify SCOOP arbitration plus OoO-LSQ and TLB/coherence contracts; the TLB/coherence issue filter passes 27 directed plus 10,000 randomized XSim checks and synthesizes with WNS +6.898 ns. The current related-work record did not identify a public DMP mechanism with this exact committed-provenance authority rule, but the paper must not make a priority claim without a fresh literature-priority audit.",
     )
 
     doc.add_heading("1. Problem and Thesis", level=1)
@@ -266,7 +266,7 @@ def build() -> None:
         [
             "Security goal: no content-derived prefetch from data-at-rest, stale, cross-domain, or permission-invalid source words.",
             "Non-goal: hiding legitimate architectural memory accesses or proving all software constant-time.",
-            "Positioning: COPPER is a safe authority layer for content-derived prefetching; SCOOP composes it with conventional address-stream prefetchers.",
+            "Positioning: COPPER is a committed-provenance authority layer for content-derived prefetching; SCOOP composes it with conventional address-stream prefetchers.",
         ],
     )
 
@@ -341,7 +341,7 @@ def build() -> None:
     )
     paragraph(
         doc,
-        "All gem5 full-system rows used in the new security portfolio complete with `rc=0` and checksum validation. The paper reports conventional prefetchers where they are stronger: DCPT/SPP/AMPM often beat standalone COPPER on raw timing. That does not invalidate the contribution because those baselines do not provide a safe authority rule for content-derived DMP candidates. It does force the paper to avoid a universal performance claim.",
+        "All gem5 full-system rows used in the new security portfolio complete with `rc=0` and checksum validation. The paper reports conventional prefetchers where they are stronger: DCPT/SPP/AMPM often beat standalone COPPER on raw timing. That does not invalidate the contribution because those baselines do not provide the same committed-provenance authority rule for content-derived DMP candidates. It does force the paper to avoid a universal performance claim.",
     )
 
     doc.add_heading("6. Security Evidence", level=1)
@@ -373,7 +373,7 @@ def build() -> None:
         doc,
         ["Ablation", "Observed failure", "Lesson"],
         [
-            ["Naive DMP", "Secret-dependent PF and allowed deltas; observer L1D miss reduction", "Address-shaped data is not safe authority."],
+            ["Naive DMP", "Secret-dependent PF and allowed deltas; observer L1D miss reduction", "Address-shaped data is not committed authority."],
             ["COPPER without boundary", "Warm proof state can leak into fake-only measurement", "A provenance epoch boundary is needed around security domains/ROIs."],
             ["Companion-first/round-robin SCOOP variants", "Bounded checker finds immediate primary-ready violations", "Strict primary priority is the hybrid invariant."],
             ["Source-only provenance", "Earlier trace sweeps permit stale rewritten-slot issues", "Value/epoch and clean-since-proof lifecycle matter."],
@@ -427,7 +427,7 @@ def build() -> None:
     doc.add_heading("8. Result Interpretation", level=1)
     paragraph(
         doc,
-        "The results create a deliberately asymmetric story. On security, unsafe DMP gives large, repeatable secret-dependent signals and COPPER/SCOOP remove the unauthorized scan-phase issue. On performance, conventional address-correlation prefetchers often remain best. A strong submission should not hide that asymmetry. It should argue that modern cores already deploy multiple prefetchers, and that a safe content-derived lane should be judged by whether it admits DMP-like candidates without violating the software address-generation contract.",
+        "The results create a deliberately asymmetric story. On security, unsafe DMP gives large, repeatable secret-dependent signals and COPPER/SCOOP remove the unauthorized scan-phase issue. On performance, conventional address-correlation prefetchers often remain best. A strong submission should not hide that asymmetry. It should argue that modern cores already deploy multiple prefetchers, and that a proof-gated content-derived lane should be judged by whether it admits DMP-like candidates without violating the software address-generation contract.",
     )
     paragraph(
         doc,
@@ -439,7 +439,7 @@ def build() -> None:
     )
     paragraph(
         doc,
-        "The remaining performance question is where safe content-derived prefetching has enough natural demand to matter beyond controlled heaps and pointer structures. Public engines exercise realistic allocators and object/table behavior, but a top-tier evaluation would still want SPEC-like C/C++ applications, language-runtime workloads at larger scale, and crypto-adjacent code where DMP leakage risk is concrete. The present evidence is enough to make the architecture/security claim credible; it is not enough to claim a universal speedup.",
+        "The remaining performance question is where proof-gated content-derived prefetching has enough natural demand to matter beyond controlled heaps and pointer structures. Public engines exercise realistic allocators and object/table behavior, but a top-tier evaluation would still want SPEC-like C/C++ applications, language-runtime workloads at larger scale, and crypto-adjacent code where DMP leakage risk is concrete. The present evidence is enough to make the architecture/security claim credible; it is not enough to claim a universal speedup.",
     )
 
     doc.add_heading("9. RTL, Models, and Cost", level=1)
@@ -473,7 +473,7 @@ def build() -> None:
         [
             ["Augury / GoFetch", "DMP side-channel threat", "Attacks/reverse engineering; no committed source-word authority defense."],
             ["SplittingSecrets", "DMP defense", "Compiler transforms secrets; COPPER changes hardware authority."],
-            ["PreFence / DIT / DOIT", "Disable or schedule around prefetch risk", "Coarse policy; COPPER is per-candidate and keeps safe activity."],
+            ["PreFence / DIT / DOIT", "Disable or schedule around prefetch risk", "Coarse policy; COPPER is per-candidate and keeps authorized activity."],
             ["Pointer-chase, indirect, ICP", "Irregular prefetch performance", "Do not require clean committed pointer-source proof for issue."],
             ["CHERI / MTE / taint", "Metadata and provenance", "Architectural safety or information-flow tracking, not DMP-specific positive authority."],
         ],
@@ -501,7 +501,7 @@ def build() -> None:
     )
     paragraph(
         doc,
-        "The paper also needs careful language around acceptance probability. The artifact is substantially stronger after the full-system oracles, public engine workloads including yyjson and JSON+SQLite, repeated SQLite/Lua/Duktape medium/stress layouts, SCOOP hybrid, Vivado arbiter check, OoO-LSQ and TLB/coherence contract checkers, and seed sweep. That still does not make a top-tier PhD conference acceptance guaranteed. Top-tier reviewers may require SPEC-like applications, production-quality backend and memory-system proof paths, and stronger energy/pollution analysis. The current honest verdict is focused-conference plausible and workshop-strong, with a credible path to a larger submission.",
+        "The paper also needs careful language around acceptance probability. The artifact is substantially stronger after the full-system oracles, public engine workloads including yyjson and JSON+SQLite, repeated SQLite/Lua/Duktape medium/stress layouts, SCOOP hybrid, Vivado arbiter check, OoO-LSQ and TLB/coherence contract checkers, and seed sweep. That still does not make conference acceptance guaranteed. Reviewers may require SPEC-like applications, production-quality backend and memory-system proof paths, and stronger energy/pollution analysis. The current honest verdict is evidence-bounded regular-conference or artifact-track candidate, with a credible path to a larger submission.",
     )
 
     doc.add_heading("12. Reproducibility Package", level=1)

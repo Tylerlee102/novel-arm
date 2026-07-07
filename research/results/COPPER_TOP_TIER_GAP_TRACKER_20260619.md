@@ -72,11 +72,11 @@ Purpose: track the remaining gap between the current local COPPER package and a 
 - Added `research/results/COPPER_PUBLIC_ARTIFACT_PACKAGE_BUILD_20260620.md`: materialized the direct-package rows plus generated metadata into a 589-file local reviewer package with 0 missing files and 0 hash mismatches.
 - Added `research/results/LUA_DUKTAPE_MEDIUM_STRESS_SEED_STABILITY_20260619.md` for Lua/Duktape medium/stress language-engine seed stability.
 - Added `research/results/YYJSON_MEDIUM_STRESS_SEED_STABILITY_20260619.md` for yyjson medium/stress parser-engine seed stability.
-- Preserved the honest gate result: `FOCUSED_CONFERENCE_READY__TOP_TIER_NEEDS_MORE_EVIDENCE`.
+- Preserved the honest gate result: `EVIDENCE_BOUNDED_SUBMISSION_READY__ACCEPTANCE_NOT_GUARANTEED`.
 
 ## Current Verdict
 
-The project is stronger than a workshop-only sketch and now has a credible focused-conference package. It is still not honest to say "guaranteed top-tier." The strongest path toward that bar is not more prose; it is one of:
+The project is an evidence-bounded regular-conference or artifact-track candidate. It is still not honest to say "guaranteed top-tier" or to widen the claims beyond the evidence levels. The strongest path toward stronger production/silicon claims is not more prose; it is one of:
 
 1. A broader public workload campaign with naturally pointer-rich behavior.
 2. A production-style backend/SoC integration proof that closes the LSQ/TLB/coherence criticism.

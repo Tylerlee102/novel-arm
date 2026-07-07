@@ -9,15 +9,15 @@ prefetching, and content-directed prefetcher patents.
 
 ## Updated Claim Boundary
 
-The safest novelty claim is **not** "first DMP defense." That claim is now too
-broad because SplittingSecrets is a 2026 compiler-based DMP defense. The
-defensible COPPER claim is narrower:
+The safest novelty claim is **not** a "first DMP defense" or priority claim.
+That claim is too broad because SplittingSecrets is a 2026 compiler-based DMP
+defense. The defensible COPPER claim is a narrower distinction:
 
-> To the best of public knowledge, COPPER is the first public hardware DMP
-> authority mechanism that permits content-derived dereference only from
-> committed source-word pointer provenance, bound to address-space authority,
-> and, for recursive cross-page targets, an exact committed target-line
-> translation witness.
+> The current public-literature pass did not identify another DMP authority
+> mechanism that permits content-derived dereference only from committed
+> source-word pointer provenance, bound to address-space authority, and, for
+> recursive cross-page targets, an exact committed target-line translation
+> witness.
 
 SARI-RQ should be treated as an implementation/timing structure for the SoC
 revocation path, not as the paper's core novelty.

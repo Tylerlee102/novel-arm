@@ -45,6 +45,7 @@ INCLUDE_SUFFIXES = {
     ".png",
     ".pdf",
     ".udp",
+    ".sha256",
 }
 EXCLUDE_SUFFIXES = {".dcp", ".wdb", ".vcd", ".saif", ".jou", ".pb", ".zip", ".gz", ".tar"}
 EXCLUDE_PARTS = {
@@ -62,6 +63,7 @@ EXCLUDE_PARTS = {
     "pass_top_tier_before",
     "ppa_ci_before",
     "copper_public_artifact_package_20260620",
+    "_vendor",
 }
 PRIVATE_PATH_PATTERNS = {
     "C:" + "\\Users\\tyboy",
@@ -148,10 +150,29 @@ def contains_private_path(path: Path) -> bool:
     if path.suffix.lower() not in INCLUDE_SUFFIXES and path.name not in {"Makefile", "Dockerfile", "README.md", "requirements.txt", "LICENSE"}:
         return False
     try:
-        text = path.read_text(encoding="utf-8", errors="replace")
+        body = path.read_bytes()
     except OSError:
         return False
+    text_candidates: list[str] = []
+    for encoding in ("utf-8", "utf-16", "utf-16-le", "utf-16-be"):
+        try:
+            text_candidates.append(body.decode(encoding, errors="ignore"))
+        except (LookupError, UnicodeError):
+            continue
+    text_candidates.extend(text.replace("\x00", "") for text in list(text_candidates))
+    return any(pattern in text for text in text_candidates for pattern in PRIVATE_PATH_PATTERNS)
+
+
+def text_has_private_path(text: str) -> bool:
     return any(pattern in text for pattern in PRIVATE_PATH_PATTERNS)
+
+
+def public_text_from_file(path: Path) -> str | None:
+    try:
+        text = path.read_text(encoding="utf-8", errors="replace")
+    except OSError:
+        return None
+    return public_cell(text)
 
 
 def public_cell(text: str) -> str:
@@ -252,6 +273,8 @@ def main() -> int:
         if base.exists():
             candidates.extend(path for path in base.rglob("*") if path.is_file() and not is_excluded_tree(path))
     for path in sorted(set(candidates)):
+        if path == MANIFEST:
+            continue
         include, note = should_include(path)
         row = {
             "path": rel(path),

@@ -2,19 +2,20 @@
 
 Date: 2026-06-20
 
-Purpose: materialize the generated COPPER public artifact manifest into a compact reviewer-facing package. This is an artifact-portability check, not a claim of top-tier acceptance.
+Purpose: materialize the generated COPPER public artifact manifest into a compact local reviewer-facing package tree. This is an artifact-portability check, not a claim of top-tier acceptance and not the exact contents of `dist/copper-artifact.zip`.
 
 ## Package Build Summary
 
 - Manifest rows read: 589
 - Direct-package rows copied: 587
-- Direct-package row bytes copied: 6,221,006
+- Direct-package row bytes copied: 6,219,713
 - Generated metadata files copied: 4
 - Package files present: 591
 - Heavy external-store rows not copied: 2
 - Missing files: 0
 - Hash mismatches: 0
 - Output directory: `research/results/copper_public_artifact_package_20260620`
+- Final zip bundle: `dist/copper-artifact.zip` is built separately by `research/scripts/package_artifact.py` and does not embed this output directory as a nested tree.
 
 ## Generated Metadata Included
 

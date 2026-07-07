@@ -22,7 +22,7 @@ Regular conference paper with an artifact/reproducibility package. The paper sho
 
 ## Exact CI Run
 
-Last imported CI evidence: GitHub Actions run 28321186683 imported at 20260628_051002. The final post-push GitHub Actions run must pass before submission.
+Last imported artifact evidence: GitHub Actions run 28321186683 imported at 20260628_051002. Final release evidence is the GitHub Actions run for the submitted commit; attach that run URL at submission time.
 
 ## Artifact Path
 
@@ -41,4 +41,4 @@ Last imported CI evidence: GitHub Actions run 28321186683 imported at 20260628_0
 
 ## Recommendation
 
-Submit as an evidence-bounded regular conference or artifact-track package after the post-change CI run is attached.
+Submit as an evidence-bounded regular conference or artifact-track package after the final main-branch CI run for the submitted commit is attached.

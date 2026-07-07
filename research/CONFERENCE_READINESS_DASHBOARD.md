@@ -4,7 +4,7 @@ This dashboard is intentionally strict. PASS means the current artifact has repr
 
 Local Windows is editing-only. GitHub Actions/Codespaces/Docker is the intended evidence environment for open-source hardware and paper gates.
 
-Final submission status from `research/results/top_tier_gate_status.csv`: SUBMISSION-READY. This dashboard certifies the evidence-bounded COPPER conference package: CI-proven RTL simulation, raw gem5 full-system provenance where indexed, independent simulator evidence, accepted-core-wrapper or PicoRV32 tiny-SoC full-core mapped FPGA PPA where generated PASS rows exist, and tool-estimated/proxy power with explicit caveats. It does not authorize production ARM/OoO integration, measured silicon power, ASIC/foundry signoff, state-of-the-art performance, or broad production-readiness claims.
+Final submission status from `research/results/top_tier_gate_status.csv`: SUBMISSION-READY. This dashboard records the evidence-bounded COPPER conference package: CI-proven RTL simulation, raw gem5 full-system provenance where indexed, independent simulator evidence, accepted-core-wrapper or PicoRV32 tiny-SoC full-core mapped FPGA PPA where generated PASS rows exist, and tool-estimated/proxy power with explicit caveats. It does not authorize production ARM/OoO integration, measured silicon power, ASIC/foundry signoff, state-of-the-art performance, or broad production-readiness claims.
 
 | Gate | Required for full submission? | Current status | Evidence file/script | Pass condition | Blocker |
 | --- | --- | --- | --- | --- | --- |

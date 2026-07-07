@@ -190,7 +190,7 @@ def main() -> None:
             [
                 "official GAPBS AArch64 full-system scaling",
                 "Backend proof path",
-                "Focused-conference plausible; top-tier not guaranteed",
+                "Evidence-bounded regular-conference or artifact-track candidate",
                 "medium/stress SQLite/Lua/Duktape seed portfolio",
                 "yyjson medium/stress",
                 "OoO-LSQ proof-contract checker",
@@ -202,8 +202,8 @@ def main() -> None:
         contains(
             RESULTS / "COPPER_CLAIM_EVIDENCE_MATRIX_20260617.md",
             [
-                "C1 | COPPER/SCOOP is plausibly novel",
-                "C10 | The current package is focused-conference plausible but not guaranteed top-tier",
+                "C1 | COPPER/SCOOP is positioned as a distinct public DMP authority mechanism",
+                "C10 | The current package is an evidence-bounded regular conference or artifact-track candidate",
                 "TLB/coherence authority contract",
                 "matching TLB/coherence RTL filter",
                 "COPPER_ENERGY_POLLUTION_SCORECARD_20260617.md",
@@ -247,7 +247,7 @@ def main() -> None:
         contains(
             RESULTS / "COPPER_TOP_TIER_GATE_AUDIT_20260617.md",
             [
-                "FOCUSED_CONFERENCE_READY__TOP_TIER_NEEDS_MORE_EVIDENCE",
+                "EVIDENCE_BOUNDED_SUBMISSION_READY__ACCEPTANCE_NOT_GUARANTEED",
                 "NEAR_MISS_NOT_GUARANTEED",
                 "SPEC-like application or production-service/production-TCP-TLS/standard-crypto-benchmark campaign",
             ],
@@ -909,7 +909,7 @@ def main() -> None:
                 "OPENSSL_TCP_PROCESS_METADATA_TOGGLE_BOUND_20260620.md",
                 "OPENSSL_TCP_PROCESS_SEED_STABILITY_20260620.md",
                 "ossltlstcp_TCP_FALLBACK_PROBE_FS_SUMMARY.md",
-                "FOCUSED_CONFERENCE_READY__TOP_TIER_NEEDS_MORE_EVIDENCE",
+                "EVIDENCE_BOUNDED_SUBMISSION_READY__ACCEPTANCE_NOT_GUARANTEED",
                 "status=PASS",
             ],
         ),
@@ -1355,8 +1355,8 @@ def main() -> None:
             RESULTS / "COPPER_MCPAT_SENSITIVITY_20260618.md",
             [
                 "Generated rows: 130; successful McPAT rows: 130.",
-                "| copper_clpd64k_peb | 26 | -0.338% | -0.625%",
-                "| naive | 26 | -0.322% | -0.608%",
+                "| copper_clpd64k_peb | 26 | -0.338% | -0.321%",
+                "| naive | 26 | -0.322% | -0.304%",
                 "McPAT total runtime energy: copper_clpd64k_peb <= naive on 12/26",
             ],
         ),

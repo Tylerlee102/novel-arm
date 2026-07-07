@@ -53,8 +53,8 @@ def evidence_status(evidence: Evidence) -> tuple[bool, str]:
 CLAIMS = (
     Claim(
         "C1",
-        "COPPER/SCOOP is plausibly novel as a public DMP authority mechanism.",
-        "To the best of public knowledge, COPPER/SCOOP is the first public DMP defense to make committed pointer provenance, address-space binding, and committed target-line witnesses the authority for recursive content-derived prefetching while coexisting with conventional address-correlation prefetchers.",
+        "COPPER/SCOOP is positioned as a distinct public DMP authority mechanism.",
+        "The current related-work record did not identify a public DMP mechanism that uses committed pointer provenance, address-space binding, and committed target-line witnesses as the authority for recursive content-derived prefetching while coexisting with conventional address-correlation prefetchers.",
         (
             Evidence(
                 RESULTS / "COPPER_PRIOR_ART_DELTA_20260617.md",
@@ -68,8 +68,8 @@ CLAIMS = (
                 RESULTS / "COPPER_PRIOR_ART_UPDATE_20260616.md",
                 (
                     "SplittingSecrets",
-                    "First public hardware DMP authority mechanism",
                     "Novelty Risk",
+                    "Closest Public Prior Art",
                 ),
             ),
         ),
@@ -150,7 +150,7 @@ CLAIMS = (
     Claim(
         "C5",
         "Standalone COPPER is a low-overhead authority path, not a universal speed path.",
-        "Across the expanded public app/service/parser/compression/TCP side-effect suite, standalone COPPER averages -0.321% ticks, +0.441% memory-bus bytes, 93.9% CTLW reduction versus naive DMP, zero translation faults, a base-weighted 18.8% lower mean gem5-counter pressure score than naive DMP with 18.1%-20.6% lower results across transparent weight scenarios, lower mean modeled DRAM total/op energy than naive DMP, a fixed-architecture McPAT sensitivity pass with -0.625% mean total-energy proxy versus no prefetch while naive DMP is -0.608%, a metadata-toggle sensitivity bound whose high scenario is 0.1801% of matching COPPER DRAM operation energy, and TCP process-server side-effect checks whose high pJ/access scenario stays below 6.818 uJ and whose conservative slack candidate stream replays through Vivado SAIF at 0.083 W total / 0.014 W dynamic.",
+        "Across the expanded public app/service/parser/compression/TCP side-effect suite, standalone COPPER averages -0.321% ticks, +0.441% memory-bus bytes, 93.9% CTLW reduction versus naive DMP, zero translation faults, a base-weighted 18.8% lower mean gem5-counter pressure score than naive DMP with 18.1%-20.6% lower results across transparent weight scenarios, lower mean modeled DRAM total/op energy than naive DMP, a fixed-architecture McPAT sensitivity pass with -0.321% mean total-energy proxy versus no prefetch while naive DMP is -0.304%, a metadata-toggle sensitivity bound whose high scenario is 0.1801% of matching COPPER DRAM operation energy, and TCP process-server side-effect checks whose high pJ/access scenario stays below 6.818 uJ and whose conservative slack candidate stream replays through Vivado SAIF at 0.083 W total / 0.014 W dynamic.",
         (
             Evidence(
                 RESULTS / "COPPER_PREFETCH_TRAFFIC_OVERHEAD_20260616.md",
@@ -184,8 +184,8 @@ CLAIMS = (
                 RESULTS / "COPPER_MCPAT_SENSITIVITY_20260618.md",
                 (
                     "Generated rows: 130; successful McPAT rows: 130.",
-                    "| copper_clpd64k_peb | 26 | -0.338% | -0.625%",
-                    "| naive | 26 | -0.322% | -0.608%",
+                    "| copper_clpd64k_peb | 26 | -0.338% | -0.321%",
+                    "| naive | 26 | -0.322% | -0.304%",
                     "McPAT total runtime energy: copper_clpd64k_peb <= naive on 12/26",
                 ),
             ),
@@ -226,7 +226,7 @@ CLAIMS = (
     Claim(
         "C6",
         "The evaluation includes real AArch64/Linux full-system execution, not only traces.",
-        "The artifact boots ARM64 Ubuntu/Linux and runs native AArch64 ROIs for public engines, Olden, official GAPBS, heap/fake controls, graph-style workloads, public MiBench Patricia trie execution with completed two-seed 12K five-policy comparison plus larger 16K/32K/full-large Patricia scale-feasibility attempts, standalone SQLite, upstream SQLite speedtest1, Lua/Duktape, yyjson medium/stress seed stability, two-seed PCRE2 regex matching, public libxml2 XML parser/serializer execution, public libarchive TAR parser execution, two-seed Zstd/zlib compression/decompression, bounded service-style workloads with medium/stress two-seed JSON+SQLite service-composition stability, small/medium TLS-library paths including socket-backed, explicitly tagged TCP-harness fallback, strict private-netns TCP-loopback, and a four-point process-separated private-netns TCP-loopback libssl portfolio including scaled four-pair and eight-pair points, small/medium OpenSSL libcrypto paths, an OpenSSL-speed-like fixed-buffer path, and multi-seed official OpenSSL CLI fixed digest/AES/HMAC paths with the selected prefetcher in the L1D cache hierarchy. The official CLI TLS-pair and larger Patricia policy-comparison attempts are recorded as feasibility evidence when they do not complete, not benchmark evidence.",
+        "Validated gem5 ARM-system summaries and retained raw-run manifests show native AArch64/Linux full-system ROIs for the listed benchmark families where the generated validation rows PASS. Feasibility rows, larger scale attempts, and imported summaries are labeled separately and must not be promoted to a complete fresh raw-run campaign.",
         (
             Evidence(
                 RESULTS / "COPPER_APPLICATION_WORKLOAD_PORTFOLIO_20260616.md",
@@ -1054,13 +1054,13 @@ CLAIMS = (
     ),
     Claim(
         "C10",
-        "The current package is focused-conference plausible but not guaranteed top-tier.",
-        "Current evidence is strong enough for a serious focused architecture/security submission, but top-tier acceptance remains unproven because broader workloads and production-grade integration are still open.",
+        "The current package is an evidence-bounded regular conference or artifact-track candidate, not an acceptance guarantee.",
+        "Current evidence is strong enough for a serious evidence-bounded architecture/security submission, but acceptance and stronger production/silicon claims remain unproven because broader raw-run workloads and production-grade integration are still open.",
         (
             Evidence(
                 RESULTS / "COPPER_READINESS_AUDIT_20260616.md",
                 (
-                    "Focused-conference plausible; top-tier not guaranteed",
+                    "Evidence-bounded regular-conference or artifact-track candidate",
                     "SPEC-like",
                     "OoO/coherence integration",
                     "TLB/coherence",
@@ -1205,9 +1205,9 @@ def build_gate(claim_pass: dict[str, bool]) -> None:
             f"| {gate} | {', '.join(claim_ids)} | {'PASS' if gate_ok else 'FAIL'} | {verdict} | {issue} |"
         )
 
-    final = "FOCUSED_CONFERENCE_READY__TOP_TIER_NEEDS_MORE_EVIDENCE"
+    final = "EVIDENCE_BOUNDED_SUBMISSION_READY__ACCEPTANCE_NOT_GUARANTEED"
     if not all_gate_claims_pass:
-        final = "NOT_READY__LOCAL_EVIDENCE_GAPS"
+        final = "EVIDENCE_GATES_FAIL__DO_NOT_SUBMIT"
 
     lines.extend(
         [
@@ -1216,7 +1216,7 @@ def build_gate(claim_pass: dict[str, bool]) -> None:
             "",
             f"`{final}`",
             "",
-            "The current package is stronger than a workshop-only sketch: it has public prior-art deltas, AArch64 full-system runs, adversarial DMP oracles, fair conventional baselines, repeated medium/stress public-engine layout evidence including two-seed PCRE2 regex matching, public MiBench Patricia two-seed 12K trie execution with larger Patricia feasibility probes, public libxml2 XML parser/serializer execution, public libarchive TAR parser execution, and two-seed Zstd/zlib compression/decompression, bounded service-style and crypto-adjacent full-system stress points, real OpenSSL libssl TLS memory-BIO small/medium two-seed execution, socket-backed OpenSSL libssl TLS execution, strict private-netns TCP-loopback OpenSSL libssl TLS execution, a four-point process-separated private-netns TCP-loopback OpenSSL libssl TLS portfolio, real OpenSSL libcrypto SHA256 plus small/medium EVP/HMAC two-seed drivers, fixed-buffer and multi-seed official OpenSSL CLI crypto evidence, gem5-counter energy/pollution, gem5 DRAM-energy, McPAT-sensitivity, Vivado vectorless/testbench-SAIF/workload-counter-replay/TCP-process-replay RTL power-proxy scorecards, app/service/parser/compression/TCP and TCP process-server metadata-toggle sensitivity bounds, Vivado RTL checks, synthesis/timing reports, an AMBA-SARI frontdoor RTL check, OoO-LSQ and TLB/coherence contract checkers, ROPL-LSQ retire guard plus ROCCA-to-CLPD clear-wins proof-write RTL checks, CAVI source-plus-target final issue interlock RTL evidence, a matching TLB/coherence RTL filter, and a passing artifact audit. It is still not honest to call top-tier acceptance guaranteed. The next evidence that would move the needle most is a SPEC-like application or production-service/production-TCP-TLS/standard-crypto-benchmark campaign, instruction-level full-system switching or ASIC-calibrated metadata power beyond the local FPGA/McPAT/transaction-replay proxies, plus production-style OoO/TLB/coherence integration beyond bounded contracts.",
+            "The current package is an evidence-bounded regular-conference or artifact-track candidate: it has public prior-art deltas, AArch64 full-system runs, adversarial DMP oracles, fair conventional baselines, repeated medium/stress public-engine layout evidence including two-seed PCRE2 regex matching, public MiBench Patricia two-seed 12K trie execution with larger Patricia feasibility probes, public libxml2 XML parser/serializer execution, public libarchive TAR parser execution, and two-seed Zstd/zlib compression/decompression, bounded service-style and crypto-adjacent full-system stress points, real OpenSSL libssl TLS memory-BIO small/medium two-seed execution, socket-backed OpenSSL libssl TLS execution, strict private-netns TCP-loopback OpenSSL libssl TLS execution, a four-point process-separated private-netns TCP-loopback OpenSSL libssl TLS portfolio, real OpenSSL libcrypto SHA256 plus small/medium EVP/HMAC two-seed drivers, fixed-buffer and multi-seed official OpenSSL CLI crypto evidence, gem5-counter energy/pollution, gem5 DRAM-energy, McPAT-sensitivity, Vivado vectorless/testbench-SAIF/workload-counter-replay/TCP-process-replay RTL power-proxy scorecards, app/service/parser/compression/TCP and TCP process-server metadata-toggle sensitivity bounds, Vivado RTL checks, synthesis/timing reports, an AMBA-SARI frontdoor RTL check, OoO-LSQ and TLB/coherence contract checkers, ROPL-LSQ retire guard plus ROCCA-to-CLPD clear-wins proof-write RTL checks, CAVI source-plus-target final issue interlock RTL evidence, a matching TLB/coherence RTL filter, and a passing artifact audit. It is still not honest to call acceptance guaranteed. The next evidence that would move the needle most for stronger claims is a SPEC-like application or production-service/production-TCP-TLS/standard-crypto-benchmark campaign, instruction-level full-system switching or ASIC-calibrated metadata power beyond the local FPGA/McPAT/transaction-replay proxies, plus production-style OoO/TLB/coherence integration beyond bounded contracts.",
             "",
         ]
     )
